@@ -196,10 +196,10 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
     cell.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
   } else {
     cell.classList.add("has-price");
-    residentPrice.textContent = `${calendarCurrency.format(price.resident)}*`;
+    residentPrice.textContent = `~${calendarCurrency.format(price.resident)}*`;
     const regularPrice = document.createElement("span");
     regularPrice.className = "calendar-day-regular-price";
-    regularPrice.textContent = calendarCurrency.format(price.regular);
+    regularPrice.textContent = `~${calendarCurrency.format(price.regular)}`;
     regularPrice.title = "Cena regularna";
     cell.append(residentPrice, regularPrice);
     cell.setAttribute(
@@ -439,8 +439,8 @@ function priceDetails(result) {
     const discounted =
       leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
     const price = discounted
-      ? `<span class="regular-inline">(Cena regularna: ${currency.format(leg.price_regular_pln)})</span> ~${currency.format(leg.price_resident_estimated_pln)}`
-      : currency.format(leg.price_regular_pln);
+      ? `<span class="regular-inline">(Cena regularna: ~${currency.format(leg.price_regular_pln)})</span> ~${currency.format(leg.price_resident_estimated_pln)}`
+      : `~${currency.format(leg.price_regular_pln)}`;
     return `
       <div class="price-row">
         <span>${leg.carrier} ${leg.flight_number}</span>
@@ -448,9 +448,11 @@ function priceDetails(result) {
       </div>
     `;
   }).join("");
-  const totalPrice = hasResidentEstimate
-    ? `~${currency.format(result.price_total_resident_estimated_pln)}`
-    : currency.format(result.price_total_regular_pln);
+  const totalPrice = `~${currency.format(
+    hasResidentEstimate
+      ? result.price_total_resident_estimated_pln
+      : result.price_total_regular_pln
+  )}`;
 
   return `
     ${legRows}
@@ -478,10 +480,10 @@ function createResultCard(result) {
   journey.classList.toggle("direct", direct);
   journey.append(createJourney(result));
   fragment.querySelector(".resident-caption").textContent = hasResidentEstimate ? "Cena dla rezydenta" : "Cena lotu";
-  fragment.querySelector(".resident-price").textContent = currency.format(result.price_total_resident_estimated_pln);
+  fragment.querySelector(".resident-price").textContent = `~${currency.format(result.price_total_resident_estimated_pln)}`;
   const regularPrice = fragment.querySelector(".regular-price");
   regularPrice.textContent = hasResidentEstimate
-    ? `Cena regularna: ${currency.format(result.price_total_regular_pln)}`
+    ? `Cena regularna: ~${currency.format(result.price_total_regular_pln)}`
     : "";
   regularPrice.hidden = !hasResidentEstimate;
 
