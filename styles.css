@@ -635,7 +635,6 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 5px;
   color: #869396;
   font-size: 0.75rem;
-  text-decoration: line-through;
 }
 
 .saving-pill {

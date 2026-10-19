@@ -226,7 +226,7 @@ function createResultCard(result) {
   fragment.querySelector(".date-label").textContent = formatDate(result.legs[0].departure_at);
   fragment.querySelector(".journey").append(createJourney(result));
   fragment.querySelector(".resident-price").textContent = currency.format(result.price_total_resident_estimated_pln);
-  fragment.querySelector(".regular-price").textContent = `regularnie ${currency.format(result.price_total_regular_pln)}`;
+  fragment.querySelector(".regular-price").textContent = `Cena regularna: ${currency.format(result.price_total_regular_pln)}`;
   fragment.querySelector(".saving-pill").textContent = `oszczędzasz około ${currency.format(saving)}`;
 
   const details = fragment.querySelector(".price-details");
