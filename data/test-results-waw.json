@@ -1,0 +1,2319 @@
+{
+  "generated_at": "2026-10-19T19:54:37+01:00",
+  "period_from": "2026-10-19",
+  "period_to": "2026-11-19",
+  "results": [
+    {
+      "id": "waw-test-0001",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1395,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT978",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-26T16:40:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T17:30:00+00:00",
+          "price_regular_pln": 725.45,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 181.36
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-27T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 1031.32,
+      "price_total_resident_estimated_pln": 487.23
+    },
+    {
+      "id": "waw-test-0002",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1235,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT988",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-26T19:20:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T20:10:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-27T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0003",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1165,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT994",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-26T20:30:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T21:20:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-27T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0004",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 550,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT940",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-27T06:45:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-27T07:35:00+00:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-27T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 404.2
+    },
+    {
+      "id": "waw-test-0005",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 330,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT952",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-27T10:25:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-27T11:15:00+00:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-27T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 404.2
+    },
+    {
+      "id": "waw-test-0006",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1395,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT978",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-28T16:40:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-28T17:30:00+00:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 404.2
+    },
+    {
+      "id": "waw-test-0007",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1165,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT994",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-28T20:30:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-28T21:20:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0008",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 550,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT940",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-29T06:45:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-29T07:35:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0009",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 330,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT952",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-29T10:25:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-29T11:15:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0010",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 265,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT962",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-29T11:30:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-29T12:20:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 668.6,
+      "price_total_resident_estimated_pln": 396.55
+    },
+    {
+      "id": "waw-test-0011",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 165,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT964",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-29T13:10:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-29T14:00:00+00:00",
+          "price_regular_pln": 336.51,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 84.13
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-29T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-29T23:10:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 642.38,
+      "price_total_resident_estimated_pln": 390.0
+    },
+    {
+      "id": "waw-test-0012",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 330,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT952",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-31T10:25:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-31T11:15:00+00:00",
+          "price_regular_pln": 559.39,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 139.85
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-31T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-10-31T23:10:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 908.96,
+      "price_total_resident_estimated_pln": 489.42
+    },
+    {
+      "id": "waw-test-0013",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-02T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-02T19:45:00+01:00",
+          "price_regular_pln": 917.74,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 229.44
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-03T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 1162.43,
+      "price_total_resident_estimated_pln": 474.13
+    },
+    {
+      "id": "waw-test-0014",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1295,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT9801",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-02T18:20:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-02T19:10:00+00:00",
+          "price_regular_pln": 559.39,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 139.85
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-03T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T23:10:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 908.96,
+      "price_total_resident_estimated_pln": 489.42
+    },
+    {
+      "id": "waw-test-0015",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-03T10:50:00+01:00",
+          "price_regular_pln": 568.13,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 142.03
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-03T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 812.82,
+      "price_total_resident_estimated_pln": 386.72
+    },
+    {
+      "id": "waw-test-0016",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 550,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT940",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T06:45:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-03T07:35:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-03T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T23:10:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 712.3,
+      "price_total_resident_estimated_pln": 440.25
+    },
+    {
+      "id": "waw-test-0017",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-03T14:05:00+01:00",
+          "price_regular_pln": 917.74,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 229.44
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-03T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 1162.43,
+      "price_total_resident_estimated_pln": 474.13
+    },
+    {
+      "id": "waw-test-0018",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 330,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT952",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T10:25:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-03T11:15:00+00:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-03T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-03T23:10:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 742.89,
+      "price_total_resident_estimated_pln": 447.9
+    },
+    {
+      "id": "waw-test-0019",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-03T19:45:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-04T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-04T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 655.49,
+      "price_total_resident_estimated_pln": 360.5
+    },
+    {
+      "id": "waw-test-0020",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-03T22:45:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-04T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-04T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 611.79,
+      "price_total_resident_estimated_pln": 349.57
+    },
+    {
+      "id": "waw-test-0021",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-04T10:50:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-04T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-04T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 568.08,
+      "price_total_resident_estimated_pln": 338.65
+    },
+    {
+      "id": "waw-test-0022",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-04T14:05:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-04T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-04T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 655.49,
+      "price_total_resident_estimated_pln": 360.5
+    },
+    {
+      "id": "waw-test-0023",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1395,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT978",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T16:40:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-04T17:30:00+00:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 786.59,
+      "price_total_resident_estimated_pln": 491.6
+    },
+    {
+      "id": "waw-test-0024",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-04T22:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-05T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T22:50:00+01:00",
+          "price_regular_pln": 436.98,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 436.98
+        }
+      ],
+      "price_total_regular_pln": 611.79,
+      "price_total_resident_estimated_pln": 480.68
+    },
+    {
+      "id": "waw-test-0025",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1165,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT994",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T20:30:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-04T21:20:00+00:00",
+          "price_regular_pln": 336.51,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 84.13
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 729.78,
+      "price_total_resident_estimated_pln": 477.4
+    },
+    {
+      "id": "waw-test-0026",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 550,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT940",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T06:45:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-05T07:35:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 756.0,
+      "price_total_resident_estimated_pln": 483.95
+    },
+    {
+      "id": "waw-test-0027",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 330,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT952",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T10:25:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-05T11:15:00+00:00",
+          "price_regular_pln": 362.73,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 90.68
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 756.0,
+      "price_total_resident_estimated_pln": 483.95
+    },
+    {
+      "id": "waw-test-0028",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 265,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT962",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T11:30:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-05T12:20:00+00:00",
+          "price_regular_pln": 336.51,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 84.13
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 729.78,
+      "price_total_resident_estimated_pln": 477.4
+    },
+    {
+      "id": "waw-test-0029",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 165,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT964",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T13:10:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-05T14:00:00+00:00",
+          "price_regular_pln": 336.51,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 84.13
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-05T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-05T23:10:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 729.78,
+      "price_total_resident_estimated_pln": 477.4
+    },
+    {
+      "id": "waw-test-0030",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-05T19:45:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-06T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-06T22:50:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 786.59,
+      "price_total_resident_estimated_pln": 491.6
+    },
+    {
+      "id": "waw-test-0031",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-05T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-05T22:45:00+01:00",
+          "price_regular_pln": 196.66,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 49.16
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-06T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-06T22:50:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 589.93,
+      "price_total_resident_estimated_pln": 442.43
+    },
+    {
+      "id": "waw-test-0032",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-06T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-06T19:45:00+01:00",
+          "price_regular_pln": 917.74,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 229.44
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-07T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-07T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 1136.21,
+      "price_total_resident_estimated_pln": 447.91
+    },
+    {
+      "id": "waw-test-0033",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-06T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-06T22:45:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-07T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-07T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 338.65
+    },
+    {
+      "id": "waw-test-0034",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-07T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-07T10:50:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-07T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-07T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 611.79,
+      "price_total_resident_estimated_pln": 316.8
+    },
+    {
+      "id": "waw-test-0035",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-07T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-07T14:05:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-07T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-07T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 338.65
+    },
+    {
+      "id": "waw-test-0036",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-07T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-07T19:45:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-08T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-08T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 742.89,
+      "price_total_resident_estimated_pln": 447.9
+    },
+    {
+      "id": "waw-test-0037",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-07T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-07T22:45:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-08T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-08T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 655.48,
+      "price_total_resident_estimated_pln": 426.05
+    },
+    {
+      "id": "waw-test-0038",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-08T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-08T10:50:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-08T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-08T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 655.48,
+      "price_total_resident_estimated_pln": 426.05
+    },
+    {
+      "id": "waw-test-0039",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-08T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-08T14:05:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-08T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-08T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 830.29,
+      "price_total_resident_estimated_pln": 469.75
+    },
+    {
+      "id": "waw-test-0040",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-09T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-09T22:45:00+01:00",
+          "price_regular_pln": 568.13,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 142.03
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-10T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-10T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 812.82,
+      "price_total_resident_estimated_pln": 386.72
+    },
+    {
+      "id": "waw-test-0041",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-10T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-10T10:50:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-10T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-10T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 550.6,
+      "price_total_resident_estimated_pln": 321.17
+    },
+    {
+      "id": "waw-test-0042",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-10T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-10T14:05:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-10T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-10T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 594.31,
+      "price_total_resident_estimated_pln": 332.09
+    },
+    {
+      "id": "waw-test-0043",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-10T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-10T19:45:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-11T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-11T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 742.89,
+      "price_total_resident_estimated_pln": 447.9
+    },
+    {
+      "id": "waw-test-0044",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-10T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-10T22:45:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-11T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-11T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 436.97
+    },
+    {
+      "id": "waw-test-0045",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-11T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-11T10:50:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-11T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-11T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 436.97
+    },
+    {
+      "id": "waw-test-0046",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-11T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-11T14:05:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-11T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-11T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 655.48,
+      "price_total_resident_estimated_pln": 426.05
+    },
+    {
+      "id": "waw-test-0047",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-11T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-11T19:45:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-12T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-12T22:50:00+01:00",
+          "price_regular_pln": 288.39,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 288.39
+        }
+      ],
+      "price_total_regular_pln": 594.3,
+      "price_total_resident_estimated_pln": 364.87
+    },
+    {
+      "id": "waw-test-0048",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-11T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-11T22:45:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-12T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-12T22:50:00+01:00",
+          "price_regular_pln": 288.39,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 288.39
+        }
+      ],
+      "price_total_regular_pln": 594.3,
+      "price_total_resident_estimated_pln": 364.87
+    },
+    {
+      "id": "waw-test-0049",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-12T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-12T10:50:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-12T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-12T22:50:00+01:00",
+          "price_regular_pln": 288.39,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 288.39
+        }
+      ],
+      "price_total_regular_pln": 769.11,
+      "price_total_resident_estimated_pln": 408.57
+    },
+    {
+      "id": "waw-test-0050",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-12T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-12T14:05:00+01:00",
+          "price_regular_pln": 568.13,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 142.03
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-12T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-12T22:50:00+01:00",
+          "price_regular_pln": 288.39,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 288.39
+        }
+      ],
+      "price_total_regular_pln": 856.52,
+      "price_total_resident_estimated_pln": 430.42
+    },
+    {
+      "id": "waw-test-0051",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-12T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-12T19:45:00+01:00",
+          "price_regular_pln": 393.32,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 98.33
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-13T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-13T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 742.89,
+      "price_total_resident_estimated_pln": 447.9
+    },
+    {
+      "id": "waw-test-0052",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-12T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-12T22:45:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-13T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-13T22:50:00+01:00",
+          "price_regular_pln": 349.57,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 349.57
+        }
+      ],
+      "price_total_regular_pln": 699.19,
+      "price_total_resident_estimated_pln": 436.97
+    },
+    {
+      "id": "waw-test-0053",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1435,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-13T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-13T10:50:00+01:00",
+          "price_regular_pln": 655.53,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 163.88
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61472",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-14T10:45:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-14T14:20:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 961.4,
+      "price_total_resident_estimated_pln": 469.75
+    },
+    {
+      "id": "waw-test-0054",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 900,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-13T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-13T19:45:00+01:00",
+          "price_regular_pln": 764.79,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 191.2
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61472",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-14T10:45:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-14T14:20:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 1070.66,
+      "price_total_resident_estimated_pln": 497.07
+    },
+    {
+      "id": "waw-test-0055",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 720,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-13T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-13T22:45:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61472",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-14T10:45:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-14T14:20:00+01:00",
+          "price_regular_pln": 305.87,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 305.87
+        }
+      ],
+      "price_total_regular_pln": 786.59,
+      "price_total_resident_estimated_pln": 426.05
+    },
+    {
+      "id": "waw-test-0056",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-16T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-16T19:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-17T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-17T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 393.28,
+      "price_total_resident_estimated_pln": 262.17
+    },
+    {
+      "id": "waw-test-0057",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-16T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-16T22:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-17T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-17T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 393.28,
+      "price_total_resident_estimated_pln": 262.17
+    },
+    {
+      "id": "waw-test-0058",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-17T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-17T10:50:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-17T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-17T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 393.28,
+      "price_total_resident_estimated_pln": 262.17
+    },
+    {
+      "id": "waw-test-0059",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-17T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-17T14:05:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-17T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-17T22:50:00+01:00",
+          "price_regular_pln": 218.47,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 218.47
+        }
+      ],
+      "price_total_regular_pln": 393.28,
+      "price_total_resident_estimated_pln": 262.17
+    },
+    {
+      "id": "waw-test-0060",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-17T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-17T19:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-18T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-18T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 419.5,
+      "price_total_resident_estimated_pln": 288.39
+    },
+    {
+      "id": "waw-test-0061",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-17T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-17T22:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-18T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-18T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 419.5,
+      "price_total_resident_estimated_pln": 288.39
+    },
+    {
+      "id": "waw-test-0062",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-18T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-18T10:50:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-18T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-18T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 419.5,
+      "price_total_resident_estimated_pln": 288.39
+    },
+    {
+      "id": "waw-test-0063",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "VLC",
+      "layover_minutes": 1305,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT5804",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-18T08:15:00+00:00",
+          "arrival_airport": "VLC",
+          "arrival_at": "2026-11-18T12:10:00+01:00",
+          "price_regular_pln": 415.17,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 103.79
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61338",
+          "departure_airport": "VLC",
+          "departure_at": "2026-11-19T09:55:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-19T13:15:00+01:00",
+          "price_regular_pln": 393.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 393.27
+        }
+      ],
+      "price_total_regular_pln": 808.44,
+      "price_total_resident_estimated_pln": 497.06
+    },
+    {
+      "id": "waw-test-0064",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-18T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-18T14:05:00+01:00",
+          "price_regular_pln": 349.62,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 87.4
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-18T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-18T22:50:00+01:00",
+          "price_regular_pln": 244.69,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 244.69
+        }
+      ],
+      "price_total_regular_pln": 594.31,
+      "price_total_resident_estimated_pln": 332.09
+    },
+    {
+      "id": "waw-test-0065",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1410,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6064",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-18T15:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-18T19:45:00+01:00",
+          "price_regular_pln": 305.91,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 76.48
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-19T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-19T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 568.08,
+      "price_total_resident_estimated_pln": 338.65
+    },
+    {
+      "id": "waw-test-0066",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1230,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6074",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-18T19:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-18T22:45:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-19T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-19T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 436.98,
+      "price_total_resident_estimated_pln": 305.87
+    },
+    {
+      "id": "waw-test-0067",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 505,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6062",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-19T06:45:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-19T10:50:00+01:00",
+          "price_regular_pln": 174.81,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 43.7
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-19T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-19T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 436.98,
+      "price_total_resident_estimated_pln": 305.87
+    },
+    {
+      "id": "waw-test-0068",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 310,
+      "legs": [
+        {
+          "carrier": "Binter",
+          "flight_number": "NT6072",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-19T10:05:00+00:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-11-19T14:05:00+01:00",
+          "price_regular_pln": 480.72,
+          "resident_discount_eligible": true,
+          "price_resident_estimated_pln": 120.18
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61474",
+          "departure_airport": "MAD",
+          "departure_at": "2026-11-19T19:15:00+01:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-19T22:50:00+01:00",
+          "price_regular_pln": 262.17,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 262.17
+        }
+      ],
+      "price_total_regular_pln": 742.89,
+      "price_total_resident_estimated_pln": 382.35
+    }
+  ]
+}

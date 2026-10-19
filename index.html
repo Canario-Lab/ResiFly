@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ResiFly — tanie połączenia z Teneryfy do Polski z uwzględnieniem szacowanej zniżki rezydenckiej."
+    />
+    <title>ResiFly — tanie loty z Teneryfy</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="ResiFly — strona główna">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="img">
+            <path d="M5 20.5 27 7l-7.6 18-4.1-6-6.7 4.4 2.2-7.2L5 20.5Z" />
+          </svg>
+        </span>
+        <span>ResiFly</span>
+      </a>
+      <div class="update-badge">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="updated-at">Wczytuję aktualizację…</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Loty dla mieszkańców Wysp Kanaryjskich</p>
+          <h1 id="page-title">Z Teneryfy do Polski.<br /><span>Prościej i taniej.</span></h1>
+          <p class="hero-description">
+            Łączymy odcinki Bintera z tanimi lotami do Polski i od razu pokazujemy
+            szacowaną cenę po zniżce rezydenckiej.
+          </p>
+        </div>
+        <div class="hero-route" aria-label="Obecnie wyszukiwana trasa">
+          <div>
+            <span class="route-code">TFS / TFN</span>
+            <span class="route-city">Teneryfa</span>
+          </div>
+          <div class="route-line" aria-hidden="true">
+            <span></span>
+            <svg viewBox="0 0 24 24"><path d="m2 16 20-9-7 13-3.8-4.2L6 19l1.8-5.5L2 16Z" /></svg>
+          </div>
+          <div class="route-end">
+            <span class="route-code">WAW</span>
+            <span class="route-city">Warszawa</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="search-panel" aria-labelledby="filters-title">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Dopasuj wyniki</p>
+            <h2 id="filters-title">Jak chcesz lecieć?</h2>
+          </div>
+          <button class="reset-button" id="reset-filters" type="button">Wyczyść filtry</button>
+        </div>
+
+        <div class="filters-grid">
+          <label class="filter-field price-field">
+            <span class="filter-label">Cena maksymalna</span>
+            <span class="range-value"><strong id="price-output">500 zł</strong> dla rezydenta</span>
+            <input id="price-filter" type="range" min="0" max="500" value="500" step="10" />
+            <span class="range-scale"><span>0 zł</span><span>500 zł</span></span>
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">Data od</span>
+            <input id="date-from" type="date" />
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">Data do</span>
+            <input id="date-to" type="date" />
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">Wylot z</span>
+            <select id="origin-filter">
+              <option value="all">Wszystkie lotniska</option>
+              <option value="TFN">Teneryfa Północ (TFN)</option>
+              <option value="TFS">Teneryfa Południe (TFS)</option>
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">Przesiadka</span>
+            <select id="transfer-filter">
+              <option value="all">Dowolne lotnisko</option>
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">Druga linia</span>
+            <select id="carrier-filter">
+              <option value="all">Dowolna linia</option>
+            </select>
+          </label>
+
+          <label class="filter-field layover-field">
+            <span class="filter-label">Maksymalna przesiadka</span>
+            <span class="range-value"><strong id="layover-output">24 godz.</strong></span>
+            <input id="layover-filter" type="range" min="2" max="24" value="24" step="1" />
+            <span class="range-scale"><span>2 godz.</span><span>24 godz.</span></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="results-section" aria-labelledby="results-title">
+        <div class="results-heading">
+          <div>
+            <p class="section-kicker">Najlepsze połączenia</p>
+            <h2 id="results-title"><span id="results-count">—</span> <span id="results-noun">wyników</span></h2>
+          </div>
+          <label class="sort-field">
+            <span>Sortuj:</span>
+            <select id="sort-results">
+              <option value="price">Najniższa cena</option>
+              <option value="departure">Najbliższy termin</option>
+              <option value="layover">Najkrótsza przesiadka</option>
+              <option value="regular">Najniższa cena regularna</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="active-filters" id="active-filters" aria-live="polite"></div>
+        <div class="results-list" id="results-list" aria-live="polite" aria-busy="true">
+          <div class="loading-state">
+            <span class="loader" aria-hidden="true"></span>
+            <p>Wczytuję najlepsze połączenia…</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M5 20.5 27 7l-7.6 18-4.1-6-6.7 4.4 2.2-7.2L5 20.5Z" /></svg>
+        </span>
+        <span>ResiFly</span>
+      </div>
+      <p>Ceny rezydenckie są wartościami szacowanymi. Wszystkie kwoty podajemy w PLN.</p>
+    </footer>
+
+    <template id="result-template">
+      <article class="flight-card">
+        <div class="flight-main">
+          <div class="flight-card-topline">
+            <span class="date-label"></span>
+            <span class="connection-label">1 przesiadka</span>
+          </div>
+          <div class="journey"></div>
+          <button class="details-toggle" type="button" aria-expanded="false">
+            <span>Pokaż szczegóły ceny</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" /></svg>
+          </button>
+          <div class="price-details" hidden></div>
+        </div>
+        <aside class="price-summary">
+          <span class="resident-caption">Około dla rezydenta</span>
+          <strong class="resident-price"></strong>
+          <span class="regular-price"></span>
+          <span class="saving-pill"></span>
+        </aside>
+      </article>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
