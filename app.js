@@ -66,6 +66,12 @@ const monthYear = new Intl.DateTimeFormat("pl-PL", {
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 
+const carrierLogos = {
+  Binter: "assets/logos/binter.svg",
+  "Wizz Air": "assets/logos/wizz-air.svg",
+  Ryanair: "assets/logos/ryanair.svg",
+};
+
 function datePart(iso) {
   return iso.slice(0, 10);
 }
@@ -151,10 +157,13 @@ function lowestPricesByDate(results) {
   const prices = new Map();
   for (const result of results) {
     const date = datePart(result.legs[0].departure_at);
-    const price = Number(result.price_total_resident_estimated_pln);
-    if (!Number.isFinite(price)) continue;
+    const resident = Number(result.price_total_resident_estimated_pln);
+    const regular = Number(result.price_total_regular_pln);
+    if (!Number.isFinite(resident) || !Number.isFinite(regular)) continue;
     const current = prices.get(date);
-    if (current === undefined || price < current) prices.set(date, price);
+    if (current === undefined || resident < current.resident) {
+      prices.set(date, { resident, regular });
+    }
   }
   return prices;
 }
@@ -179,18 +188,27 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
     return cell;
   }
 
-  const priceLabel = document.createElement("strong");
-  priceLabel.className = "calendar-day-price";
+  const residentPrice = document.createElement("strong");
+  residentPrice.className = "calendar-day-price";
   if (price === undefined) {
     cell.classList.add("has-no-price");
-    priceLabel.textContent = "—";
+    residentPrice.textContent = "—";
     cell.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
   } else {
     cell.classList.add("has-price");
-    priceLabel.textContent = calendarCurrency.format(price);
-    cell.setAttribute("aria-label", `${formatDate(isoDate)}, najniższa cena ${currency.format(price)}`);
+    residentPrice.textContent = `${calendarCurrency.format(price.resident)}*`;
+    const regularPrice = document.createElement("span");
+    regularPrice.className = "calendar-day-regular-price";
+    regularPrice.textContent = calendarCurrency.format(price.regular);
+    regularPrice.title = "Cena regularna";
+    cell.append(residentPrice, regularPrice);
+    cell.setAttribute(
+      "aria-label",
+      `${formatDate(isoDate)}, cena dla rezydenta ${currency.format(price.resident)}, cena regularna ${currency.format(price.regular)}`
+    );
+    return cell;
   }
-  cell.append(priceLabel);
+  cell.append(residentPrice);
   return cell;
 }
 
@@ -360,9 +378,7 @@ function createJourney(result) {
   origin.className = "airport-stop";
   origin.innerHTML = `<strong>${timePart(first.departure_at)}</strong><span class="airport-code">${first.departure_airport}</span>`;
 
-  const firstLine = document.createElement("div");
-  firstLine.className = "leg-line";
-  firstLine.innerHTML = `<span>${first.carrier} · ${first.flight_number}</span>`;
+  const firstLine = createLegLine(first);
 
   const destination = document.createElement("div");
   destination.className = "airport-stop destination";
@@ -380,12 +396,39 @@ function createJourney(result) {
   const nextDayMarker = datePart(second.departure_at) > datePart(first.arrival_at) ? "*" : "";
   transfer.innerHTML = `<strong>${timePart(first.arrival_at)} · ${result.transfer_airport} · ${timePart(second.departure_at)}${nextDayMarker}</strong><span>${formatDuration(result.layover_minutes)} przerwy</span>`;
 
-  const secondLine = document.createElement("div");
-  secondLine.className = "leg-line";
-  secondLine.innerHTML = `<span>${second.carrier} · ${second.flight_number}</span>`;
+  const secondLine = createLegLine(second);
 
   journey.append(origin, firstLine, transfer, secondLine, destination);
   return journey;
+}
+
+function createLegLine(leg) {
+  const line = document.createElement("div");
+  line.className = "leg-line";
+
+  const logoPath = carrierLogos[leg.carrier];
+  if (logoPath) {
+    const logo = document.createElement("img");
+    logo.className = "carrier-logo";
+    logo.src = logoPath;
+    logo.alt = `Logo ${leg.carrier}`;
+    line.append(logo);
+  } else {
+    const fallback = document.createElement("span");
+    fallback.className = "carrier-name";
+    fallback.textContent = leg.carrier;
+    line.append(fallback);
+  }
+
+  const track = document.createElement("span");
+  track.className = "leg-track";
+  track.setAttribute("aria-hidden", "true");
+
+  const description = document.createElement("span");
+  description.className = "leg-description";
+  description.textContent = `${leg.carrier} · ${leg.flight_number}`;
+  line.append(track, description);
+  return line;
 }
 
 function priceDetails(result) {
