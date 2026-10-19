@@ -12,8 +12,10 @@ const elements = {
   dateFrom: document.querySelector("#date-from"),
   dateTo: document.querySelector("#date-to"),
   origin: document.querySelector("#origin-filter"),
+  destination: document.querySelector("#destination-filter"),
   transfer: document.querySelector("#transfer-filter"),
-  carrier: document.querySelector("#carrier-filter"),
+  firstCarrier: document.querySelector("#first-carrier-filter"),
+  secondCarrier: document.querySelector("#second-carrier-filter"),
   layover: document.querySelector("#layover-filter"),
   layoverOutput: document.querySelector("#layover-output"),
   sort: document.querySelector("#sort-results"),
@@ -125,9 +127,11 @@ function initializeFilters() {
   elements.dateTo.value = state.document.period_to;
 
   const transfers = [...new Set(state.results.map(result => result.transfer_airport))].sort();
-  const carriers = [...new Set(state.results.map(result => result.legs.at(-1).carrier))].sort();
+  const firstCarriers = [...new Set(state.results.map(result => result.legs[0].carrier))].sort();
+  const secondCarriers = [...new Set(state.results.map(result => result.legs.at(-1).carrier))].sort();
   addOptions(elements.transfer, transfers, optionLabel);
-  addOptions(elements.carrier, carriers);
+  addOptions(elements.firstCarrier, firstCarriers);
+  addOptions(elements.secondCarrier, secondCarriers);
   updateRangeLabels();
 }
 
@@ -144,8 +148,10 @@ function currentFilters() {
     dateFrom: elements.dateFrom.value,
     dateTo: elements.dateTo.value,
     origin: elements.origin.value,
+    destination: elements.destination.value,
     transfer: elements.transfer.value,
-    carrier: elements.carrier.value,
+    firstCarrier: elements.firstCarrier.value,
+    secondCarrier: elements.secondCarrier.value,
     maxLayover: Number(elements.layover.value) * 60,
     sort: elements.sort.value,
   };
@@ -155,14 +161,17 @@ function filteredResults() {
   const filters = currentFilters();
   const filtered = state.results.filter(result => {
     const departureDate = datePart(result.legs[0].departure_at);
+    const firstCarrier = result.legs[0].carrier;
     const secondCarrier = result.legs.at(-1).carrier;
     return (
       result.price_total_resident_estimated_pln <= filters.maxPrice &&
       departureDate >= filters.dateFrom &&
       departureDate <= filters.dateTo &&
       (filters.origin === "all" || result.origin_airport === filters.origin) &&
+      result.destination_airport === filters.destination &&
       (filters.transfer === "all" || result.transfer_airport === filters.transfer) &&
-      (filters.carrier === "all" || secondCarrier === filters.carrier) &&
+      (filters.firstCarrier === "all" || firstCarrier === filters.firstCarrier) &&
+      (filters.secondCarrier === "all" || secondCarrier === filters.secondCarrier) &&
       result.layover_minutes <= filters.maxLayover
     );
   });
@@ -215,7 +224,7 @@ function priceDetails(result) {
   return `
     <div class="price-row">
       <span>${first.carrier} ${first.flight_number}</span>
-      <strong><span class="regular-inline">(${currency.format(first.price_regular_pln)})</span> ~${currency.format(first.price_resident_estimated_pln)}</strong>
+      <strong><span class="regular-inline">(Cena regularna: ${currency.format(first.price_regular_pln)})</span> ~${currency.format(first.price_resident_estimated_pln)}</strong>
     </div>
     <div class="price-row">
       <span>${second.carrier} ${second.flight_number}</span>
@@ -226,7 +235,7 @@ function priceDetails(result) {
         <span>Wylot: ${formatTimestampWithWeekday(first.departure_at)}</span>
         <span>Przylot: ${formatTimestampWithWeekday(second.arrival_at)}</span>
       </span>
-      <strong>Razem ~${currency.format(result.price_total_resident_estimated_pln)}</strong>
+      <strong class="total-price-detail"><span>Razem:</span><span>~${currency.format(result.price_total_resident_estimated_pln)}</span></strong>
     </div>
   `;
 }
@@ -261,8 +270,10 @@ function renderActiveFilters() {
   const filters = currentFilters();
   const chips = [`Do ${currency.format(filters.maxPrice)}`];
   if (filters.origin !== "all") chips.push(`Wylot: ${filters.origin}`);
+  chips.push(`Przylot: ${filters.destination}`);
   if (filters.transfer !== "all") chips.push(`Przez: ${filters.transfer}`);
-  if (filters.carrier !== "all") chips.push(filters.carrier);
+  if (filters.firstCarrier !== "all") chips.push(`Pierwsza linia: ${filters.firstCarrier}`);
+  if (filters.secondCarrier !== "all") chips.push(`Druga linia: ${filters.secondCarrier}`);
   if (filters.maxLayover < 24 * 60) chips.push(`Przesiadka do ${formatDuration(filters.maxLayover)}`);
   if (filters.dateFrom !== state.document.period_from || filters.dateTo !== state.document.period_to) {
     chips.push(`${filters.dateFrom} – ${filters.dateTo}`);
@@ -303,8 +314,10 @@ function resetFilters() {
   elements.dateFrom.value = state.document.period_from;
   elements.dateTo.value = state.document.period_to;
   elements.origin.value = "all";
+  elements.destination.value = "WAW";
   elements.transfer.value = "all";
-  elements.carrier.value = "all";
+  elements.firstCarrier.value = "all";
+  elements.secondCarrier.value = "all";
   elements.layover.value = 6;
   elements.sort.value = "price";
   renderResults();
@@ -316,8 +329,10 @@ function bindEvents() {
     elements.dateFrom,
     elements.dateTo,
     elements.origin,
+    elements.destination,
     elements.transfer,
-    elements.carrier,
+    elements.firstCarrier,
+    elements.secondCarrier,
     elements.layover,
     elements.sort,
   ];

@@ -76,45 +76,67 @@
             <span class="range-scale"><span>0 zł</span><span>500 zł</span></span>
           </label>
 
-          <label class="filter-field">
-            <span class="filter-label">Data od</span>
-            <input id="date-from" type="date" />
-          </label>
+          <div class="filter-stack">
+            <label class="filter-field">
+              <span class="filter-label">Data od</span>
+              <input id="date-from" type="date" />
+            </label>
 
-          <label class="filter-field">
-            <span class="filter-label">Data do</span>
-            <input id="date-to" type="date" />
-          </label>
+            <label class="filter-field">
+              <span class="filter-label">Data do</span>
+              <input id="date-to" type="date" />
+            </label>
+          </div>
 
-          <label class="filter-field">
-            <span class="filter-label">Wylot z</span>
-            <select id="origin-filter">
-              <option value="all">Wszystkie lotniska</option>
-              <option value="TFN">Teneryfa Północ (TFN)</option>
-              <option value="TFS">Teneryfa Południe (TFS)</option>
-            </select>
-          </label>
+          <div class="filter-stack">
+            <label class="filter-field">
+              <span class="filter-label">Wylot z</span>
+              <select id="origin-filter">
+                <option value="all">Wszystkie lotniska</option>
+                <option value="TFN">Teneryfa Północ (TFN)</option>
+                <option value="TFS">Teneryfa Południe (TFS)</option>
+              </select>
+            </label>
 
-          <label class="filter-field">
-            <span class="filter-label">Przesiadka</span>
-            <select id="transfer-filter">
-              <option value="all">Dowolne lotnisko</option>
-            </select>
-          </label>
+            <label class="filter-field">
+              <span class="filter-label">Przylot na</span>
+              <select id="destination-filter">
+                <option value="WAW">Warszawa (WAW)</option>
+              </select>
+            </label>
+          </div>
 
-          <label class="filter-field">
-            <span class="filter-label">Druga linia</span>
-            <select id="carrier-filter">
-              <option value="all">Dowolna linia</option>
-            </select>
-          </label>
+          <div class="filter-stack">
+            <label class="filter-field">
+              <span class="filter-label">Pierwsza linia</span>
+              <select id="first-carrier-filter">
+                <option value="all">Dowolna linia</option>
+              </select>
+            </label>
 
-          <label class="filter-field layover-field">
-            <span class="filter-label">Maksymalna przesiadka</span>
-            <span class="range-value"><strong id="layover-output">6 godz.</strong></span>
-            <input id="layover-filter" type="range" min="2" max="24" value="6" step="1" />
-            <span class="range-scale"><span>2 godz.</span><span>24 godz.</span></span>
-          </label>
+            <label class="filter-field">
+              <span class="filter-label">Druga linia</span>
+              <select id="second-carrier-filter">
+                <option value="all">Dowolna linia</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="filter-stack transfer-stack">
+            <label class="filter-field">
+              <span class="filter-label">Przesiadka</span>
+              <select id="transfer-filter">
+                <option value="all">Dowolne lotnisko</option>
+              </select>
+            </label>
+
+            <label class="filter-field layover-field">
+              <span class="filter-label">Maksymalny czas oczekiwania</span>
+              <span class="range-value"><strong id="layover-output">6 godz.</strong></span>
+              <input id="layover-filter" type="range" min="2" max="24" value="6" step="1" />
+              <span class="range-scale"><span>2 godz.</span><span>24 godz.</span></span>
+            </label>
+          </div>
         </div>
       </section>
 
