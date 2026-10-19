@@ -147,9 +147,9 @@ function addOptions(select, values, formatter = value => value) {
   }
 }
 
-function lowestPricesByDate() {
+function lowestPricesByDate(results) {
   const prices = new Map();
-  for (const result of state.results) {
+  for (const result of results) {
     const date = datePart(result.legs[0].departure_at);
     const price = Number(result.price_total_resident_estimated_pln);
     if (!Number.isFinite(price)) continue;
@@ -244,10 +244,10 @@ function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {
   return card;
 }
 
-function renderFareCalendar() {
-  const rangeStart = state.document.period_from;
-  const rangeEnd = state.document.period_to;
-  const firstMonth = parseDateOnly(rangeStart);
+function renderFareCalendar(results, filters) {
+  const rangeStart = filters.dateFrom;
+  const rangeEnd = filters.dateTo;
+  const firstMonth = parseDateOnly(state.document.period_from);
   firstMonth.setUTCDate(1);
   const secondMonth = new Date(Date.UTC(
     firstMonth.getUTCFullYear(),
@@ -255,7 +255,7 @@ function renderFareCalendar() {
     1,
     12
   ));
-  const prices = lowestPricesByDate();
+  const prices = lowestPricesByDate(results);
 
   elements.calendarMonths.replaceChildren(
     createCalendarMonth(firstMonth, rangeStart, rangeEnd, prices),
@@ -315,8 +315,7 @@ function currentFilters() {
   };
 }
 
-function filteredResults() {
-  const filters = currentFilters();
+function filteredResults(filters = currentFilters()) {
   const filtered = state.results.filter(result => {
     const departureDate = datePart(result.legs[0].departure_at);
     const direct = isDirectConnection(result);
@@ -481,7 +480,9 @@ function renderActiveFilters() {
 
 function renderResults() {
   updateRangeLabels();
-  const results = filteredResults();
+  const filters = currentFilters();
+  const results = filteredResults(filters);
+  renderFareCalendar(results, filters);
   elements.count.textContent = results.length;
   elements.countNoun.textContent = pluralizeResults(results.length);
   renderActiveFilters();
@@ -545,7 +546,6 @@ async function loadFlights() {
 
     const generated = new Date(state.document.generated_at);
     elements.updatedAt.textContent = `Aktualizacja ${shortDate.format(generated)}`;
-    renderFareCalendar();
     initializeFilters();
     bindEvents();
     renderResults();

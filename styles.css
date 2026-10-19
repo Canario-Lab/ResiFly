@@ -264,11 +264,11 @@ main,
 }
 
 .fare-calendar {
-  margin-top: -24px;
+  margin-top: 24px;
 }
 
 .search-panel {
-  margin-top: 24px;
+  margin-top: -24px;
 }
 
 .fare-calendar-heading {
@@ -968,12 +968,12 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .search-panel {
-    margin-top: 18px;
+    margin-top: -30px;
     padding: 23px 18px;
   }
 
   .fare-calendar {
-    margin-top: -30px;
+    margin-top: 18px;
     padding: 23px 12px;
   }
 
