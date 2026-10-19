@@ -162,7 +162,7 @@ function lowestPricesByDate(results) {
     if (!Number.isFinite(resident) || !Number.isFinite(regular)) continue;
     const current = prices.get(date);
     if (current === undefined || resident < current.resident) {
-      prices.set(date, { resident, regular });
+      prices.set(date, { resident, regular, resultId: result.id });
     }
   }
   return prices;
@@ -170,12 +170,18 @@ function lowestPricesByDate(results) {
 
 function createCalendarDay(date, rangeStart, rangeEnd, prices) {
   const isoDate = toDateOnly(date);
-  const cell = document.createElement("div");
   const outsideRange = isoDate < rangeStart || isoDate > rangeEnd;
   const price = prices.get(isoDate);
+  const clickable = !outsideRange && price !== undefined;
+  const cell = document.createElement(clickable ? "button" : "div");
 
   cell.className = "calendar-day";
   cell.dataset.date = isoDate;
+  if (clickable) {
+    cell.type = "button";
+    cell.classList.add("is-clickable");
+    cell.dataset.resultId = price.resultId;
+  }
 
   const dayNumber = document.createElement("span");
   dayNumber.className = "calendar-day-number";
@@ -196,20 +202,43 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
     cell.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
   } else {
     cell.classList.add("has-price");
-    residentPrice.textContent = `~${calendarCurrency.format(price.resident)}*`;
+    residentPrice.textContent = `${calendarCurrency.format(price.resident)}*`;
     const regularPrice = document.createElement("span");
     regularPrice.className = "calendar-day-regular-price";
-    regularPrice.textContent = `~${calendarCurrency.format(price.regular)}`;
+    regularPrice.textContent = calendarCurrency.format(price.regular);
     regularPrice.title = "Cena regularna";
     cell.append(residentPrice, regularPrice);
     cell.setAttribute(
       "aria-label",
       `${formatDate(isoDate)}, cena dla rezydenta ${currency.format(price.resident)}, cena regularna ${currency.format(price.regular)}`
     );
+    cell.addEventListener("click", () => scrollToResult(price.resultId));
     return cell;
   }
   cell.append(residentPrice);
   return cell;
+}
+
+let calendarHighlightTimer;
+
+function scrollToResult(resultId) {
+  const card = [...elements.list.querySelectorAll(".flight-card")]
+    .find(item => item.dataset.resultId === resultId);
+  if (!card) return;
+
+  elements.list.querySelectorAll(".is-calendar-target").forEach(item => {
+    item.classList.remove("is-calendar-target");
+  });
+  card.classList.add("is-calendar-target");
+  card.scrollIntoView({
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    block: "center",
+  });
+
+  window.clearTimeout(calendarHighlightTimer);
+  calendarHighlightTimer = window.setTimeout(() => {
+    card.classList.remove("is-calendar-target");
+  }, 1800);
 }
 
 function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {

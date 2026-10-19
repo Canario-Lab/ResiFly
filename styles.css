@@ -358,6 +358,25 @@ main,
   text-align: center;
 }
 
+.calendar-day.is-clickable {
+  appearance: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.calendar-day.is-clickable:hover {
+  transform: translateY(-2px);
+  border-color: var(--green);
+  box-shadow: 0 8px 18px rgba(13, 118, 95, 0.13);
+}
+
+.calendar-day.is-clickable:focus-visible {
+  outline: 3px solid rgba(13, 118, 95, 0.23);
+  outline-offset: 2px;
+}
+
 .calendar-day-number {
   color: var(--ink);
   font-size: 0.75rem;
@@ -612,7 +631,13 @@ input[type="range"]::-moz-range-thumb {
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--paper);
+  scroll-margin-top: 24px;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.flight-card.is-calendar-target {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(13, 118, 95, 0.14), 0 18px 44px rgba(29, 61, 57, 0.12);
 }
 
 .flight-card:hover {
