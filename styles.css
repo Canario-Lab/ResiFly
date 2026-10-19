@@ -137,6 +137,7 @@ main,
 }
 
 .hero h1,
+.fare-calendar-heading h2,
 .panel-heading h2,
 .results-heading h2 {
   font-family: "Manrope", sans-serif;
@@ -251,15 +252,146 @@ main,
   box-shadow: 0 4px 12px rgba(13, 118, 95, 0.16);
 }
 
+.fare-calendar,
 .search-panel {
   position: relative;
   z-index: 2;
-  margin-top: -24px;
   padding: 30px;
   border: 1px solid rgba(218, 229, 226, 0.8);
   border-radius: var(--radius-lg);
   background: var(--paper);
   box-shadow: var(--shadow);
+}
+
+.fare-calendar {
+  margin-top: -24px;
+}
+
+.search-panel {
+  margin-top: 24px;
+}
+
+.fare-calendar-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.fare-calendar-heading h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.fare-calendar-heading > p {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 0.83rem;
+  text-align: right;
+}
+
+.calendar-months {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.calendar-month-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fbfcfb;
+}
+
+.calendar-month-title {
+  margin: 0 0 18px;
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: -0.035em;
+  text-align: center;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 7px;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.calendar-day {
+  min-width: 0;
+  min-height: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 3px;
+  border: 1px solid #dfe7e5;
+  border-radius: 11px;
+  background: white;
+  text-align: center;
+}
+
+.calendar-day-number {
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.calendar-day-price {
+  color: var(--green-dark);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(0.68rem, 0.9vw, 0.82rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.calendar-day.has-price {
+  border-color: #bcd8cf;
+  background: linear-gradient(145deg, #ffffff, #edf7f2);
+}
+
+.calendar-day.has-no-price .calendar-day-price {
+  color: #9aa7a7;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.calendar-day.is-outside-range {
+  border-color: #e5e8e7;
+  background: #ecefed;
+}
+
+.calendar-day.is-outside-range .calendar-day-number {
+  color: #a4adac;
+}
+
+.calendar-day.is-empty {
+  visibility: hidden;
+}
+
+.calendar-loading {
+  grid-column: 1 / -1;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 20px;
 }
 
 .panel-heading,
@@ -771,6 +903,10 @@ input[type="range"]::-moz-range-thumb {
     max-width: 620px;
   }
 
+  .calendar-months {
+    grid-template-columns: 1fr;
+  }
+
   .filters-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -832,8 +968,47 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .search-panel {
-    margin-top: -30px;
+    margin-top: 18px;
     padding: 23px 18px;
+  }
+
+  .fare-calendar {
+    margin-top: -30px;
+    padding: 23px 12px;
+  }
+
+  .fare-calendar-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding-inline: 6px;
+  }
+
+  .fare-calendar-heading h2 {
+    font-size: 1.45rem;
+  }
+
+  .fare-calendar-heading > p {
+    text-align: left;
+  }
+
+  .calendar-month-card {
+    padding: 14px 9px;
+  }
+
+  .calendar-day {
+    min-height: 54px;
+    gap: 4px;
+    padding: 5px 1px;
+    border-radius: 8px;
+  }
+
+  .calendar-day-number {
+    font-size: 0.68rem;
+  }
+
+  .calendar-day-price {
+    font-size: clamp(0.57rem, 2.5vw, 0.72rem);
   }
 
   .panel-heading,

@@ -20,6 +20,7 @@ const elements = {
   layoverOutput: document.querySelector("#layover-output"),
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
+  calendarMonths: document.querySelector("#calendar-months"),
   activeFilters: document.querySelector("#active-filters"),
   count: document.querySelector("#results-count"),
   countNoun: document.querySelector("#results-noun"),
@@ -31,6 +32,13 @@ const currency = new Intl.NumberFormat("pl-PL", {
   style: "currency",
   currency: "PLN",
   minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+const calendarCurrency = new Intl.NumberFormat("pl-PL", {
+  style: "currency",
+  currency: "PLN",
+  minimumFractionDigits: 0,
   maximumFractionDigits: 2,
 });
 
@@ -50,12 +58,36 @@ const weekday = new Intl.DateTimeFormat("pl-PL", {
   weekday: "long",
 });
 
+const monthYear = new Intl.DateTimeFormat("pl-PL", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
+
 function datePart(iso) {
   return iso.slice(0, 10);
 }
 
 function timePart(iso) {
   return iso.slice(11, 16);
+}
+
+function parseDateOnly(iso) {
+  return new Date(`${iso}T12:00:00Z`);
+}
+
+function toDateOnly(date) {
+  return [
+    date.getUTCFullYear(),
+    String(date.getUTCMonth() + 1).padStart(2, "0"),
+    String(date.getUTCDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function capitalized(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
 function formatDate(iso) {
@@ -113,6 +145,123 @@ function addOptions(select, values, formatter = value => value) {
     option.textContent = formatter(value);
     select.append(option);
   }
+}
+
+function lowestPricesByDate() {
+  const prices = new Map();
+  for (const result of state.results) {
+    const date = datePart(result.legs[0].departure_at);
+    const price = Number(result.price_total_resident_estimated_pln);
+    if (!Number.isFinite(price)) continue;
+    const current = prices.get(date);
+    if (current === undefined || price < current) prices.set(date, price);
+  }
+  return prices;
+}
+
+function createCalendarDay(date, rangeStart, rangeEnd, prices) {
+  const isoDate = toDateOnly(date);
+  const cell = document.createElement("div");
+  const outsideRange = isoDate < rangeStart || isoDate > rangeEnd;
+  const price = prices.get(isoDate);
+
+  cell.className = "calendar-day";
+  cell.dataset.date = isoDate;
+
+  const dayNumber = document.createElement("span");
+  dayNumber.className = "calendar-day-number";
+  dayNumber.textContent = String(date.getUTCDate());
+  cell.append(dayNumber);
+
+  if (outsideRange) {
+    cell.classList.add("is-outside-range");
+    cell.setAttribute("aria-label", `${formatDate(isoDate)}, poza zakresem wyszukiwania`);
+    return cell;
+  }
+
+  const priceLabel = document.createElement("strong");
+  priceLabel.className = "calendar-day-price";
+  if (price === undefined) {
+    cell.classList.add("has-no-price");
+    priceLabel.textContent = "—";
+    cell.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
+  } else {
+    cell.classList.add("has-price");
+    priceLabel.textContent = calendarCurrency.format(price);
+    cell.setAttribute("aria-label", `${formatDate(isoDate)}, najniższa cena ${currency.format(price)}`);
+  }
+  cell.append(priceLabel);
+  return cell;
+}
+
+function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {
+  const card = document.createElement("article");
+  card.className = "calendar-month-card";
+
+  const title = document.createElement("h3");
+  title.className = "calendar-month-title";
+  title.textContent = capitalized(monthYear.format(monthDate));
+  card.append(title);
+
+  const weekdays = document.createElement("div");
+  weekdays.className = "calendar-weekdays";
+  weekdays.setAttribute("aria-hidden", "true");
+  for (const label of calendarWeekdays) {
+    const day = document.createElement("span");
+    day.textContent = label;
+    weekdays.append(day);
+  }
+  card.append(weekdays);
+
+  const grid = document.createElement("div");
+  grid.className = "calendar-grid";
+  const year = monthDate.getUTCFullYear();
+  const month = monthDate.getUTCMonth();
+  const firstDay = new Date(Date.UTC(year, month, 1, 12));
+  const leadingCells = (firstDay.getUTCDay() + 6) % 7;
+  const daysInMonth = new Date(Date.UTC(year, month + 1, 0, 12)).getUTCDate();
+
+  for (let index = 0; index < leadingCells; index += 1) {
+    const empty = document.createElement("span");
+    empty.className = "calendar-day is-empty";
+    empty.setAttribute("aria-hidden", "true");
+    grid.append(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    grid.append(createCalendarDay(new Date(Date.UTC(year, month, day, 12)), rangeStart, rangeEnd, prices));
+  }
+
+  const usedCells = leadingCells + daysInMonth;
+  for (let index = usedCells; index < 42; index += 1) {
+    const empty = document.createElement("span");
+    empty.className = "calendar-day is-empty";
+    empty.setAttribute("aria-hidden", "true");
+    grid.append(empty);
+  }
+
+  card.append(grid);
+  return card;
+}
+
+function renderFareCalendar() {
+  const rangeStart = state.document.period_from;
+  const rangeEnd = state.document.period_to;
+  const firstMonth = parseDateOnly(rangeStart);
+  firstMonth.setUTCDate(1);
+  const secondMonth = new Date(Date.UTC(
+    firstMonth.getUTCFullYear(),
+    firstMonth.getUTCMonth() + 1,
+    1,
+    12
+  ));
+  const prices = lowestPricesByDate();
+
+  elements.calendarMonths.replaceChildren(
+    createCalendarMonth(firstMonth, rangeStart, rangeEnd, prices),
+    createCalendarMonth(secondMonth, rangeStart, rangeEnd, prices)
+  );
+  elements.calendarMonths.setAttribute("aria-busy", "false");
 }
 
 function setRangeProgress(input) {
@@ -396,12 +545,15 @@ async function loadFlights() {
 
     const generated = new Date(state.document.generated_at);
     elements.updatedAt.textContent = `Aktualizacja ${shortDate.format(generated)}`;
+    renderFareCalendar();
     initializeFilters();
     bindEvents();
     renderResults();
   } catch (error) {
     console.error("Nie udało się wczytać danych lotów", error);
     elements.updatedAt.textContent = "Brak danych";
+    elements.calendarMonths.setAttribute("aria-busy", "false");
+    elements.calendarMonths.innerHTML = `<div class="calendar-loading">Nie udało się wczytać kalendarza cen.</div>`;
     elements.list.setAttribute("aria-busy", "false");
     elements.list.innerHTML = `
       <div class="error-state">

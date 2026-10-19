@@ -8,14 +8,14 @@
       content="ResiFly — tanie połączenia z Teneryfy do Polski z uwzględnieniem szacowanej zniżki rezydenckiej."
     />
     <title>ResiFly — tanie loty z Teneryfy</title>
-    <link rel="icon" href="favicon.svg?v=20261019-7" type="image/svg+xml" />
+    <link rel="icon" href="favicon.svg?v=20261019-8" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261019-7" />
+    <link rel="stylesheet" href="styles.css?v=20261019-8" />
   </head>
   <body>
     <header class="site-header">
@@ -56,6 +56,19 @@
             <span class="route-code">WAW</span>
             <span class="route-city">Warszawa</span>
           </div>
+        </div>
+      </section>
+
+      <section class="fare-calendar" aria-labelledby="fare-calendar-title">
+        <div class="fare-calendar-heading">
+          <div>
+            <p class="section-kicker">Kalendarz cen</p>
+            <h2 id="fare-calendar-title">Najniższe ceny w ciągu 30 dni</h2>
+          </div>
+          <p>Najniższa cena dla rezydenta w danym dniu</p>
+        </div>
+        <div class="calendar-months" id="calendar-months" aria-live="polite" aria-busy="true">
+          <div class="calendar-loading">Wczytuję kalendarz cen…</div>
         </div>
       </section>
 
@@ -203,6 +216,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=20261019-7" defer></script>
+    <script src="app.js?v=20261019-8" defer></script>
   </body>
 </html>
