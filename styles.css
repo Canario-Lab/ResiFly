@@ -164,11 +164,11 @@ main,
 .hero-route {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: minmax(130px, 0.95fr) minmax(70px, 1fr) minmax(115px, 0.8fr);
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   min-height: 180px;
-  padding: 36px;
+  padding: 22px 28px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 28px;
@@ -177,27 +177,40 @@ main,
   backdrop-filter: blur(18px);
 }
 
-.hero-route::before,
-.hero-route::after {
+.route-shape {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 136px;
+  display: grid;
+  place-items: center;
+}
+
+.route-shape > svg {
   position: absolute;
-  content: "";
-  border-radius: 50%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.hero-route::before {
-  width: 170px;
-  height: 170px;
-  right: -70px;
-  top: -70px;
-  background: rgba(243, 198, 77, 0.24);
+.route-shape > svg path {
+  fill: rgba(13, 118, 95, 0.065);
+  stroke: rgba(13, 118, 95, 0.55);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
-.hero-route::after {
-  width: 90px;
-  height: 90px;
-  left: 45%;
-  bottom: -55px;
-  background: rgba(13, 118, 95, 0.1);
+.route-shape-poland > svg path {
+  fill: rgba(243, 198, 77, 0.1);
+  stroke: rgba(176, 137, 29, 0.55);
+}
+
+.route-shape-label {
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 .route-code {
@@ -218,10 +231,6 @@ main,
   margin-top: 4px;
   color: var(--muted);
   font-size: 0.86rem;
-}
-
-.route-end {
-  text-align: right;
 }
 
 .route-line {
@@ -326,6 +335,10 @@ main,
 
 .layover-field {
   flex: none;
+}
+
+.layover-field.is-disabled {
+  opacity: 0.48;
 }
 
 .filter-label {
@@ -513,6 +526,10 @@ input[type="range"]::-moz-range-thumb {
   gap: 14px;
 }
 
+.journey.direct {
+  grid-template-columns: minmax(105px, auto) minmax(180px, 1fr) minmax(105px, auto);
+}
+
 .airport-stop strong {
   display: block;
   font-family: "Manrope", sans-serif;
@@ -689,16 +706,6 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.75rem;
 }
 
-.saving-pill {
-  margin-top: 13px;
-  padding: 5px 9px;
-  color: #735d17;
-  border-radius: 999px;
-  background: var(--yellow-soft);
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
 .loading-state,
 .empty-state,
 .error-state {
@@ -826,11 +833,21 @@ input[type="range"]::-moz-range-thumb {
 
   .hero-route {
     min-height: 150px;
-    padding: 27px 22px;
+    grid-template-columns: minmax(100px, 1fr) minmax(42px, 0.7fr) minmax(86px, 0.85fr);
+    gap: 8px;
+    padding: 18px 14px;
+  }
+
+  .route-shape {
+    min-height: 112px;
   }
 
   .route-code {
-    font-size: 1.28rem;
+    font-size: 1.08rem;
+  }
+
+  .route-city {
+    font-size: 0.72rem;
   }
 
   .search-panel {

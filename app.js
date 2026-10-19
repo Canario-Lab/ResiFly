@@ -82,6 +82,10 @@ function journeyDuration(result) {
   return Math.round((arrival - departure) / 60000);
 }
 
+function isDirectConnection(result) {
+  return result.legs.length === 1;
+}
+
 function pluralizeResults(count) {
   if (count === 1) return "wynik";
   const lastTwo = count % 100;
@@ -126,9 +130,11 @@ function initializeFilters() {
   elements.dateTo.max = state.document.period_to;
   elements.dateTo.value = state.document.period_to;
 
-  const transfers = [...new Set(state.results.map(result => result.transfer_airport))].sort();
+  const transfers = [...new Set(state.results.map(result => result.transfer_airport).filter(Boolean))].sort();
   const firstCarriers = [...new Set(state.results.map(result => result.legs[0].carrier))].sort();
-  const secondCarriers = [...new Set(state.results.map(result => result.legs.at(-1).carrier))].sort();
+  const secondCarriers = [...new Set(
+    state.results.filter(result => !isDirectConnection(result)).map(result => result.legs.at(-1).carrier)
+  )].sort();
   addOptions(elements.transfer, transfers, optionLabel);
   addOptions(elements.firstCarrier, firstCarriers);
   addOptions(elements.secondCarrier, secondCarriers);
@@ -136,8 +142,11 @@ function initializeFilters() {
 }
 
 function updateRangeLabels() {
+  const directSelected = elements.transfer.value === "direct";
   elements.priceOutput.textContent = currency.format(Number(elements.price.value));
   elements.layoverOutput.textContent = `${elements.layover.value} godz.`;
+  elements.layover.disabled = directSelected;
+  elements.layover.closest(".layover-field").classList.toggle("is-disabled", directSelected);
   setRangeProgress(elements.price);
   setRangeProgress(elements.layover);
 }
@@ -161,25 +170,30 @@ function filteredResults() {
   const filters = currentFilters();
   const filtered = state.results.filter(result => {
     const departureDate = datePart(result.legs[0].departure_at);
+    const direct = isDirectConnection(result);
     const firstCarrier = result.legs[0].carrier;
     const secondCarrier = result.legs.at(-1).carrier;
+    const transferMatches =
+      filters.transfer === "all" ||
+      (filters.transfer === "direct" && direct) ||
+      (!direct && result.transfer_airport === filters.transfer);
     return (
       result.price_total_resident_estimated_pln <= filters.maxPrice &&
       departureDate >= filters.dateFrom &&
       departureDate <= filters.dateTo &&
       (filters.origin === "all" || result.origin_airport === filters.origin) &&
       result.destination_airport === filters.destination &&
-      (filters.transfer === "all" || result.transfer_airport === filters.transfer) &&
+      transferMatches &&
       (filters.firstCarrier === "all" || firstCarrier === filters.firstCarrier) &&
-      (filters.secondCarrier === "all" || secondCarrier === filters.secondCarrier) &&
-      result.layover_minutes <= filters.maxLayover
+      (filters.secondCarrier === "all" || (!direct && secondCarrier === filters.secondCarrier)) &&
+      (direct || result.layover_minutes <= filters.maxLayover)
     );
   });
 
   const sorters = {
     price: (a, b) => a.price_total_resident_estimated_pln - b.price_total_resident_estimated_pln,
     regular: (a, b) => a.price_total_regular_pln - b.price_total_regular_pln,
-    layover: (a, b) => a.layover_minutes - b.layover_minutes,
+    layover: (a, b) => (a.layover_minutes ?? 0) - (b.layover_minutes ?? 0),
     departure: (a, b) => a.legs[0].departure_at.localeCompare(b.legs[0].departure_at),
   };
 
@@ -191,7 +205,7 @@ function filteredResults() {
 
 function createJourney(result) {
   const first = result.legs[0];
-  const second = result.legs[1];
+  const last = result.legs.at(-1);
   const journey = document.createDocumentFragment();
 
   const origin = document.createElement("div");
@@ -202,6 +216,17 @@ function createJourney(result) {
   firstLine.className = "leg-line";
   firstLine.innerHTML = `<span>${first.carrier} · ${first.flight_number}</span>`;
 
+  const destination = document.createElement("div");
+  destination.className = "airport-stop destination";
+  destination.innerHTML = `<strong>${timePart(last.arrival_at)}</strong><span class="airport-code">${last.arrival_airport}</span>`;
+
+  if (isDirectConnection(result)) {
+    journey.append(origin, firstLine, destination);
+    return journey;
+  }
+
+  const second = result.legs[1];
+
   const transfer = document.createElement("div");
   transfer.className = "transfer-stop";
   const nextDayMarker = datePart(second.departure_at) > datePart(first.arrival_at) ? "*" : "";
@@ -211,31 +236,39 @@ function createJourney(result) {
   secondLine.className = "leg-line";
   secondLine.innerHTML = `<span>${second.carrier} · ${second.flight_number}</span>`;
 
-  const destination = document.createElement("div");
-  destination.className = "airport-stop destination";
-  destination.innerHTML = `<strong>${timePart(second.arrival_at)}</strong><span class="airport-code">${second.arrival_airport}</span>`;
-
   journey.append(origin, firstLine, transfer, secondLine, destination);
   return journey;
 }
 
 function priceDetails(result) {
-  const [first, second] = result.legs;
+  const first = result.legs[0];
+  const last = result.legs.at(-1);
+  const hasResidentEstimate = result.price_total_resident_estimated_pln < result.price_total_regular_pln;
+  const legRows = result.legs.map(leg => {
+    const discounted =
+      leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
+    const price = discounted
+      ? `<span class="regular-inline">(Cena regularna: ${currency.format(leg.price_regular_pln)})</span> ~${currency.format(leg.price_resident_estimated_pln)}`
+      : currency.format(leg.price_regular_pln);
+    return `
+      <div class="price-row">
+        <span>${leg.carrier} ${leg.flight_number}</span>
+        <strong>${price}</strong>
+      </div>
+    `;
+  }).join("");
+  const totalPrice = hasResidentEstimate
+    ? `~${currency.format(result.price_total_resident_estimated_pln)}`
+    : currency.format(result.price_total_regular_pln);
+
   return `
-    <div class="price-row">
-      <span>${first.carrier} ${first.flight_number}</span>
-      <strong><span class="regular-inline">(Cena regularna: ${currency.format(first.price_regular_pln)})</span> ~${currency.format(first.price_resident_estimated_pln)}</strong>
-    </div>
-    <div class="price-row">
-      <span>${second.carrier} ${second.flight_number}</span>
-      <strong>${currency.format(second.price_regular_pln)}</strong>
-    </div>
+    ${legRows}
     <div class="price-row trip-summary-row">
       <span class="trip-timing">
         <span>Wylot: ${formatTimestampWithWeekday(first.departure_at)}</span>
-        <span>Przylot: ${formatTimestampWithWeekday(second.arrival_at)}</span>
+        <span>Przylot: ${formatTimestampWithWeekday(last.arrival_at)}</span>
       </span>
-      <strong class="total-price-detail"><span>Razem:</span><span>~${currency.format(result.price_total_resident_estimated_pln)}</span></strong>
+      <strong class="total-price-detail"><span>Razem:</span><span>${totalPrice}</span></strong>
     </div>
   `;
 }
@@ -243,15 +276,23 @@ function priceDetails(result) {
 function createResultCard(result) {
   const fragment = elements.template.content.cloneNode(true);
   const card = fragment.querySelector(".flight-card");
-  const saving = result.price_total_regular_pln - result.price_total_resident_estimated_pln;
+  const direct = isDirectConnection(result);
+  const hasResidentEstimate = result.price_total_resident_estimated_pln < result.price_total_regular_pln;
 
   card.dataset.resultId = result.id;
   fragment.querySelector(".date-label").textContent = formatDate(result.legs[0].departure_at);
+  fragment.querySelector(".connection-label").textContent = direct ? "Bez przesiadek" : "1 przesiadka";
   fragment.querySelector(".total-duration").textContent = `Łącznie: ${formatDuration(journeyDuration(result))}`;
-  fragment.querySelector(".journey").append(createJourney(result));
+  const journey = fragment.querySelector(".journey");
+  journey.classList.toggle("direct", direct);
+  journey.append(createJourney(result));
+  fragment.querySelector(".resident-caption").textContent = hasResidentEstimate ? "Cena dla rezydenta" : "Cena lotu";
   fragment.querySelector(".resident-price").textContent = currency.format(result.price_total_resident_estimated_pln);
-  fragment.querySelector(".regular-price").textContent = `Cena regularna: ${currency.format(result.price_total_regular_pln)}`;
-  fragment.querySelector(".saving-pill").textContent = `oszczędzasz ~${currency.format(saving)}`;
+  const regularPrice = fragment.querySelector(".regular-price");
+  regularPrice.textContent = hasResidentEstimate
+    ? `Cena regularna: ${currency.format(result.price_total_regular_pln)}`
+    : "";
+  regularPrice.hidden = !hasResidentEstimate;
 
   const details = fragment.querySelector(".price-details");
   details.innerHTML = priceDetails(result);
@@ -271,10 +312,13 @@ function renderActiveFilters() {
   const chips = [`Do ${currency.format(filters.maxPrice)}`];
   if (filters.origin !== "all") chips.push(`Wylot: ${filters.origin}`);
   chips.push(`Przylot: ${filters.destination}`);
-  if (filters.transfer !== "all") chips.push(`Przez: ${filters.transfer}`);
+  if (filters.transfer === "direct") chips.push("Bez przesiadek");
+  if (filters.transfer !== "all" && filters.transfer !== "direct") chips.push(`Przez: ${filters.transfer}`);
   if (filters.firstCarrier !== "all") chips.push(`Pierwsza linia: ${filters.firstCarrier}`);
   if (filters.secondCarrier !== "all") chips.push(`Druga linia: ${filters.secondCarrier}`);
-  if (filters.maxLayover < 24 * 60) chips.push(`Przesiadka do ${formatDuration(filters.maxLayover)}`);
+  if (filters.transfer !== "direct" && filters.maxLayover < 24 * 60) {
+    chips.push(`Przesiadka do ${formatDuration(filters.maxLayover)}`);
+  }
   if (filters.dateFrom !== state.document.period_from || filters.dateTo !== state.document.period_to) {
     chips.push(`${filters.dateFrom} – ${filters.dateTo}`);
   }
@@ -295,10 +339,13 @@ function renderResults() {
   elements.list.setAttribute("aria-busy", "false");
 
   if (!results.length) {
+    const directSelected = currentFilters().transfer === "direct";
     elements.list.innerHTML = `
       <div class="empty-state">
         <strong>Brak lotów dla tych filtrów</strong>
-        <p>Podnieś limit ceny albo wybierz dłuższą przesiadkę.</p>
+        <p>${directSelected
+          ? "W aktualnych danych nie ma lotów bezpośrednich."
+          : "Podnieś limit ceny albo wybierz dłuższą przesiadkę."}</p>
       </div>
     `;
     return;

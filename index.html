@@ -8,14 +8,14 @@
       content="ResiFly — tanie połączenia z Teneryfy do Polski z uwzględnieniem szacowanej zniżki rezydenckiej."
     />
     <title>ResiFly — tanie loty z Teneryfy</title>
-    <link rel="icon" href="favicon.svg?v=20261019-5" type="image/svg+xml" />
+    <link rel="icon" href="favicon.svg?v=20261019-6" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261019-5" />
+    <link rel="stylesheet" href="styles.css?v=20261019-6" />
   </head>
   <body>
     <header class="site-header">
@@ -36,25 +36,35 @@
     <main>
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">Loty dla mieszkańców Wysp Kanaryjskich</p>
+          <p class="eyebrow">Loty dla rezydentów Wysp Kanaryjskich</p>
           <h1 id="page-title">Z Teneryfy do Polski.<br /><span>Prościej i taniej.</span></h1>
           <p class="hero-description">
             Łączymy odcinki Bintera z tanimi lotami do Polski i od razu pokazujemy
             szacowaną cenę po zniżce rezydenckiej.
           </p>
         </div>
-        <div class="hero-route" aria-label="Obecnie wyszukiwana trasa">
-          <div>
-            <span class="route-code">TFS / TFN</span>
-            <span class="route-city">Teneryfa</span>
+        <div class="hero-route" aria-label="Obecnie wyszukiwana trasa z Teneryfy do Polski">
+          <div class="route-shape route-shape-tenerife">
+            <svg viewBox="0 0 160 150" aria-hidden="true">
+              <path d="M91 8c13 8 17 22 26 34 9 13 11 26 4 39-7 12-10 26-19 37-8 10-14 20-27 26-8-8-9-19-17-29-10-12-16-25-13-38 2-13-5-23 3-35 7-11 17-15 23-25 5-8 12-13 20-9Z" />
+            </svg>
+            <div class="route-shape-label">
+              <span class="route-code">TFS / TFN</span>
+              <span class="route-city">Teneryfa</span>
+            </div>
           </div>
           <div class="route-line" aria-hidden="true">
             <span></span>
             <svg viewBox="0 0 24 24"><path d="m2 16 20-9-7 13-3.8-4.2L6 19l1.8-5.5L2 16Z" /></svg>
           </div>
-          <div class="route-end">
-            <span class="route-code">WAW</span>
-            <span class="route-city">Warszawa</span>
+          <div class="route-shape route-shape-poland">
+            <svg viewBox="0 0 160 130" aria-hidden="true">
+              <path d="M20 40c8-6 11-13 22-13 8 0 14-6 22-4 9 2 14-5 23-1 10 5 18-1 27 4 8 5 19 2 23 13 4 11-1 19 5 29 5 9-2 17-4 28-6 9-16 6-23 15-9 8-18 2-28 6-10 4-17-5-27-2-11 3-15-8-25-7-10-3-8-13-16-19-7-7-1-16-6-24-3-10 5-15 7-25Z" />
+            </svg>
+            <div class="route-shape-label">
+              <span class="route-code">WAW</span>
+              <span class="route-city">Warszawa</span>
+            </div>
           </div>
         </div>
       </section>
@@ -127,6 +137,7 @@
               <span class="filter-label">Przesiadka</span>
               <select id="transfer-filter">
                 <option value="all">Dowolne lotnisko</option>
+                <option value="direct">Bez przesiadek</option>
               </select>
             </label>
 
@@ -183,7 +194,7 @@
           <div class="flight-card-topline">
             <span class="date-label"></span>
             <div class="connection-summary">
-              <span class="connection-label">1 przesiadka</span>
+              <span class="connection-label"></span>
               <span class="total-duration"></span>
             </div>
           </div>
@@ -198,11 +209,10 @@
           <span class="resident-caption">Cena dla rezydenta</span>
           <strong class="resident-price"></strong>
           <span class="regular-price"></span>
-          <span class="saving-pill"></span>
         </aside>
       </article>
     </template>
 
-    <script src="app.js?v=20261019-5" defer></script>
+    <script src="app.js?v=20261019-6" defer></script>
   </body>
 </html>
