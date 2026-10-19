@@ -44,6 +44,10 @@ const shortDate = new Intl.DateTimeFormat("pl-PL", {
   year: "numeric",
 });
 
+const weekday = new Intl.DateTimeFormat("pl-PL", {
+  weekday: "long",
+});
+
 function datePart(iso) {
   return iso.slice(0, 10);
 }
@@ -58,9 +62,9 @@ function formatDate(iso) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-function formatTimestamp(iso) {
+function formatTimestampWithWeekday(iso) {
   const safeDate = new Date(`${datePart(iso)}T12:00:00Z`);
-  return `${shortDate.format(safeDate)}, ${timePart(iso)}`;
+  return `${shortDate.format(safeDate)}, ${timePart(iso)} (${weekday.format(safeDate)})`;
 }
 
 function formatDuration(minutes) {
@@ -68,6 +72,12 @@ function formatDuration(minutes) {
   const remainder = minutes % 60;
   if (!remainder) return `${hours} godz.`;
   return `${hours} godz. ${remainder} min`;
+}
+
+function journeyDuration(result) {
+  const departure = new Date(result.legs[0].departure_at);
+  const arrival = new Date(result.legs.at(-1).arrival_at);
+  return Math.round((arrival - departure) / 60000);
 }
 
 function pluralizeResults(count) {
@@ -185,7 +195,8 @@ function createJourney(result) {
 
   const transfer = document.createElement("div");
   transfer.className = "transfer-stop";
-  transfer.innerHTML = `<strong>${timePart(first.arrival_at)} · ${result.transfer_airport}</strong><span>${formatDuration(result.layover_minutes)} przerwy</span>`;
+  const nextDayMarker = datePart(second.departure_at) > datePart(first.arrival_at) ? "*" : "";
+  transfer.innerHTML = `<strong>${timePart(first.arrival_at)} · ${result.transfer_airport} · ${timePart(second.departure_at)}${nextDayMarker}</strong><span>${formatDuration(result.layover_minutes)} przerwy</span>`;
 
   const secondLine = document.createElement("div");
   secondLine.className = "leg-line";
@@ -203,16 +214,19 @@ function priceDetails(result) {
   const [first, second] = result.legs;
   return `
     <div class="price-row">
-      <span>${first.carrier} ${first.flight_number} · regularna ${currency.format(first.price_regular_pln)}</span>
-      <strong>około ${currency.format(first.price_resident_estimated_pln)}</strong>
+      <span>${first.carrier} ${first.flight_number}</span>
+      <strong><span class="regular-inline">(${currency.format(first.price_regular_pln)})</span> ~${currency.format(first.price_resident_estimated_pln)}</strong>
     </div>
     <div class="price-row">
       <span>${second.carrier} ${second.flight_number}</span>
       <strong>${currency.format(second.price_regular_pln)}</strong>
     </div>
-    <div class="price-row">
-      <span>Wylot ${formatTimestamp(first.departure_at)} · przylot ${formatTimestamp(second.arrival_at)}</span>
-      <strong>Razem około ${currency.format(result.price_total_resident_estimated_pln)}</strong>
+    <div class="price-row trip-summary-row">
+      <span class="trip-timing">
+        <span>Wylot: ${formatTimestampWithWeekday(first.departure_at)}</span>
+        <span>Przylot: ${formatTimestampWithWeekday(second.arrival_at)}</span>
+      </span>
+      <strong>Razem ~${currency.format(result.price_total_resident_estimated_pln)}</strong>
     </div>
   `;
 }
@@ -224,10 +238,11 @@ function createResultCard(result) {
 
   card.dataset.resultId = result.id;
   fragment.querySelector(".date-label").textContent = formatDate(result.legs[0].departure_at);
+  fragment.querySelector(".total-duration").textContent = `Łącznie: ${formatDuration(journeyDuration(result))}`;
   fragment.querySelector(".journey").append(createJourney(result));
   fragment.querySelector(".resident-price").textContent = currency.format(result.price_total_resident_estimated_pln);
   fragment.querySelector(".regular-price").textContent = `Cena regularna: ${currency.format(result.price_total_regular_pln)}`;
-  fragment.querySelector(".saving-pill").textContent = `oszczędzasz około ${currency.format(saving)}`;
+  fragment.querySelector(".saving-pill").textContent = `oszczędzasz ~${currency.format(saving)}`;
 
   const details = fragment.querySelector(".price-details");
   details.innerHTML = priceDetails(result);
@@ -290,7 +305,7 @@ function resetFilters() {
   elements.origin.value = "all";
   elements.transfer.value = "all";
   elements.carrier.value = "all";
-  elements.layover.value = 24;
+  elements.layover.value = 6;
   elements.sort.value = "price";
   renderResults();
 }

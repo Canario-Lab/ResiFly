@@ -111,8 +111,8 @@
 
           <label class="filter-field layover-field">
             <span class="filter-label">Maksymalna przesiadka</span>
-            <span class="range-value"><strong id="layover-output">24 godz.</strong></span>
-            <input id="layover-filter" type="range" min="2" max="24" value="24" step="1" />
+            <span class="range-value"><strong id="layover-output">6 godz.</strong></span>
+            <input id="layover-filter" type="range" min="2" max="24" value="6" step="1" />
             <span class="range-scale"><span>2 godz.</span><span>24 godz.</span></span>
           </label>
         </div>
@@ -160,7 +160,10 @@
         <div class="flight-main">
           <div class="flight-card-topline">
             <span class="date-label"></span>
-            <span class="connection-label">1 przesiadka</span>
+            <div class="connection-summary">
+              <span class="connection-label">1 przesiadka</span>
+              <span class="total-duration"></span>
+            </div>
           </div>
           <div class="journey"></div>
           <button class="details-toggle" type="button" aria-expanded="false">

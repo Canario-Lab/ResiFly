@@ -476,9 +476,23 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 700;
 }
 
+.connection-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.total-duration {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .journey {
   display: grid;
-  grid-template-columns: minmax(105px, auto) minmax(125px, 1fr) minmax(105px, auto) minmax(125px, 1fr) minmax(105px, auto);
+  grid-template-columns: minmax(105px, auto) minmax(115px, 1fr) minmax(180px, auto) minmax(115px, 1fr) minmax(105px, auto);
   align-items: center;
   gap: 14px;
 }
@@ -544,6 +558,7 @@ input[type="range"]::-moz-range-thumb {
   display: block;
   font-family: "Manrope", sans-serif;
   font-size: 1.15rem;
+  white-space: nowrap;
 }
 
 .transfer-stop span {
@@ -605,6 +620,22 @@ input[type="range"]::-moz-range-thumb {
 
 .price-row strong {
   color: var(--ink);
+}
+
+.regular-inline {
+  margin-right: 5px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.trip-summary-row {
+  align-items: flex-start;
+}
+
+.trip-timing {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .price-summary {
@@ -845,6 +876,14 @@ input[type="range"]::-moz-range-thumb {
 
   .transfer-stop {
     padding: 4px 0;
+  }
+
+  .transfer-stop strong {
+    white-space: normal;
+  }
+
+  .trip-summary-row {
+    flex-direction: column;
   }
 
   .price-summary {
