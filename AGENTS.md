@@ -18,6 +18,18 @@
   listed airports; being on the allowlist does not imply current availability.
 - Update this allowlist only when the user explicitly asks to revise it.
 
+## Canonical Ryanair transfer-airport list
+
+- The fixed Ryanair + Ryanair airport allowlist for Step 3 is stored in
+  `data/ryanair-transfer-airports.json`.
+- Read both the transfer airport code and its eligible Polish airport codes
+  from that file whenever Step 3 is run. Do not rediscover, add, or remove
+  transfer airports during a weekly collection.
+- A weekly collection still fetches current schedules and prices for the
+  listed route combinations; being on the allowlist does not imply current
+  availability.
+- Update this allowlist only when the user explicitly asks to revise it.
+
 ## Flight booking links
 
 - Every Wizz Air leg written to a public results JSON must contain a

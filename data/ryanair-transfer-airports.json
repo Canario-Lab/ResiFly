@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Ryanair dla kroku 3",
+  "verified_on": "2026-10-20",
+  "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Ryanair + Ryanair między Teneryfą a Polską w kroku 3.",
+  "scope": {
+    "tenerife_airports": [
+      "TFN",
+      "TFS"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "airline": "Ryanair",
+    "resident_discount_considered": false
+  },
+  "selection_method": {
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK.",
+    "route_filter": {
+      "operator": "RYANAIR",
+      "connectingAirport": null
+    },
+    "excluded_endpoints": [
+      "TFN",
+      "TFS",
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "result_count": 34,
+    "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
+  },
+  "usage_policy": {
+    "step": 3,
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj aktualne rozkłady i ceny wyłącznie dla kombinacji zapisanych w airports.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie; trasy mogą być sezonowe lub czasowo zawieszone."
+  },
+  "airports": [
+    {
+      "iata": "AGA",
+      "name_pl": "Agadir",
+      "country_pl": "Maroko",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "AGP",
+      "name_pl": "Malaga",
+      "country_pl": "Hiszpania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "BGY",
+      "name_pl": "Mediolan-Bergamo",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "BHX",
+      "name_pl": "Birmingham",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "BLQ",
+      "name_pl": "Bolonia",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KRK"]
+    },
+    {
+      "iata": "BOH",
+      "name_pl": "Bournemouth",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "BRS",
+      "name_pl": "Bristol",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "BUD",
+      "name_pl": "Budapeszt",
+      "country_pl": "Węgry",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "BVA",
+      "name_pl": "Paryż-Beauvais",
+      "country_pl": "Francja",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "CRL",
+      "name_pl": "Bruksela-Charleroi",
+      "country_pl": "Belgia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "DUB",
+      "name_pl": "Dublin",
+      "country_pl": "Irlandia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "EDI",
+      "name_pl": "Edynburg",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "EIN",
+      "name_pl": "Eindhoven",
+      "country_pl": "Holandia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "EMA",
+      "name_pl": "East Midlands",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "FCO",
+      "name_pl": "Rzym-Fiumicino",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KTW"]
+    },
+    {
+      "iata": "FMM",
+      "name_pl": "Memmingen",
+      "country_pl": "Niemcy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "LBA",
+      "name_pl": "Leeds-Bradford",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "LPL",
+      "name_pl": "Liverpool",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KRK"]
+    },
+    {
+      "iata": "LTN",
+      "name_pl": "Londyn-Luton",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "MAN",
+      "name_pl": "Manchester",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "MRS",
+      "name_pl": "Marsylia",
+      "country_pl": "Francja",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "MXP",
+      "name_pl": "Mediolan-Malpensa",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "NAP",
+      "name_pl": "Neapol",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "NCL",
+      "name_pl": "Newcastle",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "OPO",
+      "name_pl": "Porto",
+      "country_pl": "Portugalia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "WMI", "KRK"]
+    },
+    {
+      "iata": "PSA",
+      "name_pl": "Piza",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "RAK",
+      "name_pl": "Marrakesz",
+      "country_pl": "Maroko",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "SNN",
+      "name_pl": "Shannon",
+      "country_pl": "Irlandia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    },
+    {
+      "iata": "STN",
+      "name_pl": "Londyn-Stansted",
+      "country_pl": "Wielka Brytania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "SVQ",
+      "name_pl": "Sewilla",
+      "country_pl": "Hiszpania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "TLS",
+      "name_pl": "Tuluza",
+      "country_pl": "Francja",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["KRK"]
+    },
+    {
+      "iata": "TSF",
+      "name_pl": "Wenecja-Treviso",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KTW", "KRK"]
+    },
+    {
+      "iata": "VIE",
+      "name_pl": "Wiedeń",
+      "country_pl": "Austria",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "VLC",
+      "name_pl": "Walencja",
+      "country_pl": "Hiszpania",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WMI", "KRK"]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Ryanair — oficjalny wykaz tras",
+      "url": "https://www.ryanair.com/api/views/locate/3/routes"
+    },
+    {
+      "name": "Ryanair — oficjalny słownik aktywnych lotnisk",
+      "url": "https://www.ryanair.com/api/views/locate/3/airports/en/active"
+    },
+    {
+      "name": "Aena — linie i kierunki z Tenerife Sur",
+      "url": "https://www.aena.es/es/tenerife-sur/aerolineas-y-destinos/aerolineas.html"
+    },
+    {
+      "name": "Aena — linie i kierunki z Tenerife Norte",
+      "url": "https://www.aena.es/es/tenerife-norte-ciudad-de-la-laguna/aerolineas-destinos/aerolineas.html"
+    }
+  ]
+}

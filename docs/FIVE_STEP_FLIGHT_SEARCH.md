@@ -82,12 +82,16 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 3 — Ryanair + Ryanair
 
-- Na podstawie aktualnej siatki Ryanair ustalić europejskie lotniska, do
-  których Ryanair lata bezpośrednio z TFS lub TFN i które mają również
-  bezpośrednie połączenie Ryanair z co najmniej jednym z lotnisk WAW, WMI, KRK
-  lub KTW.
-- Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde takie
-  lotnisko, w obu kierunkach.
+- Używać wyłącznie lotnisk i odpowiadających im polskich lotnisk zapisanych w
+  kanonicznej liście `data/ryanair-transfer-airports.json`.
+- Podczas cotygodniowego uruchomienia nie odkrywać ponownie możliwych lotnisk
+  przesiadkowych, nie rozszerzać listy i nie usuwać z niej pozycji. Sprawdzać
+  tylko bieżące rozkłady oraz ceny dla kombinacji zapisanych w pliku.
+- Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
+  liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
+  sezonowości lub czasowego zawieszenia trasy.
+- Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
+  z listy, w obu kierunkach.
 - Zwykłą cenę odcinka Ryanair z/do TFS lub TFN pomnożyć przez 25%. Odcinek
   między Polską a lotniskiem przesiadkowym policzyć w pełnej cenie.
 - W PDF-ie najpierw podać aktualną listę lotnisk przesiadkowych i odpowiadające
