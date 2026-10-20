@@ -2,6 +2,7 @@ const DATA_URLS = [
   "data/step1-results.json",
   "data/step2-results.json",
   "data/step3-results.json",
+  "data/step4-results.json",
 ];
 
 const state = {
@@ -220,6 +221,7 @@ const airportLabels = {
   AGA: "Agadir (AGA)",
   AGP: "Malaga (AGP)",
   BGY: "Mediolan-Bergamo (BGY)",
+  BBU: "Bukareszt-Băneasa (BBU)",
   BHX: "Birmingham (BHX)",
   BLQ: "Bolonia (BLQ)",
   BOH: "Bournemouth (BOH)",
@@ -242,9 +244,11 @@ const airportLabels = {
   NAP: "Neapol (NAP)",
   NCL: "Newcastle (NCL)",
   OPO: "Porto (OPO)",
+  OTP: "Bukareszt-Otopeni (OTP)",
   PSA: "Piza (PSA)",
   RAK: "Marrakesz (RAK)",
   SNN: "Shannon (SNN)",
+  SCQ: "Santiago de Compostela (SCQ)",
   STN: "Londyn-Stansted (STN)",
   SVQ: "Sewilla (SVQ)",
   TLS: "Tuluza (TLS)",
@@ -950,7 +954,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy pliki danych kroków 1–3 są dostępne.</p>
+        <p>Sprawdź, czy pliki danych kroków 1–4 są dostępne.</p>
       </div>
     `;
   }

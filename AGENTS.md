@@ -49,6 +49,8 @@
 
 - The fixed Wizz Air + Wizz Air airport allowlist for Step 4 is stored in
   `data/wizzair-transfer-airports.json`.
+- Generate Step 4 with `scripts/collect_step4.py` and write the public feed to
+  `data/step4-results.json`.
 - Read both the transfer airport code and its eligible Polish airport codes
   from that file whenever Step 4 is run. Do not rediscover, add, or remove
   transfer airports during a weekly collection.
@@ -60,6 +62,11 @@
   listed route combinations; being on the allowlist does not imply current
   availability.
 - Update this allowlist only when the user explicitly asks to revise it.
+- Keep verified Wizz Air flight numbers and published block times in the
+  collector's `WIZZ_ROUTE_SCHEDULES`; the public Wizz timetable API supplies
+  current dates, departure times and fares but omits arrival times and flight
+  numbers. If a new allowlisted route becomes active, verify and add its
+  schedule instead of inventing missing data.
 
 ## Canonical mixed Ryanair/Wizz Air transfer-airport list
 
