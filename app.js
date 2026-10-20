@@ -3,6 +3,7 @@ const DATA_URLS = [
   "data/step2-results.json",
   "data/step3-results.json",
   "data/step4-results.json",
+  "data/step5-results.json",
 ];
 
 const state = {
@@ -235,6 +236,7 @@ const airportLabels = {
   EMA: "East Midlands (EMA)",
   FCO: "Rzym-Fiumicino (FCO)",
   FMM: "Memmingen (FMM)",
+  GDN: "Gdańsk (GDN)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",
@@ -954,7 +956,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy pliki danych kroków 1–4 są dostępne.</p>
+        <p>Sprawdź, czy pliki danych kroków 1–5 są dostępne.</p>
       </div>
     `;
   }

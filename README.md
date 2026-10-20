@@ -2,7 +2,8 @@
 
 Prosta statyczna wyszukiwarka lotów między Teneryfą a Polską. Strona łączy
 wyniki z plików `data/step1-results.json`, `data/step2-results.json`,
-`data/step3-results.json` i `data/step4-results.json` oraz
+`data/step3-results.json`, `data/step4-results.json` i
+`data/step5-results.json` oraz
 pozwala filtrować je po kierunku, cenie, dacie, lotnisku, miejscu przesiadki,
 przewoźniku i czasie oczekiwania.
 
@@ -24,10 +25,12 @@ python3 -m venv .venv
 .venv/bin/python scripts/collect_step2.py --days 30
 .venv/bin/python scripts/collect_step3.py --days 30
 .venv/bin/python scripts/collect_step4.py --days 30
+.venv/bin/python scripts/collect_step5.py --days 30
 ```
 
 Generatory same zapisują `data/step1-results.json`, `data/step2-results.json`,
-`data/step3-results.json` i `data/step4-results.json`; plików wynikowych nie
+`data/step3-results.json`, `data/step4-results.json` i
+`data/step5-results.json`; plików wynikowych nie
 należy poprawiać ręcznie.
 
 ## Linki do zakupu Wizz Air

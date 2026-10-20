@@ -70,6 +70,7 @@ AIRPORT_TIMEZONES = {
     "EMA": "Europe/London",
     "FCO": "Europe/Rome",
     "FMM": "Europe/Berlin",
+    "GDN": "Europe/Warsaw",
     "LBA": "Europe/London",
     "LPL": "Europe/London",
     "LTN": "Europe/London",

@@ -72,6 +72,8 @@
 
 - The fixed mixed-airline airport allowlist for Step 5 is stored in
   `data/mixed-transfer-airports.json`.
+- Generate Step 5 with `scripts/collect_step5.py` and write the public feed to
+  `data/step5-results.json`.
 - Read the route combinations from both variants in that file whenever Step 5
   is run: Ryanair on the Tenerife leg with Wizz Air on the Poland leg, and
   Wizz Air on the Tenerife leg with Ryanair on the Poland leg.
