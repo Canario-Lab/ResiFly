@@ -1074,6 +1074,11 @@ input[type="range"]::-moz-range-thumb {
   line-height: 1.45;
 }
 
+.purchase-step-timing {
+  display: grid;
+  gap: 2px;
+}
+
 .purchase-step-flight {
   margin-top: 4px;
 }

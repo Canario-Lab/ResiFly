@@ -550,9 +550,16 @@ function createPurchaseStep(leg, index) {
   route.className = "purchase-step-route";
   route.textContent = `${leg.departure_airport} ${timePart(leg.departure_at)} → ${leg.arrival_airport} ${timePart(leg.arrival_at)}`;
 
-  const timing = document.createElement("span");
+  const timing = document.createElement("div");
   timing.className = "purchase-step-timing";
-  timing.textContent = `Wylot: ${formatPurchaseTimestamp(leg.departure_at)} · Przylot: ${formatPurchaseTimestamp(leg.arrival_at)}`;
+
+  const departureTiming = document.createElement("span");
+  departureTiming.textContent = `Wylot: ${formatPurchaseTimestamp(leg.departure_at)}`;
+
+  const arrivalTiming = document.createElement("span");
+  arrivalTiming.textContent = `Przylot: ${formatPurchaseTimestamp(leg.arrival_at)}`;
+
+  timing.append(departureTiming, arrivalTiming);
 
   const flightNumber = document.createElement("span");
   flightNumber.className = "purchase-step-flight";
