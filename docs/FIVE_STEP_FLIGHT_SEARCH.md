@@ -151,10 +151,11 @@ wyników w każdym kroku oraz linki do pięciu utworzonych PDF-ów.
 
 ## Ważne rozróżnienie: raport a JSON strony
 
-Próg 500 PLN jest zasadą kwalifikacji wyników do powyższych pięciu raportów.
-Obecny testowy JSON strony także został zawężony do cen rezydenckich poniżej
-500 PLN, dlatego nie pozwala stronie pokazać droższych połączeń. Jeżeli strona
-ma umożliwiać podniesienie limitu ponad 500 PLN, kolektor powinien zapisywać
-szerszy zestaw danych, a limit należy stosować dopiero w interfejsie lub podczas
-tworzenia raportu. Wygenerowanych JSON-ów nie należy poprawiać ręcznie.
+Próg 500 PLN pozostaje zasadą kwalifikacji wyników do powyższych pięciu
+raportów PDF. Publiczny JSON strony dla kroku 1 ma osobną regułę: obejmuje oba
+kierunki i zapisuje połączenia, których łączna **cena regularna** jest ściśle
+niższa niż 1000 PLN. Cena rezydencka i Wizz Air Discount Club są zapisywane
+jako dodatkowe warianty, ale nie decydują o włączeniu połączenia do JSON-a.
+Wygenerowanych JSON-ów nie należy poprawiać ręcznie; zmianę zakresu lub progu
+należy wprowadzić w kolektorze i ponownie wygenerować plik.
 

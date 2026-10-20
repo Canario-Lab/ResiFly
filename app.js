@@ -1,4 +1,4 @@
-const DATA_URL = "data/test-results-waw.json";
+const DATA_URL = "data/step1-results.json";
 
 const state = {
   document: null,
@@ -11,7 +11,9 @@ const elements = {
   wizzClub: document.querySelector("#wizz-club-filter"),
   price: document.querySelector("#price-filter"),
   priceOutput: document.querySelector("#price-output"),
+  priceMaxLabel: document.querySelector("#price-max-label"),
   priceContext: document.querySelector("#price-context"),
+  direction: document.querySelector("#direction-filter"),
   dateFrom: document.querySelector("#date-from"),
   dateTo: document.querySelector("#date-to"),
   origin: document.querySelector("#origin-filter"),
@@ -200,16 +202,23 @@ function pluralizeResults(count) {
   return "wyników";
 }
 
+const airportLabels = {
+  TFN: "Teneryfa Północ (TFN)",
+  TFS: "Teneryfa Południe (TFS)",
+  WAW: "Warszawa Chopina (WAW)",
+  WMI: "Warszawa Modlin (WMI)",
+  KTW: "Katowice (KTW)",
+  KRK: "Kraków (KRK)",
+  FUE: "Fuerteventura (FUE)",
+  LPA: "Gran Canaria (LPA)",
+  MAD: "Madryt (MAD)",
+  PMI: "Palma de Mallorca (PMI)",
+  SVQ: "Sewilla (SVQ)",
+  VLC: "Walencja (VLC)",
+};
+
 function optionLabel(code) {
-  const labels = {
-    FUE: "Fuerteventura (FUE)",
-    LPA: "Gran Canaria (LPA)",
-    MAD: "Madryt (MAD)",
-    PMI: "Palma de Mallorca (PMI)",
-    SVQ: "Sewilla (SVQ)",
-    VLC: "Walencja (VLC)",
-  };
-  return labels[code] || code;
+  return airportLabels[code] || code;
 }
 
 function addOptions(select, values, formatter = value => value) {
@@ -219,6 +228,25 @@ function addOptions(select, values, formatter = value => value) {
     option.textContent = formatter(value);
     select.append(option);
   }
+}
+
+function resetAirportSelect(select) {
+  select.replaceChildren();
+  const all = document.createElement("option");
+  all.value = "all";
+  all.textContent = "Wszystkie lotniska";
+  select.append(all);
+}
+
+function updateAirportOptions() {
+  const direction = elements.direction.value;
+  const matching = state.results.filter(result => result.direction === direction);
+  const origins = [...new Set(matching.map(result => result.origin_airport))].sort();
+  const destinations = [...new Set(matching.map(result => result.destination_airport))].sort();
+  resetAirportSelect(elements.origin);
+  resetAirportSelect(elements.destination);
+  addOptions(elements.origin, origins, optionLabel);
+  addOptions(elements.destination, destinations, optionLabel);
 }
 
 function lowestPricesByDate(results, filters) {
@@ -409,6 +437,12 @@ function initializeFilters() {
   elements.dateTo.max = state.document.period_to;
   elements.dateTo.value = state.document.period_to;
 
+  const configuredLimit = Number(state.document.inclusion_limit?.amount) || 1000;
+  elements.price.max = String(configuredLimit);
+  elements.price.value = String(configuredLimit);
+  elements.priceMaxLabel.textContent = `${configuredLimit.toLocaleString("pl-PL")} zł`;
+  updateAirportOptions();
+
   const transfers = [...new Set(state.results.map(result => result.transfer_airport).filter(Boolean))].sort();
   const firstCarriers = [...new Set(state.results.map(result => result.legs[0].carrier))].sort();
   const secondCarriers = [...new Set(
@@ -451,6 +485,7 @@ function currentFilters() {
     secondCarrier: elements.secondCarrier.value,
     maxLayover: Number(elements.layover.value) * 60,
     sort: elements.sort.value,
+    direction: elements.direction.value,
   };
 }
 
@@ -466,10 +501,11 @@ function filteredResults(filters = currentFilters()) {
       (!direct && result.transfer_airport === filters.transfer);
     return (
       selectedResultPricing(result, filters).total <= filters.maxPrice &&
+      result.direction === filters.direction &&
       departureDate >= filters.dateFrom &&
       departureDate <= filters.dateTo &&
       (filters.origin === "all" || result.origin_airport === filters.origin) &&
-      result.destination_airport === filters.destination &&
+      (filters.destination === "all" || result.destination_airport === filters.destination) &&
       transferMatches &&
       (filters.firstCarrier === "all" || firstCarrier === filters.firstCarrier) &&
       (filters.secondCarrier === "all" || (!direct && secondCarrier === filters.secondCarrier)) &&
@@ -665,11 +701,11 @@ function createPurchaseStep(leg, index, filters) {
 
   const openLink = document.createElement("a");
   openLink.className = "purchase-open-link";
-  openLink.href = carrierPurchaseUrls[leg.carrier] || "#";
+  openLink.href = leg.booking_url || carrierPurchaseUrls[leg.carrier] || "#";
   openLink.target = "_blank";
   openLink.rel = "noopener noreferrer";
   openLink.textContent = `Otwórz ${leg.carrier}`;
-  if (!carrierPurchaseUrls[leg.carrier]) {
+  if (!leg.booking_url && !carrierPurchaseUrls[leg.carrier]) {
     openLink.hidden = true;
   }
 
@@ -749,10 +785,11 @@ function createResultCard(result, filters) {
 function renderActiveFilters() {
   const filters = currentFilters();
   const chips = [`Do ${currency.format(filters.maxPrice)}`];
+  chips.push(filters.direction === "poland_to_tenerife" ? "Polska → Teneryfa" : "Teneryfa → Polska");
   if (filters.resident) chips.push("Rezydent Teneryfy");
   if (filters.wizzClub) chips.push("Wizz Air Discount Club");
   if (filters.origin !== "all") chips.push(`Wylot: ${filters.origin}`);
-  chips.push(`Przylot: ${filters.destination}`);
+  if (filters.destination !== "all") chips.push(`Przylot: ${filters.destination}`);
   if (filters.transfer === "direct") chips.push("Bez przesiadek");
   if (filters.transfer !== "all" && filters.transfer !== "direct") chips.push(`Przez: ${filters.transfer}`);
   if (filters.firstCarrier !== "all") chips.push(`Pierwsza linia: ${filters.firstCarrier}`);
@@ -802,11 +839,13 @@ function renderResults() {
 function resetFilters() {
   elements.resident.checked = true;
   elements.wizzClub.checked = false;
-  elements.price.value = 500;
+  elements.price.value = elements.price.max;
+  elements.direction.value = "tenerife_to_poland";
+  updateAirportOptions();
   elements.dateFrom.value = state.document.period_from;
   elements.dateTo.value = state.document.period_to;
   elements.origin.value = "all";
-  elements.destination.value = "WAW";
+  elements.destination.value = "all";
   elements.transfer.value = "all";
   elements.firstCarrier.value = "all";
   elements.secondCarrier.value = "all";
@@ -831,6 +870,10 @@ function bindEvents() {
     elements.sort,
   ];
   filters.forEach(element => element.addEventListener("input", renderResults));
+  elements.direction.addEventListener("input", () => {
+    updateAirportOptions();
+    renderResults();
+  });
   elements.reset.addEventListener("click", resetFilters);
   elements.purchaseDialog.querySelector("[data-close-purchase]").addEventListener("click", () => {
     elements.purchaseDialog.close();
@@ -861,7 +904,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy plik data/test-results-waw.json jest dostępny.</p>
+        <p>Sprawdź, czy plik data/step1-results.json jest dostępny.</p>
       </div>
     `;
   }

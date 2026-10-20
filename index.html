@@ -88,13 +88,21 @@
 
             <label class="filter-field price-field">
               <span class="filter-label">Cena maksymalna</span>
-              <span class="range-value"><strong id="price-output">500 zł</strong> <span id="price-context">dla rezydenta</span></span>
-              <input id="price-filter" type="range" min="0" max="500" value="500" step="10" />
-              <span class="range-scale"><span>0 zł</span><span>500 zł</span></span>
+              <span class="range-value"><strong id="price-output">1000 zł</strong> <span id="price-context">dla rezydenta</span></span>
+              <input id="price-filter" type="range" min="0" max="1000" value="1000" step="10" />
+              <span class="range-scale"><span>0 zł</span><span id="price-max-label">1000 zł</span></span>
             </label>
           </div>
 
           <div class="filter-stack">
+            <label class="filter-field">
+              <span class="filter-label">Kierunek</span>
+              <select id="direction-filter">
+                <option value="tenerife_to_poland">Teneryfa → Polska</option>
+                <option value="poland_to_tenerife">Polska → Teneryfa</option>
+              </select>
+            </label>
+
             <label class="filter-field">
               <span class="filter-label">Data od</span>
               <input id="date-from" type="date" />
@@ -111,15 +119,13 @@
               <span class="filter-label">Wylot z</span>
               <select id="origin-filter">
                 <option value="all">Wszystkie lotniska</option>
-                <option value="TFN">Teneryfa Północ (TFN)</option>
-                <option value="TFS">Teneryfa Południe (TFS)</option>
               </select>
             </label>
 
             <label class="filter-field">
               <span class="filter-label">Przylot na</span>
               <select id="destination-filter">
-                <option value="WAW">Warszawa (WAW)</option>
+                <option value="all">Wszystkie lotniska</option>
               </select>
             </label>
           </div>
@@ -254,6 +260,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261020-18" defer></script>
+    <script src="app.js?v=20261020-19" defer></script>
   </body>
 </html>
