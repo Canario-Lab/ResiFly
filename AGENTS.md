@@ -50,6 +50,22 @@
   availability.
 - Update this allowlist only when the user explicitly asks to revise it.
 
+## Canonical mixed Ryanair/Wizz Air transfer-airport list
+
+- The fixed mixed-airline airport allowlist for Step 5 is stored in
+  `data/mixed-transfer-airports.json`.
+- Read the route combinations from both variants in that file whenever Step 5
+  is run: Ryanair on the Tenerife leg with Wizz Air on the Poland leg, and
+  Wizz Air on the Tenerife leg with Ryanair on the Poland leg.
+- Check both travel directions separately. The airline assigned to a
+  geographical leg remains the same when the direction is reversed.
+- Read resident-discount eligibility and the Tenerife-leg fare multiplier from
+  the matching variant. Never infer the discount from the carrier alone.
+- Do not rediscover, add, or remove transfer airports during a weekly
+  collection. Still fetch current schedules and prices for every saved route
+  combination.
+- Update this allowlist only when the user explicitly asks to revise it.
+
 ## Flight booking links
 
 - Every Wizz Air leg written to a public results JSON must contain a

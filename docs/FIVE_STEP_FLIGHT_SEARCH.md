@@ -124,19 +124,23 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 5 — połączenia mieszane Ryanair × Wizz Air
 
-- Użyć aktualnych list lotnisk przesiadkowych wyznaczonych w krokach 3 i 4 tego
-  samego uruchomienia.
-- Wariant A: dla lotnisk, do których Ryanair lata z TFS/TFN, sprawdzić odcinek
-  między tym lotniskiem a WAW/WMI/KRK/KTW linią Wizz Air. Połączyć Ryanair na
-  odcinku Teneryfa–przesiadka z Wizz Air na odcinku przesiadka–Polska, w obu
-  kierunkach.
-- Wariant B: dla lotnisk, do których Wizz Air lata z TFS/TFN, sprawdzić odcinek
-  między tym lotniskiem a WAW/WMI/KRK/KTW linią Ryanair. Połączyć Wizz Air na
-  odcinku Teneryfa–przesiadka z Ryanair na odcinku przesiadka–Polska, w obu
-  kierunkach.
-- Zwykłą cenę odcinka z/do TFS lub TFN pomnożyć przez 25%, niezależnie od tego,
-  czy obsługuje go Ryanair, czy Wizz Air. Odcinek między Polską a lotniskiem
-  przesiadkowym policzyć w pełnej cenie.
+- Używać wyłącznie kombinacji zapisanych w kanonicznej liście
+  `data/mixed-transfer-airports.json`.
+- Podczas cotygodniowego uruchomienia nie odkrywać ponownie możliwych lotnisk
+  przesiadkowych, nie rozszerzać listy i nie usuwać z niej pozycji. Sprawdzać
+  tylko bieżące rozkłady oraz ceny dla kombinacji zapisanych w pliku.
+- Wariant A: Ryanair obsługuje odcinek TFS/TFN ↔ przesiadka, a Wizz Air odcinek
+  przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
+- Wariant B: Wizz Air obsługuje odcinek TFS/TFN ↔ przesiadka, a Ryanair odcinek
+  przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
+- Uprawnienie do zniżki odczytywać osobno dla właściwego wariantu z pola
+  `resident_discount_on_tenerife_leg`. Mnożnik `0.25` stosować wyłącznie do
+  odcinka TFS/TFN ↔ przesiadka, gdy lotnisko znajduje się w odpowiednim
+  `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną cenę
+  (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć w
+  pełnej cenie.
+- Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Obecność na liście
+  nie gwarantuje połączenia w danym 30-dniowym oknie.
 - W PDF-ie najpierw podać listę lotnisk przesiadkowych dla obu wariantów, a
   następnie wszystkie połączenia poniżej 500 PLN.
 
