@@ -575,7 +575,14 @@ function createPurchaseStep(leg, index) {
     openLink.hidden = true;
   }
 
-  actions.append(openLink);
+  const kiwiLink = document.createElement("a");
+  kiwiLink.className = "purchase-kiwi-link";
+  kiwiLink.href = "https://www.kiwi.com/pl/";
+  kiwiLink.target = "_blank";
+  kiwiLink.rel = "noopener noreferrer";
+  kiwiLink.textContent = "Sprawdź na Kiwi.com";
+
+  actions.append(openLink, kiwiLink);
   step.append(heading, route, timing, flightNumber, price, actions);
   return step;
 }
@@ -598,14 +605,7 @@ function showPurchaseDialog(result) {
     ? "Przed zapłatą upewnij się, że wszystkie loty są nadal dostępne. Ceny mogą się zmienić na stronach linii."
     : "Przed zapłatą sprawdź aktualną cenę i dostępność na stronie linii.";
 
-  const kiwiLink = document.createElement("a");
-  kiwiLink.className = "purchase-kiwi-link";
-  kiwiLink.href = "https://www.kiwi.com/pl/";
-  kiwiLink.target = "_blank";
-  kiwiLink.rel = "noopener noreferrer";
-  kiwiLink.textContent = "Sprawdź i kup na Kiwi.com";
-
-  elements.purchaseDialogContent.replaceChildren(intro, note, steps, kiwiLink);
+  elements.purchaseDialogContent.replaceChildren(intro, note, steps);
   elements.purchaseDialog.showModal();
 }
 
