@@ -1084,8 +1084,15 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .purchase-step-price {
+  display: grid;
+  gap: 2px;
   color: var(--green-dark);
   font-weight: 700;
+}
+
+.purchase-step-price-regular {
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .purchase-step-actions {

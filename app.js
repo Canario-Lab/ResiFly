@@ -514,11 +514,26 @@ function priceDetails(result) {
   `;
 }
 
-function purchaseLegPriceLabel(leg) {
+function purchaseLegPriceRows(leg) {
   const hasResidentEstimate =
     leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
-  const price = hasResidentEstimate ? leg.price_resident_estimated_pln : leg.price_regular_pln;
-  return `${hasResidentEstimate ? "Cena orientacyjna dla rezydenta" : "Cena orientacyjna"}: ~${currency.format(price)}`;
+  if (hasResidentEstimate) {
+    return [
+      {
+        label: `Cena orientacyjna dla rezydenta: ~${currency.format(leg.price_resident_estimated_pln)}`,
+        regular: false,
+      },
+      {
+        label: `Cena regularna: ~${currency.format(leg.price_regular_pln)}`,
+        regular: true,
+      },
+    ];
+  }
+
+  return [{
+    label: `Cena orientacyjna: ~${currency.format(leg.price_regular_pln)}`,
+    regular: false,
+  }];
 }
 
 function createPurchaseStep(leg, index) {
@@ -565,9 +580,14 @@ function createPurchaseStep(leg, index) {
   flightNumber.className = "purchase-step-flight";
   flightNumber.textContent = `Numer lotu: ${leg.flight_number}`;
 
-  const price = document.createElement("span");
+  const price = document.createElement("div");
   price.className = "purchase-step-price";
-  price.textContent = purchaseLegPriceLabel(leg);
+  purchaseLegPriceRows(leg).forEach(row => {
+    const priceRow = document.createElement("span");
+    priceRow.textContent = row.label;
+    if (row.regular) priceRow.className = "purchase-step-price-regular";
+    price.append(priceRow);
+  });
 
   const actions = document.createElement("div");
   actions.className = "purchase-step-actions";
