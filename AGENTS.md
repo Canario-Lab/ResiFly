@@ -25,6 +25,10 @@
 - Read both the transfer airport code and its eligible Polish airport codes
   from that file whenever Step 3 is run. Do not rediscover, add, or remove
   transfer airports during a weekly collection.
+- Read resident-discount eligibility from
+  `resident_discount_on_tenerife_leg` in the same file. Apply the `0.25`
+  multiplier only to the Tenerife leg when its transfer airport is listed as
+  eligible; otherwise use the full fare (`1.0`).
 - A weekly collection still fetches current schedules and prices for the
   listed route combinations; being on the allowlist does not imply current
   availability.

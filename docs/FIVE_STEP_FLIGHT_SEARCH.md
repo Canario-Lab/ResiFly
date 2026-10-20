@@ -92,8 +92,12 @@ wyraźnej decyzji użytkownika.
   sezonowości lub czasowego zawieszenia trasy.
 - Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
   z listy, w obu kierunkach.
-- Zwykłą cenę odcinka Ryanair z/do TFS lub TFN pomnożyć przez 25%. Odcinek
-  między Polską a lotniskiem przesiadkowym policzyć w pełnej cenie.
+- Uprawnienie do zniżki odczytywać z pola
+  `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
+  wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
+  się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
+  cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
+  w pełnej cenie.
 - W PDF-ie najpierw podać aktualną listę lotnisk przesiadkowych i odpowiadające
   im polskie lotniska, a następnie wszystkie połączenia poniżej 500 PLN.
 

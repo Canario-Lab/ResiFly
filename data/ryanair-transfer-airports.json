@@ -34,6 +34,54 @@
     "result_count": 34,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
   },
+  "resident_discount_on_tenerife_leg": {
+    "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
+    "discount_percent": 75,
+    "eligible_fare_multiplier": 0.25,
+    "ineligible_fare_multiplier": 1.0,
+    "applies_only_to_tenerife_leg": true,
+    "eligible_transfer_airports": [
+      "AGP",
+      "SVQ",
+      "VLC"
+    ],
+    "ineligible_transfer_airports": [
+      "AGA",
+      "BGY",
+      "BHX",
+      "BLQ",
+      "BOH",
+      "BRS",
+      "BUD",
+      "BVA",
+      "CRL",
+      "DUB",
+      "EDI",
+      "EIN",
+      "EMA",
+      "FCO",
+      "FMM",
+      "LBA",
+      "LPL",
+      "LTN",
+      "MAN",
+      "MRS",
+      "MXP",
+      "NAP",
+      "NCL",
+      "OPO",
+      "PSA",
+      "RAK",
+      "SNN",
+      "STN",
+      "TLS",
+      "TSF",
+      "VIE"
+    ],
+    "eligible_count": 3,
+    "ineligible_count": 31,
+    "calculation": "Dla AGP, SVQ i VLC pomnóż regularną cenę odcinka TFS/TFN przez 0.25. Dla każdego pozostałego lotniska użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
+  },
   "usage_policy": {
     "step": 3,
     "discovery_mode": "fixed_allowlist",
@@ -298,6 +346,14 @@
     {
       "name": "Aena — linie i kierunki z Tenerife Norte",
       "url": "https://www.aena.es/es/tenerife-norte-ciudad-de-la-laguna/aerolineas-destinos/aerolineas.html"
+    },
+    {
+      "name": "BOE — 75% zniżki dla mieszkańców Wysp Kanaryjskich na połączenia z resztą Hiszpanii",
+      "url": "https://boe.es/buscar/act.php?id=BOE-A-2018-10651"
+    },
+    {
+      "name": "Ministerstwo Transportu Hiszpanii — zniżki dotyczą krajowych regularnych połączeń lotniczych",
+      "url": "https://sede.transportes.gob.es/areas-actividad/aviacion-civil-aereo/liquidacion-bonificaciones-transporte-aereo"
     }
   ]
 }
