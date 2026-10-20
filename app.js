@@ -26,6 +26,8 @@ const elements = {
   countNoun: document.querySelector("#results-noun"),
   list: document.querySelector("#results-list"),
   template: document.querySelector("#result-template"),
+  purchaseDialog: document.querySelector("#purchase-dialog"),
+  purchaseDialogContent: document.querySelector("#purchase-dialog-content"),
 };
 
 const currency = new Intl.NumberFormat("pl-PL", {
@@ -64,12 +66,24 @@ const monthYear = new Intl.DateTimeFormat("pl-PL", {
   timeZone: "UTC",
 });
 
+const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
   "Wizz Air": "assets/logos/wizz-air.svg",
   Ryanair: "assets/logos/ryanair.svg",
+};
+
+const carrierPurchaseUrls = {
+  Binter: "https://www.bintercanarias.com/es/buscar-vuelos",
+  "Wizz Air": "https://wizzair.com/pl-pl",
+  Ryanair: "https://www.ryanair.com/pl/pl",
 };
 
 function datePart(iso) {
@@ -105,6 +119,11 @@ function formatDate(iso) {
 function formatTimestampWithWeekday(iso) {
   const safeDate = new Date(`${datePart(iso)}T12:00:00Z`);
   return `${shortDate.format(safeDate)}, ${timePart(iso)} (${weekday.format(safeDate)})`;
+}
+
+function formatPurchaseTimestamp(iso) {
+  const safeDate = new Date(`${datePart(iso)}T12:00:00Z`);
+  return `${purchaseDate.format(safeDate)}, ${timePart(iso)}`;
 }
 
 function formatDuration(minutes) {
@@ -495,6 +514,140 @@ function priceDetails(result) {
   `;
 }
 
+function purchaseLegPriceLabel(leg) {
+  const hasResidentEstimate =
+    leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
+  const price = hasResidentEstimate ? leg.price_resident_estimated_pln : leg.price_regular_pln;
+  return `${hasResidentEstimate ? "Cena orientacyjna dla rezydenta" : "Cena orientacyjna"}: ~${currency.format(price)}`;
+}
+
+function purchaseLegClipboardText(leg) {
+  return [
+    `${leg.carrier} · lot ${leg.flight_number}`,
+    `Wylot: ${leg.departure_airport}, ${formatPurchaseTimestamp(leg.departure_at)}`,
+    `Przylot: ${leg.arrival_airport}, ${formatPurchaseTimestamp(leg.arrival_at)}`,
+    purchaseLegPriceLabel(leg),
+  ].join("\n");
+}
+
+async function copyText(value) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function createPurchaseStep(leg, index) {
+  const step = document.createElement("article");
+  step.className = "purchase-step";
+
+  const heading = document.createElement("div");
+  heading.className = "purchase-step-heading";
+
+  const number = document.createElement("span");
+  number.className = "purchase-step-number";
+  number.textContent = String(index + 1);
+
+  const carrier = document.createElement("div");
+  carrier.className = "purchase-step-carrier";
+  const logoPath = carrierLogos[leg.carrier];
+  if (logoPath) {
+    const logo = document.createElement("img");
+    logo.src = logoPath;
+    logo.alt = `Logo ${leg.carrier}`;
+    carrier.append(logo);
+  }
+  const carrierName = document.createElement("strong");
+  carrierName.textContent = leg.carrier;
+  carrier.append(carrierName);
+  heading.append(number, carrier);
+
+  const route = document.createElement("strong");
+  route.className = "purchase-step-route";
+  route.textContent = `${leg.departure_airport} ${timePart(leg.departure_at)} → ${leg.arrival_airport} ${timePart(leg.arrival_at)}`;
+
+  const timing = document.createElement("span");
+  timing.className = "purchase-step-timing";
+  timing.textContent = `Wylot: ${formatPurchaseTimestamp(leg.departure_at)} · Przylot: ${formatPurchaseTimestamp(leg.arrival_at)}`;
+
+  const flightNumber = document.createElement("span");
+  flightNumber.className = "purchase-step-flight";
+  flightNumber.textContent = `Numer lotu: ${leg.flight_number}`;
+
+  const price = document.createElement("span");
+  price.className = "purchase-step-price";
+  price.textContent = purchaseLegPriceLabel(leg);
+
+  const actions = document.createElement("div");
+  actions.className = "purchase-step-actions";
+
+  const openLink = document.createElement("a");
+  openLink.className = "purchase-open-link";
+  openLink.href = carrierPurchaseUrls[leg.carrier] || "#";
+  openLink.target = "_blank";
+  openLink.rel = "noopener noreferrer";
+  openLink.textContent = `Otwórz ${leg.carrier}`;
+  if (!carrierPurchaseUrls[leg.carrier]) {
+    openLink.hidden = true;
+  }
+
+  const copyButton = document.createElement("button");
+  copyButton.className = "purchase-copy-button";
+  copyButton.type = "button";
+  copyButton.textContent = "Skopiuj dane lotu";
+  copyButton.addEventListener("click", async () => {
+    const originalLabel = copyButton.textContent;
+    try {
+      await copyText(purchaseLegClipboardText(leg));
+      copyButton.textContent = "Skopiowano";
+      copyButton.classList.add("is-copied");
+    } catch (error) {
+      console.error("Nie udało się skopiować danych lotu", error);
+      copyButton.textContent = "Nie udało się skopiować";
+    }
+    window.setTimeout(() => {
+      copyButton.textContent = originalLabel;
+      copyButton.classList.remove("is-copied");
+    }, 1800);
+  });
+
+  actions.append(openLink, copyButton);
+  step.append(heading, route, timing, flightNumber, price, actions);
+  return step;
+}
+
+function showPurchaseDialog(result) {
+  const separateBookings = result.legs.length > 1;
+  const intro = document.createElement("p");
+  intro.className = "purchase-dialog-intro";
+  intro.textContent = separateBookings
+    ? `To połączenie składa się z ${result.legs.length} osobnych rezerwacji. Kup każdy odcinek bezpośrednio u przewoźnika.`
+    : "Ten lot kupisz jako jedną rezerwację bezpośrednio u przewoźnika.";
+
+  const steps = document.createElement("div");
+  steps.className = "purchase-steps";
+  result.legs.forEach((leg, index) => steps.append(createPurchaseStep(leg, index)));
+
+  const note = document.createElement("p");
+  note.className = "purchase-dialog-note";
+  note.textContent = separateBookings
+    ? "Przed zapłatą upewnij się, że wszystkie loty są nadal dostępne. Ceny mogą się zmienić na stronach linii."
+    : "Przed zapłatą sprawdź aktualną cenę i dostępność na stronie linii.";
+
+  elements.purchaseDialogContent.replaceChildren(intro, steps, note);
+  elements.purchaseDialog.showModal();
+}
+
 function createResultCard(result) {
   const fragment = elements.template.content.cloneNode(true);
   const card = fragment.querySelector(".flight-card");
@@ -515,6 +668,10 @@ function createResultCard(result) {
     ? `Cena regularna: ~${currency.format(result.price_total_regular_pln)}`
     : "";
   regularPrice.hidden = !hasResidentEstimate;
+  fragment.querySelector(".purchase-ticket-count").textContent = direct
+    ? "1 rezerwacja"
+    : `${result.legs.length} osobne bilety`;
+  fragment.querySelector(".purchase-button").addEventListener("click", () => showPurchaseDialog(result));
 
   const details = fragment.querySelector(".price-details");
   details.innerHTML = priceDetails(result);
@@ -609,6 +766,12 @@ function bindEvents() {
   ];
   filters.forEach(element => element.addEventListener("input", renderResults));
   elements.reset.addEventListener("click", resetFilters);
+  elements.purchaseDialog.querySelector("[data-close-purchase]").addEventListener("click", () => {
+    elements.purchaseDialog.close();
+  });
+  elements.purchaseDialog.addEventListener("click", event => {
+    if (event.target === elements.purchaseDialog) elements.purchaseDialog.close();
+  });
 }
 
 async function loadFlights() {

@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261019-12" />
+    <link rel="stylesheet" href="styles.css?v=20261020-13" />
   </head>
   <body>
     <header class="site-header">
@@ -215,10 +215,27 @@
           <span class="resident-caption">Cena dla rezydenta</span>
           <strong class="resident-price"></strong>
           <span class="regular-price"></span>
+          <span class="purchase-ticket-count"></span>
+          <button class="purchase-button" type="button">Przejdź do zakupu</button>
         </aside>
       </article>
     </template>
 
-    <script src="app.js?v=20261019-12" defer></script>
+    <dialog class="purchase-dialog" id="purchase-dialog" aria-labelledby="purchase-dialog-title">
+      <div class="purchase-dialog-card">
+        <header class="purchase-dialog-header">
+          <div>
+            <p class="section-kicker">Dalszy krok</p>
+            <h2 id="purchase-dialog-title">Kup bilety</h2>
+          </div>
+          <button class="dialog-close" type="button" data-close-purchase aria-label="Zamknij okno zakupu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          </button>
+        </header>
+        <div id="purchase-dialog-content"></div>
+      </div>
+    </dialog>
+
+    <script src="app.js?v=20261020-13" defer></script>
   </body>
 </html>
