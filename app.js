@@ -521,32 +521,6 @@ function purchaseLegPriceLabel(leg) {
   return `${hasResidentEstimate ? "Cena orientacyjna dla rezydenta" : "Cena orientacyjna"}: ~${currency.format(price)}`;
 }
 
-function purchaseLegClipboardText(leg) {
-  return [
-    `${leg.carrier} · lot ${leg.flight_number}`,
-    `Wylot: ${leg.departure_airport}, ${formatPurchaseTimestamp(leg.departure_at)}`,
-    `Przylot: ${leg.arrival_airport}, ${formatPurchaseTimestamp(leg.arrival_at)}`,
-    purchaseLegPriceLabel(leg),
-  ].join("\n");
-}
-
-async function copyText(value) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(value);
-    return;
-  }
-
-  const textarea = document.createElement("textarea");
-  textarea.value = value;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
-  document.body.append(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  textarea.remove();
-}
-
 function createPurchaseStep(leg, index) {
   const step = document.createElement("article");
   step.className = "purchase-step";
@@ -601,27 +575,7 @@ function createPurchaseStep(leg, index) {
     openLink.hidden = true;
   }
 
-  const copyButton = document.createElement("button");
-  copyButton.className = "purchase-copy-button";
-  copyButton.type = "button";
-  copyButton.textContent = "Skopiuj dane lotu";
-  copyButton.addEventListener("click", async () => {
-    const originalLabel = copyButton.textContent;
-    try {
-      await copyText(purchaseLegClipboardText(leg));
-      copyButton.textContent = "Skopiowano";
-      copyButton.classList.add("is-copied");
-    } catch (error) {
-      console.error("Nie udało się skopiować danych lotu", error);
-      copyButton.textContent = "Nie udało się skopiować";
-    }
-    window.setTimeout(() => {
-      copyButton.textContent = originalLabel;
-      copyButton.classList.remove("is-copied");
-    }, 1800);
-  });
-
-  actions.append(openLink, copyButton);
+  actions.append(openLink);
   step.append(heading, route, timing, flightNumber, price, actions);
   return step;
 }

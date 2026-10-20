@@ -930,8 +930,7 @@ input[type="range"]::-moz-range-thumb {
 
 .purchase-button:focus-visible,
 .dialog-close:focus-visible,
-.purchase-open-link:focus-visible,
-.purchase-copy-button:focus-visible {
+.purchase-open-link:focus-visible {
   outline: 3px solid rgba(13, 118, 95, 0.24);
   outline-offset: 2px;
 }
@@ -1090,8 +1089,7 @@ input[type="range"]::-moz-range-thumb {
   padding-top: 18px;
 }
 
-.purchase-open-link,
-.purchase-copy-button {
+.purchase-open-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1111,18 +1109,6 @@ input[type="range"]::-moz-range-thumb {
 
 .purchase-open-link:hover {
   background: var(--green-dark);
-}
-
-.purchase-copy-button {
-  color: var(--green-dark);
-  border: 1px solid #c9ddd7;
-  background: #fff;
-}
-
-.purchase-copy-button:hover,
-.purchase-copy-button.is-copied {
-  border-color: #a9ccc2;
-  background: var(--green-soft);
 }
 
 .purchase-dialog-note {
