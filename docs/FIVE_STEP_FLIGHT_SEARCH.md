@@ -49,18 +49,26 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 1 — Binter + Ryanair lub Wizz Air
 
-- Używać wyłącznie następujących lotnisk przesiadkowych z ustalonej listy
-  Bintera: Fuerteventura (FUE), Gran Canaria (LPA), Madryt (MAD), Palma de
-  Mallorca (PMI), Sewilla (SVQ), Walencja (VLC).
-- Nie sprawdzać Madery ani Funchal (FNC).
-- Dla każdego z sześciu lotnisk sprawdzić oba kierunki:
+- Używać wyłącznie lotnisk z kanonicznej listy
+  `data/binter-transfer-airports.json`. Aktualnie są to: Fuerteventura (FUE),
+  Gran Canaria (LPA), Madryt (MAD), Palma de Mallorca (PMI), Sewilla (SVQ) i
+  Walencja (VLC).
+- Podczas cotygodniowego uruchomienia nie wyszukiwać ponownie możliwych lotnisk
+  przesiadkowych, nie rozszerzać listy i nie usuwać z niej pozycji. Sprawdzać
+  tylko bieżące rozkłady oraz ceny dla pozycji zapisanych w pliku.
+- Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
+  liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
+  sezonowości.
+- Nie sprawdzać lotnisk zapisanych w `excluded_airports`, w tym Madery ani
+  Funchal (FNC).
+- Dla każdego lotniska z listy sprawdzić oba kierunki:
   1. WAW/WMI/KRK/KTW → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
      TFS/TFN linią Binter.
   2. TFS/TFN → lotnisko przesiadkowe linią Binter → WAW/WMI/KRK/KTW linią
      Ryanair albo Wizz Air.
 - Zwykłą cenę wyłącznie odcinka Bintera pomnożyć przez 25%. Drugi odcinek
   policzyć w pełnej cenie.
-- W PDF-ie najpierw umieścić krótką listę sześciu użytych lotnisk
+- W PDF-ie najpierw umieścić krótką listę użytych lotnisk
   przesiadkowych, a następnie wszystkie znalezione połączenia poniżej 500 PLN.
 
 ## Krok 2 — loty bezpośrednie

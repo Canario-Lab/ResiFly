@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Binter dla kroku 1",
+  "verified_on": "2026-10-20",
+  "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Binter + Ryanair/Wizz Air w kroku 1.",
+  "scope": {
+    "tenerife_airports": [
+      "TFN",
+      "TFS"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
+  },
+  "usage_policy": {
+    "step": 1,
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj wyłącznie aktualne rozkłady i ceny dla lotnisk z pola airports.",
+    "do_not_rediscover_each_run": true,
+    "polish_route_evidence_is_not_a_search_limit": true,
+    "update_only_on_explicit_user_request": true,
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie; część tras jest sezonowa."
+  },
+  "airports": [
+    {
+      "iata": "FUE",
+      "name_pl": "Fuerteventura",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KTW",
+          "airline": "Wizz Air"
+        }
+      ]
+    },
+    {
+      "iata": "LPA",
+      "name_pl": "Gran Canaria",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        }
+      ]
+    },
+    {
+      "iata": "MAD",
+      "name_pl": "Madryt",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "KTW",
+          "airline": "Wizz Air"
+        }
+      ]
+    },
+    {
+      "iata": "PMI",
+      "name_pl": "Palma de Mallorca",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        }
+      ]
+    },
+    {
+      "iata": "SVQ",
+      "name_pl": "Sewilla",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        }
+      ]
+    },
+    {
+      "iata": "VLC",
+      "name_pl": "Walencja",
+      "binter_from_tenerife": true,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "KRK",
+          "airline": "Wizz Air"
+        }
+      ]
+    }
+  ],
+  "excluded_airports": [
+    {
+      "iata": "FNC",
+      "name_pl": "Funchal (Madera)",
+      "reason": "Wyłączone z kroku 1 decyzją użytkownika."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Binter — oficjalna lista kierunków",
+      "url": "https://www.bintercanarias.com/es/destinos"
+    },
+    {
+      "name": "Kraków Airport — siatka połączeń lato 2026",
+      "url": "https://krakowairport.pl/storage/2026-03/informator-polaczenia-25marca2026-1774521834aN89g.pdf"
+    },
+    {
+      "name": "Katowice Airport — aktualizacja siatki połączeń 2026",
+      "url": "https://www.katowice-airport.com/en/our-airport/news/108"
+    }
+  ]
+}
