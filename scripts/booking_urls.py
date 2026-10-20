@@ -3,6 +3,7 @@
 from datetime import date, datetime
 import re
 from typing import Union
+from urllib.parse import urlencode
 
 
 _IATA_CODE = re.compile(r"^[A-Z]{3}$")
@@ -64,4 +65,48 @@ def wizz_booking_url(
         f"{_iata(origin)}/{_iata(destination)}/{_departure_date(departure)}/"
         f"null/{adults}/{children}/{infants}/null"
     )
+
+
+def ryanair_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+    *,
+    adults: int = 1,
+    teens: int = 0,
+    children: int = 0,
+    infants: int = 0,
+    locale: str = "pl/pl",
+) -> str:
+    """Return a reusable Ryanair search link for one outbound journey."""
+
+    passenger_counts = (adults, teens, children, infants)
+    if any(not isinstance(count, int) or count < 0 for count in passenger_counts):
+        raise ValueError("Passenger counts must be non-negative integers")
+    if adults < 1:
+        raise ValueError("At least one adult passenger is required")
+
+    language = locale.strip().lower()
+    if not re.fullmatch(r"[a-z]{2}/[a-z]{2}", language):
+        raise ValueError(f"Invalid locale: {locale!r}")
+
+    query = urlencode({
+        "adults": adults,
+        "teens": teens,
+        "children": children,
+        "infants": infants,
+        "dateOut": _departure_date(departure),
+        "dateIn": "",
+        "isConnectedFlight": "false",
+        "discount": 0,
+        "promoCode": "",
+        "isReturn": "false",
+        "originIata": _iata(origin),
+        "destinationIata": _iata(destination),
+        "tpAdults": adults,
+        "tpTeens": teens,
+        "tpChildren": children,
+        "tpInfants": infants,
+    })
+    return f"https://www.ryanair.com/{language}/trip/flights/select?{query}"
 

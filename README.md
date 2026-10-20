@@ -1,9 +1,9 @@
 # ResiFly
 
-Prosta statyczna wyszukiwarka lotów między Teneryfą a Polską. Strona wczytuje
-wyniki kroku 1 z pliku `data/step1-results.json` i pozwala filtrować je po
-kierunku, cenie, dacie, lotnisku, miejscu przesiadki, przewoźniku i czasie
-oczekiwania.
+Prosta statyczna wyszukiwarka lotów między Teneryfą a Polską. Strona łączy
+wyniki z plików `data/step1-results.json` i `data/step2-results.json` oraz
+pozwala filtrować je po kierunku, cenie, dacie, lotnisku, miejscu przesiadki,
+przewoźniku i czasie oczekiwania.
 
 ## Zbieranie danych
 
@@ -12,18 +12,19 @@ Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku
 wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
 wynikowych danych.
 
-Publiczny JSON strony jest generowany z aktualnych danych Binter, Ryanair,
-Wizz Air oraz kursu NBP. Obejmuje oba kierunki i wyłącznie połączenia, których
-łączna cena regularna jest niższa niż 1000 PLN.
+Publiczne JSON-y strony są generowane z aktualnych danych Binter, Ryanair,
+Wizz Air oraz kursu NBP. Obejmują oba kierunki i nie mają limitu cenowego;
+maksymalną cenę wybiera użytkownik na stronie.
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r scripts/requirements-flight-collector.txt
 .venv/bin/python scripts/collect_step1.py --days 30
+.venv/bin/python scripts/collect_step2.py --days 30
 ```
 
-Generator sam zapisuje `data/step1-results.json`; pliku wynikowego nie należy
-poprawiać ręcznie.
+Generatory same zapisują `data/step1-results.json` i
+`data/step2-results.json`; plików wynikowych nie należy poprawiać ręcznie.
 
 ## Linki do zakupu Wizz Air
 

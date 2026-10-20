@@ -21,7 +21,7 @@ def leg(carrier, number, origin, departure, destination, arrival, regular, resid
 
 
 class Step1CollectorTests(unittest.TestCase):
-    def test_limit_uses_regular_total_not_resident_total(self):
+    def test_does_not_filter_expensive_regular_price(self):
         binter = leg(
             "Binter", "NT1", "TFN", "2026-11-01T08:00:00+00:00",
             "MAD", "2026-11-01T12:00:00+01:00", 800, 200,
@@ -31,9 +31,11 @@ class Step1CollectorTests(unittest.TestCase):
             "WAW", "2026-11-01T18:30:00+01:00", 250,
             booking_url="https://www.wizzair.com/example",
         )
-        self.assertEqual(build_connections([wizz], [binter], 1000), [])
+        results = build_connections([wizz], [binter])
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0]["price_total_regular_pln"], 1050)
 
-    def test_both_directions_and_strict_limit(self):
+    def test_both_directions_without_price_limit(self):
         wizz_to_poland = leg(
             "Wizz Air", "W61472", "MAD", "2026-11-01T15:00:00+01:00",
             "WAW", "2026-11-01T18:30:00+01:00", 300,
@@ -55,19 +57,17 @@ class Step1CollectorTests(unittest.TestCase):
         results = build_connections(
             [wizz_to_poland, wizz_from_poland],
             [binter_to_transfer, binter_to_tenerife],
-            1000,
         )
         self.assertEqual(len(results), 2)
         self.assertEqual({result["direction"] for result in results}, {
             "tenerife_to_poland", "poland_to_tenerife",
         })
-        self.assertTrue(all(result["price_total_regular_pln"] < 1000 for result in results))
 
         document = {
             "directions": ["tenerife_to_poland", "poland_to_tenerife"],
             "results": results,
         }
-        validate_document(document, 1000)
+        validate_document(document)
 
 
 if __name__ == "__main__":

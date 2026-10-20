@@ -1,4 +1,4 @@
-const DATA_URL = "data/step1-results.json";
+const DATA_URLS = ["data/step1-results.json", "data/step2-results.json"];
 
 const state = {
   document: null,
@@ -437,7 +437,11 @@ function initializeFilters() {
   elements.dateTo.max = state.document.period_to;
   elements.dateTo.value = state.document.period_to;
 
-  const configuredLimit = Number(state.document.inclusion_limit?.amount) || 1000;
+  const highestRegularPrice = Math.max(
+    0,
+    ...state.results.map(result => finitePrice(result.price_total_regular_pln) ?? 0)
+  );
+  const configuredLimit = Math.max(100, Math.ceil(highestRegularPrice / 100) * 100);
   elements.price.max = String(configuredLimit);
   elements.price.value = String(configuredLimit);
   elements.priceMaxLabel.textContent = `${configuredLimit.toLocaleString("pl-PL")} zł`;
@@ -885,10 +889,16 @@ function bindEvents() {
 
 async function loadFlights() {
   try {
-    const response = await fetch(DATA_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.document = await response.json();
-    state.results = state.document.results || [];
+    const responses = await Promise.all(DATA_URLS.map(url => fetch(url, { cache: "no-store" })));
+    const failed = responses.find(response => !response.ok);
+    if (failed) throw new Error(`HTTP ${failed.status}`);
+    const documents = await Promise.all(responses.map(response => response.json()));
+    state.document = {
+      generated_at: documents.map(document => document.generated_at).sort().at(-1),
+      period_from: documents.map(document => document.period_from).sort().at(-1),
+      period_to: documents.map(document => document.period_to).sort()[0],
+    };
+    state.results = documents.flatMap(document => document.results || []);
 
     const generated = new Date(state.document.generated_at);
     elements.updatedAt.textContent = `Aktualizacja ${shortDate.format(generated)}`;
@@ -904,7 +914,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy plik data/step1-results.json jest dostępny.</p>
+        <p>Sprawdź, czy pliki danych kroków 1 i 2 są dostępne.</p>
       </div>
     `;
   }

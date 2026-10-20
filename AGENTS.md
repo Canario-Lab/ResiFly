@@ -18,6 +18,15 @@
   listed airports; being on the allowlist does not imply current availability.
 - Update this allowlist only when the user explicitly asks to revise it.
 
+## Step 2 direct-flight collection
+
+- Generate Step 2 with `scripts/collect_step2.py`.
+- Check the complete matrix between WAW, WMI, KRK, KTW and TFN, TFS in both
+  directions for Wizz Air and Ryanair.
+- Keep every direct flight returned for the configured date window regardless
+  of price. The website, not the collector, applies the user's price limit.
+- Write the generated public feed to `data/step2-results.json`.
+
 ## Canonical Ryanair transfer-airport list
 
 - The fixed Ryanair + Ryanair airport allowlist for Step 3 is stored in
@@ -91,4 +100,13 @@
   the Wizz Air URL: self-transfer itineraries are purchased one leg at a time.
 - Do not hand-edit generated result JSON files. Update the collector/builder and
   regenerate them when the user explicitly asks for new data.
+
+## Price filtering
+
+- Flight collectors and generated public JSON files must not discard results
+  because of price.
+- Collect every result that satisfies the route, date, carrier, and connection
+  rules. The website applies the user's selected maximum-price filter.
+- Keep regular, resident, and Wizz Air Discount Club prices as separate values
+  whenever the source provides them.
 

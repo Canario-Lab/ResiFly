@@ -2,9 +2,9 @@
 """Build the public Step 1 flight feed from current airline prices.
 
 The collector uses the fixed Binter transfer-airport allowlist, checks both
-directions and keeps only self-transfer connections whose *regular* total is
-strictly below the configured limit. Generated JSON files are never edited by
-hand.
+directions and keeps every chronologically valid self-transfer connection.
+Price filtering belongs to the website. Generated JSON files are never edited
+by hand.
 """
 
 from __future__ import annotations
@@ -19,7 +19,6 @@ from pathlib import Path
 import sys
 import time as time_module
 from typing import Any, Iterable
-from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
 from curl_cffi import requests
@@ -27,7 +26,7 @@ from curl_cffi import requests
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from scripts.booking_urls import wizz_booking_url
+from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,7 +37,6 @@ TENERIFE_AIRPORTS = ("TFN", "TFS")
 POLISH_AIRPORTS = ("WAW", "WMI", "KTW", "KRK")
 MIN_LAYOVER_MINUTES = 120
 MAX_LAYOVER_MINUTES = 24 * 60
-DEFAULT_REGULAR_LIMIT_PLN = 1000.0
 WIZZ_API = "https://be.wizzair.com/29.21.0/Api"
 BINTER_API = "https://services.bintercanarias.com/main/graphql"
 
@@ -123,7 +121,6 @@ def cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--from-date", type=date.fromisoformat, default=date.today())
     parser.add_argument("--days", type=int, default=30, help="Number of days after from-date, inclusive")
-    parser.add_argument("--max-regular-pln", type=float, default=DEFAULT_REGULAR_LIMIT_PLN)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--workers", type=int, default=10)
     return parser.parse_args()
@@ -281,28 +278,6 @@ def collect_wizz_route(
             "price_source_amount": float(price["amount"]),
         })
     return legs
-
-
-def ryanair_booking_url(origin: str, destination: str, departure: datetime) -> str:
-    query = urlencode({
-        "adults": 1,
-        "teens": 0,
-        "children": 0,
-        "infants": 0,
-        "dateOut": departure.date().isoformat(),
-        "dateIn": "",
-        "isConnectedFlight": "false",
-        "discount": 0,
-        "promoCode": "",
-        "isReturn": "false",
-        "originIata": origin,
-        "destinationIata": destination,
-        "tpAdults": 1,
-        "tpTeens": 0,
-        "tpChildren": 0,
-        "tpInfants": 0,
-    })
-    return f"https://www.ryanair.com/pl/pl/trip/flights/select?{query}"
 
 
 def collect_ryanair_route(
@@ -547,7 +522,6 @@ def connection_id(legs: list[dict[str, Any]]) -> str:
 def build_connections(
     low_cost_legs: list[dict[str, Any]],
     binter_legs: list[dict[str, Any]],
-    max_regular_pln: float,
 ) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     for low_cost in low_cost_legs:
@@ -573,8 +547,6 @@ def build_connections(
                 continue
 
             regular_total = round(sum(float(leg["price_regular_pln"]) for leg in legs), 2)
-            if regular_total >= max_regular_pln:
-                continue
             resident_total = round(sum(float(leg["price_resident_estimated_pln"]) for leg in legs), 2)
             results.append({
                 "id": connection_id(legs),
@@ -600,15 +572,13 @@ def build_connections(
     )
 
 
-def validate_document(document: dict[str, Any], regular_limit: float) -> None:
+def validate_document(document: dict[str, Any]) -> None:
     if not document["results"]:
         raise RuntimeError("Collector produced no Step 1 connections")
     directions = {result["direction"] for result in document["results"]}
     if directions != {"tenerife_to_poland", "poland_to_tenerife"}:
         raise RuntimeError(f"Both directions are required; got {sorted(directions)}")
     for result in document["results"]:
-        if result["price_total_regular_pln"] >= regular_limit:
-            raise RuntimeError(f"Regular-price limit violated by {result['id']}")
         if len(result["legs"]) != 2:
             raise RuntimeError(f"Step 1 connection must have two legs: {result['id']}")
         for leg in result["legs"]:
@@ -620,8 +590,6 @@ def main() -> None:
     args = cli()
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
-    if args.max_regular_pln <= 0:
-        raise SystemExit("--max-regular-pln must be positive")
     end = args.from_date + timedelta(days=args.days)
     allowlist = json.loads(TRANSFER_FILE.read_text(encoding="utf-8"))
     transfers = [airport["iata"] for airport in allowlist["airports"]]
@@ -635,7 +603,7 @@ def main() -> None:
     print(f"Zapytania Binter do sprawdzenia: {len(candidates)}", flush=True)
     binter_legs = collect_binter_legs(candidates, rates, args.workers)
     print(f"Odcinki Binter: {len(binter_legs)}", flush=True)
-    results = build_connections(low_cost_legs, binter_legs, args.max_regular_pln)
+    results = build_connections(low_cost_legs, binter_legs)
 
     generated_at = datetime.now(ZoneInfo("Atlantic/Canary")).isoformat(timespec="seconds")
     document = {
@@ -646,11 +614,9 @@ def main() -> None:
         "step": 1,
         "directions": ["tenerife_to_poland", "poland_to_tenerife"],
         "transfer_airports": transfers,
-        "inclusion_limit": {
-            "basis": "price_total_regular_pln",
-            "operator": "strictly_less_than",
-            "amount": args.max_regular_pln,
-            "currency": "PLN",
+        "price_filtering": {
+            "applied_during_collection": False,
+            "controlled_by": "website",
         },
         "exchange_rates": {
             "EUR_PLN": {
@@ -666,7 +632,7 @@ def main() -> None:
         },
         "results": results,
     }
-    validate_document(document, args.max_regular_pln)
+    validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     counts = {
