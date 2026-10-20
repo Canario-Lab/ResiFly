@@ -598,7 +598,14 @@ function showPurchaseDialog(result) {
     ? "Przed zapłatą upewnij się, że wszystkie loty są nadal dostępne. Ceny mogą się zmienić na stronach linii."
     : "Przed zapłatą sprawdź aktualną cenę i dostępność na stronie linii.";
 
-  elements.purchaseDialogContent.replaceChildren(intro, steps, note);
+  const kiwiLink = document.createElement("a");
+  kiwiLink.className = "purchase-kiwi-link";
+  kiwiLink.href = "https://www.kiwi.com/pl/";
+  kiwiLink.target = "_blank";
+  kiwiLink.rel = "noopener noreferrer";
+  kiwiLink.textContent = "Sprawdź i kup na Kiwi.com";
+
+  elements.purchaseDialogContent.replaceChildren(intro, note, steps, kiwiLink);
   elements.purchaseDialog.showModal();
 }
 

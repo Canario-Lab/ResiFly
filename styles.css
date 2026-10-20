@@ -930,7 +930,8 @@ input[type="range"]::-moz-range-thumb {
 
 .purchase-button:focus-visible,
 .dialog-close:focus-visible,
-.purchase-open-link:focus-visible {
+.purchase-open-link:focus-visible,
+.purchase-kiwi-link:focus-visible {
   outline: 3px solid rgba(13, 118, 95, 0.24);
   outline-offset: 2px;
 }
@@ -1112,13 +1113,38 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .purchase-dialog-note {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   padding: 13px 15px;
   color: #66551d;
   border-radius: 12px;
   background: var(--yellow-soft);
   font-size: 0.76rem;
   line-height: 1.5;
+}
+
+.purchase-kiwi-link {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  padding: 12px 18px;
+  color: #fff;
+  border: 1px solid var(--green-dark);
+  border-radius: 12px;
+  background: var(--green-dark);
+  box-shadow: 0 8px 20px rgba(7, 88, 70, 0.18);
+  font-size: 0.83rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.purchase-kiwi-link:hover {
+  transform: translateY(-1px);
+  background: var(--green);
+  box-shadow: 0 10px 24px rgba(7, 88, 70, 0.24);
 }
 
 .loading-state,
