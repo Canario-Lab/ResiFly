@@ -1,5 +1,13 @@
 # ResiFly project rules
 
+## Canonical five-step flight search
+
+- The complete, durable procedure for recurring flight collection is stored in
+  `docs/FIVE_STEP_FLIGHT_SEARCH.md`.
+- Read and follow that file before running or changing the weekly collection.
+- Keep exactly five search steps. Do not add, remove, or silently reinterpret a
+  step without an explicit user decision.
+
 ## Flight booking links
 
 - Every Wizz Air leg written to a public results JSON must contain a

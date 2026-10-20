@@ -2,6 +2,13 @@
 
 Prosta statyczna wyszukiwarka lotów z Teneryfy do Polski. Strona wczytuje dane z pliku `data/test-results-waw.json` i pozwala filtrować wyniki po cenie, dacie, lotnisku, miejscu przesiadki, przewoźniku i czasie oczekiwania.
 
+## Zbieranie danych
+
+Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku
+[`docs/FIVE_STEP_FLIGHT_SEARCH.md`](docs/FIVE_STEP_FLIGHT_SEARCH.md). Zawiera
+wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
+raportów PDF.
+
 ## Linki do zakupu Wizz Air
 
 Każdy odcinek Wizz Air zapisywany w wynikowym JSON-ie musi zawierać pole
