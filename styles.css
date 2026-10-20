@@ -476,6 +476,107 @@ main,
   gap: 24px;
 }
 
+.price-stack {
+  gap: 14px;
+}
+
+.traveller-benefits {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.traveller-benefits legend {
+  margin-bottom: 9px;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.benefit-options {
+  display: grid;
+  gap: 8px;
+}
+
+.benefit-option {
+  min-height: 47px;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfcfb;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.benefit-option:hover {
+  border-color: #a9cec3;
+}
+
+.benefit-option:has(input:checked) {
+  color: var(--green-dark);
+  border-color: #a9cec3;
+  background: linear-gradient(145deg, #f8fcfa, var(--green-soft));
+  box-shadow: 0 7px 18px rgba(13, 118, 95, 0.08);
+}
+
+.benefit-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.benefit-check {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #b8c8c4;
+  border-radius: 7px;
+  background: white;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.benefit-check::after {
+  width: 9px;
+  height: 5px;
+  content: "";
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+  transform: translateY(-1px) rotate(-45deg) scale(0);
+  transition: transform 150ms ease;
+}
+
+.benefit-option input:checked + .benefit-check {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.benefit-option input:checked + .benefit-check::after {
+  transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+
+.benefit-option input:focus-visible + .benefit-check {
+  outline: 3px solid rgba(13, 118, 95, 0.2);
+  outline-offset: 2px;
+}
+
 .filter-field {
   min-width: 0;
   display: flex;
@@ -493,7 +594,6 @@ main,
 
 .price-field {
   min-height: 156px;
-  align-self: start;
 }
 
 .layover-field {
@@ -1228,8 +1328,12 @@ input[type="range"]::-moz-range-thumb {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .price-field {
+  .price-stack {
     grid-column: 1 / -1;
+  }
+
+  .benefit-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .flight-card {
@@ -1347,8 +1451,12 @@ input[type="range"]::-moz-range-thumb {
     grid-template-columns: 1fr;
   }
 
-  .price-field {
+  .price-stack {
     grid-column: auto;
+  }
+
+  .benefit-options {
+    grid-template-columns: 1fr;
   }
 
   .results-section {

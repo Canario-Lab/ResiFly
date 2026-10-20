@@ -7,8 +7,11 @@ const state = {
 
 const elements = {
   updatedAt: document.querySelector("#updated-at"),
+  resident: document.querySelector("#resident-filter"),
+  wizzClub: document.querySelector("#wizz-club-filter"),
   price: document.querySelector("#price-filter"),
   priceOutput: document.querySelector("#price-output"),
+  priceContext: document.querySelector("#price-context"),
   dateFrom: document.querySelector("#date-from"),
   dateTo: document.querySelector("#date-to"),
   origin: document.querySelector("#origin-filter"),
@@ -21,6 +24,8 @@ const elements = {
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
+  calendarLegendSelected: document.querySelector(".calendar-legend-resident"),
+  calendarLegendRegular: document.querySelector(".calendar-legend-regular"),
   activeFilters: document.querySelector("#active-filters"),
   count: document.querySelector("#results-count"),
   countNoun: document.querySelector("#results-noun"),
@@ -85,6 +90,50 @@ const carrierPurchaseUrls = {
   "Wizz Air": "https://wizzair.com/pl-pl",
   Ryanair: "https://www.ryanair.com/pl/pl",
 };
+
+function finitePrice(value) {
+  const price = Number(value);
+  return Number.isFinite(price) ? price : null;
+}
+
+function wizzClubPrice(leg) {
+  return finitePrice(leg.price_wizz_discount_club_pln);
+}
+
+function selectedLegPrice(leg, filters) {
+  const regular = finitePrice(leg.price_regular_pln) ?? 0;
+  const resident = finitePrice(leg.price_resident_estimated_pln);
+  if (filters.resident && leg.resident_discount_eligible && resident !== null && resident < regular) {
+    return { value: resident, kind: "resident", regular };
+  }
+
+  const club = wizzClubPrice(leg);
+  if (filters.wizzClub && leg.carrier === "Wizz Air" && club !== null && club < regular) {
+    return { value: club, kind: "wizz-club", regular };
+  }
+
+  return { value: regular, kind: "regular", regular };
+}
+
+function selectedResultPricing(result, filters) {
+  const legs = result.legs.map(leg => selectedLegPrice(leg, filters));
+  const total = legs.reduce((sum, leg) => sum + leg.value, 0);
+  const regular = finitePrice(result.price_total_regular_pln)
+    ?? legs.reduce((sum, leg) => sum + leg.regular, 0);
+  return {
+    total: Math.round(total * 100) / 100,
+    regular,
+    hasResident: legs.some(leg => leg.kind === "resident"),
+    hasWizzClub: legs.some(leg => leg.kind === "wizz-club"),
+  };
+}
+
+function selectedPriceCaption(pricing) {
+  if (pricing.hasResident && pricing.hasWizzClub) return "Cena po zniżkach";
+  if (pricing.hasResident) return "Cena dla rezydenta";
+  if (pricing.hasWizzClub) return "Cena z Wizz Discount Club";
+  return "Cena lotu";
+}
 
 function datePart(iso) {
   return iso.slice(0, 10);
@@ -172,16 +221,15 @@ function addOptions(select, values, formatter = value => value) {
   }
 }
 
-function lowestPricesByDate(results) {
+function lowestPricesByDate(results, filters) {
   const prices = new Map();
   for (const result of results) {
     const date = datePart(result.legs[0].departure_at);
-    const resident = Number(result.price_total_resident_estimated_pln);
-    const regular = Number(result.price_total_regular_pln);
-    if (!Number.isFinite(resident) || !Number.isFinite(regular)) continue;
+    const pricing = selectedResultPricing(result, filters);
+    if (!Number.isFinite(pricing.total) || !Number.isFinite(pricing.regular)) continue;
     const current = prices.get(date);
-    if (current === undefined || resident < current.resident) {
-      prices.set(date, { resident, regular, resultId: result.id });
+    if (current === undefined || pricing.total < current.total) {
+      prices.set(date, { ...pricing, resultId: result.id });
     }
   }
   return prices;
@@ -213,28 +261,32 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
     return cell;
   }
 
-  const residentPrice = document.createElement("strong");
-  residentPrice.className = "calendar-day-price";
+  const selectedPrice = document.createElement("strong");
+  selectedPrice.className = "calendar-day-price";
   if (price === undefined) {
     cell.classList.add("has-no-price");
-    residentPrice.textContent = "—";
+    selectedPrice.textContent = "—";
     cell.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
   } else {
     cell.classList.add("has-price");
-    residentPrice.textContent = `${calendarCurrency.format(price.resident)}*`;
-    const regularPrice = document.createElement("span");
-    regularPrice.className = "calendar-day-regular-price";
-    regularPrice.textContent = calendarCurrency.format(price.regular);
-    regularPrice.title = "Cena regularna";
-    cell.append(residentPrice, regularPrice);
+    const discounted = price.total < price.regular;
+    selectedPrice.textContent = `${calendarCurrency.format(price.total)}${discounted ? "*" : ""}`;
+    cell.append(selectedPrice);
+    if (discounted) {
+      const regularPrice = document.createElement("span");
+      regularPrice.className = "calendar-day-regular-price";
+      regularPrice.textContent = calendarCurrency.format(price.regular);
+      regularPrice.title = "Cena regularna";
+      cell.append(regularPrice);
+    }
     cell.setAttribute(
       "aria-label",
-      `${formatDate(isoDate)}, cena dla rezydenta ${currency.format(price.resident)}, cena regularna ${currency.format(price.regular)}`
+      `${formatDate(isoDate)}, ${selectedPriceCaption(price).toLowerCase()} ${currency.format(price.total)}${discounted ? `, cena regularna ${currency.format(price.regular)}` : ""}`
     );
     cell.addEventListener("click", () => scrollToResult(price.resultId));
     return cell;
   }
-  cell.append(residentPrice);
+  cell.append(selectedPrice);
   return cell;
 }
 
@@ -321,7 +373,19 @@ function renderFareCalendar(results, filters) {
     1,
     12
   ));
-  const prices = lowestPricesByDate(results);
+  const prices = lowestPricesByDate(results, filters);
+  const hasDiscountedPrices = [...prices.values()].some(price => price.total < price.regular);
+  const hasResidentPrices = [...prices.values()].some(price => price.hasResident);
+  const hasWizzClubPrices = [...prices.values()].some(price => price.hasWizzClub);
+
+  elements.calendarLegendSelected.textContent = hasDiscountedPrices
+    ? `* ${hasResidentPrices && hasWizzClubPrices
+      ? "Cena po wybranych zniżkach"
+      : hasResidentPrices
+        ? "Cena dla rezydenta"
+        : "Cena z Wizz Discount Club"}`
+    : "Cena regularna";
+  elements.calendarLegendRegular.hidden = !hasDiscountedPrices;
 
   elements.calendarMonths.replaceChildren(
     createCalendarMonth(firstMonth, rangeStart, rangeEnd, prices),
@@ -359,6 +423,13 @@ function initializeFilters() {
 function updateRangeLabels() {
   const directSelected = elements.transfer.value === "direct";
   elements.priceOutput.textContent = currency.format(Number(elements.price.value));
+  elements.priceContext.textContent = elements.resident.checked && elements.wizzClub.checked
+    ? "po wybranych zniżkach"
+    : elements.resident.checked
+      ? "dla rezydenta"
+      : elements.wizzClub.checked
+        ? "z Wizz Discount Club"
+        : "cena regularna";
   elements.layoverOutput.textContent = `${elements.layover.value} godz.`;
   elements.layover.disabled = directSelected;
   elements.layover.closest(".layover-field").classList.toggle("is-disabled", directSelected);
@@ -368,6 +439,8 @@ function updateRangeLabels() {
 
 function currentFilters() {
   return {
+    resident: elements.resident.checked,
+    wizzClub: elements.wizzClub.checked,
     maxPrice: Number(elements.price.value),
     dateFrom: elements.dateFrom.value,
     dateTo: elements.dateTo.value,
@@ -392,7 +465,7 @@ function filteredResults(filters = currentFilters()) {
       (filters.transfer === "direct" && direct) ||
       (!direct && result.transfer_airport === filters.transfer);
     return (
-      result.price_total_resident_estimated_pln <= filters.maxPrice &&
+      selectedResultPricing(result, filters).total <= filters.maxPrice &&
       departureDate >= filters.dateFrom &&
       departureDate <= filters.dateTo &&
       (filters.origin === "all" || result.origin_airport === filters.origin) &&
@@ -405,7 +478,7 @@ function filteredResults(filters = currentFilters()) {
   });
 
   const sorters = {
-    price: (a, b) => a.price_total_resident_estimated_pln - b.price_total_resident_estimated_pln,
+    price: (a, b) => selectedResultPricing(a, filters).total - selectedResultPricing(b, filters).total,
     regular: (a, b) => a.price_total_regular_pln - b.price_total_regular_pln,
     layover: (a, b) => (a.layover_minutes ?? 0) - (b.layover_minutes ?? 0),
     departure: (a, b) => a.legs[0].departure_at.localeCompare(b.legs[0].departure_at),
@@ -479,16 +552,16 @@ function createLegLine(leg) {
   return line;
 }
 
-function priceDetails(result) {
+function priceDetails(result, filters) {
   const first = result.legs[0];
   const last = result.legs.at(-1);
-  const hasResidentEstimate = result.price_total_resident_estimated_pln < result.price_total_regular_pln;
+  const resultPricing = selectedResultPricing(result, filters);
   const legRows = result.legs.map(leg => {
-    const discounted =
-      leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
+    const pricing = selectedLegPrice(leg, filters);
+    const discounted = pricing.value < pricing.regular;
     const price = discounted
-      ? `<span class="regular-inline">(Cena regularna: ~${currency.format(leg.price_regular_pln)})</span> ~${currency.format(leg.price_resident_estimated_pln)}`
-      : `~${currency.format(leg.price_regular_pln)}`;
+      ? `<span class="regular-inline">(Cena regularna: ~${currency.format(pricing.regular)})</span> ~${currency.format(pricing.value)}`
+      : `~${currency.format(pricing.value)}`;
     return `
       <div class="price-row">
         <span>${leg.carrier} ${leg.flight_number}</span>
@@ -496,11 +569,7 @@ function priceDetails(result) {
       </div>
     `;
   }).join("");
-  const totalPrice = `~${currency.format(
-    hasResidentEstimate
-      ? result.price_total_resident_estimated_pln
-      : result.price_total_regular_pln
-  )}`;
+  const totalPrice = `~${currency.format(resultPricing.total)}`;
 
   return `
     ${legRows}
@@ -514,29 +583,31 @@ function priceDetails(result) {
   `;
 }
 
-function purchaseLegPriceRows(leg) {
-  const hasResidentEstimate =
-    leg.resident_discount_eligible && leg.price_resident_estimated_pln < leg.price_regular_pln;
-  if (hasResidentEstimate) {
+function purchaseLegPriceRows(leg, filters) {
+  const pricing = selectedLegPrice(leg, filters);
+  if (pricing.value < pricing.regular) {
+    const selectedLabel = pricing.kind === "resident"
+      ? "Cena orientacyjna dla rezydenta"
+      : "Cena z Wizz Discount Club";
     return [
       {
-        label: `Cena orientacyjna dla rezydenta: ~${currency.format(leg.price_resident_estimated_pln)}`,
+        label: `${selectedLabel}: ~${currency.format(pricing.value)}`,
         regular: false,
       },
       {
-        label: `Cena regularna: ~${currency.format(leg.price_regular_pln)}`,
+        label: `Cena regularna: ~${currency.format(pricing.regular)}`,
         regular: true,
       },
     ];
   }
 
   return [{
-    label: `Cena orientacyjna: ~${currency.format(leg.price_regular_pln)}`,
+    label: `Cena orientacyjna: ~${currency.format(pricing.value)}`,
     regular: false,
   }];
 }
 
-function createPurchaseStep(leg, index) {
+function createPurchaseStep(leg, index, filters) {
   const step = document.createElement("article");
   step.className = "purchase-step";
 
@@ -582,7 +653,7 @@ function createPurchaseStep(leg, index) {
 
   const price = document.createElement("div");
   price.className = "purchase-step-price";
-  purchaseLegPriceRows(leg).forEach(row => {
+  purchaseLegPriceRows(leg, filters).forEach(row => {
     const priceRow = document.createElement("span");
     priceRow.textContent = row.label;
     if (row.regular) priceRow.className = "purchase-step-price-regular";
@@ -614,7 +685,7 @@ function createPurchaseStep(leg, index) {
   return step;
 }
 
-function showPurchaseDialog(result) {
+function showPurchaseDialog(result, filters) {
   const separateBookings = result.legs.length > 1;
   const intro = document.createElement("p");
   intro.className = "purchase-dialog-intro";
@@ -624,7 +695,7 @@ function showPurchaseDialog(result) {
 
   const steps = document.createElement("div");
   steps.className = "purchase-steps";
-  result.legs.forEach((leg, index) => steps.append(createPurchaseStep(leg, index)));
+  result.legs.forEach((leg, index) => steps.append(createPurchaseStep(leg, index, filters)));
 
   const note = document.createElement("p");
   note.className = "purchase-dialog-note";
@@ -636,11 +707,12 @@ function showPurchaseDialog(result) {
   elements.purchaseDialog.showModal();
 }
 
-function createResultCard(result) {
+function createResultCard(result, filters) {
   const fragment = elements.template.content.cloneNode(true);
   const card = fragment.querySelector(".flight-card");
   const direct = isDirectConnection(result);
-  const hasResidentEstimate = result.price_total_resident_estimated_pln < result.price_total_regular_pln;
+  const pricing = selectedResultPricing(result, filters);
+  const discounted = pricing.total < pricing.regular;
 
   card.dataset.resultId = result.id;
   fragment.querySelector(".date-label").textContent = formatDate(result.legs[0].departure_at);
@@ -649,20 +721,20 @@ function createResultCard(result) {
   const journey = fragment.querySelector(".journey");
   journey.classList.toggle("direct", direct);
   journey.append(createJourney(result));
-  fragment.querySelector(".resident-caption").textContent = hasResidentEstimate ? "Cena dla rezydenta" : "Cena lotu";
-  fragment.querySelector(".resident-price").textContent = `~${currency.format(result.price_total_resident_estimated_pln)}`;
+  fragment.querySelector(".resident-caption").textContent = selectedPriceCaption(pricing);
+  fragment.querySelector(".resident-price").textContent = `~${currency.format(pricing.total)}`;
   const regularPrice = fragment.querySelector(".regular-price");
-  regularPrice.textContent = hasResidentEstimate
-    ? `Cena regularna: ~${currency.format(result.price_total_regular_pln)}`
+  regularPrice.textContent = discounted
+    ? `Cena regularna: ~${currency.format(pricing.regular)}`
     : "";
-  regularPrice.hidden = !hasResidentEstimate;
+  regularPrice.hidden = !discounted;
   fragment.querySelector(".purchase-ticket-count").textContent = direct
     ? "1 rezerwacja"
     : `${result.legs.length} osobne bilety`;
-  fragment.querySelector(".purchase-button").addEventListener("click", () => showPurchaseDialog(result));
+  fragment.querySelector(".purchase-button").addEventListener("click", () => showPurchaseDialog(result, filters));
 
   const details = fragment.querySelector(".price-details");
-  details.innerHTML = priceDetails(result);
+  details.innerHTML = priceDetails(result, filters);
   const toggle = fragment.querySelector(".details-toggle");
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
@@ -677,6 +749,8 @@ function createResultCard(result) {
 function renderActiveFilters() {
   const filters = currentFilters();
   const chips = [`Do ${currency.format(filters.maxPrice)}`];
+  if (filters.resident) chips.push("Rezydent Teneryfy");
+  if (filters.wizzClub) chips.push("Wizz Air Discount Club");
   if (filters.origin !== "all") chips.push(`Wylot: ${filters.origin}`);
   chips.push(`Przylot: ${filters.destination}`);
   if (filters.transfer === "direct") chips.push("Bez przesiadek");
@@ -721,11 +795,13 @@ function renderResults() {
   }
 
   const cards = document.createDocumentFragment();
-  for (const result of results) cards.append(createResultCard(result));
+  for (const result of results) cards.append(createResultCard(result, filters));
   elements.list.replaceChildren(cards);
 }
 
 function resetFilters() {
+  elements.resident.checked = true;
+  elements.wizzClub.checked = false;
   elements.price.value = 500;
   elements.dateFrom.value = state.document.period_from;
   elements.dateTo.value = state.document.period_to;
@@ -741,6 +817,8 @@ function resetFilters() {
 
 function bindEvents() {
   const filters = [
+    elements.resident,
+    elements.wizzClub,
     elements.price,
     elements.dateFrom,
     elements.dateTo,
