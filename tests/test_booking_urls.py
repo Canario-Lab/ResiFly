@@ -31,10 +31,12 @@ class WizzBookingUrlTests(unittest.TestCase):
 class RyanairBookingUrlTests(unittest.TestCase):
     def test_builds_reusable_one_way_url(self):
         url = ryanair_booking_url("wmi", "tfs", "2026-11-18")
-        self.assertTrue(url.startswith("https://www.ryanair.com/pl/pl/trip/flights/select?"))
+        self.assertTrue(url.startswith("https://www.ryanair.com/pl/pl/fare-finder?"))
         self.assertIn("dateOut=2026-11-18", url)
         self.assertIn("originIata=WMI", url)
         self.assertIn("destinationIata=TFS", url)
+        self.assertIn("isExactDate=true", url)
+        self.assertIn("currency=PLN", url)
         self.assertNotIn("token", url.lower())
 
 

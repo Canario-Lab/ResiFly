@@ -147,7 +147,7 @@
           "price_regular_pln": 1491.41,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1491.41,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-23&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-23&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1491.41
         }
@@ -175,7 +175,7 @@
           "price_regular_pln": 333.73,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 333.73,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-23&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-23&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 76.34
         }
@@ -261,7 +261,7 @@
           "price_regular_pln": 1909.27,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1909.27,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-24&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-24&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1909.27
         }
@@ -289,7 +289,7 @@
           "price_regular_pln": 269.95,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 269.95,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-24&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-24&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 61.75
         }
@@ -317,7 +317,7 @@
           "price_regular_pln": 1198.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1198.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-25&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1198.0
         }
@@ -345,7 +345,7 @@
           "price_regular_pln": 1147.69,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1147.69,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-25&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1147.69
         }
@@ -402,7 +402,7 @@
           "price_regular_pln": 163.59,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 163.59,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-25&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 37.42
         }
@@ -430,7 +430,7 @@
           "price_regular_pln": 204.37,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 204.37,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-25&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 46.75
         }
@@ -487,7 +487,7 @@
           "price_regular_pln": 924.75,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 924.75,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-26&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-26&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 924.75
         }
@@ -515,7 +515,7 @@
           "price_regular_pln": 1100.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1100.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-26&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-26&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1100.0
         }
@@ -572,7 +572,7 @@
           "price_regular_pln": 177.88,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 177.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-26&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-26&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 40.69
         }
@@ -600,7 +600,7 @@
           "price_regular_pln": 122.36,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 122.36,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-26&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-26&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 27.99
         }
@@ -657,7 +657,7 @@
           "price_regular_pln": 858.37,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 858.37,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-27&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-27&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 858.37
         }
@@ -714,7 +714,7 @@
           "price_regular_pln": 1105.52,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1105.52,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-27&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-27&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1105.52
         }
@@ -742,7 +742,7 @@
           "price_regular_pln": 258.93,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 258.93,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-27&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-27&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 59.23
         }
@@ -828,7 +828,7 @@
           "price_regular_pln": 122.36,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 122.36,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-27&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-27&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 27.99
         }
@@ -885,7 +885,7 @@
           "price_regular_pln": 999.88,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 999.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-28&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-28&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 999.88
         }
@@ -913,7 +913,7 @@
           "price_regular_pln": 1370.08,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1370.08,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-28&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-28&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1370.08
         }
@@ -941,7 +941,7 @@
           "price_regular_pln": 148.59,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 148.59,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-28&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-28&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 33.99
         }
@@ -969,7 +969,7 @@
           "price_regular_pln": 181.64,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 181.64,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-28&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-28&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 41.55
         }
@@ -1055,7 +1055,7 @@
           "price_regular_pln": 988.35,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 988.35,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-29&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-29&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 988.35
         }
@@ -1083,7 +1083,7 @@
           "price_regular_pln": 938.9,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 938.9,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-29&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-29&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 938.9
         }
@@ -1111,7 +1111,7 @@
           "price_regular_pln": 269.95,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 269.95,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-29&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-29&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 61.75
         }
@@ -1139,7 +1139,7 @@
           "price_regular_pln": 208.92,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 208.92,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-29&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-29&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 47.79
         }
@@ -1283,7 +1283,7 @@
           "price_regular_pln": 854.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 854.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-30&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 854.0
         }
@@ -1311,7 +1311,7 @@
           "price_regular_pln": 865.66,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 865.66,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-30&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 865.66
         }
@@ -1397,7 +1397,7 @@
           "price_regular_pln": 349.86,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 349.86,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-30&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 80.03
         }
@@ -1425,7 +1425,7 @@
           "price_regular_pln": 382.82,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 382.82,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-30&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 87.57
         }
@@ -1482,7 +1482,7 @@
           "price_regular_pln": 930.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 930.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-10-31&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 930.0
         }
@@ -1510,7 +1510,7 @@
           "price_regular_pln": 620.72,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 620.72,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-10-31&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 141.99
         }
@@ -1538,7 +1538,7 @@
           "price_regular_pln": 1377.02,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1377.02,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-10-31&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1377.02
         }
@@ -1566,7 +1566,7 @@
           "price_regular_pln": 490.1,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 490.1,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-10-31&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 112.11
         }
@@ -1594,7 +1594,7 @@
           "price_regular_pln": 1547.36,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1547.36,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-01&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1547.36
         }
@@ -1622,7 +1622,7 @@
           "price_regular_pln": 883.29,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 883.29,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-01&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 883.29
         }
@@ -1708,7 +1708,7 @@
           "price_regular_pln": 361.88,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 361.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-01&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 82.78
         }
@@ -1736,7 +1736,7 @@
           "price_regular_pln": 811.33,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 811.33,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-01&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 185.59
         }
@@ -1793,7 +1793,7 @@
           "price_regular_pln": 930.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 930.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-02&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-02&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 930.0
         }
@@ -1821,7 +1821,7 @@
           "price_regular_pln": 973.91,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 973.91,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-02&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-02&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 973.91
         }
@@ -1907,7 +1907,7 @@
           "price_regular_pln": 346.89,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 346.89,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-02&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-02&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 79.35
         }
@@ -1935,7 +1935,7 @@
           "price_regular_pln": 549.38,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 549.38,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-02&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-02&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 125.67
         }
@@ -1992,7 +1992,7 @@
           "price_regular_pln": 895.29,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 895.29,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-03&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 895.29
         }
@@ -2049,7 +2049,7 @@
           "price_regular_pln": 1043.79,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1043.79,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-03&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1043.79
         }
@@ -2077,7 +2077,7 @@
           "price_regular_pln": 345.31,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 345.31,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-03&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 78.99
         }
@@ -2163,7 +2163,7 @@
           "price_regular_pln": 242.49,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 242.49,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-03&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 55.47
         }
@@ -2220,7 +2220,7 @@
           "price_regular_pln": 702.9,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 702.9,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-04&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 702.9
         }
@@ -2248,7 +2248,7 @@
           "price_regular_pln": 759.9,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 759.9,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-04&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 759.9
         }
@@ -2305,7 +2305,7 @@
           "price_regular_pln": 467.72,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 467.72,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-04&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 106.99
         }
@@ -2333,7 +2333,7 @@
           "price_regular_pln": 454.6,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 454.6,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-04&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 103.99
         }
@@ -2419,7 +2419,7 @@
           "price_regular_pln": 659.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 659.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-05&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 659.0
         }
@@ -2447,7 +2447,7 @@
           "price_regular_pln": 1087.46,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1087.46,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-05&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1087.46
         }
@@ -2475,7 +2475,7 @@
           "price_regular_pln": 319.08,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 319.08,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-05&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 72.99
         }
@@ -2503,7 +2503,7 @@
           "price_regular_pln": 371.02,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 371.02,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-05&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 84.87
         }
@@ -2647,7 +2647,7 @@
           "price_regular_pln": 806.05,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 806.05,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-06&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 806.05
         }
@@ -2675,7 +2675,7 @@
           "price_regular_pln": 860.35,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 860.35,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-06&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 860.35
         }
@@ -2761,7 +2761,7 @@
           "price_regular_pln": 251.94,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 251.94,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-06&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 57.63
         }
@@ -2789,7 +2789,7 @@
           "price_regular_pln": 349.68,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 349.68,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-06&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 79.99
         }
@@ -2846,7 +2846,7 @@
           "price_regular_pln": 883.29,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 883.29,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-07&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-07&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 883.29
         }
@@ -2874,7 +2874,7 @@
           "price_regular_pln": 295.3,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 295.3,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-07&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-07&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 67.55
         }
@@ -2902,7 +2902,7 @@
           "price_regular_pln": 966.47,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 966.47,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-07&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-07&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 966.47
         }
@@ -2930,7 +2930,7 @@
           "price_regular_pln": 1145.32,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1145.32,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-07&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-07&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 261.99
         }
@@ -2958,7 +2958,7 @@
           "price_regular_pln": 1100.57,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1100.57,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-08&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1100.57
         }
@@ -2986,7 +2986,7 @@
           "price_regular_pln": 858.37,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 858.37,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-08&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 858.37
         }
@@ -3072,7 +3072,7 @@
           "price_regular_pln": 530.93,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 530.93,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-08&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 121.45
         }
@@ -3100,7 +3100,7 @@
           "price_regular_pln": 553.75,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 553.75,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-08&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 126.67
         }
@@ -3186,7 +3186,7 @@
           "price_regular_pln": 628.88,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 628.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-09&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-09&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 628.88
         }
@@ -3214,7 +3214,7 @@
           "price_regular_pln": 851.62,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 851.62,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-09&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-09&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 851.62
         }
@@ -3300,7 +3300,7 @@
           "price_regular_pln": 1097.23,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1097.23,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-09&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-09&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 250.99
         }
@@ -3328,7 +3328,7 @@
           "price_regular_pln": 410.89,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 410.89,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-09&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-09&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 93.99
         }
@@ -3385,7 +3385,7 @@
           "price_regular_pln": 492.52,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 492.52,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-10&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-10&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 492.52
         }
@@ -3413,7 +3413,7 @@
           "price_regular_pln": 876.67,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 876.67,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-10&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-10&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 876.67
         }
@@ -3441,7 +3441,7 @@
           "price_regular_pln": 432.74,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 432.74,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-10&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-10&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 98.99
         }
@@ -3527,7 +3527,7 @@
           "price_regular_pln": 511.43,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 511.43,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-10&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-10&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 116.99
         }
@@ -3584,7 +3584,7 @@
           "price_regular_pln": 1096.2,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1096.2,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-11&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 1096.2
         }
@@ -3612,7 +3612,7 @@
           "price_regular_pln": 537.16,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 537.16,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-11&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 537.16
         }
@@ -3669,7 +3669,7 @@
           "price_regular_pln": 818.84,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 818.84,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-11&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 187.31
         }
@@ -3697,7 +3697,7 @@
           "price_regular_pln": 839.65,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 839.65,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-11&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 192.07
         }
@@ -3812,7 +3812,7 @@
           "price_regular_pln": 344.99,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 344.99,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-12&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 344.99
         }
@@ -3840,7 +3840,7 @@
           "price_regular_pln": 759.9,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 759.9,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-12&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 759.9
         }
@@ -3897,7 +3897,7 @@
           "price_regular_pln": 572.64,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 572.64,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-12&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 130.99
         }
@@ -3925,7 +3925,7 @@
           "price_regular_pln": 751.87,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 751.87,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-12&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 171.99
         }
@@ -4069,7 +4069,7 @@
           "price_regular_pln": 414.87,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 414.87,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-13&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 414.87
         }
@@ -4097,7 +4097,7 @@
           "price_regular_pln": 534.4,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 534.4,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-13&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 534.4
         }
@@ -4154,7 +4154,7 @@
           "price_regular_pln": 1158.43,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1158.43,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-13&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 264.99
         }
@@ -4182,7 +4182,7 @@
           "price_regular_pln": 813.07,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 813.07,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-13&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 185.99
         }
@@ -4210,7 +4210,7 @@
           "price_regular_pln": 559.0,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 559.0,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-14&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-14&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 559.0
         }
@@ -4238,7 +4238,7 @@
           "price_regular_pln": 1398.87,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1398.87,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-14&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-14&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 319.99
         }
@@ -4266,7 +4266,7 @@
           "price_regular_pln": 406.15,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 406.15,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-14&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-14&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 406.15
         }
@@ -4294,7 +4294,7 @@
           "price_regular_pln": 1302.69,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1302.69,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-14&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-14&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 297.99
         }
@@ -4351,7 +4351,7 @@
           "price_regular_pln": 285.77,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 285.77,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-15&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 285.77
         }
@@ -4379,7 +4379,7 @@
           "price_regular_pln": 374.66,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 374.66,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-15&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 374.66
         }
@@ -4436,7 +4436,7 @@
           "price_regular_pln": 1200.18,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1200.18,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-15&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 274.54
         }
@@ -4464,7 +4464,7 @@
           "price_regular_pln": 1514.06,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 1514.06,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-15&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 346.34
         }
@@ -4521,7 +4521,7 @@
           "price_regular_pln": 301.31,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 301.31,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-16&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-16&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 301.31
         }
@@ -4549,7 +4549,7 @@
           "price_regular_pln": 280.43,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 280.43,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-16&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-16&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 280.43
         }
@@ -4606,7 +4606,7 @@
           "price_regular_pln": 866.23,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 866.23,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-16&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-16&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 198.15
         }
@@ -4634,7 +4634,7 @@
           "price_regular_pln": 970.45,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 970.45,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-16&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-16&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 221.99
         }
@@ -4691,7 +4691,7 @@
           "price_regular_pln": 296.47,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 296.47,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-17&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-17&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 296.47
         }
@@ -4748,7 +4748,7 @@
           "price_regular_pln": 311.38,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 311.38,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-17&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-17&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 311.38
         }
@@ -4776,7 +4776,7 @@
           "price_regular_pln": 616.35,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 616.35,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-17&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-17&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 140.99
         }
@@ -4833,7 +4833,7 @@
           "price_regular_pln": 721.49,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 721.49,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-17&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-17&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 165.04
         }
@@ -4890,7 +4890,7 @@
           "price_regular_pln": 279.48,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 279.48,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-18&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 279.48
         }
@@ -4918,7 +4918,7 @@
           "price_regular_pln": 436.71,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 436.71,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-18&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 436.71
         }
@@ -4975,7 +4975,7 @@
           "price_regular_pln": 625.1,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 625.1,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-18&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 142.99
         }
@@ -5003,7 +5003,7 @@
           "price_regular_pln": 572.64,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 572.64,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-18&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 130.99
         }
@@ -5118,7 +5118,7 @@
           "price_regular_pln": 410.52,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 410.52,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=KRK&destinationIata=TFS&dateOut=2026-11-19&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 410.52
         }
@@ -5146,7 +5146,7 @@
           "price_regular_pln": 327.52,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 327.52,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=WMI&destinationIata=TFS&dateOut=2026-11-19&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "PLN",
           "price_source_amount": 327.52
         }
@@ -5203,7 +5203,7 @@
           "price_regular_pln": 833.1,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 833.1,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=KRK&dateOut=2026-11-19&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 190.57
         }
@@ -5231,7 +5231,7 @@
           "price_regular_pln": 474.54,
           "resident_discount_eligible": false,
           "price_resident_estimated_pln": 474.54,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "booking_url": "https://www.ryanair.com/pl/pl/fare-finder?originIata=TFS&destinationIata=WMI&dateOut=2026-11-19&dateIn=&isExactDate=true&outboundFromHour=00%3A00&outboundToHour=23%3A59&priceValueTo=&currency=PLN&isReturn=false&isMacDestination=false&promoCode=&adults=1&teens=0&children=0&infants=0",
           "price_source_currency": "EUR",
           "price_source_amount": 108.55
         }

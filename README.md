@@ -54,6 +54,15 @@ Adres otwiera właściwą trasę i dzień. Numer lotu nie jest częścią adresu
 jeżeli tego samego dnia dostępnych jest kilka lotów, użytkownik wybiera właściwy
 po godzinie.
 
+Linki Ryanair są generowane analogicznie, ale prowadzą do oficjalnego Fare
+Finder Ryanaira z ustawioną trasą i dokładnym dniem. Ten ekran jest stabilniejszy
+od bezpośredniego widoku zakupu, który potrafi zatrzymać się na pustym wyniku.
+Istniejące pliki wynikowe można bez ponownego pobierania cen odświeżyć poleceniem:
+
+```bash
+.venv/bin/python scripts/refresh_booking_urls.py
+```
+
 ## Uruchomienie lokalne
 
 ```bash
