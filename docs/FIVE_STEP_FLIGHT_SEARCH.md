@@ -103,14 +103,22 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 4 — Wizz Air + Wizz Air
 
-- Na podstawie aktualnej siatki Wizz Air ustalić europejskie lotniska, do
-  których Wizz Air lata bezpośrednio z TFS lub TFN i które mają również
-  bezpośrednie połączenie Wizz Air z co najmniej jednym z lotnisk WAW, WMI,
-  KRK lub KTW.
-- Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde takie
-  lotnisko, w obu kierunkach.
-- Zwykłą cenę odcinka Wizz Air z/do TFS lub TFN pomnożyć przez 25%. Odcinek
-  między Polską a lotniskiem przesiadkowym policzyć w pełnej cenie.
+- Używać wyłącznie lotnisk i odpowiadających im polskich lotnisk zapisanych w
+  kanonicznej liście `data/wizzair-transfer-airports.json`.
+- Podczas cotygodniowego uruchomienia nie odkrywać ponownie możliwych lotnisk
+  przesiadkowych, nie rozszerzać listy i nie usuwać z niej pozycji. Sprawdzać
+  tylko bieżące rozkłady oraz ceny dla kombinacji zapisanych w pliku.
+- Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
+  liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
+  sezonowości, przyszłej daty uruchomienia albo czasowego zawieszenia trasy.
+- Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
+  z listy, w obu kierunkach.
+- Uprawnienie do zniżki odczytywać z pola
+  `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
+  wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
+  się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
+  cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
+  w pełnej cenie.
 - W PDF-ie najpierw podać aktualną listę lotnisk przesiadkowych i odpowiadające
   im polskie lotniska, a następnie wszystkie połączenia poniżej 500 PLN.
 

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Wizz Air dla kroku 4",
+  "verified_on": "2026-10-20",
+  "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Wizz Air + Wizz Air między Teneryfą a Polską w kroku 4.",
+  "scope": {
+    "tenerife_airports": [
+      "TFN",
+      "TFS"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "airline": "Wizz Air",
+    "resident_discount_considered": true
+  },
+  "selection_method": {
+    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK.",
+    "excluded_endpoints": [
+      "TFN",
+      "TFS",
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "result_count": 6,
+    "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
+  },
+  "resident_discount_on_tenerife_leg": {
+    "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
+    "discount_percent": 75,
+    "eligible_fare_multiplier": 0.25,
+    "ineligible_fare_multiplier": 1.0,
+    "applies_only_to_tenerife_leg": true,
+    "eligible_transfer_airports": [
+      "SCQ"
+    ],
+    "ineligible_transfer_airports": [
+      "BBU",
+      "BUD",
+      "FCO",
+      "MXP",
+      "OTP"
+    ],
+    "eligible_count": 1,
+    "ineligible_count": 5,
+    "calculation": "Dla SCQ pomnóż regularną cenę odcinka TFN/TFS przez 0.25. Dla BBU, BUD, FCO, MXP i OTP użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
+  },
+  "usage_policy": {
+    "step": 4,
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj aktualne rozkłady i ceny wyłącznie dla kombinacji zapisanych w airports.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie; trasy mogą być sezonowe, dopiero zapowiedziane lub czasowo zawieszone."
+  },
+  "airports": [
+    {
+      "iata": "BBU",
+      "name_pl": "Bukareszt-Băneasa",
+      "country_pl": "Rumunia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "BUD",
+      "name_pl": "Budapeszt",
+      "country_pl": "Węgry",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "FCO",
+      "name_pl": "Rzym-Fiumicino",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KTW", "KRK"]
+    },
+    {
+      "iata": "MXP",
+      "name_pl": "Mediolan-Malpensa",
+      "country_pl": "Włochy",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW", "KRK"]
+    },
+    {
+      "iata": "OTP",
+      "name_pl": "Bukareszt-Otopeni",
+      "country_pl": "Rumunia",
+      "tenerife_airports": ["TFS"],
+      "polish_airports": ["WAW"]
+    },
+    {
+      "iata": "SCQ",
+      "name_pl": "Santiago de Compostela",
+      "country_pl": "Hiszpania",
+      "tenerife_airports": ["TFN"],
+      "polish_airports": ["WMI"]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Wizz Air — oficjalna mapa tras",
+      "url": "https://www.wizzair.com/en-gb/flights/wizz-route-map"
+    },
+    {
+      "name": "Wizz Air — ogłoszenie tras TFN-SCQ i WMI-SCQ",
+      "url": "https://ssr-weu2.wizzair.com/en-gb/information-and-services/about-us/news/2026/07/30/wizz-air-expands-its-spanish-network-further-with-a-new-base-in-santiago-de-compostela"
+    },
+    {
+      "name": "Aena — kierunki z Tenerife Sur",
+      "url": "https://www.aena.es/en/tenerife-sur/airlines-and-destinations/airport-destinations.html"
+    },
+    {
+      "name": "BOE — zasady bonifikaty transportowej dla rezydentów",
+      "url": "https://boe.es/buscar/act.php?id=BOE-A-2018-10651"
+    },
+    {
+      "name": "Ministerstwo Transportu Hiszpanii — bonifikaty w transporcie lotniczym",
+      "url": "https://sede.transportes.gob.es/areas-activity/aviacion-civil-aereo/liquidacion-bonificaciones-transporte-aereo"
+    }
+  ]
+}

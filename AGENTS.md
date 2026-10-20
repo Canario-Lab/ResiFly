@@ -34,6 +34,22 @@
   availability.
 - Update this allowlist only when the user explicitly asks to revise it.
 
+## Canonical Wizz Air transfer-airport list
+
+- The fixed Wizz Air + Wizz Air airport allowlist for Step 4 is stored in
+  `data/wizzair-transfer-airports.json`.
+- Read both the transfer airport code and its eligible Polish airport codes
+  from that file whenever Step 4 is run. Do not rediscover, add, or remove
+  transfer airports during a weekly collection.
+- Read resident-discount eligibility from
+  `resident_discount_on_tenerife_leg` in the same file. Apply the `0.25`
+  multiplier only to the Tenerife leg when its transfer airport is listed as
+  eligible; otherwise use the full fare (`1.0`).
+- A weekly collection still fetches current schedules and prices for the
+  listed route combinations; being on the allowlist does not imply current
+  availability.
+- Update this allowlist only when the user explicitly asks to revise it.
+
 ## Flight booking links
 
 - Every Wizz Air leg written to a public results JSON must contain a
