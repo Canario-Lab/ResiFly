@@ -59,8 +59,9 @@ wyraźnej decyzji użytkownika.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
   liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
   sezonowości.
-- Nie sprawdzać lotnisk zapisanych w `excluded_airports`, w tym Madery ani
-  Funchal (FNC).
+- Nie sprawdzać lotnisk zapisanych w `excluded_airports`, w tym Funchal (FNC)
+  na Maderze, ponieważ na połączenia z Maderą nie obowiązuje kanaryjska zniżka
+  rezydencka 75%.
 - Dla każdego lotniska z listy sprawdzić oba kierunki:
   1. WAW/WMI/KRK/KTW → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
      TFS/TFN linią Binter.
