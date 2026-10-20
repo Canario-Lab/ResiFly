@@ -10,12 +10,11 @@ oczekiwania.
 Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku
 [`docs/FIVE_STEP_FLIGHT_SEARCH.md`](docs/FIVE_STEP_FLIGHT_SEARCH.md). Zawiera
 wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
-raportów PDF.
+wynikowych danych.
 
 Publiczny JSON strony jest generowany z aktualnych danych Binter, Ryanair,
 Wizz Air oraz kursu NBP. Obejmuje oba kierunki i wyłącznie połączenia, których
-łączna cena regularna jest niższa niż 1000 PLN. To osobna zasada od progu
-raportów PDF.
+łączna cena regularna jest niższa niż 1000 PLN.
 
 ```bash
 python3 -m venv .venv

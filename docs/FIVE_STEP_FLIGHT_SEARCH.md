@@ -8,7 +8,7 @@ wyraźnej decyzji użytkownika.
 
 - Uruchomienie: każdy wtorek o 09:00 czasu Wysp Kanaryjskich.
 - Każde uruchomienie zaczyna się od zera i pobiera aktualne rozkłady oraz ceny.
-- Nie wolno używać cen z poprzedniego raportu.
+- Nie wolno używać cen z poprzedniego uruchomienia.
 
 ## Wspólne zasady dla wszystkich kroków
 
@@ -24,7 +24,7 @@ wyraźnej decyzji użytkownika.
 - Przy przesiadce wymagać od 2 do 24 godzin między planowanym przylotem
   pierwszego odcinka a odlotem drugiego. Odcinki muszą być chronologicznie
   wykonalne.
-- Do raportu kwalifikować wyłącznie połączenia kosztujące mniej niż 500 PLN za
+- W każdym kroku zachować wyłącznie połączenia kosztujące mniej niż 500 PLN za
   całą podróż w jedną stronę po zastosowaniu właściwego przeliczenia 25%.
   Wyników równych 500 PLN ani droższych nie pokazywać.
 - Bagaż nie ma znaczenia — używać najtańszej dostępnej taryfy.
@@ -42,10 +42,8 @@ wyraźnej decyzji użytkownika.
   - cenę tego odcinka po pomnożeniu przez 25%,
   - cenę pozostałego odcinka,
   - cenę całkowitą w PLN.
-- Każdy krok zakończyć osobnym, czytelnym PDF-em zapisanym w folderze `Loty`
-  na Biurku.
-- Jeśli krok nie zwróci wyników, mimo to utworzyć PDF z informacją, co
-  sprawdzono i że nie znaleziono połączeń spełniających warunki.
+- Jeśli krok nie zwróci wyników, zapisać informację, co sprawdzono i że nie
+  znaleziono połączeń spełniających warunki.
 
 ## Krok 1 — Binter + Ryanair lub Wizz Air
 
@@ -69,7 +67,7 @@ wyraźnej decyzji użytkownika.
      Ryanair albo Wizz Air.
 - Zwykłą cenę wyłącznie odcinka Bintera pomnożyć przez 25%. Drugi odcinek
   policzyć w pełnej cenie.
-- W PDF-ie najpierw umieścić krótką listę użytych lotnisk
+- W wynikach kroku najpierw umieścić krótką listę użytych lotnisk
   przesiadkowych, a następnie wszystkie znalezione połączenia poniżej 500 PLN.
 
 ## Krok 2 — loty bezpośrednie
@@ -98,8 +96,9 @@ wyraźnej decyzji użytkownika.
   się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
   cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
   w pełnej cenie.
-- W PDF-ie najpierw podać aktualną listę lotnisk przesiadkowych i odpowiadające
-  im polskie lotniska, a następnie wszystkie połączenia poniżej 500 PLN.
+- W wynikach kroku najpierw podać aktualną listę lotnisk przesiadkowych i
+  odpowiadające im polskie lotniska, a następnie wszystkie połączenia poniżej
+  500 PLN.
 
 ## Krok 4 — Wizz Air + Wizz Air
 
@@ -119,8 +118,9 @@ wyraźnej decyzji użytkownika.
   się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
   cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
   w pełnej cenie.
-- W PDF-ie najpierw podać aktualną listę lotnisk przesiadkowych i odpowiadające
-  im polskie lotniska, a następnie wszystkie połączenia poniżej 500 PLN.
+- W wynikach kroku najpierw podać aktualną listę lotnisk przesiadkowych i
+  odpowiadające im polskie lotniska, a następnie wszystkie połączenia poniżej
+  500 PLN.
 
 ## Krok 5 — połączenia mieszane Ryanair × Wizz Air
 
@@ -141,18 +141,18 @@ wyraźnej decyzji użytkownika.
   pełnej cenie.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Obecność na liście
   nie gwarantuje połączenia w danym 30-dniowym oknie.
-- W PDF-ie najpierw podać listę lotnisk przesiadkowych dla obu wariantów, a
-  następnie wszystkie połączenia poniżej 500 PLN.
+- W wynikach kroku najpierw podać listę lotnisk przesiadkowych dla obu
+  wariantów, a następnie wszystkie połączenia poniżej 500 PLN.
 
 ## Zakończenie uruchomienia
 
 Po ukończeniu pięciu kroków przygotować krótkie podsumowanie zawierające liczbę
-wyników w każdym kroku oraz linki do pięciu utworzonych PDF-ów.
+wyników w każdym kroku.
 
-## Ważne rozróżnienie: raport a JSON strony
+## Ważne rozróżnienie: wyniki kroków a JSON strony
 
 Próg 500 PLN pozostaje zasadą kwalifikacji wyników do powyższych pięciu
-raportów PDF. Publiczny JSON strony dla kroku 1 ma osobną regułę: obejmuje oba
+kroków. Publiczny JSON strony dla kroku 1 ma osobną regułę: obejmuje oba
 kierunki i zapisuje połączenia, których łączna **cena regularna** jest ściśle
 niższa niż 1000 PLN. Cena rezydencka i Wizz Air Discount Club są zapisywane
 jako dodatkowe warianty, ale nie decydują o włączeniu połączenia do JSON-a.
