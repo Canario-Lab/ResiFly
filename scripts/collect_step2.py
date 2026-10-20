@@ -42,6 +42,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "data" / "step2-results.json"
 WIZZ_API = "https://be.wizzair.com/29.21.0/Api"
 RYANAIR_DATES_API = "https://www.ryanair.com/api/farfnd/v4/oneWayFares"
+RYANAIR_FARE_FINDER_API = "https://www.ryanair.com/api/farfnd/3/oneWayFares"
 RYANAIR_AVAILABILITY_API = "https://www.ryanair.com/api/booking/v4/en-gb/availability"
 RYANAIR_VERSION_PAGE = "https://www.ryanair.com/ie/en/trip/flights/select"
 
@@ -173,21 +174,37 @@ def collect_wizz_route(
 
 
 def ryanair_client_version() -> str:
-    response = requests.get(RYANAIR_VERSION_PAGE, impersonate="chrome", timeout=60)
-    response.raise_for_status()
-    match = re.search(r"Desktop version: (\d+\.\d+\.\d+)", response.text)
-    if not match:
-        raise RuntimeError("Could not discover the current Ryanair desktop client version")
-    return match.group(1)
+    last_error: Exception | None = None
+    for attempt in range(4):
+        try:
+            response = requests.get(RYANAIR_VERSION_PAGE, impersonate="chrome", timeout=60)
+            response.raise_for_status()
+            match = re.search(r"Desktop version: (\d+\.\d+\.\d+)", response.text)
+            if not match:
+                raise RuntimeError("Could not discover the current Ryanair desktop client version")
+            return match.group(1)
+        except Exception as error:
+            last_error = error
+            if attempt < 3:
+                time_module.sleep(1.5 * (attempt + 1))
+    raise RuntimeError("Could not discover the current Ryanair desktop client version") from last_error
 
 
 def ryanair_available_dates(origin: str, destination: str) -> list[date]:
     url = f"{RYANAIR_DATES_API}/{origin}/{destination}/availabilities"
-    response = requests.get(url, impersonate="safari184", timeout=60)
-    if response.status_code in {400, 404}:
-        return []
-    response.raise_for_status()
-    return [date.fromisoformat(value) for value in response.json()]
+    last_error: Exception | None = None
+    for attempt in range(4):
+        try:
+            response = requests.get(url, impersonate="safari184", timeout=60)
+            if response.status_code in {400, 404}:
+                return []
+            response.raise_for_status()
+            return [date.fromisoformat(value) for value in response.json()]
+        except Exception as error:
+            last_error = error
+            if attempt < 3:
+                time_module.sleep(1.5 * (attempt + 1))
+    raise RuntimeError(f"Ryanair active dates failed for {origin}-{destination}") from last_error
 
 
 def ryanair_windows(active_dates: list[date], start: date, end: date) -> list[date]:
@@ -229,24 +246,115 @@ def ryanair_availability(
         "RoundTrip": "false",
         "ToUs": "AGREED",
     }
-    headers = {
-        "client": "desktop",
-        "client-version": client_version,
-        "cookie": f"fr-correlation-id={uuid.uuid4()}",
-    }
-    response = requests.get(
-        RYANAIR_AVAILABILITY_API,
-        params=params,
-        headers=headers,
-        impersonate="chrome",
-        timeout=60,
+    last_error = ""
+    for attempt in range(5):
+        headers = {
+            "client": "desktop",
+            "client-version": client_version,
+            "cookie": f"fr-correlation-id={uuid.uuid4()}",
+        }
+        try:
+            response = requests.get(
+                RYANAIR_AVAILABILITY_API,
+                params=params,
+                headers=headers,
+                impersonate="chrome",
+                timeout=60,
+            )
+            if response.status_code < 400:
+                return response.json()
+            last_error = f"HTTP {response.status_code}: {response.text[:300]}"
+            if response.status_code == 409 and "Availability declined" in response.text:
+                break
+            if response.status_code not in {409, 429} and response.status_code < 500:
+                break
+        except Exception as error:
+            last_error = str(error)
+        if attempt < 4:
+            time_module.sleep(2 * (attempt + 1))
+    raise RuntimeError(
+        f"Ryanair availability failed for {origin}-{destination} "
+        f"around {center}: {last_error}"
     )
-    if response.status_code >= 400:
-        raise RuntimeError(
-            f"Ryanair availability failed for {origin}-{destination} "
-            f"around {center}: HTTP {response.status_code}: {response.text[:300]}"
-        )
-    return response.json()
+
+
+def collect_ryanair_farefinder_dates(
+    origin: str,
+    destination: str,
+    active_dates: list[date],
+    start: date,
+    end: date,
+    rates: dict[str, CurrencyRate],
+) -> list[dict[str, Any]]:
+    """Fallback for markets declined by the full availability endpoint.
+
+    Fare Finder returns only the cheapest result for a date range, so each
+    known active date is requested separately to avoid losing travel dates.
+    """
+
+    legs_by_key: dict[str, dict[str, Any]] = {}
+    for active_date in sorted(day for day in active_dates if start <= day <= end):
+        params = {
+            "departureAirportIataCode": origin,
+            "arrivalAirportIataCode": destination,
+            "outboundDepartureDateFrom": active_date.isoformat(),
+            "outboundDepartureDateTo": active_date.isoformat(),
+            "currency": "EUR",
+            "limit": 20,
+        }
+        last_error: Exception | None = None
+        for attempt in range(4):
+            try:
+                response = requests.get(
+                    RYANAIR_FARE_FINDER_API,
+                    params=params,
+                    impersonate="safari184",
+                    timeout=60,
+                )
+                response.raise_for_status()
+                payload = response.json()
+                break
+            except Exception as error:
+                last_error = error
+                if attempt < 3:
+                    time_module.sleep(1.5 * (attempt + 1))
+        else:
+            raise RuntimeError(
+                f"Ryanair Fare Finder failed for {origin}-{destination} on {active_date}"
+            ) from last_error
+
+        for fare in payload.get("fares", []):
+            item = fare.get("outbound") or {}
+            if item.get("departureAirport", {}).get("iataCode") != origin:
+                continue
+            if item.get("arrivalAirport", {}).get("iataCode") != destination:
+                continue
+            price = item.get("price") or {}
+            if not price.get("value"):
+                continue
+            departure = local_datetime(item["departureDate"], origin)
+            arrival = local_datetime(item["arrivalDate"], destination)
+            currency = price["currencyCode"]
+            regular_amount = float(price["value"])
+            key = item.get("flightKey") or (
+                f"{item.get('flightNumber')}:{departure.isoformat()}:{arrival.isoformat()}"
+            )
+            legs_by_key[key] = {
+                "carrier": "Ryanair",
+                "flight_number": str(item.get("flightNumber") or "Ryanair").replace(" ", ""),
+                "departure_airport": origin,
+                "departure_at": serialize_datetime(departure),
+                "arrival_airport": destination,
+                "arrival_at": serialize_datetime(arrival),
+                "price_regular_pln": money_pln(regular_amount, currency, rates),
+                "resident_discount_eligible": False,
+                "price_resident_estimated_pln": money_pln(regular_amount, currency, rates),
+                "booking_url": ryanair_booking_url(origin, destination, departure),
+                "price_source_currency": currency,
+                "price_source_amount": regular_amount,
+                "price_source": "Ryanair Fare Finder daily fallback",
+            }
+    return sorted(legs_by_key.values(), key=lambda leg: leg["departure_at"])
 
 
 def collect_ryanair_route(
@@ -264,7 +372,19 @@ def collect_ryanair_route(
 
     legs_by_key: dict[str, dict[str, Any]] = {}
     for center in centers:
-        payload = ryanair_availability(origin, destination, center, client_version)
+        try:
+            payload = ryanair_availability(origin, destination, center, client_version)
+        except RuntimeError as error:
+            if "Availability declined" in str(error):
+                return collect_ryanair_farefinder_dates(
+                    origin,
+                    destination,
+                    active_dates,
+                    start,
+                    end,
+                    rates,
+                )
+            raise
         currency = payload["currency"]
         for trip in payload.get("trips", []):
             if trip.get("origin") != origin or trip.get("destination") != destination:

@@ -1,4 +1,8 @@
-const DATA_URLS = ["data/step1-results.json", "data/step2-results.json"];
+const DATA_URLS = [
+  "data/step1-results.json",
+  "data/step2-results.json",
+  "data/step3-results.json",
+];
 
 const state = {
   document: null,
@@ -213,7 +217,39 @@ const airportLabels = {
   LPA: "Gran Canaria (LPA)",
   MAD: "Madryt (MAD)",
   PMI: "Palma de Mallorca (PMI)",
+  AGA: "Agadir (AGA)",
+  AGP: "Malaga (AGP)",
+  BGY: "Mediolan-Bergamo (BGY)",
+  BHX: "Birmingham (BHX)",
+  BLQ: "Bolonia (BLQ)",
+  BOH: "Bournemouth (BOH)",
+  BRS: "Bristol (BRS)",
+  BUD: "Budapeszt (BUD)",
+  BVA: "Paryż-Beauvais (BVA)",
+  CRL: "Bruksela-Charleroi (CRL)",
+  DUB: "Dublin (DUB)",
+  EDI: "Edynburg (EDI)",
+  EIN: "Eindhoven (EIN)",
+  EMA: "East Midlands (EMA)",
+  FCO: "Rzym-Fiumicino (FCO)",
+  FMM: "Memmingen (FMM)",
+  LBA: "Leeds-Bradford (LBA)",
+  LPL: "Liverpool (LPL)",
+  LTN: "Londyn-Luton (LTN)",
+  MAN: "Manchester (MAN)",
+  MRS: "Marsylia (MRS)",
+  MXP: "Mediolan-Malpensa (MXP)",
+  NAP: "Neapol (NAP)",
+  NCL: "Newcastle (NCL)",
+  OPO: "Porto (OPO)",
+  PSA: "Piza (PSA)",
+  RAK: "Marrakesz (RAK)",
+  SNN: "Shannon (SNN)",
+  STN: "Londyn-Stansted (STN)",
   SVQ: "Sewilla (SVQ)",
+  TLS: "Tuluza (TLS)",
+  TSF: "Wenecja-Treviso (TSF)",
+  VIE: "Wiedeń (VIE)",
   VLC: "Walencja (VLC)",
 };
 
@@ -914,7 +950,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy pliki danych kroków 1 i 2 są dostępne.</p>
+        <p>Sprawdź, czy pliki danych kroków 1–3 są dostępne.</p>
       </div>
     `;
   }

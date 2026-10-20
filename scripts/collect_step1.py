@@ -53,6 +53,38 @@ AIRPORT_TIMEZONES = {
     "WMI": "Europe/Warsaw",
     "KTW": "Europe/Warsaw",
     "KRK": "Europe/Warsaw",
+    "AGA": "Africa/Casablanca",
+    "AGP": "Europe/Madrid",
+    "BGY": "Europe/Rome",
+    "BHX": "Europe/London",
+    "BLQ": "Europe/Rome",
+    "BOH": "Europe/London",
+    "BRS": "Europe/London",
+    "BUD": "Europe/Budapest",
+    "BVA": "Europe/Paris",
+    "CRL": "Europe/Brussels",
+    "DUB": "Europe/Dublin",
+    "EDI": "Europe/London",
+    "EIN": "Europe/Amsterdam",
+    "EMA": "Europe/London",
+    "FCO": "Europe/Rome",
+    "FMM": "Europe/Berlin",
+    "LBA": "Europe/London",
+    "LPL": "Europe/London",
+    "LTN": "Europe/London",
+    "MAN": "Europe/London",
+    "MRS": "Europe/Paris",
+    "MXP": "Europe/Rome",
+    "NAP": "Europe/Rome",
+    "NCL": "Europe/London",
+    "OPO": "Europe/Lisbon",
+    "PSA": "Europe/Rome",
+    "RAK": "Africa/Casablanca",
+    "SNN": "Europe/Dublin",
+    "STN": "Europe/London",
+    "TLS": "Europe/Paris",
+    "TSF": "Europe/Rome",
+    "VIE": "Europe/Vienna",
 }
 
 # Wizz's public timetable endpoint exposes departure time and price, but not
@@ -157,16 +189,30 @@ def get_json(
     raise RuntimeError(f"Request failed after {attempts} attempts: {url}") from last_error
 
 
-def nbp_eur_rate(day: date) -> CurrencyRate:
+def nbp_rate(currency_code: str, day: date) -> CurrencyRate:
+    code = currency_code.upper()
+    if code == "PLN":
+        return CurrencyRate("PLN", 1.0)
     cursor = day
     for _ in range(8):
-        url = f"https://api.nbp.pl/api/exchangerates/rates/a/eur/{cursor.isoformat()}/"
-        try:
-            payload = get_json("GET", url, params={"format": "json"}, attempts=1)
-            return CurrencyRate("EUR", float(payload["rates"][0]["mid"]))
-        except RuntimeError:
-            cursor -= timedelta(days=1)
-    raise RuntimeError(f"No NBP EUR rate available for {day.isoformat()} or preceding days")
+        for table in ("a", "b"):
+            url = (
+                "https://api.nbp.pl/api/exchangerates/rates/"
+                f"{table}/{code.lower()}/{cursor.isoformat()}/"
+            )
+            try:
+                payload = get_json("GET", url, params={"format": "json"}, attempts=1)
+                return CurrencyRate(code, float(payload["rates"][0]["mid"]))
+            except RuntimeError:
+                continue
+        cursor -= timedelta(days=1)
+    raise RuntimeError(
+        f"No NBP {code} rate available for {day.isoformat()} or preceding days"
+    )
+
+
+def nbp_eur_rate(day: date) -> CurrencyRate:
+    return nbp_rate("EUR", day)
 
 
 def money_pln(amount: float, currency_code: str, rates: dict[str, CurrencyRate]) -> float:

@@ -31,6 +31,8 @@
 
 - The fixed Ryanair + Ryanair airport allowlist for Step 3 is stored in
   `data/ryanair-transfer-airports.json`.
+- Generate Step 3 with `scripts/collect_step3.py` and write the public feed to
+  `data/step3-results.json`.
 - Read both the transfer airport code and its eligible Polish airport codes
   from that file whenever Step 3 is run. Do not rediscover, add, or remove
   transfer airports during a weekly collection.
