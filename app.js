@@ -100,6 +100,7 @@ let calendarRenderKey = null;
 let progressiveResults = [];
 let progressiveFilters = null;
 let progressiveResultCount = 0;
+let progressiveLoadedResultIndexes = new Set();
 let progressiveRenderVersion = 0;
 let progressiveObserver = null;
 let progressiveSentinel = null;
@@ -986,14 +987,32 @@ function stopProgressiveRendering() {
   progressiveResults = [];
   progressiveFilters = null;
   progressiveResultCount = 0;
+  progressiveLoadedResultIndexes = new Set();
 }
 
 function updateProgressiveSentinel() {
   if (!progressiveSentinel) return;
   const label = progressiveSentinel.querySelector(".results-load-sentinel-label");
   if (label) {
-    label.textContent = `Wyświetlono ${progressiveResultCount} z ${progressiveResults.length}. Przewiń niżej, aby wczytać kolejne.`;
+    label.textContent = `Wyświetlono ${progressiveLoadedResultIndexes.size} z ${progressiveResults.length}. Przewiń niżej, aby wczytać kolejne.`;
   }
+}
+
+function renderResultAtIndex(index) {
+  if (
+    progressiveLoadedResultIndexes.has(index) ||
+    !progressiveResults[index] ||
+    !progressiveFilters ||
+    !progressiveSentinel?.isConnected
+  ) return;
+
+  const fragment = createResultCard(progressiveResults[index], progressiveFilters);
+  const card = fragment.querySelector(".flight-card");
+  card.dataset.resultIndex = String(index);
+  const nextCard = [...elements.list.querySelectorAll(".flight-card")]
+    .find(item => Number(item.dataset.resultIndex) > index);
+  elements.list.insertBefore(fragment, nextCard || progressiveSentinel);
+  progressiveLoadedResultIndexes.add(index);
 }
 
 function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
@@ -1004,11 +1023,9 @@ function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
   ) return;
 
   const end = Math.min(progressiveResultCount + RESULT_BATCH_SIZE, progressiveResults.length);
-  const cards = document.createDocumentFragment();
-  for (const result of progressiveResults.slice(progressiveResultCount, end)) {
-    cards.append(createResultCard(result, progressiveFilters));
+  for (let index = progressiveResultCount; index < end; index += 1) {
+    renderResultAtIndex(index);
   }
-  elements.list.insertBefore(cards, progressiveSentinel);
   progressiveResultCount = end;
 
   if (progressiveResultCount >= progressiveResults.length) {
@@ -1068,15 +1085,17 @@ function renderResultCards(results, filters) {
   `;
   elements.list.replaceChildren(progressiveSentinel);
   appendNextResultBatch(expectedVersion);
+  for (const day of elements.calendarMonths.querySelectorAll(".calendar-day[data-result-id]")) {
+    ensureResultRendered(day.dataset.resultId);
+  }
+  updateProgressiveSentinel();
   observeProgressiveSentinel(expectedVersion);
 }
 
 function ensureResultRendered(resultId) {
   const targetIndex = progressiveResults.findIndex(result => result.id === resultId);
   if (targetIndex < 0) return;
-  while (progressiveResultCount <= targetIndex && progressiveSentinel) {
-    appendNextResultBatch(progressiveRenderVersion);
-  }
+  renderResultAtIndex(targetIndex);
 }
 
 function renderResults() {
