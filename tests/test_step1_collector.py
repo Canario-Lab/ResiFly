@@ -1,6 +1,18 @@
+import json
+from pathlib import Path
 import unittest
+from zoneinfo import ZoneInfo
 
-from scripts.collect_step1 import build_connections, validate_document
+from scripts.collect_step1 import (
+    AIRPORT_TIMEZONES,
+    build_connections,
+    configure_airports_from_allowlist,
+    validate_document,
+    wizz_schedules_from_allowlist,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def leg(carrier, number, origin, departure, destination, arrival, regular, resident=None, booking_url=None):
@@ -21,6 +33,23 @@ def leg(carrier, number, origin, departure, destination, arrival, regular, resid
 
 
 class Step1CollectorTests(unittest.TestCase):
+    def test_allowlist_contains_complete_collector_metadata(self):
+        allowlist = json.loads(
+            (ROOT / "data" / "binter-transfer-airports.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        configure_airports_from_allowlist(allowlist)
+        for airport in allowlist["airports"]:
+            code = airport["iata"]
+            self.assertEqual(AIRPORT_TIMEZONES[code], airport["timezone"])
+            ZoneInfo(airport["timezone"])
+            self.assertIn("resident_discount_eligible_on_binter_leg", airport)
+            self.assertIn("binter_resident_fare_multiplier", airport)
+        schedules = wizz_schedules_from_allowlist(allowlist)
+        self.assertEqual(schedules[("WAW", "MAD")], ("W61471", 230))
+        self.assertEqual(schedules[("MAD", "WAW")], ("W61472", 215))
+
     def test_does_not_filter_expensive_regular_price(self):
         binter = leg(
             "Binter", "NT1", "TFN", "2026-11-01T08:00:00+00:00",

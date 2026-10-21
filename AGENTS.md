@@ -17,6 +17,10 @@
 - A weekly collection still fetches current schedules and prices for the
   listed airports; being on the allowlist does not imply current availability.
 - Update this allowlist only when the user explicitly asks to revise it.
+- Keep each Step 1 airport's IANA time zone and resident-discount eligibility
+  in `data/binter-transfer-airports.json`. Keep the verified Wizz routes needed
+  by Step 1 in that same file under `wizz_route_schedules`. Do not hard-code
+  new Step 1 airport knowledge in the collector.
 
 ## Step 2 direct-flight collection
 
@@ -44,6 +48,8 @@
   listed route combinations; being on the allowlist does not imply current
   availability.
 - Update this allowlist only when the user explicitly asks to revise it.
+- Keep transfer-airport time zones in the allowlist's `airport_timezones`
+  object so a new airport does not require a collector-code change.
 
 ## Canonical Wizz Air transfer-airport list
 
@@ -62,11 +68,13 @@
   listed route combinations; being on the allowlist does not imply current
   availability.
 - Update this allowlist only when the user explicitly asks to revise it.
-- Keep verified Wizz Air flight numbers and published block times in the
-  collector's `WIZZ_ROUTE_SCHEDULES`; the public Wizz timetable API supplies
-  current dates, departure times and fares but omits arrival times and flight
-  numbers. If a new allowlisted route becomes active, verify and add its
-  schedule instead of inventing missing data.
+- Keep transfer-airport time zones in the allowlist's `airport_timezones`
+  object. Keep verified Wizz Air flight numbers, published block times and
+  time-specific flight-number overrides in `data/wizz-route-schedules.json`;
+  the public Wizz timetable API supplies current dates, departure times and
+  fares but omits arrival times and flight numbers. If a new allowlisted route
+  becomes active, verify and add its schedule to that data file instead of
+  changing the collector or inventing missing data.
 
 ## Canonical mixed Ryanair/Wizz Air transfer-airport list
 
@@ -85,6 +93,10 @@
   collection. Still fetch current schedules and prices for every saved route
   combination.
 - Update this allowlist only when the user explicitly asks to revise it.
+- Keep transfer-airport time zones in the allowlist's `airport_timezones`
+  object. Mixed variants that use Wizz Air read their verified technical route
+  data from `data/wizz-route-schedules.json`, without hard-coded route changes
+  in the Step 5 collector.
 
 ## Flight booking links
 

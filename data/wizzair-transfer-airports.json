@@ -30,6 +30,14 @@
     "result_count": 6,
     "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
   },
+  "airport_timezones": {
+  "BBU": "Europe/Bucharest",
+  "BUD": "Europe/Budapest",
+  "FCO": "Europe/Rome",
+  "MXP": "Europe/Rome",
+  "OTP": "Europe/Bucharest",
+  "SCQ": "Europe/Madrid"
+},
   "resident_discount_on_tenerife_leg": {
     "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
     "discount_percent": 75,

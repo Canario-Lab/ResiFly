@@ -57,6 +57,10 @@ wyraźnej decyzji użytkownika.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
   liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
   sezonowości.
+- Kod lotniska, jego strefę czasową, uprawnienie do zniżki na odcinku Bintera
+  oraz zweryfikowane dane tras Wizz Air przechowywać w
+  `data/binter-transfer-airports.json`. Dodanie lotniska nie może wymagać
+  dopisywania jego danych bezpośrednio w kodzie kolektora.
 - Nie sprawdzać lotnisk zapisanych w `excluded_airports`, w tym Funchal (FNC)
   na Maderze, ponieważ na połączenia z Maderą nie obowiązuje kanaryjska zniżka
   rezydencka 75%.
@@ -88,6 +92,8 @@ wyraźnej decyzji użytkownika.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
   liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
   sezonowości lub czasowego zawieszenia trasy.
+- Strefy czasowe lotnisk przesiadkowych przechowywać w `airport_timezones` w
+  tym samym pliku listy, a nie w kodzie kolektora.
 - Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
   z listy, w obu kierunkach.
 - Uprawnienie do zniżki odczytywać z pola
@@ -109,6 +115,9 @@ wyraźnej decyzji użytkownika.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Lotnisko obecne na
   liście może nie mieć połączenia w danym 30-dniowym oknie, np. z powodu
   sezonowości, przyszłej daty uruchomienia albo czasowego zawieszenia trasy.
+- Strefy czasowe lotnisk przechowywać w `airport_timezones` w tym samym pliku
+  listy. Zweryfikowane numery lotów, czasy blokowe i wyjątki godzinowe Wizz Air
+  przechowywać w `data/wizz-route-schedules.json`, nie w kodzie kolektora.
 - Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
   z listy, w obu kierunkach.
 - Uprawnienie do zniżki odczytywać z pola
@@ -139,6 +148,10 @@ wyraźnej decyzji użytkownika.
   pełnej cenie.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Obecność na liście
   nie gwarantuje połączenia w danym 30-dniowym oknie.
+- Strefy czasowe lotnisk przechowywać w `airport_timezones` w tym samym pliku
+  listy. Odcinki Wizz Air korzystają ze zweryfikowanych danych zapisanych w
+  `data/wizz-route-schedules.json`, dzięki czemu nowa trasa nie wymaga zmiany
+  kodu kolektora.
 - W wynikach kroku najpierw podać listę lotnisk przesiadkowych dla obu
   wariantów, a następnie wszystkie połączenia.
 

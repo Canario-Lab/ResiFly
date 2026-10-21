@@ -1,0 +1,646 @@
+{
+  "schema_version": 1,
+  "name": "Zweryfikowane dane rozkładowe tras Wizz Air",
+  "purpose": "Dane techniczne wymagane przez kolektory, ponieważ timetableV2 nie zwraca numeru lotu ani godziny przylotu.",
+  "update_policy": "Nowe zweryfikowane trasy dopisuj tutaj, bez zmiany kodu kolektorów.",
+  "routes": [
+    {
+      "origin": "AGA",
+      "destination": "KTW",
+      "flight_number": "W61078",
+      "duration_minutes": 285
+    },
+    {
+      "origin": "AGA",
+      "destination": "WAW",
+      "flight_number": "W61600",
+      "duration_minutes": 300
+    },
+    {
+      "origin": "AGP",
+      "destination": "KRK",
+      "flight_number": "W62074",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "AGP",
+      "destination": "KTW",
+      "flight_number": "W61074",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "AGP",
+      "destination": "WAW",
+      "flight_number": "W61360",
+      "duration_minutes": 230
+    },
+    {
+      "origin": "BBU",
+      "destination": "KRK",
+      "flight_number": "W62058",
+      "duration_minutes": 105
+    },
+    {
+      "origin": "BBU",
+      "destination": "WAW",
+      "flight_number": "W61584",
+      "duration_minutes": 110
+    },
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "flight_number": "W61432",
+      "duration_minutes": 120
+    },
+    {
+      "origin": "BGY",
+      "destination": "WMI",
+      "flight_number": "W61402",
+      "duration_minutes": 115
+    },
+    {
+      "origin": "BLQ",
+      "destination": "WAW",
+      "flight_number": "W61466",
+      "duration_minutes": 120
+    },
+    {
+      "origin": "BUD",
+      "destination": "KRK",
+      "flight_number": "W62419",
+      "duration_minutes": 75
+    },
+    {
+      "origin": "BUD",
+      "destination": "TFS",
+      "flight_number": "W62493",
+      "duration_minutes": 340
+    },
+    {
+      "origin": "BUD",
+      "destination": "WAW",
+      "flight_number": "W62467",
+      "duration_minutes": 75
+    },
+    {
+      "origin": "CRL",
+      "destination": "WAW",
+      "flight_number": "W61382",
+      "duration_minutes": 120
+    },
+    {
+      "origin": "EIN",
+      "destination": "KRK",
+      "flight_number": "W62076",
+      "duration_minutes": 110
+    },
+    {
+      "origin": "EIN",
+      "destination": "KTW",
+      "flight_number": "W61072",
+      "duration_minutes": 105
+    },
+    {
+      "origin": "EIN",
+      "destination": "WAW",
+      "flight_number": "W61372",
+      "duration_minutes": 110
+    },
+    {
+      "origin": "FCO",
+      "destination": "KRK",
+      "flight_number": "W62062",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "FCO",
+      "destination": "KTW",
+      "flight_number": "W61046",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "FCO",
+      "destination": "TFS",
+      "flight_number": "W46035",
+      "duration_minutes": 285
+    },
+    {
+      "origin": "FCO",
+      "destination": "WAW",
+      "flight_number": "W61442",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "GDN",
+      "destination": "TFS",
+      "flight_number": "W61709",
+      "duration_minutes": 365
+    },
+    {
+      "origin": "KRK",
+      "destination": "AGP",
+      "flight_number": "W62073",
+      "duration_minutes": 235
+    },
+    {
+      "origin": "KRK",
+      "destination": "BBU",
+      "flight_number": "W62057",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "KRK",
+      "destination": "BUD",
+      "flight_number": "W62420",
+      "duration_minutes": 70
+    },
+    {
+      "origin": "KRK",
+      "destination": "EIN",
+      "flight_number": "W62075",
+      "duration_minutes": 120
+    },
+    {
+      "origin": "KRK",
+      "destination": "FCO",
+      "flight_number": "W62061",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "KRK",
+      "destination": "LTN",
+      "flight_number": "W62001",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "KRK",
+      "destination": "MXP",
+      "flight_number": "W62067",
+      "duration_minutes": 115
+    },
+    {
+      "origin": "KTW",
+      "destination": "AGA",
+      "flight_number": "W61077",
+      "duration_minutes": 235
+    },
+    {
+      "origin": "KTW",
+      "destination": "AGP",
+      "flight_number": "W61073",
+      "duration_minutes": 230
+    },
+    {
+      "origin": "KTW",
+      "destination": "EIN",
+      "flight_number": "W61071",
+      "duration_minutes": 115
+    },
+    {
+      "origin": "KTW",
+      "destination": "FCO",
+      "flight_number": "W61045",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "KTW",
+      "destination": "LTN",
+      "flight_number": "W61001",
+      "duration_minutes": 150
+    },
+    {
+      "origin": "KTW",
+      "destination": "NAP",
+      "flight_number": "W61049",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "KTW",
+      "destination": "OPO",
+      "flight_number": "W61085",
+      "duration_minutes": 225
+    },
+    {
+      "origin": "LBA",
+      "destination": "WAW",
+      "flight_number": "W61316",
+      "duration_minutes": 150
+    },
+    {
+      "origin": "LPL",
+      "destination": "WAW",
+      "flight_number": "W61312",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "LTN",
+      "destination": "KRK",
+      "flight_number": "W62002",
+      "duration_minutes": 145
+    },
+    {
+      "origin": "LTN",
+      "destination": "KTW",
+      "flight_number": "W61002",
+      "duration_minutes": 140
+    },
+    {
+      "origin": "LTN",
+      "destination": "WAW",
+      "flight_number": "W61302",
+      "duration_minutes": 145
+    },
+    {
+      "origin": "MXP",
+      "destination": "KRK",
+      "flight_number": "W62068",
+      "duration_minutes": 110
+    },
+    {
+      "origin": "MXP",
+      "destination": "TFS",
+      "flight_number": "W46323",
+      "duration_minutes": 285
+    },
+    {
+      "origin": "MXP",
+      "destination": "WAW",
+      "flight_number": "W46387",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "NAP",
+      "destination": "KTW",
+      "flight_number": "W61050",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "NAP",
+      "destination": "WAW",
+      "flight_number": "W61458",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "OPO",
+      "destination": "KTW",
+      "flight_number": "W61086",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "OPO",
+      "destination": "WAW",
+      "flight_number": "W61596",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "OTP",
+      "destination": "TFS",
+      "flight_number": "W43021",
+      "duration_minutes": 375
+    },
+    {
+      "origin": "PSA",
+      "destination": "WAW",
+      "flight_number": "W61468",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "RAK",
+      "destination": "WAW",
+      "flight_number": "W61598",
+      "duration_minutes": 285
+    },
+    {
+      "origin": "SCQ",
+      "destination": "TFN",
+      "flight_number": "W47465",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "SCQ",
+      "destination": "WMI",
+      "flight_number": "W61408",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "TFN",
+      "destination": "SCQ",
+      "flight_number": "W47466",
+      "duration_minutes": 175
+    },
+    {
+      "origin": "TFS",
+      "destination": "BUD",
+      "flight_number": "W62494",
+      "duration_minutes": 305
+    },
+    {
+      "origin": "TFS",
+      "destination": "FCO",
+      "flight_number": "W46036",
+      "duration_minutes": 270
+    },
+    {
+      "origin": "TFS",
+      "destination": "GDN",
+      "flight_number": "W61710",
+      "duration_minutes": 330
+    },
+    {
+      "origin": "TFS",
+      "destination": "MXP",
+      "flight_number": "W46324",
+      "duration_minutes": 260
+    },
+    {
+      "origin": "TFS",
+      "destination": "OTP",
+      "flight_number": "W43022",
+      "duration_minutes": 330
+    },
+    {
+      "origin": "WAW",
+      "destination": "AGA",
+      "flight_number": "W61599",
+      "duration_minutes": 260
+    },
+    {
+      "origin": "WAW",
+      "destination": "AGP",
+      "flight_number": "W61359",
+      "duration_minutes": 250
+    },
+    {
+      "origin": "WAW",
+      "destination": "BBU",
+      "flight_number": "W61583",
+      "duration_minutes": 105
+    },
+    {
+      "origin": "WAW",
+      "destination": "BGY",
+      "flight_number": "W61431",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "WAW",
+      "destination": "BLQ",
+      "flight_number": "W61465",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "WAW",
+      "destination": "BUD",
+      "flight_number": "W62468",
+      "duration_minutes": 80
+    },
+    {
+      "origin": "WAW",
+      "destination": "CRL",
+      "flight_number": "W61381",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "WAW",
+      "destination": "EIN",
+      "flight_number": "W61371",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "WAW",
+      "destination": "FCO",
+      "flight_number": "W61441",
+      "duration_minutes": 150
+    },
+    {
+      "origin": "WAW",
+      "destination": "LBA",
+      "flight_number": "W61315",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "WAW",
+      "destination": "LPL",
+      "flight_number": "W61311",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "WAW",
+      "destination": "LTN",
+      "flight_number": "W61301",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "WAW",
+      "destination": "MXP",
+      "flight_number": "W46388",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "WAW",
+      "destination": "NAP",
+      "flight_number": "W61457",
+      "duration_minutes": 145
+    },
+    {
+      "origin": "WAW",
+      "destination": "OPO",
+      "flight_number": "W61595",
+      "duration_minutes": 245
+    },
+    {
+      "origin": "WAW",
+      "destination": "PSA",
+      "flight_number": "W61467",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "WAW",
+      "destination": "RAK",
+      "flight_number": "W61597",
+      "duration_minutes": 245
+    },
+    {
+      "origin": "WMI",
+      "destination": "BGY",
+      "flight_number": "W61401",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "WMI",
+      "destination": "SCQ",
+      "flight_number": "W61407",
+      "duration_minutes": 230
+    }
+  ],
+  "flight_number_overrides_by_departure_time": [
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "departure_time": "20:30",
+      "flight_number": "W61434"
+    },
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "departure_time": "20:40",
+      "flight_number": "W61434"
+    },
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "departure_time": "20:50",
+      "flight_number": "W61434"
+    },
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "departure_time": "20:55",
+      "flight_number": "W61434"
+    },
+    {
+      "origin": "BGY",
+      "destination": "WAW",
+      "departure_time": "21:00",
+      "flight_number": "W61434"
+    },
+    {
+      "origin": "BUD",
+      "destination": "WAW",
+      "departure_time": "20:25",
+      "flight_number": "W62469"
+    },
+    {
+      "origin": "FCO",
+      "destination": "KRK",
+      "departure_time": "05:30",
+      "flight_number": "W42032"
+    },
+    {
+      "origin": "FCO",
+      "destination": "KRK",
+      "departure_time": "05:40",
+      "flight_number": "W42032"
+    },
+    {
+      "origin": "FCO",
+      "destination": "KRK",
+      "departure_time": "16:15",
+      "flight_number": "W62032"
+    },
+    {
+      "origin": "FCO",
+      "destination": "WAW",
+      "departure_time": "18:20",
+      "flight_number": "W41446"
+    },
+    {
+      "origin": "FCO",
+      "destination": "WAW",
+      "departure_time": "18:25",
+      "flight_number": "W41446"
+    },
+    {
+      "origin": "FCO",
+      "destination": "WAW",
+      "departure_time": "18:30",
+      "flight_number": "W41446"
+    },
+    {
+      "origin": "FCO",
+      "destination": "WAW",
+      "departure_time": "20:35",
+      "flight_number": "W61446"
+    },
+    {
+      "origin": "KRK",
+      "destination": "FCO",
+      "departure_time": "08:15",
+      "flight_number": "W42031"
+    },
+    {
+      "origin": "KRK",
+      "destination": "FCO",
+      "departure_time": "08:25",
+      "flight_number": "W42031"
+    },
+    {
+      "origin": "KRK",
+      "destination": "FCO",
+      "departure_time": "08:55",
+      "flight_number": "W42031"
+    },
+    {
+      "origin": "KRK",
+      "destination": "FCO",
+      "departure_time": "13:30",
+      "flight_number": "W62031"
+    },
+    {
+      "origin": "MXP",
+      "destination": "WAW",
+      "departure_time": "21:05",
+      "flight_number": "W66389"
+    },
+    {
+      "origin": "WAW",
+      "destination": "BGY",
+      "departure_time": "17:45",
+      "flight_number": "W61433"
+    },
+    {
+      "origin": "WAW",
+      "destination": "BGY",
+      "departure_time": "18:00",
+      "flight_number": "W61433"
+    },
+    {
+      "origin": "WAW",
+      "destination": "BUD",
+      "departure_time": "22:05",
+      "flight_number": "W62470"
+    },
+    {
+      "origin": "WAW",
+      "destination": "CRL",
+      "departure_time": "17:30",
+      "flight_number": "W61383"
+    },
+    {
+      "origin": "WAW",
+      "destination": "CRL",
+      "departure_time": "17:50",
+      "flight_number": "W61383"
+    },
+    {
+      "origin": "WAW",
+      "destination": "FCO",
+      "departure_time": "21:20",
+      "flight_number": "W41445"
+    },
+    {
+      "origin": "WAW",
+      "destination": "FCO",
+      "departure_time": "21:25",
+      "flight_number": "W41445"
+    },
+    {
+      "origin": "WAW",
+      "destination": "FCO",
+      "departure_time": "21:30",
+      "flight_number": "W41445"
+    },
+    {
+      "origin": "WAW",
+      "destination": "MXP",
+      "departure_time": "13:30",
+      "flight_number": "W66390"
+    },
+    {
+      "origin": "WAW",
+      "destination": "MXP",
+      "departure_time": "18:15",
+      "flight_number": "W66390"
+    }
+  ]
+}

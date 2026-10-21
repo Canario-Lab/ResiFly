@@ -25,6 +25,7 @@ from scripts.collect_step1 import (
     MIN_LAYOVER_MINUTES,
     POLISH_AIRPORTS,
     TENERIFE_AIRPORTS,
+    configure_airports_from_allowlist,
     dt,
     nbp_rate,
 )
@@ -318,6 +319,7 @@ def main() -> None:
 
     end = args.from_date + timedelta(days=args.days)
     allowlist = load_allowlist()
+    configure_airports_from_allowlist(allowlist)
     discount_rules = allowlist["resident_discount_on_tenerife_leg"]
     routes = route_matrix(allowlist)
     rates = {code: nbp_rate(code, args.from_date) for code in SOURCE_CURRENCIES}

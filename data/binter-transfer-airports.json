@@ -32,7 +32,10 @@
     {
       "iata": "FUE",
       "name_pl": "Fuerteventura",
+      "timezone": "Atlantic/Canary",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KTW",
@@ -43,7 +46,10 @@
     {
       "iata": "LPA",
       "name_pl": "Gran Canaria",
+      "timezone": "Atlantic/Canary",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
@@ -54,7 +60,10 @@
     {
       "iata": "MAD",
       "name_pl": "Madryt",
+      "timezone": "Europe/Madrid",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
@@ -69,7 +78,10 @@
     {
       "iata": "PMI",
       "name_pl": "Palma de Mallorca",
+      "timezone": "Europe/Madrid",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
@@ -80,7 +92,10 @@
     {
       "iata": "SVQ",
       "name_pl": "Sewilla",
+      "timezone": "Europe/Madrid",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
@@ -91,7 +106,10 @@
     {
       "iata": "VLC",
       "name_pl": "Walencja",
+      "timezone": "Europe/Madrid",
       "binter_from_tenerife": true,
+      "resident_discount_eligible_on_binter_leg": true,
+      "binter_resident_fare_multiplier": 0.25,
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
@@ -103,6 +121,24 @@
         }
       ]
     }
+  ],
+  "wizz_route_schedules": [
+    { "origin": "WAW", "destination": "FUE", "flight_number": "W61331", "duration_minutes": 340 },
+    { "origin": "FUE", "destination": "WAW", "flight_number": "W61332", "duration_minutes": 325 },
+    { "origin": "KTW", "destination": "FUE", "flight_number": "W61083", "duration_minutes": 330 },
+    { "origin": "FUE", "destination": "KTW", "flight_number": "W61084", "duration_minutes": 310 },
+    { "origin": "WAW", "destination": "MAD", "flight_number": "W61471", "duration_minutes": 230 },
+    { "origin": "MAD", "destination": "WAW", "flight_number": "W61472", "duration_minutes": 215 },
+    { "origin": "KTW", "destination": "MAD", "flight_number": "W61177", "duration_minutes": 200 },
+    { "origin": "MAD", "destination": "KTW", "flight_number": "W61178", "duration_minutes": 205 },
+    { "origin": "WAW", "destination": "PMI", "flight_number": "W61327", "duration_minutes": 195 },
+    { "origin": "PMI", "destination": "WAW", "flight_number": "W61328", "duration_minutes": 185 },
+    { "origin": "WAW", "destination": "SVQ", "flight_number": "W61351", "duration_minutes": 245 },
+    { "origin": "SVQ", "destination": "WAW", "flight_number": "W61352", "duration_minutes": 235 },
+    { "origin": "WAW", "destination": "VLC", "flight_number": "W61337", "duration_minutes": 205 },
+    { "origin": "VLC", "destination": "WAW", "flight_number": "W61338", "duration_minutes": 200 },
+    { "origin": "KRK", "destination": "VLC", "flight_number": "W62079", "duration_minutes": 185 },
+    { "origin": "VLC", "destination": "KRK", "flight_number": "W62080", "duration_minutes": 190 }
   ],
   "excluded_airports": [
     {

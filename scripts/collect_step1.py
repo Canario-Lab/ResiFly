@@ -43,75 +43,37 @@ BINTER_API = "https://services.bintercanarias.com/main/graphql"
 AIRPORT_TIMEZONES = {
     "TFN": "Atlantic/Canary",
     "TFS": "Atlantic/Canary",
-    "FUE": "Atlantic/Canary",
-    "LPA": "Atlantic/Canary",
-    "MAD": "Europe/Madrid",
-    "PMI": "Europe/Madrid",
-    "SVQ": "Europe/Madrid",
-    "VLC": "Europe/Madrid",
     "WAW": "Europe/Warsaw",
     "WMI": "Europe/Warsaw",
     "KTW": "Europe/Warsaw",
     "KRK": "Europe/Warsaw",
-    "AGA": "Africa/Casablanca",
-    "AGP": "Europe/Madrid",
-    "BGY": "Europe/Rome",
-    "BBU": "Europe/Bucharest",
-    "BHX": "Europe/London",
-    "BLQ": "Europe/Rome",
-    "BOH": "Europe/London",
-    "BRS": "Europe/London",
-    "BUD": "Europe/Budapest",
-    "BVA": "Europe/Paris",
-    "CRL": "Europe/Brussels",
-    "DUB": "Europe/Dublin",
-    "EDI": "Europe/London",
-    "EIN": "Europe/Amsterdam",
-    "EMA": "Europe/London",
-    "FCO": "Europe/Rome",
-    "FMM": "Europe/Berlin",
-    "GDN": "Europe/Warsaw",
-    "LBA": "Europe/London",
-    "LPL": "Europe/London",
-    "LTN": "Europe/London",
-    "MAN": "Europe/London",
-    "MRS": "Europe/Paris",
-    "MXP": "Europe/Rome",
-    "NAP": "Europe/Rome",
-    "NCL": "Europe/London",
-    "OPO": "Europe/Lisbon",
-    "OTP": "Europe/Bucharest",
-    "PSA": "Europe/Rome",
-    "RAK": "Africa/Casablanca",
-    "SNN": "Europe/Dublin",
-    "SCQ": "Europe/Madrid",
-    "STN": "Europe/London",
-    "TLS": "Europe/Paris",
-    "TSF": "Europe/Rome",
-    "VIE": "Europe/Vienna",
 }
 
-# Wizz's public timetable endpoint exposes departure time and price, but not
-# the flight number or scheduled arrival. These stable route identifiers and
-# published block times complete that response without using a session URL.
-WIZZ_ROUTE_SCHEDULE = {
-    ("WAW", "FUE"): ("W61331", 340),
-    ("FUE", "WAW"): ("W61332", 325),
-    ("KTW", "FUE"): ("W61083", 330),
-    ("FUE", "KTW"): ("W61084", 310),
-    ("WAW", "MAD"): ("W61471", 230),
-    ("MAD", "WAW"): ("W61472", 215),
-    ("KTW", "MAD"): ("W61177", 200),
-    ("MAD", "KTW"): ("W61178", 205),
-    ("WAW", "PMI"): ("W61327", 195),
-    ("PMI", "WAW"): ("W61328", 185),
-    ("WAW", "SVQ"): ("W61351", 245),
-    ("SVQ", "WAW"): ("W61352", 235),
-    ("WAW", "VLC"): ("W61337", 205),
-    ("VLC", "WAW"): ("W61338", 200),
-    ("KRK", "VLC"): ("W62079", 185),
-    ("VLC", "KRK"): ("W62080", 190),
-}
+def configure_airports_from_allowlist(allowlist: dict[str, Any]) -> None:
+    """Register transfer-airport time zones stored in an allowlist file."""
+    configured = dict(allowlist.get("airport_timezones", {}))
+    for airport in allowlist.get("airports", []):
+        if airport.get("timezone"):
+            configured[airport["iata"]] = airport["timezone"]
+    for code, timezone in configured.items():
+        ZoneInfo(timezone)
+        AIRPORT_TIMEZONES[code] = timezone
+
+
+def wizz_schedules_from_allowlist(
+    allowlist: dict[str, Any],
+) -> dict[tuple[str, str], tuple[str, int]]:
+    """Read Wizz route identifiers and block times from the Step 1 list."""
+    schedules: dict[tuple[str, str], tuple[str, int]] = {}
+    for route in allowlist.get("wizz_route_schedules", []):
+        key = (route["origin"], route["destination"])
+        if key in schedules:
+            raise RuntimeError(f"Duplicate Wizz schedule in Step 1 list: {key}")
+        duration = int(route["duration_minutes"])
+        if duration <= 0:
+            raise RuntimeError(f"Invalid Wizz duration in Step 1 list: {key}")
+        schedules[key] = (route["flight_number"], duration)
+    return schedules
 
 BINTER_QUERY = """
 query booking_search($search: BookingSearchInput!) {
@@ -289,8 +251,9 @@ def collect_wizz_route(
     start: date,
     end: date,
     rates: dict[str, CurrencyRate],
+    schedules: dict[tuple[str, str], tuple[str, int]],
 ) -> list[dict[str, Any]]:
-    schedule = WIZZ_ROUTE_SCHEDULE.get((origin, destination))
+    schedule = schedules.get((origin, destination))
     if schedule is None:
         return []
     regular = wizz_timetable(origin, destination, start, end, "regular")
@@ -420,6 +383,8 @@ def collect_binter_trip(
     destination: str,
     departure_date: date,
     rates: dict[str, CurrencyRate],
+    resident_discount_eligible: bool,
+    resident_fare_multiplier: float,
 ) -> list[dict[str, Any]]:
     variables = {
         "search": {
@@ -462,6 +427,9 @@ def collect_binter_trip(
             if fare is None:
                 continue
             regular_eur, resident_eur = fare
+            effective_resident_eur = (
+                resident_eur if resident_discount_eligible else regular_eur
+            )
             departure = local_datetime(segment["departureTime"], origin)
             arrival = local_datetime(segment["arrivalTime"], destination)
             legs.append({
@@ -472,8 +440,13 @@ def collect_binter_trip(
                 "arrival_airport": destination,
                 "arrival_at": serialize_datetime(arrival),
                 "price_regular_pln": money_pln(regular_eur, "EUR", rates),
-                "resident_discount_eligible": True,
-                "price_resident_estimated_pln": money_pln(resident_eur, "EUR", rates),
+                "resident_discount_eligible": resident_discount_eligible,
+                "resident_fare_multiplier": resident_fare_multiplier,
+                "price_resident_estimated_pln": money_pln(
+                    effective_resident_eur,
+                    "EUR",
+                    rates,
+                ),
                 "booking_url": "https://www.bintercanarias.com/es/buscar-vuelos",
                 "price_source_currency": "EUR",
                 "price_source_amount": regular_eur,
@@ -487,6 +460,7 @@ def collect_low_cost_legs(
     end: date,
     rates: dict[str, CurrencyRate],
     workers: int,
+    wizz_schedules: dict[tuple[str, str], tuple[str, int]],
 ) -> list[dict[str, Any]]:
     jobs = []
     for transfer in transfers:
@@ -498,8 +472,25 @@ def collect_low_cost_legs(
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {}
         for carrier, origin, destination in jobs:
-            function = collect_wizz_route if carrier == "Wizz Air" else collect_ryanair_route
-            future = pool.submit(function, origin, destination, start, end, rates)
+            if carrier == "Wizz Air":
+                future = pool.submit(
+                    collect_wizz_route,
+                    origin,
+                    destination,
+                    start,
+                    end,
+                    rates,
+                    wizz_schedules,
+                )
+            else:
+                future = pool.submit(
+                    collect_ryanair_route,
+                    origin,
+                    destination,
+                    start,
+                    end,
+                    rates,
+                )
             futures[future] = (carrier, origin, destination)
         for future in as_completed(futures):
             carrier, origin, destination = futures[future]
@@ -540,14 +531,36 @@ def collect_binter_legs(
     candidates: set[tuple[str, str, date]],
     rates: dict[str, CurrencyRate],
     workers: int,
+    transfer_rules: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     legs: list[dict[str, Any]] = []
     ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
     with ThreadPoolExecutor(max_workers=max(2, min(workers, 6))) as pool:
-        futures = {
-            pool.submit(collect_binter_trip, origin, destination, day, rates): (origin, destination, day)
-            for origin, destination, day in ordered
-        }
+        futures = {}
+        for origin, destination, day in ordered:
+            transfer = destination if origin in TENERIFE_AIRPORTS else origin
+            eligible = bool(
+                transfer_rules[transfer][
+                    "resident_discount_eligible_on_binter_leg"
+                ]
+            )
+            multiplier = float(
+                transfer_rules[transfer]["binter_resident_fare_multiplier"]
+            )
+            if eligible != (multiplier < 1.0):
+                raise RuntimeError(
+                    f"Inconsistent Binter discount metadata for {transfer}"
+                )
+            future = pool.submit(
+                collect_binter_trip,
+                origin,
+                destination,
+                day,
+                rates,
+                eligible,
+                multiplier,
+            )
+            futures[future] = (origin, destination, day)
         done = 0
         for future in as_completed(futures):
             done += 1
@@ -642,16 +655,33 @@ def main() -> None:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
     allowlist = json.loads(TRANSFER_FILE.read_text(encoding="utf-8"))
+    configure_airports_from_allowlist(allowlist)
     transfers = [airport["iata"] for airport in allowlist["airports"]]
+    transfer_rules = {
+        airport["iata"]: airport for airport in allowlist["airports"]
+    }
+    wizz_schedules = wizz_schedules_from_allowlist(allowlist)
 
     eur = nbp_eur_rate(args.from_date)
     rates = {"EUR": eur, "PLN": CurrencyRate("PLN", 1.0)}
     print(f"NBP EUR: {eur.pln:.4f} PLN", flush=True)
-    low_cost_legs = collect_low_cost_legs(transfers, args.from_date, end, rates, args.workers)
+    low_cost_legs = collect_low_cost_legs(
+        transfers,
+        args.from_date,
+        end,
+        rates,
+        args.workers,
+        wizz_schedules,
+    )
     print(f"Odcinki Ryanair/Wizz Air: {len(low_cost_legs)}", flush=True)
     candidates = candidate_binter_trips(low_cost_legs, args.from_date, end)
     print(f"Zapytania Binter do sprawdzenia: {len(candidates)}", flush=True)
-    binter_legs = collect_binter_legs(candidates, rates, args.workers)
+    binter_legs = collect_binter_legs(
+        candidates,
+        rates,
+        args.workers,
+        transfer_rules,
+    )
     print(f"Odcinki Binter: {len(binter_legs)}", flush=True)
     results = build_connections(low_cost_legs, binter_legs)
 

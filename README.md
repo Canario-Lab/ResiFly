@@ -33,6 +33,15 @@ Generatory same zapisują `data/step1-results.json`, `data/step2-results.json`,
 `data/step5-results.json`; plików wynikowych nie
 należy poprawiać ręcznie.
 
+## Dodawanie nowych lotnisk przesiadkowych
+
+Kolektory są sterowane plikami danych, a nie wpisanymi na stałe lotniskami w
+kodzie. Nowe lotnisko dodaje się do właściwej listy w `data/` razem ze strefą
+czasową i regułą zniżki. Krok 1 przechowuje potrzebne dane tras Wizz Air w
+`data/binter-transfer-airports.json`; kroki 4 i 5 korzystają ze wspólnego
+rejestru `data/wizz-route-schedules.json`. Po uzupełnieniu tych danych nie
+trzeba zmieniać kodu kolektora.
+
 ## Linki do zakupu Wizz Air
 
 Każdy odcinek Wizz Air zapisywany w wynikowym JSON-ie musi zawierać pole

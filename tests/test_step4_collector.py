@@ -1,6 +1,12 @@
 import unittest
 
-from scripts.collect_step4 import build_connections, route_matrix, validate_document
+from scripts.collect_step4 import (
+    WIZZ_FLIGHT_NUMBERS_BY_TIME,
+    WIZZ_ROUTE_SCHEDULES,
+    build_connections,
+    route_matrix,
+    validate_document,
+)
 
 
 def leg(number, origin, departure, destination, arrival, regular, club):
@@ -43,6 +49,13 @@ def allowlist():
 
 
 class Step4CollectorTests(unittest.TestCase):
+    def test_wizz_schedule_metadata_is_loaded_from_json(self):
+        self.assertEqual(WIZZ_ROUTE_SCHEDULES[("TFS", "BUD")], ("W62494", 305))
+        self.assertEqual(
+            WIZZ_FLIGHT_NUMBERS_BY_TIME[("WAW", "CRL", "17:30")],
+            "W61383",
+        )
+
     def test_route_matrix_comes_only_from_allowlist(self):
         routes = route_matrix(allowlist())
         self.assertEqual(len(routes), 8)

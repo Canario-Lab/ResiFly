@@ -28,13 +28,15 @@ from scripts.collect_step1 import (
     MIN_LAYOVER_MINUTES,
     CurrencyRate,
     POLISH_AIRPORTS,
+    TRANSFER_FILE as STEP1_TRANSFER_FILE,
     TENERIFE_AIRPORTS,
-    WIZZ_ROUTE_SCHEDULE as STEP1_WIZZ_ROUTE_SCHEDULE,
+    configure_airports_from_allowlist,
     dt,
     local_datetime,
     money_pln,
     nbp_rate,
     serialize_datetime,
+    wizz_schedules_from_allowlist,
 )
 from scripts.collect_step2 import wizz_timetable
 
@@ -43,126 +45,41 @@ ROOT = Path(__file__).resolve().parents[1]
 TRANSFER_FILE = ROOT / "data" / "wizzair-transfer-airports.json"
 DEFAULT_OUTPUT = ROOT / "data" / "step4-results.json"
 SOURCE_CURRENCIES = ("EUR", "HUF", "PLN", "RON")
+STEP1_ALLOWLIST = json.loads(STEP1_TRANSFER_FILE.read_text(encoding="utf-8"))
 
-# Wizz's public timetable price endpoint exposes the departure time and fare,
-# but not the flight number or arrival time. The route map below completes the
-# official response with published flight identifiers and block times. If a
-# newly active allowlisted route has no verified schedule, collection fails
-# loudly instead of inventing a flight number or an arrival time.
+WIZZ_ROUTE_FILE = ROOT / "data" / "wizz-route-schedules.json"
+
+
+def load_wizz_route_data(
+    path: Path = WIZZ_ROUTE_FILE,
+) -> tuple[
+    dict[tuple[str, str], tuple[str, int]],
+    dict[tuple[str, str, str], str],
+]:
+    document = json.loads(path.read_text(encoding="utf-8"))
+    schedules: dict[tuple[str, str], tuple[str, int]] = {}
+    for route in document["routes"]:
+        key = (route["origin"], route["destination"])
+        if key in schedules:
+            raise RuntimeError(f"Duplicate Wizz route schedule: {key}")
+        duration = int(route["duration_minutes"])
+        if duration <= 0:
+            raise RuntimeError(f"Invalid Wizz route duration: {key}")
+        schedules[key] = (route["flight_number"], duration)
+
+    overrides: dict[tuple[str, str, str], str] = {}
+    for item in document.get("flight_number_overrides_by_departure_time", []):
+        key = (item["origin"], item["destination"], item["departure_time"])
+        if key in overrides:
+            raise RuntimeError(f"Duplicate Wizz flight-number override: {key}")
+        overrides[key] = item["flight_number"]
+    return schedules, overrides
+
+
+_SHARED_WIZZ_SCHEDULES, WIZZ_FLIGHT_NUMBERS_BY_TIME = load_wizz_route_data()
 WIZZ_ROUTE_SCHEDULES: dict[tuple[str, str], tuple[str, int]] = {
-    **STEP1_WIZZ_ROUTE_SCHEDULE,
-    ("AGA", "KTW"): ("W61078", 285),
-    ("KTW", "AGA"): ("W61077", 235),
-    ("AGA", "WAW"): ("W61600", 300),
-    ("WAW", "AGA"): ("W61599", 260),
-    ("AGP", "KRK"): ("W62074", 220),
-    ("KRK", "AGP"): ("W62073", 235),
-    ("AGP", "KTW"): ("W61074", 220),
-    ("KTW", "AGP"): ("W61073", 230),
-    ("AGP", "WAW"): ("W61360", 230),
-    ("WAW", "AGP"): ("W61359", 250),
-    ("BGY", "WMI"): ("W61402", 115),
-    ("WMI", "BGY"): ("W61401", 125),
-    ("BGY", "WAW"): ("W61432", 120),
-    ("WAW", "BGY"): ("W61431", 125),
-    ("BLQ", "WAW"): ("W61466", 120),
-    ("WAW", "BLQ"): ("W61465", 125),
-    ("BBU", "KRK"): ("W62058", 105),
-    ("KRK", "BBU"): ("W62057", 100),
-    ("BBU", "WAW"): ("W61584", 110),
-    ("WAW", "BBU"): ("W61583", 105),
-    ("BUD", "KRK"): ("W62419", 75),
-    ("KRK", "BUD"): ("W62420", 70),
-    ("BUD", "TFS"): ("W62493", 340),
-    ("TFS", "BUD"): ("W62494", 305),
-    ("BUD", "WAW"): ("W62467", 75),
-    ("WAW", "BUD"): ("W62468", 80),
-    ("CRL", "WAW"): ("W61382", 120),
-    ("WAW", "CRL"): ("W61381", 130),
-    ("EIN", "KRK"): ("W62076", 110),
-    ("KRK", "EIN"): ("W62075", 120),
-    ("EIN", "KTW"): ("W61072", 105),
-    ("KTW", "EIN"): ("W61071", 115),
-    ("EIN", "WAW"): ("W61372", 110),
-    ("WAW", "EIN"): ("W61371", 125),
-    ("FCO", "KRK"): ("W62062", 130),
-    ("KRK", "FCO"): ("W62061", 125),
-    ("FCO", "KTW"): ("W61046", 130),
-    ("KTW", "FCO"): ("W61045", 130),
-    ("FCO", "TFS"): ("W46035", 285),
-    ("TFS", "FCO"): ("W46036", 270),
-    ("FCO", "WAW"): ("W61442", 160),
-    ("WAW", "FCO"): ("W61441", 150),
-    ("GDN", "TFS"): ("W61709", 365),
-    ("TFS", "GDN"): ("W61710", 330),
-    ("KTW", "LTN"): ("W61001", 150),
-    ("LTN", "KTW"): ("W61002", 140),
-    ("KTW", "NAP"): ("W61049", 130),
-    ("NAP", "KTW"): ("W61050", 130),
-    ("KTW", "OPO"): ("W61085", 225),
-    ("OPO", "KTW"): ("W61086", 205),
-    ("LBA", "WAW"): ("W61316", 150),
-    ("WAW", "LBA"): ("W61315", 160),
-    ("LPL", "WAW"): ("W61312", 155),
-    ("WAW", "LPL"): ("W61311", 170),
-    ("KRK", "LTN"): ("W62001", 160),
-    ("LTN", "KRK"): ("W62002", 145),
-    ("LTN", "WAW"): ("W61302", 145),
-    ("WAW", "LTN"): ("W61301", 160),
-    ("KRK", "MXP"): ("W62067", 115),
-    ("MXP", "KRK"): ("W62068", 110),
-    ("MXP", "TFS"): ("W46323", 285),
-    ("TFS", "MXP"): ("W46324", 260),
-    ("MXP", "WAW"): ("W46387", 135),
-    ("WAW", "MXP"): ("W46388", 135),
-    ("NAP", "WAW"): ("W61458", 130),
-    ("WAW", "NAP"): ("W61457", 145),
-    ("OPO", "WAW"): ("W61596", 220),
-    ("WAW", "OPO"): ("W61595", 245),
-    ("OTP", "TFS"): ("W43021", 375),
-    ("TFS", "OTP"): ("W43022", 330),
-    ("SCQ", "TFN"): ("W47465", 160),
-    ("TFN", "SCQ"): ("W47466", 175),
-    ("SCQ", "WMI"): ("W61408", 220),
-    ("WMI", "SCQ"): ("W61407", 230),
-    ("PSA", "WAW"): ("W61468", 130),
-    ("WAW", "PSA"): ("W61467", 135),
-    ("RAK", "WAW"): ("W61598", 285),
-    ("WAW", "RAK"): ("W61597", 245),
-}
-
-# Some routes have more than one Wizz flight number. The timetable API still
-# identifies the departure time, which is enough to choose the published
-# service deterministically for the current schedule.
-WIZZ_FLIGHT_NUMBERS_BY_TIME: dict[tuple[str, str, str], str] = {
-    ("BGY", "WAW", "20:30"): "W61434",
-    ("BGY", "WAW", "20:40"): "W61434",
-    ("BGY", "WAW", "20:50"): "W61434",
-    ("BGY", "WAW", "20:55"): "W61434",
-    ("BGY", "WAW", "21:00"): "W61434",
-    ("WAW", "BGY", "17:45"): "W61433",
-    ("WAW", "BGY", "18:00"): "W61433",
-    ("BUD", "WAW", "20:25"): "W62469",
-    ("WAW", "BUD", "22:05"): "W62470",
-    ("WAW", "CRL", "17:30"): "W61383",
-    ("WAW", "CRL", "17:50"): "W61383",
-    ("FCO", "KRK", "05:30"): "W42032",
-    ("FCO", "KRK", "05:40"): "W42032",
-    ("FCO", "KRK", "16:15"): "W62032",
-    ("KRK", "FCO", "08:15"): "W42031",
-    ("KRK", "FCO", "08:25"): "W42031",
-    ("KRK", "FCO", "08:55"): "W42031",
-    ("KRK", "FCO", "13:30"): "W62031",
-    ("FCO", "WAW", "18:20"): "W41446",
-    ("FCO", "WAW", "18:25"): "W41446",
-    ("FCO", "WAW", "18:30"): "W41446",
-    ("FCO", "WAW", "20:35"): "W61446",
-    ("WAW", "FCO", "21:20"): "W41445",
-    ("WAW", "FCO", "21:25"): "W41445",
-    ("WAW", "FCO", "21:30"): "W41445",
-    ("MXP", "WAW", "21:05"): "W66389",
-    ("WAW", "MXP", "13:30"): "W66390",
-    ("WAW", "MXP", "18:15"): "W66390",
+    **wizz_schedules_from_allowlist(STEP1_ALLOWLIST),
+    **_SHARED_WIZZ_SCHEDULES,
 }
 
 
@@ -455,6 +372,7 @@ def main() -> None:
 
     end = args.from_date + timedelta(days=args.days)
     allowlist = load_allowlist()
+    configure_airports_from_allowlist(allowlist)
     routes = route_matrix(allowlist)
     rates = {code: nbp_rate(code, args.from_date) for code in SOURCE_CURRENCIES}
     print(
