@@ -702,12 +702,28 @@ function purchaseLegPriceRows(leg, filters) {
   }];
 }
 
-function bookingUrlForFilters(leg, filters) {
+function isSafariBrowser(userAgent = navigator.userAgent) {
+  return /Safari\//.test(userAgent)
+    && !/(Chrome|Chromium|CriOS|Edg|EdgiOS|OPR|FxiOS|Android)\//.test(userAgent);
+}
+
+function airEuropaSafariUrl(leg) {
+  const url = new URL(carrierPurchaseUrls["Air Europa"]);
+  url.searchParams.set("from", leg.departure_airport);
+  url.searchParams.set("to", leg.arrival_airport);
+  return url.toString();
+}
+
+function bookingUrlForFilters(leg, filters, userAgent = navigator.userAgent) {
   const fallback = carrierPurchaseUrls[leg.carrier] || "#";
   const rawUrl = leg.booking_url || fallback;
   if (!leg.booking_url || !["Vueling", "Air Europa"].includes(leg.carrier)) return rawUrl;
 
   try {
+    if (leg.carrier === "Air Europa" && isSafariBrowser(userAgent)) {
+      return airEuropaSafariUrl(leg);
+    }
+
     const url = new URL(rawUrl, window.location.href);
     const useResidentDiscount = filters.resident && leg.resident_discount_eligible;
     if (leg.carrier === "Vueling") {
@@ -722,6 +738,18 @@ function bookingUrlForFilters(leg, filters) {
     console.warn(`Nie udało się dopasować linku ${leg.carrier} do filtra rezydenta`, error);
     return fallback;
   }
+}
+
+function airEuropaSafariNotice(leg, filters) {
+  if (leg.carrier !== "Air Europa" || !isSafariBrowser()) return null;
+
+  const notice = document.createElement("p");
+  notice.className = "purchase-step-browser-note";
+  const departureDate = datePart(leg.departure_at).split("-").reverse().join(".");
+  const useResidentDiscount = filters.resident && leg.resident_discount_eligible;
+  const residentChoice = useResidentDiscount ? "„Residente Canarias”" : "„No residente”";
+  notice.textContent = `Air Europa blokuje w Safari bezpośrednie przejście do wyników. Po otwarciu wybierz „Solo ida”, datę ${departureDate} i ${residentChoice}. Trasa ${leg.departure_airport}–${leg.arrival_airport} będzie już wpisana.`;
+  return notice;
 }
 
 function createPurchaseStep(leg, index, filters) {
@@ -785,7 +813,9 @@ function createPurchaseStep(leg, index, filters) {
   openLink.href = bookingUrlForFilters(leg, filters);
   openLink.target = "_blank";
   openLink.rel = "noopener noreferrer";
-  openLink.textContent = `Otwórz ${leg.carrier}`;
+  openLink.textContent = leg.carrier === "Air Europa" && isSafariBrowser()
+    ? "Otwórz formularz Air Europa"
+    : `Otwórz ${leg.carrier}`;
   if (!leg.booking_url && !carrierPurchaseUrls[leg.carrier]) {
     openLink.hidden = true;
   }
@@ -798,7 +828,10 @@ function createPurchaseStep(leg, index, filters) {
   kiwiLink.textContent = "Sprawdź na Kiwi.com";
 
   actions.append(openLink, kiwiLink);
-  step.append(heading, route, timing, flightNumber, price, actions);
+  const safariNotice = airEuropaSafariNotice(leg, filters);
+  step.append(heading, route, timing, flightNumber, price);
+  if (safariNotice) step.append(safariNotice);
+  step.append(actions);
   return step;
 }
 

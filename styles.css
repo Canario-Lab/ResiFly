@@ -1195,6 +1195,16 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 500;
 }
 
+.purchase-step-browser-note {
+  margin: 13px 0 0;
+  padding: 11px 12px;
+  color: #66551d;
+  border-radius: 10px;
+  background: var(--yellow-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
 .purchase-step-actions {
   display: grid;
   gap: 8px;

@@ -96,7 +96,11 @@ Odcinki Air Europa otrzymują oficjalny deeplink przewoźnika z trasą, datą,
 liczbą pasażerów i kodem rezydenta `SPANISH_RESIDENT_RC`, zwracanym przez
 publiczny endpoint Air Europa dla zapisanych tras. Strona ResiFly dodaje go
 tylko wtedy, gdy filtr rezydenta jest zaznaczony, i usuwa go dla ceny
-regularnej. Link nie zawiera klucza feedu, tokenu ani danych sesji.
+regularnej. Link nie zawiera klucza feedu, tokenu ani danych sesji. Ponieważ
+deeplink Air Europa może zatrzymywać się na ekranie ładowania w Safari,
+ResiFly otwiera tam działający formularz przewoźnika z wypełnioną trasą i
+pokazuje obok biletu dokładną datę oraz właściwy wybór rezydenta. W pozostałych
+przeglądarkach nadal używany jest bezpośredni deeplink do wyników.
 
 Linki Ryanair są generowane analogicznie i prowadzą bezpośrednio do oficjalnego
 ekranu wyboru lotu Ryanaira z ustawioną trasą i dokładnym dniem. Istniejące
