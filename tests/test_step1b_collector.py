@@ -2,11 +2,10 @@ import json
 from pathlib import Path
 import unittest
 
-from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
+from scripts.collect_step1 import configure_airports_from_allowlist
 from scripts.collect_step1b import (
-    apply_resident_prices,
     build_connections,
-    parse_iberia_response,
+    parse_google_flights_response,
     validate_allowlist,
     validate_document,
 )
@@ -66,63 +65,48 @@ class Step1BCollectorTests(unittest.TestCase):
         self.assertEqual(airport["iberia_resident_fare_multiplier"], 0.25)
         self.assertEqual(set(airport["tenerife_airports"]), {"TFN", "TFS"})
 
-    def test_parses_direct_iberia_express_flight(self):
-        payload = {
-            "contextMetadata": {"currencies": [{"code": "EUR"}]},
-            "originDestinations": [{
-                "slices": [{
-                    "price": {"total": 100.0, "currency": "EUR"},
-                    "segments": [{
-                        "departure": {"code": "TFN"},
-                        "arrival": {"code": "MAD"},
-                        "departureDateTime": "2026-11-03 10:00:00",
-                        "arrivalDateTime": "2026-11-03 13:45:00",
-                        "flight": {
-                            "marketingCarrier": {"code": "IB"},
-                            "operationalCarrier": {
-                                "code": "I2",
-                                "name": "Iberia Express",
-                            },
-                            "marketingFlightNumber": "1574",
-                        },
-                    }],
-                }],
-            }],
-        }
-        legs = parse_iberia_response(
-            payload,
+    @staticmethod
+    def google_html(*offers):
+        payload = [None] * 8
+        payload[3] = [list(offers)]
+        return (
+            '<html><script class="ds:1">AF_initDataCallback({data:'
+            + json.dumps(payload)
+            + ', sideChannel: {}});</script></html>'
+        )
+
+    @staticmethod
+    def google_offer(code, number, carrier, price):
+        segment = [None] * 23
+        segment[2] = carrier if code == "IB" else None
+        segment[3] = "TFN"
+        segment[6] = "MAD"
+        segment[8] = [10, 0]
+        segment[10] = [13, 45]
+        segment[20] = [2026, 11, 3]
+        segment[21] = [2026, 11, 3]
+        segment[22] = [code, number, None, carrier]
+        return [[code, [carrier], [segment]], [[None, price]]]
+
+    def test_parses_cheapest_direct_iberia_offer_and_applies_multiplier(self):
+        html = self.google_html(
+            self.google_offer("IB", "1574", "Iberia", 450),
+            self.google_offer("I2", "1574", "Iberia Express", 430),
+        )
+        legs = parse_google_flights_response(
+            html,
             "TFN",
             "MAD",
-            {"EUR": CurrencyRate("EUR", 4.3)},
+            0.25,
             {"IB", "I2"},
-            {"IB", "I2", "YW"},
         )
         self.assertEqual(len(legs), 1)
         self.assertEqual(legs[0]["carrier"], "Iberia Express")
-        self.assertEqual(legs[0]["flight_number"], "IB1574")
+        self.assertEqual(legs[0]["flight_number"], "I21574")
         self.assertEqual(legs[0]["price_regular_pln"], 430.0)
+        self.assertEqual(legs[0]["price_resident_estimated_pln"], 107.5)
+        self.assertEqual(legs[0]["price_source"], "Google Flights")
         self.assertIn("residentCode=RC", legs[0]["booking_url"])
-
-    def test_prefers_real_resident_price_and_has_multiplier_fallback(self):
-        regular = [iberia_leg(
-            "TFN",
-            "2026-11-03T10:00:00+00:00",
-            "MAD",
-            "2026-11-03T13:45:00+01:00",
-            regular=800.0,
-            resident=800.0,
-        )]
-        actual = [dict(regular[0], price_regular_pln=180.0)]
-        merged = apply_resident_prices(regular, actual, 0.25)
-        self.assertEqual(merged[0]["price_resident_estimated_pln"], 180.0)
-        self.assertIn("CANARIAS", merged[0]["resident_price_source"])
-
-        fallback = apply_resident_prices(regular, [], 0.25)
-        self.assertEqual(fallback[0]["price_resident_estimated_pln"], 200.0)
-        self.assertEqual(
-            fallback[0]["resident_price_source"],
-            "estimated from configured multiplier",
-        )
 
     def test_builds_both_directions_without_price_limit(self):
         tenerife_to_madrid = iberia_leg(

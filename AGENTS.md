@@ -33,8 +33,11 @@
 - Read airport codes, time zones, discount eligibility, multiplier and Wizz
   route metadata from that allowlist. Do not rediscover or hard-code transfer
   airports during a regular price collection.
-- Prefer the actual Iberia fare returned with the `CANARIAS` resident discount.
-  Use the configured `0.25` multiplier only as an explicitly labelled fallback.
+- Read the regular Iberia/Iberia Express fare in PLN from Google Flights by
+  HTTP, without launching a real browser. Calculate the resident estimate with
+  the allowlist's configured `0.25` multiplier and label it as an estimate.
+- If Google Flights does not return usable Iberia data, fail before overwriting
+  the previous `data/step1b-results.json` file. Never invent prices.
 - Never persist Iberia access tokens, cookies, browser-session URLs or other
   temporary parameters. Every Iberia/Iberia Express leg must instead receive a
   deterministic `booking_url` from `scripts.booking_urls.iberia_booking_url`.

@@ -3,27 +3,27 @@
 
 The collector reads a fixed transfer-airport allowlist, checks both travel
 directions and keeps every valid 2–24 hour self-transfer. Price filtering is
-left to the website. Iberia's short-lived anonymous access token is discovered
-from the current public web application, used only in memory and never written
-to a result file.
+left to the website. Regular Iberia prices come from Google Flights and the
+resident estimate is calculated explicitly from the configured 25% multiplier.
+No real browser, browser session or Iberia access token is required.
 """
 
 from __future__ import annotations
 
 import argparse
-import copy
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 import hashlib
 import json
 from pathlib import Path
-import re
 import sys
 import time as time_module
-from typing import Any, Iterable
-from urllib.parse import urljoin
+from typing import Any
 from zoneinfo import ZoneInfo
 
 from curl_cffi import requests
+from fast_flights import FlightData, Passengers, create_filter
+from selectolax.lexbor import LexborHTMLParser
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -40,8 +40,6 @@ from scripts.collect_step1 import (
     collect_low_cost_legs,
     configure_airports_from_allowlist,
     dt,
-    local_datetime,
-    money_pln,
     nbp_eur_rate,
     serialize_datetime,
     wizz_schedules_from_allowlist,
@@ -52,12 +50,13 @@ ROOT = Path(__file__).resolve().parents[1]
 TRANSFER_FILE = ROOT / "data" / "iberia-transfer-airports.json"
 DEFAULT_OUTPUT = ROOT / "data" / "step1b-results.json"
 
-IBERIA_WEB_ENTRY = "https://www.iberia.com/flights/"
-ENV_SCRIPT_PATTERN = re.compile(r"(?:src=[\"']|\b)(env-[\w.-]+\.js)")
-ENV_VALUE_PATTERN = re.compile(
-    r"window\.env\.(?P<name>[A-Za-z0-9_]+)\s*=\s*['\"](?P<value>[^'\"]+)['\"]"
-)
-APP_VERSION_PATTERN = re.compile(r"web-booking-main-([\w-]+)\.js")
+GOOGLE_FLIGHTS_URL = "https://www.google.com/travel/flights"
+GOOGLE_CONSENT_COOKIES = {
+    "CONSENT": "YES+",
+    # A non-personalized/reject-all consent state. It prevents the European
+    # consent interstitial from replacing the flight results HTML.
+    "SOCS": "CAESEwgDEgk0ODE3Nzk3MjQaAmVuIAEaBgiA_LyaBg",
+}
 
 
 def cli() -> argparse.Namespace:
@@ -74,245 +73,158 @@ def cli() -> argparse.Namespace:
     return parser.parse_args()
 
 
-class IberiaWebClient:
-    """Small client for the public search API used by iberia.com.
-
-    Endpoint addresses and the anonymous web-client credential are read from
-    Iberia's current ``env-*.js`` file. The resulting bearer token is kept only
-    on this object and expires shortly after the collection.
-    """
+class GoogleFlightsClient:
+    """HTTP-only Google Flights client used for regular Iberia fares."""
 
     def __init__(self) -> None:
         self.session = requests.Session(impersonate="chrome")
-        self.services_url = ""
-        self.app_version = ""
-        self.access_token = ""
-        self._bootstrap()
 
-    @staticmethod
-    def _browser_headers() -> dict[str, str]:
-        return {
-            "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-            "Origin": "https://www.iberia.com",
-            "Referer": IBERIA_WEB_ENTRY,
-        }
-
-    def _request(self, method: str, url: str, **kwargs: Any) -> Any:
+    def _request(self, params: dict[str, str]) -> str:
         last_error: Exception | None = None
         for attempt in range(4):
             try:
-                response = self.session.request(method, url, timeout=60, **kwargs)
+                response = self.session.get(
+                    GOOGLE_FLIGHTS_URL,
+                    params=params,
+                    cookies=GOOGLE_CONSENT_COOKIES,
+                    headers={"Accept-Language": "pl-PL,pl;q=0.9,en;q=0.8"},
+                    timeout=60,
+                )
                 response.raise_for_status()
-                return response
+                if "Before you continue to Google" in response.text:
+                    raise RuntimeError("Google zwrócił ekran zgody zamiast wyników")
+                return response.text
             except Exception as error:
                 last_error = error
                 if attempt + 1 < 4:
                     time_module.sleep(1.5 * (attempt + 1))
         raise RuntimeError(
-            "Iberia odrzuciła zapytanie do swojej publicznej wyszukiwarki. "
+            "Google Flights nie zwrócił wyników dla zapytania Iberii. "
             "Poprzedni plik wynikowy nie został nadpisany."
         ) from last_error
-
-    def _bootstrap(self) -> None:
-        page = self._request(
-            "GET",
-            IBERIA_WEB_ENTRY,
-            headers=self._browser_headers(),
-        ).text
-        env_match = ENV_SCRIPT_PATTERN.search(page)
-        if not env_match:
-            raise RuntimeError("Nie znaleziono aktualnego pliku env wyszukiwarki Iberii")
-        env_url = urljoin(IBERIA_WEB_ENTRY, env_match.group(1))
-        env_text = self._request(
-            "GET",
-            env_url,
-            headers=self._browser_headers(),
-        ).text
-        env = {
-            match.group("name"): match.group("value")
-            for match in ENV_VALUE_PATTERN.finditer(env_text)
-        }
-        required = {"services", "auth", "globalAuthorizationToken"}
-        if not required <= env.keys():
-            raise RuntimeError(
-                f"Plik env Iberii nie zawiera pól: {sorted(required - env.keys())}"
-            )
-
-        version_match = APP_VERSION_PATTERN.search(page)
-        self.app_version = (
-            version_match.group(1).replace("-", ".") if version_match else "unknown"
-        )
-        token_url = (
-            env["auth"].rstrip("/")
-            + "/auth/realms/commercial_platform/protocol/openid-connect/token"
-        )
-        token_response = self._request(
-            "POST",
-            token_url,
-            headers={
-                **self._browser_headers(),
-                "Authorization": env["globalAuthorizationToken"],
-                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-            },
-            data="grant_type=client_credentials",
-        ).json()
-        self.access_token = str(token_response.get("access_token") or "")
-        if not self.access_token:
-            raise RuntimeError("Iberia nie zwróciła anonimowego tokenu wyszukiwarki")
-        self.services_url = env["services"].rstrip("/")
 
     def availability(
         self,
         origin: str,
         destination: str,
         departure_date: date,
-        *,
-        canary_resident: bool,
-    ) -> dict[str, Any]:
-        payload: dict[str, Any] = {
-            "isPetFlight": False,
-            "slices": [{
-                "origin": origin,
-                "destination": destination,
-                "date": departure_date.isoformat(),
-            }],
-            "passengers": [{"passengerType": "ADULT", "count": 1}],
-            "marketCode": "ES",
-            "preferredCabin": "ECONOMY",
-        }
-        if canary_resident:
-            payload["specialDiscounts"] = [
-                {"type": "RES", "discountType": "CANARIAS"}
-            ]
-        headers = {
-            **self._browser_headers(),
-            "Authorization": f"Bearer {self.access_token}",
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Cache-Control": "no-cache",
-            "Pragma": "no-cache",
-            "X-Request-AppVersion": self.app_version,
-            "X-Request-OsVersion": "Mac OS|10.15.7",
-            "X-Request-Device": "desktop|Chrome|141.0.0.0",
-            "X-Observations-Origin-Page": "home",
-            "X-Observations-Current-Page": "availability",
-        }
-        response = self._request(
-            "POST",
-            f"{self.services_url}/sse-avm/rs/v2/availability",
-            headers=headers,
-            json=payload,
-        ).json()
-        if isinstance(response.get("data"), dict):
-            return response["data"]
-        return response
+    ) -> str:
+        query = create_filter(
+            flight_data=[
+                FlightData(
+                    date=departure_date.isoformat(),
+                    from_airport=origin,
+                    to_airport=destination,
+                )
+            ],
+            trip="one-way",
+            passengers=Passengers(adults=1),
+            seat="economy",
+            max_stops=0,
+        )
+        return self._request({
+            "tfs": query.as_b64().decode("utf-8"),
+            "hl": "pl",
+            "gl": "US",
+            "tfu": "EgQIABABIgA",
+            "curr": "PLN",
+        })
 
 
-def _place_code(place: Any) -> str:
-    if not isinstance(place, dict):
-        return ""
-    return str(
-        place.get("code")
-        or (place.get("airport") or {}).get("code")
-        or place.get("iata")
-        or ""
-    ).upper()
+def _at(value: Any, index: int, default: Any = None) -> Any:
+    return value[index] if isinstance(value, list) and len(value) > index else default
 
 
-def _price_amount(price: Any) -> float | None:
-    if isinstance(price, (int, float)):
-        return float(price)
-    if not isinstance(price, dict):
-        return None
-    for key in ("total", "fare", "amount", "value"):
-        value = price.get(key)
-        if isinstance(value, (int, float)) and float(value) > 0:
-            return float(value)
-    return None
+def _google_datetime(date_parts: Any, time_parts: Any, airport: str) -> datetime:
+    if not isinstance(date_parts, list) or len(date_parts) < 3:
+        raise ValueError("Google Flights nie zwrócił pełnej daty lotu")
+    hour = int(_at(time_parts, 0, 0) or 0)
+    minute = int(_at(time_parts, 1, 0) or 0)
+    return datetime(
+        int(date_parts[0]),
+        int(date_parts[1]),
+        int(date_parts[2]),
+        hour,
+        minute,
+        tzinfo=ZoneInfo(AIRPORT_TIMEZONES[airport]),
+    )
 
 
-def _currency_code(payload: dict[str, Any], price: Any) -> str:
-    if isinstance(price, dict):
-        currency = price.get("currency") or price.get("currencyCode")
-        if isinstance(currency, dict):
-            currency = currency.get("code")
-        if currency:
-            return str(currency).upper()
-    currencies = (payload.get("contextMetadata") or {}).get("currencies") or []
-    if currencies:
-        currency = currencies[0]
-        if isinstance(currency, dict):
-            currency = currency.get("code")
-        if currency:
-            return str(currency).upper()
-    return "EUR"
+def _google_flights_payload(html: str) -> list[Any]:
+    parser = LexborHTMLParser(html)
+    script = next(
+        (
+            node
+            for node in parser.css("script")
+            if "ds:1" in (node.attributes.get("class") or "").split()
+        ),
+        None,
+    )
+    if script is None:
+        raise RuntimeError("Google Flights nie zwrócił danych lotów")
+    text = script.text()
+    if "data:" not in text:
+        raise RuntimeError("Nieznany format odpowiedzi Google Flights")
+    raw = text.split("data:", 1)[1].rsplit(",", 1)[0]
+    payload = json.loads(raw)
+    try:
+        return payload[3][0] or []
+    except (IndexError, TypeError):
+        raise RuntimeError("Nieznana struktura wyników Google Flights")
 
 
-def _iter_priced_slices(payload: dict[str, Any]) -> Iterable[tuple[dict[str, Any], Any]]:
-    for destination in payload.get("originDestinations") or []:
-        for slice_data in destination.get("slices") or []:
-            yield slice_data, slice_data.get("price")
-    for offer in payload.get("offers") or []:
-        offer_price = offer.get("price")
-        for slice_data in offer.get("slices") or []:
-            yield slice_data, slice_data.get("price") or offer_price
-
-
-def parse_iberia_response(
-    payload: dict[str, Any],
+def parse_google_flights_response(
+    html: str,
     origin: str,
     destination: str,
-    rates: dict[str, CurrencyRate],
+    multiplier: float,
     accepted_marketing: set[str],
-    accepted_operating: set[str],
 ) -> list[dict[str, Any]]:
-    """Transform direct Iberia-group flights from an availability response."""
+    """Transform direct Iberia-group offers from Google Flights HTML."""
 
     best_by_flight: dict[tuple[str, str, str], dict[str, Any]] = {}
-    for slice_data, price_data in _iter_priced_slices(payload):
-        segments = slice_data.get("segments") or []
+    for offer in _google_flights_payload(html):
+        flight_group = _at(offer, 0, [])
+        segments = _at(flight_group, 2, [])
         if len(segments) != 1:
             continue
         segment = segments[0]
-        if _place_code(segment.get("departure")) != origin:
+        if str(_at(segment, 3, "")).upper() != origin:
             continue
-        if _place_code(segment.get("arrival")) != destination:
+        if str(_at(segment, 6, "")).upper() != destination:
             continue
-        flight = segment.get("flight") or {}
-        marketing = flight.get("marketingCarrier") or {}
-        operating = flight.get("operationalCarrier") or {}
-        marketing_code = str(
-            marketing.get("code") or flight.get("operationalDisclosure") or ""
-        ).upper()
-        operating_code = str(operating.get("code") or marketing_code).upper()
+
+        flight = _at(segment, 22, [])
+        marketing_code = str(_at(flight, 0, "")).upper()
         if marketing_code not in accepted_marketing:
             continue
-        if operating_code and operating_code not in accepted_operating:
-            continue
-        amount = _price_amount(price_data)
-        if amount is None:
-            continue
-        currency = _currency_code(payload, price_data)
-        if currency not in rates:
-            continue
-        raw_number = str(
-            flight.get("marketingFlightNumber")
-            or flight.get("flightNumber")
-            or segment.get("flightNumber")
-            or ""
-        ).strip()
+
+        raw_number = str(_at(flight, 1, "")).strip()
         if not raw_number:
             continue
-        number = raw_number if raw_number.upper().startswith(marketing_code) else f"{marketing_code}{raw_number}"
-        departure = local_datetime(segment["departureDateTime"], origin)
-        arrival = local_datetime(segment["arrivalDateTime"], destination)
-        operating_name = str(operating.get("name") or "")
+        price_block = _at(_at(offer, 1, []), 0, [])
+        amount = _at(price_block, 1)
+        if not isinstance(amount, (int, float)) or float(amount) <= 0:
+            continue
+
+        try:
+            departure = _google_datetime(_at(segment, 20), _at(segment, 8), origin)
+            arrival = _google_datetime(_at(segment, 21), _at(segment, 10), destination)
+        except (TypeError, ValueError):
+            continue
+
+        number = (
+            raw_number
+            if raw_number.upper().startswith(marketing_code)
+            else f"{marketing_code}{raw_number}"
+        )
+        operating_name = str(_at(segment, 2, "") or _at(flight, 3, ""))
         carrier = (
             "Iberia Express"
-            if operating_code == "I2" or "express" in operating_name.lower()
+            if marketing_code == "I2" or "express" in operating_name.lower()
             else "Iberia"
         )
-        regular_pln = money_pln(amount, currency, rates)
+        regular_pln = round(float(amount), 2)
         leg = {
             "carrier": carrier,
             "flight_number": number,
@@ -322,101 +234,55 @@ def parse_iberia_response(
             "arrival_at": serialize_datetime(arrival),
             "price_regular_pln": regular_pln,
             "resident_discount_eligible": True,
-            "resident_fare_multiplier": 0.25,
-            "price_resident_estimated_pln": regular_pln,
+            "resident_fare_multiplier": multiplier,
+            "price_resident_estimated_pln": round(regular_pln * multiplier, 2),
+            "resident_price_source": (
+                "estimated as configured percentage of Google Flights regular fare"
+            ),
             "booking_url": iberia_booking_url(origin, destination, departure),
-            "price_source_currency": currency,
+            "price_source": "Google Flights",
+            "price_source_currency": "PLN",
             "price_source_amount": amount,
         }
-        key = (number, leg["departure_at"], leg["arrival_at"])
+        numeric_flight = "".join(character for character in raw_number if character.isdigit())
+        key = (numeric_flight or raw_number, leg["departure_at"], leg["arrival_at"])
         previous = best_by_flight.get(key)
         if previous is None or regular_pln < previous["price_regular_pln"]:
             best_by_flight[key] = leg
     return sorted(best_by_flight.values(), key=lambda leg: leg["departure_at"])
 
 
-def apply_resident_prices(
-    regular_legs: list[dict[str, Any]],
-    resident_legs: list[dict[str, Any]],
-    multiplier: float,
-) -> list[dict[str, Any]]:
-    resident_by_flight = {
-        (leg["flight_number"], leg["departure_at"], leg["arrival_at"]): leg
-        for leg in resident_legs
-    }
-    merged: list[dict[str, Any]] = []
-    for regular in regular_legs:
-        leg = copy.deepcopy(regular)
-        key = (leg["flight_number"], leg["departure_at"], leg["arrival_at"])
-        discounted = resident_by_flight.get(key)
-        regular_price = float(leg["price_regular_pln"])
-        actual_price = (
-            float(discounted["price_regular_pln"]) if discounted is not None else None
-        )
-        if actual_price is not None and 0 < actual_price < regular_price:
-            leg["price_resident_estimated_pln"] = round(actual_price, 2)
-            leg["resident_price_source"] = "Iberia availability with CANARIAS discount"
-        else:
-            leg["price_resident_estimated_pln"] = round(regular_price * multiplier, 2)
-            leg["resident_price_source"] = "estimated from configured multiplier"
-        leg["resident_fare_multiplier"] = multiplier
-        merged.append(leg)
-    return merged
-
-
 def collect_iberia_trip(
-    client: IberiaWebClient,
+    client: GoogleFlightsClient,
     origin: str,
     destination: str,
     departure_date: date,
-    rates: dict[str, CurrencyRate],
     multiplier: float,
     accepted_marketing: set[str],
-    accepted_operating: set[str],
 ) -> list[dict[str, Any]]:
-    regular = parse_iberia_response(
-        client.availability(
-            origin,
-            destination,
-            departure_date,
-            canary_resident=False,
-        ),
+    return parse_google_flights_response(
+        client.availability(origin, destination, departure_date),
         origin,
         destination,
-        rates,
+        multiplier,
         accepted_marketing,
-        accepted_operating,
     )
-    resident = parse_iberia_response(
-        client.availability(
-            origin,
-            destination,
-            departure_date,
-            canary_resident=True,
-        ),
-        origin,
-        destination,
-        rates,
-        accepted_marketing,
-        accepted_operating,
-    )
-    return apply_resident_prices(regular, resident, multiplier)
 
 
 def collect_iberia_legs(
     candidates: set[tuple[str, str, date]],
-    rates: dict[str, CurrencyRate],
     transfer_rules: dict[str, dict[str, Any]],
     airline_codes: dict[str, Any],
+    workers: int,
 ) -> list[dict[str, Any]]:
     if not candidates:
         return []
-    client = IberiaWebClient()
     accepted_marketing = set(airline_codes["accepted_marketing"])
-    accepted_operating = set(airline_codes["accepted_operating"])
     legs: list[dict[str, Any]] = []
     ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
-    for index, (origin, destination, day) in enumerate(ordered, start=1):
+
+    def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
+        origin, destination, day = candidate
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         rule = transfer_rules[transfer]
         if not rule["resident_discount_eligible_on_iberia_leg"]:
@@ -424,20 +290,24 @@ def collect_iberia_legs(
         multiplier = float(rule["iberia_resident_fare_multiplier"])
         if not 0 < multiplier < 1:
             raise RuntimeError(f"Nieprawidłowy mnożnik zniżki Iberii dla {transfer}")
-        legs.extend(
-            collect_iberia_trip(
-                client,
-                origin,
-                destination,
-                day,
-                rates,
-                multiplier,
-                accepted_marketing,
-                accepted_operating,
-            )
+        return collect_iberia_trip(
+            GoogleFlightsClient(),
+            origin,
+            destination,
+            day,
+            multiplier,
+            accepted_marketing,
         )
-        if index % 10 == 0 or index == len(ordered):
-            print(f"Iberia: {index}/{len(ordered)} zapytań tras/dni", flush=True)
+
+    max_workers = min(max(workers, 1), 4)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        for index, result in enumerate(executor.map(fetch, ordered), start=1):
+            legs.extend(result)
+            if index % 10 == 0 or index == len(ordered):
+                print(
+                    f"Iberia przez Google Flights: {index}/{len(ordered)} zapytań tras/dni",
+                    flush=True,
+                )
     return legs
 
 
@@ -579,9 +449,9 @@ def main() -> None:
     print(f"Zapytania Iberia do sprawdzenia: {len(candidates)}", flush=True)
     iberia_legs = collect_iberia_legs(
         candidates,
-        rates,
         transfer_rules,
         allowlist["iberia_airline_codes"],
+        args.workers,
     )
     if candidates and not iberia_legs:
         raise RuntimeError(
@@ -613,7 +483,10 @@ def main() -> None:
             }
         },
         "sources": {
-            "iberia": "Publiczna wyszukiwarka Iberia availability z rabatem CANARIAS",
+            "iberia": (
+                "Google Flights: regularna cena w PLN; cena rezydenta "
+                "oszacowana jako 25% ceny regularnej zgodnie z listą lotnisk"
+            ),
             "ryanair": "Ryanair Fare Finder",
             "wizz_air": "Wizz Air timetableV2",
         },

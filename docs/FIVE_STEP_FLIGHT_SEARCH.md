@@ -91,10 +91,12 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
      Iberia lub Iberia Express.
   2. TFS/TFN → MAD linią Iberia lub Iberia Express → WAW/WMI/KRK/KTW linią
      Ryanair albo Wizz Air.
-- W pierwszej kolejności pobierać rzeczywistą cenę wyszukiwarki Iberii z
-  rabatem rezydenta Wysp Kanaryjskich. Jeżeli źródło nie zwraca osobnej ceny
-  rezydenckiej, zapisać orientacyjną wartość równą 25% ceny regularnej i
-  oznaczyć jej źródło w odcinku.
+- Pobierać regularną cenę Iberii/Iberii Express w PLN z Google Flights zwykłym
+  zapytaniem HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta
+  zapisać jako orientacyjną wartość równą 25% tej ceny regularnej i wyraźnie
+  oznaczyć sposób wyliczenia w odcinku.
+- Jeśli Google Flights nie zwróci użytecznych danych Iberii, przerwać wykonanie
+  bez nadpisywania poprzedniego pliku wynikowego. Nie tworzyć cen zastępczych.
 - Odcinek Wizz Air lub Ryanair liczyć w pełnej cenie. Nie filtrować wyników
   cenowo w kolektorze.
 - Generować wariant poleceniem `scripts/collect_step1b.py`, a publiczny wynik

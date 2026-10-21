@@ -16,8 +16,10 @@ wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
 wynikowych danych.
 
 Publiczne JSON-y strony są generowane z aktualnych danych Binter, Ryanair,
-Wizz Air oraz kursu NBP. Obejmują oba kierunki i nie mają limitu cenowego;
-maksymalną cenę wybiera użytkownik na stronie.
+Wizz Air, Google Flights dla Iberii/Iberii Express oraz kursu NBP. W kroku 1B
+cena rezydenta jest jawnym oszacowaniem 25% regularnej ceny Iberii. Wyniki
+obejmują oba kierunki i nie mają limitu cenowego; maksymalną cenę wybiera
+użytkownik na stronie.
 
 ```bash
 python3 -m venv .venv
