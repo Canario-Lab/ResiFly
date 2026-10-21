@@ -133,3 +133,26 @@
 - Keep regular, resident, and Wizz Air Discount Club prices as separate values
   whenever the source provides them.
 
+## Transfer-route detector
+
+- Use `scripts/discover_transfer_routes.py` to check whether the airline route
+  networks create new Step 1, 3, 4, or 5 transfer combinations. Step 2 has no
+  transfer allowlist: its collector always checks the complete fixed airport
+  matrix.
+- The detector is separate from the five price collectors. Do not run it as
+  part of a normal price refresh unless route discovery was explicitly
+  requested or separately scheduled.
+- Its default mode is a read-only dry run. Use `--apply` only after reviewing
+  the printed report. Existing allowlist entries are never removed
+  automatically because a missing route may only be seasonal or temporarily
+  unpublished.
+- The detector may activate a new Wizz Air route only when verified flight
+  number and block-time entries for both directions already exist in the Wizz
+  schedule registry. If they do not, it must report the route as pending and
+  leave that incomplete candidate unchanged. Complete candidates from other
+  steps may still be applied.
+- The script is suitable for GitHub Actions. A future workflow should install
+  `scripts/requirements-flight-collector.txt`, run the detector in dry-run mode
+  first, preserve its JSON report as an artifact, and only then run with
+  `--apply` under the chosen review policy.
+

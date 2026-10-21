@@ -160,6 +160,28 @@ wyraźnej decyzji użytkownika.
 Po ukończeniu pięciu kroków przygotować krótkie podsumowanie zawierające liczbę
 wyników w każdym kroku.
 
+## Osobny wykrywacz nowych tras
+
+Cotygodniowe kolektory cen korzystają wyłącznie z zapisanych list i nie szukają
+nowych lotnisk przesiadkowych. Do okresowej kontroli siatki służy osobny skrypt:
+
+```bash
+python3 scripts/discover_transfer_routes.py
+```
+
+Domyślnie jest to bezpieczny podgląd zmian bez zapisu. Opcja `--apply` dopisuje
+wyłącznie kompletne nowe pozycje do list kroków 1, 3, 4 i 5; nigdy automatycznie
+nie usuwa istniejących pozycji. Krok 2 nie ma listy przesiadek, ponieważ jego
+kolektor zawsze sprawdza pełną macierz czterech polskich i dwóch teneryfskich
+lotnisk.
+
+Jeżeli nowa możliwość wykorzystuje Wizz Air, przed aktywacją muszą istnieć
+zweryfikowane numery lotów i czasy blokowe obu kierunków w rejestrze rozkładów.
+Gdy ich brakuje, wykrywacz pokazuje tę pozycję jako oczekującą i jej nie zapisuje;
+kompletne pozycje z pozostałych kroków nadal mogą zostać dopisane. Raport można
+zapisać opcją `--report`, co pozwoli później podłączyć ten sam skrypt do GitHub
+Actions bez przepisywania mechanizmu.
+
 ## Filtrowanie cen
 
 Publiczne JSON-y nie mają limitu cenowego. Cena regularna, cena rezydencka i
