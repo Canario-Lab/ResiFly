@@ -91,7 +91,6 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 });
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
-const CALENDAR_HIGHLIGHT_DURATION_MS = 30_000;
 const CALENDAR_SCROLL_SETTLE_FALLBACK_MS = 1_200;
 const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
@@ -405,8 +404,6 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
   return cell;
 }
 
-let calendarHighlightTimer;
-
 function setCardDetailsExpanded(card, expanded) {
   const toggle = card.querySelector(".details-toggle");
   const details = card.querySelector(".price-details");
@@ -417,6 +414,13 @@ function setCardDetailsExpanded(card, expanded) {
     ? "Ukryj szczegóły ceny"
     : "Pokaż szczegóły ceny";
   details.hidden = !expanded;
+}
+
+function clearCalendarTarget() {
+  elements.list.querySelectorAll(".is-calendar-target").forEach(card => {
+    card.classList.remove("is-calendar-target");
+  });
+  calendarTargetCard = null;
 }
 
 function clearCalendarNavigationGuard() {
@@ -459,9 +463,7 @@ function scrollToResult(resultId) {
   }
   if (!card) return;
 
-  elements.list.querySelectorAll(".is-calendar-target").forEach(item => {
-    item.classList.remove("is-calendar-target");
-  });
+  clearCalendarTarget();
   setCardDetailsExpanded(card, true);
   card.classList.add("is-calendar-target");
   calendarTargetCard = card;
@@ -472,10 +474,6 @@ function scrollToResult(resultId) {
     block: "center",
   });
 
-  window.clearTimeout(calendarHighlightTimer);
-  calendarHighlightTimer = window.setTimeout(() => {
-    card.classList.remove("is-calendar-target");
-  }, CALENDAR_HIGHLIGHT_DURATION_MS);
 }
 
 function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {
@@ -973,6 +971,7 @@ function createResultCard(result, filters) {
   const toggle = fragment.querySelector(".details-toggle");
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
+    if (!expanded && card !== calendarTargetCard) clearCalendarTarget();
     setCardDetailsExpanded(card, !expanded);
   });
 
@@ -1034,7 +1033,6 @@ function cancelProgressiveIdleWork() {
 
 function stopProgressiveRendering() {
   progressiveRenderVersion += 1;
-  window.clearTimeout(calendarHighlightTimer);
   cancelProgressiveIdleWork();
   clearCalendarNavigationGuard();
   progressiveResults = [];

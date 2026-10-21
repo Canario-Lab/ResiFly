@@ -735,15 +735,16 @@ input[type="range"]::-moz-range-thumb {
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
-.flight-card.is-calendar-target {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(13, 118, 95, 0.14), 0 18px 44px rgba(29, 61, 57, 0.12);
-}
-
 .flight-card:hover {
   transform: translateY(-2px);
   border-color: #c8d8d3;
   box-shadow: 0 14px 36px rgba(29, 61, 57, 0.08);
+}
+
+.flight-card.is-calendar-target,
+.flight-card.is-calendar-target:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(13, 118, 95, 0.14), 0 18px 44px rgba(29, 61, 57, 0.12);
 }
 
 .flight-main {
