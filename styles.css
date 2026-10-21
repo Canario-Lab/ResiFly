@@ -724,6 +724,39 @@ input[type="range"]::-moz-range-thumb {
   gap: 14px;
 }
 
+.results-load-sentinel {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.results-load-sentinel .loader {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+.results-load-more {
+  padding: 10px 16px;
+  color: var(--green-dark);
+  border: 1px solid var(--green);
+  border-radius: 999px;
+  background: var(--paper);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.results-load-more:hover {
+  background: var(--green-soft);
+}
+
 .flight-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 235px;

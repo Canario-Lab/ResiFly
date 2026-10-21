@@ -92,6 +92,17 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_HIGHLIGHT_DURATION_MS = 12_000;
+const FILTER_RENDER_DELAY_MS = 150;
+const RESULT_BATCH_SIZE = 30;
+
+let filterRenderTimer;
+let calendarRenderKey = null;
+let progressiveResults = [];
+let progressiveFilters = null;
+let progressiveResultCount = 0;
+let progressiveRenderVersion = 0;
+let progressiveObserver = null;
+let progressiveSentinel = null;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -399,8 +410,13 @@ function setCardDetailsExpanded(card, expanded) {
 }
 
 function scrollToResult(resultId) {
-  const card = [...elements.list.querySelectorAll(".flight-card")]
+  let card = [...elements.list.querySelectorAll(".flight-card")]
     .find(item => item.dataset.resultId === resultId);
+  if (!card) {
+    ensureResultRendered(resultId);
+    card = [...elements.list.querySelectorAll(".flight-card")]
+      .find(item => item.dataset.resultId === resultId);
+  }
   if (!card) return;
 
   elements.list.querySelectorAll(".is-calendar-target").forEach(item => {
@@ -920,8 +936,7 @@ function createResultCard(result, filters) {
   return fragment;
 }
 
-function renderActiveFilters() {
-  const filters = currentFilters();
+function renderActiveFilters(filters = currentFilters()) {
   const chips = [`Do ${currency.format(filters.maxPrice)}`];
   chips.push(filters.direction === "poland_to_tenerife" ? "Polska → Teneryfa" : "Teneryfa → Polska");
   if (filters.resident) chips.push("Rezydent Teneryfy");
@@ -946,18 +961,143 @@ function renderActiveFilters() {
   }));
 }
 
+function fareCalendarRenderKey(filters) {
+  return JSON.stringify([
+    filters.resident,
+    filters.wizzClub,
+    filters.maxPrice,
+    filters.dateFrom,
+    filters.dateTo,
+    filters.origin,
+    filters.destination,
+    filters.transfer,
+    filters.firstCarrier,
+    filters.secondCarrier,
+    filters.maxLayover,
+    filters.direction,
+  ]);
+}
+
+function stopProgressiveRendering() {
+  progressiveRenderVersion += 1;
+  progressiveObserver?.disconnect();
+  progressiveObserver = null;
+  progressiveSentinel = null;
+  progressiveResults = [];
+  progressiveFilters = null;
+  progressiveResultCount = 0;
+}
+
+function updateProgressiveSentinel() {
+  if (!progressiveSentinel) return;
+  const label = progressiveSentinel.querySelector(".results-load-sentinel-label");
+  if (label) {
+    label.textContent = `Wyświetlono ${progressiveResultCount} z ${progressiveResults.length}. Przewiń niżej, aby wczytać kolejne.`;
+  }
+}
+
+function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
+  if (
+    expectedVersion !== progressiveRenderVersion ||
+    !progressiveFilters ||
+    !progressiveSentinel?.isConnected
+  ) return;
+
+  const end = Math.min(progressiveResultCount + RESULT_BATCH_SIZE, progressiveResults.length);
+  const cards = document.createDocumentFragment();
+  for (const result of progressiveResults.slice(progressiveResultCount, end)) {
+    cards.append(createResultCard(result, progressiveFilters));
+  }
+  elements.list.insertBefore(cards, progressiveSentinel);
+  progressiveResultCount = end;
+
+  if (progressiveResultCount >= progressiveResults.length) {
+    progressiveObserver?.disconnect();
+    progressiveObserver = null;
+    progressiveSentinel.remove();
+    progressiveSentinel = null;
+    return;
+  }
+
+  updateProgressiveSentinel();
+}
+
+function observeProgressiveSentinel(expectedVersion) {
+  if (!progressiveSentinel) return;
+
+  if (!("IntersectionObserver" in window)) {
+    const button = document.createElement("button");
+    button.className = "results-load-more";
+    button.type = "button";
+    button.textContent = "Pokaż kolejne 30 wyników";
+    button.addEventListener("click", () => appendNextResultBatch(expectedVersion));
+    progressiveSentinel.replaceChildren(button);
+    return;
+  }
+
+  progressiveObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting) || !progressiveSentinel) return;
+    const sentinel = progressiveSentinel;
+    progressiveObserver.unobserve(sentinel);
+    window.requestAnimationFrame(() => {
+      appendNextResultBatch(expectedVersion);
+      if (
+        expectedVersion === progressiveRenderVersion &&
+        progressiveObserver &&
+        progressiveSentinel?.isConnected
+      ) {
+        progressiveObserver.observe(progressiveSentinel);
+      }
+    });
+  }, { rootMargin: "600px 0px" });
+  progressiveObserver.observe(progressiveSentinel);
+}
+
+function renderResultCards(results, filters) {
+  stopProgressiveRendering();
+  const expectedVersion = progressiveRenderVersion;
+  progressiveResults = results;
+  progressiveFilters = filters;
+
+  progressiveSentinel = document.createElement("div");
+  progressiveSentinel.className = "results-load-sentinel";
+  progressiveSentinel.setAttribute("role", "status");
+  progressiveSentinel.innerHTML = `
+    <span class="loader" aria-hidden="true"></span>
+    <span class="results-load-sentinel-label"></span>
+  `;
+  elements.list.replaceChildren(progressiveSentinel);
+  appendNextResultBatch(expectedVersion);
+  observeProgressiveSentinel(expectedVersion);
+}
+
+function ensureResultRendered(resultId) {
+  const targetIndex = progressiveResults.findIndex(result => result.id === resultId);
+  if (targetIndex < 0) return;
+  while (progressiveResultCount <= targetIndex && progressiveSentinel) {
+    appendNextResultBatch(progressiveRenderVersion);
+  }
+}
+
 function renderResults() {
+  window.clearTimeout(filterRenderTimer);
+  filterRenderTimer = undefined;
   updateRangeLabels();
   const filters = currentFilters();
   const results = filteredResults(filters);
-  renderFareCalendar(results, filters);
+  const nextCalendarRenderKey = fareCalendarRenderKey(filters);
+  if (nextCalendarRenderKey !== calendarRenderKey) {
+    renderFareCalendar(results, filters);
+    calendarRenderKey = nextCalendarRenderKey;
+  }
   elements.count.textContent = results.length;
   elements.countNoun.textContent = pluralizeResults(results.length);
-  renderActiveFilters();
+  renderActiveFilters(filters);
   elements.list.setAttribute("aria-busy", "false");
 
   if (!results.length) {
-    const directSelected = currentFilters().transfer === "direct";
+    stopProgressiveRendering();
+    const directSelected = filters.transfer === "direct";
     elements.list.innerHTML = `
       <div class="empty-state">
         <strong>Brak lotów dla tych filtrów</strong>
@@ -969,12 +1109,19 @@ function renderResults() {
     return;
   }
 
-  const cards = document.createDocumentFragment();
-  for (const result of results) cards.append(createResultCard(result, filters));
-  elements.list.replaceChildren(cards);
+  renderResultCards(results, filters);
+}
+
+function scheduleRenderResults() {
+  updateRangeLabels();
+  window.clearTimeout(filterRenderTimer);
+  stopProgressiveRendering();
+  elements.list.setAttribute("aria-busy", "true");
+  filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
 }
 
 function resetFilters() {
+  window.clearTimeout(filterRenderTimer);
   elements.resident.checked = true;
   elements.wizzClub.checked = false;
   elements.price.value = elements.price.max;
@@ -1007,10 +1154,10 @@ function bindEvents() {
     elements.layover,
     elements.sort,
   ];
-  filters.forEach(element => element.addEventListener("input", renderResults));
+  filters.forEach(element => element.addEventListener("input", scheduleRenderResults));
   elements.direction.addEventListener("input", () => {
     updateAirportOptions();
-    renderResults();
+    scheduleRenderResults();
   });
   elements.reset.addEventListener("click", resetFilters);
   elements.purchaseDialog.querySelector("[data-close-purchase]").addEventListener("click", () => {
