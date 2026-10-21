@@ -1,10 +1,12 @@
 import json
+from datetime import date, timedelta
 from pathlib import Path
 import unittest
 from zoneinfo import ZoneInfo
 
 from scripts.collect_step1 import (
     AIRPORT_TIMEZONES,
+    binter_route_days,
     build_connections,
     configure_airports_from_allowlist,
     validate_document,
@@ -33,6 +35,26 @@ def leg(carrier, number, origin, departure, destination, arrival, regular, resid
 
 
 class Step1CollectorTests(unittest.TestCase):
+    def test_binter_route_days_cover_full_window_in_both_directions(self):
+        allowlist = json.loads(
+            (ROOT / "data" / "binter-transfer-airports.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        start = date(2026, 10, 21)
+        end = start + timedelta(days=30)
+        route_days = binter_route_days(allowlist, start, end)
+        expected = (
+            len(allowlist["airports"])
+            * len(allowlist["scope"]["tenerife_airports"])
+            * 2
+            * 31
+        )
+        self.assertEqual(len(route_days), expected)
+        for day in (start, start + timedelta(days=15), end):
+            self.assertIn(("MAD", "TFN", day), route_days)
+            self.assertIn(("TFN", "MAD", day), route_days)
+
     def test_allowlist_contains_complete_collector_metadata(self):
         allowlist = json.loads(
             (ROOT / "data" / "binter-transfer-airports.json").read_text(

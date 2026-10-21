@@ -1,9 +1,12 @@
 import unittest
+from datetime import date
+from unittest.mock import patch
 
 from scripts.collect_step4 import (
     WIZZ_FLIGHT_NUMBERS_BY_TIME,
     WIZZ_ROUTE_SCHEDULES,
     build_connections,
+    collect_routes,
     route_matrix,
     validate_document,
 )
@@ -49,6 +52,17 @@ def allowlist():
 
 
 class Step4CollectorTests(unittest.TestCase):
+    @patch("scripts.collect_step4.collect_wizz_route", return_value=[])
+    def test_every_route_receives_the_full_calendar_window(self, collect_route):
+        routes = route_matrix(allowlist())
+        start = date(2026, 10, 21)
+        end = date(2026, 11, 20)
+        collect_routes(routes, start, end, {}, 2)
+        self.assertEqual(collect_route.call_count, len(routes))
+        self.assertTrue(
+            all(call.args[2:4] == (start, end) for call in collect_route.call_args_list)
+        )
+
     def test_wizz_schedule_metadata_is_loaded_from_json(self):
         self.assertEqual(WIZZ_ROUTE_SCHEDULES[("TFS", "BUD")], ("W62494", 305))
         self.assertEqual(

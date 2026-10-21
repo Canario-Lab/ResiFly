@@ -36,9 +36,9 @@ from scripts.collect_step1 import (
     POLISH_AIRPORTS,
     TENERIFE_AIRPORTS,
     CurrencyRate,
-    candidate_binter_trips,
     collect_low_cost_legs,
     configure_airports_from_allowlist,
+    date_range,
     dt,
     nbp_eur_rate,
     serialize_datetime,
@@ -274,17 +274,32 @@ def collect_iberia_trip(
     )
 
 
+def iberia_route_days(
+    allowlist: dict[str, Any],
+    start: date,
+    end: date,
+) -> set[tuple[str, str, date]]:
+    route_days: set[tuple[str, str, date]] = set()
+    for airport in allowlist["airports"]:
+        transfer = airport["iata"]
+        for tenerife in airport["tenerife_airports"]:
+            for day in date_range(start, end):
+                route_days.add((transfer, tenerife, day))
+                route_days.add((tenerife, transfer, day))
+    return route_days
+
+
 def collect_iberia_legs(
-    candidates: set[tuple[str, str, date]],
+    route_days: set[tuple[str, str, date]],
     transfer_rules: dict[str, dict[str, Any]],
     airline_codes: dict[str, Any],
     workers: int,
 ) -> list[dict[str, Any]]:
-    if not candidates:
+    if not route_days:
         return []
     accepted_marketing = set(airline_codes["accepted_marketing"])
     legs: list[dict[str, Any]] = []
-    ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
+    ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
 
     def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
         origin, destination, day = candidate
@@ -450,15 +465,18 @@ def main() -> None:
             "Nie pobrano żadnego odcinka Wizz/Ryanair; wynik nie zostanie nadpisany"
         )
     print(f"Odcinki Ryanair/Wizz Air: {len(low_cost_legs)}", flush=True)
-    candidates = candidate_binter_trips(low_cost_legs, args.from_date, end)
-    print(f"Zapytania Iberia do sprawdzenia: {len(candidates)}", flush=True)
+    route_days = iberia_route_days(allowlist, args.from_date, end)
+    print(
+        f"Pełny kalendarz Iberii do sprawdzenia: {len(route_days)} tras/dni",
+        flush=True,
+    )
     iberia_legs = collect_iberia_legs(
-        candidates,
+        route_days,
         transfer_rules,
         allowlist["iberia_airline_codes"],
         args.workers,
     )
-    if candidates and not iberia_legs:
+    if route_days and not iberia_legs:
         raise RuntimeError(
             "Iberia nie zwróciła żadnych odcinków; wynik nie zostanie nadpisany"
         )

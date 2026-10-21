@@ -1,6 +1,13 @@
 import unittest
+from datetime import date
+from unittest.mock import patch
 
-from scripts.collect_step3 import build_connections, route_matrix, validate_document
+from scripts.collect_step3 import (
+    build_connections,
+    collect_routes,
+    route_matrix,
+    validate_document,
+)
 
 
 def leg(number, origin, departure, destination, arrival, regular):
@@ -41,6 +48,17 @@ def allowlist():
 
 
 class Step3CollectorTests(unittest.TestCase):
+    @patch("scripts.collect_step3.collect_ryanair_route", return_value=[])
+    def test_every_route_receives_the_full_calendar_window(self, collect_route):
+        routes = route_matrix(allowlist())
+        start = date(2026, 10, 21)
+        end = date(2026, 11, 20)
+        collect_routes(routes, start, end, {}, "test-version", 2)
+        self.assertEqual(collect_route.call_count, len(routes))
+        self.assertTrue(
+            all(call.args[2:4] == (start, end) for call in collect_route.call_args_list)
+        )
+
     def test_route_matrix_comes_only_from_allowlist(self):
         routes = route_matrix(allowlist())
         self.assertEqual(len(routes), 8)

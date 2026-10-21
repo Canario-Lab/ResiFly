@@ -19,6 +19,10 @@ wyraźnej decyzji użytkownika.
 - Kierunki `Polska → Teneryfa` i `Teneryfa → Polska` analizować i pokazywać
   oddzielnie. Nie łączyć ich w podróż w obie strony i nie dobierać długości
   pobytu.
+- Dla każdej zapisanej trasy najpierw pobrać pełne skonfigurowane okno dat
+  każdej uczestniczącej linii w obu kierunkach. Dopiero po zebraniu obu
+  kompletnych kalendarzy dopasowywać odcinki. Nie wolno ograniczać dat zapytań
+  jednej linii na podstawie dni lotów zwróconych przez drugą linię.
 - Dopuszczać lot bezpośredni albo maksymalnie jedną przesiadkę, zgodnie z
   zasadami danego kroku.
 - Przy przesiadce wymagać od 2 do 24 godzin między planowanym przylotem
@@ -74,6 +78,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
      TFS/TFN linią Binter.
   2. TFS/TFN → lotnisko przesiadkowe linią Binter → WAW/WMI/KRK/KTW linią
      Ryanair albo Wizz Air.
+- Każdą zapisaną trasę Bintera sprawdzić we wszystkie dni pełnego okna dat w
+  obu kierunkach, niezależnie od kalendarza Ryanair/Wizz Air. Dopiero potem
+  dopasować możliwe przesiadki.
 - Zwykłą cenę wyłącznie odcinka Bintera pomnożyć przez 25%. Drugi odcinek
   policzyć w pełnej cenie.
 - W wynikach kroku umieścić krótką listę użytych lotnisk przesiadkowych oraz
@@ -91,6 +98,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
      Iberia lub Iberia Express.
   2. TFS/TFN → MAD linią Iberia lub Iberia Express → WAW/WMI/KRK/KTW linią
      Ryanair albo Wizz Air.
+- Każdą zapisaną trasę Iberii/Iberii Express sprawdzić we wszystkie dni
+  pełnego okna dat w obu kierunkach, niezależnie od kalendarza Ryanair/Wizz
+  Air. Dopiero potem dopasować możliwe przesiadki.
 - Pobierać regularną cenę Iberii/Iberii Express w PLN z Google Flights zwykłym
   zapytaniem HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta
   zapisać jako orientacyjną wartość równą 25% tej ceny regularnej i wyraźnie
@@ -204,6 +214,8 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Sprawdzić wyłącznie bezpośrednie loty Ryanair i Wizz Air między WAW, WMI,
   KRK lub KTW a TFS lub TFN.
 - Sprawdzić oba kierunki oddzielnie.
+- Dla każdej pary lotnisk i każdego przewoźnika pobrać pełne skonfigurowane
+  okno dat; nie ograniczać dni na podstawie innego źródła.
 - Używać pełnej aktualnej ceny lotu; nie stosować mnożnika 25%.
 - Zapisać wszystkie znalezione loty bezpośrednie niezależnie od ceny.
 
@@ -221,6 +233,8 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   tym samym pliku listy, a nie w kodzie kolektora.
 - Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
   z listy, w obu kierunkach.
+- Najpierw pobrać pełne okno dat obu odcinków Ryanaira każdej zapisanej trasy,
+  a dopiero potem je łączyć.
 - Uprawnienie do zniżki odczytywać z pola
   `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
   wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
@@ -245,6 +259,8 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   przechowywać w `data/wizz-route-schedules.json`, nie w kodzie kolektora.
 - Sprawdzić wszystkie chronologicznie wykonalne połączenia przez każde lotnisko
   z listy, w obu kierunkach.
+- Najpierw pobrać pełne okno dat obu odcinków Wizz Air każdej zapisanej trasy,
+  a dopiero potem je łączyć.
 - Uprawnienie do zniżki odczytywać z pola
   `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
   wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
@@ -265,6 +281,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
 - Wariant B: Wizz Air obsługuje odcinek TFS/TFN ↔ przesiadka, a Ryanair odcinek
   przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
+- Dla obu wariantów najpierw pobrać pełne okno dat wszystkich zapisanych
+  odcinków Ryanair i Wizz Air w obu kierunkach, a dopiero potem dopasowywać
+  połączenia. Kalendarz jednej linii nie może ograniczać zapytań do drugiej.
 - Uprawnienie do zniżki odczytywać osobno dla właściwego wariantu z pola
   `resident_discount_on_tenerife_leg`. Mnożnik `0.25` stosować wyłącznie do
   odcinka TFS/TFN ↔ przesiadka, gdy lotnisko znajduje się w odpowiednim

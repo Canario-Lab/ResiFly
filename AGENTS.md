@@ -7,6 +7,10 @@
 - Read and follow that file before running or changing the weekly collection.
 - Keep exactly five search steps. Do not add, remove, or silently reinterpret a
   step without an explicit user decision.
+- For every saved route in every step, fetch the complete configured calendar
+  window in both directions for each participating carrier before matching or
+  comparing legs. Never derive one carrier's query dates from another
+  carrier's returned flights.
 
 ## Canonical Step 1A Binter transfer-airport list
 
@@ -16,6 +20,9 @@
   rediscover, add, or remove transfer airports during a weekly collection.
 - A weekly collection still fetches current schedules and prices for the
   listed airports; being on the allowlist does not imply current availability.
+- Check every calendar day in the complete configured window for every saved
+  Binter route in both directions, independently of the Wizz Air/Ryanair
+  calendar. Match connections only after both full calendars are collected.
 - Update this allowlist only when the user explicitly asks to revise it.
 - Keep each Step 1A airport's IANA time zone and resident-discount eligibility
   in `data/binter-transfer-airports.json`. Keep the verified Wizz routes needed
@@ -36,6 +43,10 @@
 - Read the regular Iberia/Iberia Express fare in PLN from Google Flights by
   HTTP, without launching a real browser. Calculate the resident estimate with
   the allowlist's configured `0.25` multiplier and label it as an estimate.
+- Check every calendar day in the complete configured window for every saved
+  Iberia/Iberia Express route in both directions, independently of the Wizz
+  Air/Ryanair calendar. Match connections only after both full calendars are
+  collected.
 - If Google Flights does not return usable Iberia data, fail before overwriting
   the previous `data/step1b-results.json` file. Never invent prices.
 - Never persist Iberia access tokens, cookies, browser-session URLs or other
@@ -140,6 +151,8 @@
 - Generate Step 2 with `scripts/collect_step2.py`.
 - Check the complete matrix between WAW, WMI, KRK, KTW and TFN, TFS in both
   directions for Wizz Air and Ryanair.
+- Fetch the complete configured date window for every route/carrier pair before
+  producing results; do not prefilter dates with another source.
 - Keep every direct flight returned for the configured date window regardless
   of price. The website, not the collector, applies the user's price limit.
 - Write the generated public feed to `data/step2-results.json`.
@@ -160,6 +173,8 @@
 - A weekly collection still fetches current schedules and prices for the
   listed route combinations; being on the allowlist does not imply current
   availability.
+- Fetch the complete configured date window for every saved Ryanair leg in
+  both directions before matching the two legs.
 - Update this allowlist only when the user explicitly asks to revise it.
 - Keep transfer-airport time zones in the allowlist's `airport_timezones`
   object so a new airport does not require a collector-code change.
@@ -180,6 +195,8 @@
 - A weekly collection still fetches current schedules and prices for the
   listed route combinations; being on the allowlist does not imply current
   availability.
+- Fetch the complete configured date window for every saved Wizz Air leg in
+  both directions before matching the two legs.
 - Update this allowlist only when the user explicitly asks to revise it.
 - Keep transfer-airport time zones in the allowlist's `airport_timezones`
   object. Keep verified Wizz Air flight numbers, published block times and
@@ -200,6 +217,9 @@
   Wizz Air on the Tenerife leg with Ryanair on the Poland leg.
 - Check both travel directions separately. The airline assigned to a
   geographical leg remains the same when the direction is reversed.
+- Fetch the complete configured date window for every saved leg of both
+  carriers before matching mixed-carrier connections. Never use one carrier's
+  dates to prefilter requests to the other carrier.
 - Read resident-discount eligibility and the Tenerife-leg fare multiplier from
   the matching variant. Never infer the discount from the carrier alone.
 - Do not rediscover, add, or remove transfer airports during a weekly

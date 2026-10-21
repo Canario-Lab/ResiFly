@@ -80,6 +80,32 @@ def route_matrix(allowlist: dict[str, Any]) -> dict[str, list[tuple[str, str]]]:
     return {carrier: sorted(values) for carrier, values in routes.items()}
 
 
+def collect_full_calendars(
+    routes: dict[str, list[tuple[str, str]]],
+    start: date,
+    end: date,
+    rates: dict[str, Any],
+    client_version: str,
+    workers: int,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    ryanair_legs = collect_ryanair_routes(
+        routes["Ryanair"],
+        start,
+        end,
+        rates,
+        client_version,
+        workers,
+    )
+    wizz_legs = collect_wizz_routes(
+        routes["Wizz Air"],
+        start,
+        end,
+        rates,
+        workers,
+    )
+    return ryanair_legs, wizz_legs
+
+
 def discounted_leg(
     leg: dict[str, Any],
     transfer: str,
@@ -334,19 +360,12 @@ def main() -> None:
         flush=True,
     )
     client_version = ryanair_client_version()
-    ryanair_legs = collect_ryanair_routes(
-        routes["Ryanair"],
+    ryanair_legs, wizz_legs = collect_full_calendars(
+        routes,
         args.from_date,
         end,
         rates,
         client_version,
-        args.workers,
-    )
-    wizz_legs = collect_wizz_routes(
-        routes["Wizz Air"],
-        args.from_date,
-        end,
-        rates,
         args.workers,
     )
     print(

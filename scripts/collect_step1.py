@@ -501,40 +501,30 @@ def collect_low_cost_legs(
     return legs
 
 
-def candidate_binter_trips(
-    low_cost_legs: list[dict[str, Any]],
+def binter_route_days(
+    allowlist: dict[str, Any],
     start: date,
     end: date,
 ) -> set[tuple[str, str, date]]:
-    candidates: set[tuple[str, str, date]] = set()
-    for leg in low_cost_legs:
-        origin = leg["departure_airport"]
-        destination = leg["arrival_airport"]
-        if origin in POLISH_AIRPORTS:
-            transfer = destination
-            arrival_date = date.fromisoformat(leg["arrival_at"][:10])
-            for tenerife in TENERIFE_AIRPORTS:
-                for candidate_date in (arrival_date, arrival_date + timedelta(days=1)):
-                    if start <= candidate_date <= end:
-                        candidates.add((transfer, tenerife, candidate_date))
-        else:
-            transfer = origin
-            departure_date = date.fromisoformat(leg["departure_at"][:10])
-            for tenerife in TENERIFE_AIRPORTS:
-                for candidate_date in (departure_date - timedelta(days=1), departure_date):
-                    if start <= candidate_date <= end:
-                        candidates.add((tenerife, transfer, candidate_date))
-    return candidates
+    route_days: set[tuple[str, str, date]] = set()
+    tenerife_airports = allowlist["scope"]["tenerife_airports"]
+    for airport in allowlist["airports"]:
+        transfer = airport["iata"]
+        for tenerife in tenerife_airports:
+            for day in date_range(start, end):
+                route_days.add((transfer, tenerife, day))
+                route_days.add((tenerife, transfer, day))
+    return route_days
 
 
 def collect_binter_legs(
-    candidates: set[tuple[str, str, date]],
+    route_days: set[tuple[str, str, date]],
     rates: dict[str, CurrencyRate],
     workers: int,
     transfer_rules: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     legs: list[dict[str, Any]] = []
-    ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
+    ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
     with ThreadPoolExecutor(max_workers=max(2, min(workers, 6))) as pool:
         futures = {}
         for origin, destination, day in ordered:
@@ -674,10 +664,13 @@ def main() -> None:
         wizz_schedules,
     )
     print(f"Odcinki Ryanair/Wizz Air: {len(low_cost_legs)}", flush=True)
-    candidates = candidate_binter_trips(low_cost_legs, args.from_date, end)
-    print(f"Zapytania Binter do sprawdzenia: {len(candidates)}", flush=True)
+    route_days = binter_route_days(allowlist, args.from_date, end)
+    print(
+        f"Pełny kalendarz Binter do sprawdzenia: {len(route_days)} tras/dni",
+        flush=True,
+    )
     binter_legs = collect_binter_legs(
-        candidates,
+        route_days,
         rates,
         args.workers,
         transfer_rules,

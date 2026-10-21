@@ -25,6 +25,11 @@ przewoźnika. Air Europa i Volotea nie korzystają z Google Flights. Wyniki
 obejmują oba kierunki i nie mają limitu cenowego; maksymalną cenę wybiera
 użytkownik na stronie.
 
+Każdy kolektor pobiera najpierw pełne skonfigurowane okno dat każdej zapisanej
+trasy i każdej uczestniczącej linii w obu kierunkach. Dopiero potem porównuje
+kalendarze i buduje przesiadki. Daty jednej linii nie są wstępnie ograniczane
+rozkładem drugiej linii.
+
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r scripts/requirements-flight-collector.txt
@@ -60,9 +65,9 @@ trzeba zmieniać kodu kolektora. Warianty 1B, 1C, 1D i 1E korzystają analogiczn
 listy zawierają wyłącznie trasy danego przewoźnika objęte zniżką rezydenta
 Wysp Kanaryjskich. Dla 1C nadrzędnym źródłem siatki jest oficjalna strona
 Vuelinga, a Aena służy tylko jako potwierdzenie pomocnicze.
-Warianty 1C i 1D sprawdzają każdy dzień pełnego okna dat w obu kierunkach,
-niezależnie od rozkładu Wizz Air/Ryanair, i dopiero potem dopasowują możliwe
-przesiadki. Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air
+Warianty 1A–1E sprawdzają każdy dzień pełnego okna dat w obu kierunkach,
+niezależnie od rozkładu drugiego przewoźnika, i dopiero potem dopasowują
+możliwe przesiadki. Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air
 Europa; zapisane szablony rozkładu mają okres ważności i muszą zostać ponownie
 zweryfikowane po jego zakończeniu.
 Wariant 1E pobiera rozkład, numer lotu i cenę bezpośrednio z oficjalnego

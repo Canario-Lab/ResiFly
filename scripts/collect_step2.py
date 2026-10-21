@@ -92,7 +92,8 @@ def wizz_timetable(
         "priceType": price_type,
     }
     last_error: Exception | None = None
-    for attempt in range(3):
+    max_attempts = 6
+    for attempt in range(max_attempts):
         try:
             response = requests.post(
                 f"{WIZZ_API}/search/timetableV2",
@@ -115,8 +116,12 @@ def wizz_timetable(
             ]
         except Exception as error:
             last_error = error
-            if attempt < 2:
-                time_module.sleep(1.5 * (attempt + 1))
+            if attempt + 1 < max_attempts:
+                # The public timetable endpoint intermittently returns 503
+                # during a complete multi-route scan. Longer exponential
+                # backoff prevents a transient throttle from discarding the
+                # otherwise complete calendar.
+                time_module.sleep(min(3 * (2 ** attempt), 30))
     raise RuntimeError(f"Wizz Air request failed for {origin}-{destination}") from last_error
 
 

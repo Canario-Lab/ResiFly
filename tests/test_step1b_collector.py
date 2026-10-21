@@ -1,10 +1,12 @@
 import json
+from datetime import date, timedelta
 from pathlib import Path
 import unittest
 
 from scripts.collect_step1 import configure_airports_from_allowlist
 from scripts.collect_step1b import (
     build_connections,
+    iberia_route_days,
     parse_google_flights_response,
     validate_allowlist,
     validate_document,
@@ -64,6 +66,19 @@ class Step1BCollectorTests(unittest.TestCase):
         self.assertTrue(airport["resident_discount_eligible_on_iberia_leg"])
         self.assertEqual(airport["iberia_resident_fare_multiplier"], 0.25)
         self.assertEqual(set(airport["tenerife_airports"]), {"TFN", "TFS"})
+
+    def test_iberia_route_days_cover_full_window_in_both_directions(self):
+        start = date(2026, 10, 21)
+        end = start + timedelta(days=30)
+        route_days = iberia_route_days(self.allowlist, start, end)
+        expected_routes = sum(
+            len(airport["tenerife_airports"])
+            for airport in self.allowlist["airports"]
+        )
+        self.assertEqual(len(route_days), expected_routes * 2 * 31)
+        for day in (start, start + timedelta(days=15), end):
+            self.assertIn(("MAD", "TFN", day), route_days)
+            self.assertIn(("TFN", "MAD", day), route_days)
 
     @staticmethod
     def google_html(*offers):

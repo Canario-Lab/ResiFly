@@ -1,9 +1,12 @@
 import unittest
+from datetime import date
+from unittest.mock import patch
 
 from scripts.collect_step5 import (
     VARIANT_A,
     VARIANT_B,
     build_connections,
+    collect_full_calendars,
     route_matrix,
     validate_document,
 )
@@ -68,6 +71,24 @@ def allowlist():
 
 
 class Step5CollectorTests(unittest.TestCase):
+    @patch("scripts.collect_step5.collect_wizz_routes", return_value=[])
+    @patch("scripts.collect_step5.collect_ryanair_routes", return_value=[])
+    def test_both_carriers_receive_the_same_full_calendar_window(
+        self,
+        collect_ryanair,
+        collect_wizz,
+    ):
+        routes = route_matrix(allowlist())
+        start = date(2026, 10, 21)
+        end = date(2026, 11, 20)
+        collect_full_calendars(routes, start, end, {}, "test-version", 3)
+        collect_ryanair.assert_called_once_with(
+            routes["Ryanair"], start, end, {}, "test-version", 3
+        )
+        collect_wizz.assert_called_once_with(
+            routes["Wizz Air"], start, end, {}, 3
+        )
+
     def test_route_matrix_assigns_airlines_by_variant_and_both_directions(self):
         routes = route_matrix(allowlist())
         self.assertEqual(set(routes["Ryanair"]), {
