@@ -51,7 +51,7 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
-Krok 1 ma pięć niezależnych wariantów. Wszystkie są częścią tego samego kroku, więc
+Krok 1 ma sześć niezależnych wariantów. Wszystkie są częścią tego samego kroku, więc
 cała procedura nadal zawiera dokładnie pięć głównych kroków.
 
 ### Krok 1A — Binter + Ryanair lub Wizz Air
@@ -208,6 +208,35 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   strony właściwej trasy i dnia, bez cookies ani tokenów sesji. Status rezydenta
   pasażer potwierdza w selektorze pasażerów Volotei, ponieważ publiczny format
   URL przewoźnika nie udostępnia obsługiwanego parametru tej zniżki.
+
+### Krok 1F — Canaryfly + Ryanair lub Wizz Air
+
+- Używać wyłącznie lotnisk i zapisanych połączeń do Polski z kanonicznej listy
+  `data/canaryfly-transfer-airports.json`. Aktualnie są to Fuerteventura (FUE)
+  i Gran Canaria (LPA), połączone przez Canaryfly z Tenerife Norte (TFN).
+- Do FUE wolno łączyć Wizz Air z WAW i KTW oraz Ryanair z KRK. Do LPA wolno
+  łączyć Ryanair z KRK. Cotygodniowy kolektor nie odkrywa ponownie tras i nie
+  zmienia allowlisty.
+- Dla każdej zapisanej trasy i obu kierunków pobrać wszystkie pełne miesięczne
+  kalendarze Canaryfly obejmujące skonfigurowane okno. Dopiero po zebraniu
+  kompletnych kalendarzy pobierać szczegóły każdego dostępnego dnia, a po
+  zebraniu obu linii dopasowywać przesiadki. Nie ograniczać dni Canaryfly
+  rozkładem Ryanair/Wizz Air.
+- Daty, godziny, numery lotów oraz regularne i rezydenckie ceny pobierać
+  bezpośrednio z oficjalnych operacji GraphQL `booking_calendar` i
+  `booking_search` Canaryfly. Cena rezydenta jest kwotą zwróconą przez
+  przewoźnika dla konkretnego lotu, a nie oszacowaniem 25%.
+- Pomijać połączenia Canaryfly z przesiadką wewnętrzną; odcinek między TFN a
+  lotniskiem przesiadkowym ResiFly musi być bezpośredni. Nie używać Google
+  Flights ani nie wymyślać rozkładu lub ceny.
+- Prawidłowy pełny kalendarz bez dostępnych dni oznacza brak lotów. Błąd
+  oficjalnego endpointu albo brak szczegółów dla wszystkich dni oznaczonych
+  jako dostępne musi przerwać kolektor przed nadpisaniem poprzedniego feedu.
+- Generować wariant poleceniem `scripts/collect_step1f.py`, a publiczny wynik
+  zapisywać w `data/step1f-results.json`. Nie filtrować wyników cenowo.
+- Każdy odcinek Canaryfly otrzymuje trwały `booking_url` prowadzący do
+  oficjalnej strony właściwej trasy i dnia, bez cookies ani tokenów sesji.
+  Wybór ceny rezydenckiej lub regularnej odbywa się w interfejsie Canaryfly.
 
 ## Krok 2 — loty bezpośrednie
 

@@ -274,3 +274,47 @@ def volotea_booking_url(
         f"{_iata(origin).lower()}/{_iata(destination).lower()}/?{query}"
     )
 
+
+_CANARYFLY_AIRPORT_SLUGS = {
+    "ACE": "lanzarote",
+    "FUE": "fuerteventura",
+    "LPA": "gran-canaria",
+    "SPC": "la-palma",
+    "TFN": "tenerife-norte",
+    "VDE": "el-hierro",
+}
+
+
+def canaryfly_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+    *,
+    locale: str = "en",
+) -> str:
+    """Return Canaryfly's stable official route-and-date URL.
+
+    The public cheap-flights route loads Canaryfly's own calendar and booking
+    search for the encoded day. It contains no opaque flight, fare or session
+    tokens. Canaryfly exposes the resident/non-resident choice in that booking
+    flow rather than as a supported public URL parameter.
+    """
+
+    language = locale.strip().lower()
+    if language not in {"en", "es"}:
+        raise ValueError(f"Invalid Canaryfly locale: {locale!r}")
+    origin_code = _iata(origin)
+    destination_code = _iata(destination)
+    try:
+        origin_slug = _CANARYFLY_AIRPORT_SLUGS[origin_code]
+        destination_slug = _CANARYFLY_AIRPORT_SLUGS[destination_code]
+    except KeyError as error:
+        raise ValueError(
+            f"Unsupported Canaryfly airport code: {error.args[0]}"
+        ) from error
+    route = "cheap-flights" if language == "en" else "vuelos-baratos"
+    return (
+        f"https://www.canaryfly.es/{language}/{route}/"
+        f"{origin_slug}/{destination_slug}/{_departure_date(departure)}"
+    )
+

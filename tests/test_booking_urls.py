@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 from scripts.booking_urls import (
     air_europa_booking_url,
+    canaryfly_booking_url,
     iberia_booking_url,
     ryanair_booking_url,
     volotea_booking_url,
@@ -99,6 +100,21 @@ class VoloteaBookingUrlTests(unittest.TestCase):
             "?departureDate=2026-11-15&returnDate=",
         )
         self.assertNotIn("token", url.lower())
+
+
+class CanaryflyBookingUrlTests(unittest.TestCase):
+    def test_builds_official_route_and_date_url_without_session_data(self):
+        url = canaryfly_booking_url("tfn", "fue", "2026-10-22T14:30:00+00:00")
+        self.assertEqual(
+            url,
+            "https://www.canaryfly.es/en/cheap-flights/"
+            "tenerife-norte/fuerteventura/2026-10-22",
+        )
+        self.assertNotIn("token", url.lower())
+
+    def test_rejects_airport_outside_canaryfly_network(self):
+        with self.assertRaises(ValueError):
+            canaryfly_booking_url("tfn", "mad", "2026-10-22")
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ const DATA_SOURCES = [
   { url: "data/step1c-results.json", optional: true },
   { url: "data/step1d-results.json", optional: true },
   { url: "data/step1e-results.json", optional: true },
+  { url: "data/step1f-results.json", optional: true },
   { url: "data/step2-results.json" },
   { url: "data/step3-results.json" },
   { url: "data/step4-results.json" },
@@ -100,6 +101,7 @@ const carrierLogos = {
   "Air Europa": "assets/logos/air-europa.svg?v=20261021-1",
   "Iberia Express": "assets/logos/iberia-express.svg",
   Volotea: "assets/logos/volotea.svg?v=20261021-1",
+  Canaryfly: "assets/logos/canaryfly.svg?v=20261021-1",
 };
 
 const carrierPurchaseUrls = {
@@ -109,6 +111,7 @@ const carrierPurchaseUrls = {
   Vueling: "https://www.vueling.com/es",
   "Air Europa": "https://www.aireuropa.com/es/es/home",
   Volotea: "https://www.volotea.com/es/",
+  Canaryfly: "https://www.canaryfly.es/es/",
   "Wizz Air": "https://wizzair.com/pl-pl",
   Ryanair: "https://www.ryanair.com/pl/pl",
 };

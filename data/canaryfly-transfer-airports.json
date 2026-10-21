@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Canaryfly dla kroku 1F",
+  "verified_on": "2026-10-21",
+  "purpose": "Stała lista lotnisk kanaryjskich objętych zniżką rezydencką, przez które wolno budować połączenia Canaryfly + Ryanair/Wizz Air w kroku 1F.",
+  "scope": {
+    "tenerife_airports": ["TFN"],
+    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
+    "tenerife_leg_airlines": ["Canaryfly"],
+    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+  },
+  "usage_policy": {
+    "step": "1F",
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Pobierz pełny kalendarz każdego zapisanego kierunku Canaryfly i pełny kalendarz każdej zapisanej trasy Ryanair/Wizz Air, a dopiero potem dopasuj przesiadki.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "primary_route_source": "Oficjalne strony tras Canaryfly oraz oficjalny publiczny endpoint GraphQL booking_calendar i booking_search.",
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Szczegóły lotów pobierane są tylko dla dni oznaczonych jako dostępne w kompletnym kalendarzu miesięcznym przewoźnika."
+  },
+  "fare_feed": {
+    "endpoint": "https://services.canaryfly.es/graphql/main",
+    "calendar_range": "MONTHLY",
+    "currency": "EUR",
+    "airline_code": "PM"
+  },
+  "airports": [
+    {
+      "iata": "FUE",
+      "name_pl": "Fuerteventura",
+      "timezone": "Atlantic/Canary",
+      "tenerife_airports": ["TFN"],
+      "resident_discount_eligible_on_canaryfly_leg": true,
+      "canaryfly_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+      ]
+    },
+    {
+      "iata": "LPA",
+      "name_pl": "Gran Canaria",
+      "timezone": "Atlantic/Canary",
+      "tenerife_airports": ["TFN"],
+      "resident_discount_eligible_on_canaryfly_leg": true,
+      "canaryfly_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+      ]
+    }
+  ],
+  "excluded_airports": [
+    {
+      "iata": "ACE",
+      "name_pl": "Lanzarote",
+      "reason": "Canaryfly lata bezpośrednio z TFN, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    },
+    {
+      "iata": "SPC",
+      "name_pl": "La Palma",
+      "reason": "Canaryfly lata bezpośrednio z TFN, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    },
+    {
+      "iata": "VDE",
+      "name_pl": "El Hierro",
+      "reason": "Canaryfly lata bezpośrednio z TFN, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Canaryfly — TFN-FUE",
+      "url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura",
+      "finding": "Oficjalna strona i jej publiczny endpoint potwierdzają trasę, pełny kalendarz, numery lotów, godziny oraz ceny regularne i rezydenckie."
+    },
+    {
+      "name": "Canaryfly — TFN-LPA",
+      "url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria",
+      "finding": "Oficjalna strona i jej publiczny endpoint potwierdzają trasę, pełny kalendarz, numery lotów, godziny oraz ceny regularne i rezydenckie."
+    },
+    {
+      "name": "Canaryfly — warunki zniżek",
+      "url": "https://www.canaryfly.es/en/legal-information/discount-conditions",
+      "finding": "Przewoźnik opisuje zniżkę dla mieszkańców Wysp Kanaryjskich, a booking_search zwraca osobne kwoty resident i noResident."
+    },
+    {
+      "name": "Oficjalne siatki Ryanair i Wizz Air",
+      "finding": "Bieżące rozkłady potwierdzają trasy FUE-WAW i FUE-KTW linią Wizz Air oraz FUE-KRK i LPA-KRK linią Ryanair w obu kierunkach."
+    }
+  ]
+}

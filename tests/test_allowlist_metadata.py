@@ -49,6 +49,22 @@ class AllowlistMetadataTests(unittest.TestCase):
             override_keys.add(key)
             self.assertIn((item["origin"], item["destination"]), route_keys)
 
+    def test_step1f_canaryfly_allowlist_has_valid_timezones_and_discount(self):
+        document = self.load("canaryfly-transfer-airports.json")
+        self.assertEqual(document["usage_policy"]["step"], "1F")
+        self.assertEqual(
+            {item["iata"] for item in document["airports"]},
+            {"FUE", "LPA"},
+        )
+        for airport in document["airports"]:
+            ZoneInfo(airport["timezone"])
+            self.assertTrue(
+                airport["resident_discount_eligible_on_canaryfly_leg"]
+            )
+            self.assertEqual(
+                airport["canaryfly_resident_fare_multiplier"], 0.25
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

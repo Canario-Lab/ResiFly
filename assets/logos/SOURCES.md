@@ -9,5 +9,7 @@
 - `iberia-express.svg` — Wikimedia Commons, `File:Iberia Express.svg`
 - `volotea.svg` — oficjalny sprite SVG używany przez stronę Volotei,
   `https://www.volotea.com/assets/img/sprite.svg#svg-logo-solid`
+- `canaryfly.svg` — oficjalny plik marki używany przez stronę Canaryfly,
+  `https://www.canaryfly.es/assets/images/logo/Brand.svg`
 
 The names and logos remain trademarks of their respective owners. They are used here only to identify the operating airline.
