@@ -47,7 +47,7 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
-Krok 1 ma dwa niezależne warianty. Oba są częścią tego samego kroku, więc
+Krok 1 ma trzy niezależne warianty. Wszystkie są częścią tego samego kroku, więc
 cała procedura nadal zawiera dokładnie pięć głównych kroków.
 
 ### Krok 1A — Binter + Ryanair lub Wizz Air
@@ -103,6 +103,36 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   zapisywać w `data/step1b-results.json`.
 - Każdy odcinek Iberii otrzymuje trwały `booking_url` z trasą, datą, liczbą
   pasażerów i kodem rezydenta, bez cookies ani tokenów sesji.
+
+### Krok 1C — Vueling + Ryanair lub Wizz Air
+
+- Używać wyłącznie lotnisk i zapisanych połączeń do Polski z kanonicznej listy
+  `data/vueling-transfer-airports.json`. Aktualnie są to: Alicante (ALC),
+  Barcelona (BCN), Bilbao (BIO), Malaga (AGP), Santiago de Compostela (SCQ),
+  Sewilla (SVQ) i Walencja (VLC).
+- Oficjalną stronę Vuelinga z lotami z Teneryfy traktować jako nadrzędne źródło
+  siatki przewoźnika. Aena może służyć tylko jako kontrola pomocnicza; nie wolno
+  budować ani ograniczać listy wyłącznie na podstawie danych Aeny.
+- Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
+  Sprawdza wyłącznie bieżące rozkłady i ceny dla zapisanych kombinacji.
+- Sprawdzić oba kierunki oddzielnie:
+  1. WAW/WMI/KRK/KTW → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
+     TFN linią Vueling.
+  2. TFN → lotnisko przesiadkowe linią Vueling → WAW/WMI/KRK/KTW linią
+     Ryanair albo Wizz Air.
+- Pobierać regularną cenę Vuelinga w PLN z Google Flights zwykłym zapytaniem
+  HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta zapisać jako
+  orientacyjną wartość równą 25% ceny regularnej i oznaczyć sposób wyliczenia.
+- Jeśli Google Flights nie zwróci użytecznych danych Vuelinga, przerwać
+  wykonanie bez nadpisywania poprzedniego pliku wynikowego. Nie tworzyć cen
+  zastępczych.
+- Odcinek Wizz Air lub Ryanair liczyć w pełnej cenie. Nie filtrować wyników
+  cenowo w kolektorze.
+- Generować wariant poleceniem `scripts/collect_step1c.py`, a publiczny wynik
+  zapisywać w `data/step1c-results.json`.
+- Każdy odcinek Vuelinga otrzymuje oficjalny trwały `booking_url` z trasą,
+  datą, liczbą pasażerów i parametrem zniżki rezydenta, bez cookies ani tokenów
+  sesji.
 
 ## Krok 2 — loty bezpośrednie
 

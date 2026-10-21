@@ -160,3 +160,50 @@ def iberia_booking_url(
     })
     return f"https://www.iberia.com/flights/?{query}#!/availability"
 
+
+def vueling_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+    *,
+    adults: int = 1,
+    children: int = 0,
+    infants: int = 0,
+    resident_discount: bool = True,
+    locale: str = "es-ES",
+    currency: str = "EUR",
+) -> str:
+    """Return Vueling's documented, reusable one-way booking deeplink.
+
+    Vueling documents ``dt=1`` as the island/Ceuta resident discount.  The
+    basic deeplink deliberately contains only route, date, passenger and
+    locale data; it has no session token and does not pretend to preselect a
+    fare basis that the collector did not receive from Vueling.
+    """
+
+    passenger_counts = (adults, children, infants)
+    if any(not isinstance(count, int) or count < 0 for count in passenger_counts):
+        raise ValueError("Passenger counts must be non-negative integers")
+    if adults < 1:
+        raise ValueError("At least one adult passenger is required")
+
+    culture = locale.strip()
+    if not re.fullmatch(r"[a-z]{2}-[A-Z]{2}", culture):
+        raise ValueError(f"Invalid locale: {locale!r}")
+    currency_code = currency.strip().upper()
+    if not re.fullmatch(r"[A-Z]{3}", currency_code):
+        raise ValueError(f"Invalid currency: {currency!r}")
+
+    query = urlencode({
+        "o": _iata(origin),
+        "d": _iata(destination),
+        "dd": _departure_date(departure),
+        "dt": 1 if resident_discount else 0,
+        "adt": adults,
+        "chd": children,
+        "inf": infants,
+        "c": culture,
+        "cur": currency_code,
+    })
+    return f"https://tickets.vueling.com/booking?{query}"
+

@@ -108,6 +108,25 @@ class Step1BCollectorTests(unittest.TestCase):
         self.assertEqual(legs[0]["price_source"], "Google Flights")
         self.assertIn("residentCode=RC", legs[0]["booking_url"])
 
+    def test_empty_google_result_is_not_an_error(self):
+        payload = [None] * 8
+        payload[3] = None
+        html = (
+            '<html><script class="ds:1">AF_initDataCallback({data:'
+            + json.dumps(payload)
+            + ', sideChannel: {}});</script></html>'
+        )
+        self.assertEqual(
+            parse_google_flights_response(
+                html,
+                "TFN",
+                "MAD",
+                0.25,
+                {"IB", "I2"},
+            ),
+            [],
+        )
+
     def test_builds_both_directions_without_price_limit(self):
         tenerife_to_madrid = iberia_leg(
             "TFN",

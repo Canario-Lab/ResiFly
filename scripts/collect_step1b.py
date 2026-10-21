@@ -74,7 +74,7 @@ def cli() -> argparse.Namespace:
 
 
 class GoogleFlightsClient:
-    """HTTP-only Google Flights client used for regular Iberia fares."""
+    """HTTP-only Google Flights client used for regular airline fares."""
 
     def __init__(self) -> None:
         self.session = requests.Session(impersonate="chrome")
@@ -99,7 +99,7 @@ class GoogleFlightsClient:
                 if attempt + 1 < 4:
                     time_module.sleep(1.5 * (attempt + 1))
         raise RuntimeError(
-            "Google Flights nie zwrócił wyników dla zapytania Iberii. "
+            "Google Flights nie zwrócił wyników dla zapytania przewoźnika. "
             "Poprzedni plik wynikowy nie został nadpisany."
         ) from last_error
 
@@ -168,9 +168,14 @@ def _google_flights_payload(html: str) -> list[Any]:
     raw = text.split("data:", 1)[1].rsplit(",", 1)[0]
     payload = json.loads(raw)
     try:
-        return payload[3][0] or []
+        result_block = payload[3]
     except (IndexError, TypeError):
         raise RuntimeError("Nieznana struktura wyników Google Flights")
+    if result_block is None:
+        return []
+    if not isinstance(result_block, list) or not result_block:
+        raise RuntimeError("Nieznana struktura wyników Google Flights")
+    return result_block[0] or []
 
 
 def parse_google_flights_response(

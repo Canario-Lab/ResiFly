@@ -1,7 +1,12 @@
 import unittest
 from datetime import datetime, timezone
 
-from scripts.booking_urls import iberia_booking_url, ryanair_booking_url, wizz_booking_url
+from scripts.booking_urls import (
+    iberia_booking_url,
+    ryanair_booking_url,
+    vueling_booking_url,
+    wizz_booking_url,
+)
 
 
 class WizzBookingUrlTests(unittest.TestCase):
@@ -49,6 +54,19 @@ class IberiaBookingUrlTests(unittest.TestCase):
         self.assertIn("residentCode=RC", url)
         self.assertNotIn("token", url.lower())
         self.assertTrue(url.endswith("#!/availability"))
+
+
+class VuelingBookingUrlTests(unittest.TestCase):
+    def test_builds_documented_resident_deeplink_without_session_data(self):
+        url = vueling_booking_url("tfn", "bcn", "2026-11-03T08:30:00+00:00")
+        self.assertTrue(url.startswith("https://tickets.vueling.com/booking?"))
+        self.assertIn("o=TFN", url)
+        self.assertIn("d=BCN", url)
+        self.assertIn("dd=2026-11-03", url)
+        self.assertIn("dt=1", url)
+        self.assertIn("adt=1", url)
+        self.assertIn("c=es-ES", url)
+        self.assertNotIn("token", url.lower())
 
 
 if __name__ == "__main__":

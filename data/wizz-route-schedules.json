@@ -35,6 +35,42 @@
       "duration_minutes": 230
     },
     {
+      "origin": "ALC",
+      "destination": "KTW",
+      "flight_number": "W61080",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "ALC",
+      "destination": "WAW",
+      "flight_number": "W61488",
+      "duration_minutes": 210
+    },
+    {
+      "origin": "BCN",
+      "destination": "KRK",
+      "flight_number": "W62048",
+      "duration_minutes": 175
+    },
+    {
+      "origin": "BCN",
+      "destination": "KTW",
+      "flight_number": "W61176",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WAW",
+      "flight_number": "W61476",
+      "duration_minutes": 185
+    },
+    {
+      "origin": "BCN",
+      "destination": "WMI",
+      "flight_number": "W61412",
+      "duration_minutes": 190
+    },
+    {
       "origin": "BBU",
       "destination": "KRK",
       "flight_number": "W62058",
@@ -81,6 +117,18 @@
       "destination": "WAW",
       "flight_number": "W62467",
       "duration_minutes": 75
+    },
+    {
+      "origin": "BIO",
+      "destination": "KRK",
+      "flight_number": "W62050",
+      "duration_minutes": 180
+    },
+    {
+      "origin": "BIO",
+      "destination": "WAW",
+      "flight_number": "W61456",
+      "duration_minutes": 200
     },
     {
       "origin": "CRL",
@@ -144,6 +192,18 @@
     },
     {
       "origin": "KRK",
+      "destination": "BCN",
+      "flight_number": "W62047",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "KRK",
+      "destination": "BIO",
+      "flight_number": "W62049",
+      "duration_minutes": 190
+    },
+    {
+      "origin": "KRK",
       "destination": "BBU",
       "flight_number": "W62057",
       "duration_minutes": 100
@@ -179,6 +239,12 @@
       "duration_minutes": 115
     },
     {
+      "origin": "KRK",
+      "destination": "VLC",
+      "flight_number": "W62079",
+      "duration_minutes": 185
+    },
+    {
       "origin": "KTW",
       "destination": "AGA",
       "flight_number": "W61077",
@@ -189,6 +255,18 @@
       "destination": "AGP",
       "flight_number": "W61073",
       "duration_minutes": 230
+    },
+    {
+      "origin": "KTW",
+      "destination": "ALC",
+      "flight_number": "W61079",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "KTW",
+      "destination": "BCN",
+      "flight_number": "W61175",
+      "duration_minutes": 170
     },
     {
       "origin": "KTW",
@@ -323,6 +401,12 @@
       "duration_minutes": 220
     },
     {
+      "origin": "SVQ",
+      "destination": "WAW",
+      "flight_number": "W61352",
+      "duration_minutes": 235
+    },
+    {
       "origin": "TFN",
       "destination": "SCQ",
       "flight_number": "W47466",
@@ -359,6 +443,18 @@
       "duration_minutes": 330
     },
     {
+      "origin": "VLC",
+      "destination": "KRK",
+      "flight_number": "W62080",
+      "duration_minutes": 190
+    },
+    {
+      "origin": "VLC",
+      "destination": "WAW",
+      "flight_number": "W61338",
+      "duration_minutes": 200
+    },
+    {
       "origin": "WAW",
       "destination": "AGA",
       "flight_number": "W61599",
@@ -369,6 +465,18 @@
       "destination": "AGP",
       "flight_number": "W61359",
       "duration_minutes": 250
+    },
+    {
+      "origin": "WAW",
+      "destination": "ALC",
+      "flight_number": "W61487",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "WAW",
+      "destination": "BCN",
+      "flight_number": "W61475",
+      "duration_minutes": 185
     },
     {
       "origin": "WAW",
@@ -393,6 +501,12 @@
       "destination": "BUD",
       "flight_number": "W62468",
       "duration_minutes": 80
+    },
+    {
+      "origin": "WAW",
+      "destination": "BIO",
+      "flight_number": "W61455",
+      "duration_minutes": 205
     },
     {
       "origin": "WAW",
@@ -461,6 +575,18 @@
       "duration_minutes": 245
     },
     {
+      "origin": "WAW",
+      "destination": "SVQ",
+      "flight_number": "W61351",
+      "duration_minutes": 245
+    },
+    {
+      "origin": "WAW",
+      "destination": "VLC",
+      "flight_number": "W61337",
+      "duration_minutes": 205
+    },
+    {
       "origin": "WMI",
       "destination": "BGY",
       "flight_number": "W61401",
@@ -471,6 +597,12 @@
       "destination": "SCQ",
       "flight_number": "W61407",
       "duration_minutes": 230
+    },
+    {
+      "origin": "WMI",
+      "destination": "BCN",
+      "flight_number": "W61411",
+      "duration_minutes": 175
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -503,6 +635,30 @@
       "destination": "WAW",
       "departure_time": "21:00",
       "flight_number": "W61434"
+    },
+    {
+      "origin": "ALC",
+      "destination": "WAW",
+      "departure_time": "19:35",
+      "flight_number": "W61490"
+    },
+    {
+      "origin": "BCN",
+      "destination": "KRK",
+      "departure_time": "19:05",
+      "flight_number": "W62096"
+    },
+    {
+      "origin": "BCN",
+      "destination": "KRK",
+      "departure_time": "20:05",
+      "flight_number": "W62096"
+    },
+    {
+      "origin": "BCN",
+      "destination": "WAW",
+      "departure_time": "19:00",
+      "flight_number": "W61478"
     },
     {
       "origin": "BUD",
@@ -577,6 +733,18 @@
       "flight_number": "W62031"
     },
     {
+      "origin": "KRK",
+      "destination": "BCN",
+      "departure_time": "15:25",
+      "flight_number": "W62095"
+    },
+    {
+      "origin": "KRK",
+      "destination": "BCN",
+      "departure_time": "16:30",
+      "flight_number": "W62095"
+    },
+    {
       "origin": "MXP",
       "destination": "WAW",
       "departure_time": "21:05",
@@ -593,6 +761,24 @@
       "destination": "BGY",
       "departure_time": "18:00",
       "flight_number": "W61433"
+    },
+    {
+      "origin": "WAW",
+      "destination": "ALC",
+      "departure_time": "14:35",
+      "flight_number": "W61489"
+    },
+    {
+      "origin": "WAW",
+      "destination": "BCN",
+      "departure_time": "15:05",
+      "flight_number": "W61477"
+    },
+    {
+      "origin": "WAW",
+      "destination": "BCN",
+      "departure_time": "15:55",
+      "flight_number": "W61477"
     },
     {
       "origin": "WAW",

@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Vueling dla kroku 1C",
+  "verified_on": "2026-10-21",
+  "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Vueling + Ryanair/Wizz Air w kroku 1C.",
+  "scope": {
+    "tenerife_airports": [
+      "TFN"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "tenerife_leg_airlines": [
+      "Vueling"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
+  },
+  "usage_policy": {
+    "step": "1C",
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj wyłącznie aktualne rozkłady i ceny dla tras zapisanych w polu airports.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "primary_route_source": "Oficjalna strona Vueling z lotami z Teneryfy; Aena jest wyłącznie potwierdzeniem pomocniczym.",
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1C obejmuje obecnie wyłącznie bezpośrednie odcinki Vueling z/do TFN."
+  },
+  "vueling_airline_codes": {
+    "accepted_marketing": [
+      "VY"
+    ]
+  },
+  "airports": [
+    {
+      "iata": "ALC",
+      "name_pl": "Alicante",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
+        { "polish_airport": "KTW", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+      ]
+    },
+    {
+      "iata": "BCN",
+      "name_pl": "Barcelona",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "WMI", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+      ]
+    },
+    {
+      "iata": "BIO",
+      "name_pl": "Bilbao",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+      ]
+    },
+    {
+      "iata": "AGP",
+      "name_pl": "Malaga",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
+        { "polish_airport": "KTW", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+      ]
+    },
+    {
+      "iata": "SCQ",
+      "name_pl": "Santiago de Compostela",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WMI", "airlines": ["Wizz Air"] }
+      ]
+    },
+    {
+      "iata": "SVQ",
+      "name_pl": "Sewilla",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+      ]
+    },
+    {
+      "iata": "VLC",
+      "name_pl": "Walencja",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "resident_discount_eligible_on_vueling_leg": true,
+      "vueling_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+      ]
+    }
+  ],
+  "excluded_airports": [
+    {
+      "iata": "OVD",
+      "name_pl": "Asturia",
+      "reason": "Vueling lata bezpośrednio z TFN, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    },
+    {
+      "iata": "GRX",
+      "name_pl": "Grenada",
+      "reason": "Vueling lata bezpośrednio z TFN, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    },
+    {
+      "iata": "MAD",
+      "name_pl": "Madryt",
+      "reason": "Strona sprzedażowa Vuelinga może pokazywać ofertę partnera, lecz bezpośredni odcinek Teneryfa–Madryt nie został potwierdzony jako operowany przez Vueling; Madryt obsługuje wariant 1B Iberii."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Vueling — loty z Teneryfy",
+      "url": "https://www.vueling.com/es/vuelos-baratos-desde-tenerife",
+      "finding": "Oficjalna strona Vuelinga pokazuje bezpośrednie oferty z Tenerife Norte do ALC, BCN, BIO, AGP, SCQ, SVQ i VLC oraz do OVD i GRX."
+    },
+    {
+      "name": "Vueling — zniżka rezydenta",
+      "url": "https://help.vueling.com/hc/es/articles/19798792351505-Descuento-para-residentes",
+      "finding": "Vueling potwierdza zniżkę 75% dla uprawnionych mieszkańców na krajowych lotach między Wyspami Kanaryjskimi a Hiszpanią kontynentalną."
+    },
+    {
+      "name": "Aena — Vueling na Tenerife Norte",
+      "url": "https://www.aena.es/es/tenerife-norte-ciudad-de-la-laguna/aerolineas-destinos/aerolineas.html",
+      "finding": "Pomocnicze potwierdzenie lotnisk obsługiwanych przez Vueling; nie jest źródłem nadrzędnym wobec strony przewoźnika."
+    },
+    {
+      "name": "Ryanair route API i Wizz Air route map",
+      "finding": "Aktualne siatki przewoźników użyte do potwierdzenia bezpośredniego drugiego odcinka do co najmniej jednego z czterech polskich lotnisk."
+    }
+  ]
+}

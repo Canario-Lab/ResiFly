@@ -14,7 +14,12 @@ if __package__ in {None, ""}:
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from scripts.booking_urls import iberia_booking_url, ryanair_booking_url, wizz_booking_url
+from scripts.booking_urls import (
+    iberia_booking_url,
+    ryanair_booking_url,
+    vueling_booking_url,
+    wizz_booking_url,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +36,8 @@ def booking_url_for_leg(leg: dict[str, Any]) -> str | None:
         return wizz_booking_url(origin, destination, departure)
     if leg.get("carrier") in {"Iberia", "Iberia Express"}:
         return iberia_booking_url(origin, destination, departure)
+    if leg.get("carrier") == "Vueling":
+        return vueling_booking_url(origin, destination, departure)
     return None
 
 
