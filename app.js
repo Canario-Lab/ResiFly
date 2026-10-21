@@ -93,8 +93,9 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_HIGHLIGHT_DURATION_MS = 30_000;
 const FILTER_RENDER_DELAY_MS = 150;
-const PROGRESSIVE_SCROLL_LOAD_DELAY_MS = 180;
 const RESULT_BATCH_SIZE = 30;
+const BACKGROUND_RESULT_BATCH_SIZE = 10;
+const BACKGROUND_RESULT_FALLBACK_DELAY_MS = 80;
 
 let filterRenderTimer;
 let calendarRenderKey = null;
@@ -103,10 +104,9 @@ let progressiveFilters = null;
 let progressiveResultCount = 0;
 let progressiveLoadedResultIndexes = new Set();
 let progressiveRenderVersion = 0;
-let progressiveObserver = null;
-let progressiveScrollHandler = null;
-let progressiveLoadTimer;
-let progressiveSentinel = null;
+let progressiveIdleHandle = null;
+let progressiveIdleUsesTimeout = false;
+let progressiveResumeHandler = null;
 let progressiveLoadingPaused = false;
 let calendarTargetCard = null;
 
@@ -986,18 +986,30 @@ function fareCalendarRenderKey(filters) {
   ]);
 }
 
+function cancelProgressiveIdleWork() {
+  if (progressiveIdleHandle === null) return;
+  if (progressiveIdleUsesTimeout) {
+    window.clearTimeout(progressiveIdleHandle);
+  } else {
+    window.cancelIdleCallback(progressiveIdleHandle);
+  }
+  progressiveIdleHandle = null;
+  progressiveIdleUsesTimeout = false;
+}
+
+function disarmProgressiveResume() {
+  if (!progressiveResumeHandler) return;
+  window.removeEventListener("wheel", progressiveResumeHandler);
+  window.removeEventListener("touchmove", progressiveResumeHandler);
+  window.removeEventListener("keydown", progressiveResumeHandler);
+  progressiveResumeHandler = null;
+}
+
 function stopProgressiveRendering() {
   progressiveRenderVersion += 1;
   window.clearTimeout(calendarHighlightTimer);
-  window.clearTimeout(progressiveLoadTimer);
-  progressiveLoadTimer = undefined;
-  progressiveObserver?.disconnect();
-  progressiveObserver = null;
-  if (progressiveScrollHandler) {
-    window.removeEventListener("scroll", progressiveScrollHandler);
-    progressiveScrollHandler = null;
-  }
-  progressiveSentinel = null;
+  cancelProgressiveIdleWork();
+  disarmProgressiveResume();
   progressiveResults = [];
   progressiveFilters = null;
   progressiveResultCount = 0;
@@ -1009,23 +1021,26 @@ function stopProgressiveRendering() {
 function resumeProgressiveLoading(expectedVersion = progressiveRenderVersion) {
   if (expectedVersion !== progressiveRenderVersion) return;
   progressiveLoadingPaused = false;
-  renderProgressiveSentinelLoading();
-  appendNextResultBatch(expectedVersion);
-  progressiveLoadingPaused = true;
-  renderProgressiveSentinelPaused(expectedVersion);
+  disarmProgressiveResume();
+  scheduleProgressiveBackground(expectedVersion);
+}
+
+function armProgressiveResume(expectedVersion) {
+  disarmProgressiveResume();
+  const scrollKeys = new Set(["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "]);
+  progressiveResumeHandler = event => {
+    if (event.type === "keydown" && !scrollKeys.has(event.key)) return;
+    resumeProgressiveLoading(expectedVersion);
+  };
+  window.addEventListener("wheel", progressiveResumeHandler, { passive: true });
+  window.addEventListener("touchmove", progressiveResumeHandler, { passive: true });
+  window.addEventListener("keydown", progressiveResumeHandler);
 }
 
 function pauseProgressiveLoading() {
   progressiveLoadingPaused = true;
-  window.clearTimeout(progressiveLoadTimer);
-  progressiveLoadTimer = undefined;
-  progressiveObserver?.disconnect();
-  progressiveObserver = null;
-  if (progressiveScrollHandler) {
-    window.removeEventListener("scroll", progressiveScrollHandler);
-    progressiveScrollHandler = null;
-  }
-  renderProgressiveSentinelPaused(progressiveRenderVersion);
+  cancelProgressiveIdleWork();
+  armProgressiveResume(progressiveRenderVersion);
 }
 
 function visibleCalendarTargetTop() {
@@ -1041,53 +1056,11 @@ function restoreCalendarTargetPosition(previousTop) {
   if (Math.abs(shift) >= 1) window.scrollBy(0, shift);
 }
 
-function renderProgressiveSentinelLoading(expectedVersion = progressiveRenderVersion) {
-  if (!progressiveSentinel) return;
-  progressiveSentinel.classList.remove("is-paused");
-  const loader = document.createElement("span");
-  loader.className = "loader";
-  loader.setAttribute("aria-hidden", "true");
-  const label = document.createElement("span");
-  label.className = "results-load-sentinel-label";
-  const loadMore = document.createElement("button");
-  loadMore.className = "results-load-more";
-  loadMore.type = "button";
-  loadMore.textContent = "Wczytaj 30 kolejnych wyników";
-  loadMore.addEventListener("click", () => {
-    window.clearTimeout(progressiveLoadTimer);
-    progressiveLoadTimer = undefined;
-    appendNextResultBatch(expectedVersion);
-  });
-  progressiveSentinel.replaceChildren(loader, label, loadMore);
-}
-
-function renderProgressiveSentinelPaused(expectedVersion) {
-  if (!progressiveSentinel) return;
-  progressiveSentinel.classList.add("is-paused");
-  const message = document.createElement("span");
-  message.textContent = "Dogrywanie wstrzymane, aby wskazany lot pozostał na ekranie.";
-  const resume = document.createElement("button");
-  resume.className = "results-load-more";
-  resume.type = "button";
-  resume.textContent = "Wczytaj 30 kolejnych wyników";
-  resume.addEventListener("click", () => resumeProgressiveLoading(expectedVersion));
-  progressiveSentinel.replaceChildren(message, resume);
-}
-
-function updateProgressiveSentinel() {
-  if (!progressiveSentinel) return;
-  const label = progressiveSentinel.querySelector(".results-load-sentinel-label");
-  if (label) {
-    label.textContent = `Wyświetlono ${progressiveLoadedResultIndexes.size} z ${progressiveResults.length}. Przewiń niżej lub użyj przycisku.`;
-  }
-}
-
 function renderResultAtIndex(index) {
   if (
     progressiveLoadedResultIndexes.has(index) ||
     !progressiveResults[index] ||
-    !progressiveFilters ||
-    !progressiveSentinel?.isConnected
+    !progressiveFilters
   ) return;
 
   const fragment = createResultCard(progressiveResults[index], progressiveFilters);
@@ -1095,21 +1068,23 @@ function renderResultAtIndex(index) {
   card.dataset.resultIndex = String(index);
   const nextCard = [...elements.list.querySelectorAll(".flight-card")]
     .find(item => Number(item.dataset.resultIndex) > index);
-  elements.list.insertBefore(fragment, nextCard || progressiveSentinel);
+  elements.list.insertBefore(fragment, nextCard || null);
   progressiveLoadedResultIndexes.add(index);
 }
 
-function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
+function appendNextResultBatch(
+  expectedVersion = progressiveRenderVersion,
+  batchSize = RESULT_BATCH_SIZE
+) {
   if (
     expectedVersion !== progressiveRenderVersion ||
     progressiveLoadingPaused ||
-    !progressiveFilters ||
-    !progressiveSentinel?.isConnected
+    !progressiveFilters
   ) return;
 
   const calendarTargetTop = visibleCalendarTargetTop();
   let appended = 0;
-  while (progressiveResultCount < progressiveResults.length && appended < RESULT_BATCH_SIZE) {
+  while (progressiveResultCount < progressiveResults.length && appended < batchSize) {
     const index = progressiveResultCount;
     progressiveResultCount += 1;
     if (progressiveLoadedResultIndexes.has(index)) continue;
@@ -1119,72 +1094,44 @@ function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
   restoreCalendarTargetPosition(calendarTargetTop);
 
   if (progressiveResultCount >= progressiveResults.length) {
-    window.clearTimeout(progressiveLoadTimer);
-    progressiveLoadTimer = undefined;
-    progressiveObserver?.disconnect();
-    progressiveObserver = null;
-    if (progressiveScrollHandler) {
-      window.removeEventListener("scroll", progressiveScrollHandler);
-      progressiveScrollHandler = null;
-    }
-    progressiveSentinel.remove();
-    progressiveSentinel = null;
-    return;
+    cancelProgressiveIdleWork();
+    disarmProgressiveResume();
   }
-
-  updateProgressiveSentinel();
 }
 
-function queueNextResultBatch(expectedVersion) {
+function scheduleProgressiveBackground(expectedVersion) {
   if (
-    progressiveLoadTimer ||
+    progressiveIdleHandle !== null ||
     progressiveLoadingPaused ||
     expectedVersion !== progressiveRenderVersion ||
-    !progressiveSentinel?.isConnected
+    progressiveResultCount >= progressiveResults.length
   ) return;
 
-  progressiveLoadTimer = window.setTimeout(() => {
-    progressiveLoadTimer = undefined;
-    appendNextResultBatch(expectedVersion);
-  }, PROGRESSIVE_SCROLL_LOAD_DELAY_MS);
-}
-
-function observeProgressiveSentinel(expectedVersion) {
-  if (!progressiveSentinel || progressiveLoadingPaused) return;
-
-  progressiveObserver?.disconnect();
-  progressiveObserver = null;
-  if (progressiveScrollHandler) {
-    window.removeEventListener("scroll", progressiveScrollHandler);
-    progressiveScrollHandler = null;
-  }
-
-  progressiveScrollHandler = () => {
+  const renderWhenIdle = deadline => {
+    progressiveIdleHandle = null;
+    progressiveIdleUsesTimeout = false;
     if (
       progressiveLoadingPaused ||
-      expectedVersion !== progressiveRenderVersion ||
-      !progressiveSentinel?.isConnected
+      expectedVersion !== progressiveRenderVersion
     ) return;
-    const bounds = progressiveSentinel.getBoundingClientRect();
-    if (bounds.top <= window.innerHeight + 600 && bounds.bottom >= -600) {
-      queueNextResultBatch(expectedVersion);
+    if (deadline && !deadline.didTimeout && deadline.timeRemaining() < 5) {
+      scheduleProgressiveBackground(expectedVersion);
+      return;
     }
+    appendNextResultBatch(expectedVersion, BACKGROUND_RESULT_BATCH_SIZE);
+    scheduleProgressiveBackground(expectedVersion);
   };
-  window.addEventListener("scroll", progressiveScrollHandler, { passive: true });
 
-  if (!("IntersectionObserver" in window)) {
-    return;
+  if ("requestIdleCallback" in window) {
+    progressiveIdleUsesTimeout = false;
+    progressiveIdleHandle = window.requestIdleCallback(renderWhenIdle, { timeout: 1000 });
+  } else {
+    progressiveIdleUsesTimeout = true;
+    progressiveIdleHandle = window.setTimeout(
+      () => renderWhenIdle(null),
+      BACKGROUND_RESULT_FALLBACK_DELAY_MS
+    );
   }
-
-  progressiveObserver = new IntersectionObserver(entries => {
-    if (
-      progressiveLoadingPaused ||
-      !entries.some(entry => entry.isIntersecting) ||
-      !progressiveSentinel
-    ) return;
-    queueNextResultBatch(expectedVersion);
-  }, { rootMargin: "600px 0px" });
-  progressiveObserver.observe(progressiveSentinel);
 }
 
 function renderResultCards(results, filters) {
@@ -1193,17 +1140,9 @@ function renderResultCards(results, filters) {
   progressiveResults = results;
   progressiveFilters = filters;
 
-  progressiveSentinel = document.createElement("div");
-  progressiveSentinel.className = "results-load-sentinel";
-  progressiveSentinel.setAttribute("role", "status");
-  renderProgressiveSentinelLoading(expectedVersion);
-  elements.list.replaceChildren(progressiveSentinel);
+  elements.list.replaceChildren();
   appendNextResultBatch(expectedVersion);
-  for (const day of elements.calendarMonths.querySelectorAll(".calendar-day[data-result-id]")) {
-    ensureResultRendered(day.dataset.resultId);
-  }
-  updateProgressiveSentinel();
-  observeProgressiveSentinel(expectedVersion);
+  scheduleProgressiveBackground(expectedVersion);
 }
 
 function ensureResultRendered(resultId) {
