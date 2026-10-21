@@ -916,7 +916,7 @@ input[type="range"]::-moz-range-thumb {
   overflow: hidden;
   color: var(--muted);
   font-family: "DM Sans", sans-serif;
-  font-size: 0.56rem;
+  font-size: 0.78rem;
   font-weight: 600;
   line-height: 1.1;
   text-overflow: ellipsis;
