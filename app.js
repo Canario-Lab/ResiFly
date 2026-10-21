@@ -91,7 +91,9 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 });
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
-const CALENDAR_HIGHLIGHT_DURATION_MS = 12_000;
+const CALENDAR_HIGHLIGHT_DURATION_MS = 30_000;
+const CALENDAR_SCROLL_CHECK_MS = 100;
+const CALENDAR_SCROLL_TIMEOUT_MS = 8_000;
 const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
 
@@ -104,6 +106,11 @@ let progressiveLoadedResultIndexes = new Set();
 let progressiveRenderVersion = 0;
 let progressiveObserver = null;
 let progressiveSentinel = null;
+let progressiveLoadingPaused = false;
+let progressiveResumeTimer;
+let calendarTargetLockReady = false;
+let calendarTargetCard = null;
+let calendarTargetObserver = null;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -425,6 +432,8 @@ function scrollToResult(resultId) {
   });
   setCardDetailsExpanded(card, true);
   card.classList.add("is-calendar-target");
+  calendarTargetCard = card;
+  pauseProgressiveLoading();
   card.scrollIntoView({
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     block: "center",
@@ -981,6 +990,8 @@ function fareCalendarRenderKey(filters) {
 
 function stopProgressiveRendering() {
   progressiveRenderVersion += 1;
+  window.clearTimeout(progressiveResumeTimer);
+  window.clearTimeout(calendarHighlightTimer);
   progressiveObserver?.disconnect();
   progressiveObserver = null;
   progressiveSentinel = null;
@@ -988,6 +999,90 @@ function stopProgressiveRendering() {
   progressiveFilters = null;
   progressiveResultCount = 0;
   progressiveLoadedResultIndexes = new Set();
+  progressiveLoadingPaused = false;
+  calendarTargetObserver?.disconnect();
+  calendarTargetObserver = null;
+  calendarTargetLockReady = false;
+  calendarTargetCard = null;
+}
+
+function resumeProgressiveLoading(expectedVersion = progressiveRenderVersion) {
+  if (expectedVersion !== progressiveRenderVersion) return;
+  progressiveLoadingPaused = false;
+  calendarTargetObserver?.disconnect();
+  calendarTargetObserver = null;
+  calendarTargetLockReady = false;
+  observeProgressiveSentinel(expectedVersion);
+}
+
+function lockProgressiveLoadingToCalendarTarget(expectedVersion) {
+  if (expectedVersion !== progressiveRenderVersion || !calendarTargetCard?.isConnected) return;
+  calendarTargetLockReady = true;
+  calendarTargetObserver?.disconnect();
+  if (!("IntersectionObserver" in window)) return;
+
+  const target = calendarTargetCard;
+  calendarTargetObserver = new IntersectionObserver(entries => {
+    const targetEntry = entries.find(entry => entry.target === target);
+    if (
+      targetEntry &&
+      !targetEntry.isIntersecting &&
+      expectedVersion === progressiveRenderVersion &&
+      progressiveLoadingPaused &&
+      calendarTargetLockReady
+    ) {
+      resumeProgressiveLoading(expectedVersion);
+    }
+  }, { threshold: 0.01 });
+  calendarTargetObserver.observe(target);
+}
+
+function waitForCalendarTargetToSettle(expectedVersion, startedAt, previousTop = null, stableChecks = 0) {
+  progressiveResumeTimer = window.setTimeout(() => {
+    if (expectedVersion !== progressiveRenderVersion || !calendarTargetCard?.isConnected) return;
+    const currentTop = visibleCalendarTargetTop();
+    const nextStableChecks = currentTop !== null && previousTop !== null && Math.abs(currentTop - previousTop) < 1
+      ? stableChecks + 1
+      : 0;
+
+    if (nextStableChecks >= 3) {
+      lockProgressiveLoadingToCalendarTarget(expectedVersion);
+      return;
+    }
+
+    if (performance.now() - startedAt >= CALENDAR_SCROLL_TIMEOUT_MS) {
+      if (currentTop === null) resumeProgressiveLoading(expectedVersion);
+      else lockProgressiveLoadingToCalendarTarget(expectedVersion);
+      return;
+    }
+
+    waitForCalendarTargetToSettle(expectedVersion, startedAt, currentTop, nextStableChecks);
+  }, CALENDAR_SCROLL_CHECK_MS);
+}
+
+function pauseProgressiveLoading() {
+  progressiveLoadingPaused = true;
+  calendarTargetLockReady = false;
+  progressiveObserver?.disconnect();
+  progressiveObserver = null;
+  calendarTargetObserver?.disconnect();
+  calendarTargetObserver = null;
+  window.clearTimeout(progressiveResumeTimer);
+  const expectedVersion = progressiveRenderVersion;
+  waitForCalendarTargetToSettle(expectedVersion, performance.now());
+}
+
+function visibleCalendarTargetTop() {
+  if (!calendarTargetCard?.isConnected) return null;
+  const bounds = calendarTargetCard.getBoundingClientRect();
+  if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return null;
+  return bounds.top;
+}
+
+function restoreCalendarTargetPosition(previousTop) {
+  if (previousTop === null || !calendarTargetCard?.isConnected) return;
+  const shift = calendarTargetCard.getBoundingClientRect().top - previousTop;
+  if (Math.abs(shift) >= 1) window.scrollBy(0, shift);
 }
 
 function updateProgressiveSentinel() {
@@ -1022,11 +1117,13 @@ function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
     !progressiveSentinel?.isConnected
   ) return;
 
+  const calendarTargetTop = visibleCalendarTargetTop();
   const end = Math.min(progressiveResultCount + RESULT_BATCH_SIZE, progressiveResults.length);
   for (let index = progressiveResultCount; index < end; index += 1) {
     renderResultAtIndex(index);
   }
   progressiveResultCount = end;
+  restoreCalendarTargetPosition(calendarTargetTop);
 
   if (progressiveResultCount >= progressiveResults.length) {
     progressiveObserver?.disconnect();
@@ -1040,7 +1137,10 @@ function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
 }
 
 function observeProgressiveSentinel(expectedVersion) {
-  if (!progressiveSentinel) return;
+  if (!progressiveSentinel || progressiveLoadingPaused) return;
+
+  progressiveObserver?.disconnect();
+  progressiveObserver = null;
 
   if (!("IntersectionObserver" in window)) {
     const button = document.createElement("button");
@@ -1053,13 +1153,19 @@ function observeProgressiveSentinel(expectedVersion) {
   }
 
   progressiveObserver = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting) || !progressiveSentinel) return;
+    if (
+      progressiveLoadingPaused ||
+      !entries.some(entry => entry.isIntersecting) ||
+      !progressiveSentinel
+    ) return;
     const sentinel = progressiveSentinel;
     progressiveObserver.unobserve(sentinel);
     window.requestAnimationFrame(() => {
+      if (progressiveLoadingPaused || expectedVersion !== progressiveRenderVersion) return;
       appendNextResultBatch(expectedVersion);
       if (
         expectedVersion === progressiveRenderVersion &&
+        !progressiveLoadingPaused &&
         progressiveObserver &&
         progressiveSentinel?.isConnected
       ) {
