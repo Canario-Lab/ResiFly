@@ -5,6 +5,7 @@ import unittest
 
 from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
 from scripts.collect_step1d import (
+    air_europa_route_days,
     build_connections,
     collect_air_europa_legs,
     extract_sputnik_config,
@@ -97,6 +98,19 @@ class Step1DCollectorTests(unittest.TestCase):
         self.assertIn(("Ryanair", "KRK", "MAD"), routes)
         self.assertIn(("Wizz Air", "BIO", "KRK"), routes)
         self.assertNotIn(("Ryanair", "BIO", "WAW"), routes)
+
+    def test_route_days_cover_every_day_in_both_directions(self):
+        start = date(2026, 10, 21)
+        end = date(2026, 11, 20)
+        route_days = air_europa_route_days(self.allowlist, start, end)
+        route_pairs = sum(
+            len(airport["tenerife_airports"])
+            for airport in self.allowlist["airports"]
+        )
+        self.assertEqual(len(route_days), route_pairs * 2 * 31)
+        for day in (start, date(2026, 11, 5), end):
+            self.assertIn(("TFN", "MAD", day), route_days)
+            self.assertIn(("MAD", "TFN", day), route_days)
 
     def test_extracts_dynamic_key_from_official_page_config(self):
         next_data = {

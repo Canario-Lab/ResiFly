@@ -36,6 +36,7 @@ from scripts.collect_step1 import (
     TENERIFE_AIRPORTS,
     CurrencyRate,
     configure_airports_from_allowlist,
+    date_range,
     dt,
     money_pln,
     nbp_eur_rate,
@@ -210,31 +211,25 @@ def low_cost_route_matrix(
     return sorted(routes)
 
 
-def candidate_air_europa_trips(
-    low_cost_legs: list[dict[str, Any]],
-    transfer_rules: dict[str, dict[str, Any]],
+def air_europa_route_days(
+    allowlist: dict[str, Any],
     start: date,
     end: date,
 ) -> set[tuple[str, str, date]]:
-    candidates: set[tuple[str, str, date]] = set()
-    for leg in low_cost_legs:
-        origin = leg["departure_airport"]
-        destination = leg["arrival_airport"]
-        if origin in POLISH_AIRPORTS:
-            transfer = destination
-            arrival_day = date.fromisoformat(leg["arrival_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for day in (arrival_day, arrival_day + timedelta(days=1)):
-                    if start <= day <= end:
-                        candidates.add((transfer, tenerife, day))
-        else:
-            transfer = origin
-            departure_day = date.fromisoformat(leg["departure_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for day in (departure_day - timedelta(days=1), departure_day):
-                    if start <= day <= end:
-                        candidates.add((tenerife, transfer, day))
-    return candidates
+    """Return every saved Air Europa route/day in both directions.
+
+    Air Europa's calendar must be collected independently of the low-cost
+    timetable. Connections are matched only after the complete carrier
+    window has been fetched.
+    """
+
+    route_days: set[tuple[str, str, date]] = set()
+    for transfer in allowlist["airports"]:
+        for tenerife in transfer["tenerife_airports"]:
+            for day in date_range(start, end):
+                route_days.add((tenerife, transfer["iata"], day))
+                route_days.add((transfer["iata"], tenerife, day))
+    return route_days
 
 
 def parse_air_europa_fares(
@@ -300,22 +295,22 @@ def scheduled_departures(
 
 
 def collect_air_europa_legs(
-    candidates: set[tuple[str, str, date]],
+    route_days: set[tuple[str, str, date]],
     allowlist: dict[str, Any],
     rates: dict[str, CurrencyRate],
     client: AirEuropaFareClient,
 ) -> list[dict[str, Any]]:
-    if not candidates:
+    if not route_days:
         return []
     config = allowlist["fare_feed"]
     rules = {airport["iata"]: airport for airport in allowlist["airports"]}
-    route_days: dict[tuple[str, str], set[date]] = {}
-    for origin, destination, day in candidates:
-        route_days.setdefault((origin, destination), set()).add(day)
+    grouped_route_days: dict[tuple[str, str], set[date]] = {}
+    for origin, destination, day in route_days:
+        grouped_route_days.setdefault((origin, destination), set()).add(day)
 
     legs: list[dict[str, Any]] = []
-    for origin, destination in sorted(route_days):
-        days = route_days[(origin, destination)]
+    for origin, destination in sorted(grouped_route_days):
+        days = grouped_route_days[(origin, destination)]
         payload = client.search(origin, destination, min(days), max(days))
         fares = parse_air_europa_fares(
             payload, origin, destination, config["airline_code"]
@@ -455,7 +450,6 @@ def main() -> None:
     validate_allowlist(allowlist)
     validate_schedule_window(allowlist, args.from_date, end)
     configure_airports_from_allowlist(allowlist)
-    rules = {airport["iata"]: airport for airport in allowlist["airports"]}
 
     eur = nbp_eur_rate(args.from_date)
     rates = {"EUR": eur, "PLN": CurrencyRate("PLN", 1.0)}
@@ -471,9 +465,8 @@ def main() -> None:
             "Nie pobrano żadnego odcinka Wizz/Ryanair; wynik 1D nie zostanie nadpisany"
         )
 
-    candidates = candidate_air_europa_trips(
-        low_cost, rules, args.from_date, end
-    )
+    route_days = air_europa_route_days(allowlist, args.from_date, end)
+    print(f"Dni tras Air Europa do sprawdzenia: {len(route_days)}", flush=True)
     config = allowlist["fare_feed"]
     client = AirEuropaFareClient(
         config["config_page"],
@@ -481,8 +474,8 @@ def main() -> None:
         config["market"],
         config["language"],
     )
-    air_europa = collect_air_europa_legs(candidates, allowlist, rates, client)
-    if candidates and not air_europa:
+    air_europa = collect_air_europa_legs(route_days, allowlist, rates, client)
+    if route_days and not air_europa:
         raise RuntimeError(
             "Oficjalny feed Air Europa nie zwrócił użytecznych cen; "
             "wynik 1D nie zostanie nadpisany"

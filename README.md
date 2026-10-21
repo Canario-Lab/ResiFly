@@ -60,9 +60,11 @@ trzeba zmieniać kodu kolektora. Warianty 1B, 1C, 1D i 1E korzystają analogiczn
 listy zawierają wyłącznie trasy danego przewoźnika objęte zniżką rezydenta
 Wysp Kanaryjskich. Dla 1C nadrzędnym źródłem siatki jest oficjalna strona
 Vuelinga, a Aena służy tylko jako potwierdzenie pomocnicze.
-Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air Europa; zapisane
-szablony rozkładu mają okres ważności i muszą zostać ponownie zweryfikowane po
-jego zakończeniu.
+Warianty 1C i 1D sprawdzają każdy dzień pełnego okna dat w obu kierunkach,
+niezależnie od rozkładu Wizz Air/Ryanair, i dopiero potem dopasowują możliwe
+przesiadki. Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air
+Europa; zapisane szablony rozkładu mają okres ważności i muszą zostać ponownie
+zweryfikowane po jego zakończeniu.
 Wariant 1E pobiera rozkład, numer lotu i cenę bezpośrednio z oficjalnego
 publicznego endpointu Volotei, osobno dla każdego dnia pełnego okna dat i w obu
 kierunkach; dopiero potem dopasowuje możliwe przesiadki.

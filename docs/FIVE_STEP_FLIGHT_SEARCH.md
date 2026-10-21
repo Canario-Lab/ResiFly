@@ -123,6 +123,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Pobierać regularną cenę Vuelinga w PLN z Google Flights zwykłym zapytaniem
   HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta zapisać jako
   orientacyjną wartość równą 25% ceny regularnej i oznaczyć sposób wyliczenia.
+- Sprawdzać każdy dzień pełnego skonfigurowanego okna dat dla każdej zapisanej
+  trasy Vuelinga w obu kierunkach, niezależnie od dni lotów Wizz Air/Ryanair.
+  Dopiero po pełnym skanie Vuelinga dopasowywać możliwe przesiadki.
 - Jeśli Google Flights nie zwróci użytecznych danych Vuelinga, przerwać
   wykonanie bez nadpisywania poprzedniego pliku wynikowego. Nie tworzyć cen
   zastępczych.
@@ -148,6 +151,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Regularną cenę Air Europa pobierać z oficjalnego feedu jako najniższą cenę
   dla trasy i dnia. Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25%
   tej ceny; podatki mogą nie podlegać pełnej zniżce.
+- Sprawdzać każdy dzień pełnego skonfigurowanego okna dat dla każdej zapisanej
+  trasy Air Europa w obu kierunkach, niezależnie od dni lotów Wizz Air/Ryanair.
+  Dopiero po pełnym skanie Air Europa dopasowywać możliwe przesiadki.
 - Feed taryfowy nie podaje godzin ani numerów lotów. Korzystać wyłącznie z
   datowanych, zweryfikowanych szablonów rozkładu w allowliście. Jeśli okno
   wykracza poza ich ważność, przerwać bez nadpisywania wyników zamiast

@@ -33,6 +33,7 @@ from scripts.collect_step1 import (
     CurrencyRate,
     collect_ryanair_route,
     configure_airports_from_allowlist,
+    date_range,
     dt,
     nbp_eur_rate,
     serialize_datetime,
@@ -173,31 +174,25 @@ def collect_low_cost_legs(
     return legs
 
 
-def candidate_vueling_trips(
-    low_cost_legs: list[dict[str, Any]],
-    transfer_rules: dict[str, dict[str, Any]],
+def vueling_route_days(
+    allowlist: dict[str, Any],
     start: date,
     end: date,
 ) -> set[tuple[str, str, date]]:
-    candidates: set[tuple[str, str, date]] = set()
-    for leg in low_cost_legs:
-        origin = leg["departure_airport"]
-        destination = leg["arrival_airport"]
-        if origin in POLISH_AIRPORTS:
-            transfer = destination
-            arrival_day = date.fromisoformat(leg["arrival_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for candidate_day in (arrival_day, arrival_day + timedelta(days=1)):
-                    if start <= candidate_day <= end:
-                        candidates.add((transfer, tenerife, candidate_day))
-        else:
-            transfer = origin
-            departure_day = date.fromisoformat(leg["departure_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for candidate_day in (departure_day - timedelta(days=1), departure_day):
-                    if start <= candidate_day <= end:
-                        candidates.add((tenerife, transfer, candidate_day))
-    return candidates
+    """Return every saved Vueling route/day in both directions.
+
+    Vueling's calendar must be collected independently of the low-cost
+    timetable. Connections are matched only after the complete Vueling
+    window has been fetched.
+    """
+
+    route_days: set[tuple[str, str, date]] = set()
+    for transfer in allowlist["airports"]:
+        for tenerife in transfer["tenerife_airports"]:
+            for day in date_range(start, end):
+                route_days.add((tenerife, transfer["iata"], day))
+                route_days.add((transfer["iata"], tenerife, day))
+    return route_days
 
 
 def parse_google_flights_response(
@@ -273,15 +268,15 @@ def parse_google_flights_response(
 
 
 def collect_vueling_legs(
-    candidates: set[tuple[str, str, date]],
+    route_days: set[tuple[str, str, date]],
     transfer_rules: dict[str, dict[str, Any]],
     airline_codes: dict[str, Any],
     workers: int,
 ) -> list[dict[str, Any]]:
-    if not candidates:
+    if not route_days:
         return []
     accepted_marketing = set(airline_codes["accepted_marketing"])
-    ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
+    ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
 
     def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
         origin, destination, day = candidate
@@ -425,20 +420,15 @@ def main() -> None:
             "Nie pobrano żadnego odcinka Wizz/Ryanair; wynik nie zostanie nadpisany"
         )
     print(f"Odcinki Ryanair/Wizz Air: {len(low_cost_legs)}", flush=True)
-    candidates = candidate_vueling_trips(
-        low_cost_legs,
-        transfer_rules,
-        args.from_date,
-        end,
-    )
-    print(f"Zapytania Vueling do sprawdzenia: {len(candidates)}", flush=True)
+    route_days = vueling_route_days(allowlist, args.from_date, end)
+    print(f"Zapytania Vueling do sprawdzenia: {len(route_days)}", flush=True)
     vueling_legs = collect_vueling_legs(
-        candidates,
+        route_days,
         transfer_rules,
         allowlist["vueling_airline_codes"],
         args.workers,
     )
-    if candidates and not vueling_legs:
+    if route_days and not vueling_legs:
         raise RuntimeError(
             "Vueling nie zwrócił żadnych odcinków; wynik nie zostanie nadpisany"
         )

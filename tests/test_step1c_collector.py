@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from pathlib import Path
 import unittest
 
@@ -9,6 +10,7 @@ from scripts.collect_step1c import (
     parse_google_flights_response,
     validate_allowlist,
     validate_document,
+    vueling_route_days,
 )
 
 
@@ -73,6 +75,19 @@ class Step1CCollectorTests(unittest.TestCase):
         self.assertIn(("Wizz Air", "BCN", "WAW"), routes)
         self.assertIn(("Ryanair", "WMI", "ALC"), routes)
         self.assertNotIn(("Ryanair", "BIO", "WAW"), routes)
+
+    def test_route_days_cover_every_day_in_both_directions(self):
+        start = date(2026, 10, 21)
+        end = date(2026, 11, 20)
+        route_days = vueling_route_days(self.allowlist, start, end)
+        route_pairs = sum(
+            len(airport["tenerife_airports"])
+            for airport in self.allowlist["airports"]
+        )
+        self.assertEqual(len(route_days), route_pairs * 2 * 31)
+        for day in (start, date(2026, 11, 5), end):
+            self.assertIn(("TFN", "BCN", day), route_days)
+            self.assertIn(("BCN", "TFN", day), route_days)
 
     @staticmethod
     def google_html(*offers):

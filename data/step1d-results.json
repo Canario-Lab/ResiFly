@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T15:40:47+01:00",
+  "generated_at": "2026-10-21T17:45:12+01:00",
   "period_from": "2026-10-21",
   "period_to": "2026-11-20",
   "step": "1D",
@@ -31,6 +31,55 @@
   },
   "result_status": "ok",
   "results": [
+    {
+      "id": "step1d-bb2f1713140a3406",
+      "origin_airport": "WAW",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1295,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61471",
+          "departure_airport": "WAW",
+          "departure_at": "2026-10-22T05:35:00+02:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-10-22T09:25:00+02:00",
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 619.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/MAD/2026-10-22/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 619.0
+        },
+        {
+          "carrier": "Air Europa",
+          "flight_number": "UX",
+          "departure_airport": "MAD",
+          "departure_at": "2026-10-23T07:00:00+02:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-23T08:55:00+01:00",
+          "price_regular_pln": 267.61,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 66.9,
+          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
+          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
+          "price_source": "Air Europa official branded fare feed",
+          "price_scope": "lowest_official_route_day_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 61.32,
+          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
+        }
+      ],
+      "price_total_regular_pln": 886.61,
+      "price_total_resident_estimated_pln": 685.9
+    },
     {
       "id": "step1d-5948f86d4b739891",
       "origin_airport": "WAW",
@@ -64,21 +113,21 @@
           "departure_at": "2026-10-22T11:45:00+02:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-22T13:40:00+01:00",
-          "price_regular_pln": 180.54,
+          "price_regular_pln": 761.84,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 45.13,
+          "price_resident_estimated_pln": 190.46,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261022&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 41.37,
+          "price_source_amount": 174.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 799.54,
-      "price_total_resident_estimated_pln": 664.13
+      "price_total_regular_pln": 1380.84,
+      "price_total_resident_estimated_pln": 809.46
     },
     {
       "id": "step1d-80505dc1b40dfe49",
@@ -113,70 +162,21 @@
           "departure_at": "2026-10-22T15:05:00+02:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-22T17:00:00+01:00",
-          "price_regular_pln": 180.54,
+          "price_regular_pln": 761.84,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 45.13,
+          "price_resident_estimated_pln": 190.46,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261022&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 41.37,
+          "price_source_amount": 174.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 799.54,
-      "price_total_resident_estimated_pln": 664.13
-    },
-    {
-      "id": "step1d-bb2f1713140a3406",
-      "origin_airport": "WAW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "MAD",
-      "layover_minutes": 1295,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61471",
-          "departure_airport": "WAW",
-          "departure_at": "2026-10-22T05:35:00+02:00",
-          "arrival_airport": "MAD",
-          "arrival_at": "2026-10-22T09:25:00+02:00",
-          "price_regular_pln": 619.0,
-          "price_wizz_discount_club_pln": 573.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 619.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/MAD/2026-10-22/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 619.0
-        },
-        {
-          "carrier": "Air Europa",
-          "flight_number": "UX",
-          "departure_airport": "MAD",
-          "departure_at": "2026-10-23T07:00:00+02:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-23T08:55:00+01:00",
-          "price_regular_pln": 814.21,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 203.55,
-          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
-          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
-          "price_source": "Air Europa official branded fare feed",
-          "price_scope": "lowest_official_route_day_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 186.57,
-          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
-        }
-      ],
-      "price_total_regular_pln": 1433.21,
-      "price_total_resident_estimated_pln": 822.55
+      "price_total_regular_pln": 1380.84,
+      "price_total_resident_estimated_pln": 809.46
     },
     {
       "id": "step1d-3a16e9e65c2f37e2",
@@ -309,21 +309,21 @@
           "departure_at": "2026-10-23T15:05:00+02:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-23T17:00:00+01:00",
-          "price_regular_pln": 814.21,
+          "price_regular_pln": 267.61,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 203.55,
+          "price_resident_estimated_pln": 66.9,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 186.57,
+          "price_source_amount": 61.32,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 1433.21,
-      "price_total_resident_estimated_pln": 822.55
+      "price_total_regular_pln": 886.61,
+      "price_total_resident_estimated_pln": 685.9
     },
     {
       "id": "step1d-d202705e5dc52b3f",
@@ -358,21 +358,21 @@
           "departure_at": "2026-10-23T11:45:00+02:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-23T13:40:00+01:00",
-          "price_regular_pln": 814.21,
+          "price_regular_pln": 267.61,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 203.55,
+          "price_resident_estimated_pln": 66.9,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 186.57,
+          "price_source_amount": 61.32,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 1433.21,
-      "price_total_resident_estimated_pln": 822.55
+      "price_total_regular_pln": 886.61,
+      "price_total_resident_estimated_pln": 685.9
     },
     {
       "id": "step1d-01c1ecc2d055f35e",
@@ -391,16 +391,16 @@
           "departure_at": "2026-10-23T07:10:00+01:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-23T11:00:00+02:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 103.25,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 25.81,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 23.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -420,8 +420,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 645.45,
-      "price_total_resident_estimated_pln": 488.64
+      "price_total_regular_pln": 539.62,
+      "price_total_resident_estimated_pln": 462.18
     },
     {
       "id": "step1d-5603d1527c68ad7e",
@@ -440,16 +440,16 @@
           "departure_at": "2026-10-23T09:55:00+01:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-23T13:40:00+02:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 103.25,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 25.81,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261023&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 23.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -469,8 +469,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 645.45,
-      "price_total_resident_estimated_pln": 488.64
+      "price_total_regular_pln": 539.62,
+      "price_total_resident_estimated_pln": 462.18
     },
     {
       "id": "step1d-03ad35cf3c3ccc95",
@@ -620,55 +620,6 @@
       "price_total_resident_estimated_pln": 446.45
     },
     {
-      "id": "step1d-a45f7395dddf8498",
-      "origin_airport": "WAW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "MAD",
-      "layover_minutes": 1355,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61471",
-          "departure_airport": "WAW",
-          "departure_at": "2026-10-24T05:35:00+02:00",
-          "arrival_airport": "MAD",
-          "arrival_at": "2026-10-24T09:25:00+02:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/MAD/2026-10-24/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 319.0
-        },
-        {
-          "carrier": "Air Europa",
-          "flight_number": "UX",
-          "departure_airport": "MAD",
-          "departure_at": "2026-10-25T07:00:00+01:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-25T08:55:00+00:00",
-          "price_regular_pln": 127.96,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 31.99,
-          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
-          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261025&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
-          "price_source": "Air Europa official branded fare feed",
-          "price_scope": "lowest_official_route_day_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 29.32,
-          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
-        }
-      ],
-      "price_total_regular_pln": 446.96,
-      "price_total_resident_estimated_pln": 350.99
-    },
-    {
       "id": "step1d-8a5e18416f7a56ed",
       "origin_airport": "WAW",
       "destination_airport": "TFN",
@@ -767,6 +718,55 @@
       "price_total_resident_estimated_pln": 356.45
     },
     {
+      "id": "step1d-a45f7395dddf8498",
+      "origin_airport": "WAW",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1355,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61471",
+          "departure_airport": "WAW",
+          "departure_at": "2026-10-24T05:35:00+02:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-10-24T09:25:00+02:00",
+          "price_regular_pln": 319.0,
+          "price_wizz_discount_club_pln": 273.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 319.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/MAD/2026-10-24/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 319.0
+        },
+        {
+          "carrier": "Air Europa",
+          "flight_number": "UX",
+          "departure_airport": "MAD",
+          "departure_at": "2026-10-25T07:00:00+01:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-25T08:55:00+00:00",
+          "price_regular_pln": 255.61,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 63.9,
+          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
+          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261025&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
+          "price_source": "Air Europa official branded fare feed",
+          "price_scope": "lowest_official_route_day_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 58.57,
+          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
+        }
+      ],
+      "price_total_regular_pln": 574.61,
+      "price_total_resident_estimated_pln": 382.9
+    },
+    {
       "id": "step1d-0d376f4bb55358b6",
       "origin_airport": "WAW",
       "destination_airport": "TFN",
@@ -799,21 +799,21 @@
           "departure_at": "2026-10-26T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-26T16:55:00+00:00",
-          "price_regular_pln": 255.61,
+          "price_regular_pln": 149.78,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 63.9,
+          "price_resident_estimated_pln": 37.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261026&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 58.57,
+          "price_source_amount": 34.32,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 714.61,
-      "price_total_resident_estimated_pln": 522.9
+      "price_total_regular_pln": 608.78,
+      "price_total_resident_estimated_pln": 496.45
     },
     {
       "id": "step1d-1de6998f7af65626",
@@ -848,21 +848,21 @@
           "departure_at": "2026-10-26T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-26T13:35:00+00:00",
-          "price_regular_pln": 255.61,
+          "price_regular_pln": 149.78,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 63.9,
+          "price_resident_estimated_pln": 37.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261026&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 58.57,
+          "price_source_amount": 34.32,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 714.61,
-      "price_total_resident_estimated_pln": 522.9
+      "price_total_regular_pln": 608.78,
+      "price_total_resident_estimated_pln": 496.45
     },
     {
       "id": "step1d-a2c64eeffef3237d",
@@ -897,21 +897,21 @@
           "departure_at": "2026-10-26T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-26T08:55:00+00:00",
-          "price_regular_pln": 255.61,
+          "price_regular_pln": 149.78,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 63.9,
+          "price_resident_estimated_pln": 37.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261026&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 58.57,
+          "price_source_amount": 34.32,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 714.61,
-      "price_total_resident_estimated_pln": 522.9
+      "price_total_regular_pln": 608.78,
+      "price_total_resident_estimated_pln": 496.45
     },
     {
       "id": "step1d-21958d3c0afe3393",
@@ -946,21 +946,21 @@
           "departure_at": "2026-10-27T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-27T16:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 615.88,
-      "price_total_resident_estimated_pln": 430.72
+      "price_total_regular_pln": 563.51,
+      "price_total_resident_estimated_pln": 417.63
     },
     {
       "id": "step1d-6523f1742fddfbe7",
@@ -995,21 +995,21 @@
           "departure_at": "2026-10-27T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-27T13:35:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 615.88,
-      "price_total_resident_estimated_pln": 430.72
+      "price_total_regular_pln": 563.51,
+      "price_total_resident_estimated_pln": 417.63
     },
     {
       "id": "step1d-c8c9a1bcd28cd071",
@@ -1044,21 +1044,21 @@
           "departure_at": "2026-10-27T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-27T08:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 615.88,
-      "price_total_resident_estimated_pln": 430.72
+      "price_total_regular_pln": 563.51,
+      "price_total_resident_estimated_pln": 417.63
     },
     {
       "id": "step1d-49eaa2d0e78eab84",
@@ -1077,16 +1077,16 @@
           "departure_at": "2026-10-26T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-26T21:50:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261026&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -1106,8 +1106,8 @@
           "price_source_amount": 79.99
         }
       ],
-      "price_total_regular_pln": 558.16,
-      "price_total_resident_estimated_pln": 401.35
+      "price_total_regular_pln": 430.51,
+      "price_total_resident_estimated_pln": 369.44
     },
     {
       "id": "step1d-b3cdf5d56f654ae7",
@@ -1142,21 +1142,21 @@
           "departure_at": "2026-10-27T19:25:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-27T21:35:00+00:00",
-          "price_regular_pln": 121.02,
+          "price_regular_pln": 346.86,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 30.25,
+          "price_resident_estimated_pln": 86.72,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=BIO&arrival_airport=TFN&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 27.73,
+          "price_source_amount": 79.48,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 218.92,
-      "price_total_resident_estimated_pln": 128.15
+      "price_total_regular_pln": 444.76,
+      "price_total_resident_estimated_pln": 184.62
     },
     {
       "id": "step1d-8ee1bd882d6fcbe4",
@@ -1175,16 +1175,16 @@
           "departure_at": "2026-10-27T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-27T10:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -1204,8 +1204,8 @@
           "price_source_amount": 79.99
         }
       ],
-      "price_total_regular_pln": 497.07,
-      "price_total_resident_estimated_pln": 386.08
+      "price_total_regular_pln": 415.24,
+      "price_total_resident_estimated_pln": 365.62
     },
     {
       "id": "step1d-2fc2fb12287fb98c",
@@ -1224,16 +1224,16 @@
           "departure_at": "2026-10-27T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-27T13:45:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -1253,8 +1253,8 @@
           "price_source_amount": 79.99
         }
       ],
-      "price_total_regular_pln": 497.07,
-      "price_total_resident_estimated_pln": 386.08
+      "price_total_regular_pln": 415.24,
+      "price_total_resident_estimated_pln": 365.62
     },
     {
       "id": "step1d-a16816c42f52b0ba",
@@ -1420,16 +1420,16 @@
           "departure_at": "2026-10-27T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-27T21:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261027&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -1449,8 +1449,8 @@
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 649.82,
-      "price_total_resident_estimated_pln": 538.83
+      "price_total_regular_pln": 567.99,
+      "price_total_resident_estimated_pln": 518.37
     },
     {
       "id": "step1d-e66911a2abde1ec0",
@@ -2106,16 +2106,16 @@
           "departure_at": "2026-10-30T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-30T10:50:00+01:00",
-          "price_regular_pln": 846.24,
+          "price_regular_pln": 964.07,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 211.56,
+          "price_resident_estimated_pln": 241.02,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261030&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 193.91,
+          "price_source_amount": 220.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2135,8 +2135,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 1282.61,
-      "price_total_resident_estimated_pln": 647.93
+      "price_total_regular_pln": 1400.44,
+      "price_total_resident_estimated_pln": 677.39
     },
     {
       "id": "step1d-01779e7e8103e57f",
@@ -2155,16 +2155,16 @@
           "departure_at": "2026-10-30T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-30T10:50:00+01:00",
-          "price_regular_pln": 846.24,
+          "price_regular_pln": 964.07,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 211.56,
+          "price_resident_estimated_pln": 241.02,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261030&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 193.91,
+          "price_source_amount": 220.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2184,8 +2184,8 @@
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 1435.35,
-      "price_total_resident_estimated_pln": 800.67
+      "price_total_regular_pln": 1553.18,
+      "price_total_resident_estimated_pln": 830.13
     },
     {
       "id": "step1d-e87302247290a462",
@@ -2204,16 +2204,16 @@
           "departure_at": "2026-10-30T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-30T13:45:00+01:00",
-          "price_regular_pln": 846.24,
+          "price_regular_pln": 964.07,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 211.56,
+          "price_resident_estimated_pln": 241.02,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261030&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 193.91,
+          "price_source_amount": 220.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2233,8 +2233,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 1282.61,
-      "price_total_resident_estimated_pln": 647.93
+      "price_total_regular_pln": 1400.44,
+      "price_total_resident_estimated_pln": 677.39
     },
     {
       "id": "step1d-f9c3b0a62e27321b",
@@ -2253,16 +2253,16 @@
           "departure_at": "2026-10-30T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-30T13:45:00+01:00",
-          "price_regular_pln": 846.24,
+          "price_regular_pln": 964.07,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 211.56,
+          "price_resident_estimated_pln": 241.02,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261030&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 193.91,
+          "price_source_amount": 220.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2282,8 +2282,8 @@
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 1435.35,
-      "price_total_resident_estimated_pln": 800.67
+      "price_total_regular_pln": 1553.18,
+      "price_total_resident_estimated_pln": 830.13
     },
     {
       "id": "step1d-9586e35d0bf955d8",
@@ -2318,21 +2318,21 @@
           "departure_at": "2026-10-31T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-31T16:55:00+00:00",
-          "price_regular_pln": 407.65,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 101.91,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 93.41,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 726.65,
-      "price_total_resident_estimated_pln": 420.91
+      "price_total_regular_pln": 496.05,
+      "price_total_resident_estimated_pln": 363.26
     },
     {
       "id": "step1d-bdb377c1140e124a",
@@ -2367,21 +2367,21 @@
           "departure_at": "2026-10-31T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-31T08:55:00+00:00",
-          "price_regular_pln": 407.65,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 101.91,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 93.41,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 726.65,
-      "price_total_resident_estimated_pln": 420.91
+      "price_total_regular_pln": 496.05,
+      "price_total_resident_estimated_pln": 363.26
     },
     {
       "id": "step1d-fa3abfe03062a343",
@@ -2416,21 +2416,162 @@
           "departure_at": "2026-10-31T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-31T13:35:00+00:00",
-          "price_regular_pln": 407.65,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 101.91,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 93.41,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 726.65,
-      "price_total_resident_estimated_pln": 420.91
+      "price_total_regular_pln": 496.05,
+      "price_total_resident_estimated_pln": 363.26
+    },
+    {
+      "id": "step1d-2e3f5cfcd512d74d",
+      "origin_airport": "KRK",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 695,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR5357",
+          "departure_airport": "KRK",
+          "departure_at": "2026-10-30T15:50:00+01:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-10-30T19:25:00+01:00",
+          "price_regular_pln": 130.88,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 130.88,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 29.99
+        },
+        {
+          "carrier": "Air Europa",
+          "flight_number": "UX",
+          "departure_airport": "MAD",
+          "departure_at": "2026-10-31T07:00:00+01:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-31T08:55:00+00:00",
+          "price_regular_pln": 177.05,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 44.26,
+          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
+          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
+          "price_source": "Air Europa official branded fare feed",
+          "price_scope": "lowest_official_route_day_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 40.57,
+          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
+        }
+      ],
+      "price_total_regular_pln": 307.93,
+      "price_total_resident_estimated_pln": 175.14
+    },
+    {
+      "id": "step1d-3e4a7d35274ed65f",
+      "origin_airport": "KRK",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 975,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR5357",
+          "departure_airport": "KRK",
+          "departure_at": "2026-10-30T15:50:00+01:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-10-30T19:25:00+01:00",
+          "price_regular_pln": 130.88,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 130.88,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 29.99
+        },
+        {
+          "carrier": "Air Europa",
+          "flight_number": "UX",
+          "departure_airport": "MAD",
+          "departure_at": "2026-10-31T11:40:00+01:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-31T13:35:00+00:00",
+          "price_regular_pln": 177.05,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 44.26,
+          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
+          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
+          "price_source": "Air Europa official branded fare feed",
+          "price_scope": "lowest_official_route_day_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 40.57,
+          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
+        }
+      ],
+      "price_total_regular_pln": 307.93,
+      "price_total_resident_estimated_pln": 175.14
+    },
+    {
+      "id": "step1d-c1fc80e00e03de47",
+      "origin_airport": "KRK",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "MAD",
+      "layover_minutes": 1175,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR5357",
+          "departure_airport": "KRK",
+          "departure_at": "2026-10-30T15:50:00+01:00",
+          "arrival_airport": "MAD",
+          "arrival_at": "2026-10-30T19:25:00+01:00",
+          "price_regular_pln": 130.88,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 130.88,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-30&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 29.99
+        },
+        {
+          "carrier": "Air Europa",
+          "flight_number": "UX",
+          "departure_airport": "MAD",
+          "departure_at": "2026-10-31T15:00:00+01:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-31T16:55:00+00:00",
+          "price_regular_pln": 177.05,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 44.26,
+          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
+          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
+          "price_source": "Air Europa official branded fare feed",
+          "price_scope": "lowest_official_route_day_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 40.57,
+          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
+        }
+      ],
+      "price_total_regular_pln": 307.93,
+      "price_total_resident_estimated_pln": 175.14
     },
     {
       "id": "step1d-913577540a021a60",
@@ -2449,16 +2590,16 @@
           "departure_at": "2026-10-30T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-30T21:50:00+01:00",
-          "price_regular_pln": 846.24,
+          "price_regular_pln": 964.07,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 211.56,
+          "price_resident_estimated_pln": 241.02,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261030&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 193.91,
+          "price_source_amount": 220.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2478,8 +2619,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 1282.61,
-      "price_total_resident_estimated_pln": 647.93
+      "price_total_regular_pln": 1400.44,
+      "price_total_resident_estimated_pln": 677.39
     },
     {
       "id": "step1d-4f0c4f1fab8f3580",
@@ -2514,21 +2655,21 @@
           "departure_at": "2026-11-01T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-01T08:55:00+00:00",
-          "price_regular_pln": 134.5,
+          "price_regular_pln": 281.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
+          "price_resident_estimated_pln": 70.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
+          "price_source_amount": 64.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 363.5,
-      "price_total_resident_estimated_pln": 262.62
+      "price_total_regular_pln": 510.79,
+      "price_total_resident_estimated_pln": 299.45
     },
     {
       "id": "step1d-9bcb4370d391feb8",
@@ -2563,21 +2704,21 @@
           "departure_at": "2026-11-01T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-01T16:55:00+00:00",
-          "price_regular_pln": 134.5,
+          "price_regular_pln": 281.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
+          "price_resident_estimated_pln": 70.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
+          "price_source_amount": 64.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 363.5,
-      "price_total_resident_estimated_pln": 262.62
+      "price_total_regular_pln": 510.79,
+      "price_total_resident_estimated_pln": 299.45
     },
     {
       "id": "step1d-ea234964960f2ac3",
@@ -2612,21 +2753,21 @@
           "departure_at": "2026-11-01T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-01T13:35:00+00:00",
-          "price_regular_pln": 134.5,
+          "price_regular_pln": 281.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
+          "price_resident_estimated_pln": 70.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
+          "price_source_amount": 64.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 363.5,
-      "price_total_resident_estimated_pln": 262.62
+      "price_total_regular_pln": 510.79,
+      "price_total_resident_estimated_pln": 299.45
     },
     {
       "id": "step1d-d670049f12948f83",
@@ -2645,16 +2786,16 @@
           "departure_at": "2026-10-31T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-10-31T21:50:00+01:00",
-          "price_regular_pln": 610.58,
+          "price_regular_pln": 181.81,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 152.65,
+          "price_resident_estimated_pln": 45.45,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261031&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 139.91,
+          "price_source_amount": 41.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -2674,149 +2815,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 1046.95,
-      "price_total_resident_estimated_pln": 589.02
-    },
-    {
-      "id": "step1d-026c1a1d3b4ad748",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "MAD",
-      "layover_minutes": 1000,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR5357",
-          "departure_airport": "KRK",
-          "departure_at": "2026-10-31T18:45:00+01:00",
-          "arrival_airport": "MAD",
-          "arrival_at": "2026-10-31T22:20:00+01:00",
-          "price_regular_pln": 130.88,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 130.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 29.99
-        },
-        {
-          "carrier": "Air Europa",
-          "flight_number": "UX",
-          "departure_airport": "MAD",
-          "departure_at": "2026-11-01T15:00:00+01:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-01T16:55:00+00:00",
-          "price_regular_pln": 134.5,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
-          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
-          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
-          "price_source": "Air Europa official branded fare feed",
-          "price_scope": "lowest_official_route_day_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
-          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
-        }
-      ],
-      "price_total_regular_pln": 265.38,
-      "price_total_resident_estimated_pln": 164.5
-    },
-    {
-      "id": "step1d-5259ce5a8719d808",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "MAD",
-      "layover_minutes": 800,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR5357",
-          "departure_airport": "KRK",
-          "departure_at": "2026-10-31T18:45:00+01:00",
-          "arrival_airport": "MAD",
-          "arrival_at": "2026-10-31T22:20:00+01:00",
-          "price_regular_pln": 130.88,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 130.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 29.99
-        },
-        {
-          "carrier": "Air Europa",
-          "flight_number": "UX",
-          "departure_airport": "MAD",
-          "departure_at": "2026-11-01T11:40:00+01:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-01T13:35:00+00:00",
-          "price_regular_pln": 134.5,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
-          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
-          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
-          "price_source": "Air Europa official branded fare feed",
-          "price_scope": "lowest_official_route_day_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
-          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
-        }
-      ],
-      "price_total_regular_pln": 265.38,
-      "price_total_resident_estimated_pln": 164.5
-    },
-    {
-      "id": "step1d-fa96bd9ed71bf147",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "MAD",
-      "layover_minutes": 520,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR5357",
-          "departure_airport": "KRK",
-          "departure_at": "2026-10-31T18:45:00+01:00",
-          "arrival_airport": "MAD",
-          "arrival_at": "2026-10-31T22:20:00+01:00",
-          "price_regular_pln": 130.88,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 130.88,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-31&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=MAD&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 29.99
-        },
-        {
-          "carrier": "Air Europa",
-          "flight_number": "UX",
-          "departure_airport": "MAD",
-          "departure_at": "2026-11-01T07:00:00+01:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-01T08:55:00+00:00",
-          "price_regular_pln": 134.5,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 33.62,
-          "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
-          "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
-          "price_source": "Air Europa official branded fare feed",
-          "price_scope": "lowest_official_route_day_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 30.82,
-          "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
-        }
-      ],
-      "price_total_regular_pln": 265.38,
-      "price_total_resident_estimated_pln": 164.5
+      "price_total_regular_pln": 618.18,
+      "price_total_resident_estimated_pln": 481.82
     },
     {
       "id": "step1d-c4b4196d1d7f621f",
@@ -2949,21 +2949,21 @@
           "departure_at": "2026-11-02T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-02T13:35:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 204.33,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 51.08,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261102&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 46.82,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 750.99,
-      "price_total_resident_estimated_pln": 412.0
+      "price_total_regular_pln": 503.33,
+      "price_total_resident_estimated_pln": 350.08
     },
     {
       "id": "step1d-61bbb7a7acc0e30b",
@@ -2998,21 +2998,21 @@
           "departure_at": "2026-11-02T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-02T16:55:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 204.33,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 51.08,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261102&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 46.82,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 750.99,
-      "price_total_resident_estimated_pln": 412.0
+      "price_total_regular_pln": 503.33,
+      "price_total_resident_estimated_pln": 350.08
     },
     {
       "id": "step1d-a6451887b1f210e5",
@@ -3047,21 +3047,21 @@
           "departure_at": "2026-11-02T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-02T08:55:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 204.33,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 51.08,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261102&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 46.82,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 750.99,
-      "price_total_resident_estimated_pln": 412.0
+      "price_total_regular_pln": 503.33,
+      "price_total_resident_estimated_pln": 350.08
     },
     {
       "id": "step1d-2d218679348df493",
@@ -3243,21 +3243,21 @@
           "departure_at": "2026-11-03T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-03T13:35:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261103&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 1140.99,
-      "price_total_resident_estimated_pln": 802.0
+      "price_total_regular_pln": 866.05,
+      "price_total_resident_estimated_pln": 733.26
     },
     {
       "id": "step1d-ac65de8db626b69d",
@@ -3292,21 +3292,21 @@
           "departure_at": "2026-11-03T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-03T08:55:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261103&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 1140.99,
-      "price_total_resident_estimated_pln": 802.0
+      "price_total_regular_pln": 866.05,
+      "price_total_resident_estimated_pln": 733.26
     },
     {
       "id": "step1d-d1c200de239af786",
@@ -3341,21 +3341,21 @@
           "departure_at": "2026-11-03T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-03T16:55:00+00:00",
-          "price_regular_pln": 451.99,
+          "price_regular_pln": 177.05,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 113.0,
+          "price_resident_estimated_pln": 44.26,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261103&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 103.57,
+          "price_source_amount": 40.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 1140.99,
-      "price_total_resident_estimated_pln": 802.0
+      "price_total_regular_pln": 866.05,
+      "price_total_resident_estimated_pln": 733.26
     },
     {
       "id": "step1d-201a3b0a7b60025a",
@@ -3860,16 +3860,16 @@
           "departure_at": "2026-11-04T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-04T10:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261104&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -3887,8 +3887,8 @@
           "price_source_amount": 27.23
         }
       ],
-      "price_total_regular_pln": 266.82,
-      "price_total_resident_estimated_pln": 155.83
+      "price_total_regular_pln": 184.99,
+      "price_total_resident_estimated_pln": 135.37
     },
     {
       "id": "step1d-d6e2298528cb7da9",
@@ -3907,16 +3907,16 @@
           "departure_at": "2026-11-04T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-04T10:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261104&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -3936,8 +3936,8 @@
           "price_source_amount": 49.99
         }
       ],
-      "price_total_regular_pln": 366.15,
-      "price_total_resident_estimated_pln": 255.16
+      "price_total_regular_pln": 284.32,
+      "price_total_resident_estimated_pln": 234.7
     },
     {
       "id": "step1d-04bf513dea095edb",
@@ -3956,16 +3956,16 @@
           "departure_at": "2026-11-04T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-04T13:45:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261104&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -3985,8 +3985,8 @@
           "price_source_amount": 49.99
         }
       ],
-      "price_total_regular_pln": 366.15,
-      "price_total_resident_estimated_pln": 255.16
+      "price_total_regular_pln": 284.32,
+      "price_total_resident_estimated_pln": 234.7
     },
     {
       "id": "step1d-0f0be4e65a35cd2c",
@@ -4152,16 +4152,16 @@
           "departure_at": "2026-11-04T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-04T21:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261104&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -4179,8 +4179,8 @@
           "price_source_amount": 46.99
         }
       ],
-      "price_total_regular_pln": 353.06,
-      "price_total_resident_estimated_pln": 242.07
+      "price_total_regular_pln": 271.23,
+      "price_total_resident_estimated_pln": 221.61
     },
     {
       "id": "step1d-e75b8e68e26683c7",
@@ -4199,16 +4199,16 @@
           "departure_at": "2026-11-04T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-04T21:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 66.16,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 16.54,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261104&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 15.16,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -4228,8 +4228,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 584.36,
-      "price_total_resident_estimated_pln": 473.37
+      "price_total_regular_pln": 502.53,
+      "price_total_resident_estimated_pln": 452.91
     },
     {
       "id": "step1d-d0c438127e272b50",
@@ -4264,21 +4264,21 @@
           "departure_at": "2026-11-05T19:25:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-05T21:35:00+00:00",
-          "price_regular_pln": 281.4,
+          "price_regular_pln": 104.65,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 70.35,
+          "price_resident_estimated_pln": 26.16,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=BIO&arrival_airport=TFN&departure_date=20261105&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 64.48,
+          "price_source_amount": 23.98,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 404.8,
-      "price_total_resident_estimated_pln": 193.75
+      "price_total_regular_pln": 228.05,
+      "price_total_resident_estimated_pln": 149.56
     },
     {
       "id": "step1d-7d6febff2b0d290b",
@@ -4685,16 +4685,16 @@
           "departure_at": "2026-11-06T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-06T10:50:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261106&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -4714,8 +4714,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 645.45,
-      "price_total_resident_estimated_pln": 488.64
+      "price_total_regular_pln": 517.8,
+      "price_total_resident_estimated_pln": 456.73
     },
     {
       "id": "step1d-d56b26909675357c",
@@ -4734,16 +4734,16 @@
           "departure_at": "2026-11-06T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-06T13:45:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261106&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -4763,8 +4763,8 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 645.45,
-      "price_total_resident_estimated_pln": 488.64
+      "price_total_regular_pln": 517.8,
+      "price_total_resident_estimated_pln": 456.73
     },
     {
       "id": "step1d-b505e9e63dc3d652",
@@ -4930,16 +4930,16 @@
           "departure_at": "2026-11-06T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-06T21:50:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261106&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -4959,8 +4959,8 @@
           "price_source_amount": 49.99
         }
       ],
-      "price_total_regular_pln": 427.24,
-      "price_total_resident_estimated_pln": 270.43
+      "price_total_regular_pln": 299.59,
+      "price_total_resident_estimated_pln": 238.52
     },
     {
       "id": "step1d-0857608fb00725d5",
@@ -5093,21 +5093,21 @@
           "departure_at": "2026-11-08T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-08T08:55:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261108&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 641.68,
-      "price_total_resident_estimated_pln": 557.17
+      "price_total_regular_pln": 723.51,
+      "price_total_resident_estimated_pln": 577.63
     },
     {
       "id": "step1d-c3f1555473460c6d",
@@ -5142,21 +5142,21 @@
           "departure_at": "2026-11-08T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-08T16:55:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261108&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 641.68,
-      "price_total_resident_estimated_pln": 557.17
+      "price_total_regular_pln": 723.51,
+      "price_total_resident_estimated_pln": 577.63
     },
     {
       "id": "step1d-c8b6b409e95b294e",
@@ -5191,21 +5191,21 @@
           "departure_at": "2026-11-08T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-08T13:35:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261108&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 641.68,
-      "price_total_resident_estimated_pln": 557.17
+      "price_total_regular_pln": 723.51,
+      "price_total_resident_estimated_pln": 577.63
     },
     {
       "id": "step1d-c6e9591e1692a763",
@@ -5387,21 +5387,21 @@
           "departure_at": "2026-11-09T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-09T13:35:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261109&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 865.88,
-      "price_total_resident_estimated_pln": 680.72
+      "price_total_regular_pln": 813.51,
+      "price_total_resident_estimated_pln": 667.63
     },
     {
       "id": "step1d-8b1b6889c9cb3055",
@@ -5436,21 +5436,21 @@
           "departure_at": "2026-11-09T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-09T08:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261109&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 865.88,
-      "price_total_resident_estimated_pln": 680.72
+      "price_total_regular_pln": 813.51,
+      "price_total_resident_estimated_pln": 667.63
     },
     {
       "id": "step1d-a6e35be4077b75a1",
@@ -5485,21 +5485,21 @@
           "departure_at": "2026-11-09T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-09T16:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261109&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 865.88,
-      "price_total_resident_estimated_pln": 680.72
+      "price_total_regular_pln": 813.51,
+      "price_total_resident_estimated_pln": 667.63
     },
     {
       "id": "step1d-cbabd7c2e8961bd7",
@@ -7004,21 +7004,21 @@
           "departure_at": "2026-11-14T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-14T08:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261114&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 515.88,
-      "price_total_resident_estimated_pln": 330.72
+      "price_total_regular_pln": 463.51,
+      "price_total_resident_estimated_pln": 317.63
     },
     {
       "id": "step1d-13b17d756844a5ff",
@@ -7053,21 +7053,21 @@
           "departure_at": "2026-11-14T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-14T16:55:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261114&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 515.88,
-      "price_total_resident_estimated_pln": 330.72
+      "price_total_regular_pln": 463.51,
+      "price_total_resident_estimated_pln": 317.63
     },
     {
       "id": "step1d-99451049d556d079",
@@ -7102,21 +7102,21 @@
           "departure_at": "2026-11-14T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-14T13:35:00+00:00",
-          "price_regular_pln": 246.88,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 61.72,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261114&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 56.57,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 515.88,
-      "price_total_resident_estimated_pln": 330.72
+      "price_total_regular_pln": 463.51,
+      "price_total_resident_estimated_pln": 317.63
     },
     {
       "id": "step1d-c0d818f7b39f6922",
@@ -7200,21 +7200,21 @@
           "departure_at": "2026-11-15T07:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-15T08:55:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 291.68,
-      "price_total_resident_estimated_pln": 207.17
+      "price_total_regular_pln": 373.51,
+      "price_total_resident_estimated_pln": 227.63
     },
     {
       "id": "step1d-805c992729bbb561",
@@ -7249,21 +7249,21 @@
           "departure_at": "2026-11-15T11:40:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-15T13:35:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 291.68,
-      "price_total_resident_estimated_pln": 207.17
+      "price_total_regular_pln": 373.51,
+      "price_total_resident_estimated_pln": 227.63
     },
     {
       "id": "step1d-cf695903b9c67632",
@@ -7298,21 +7298,21 @@
           "departure_at": "2026-11-15T15:00:00+01:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-15T16:55:00+00:00",
-          "price_regular_pln": 112.68,
+          "price_regular_pln": 194.51,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 28.17,
+          "price_resident_estimated_pln": 48.63,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 25.82,
+          "price_source_amount": 44.57,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         }
       ],
-      "price_total_regular_pln": 291.68,
-      "price_total_resident_estimated_pln": 207.17
+      "price_total_regular_pln": 373.51,
+      "price_total_resident_estimated_pln": 227.63
     },
     {
       "id": "step1d-e3bdbdb9cb7d7c5f",
@@ -7380,16 +7380,16 @@
           "departure_at": "2026-11-15T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-15T10:50:00+01:00",
-          "price_regular_pln": 81.43,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 20.36,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 18.66,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7409,8 +7409,8 @@
           "price_source_amount": 124.99
         }
       ],
-      "price_total_regular_pln": 626.9,
-      "price_total_resident_estimated_pln": 565.83
+      "price_total_regular_pln": 754.55,
+      "price_total_resident_estimated_pln": 597.74
     },
     {
       "id": "step1d-245eb4722c2e891b",
@@ -7429,16 +7429,16 @@
           "departure_at": "2026-11-15T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-15T13:45:00+01:00",
-          "price_regular_pln": 81.43,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 20.36,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 18.66,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7458,8 +7458,8 @@
           "price_source_amount": 124.99
         }
       ],
-      "price_total_regular_pln": 626.9,
-      "price_total_resident_estimated_pln": 565.83
+      "price_total_regular_pln": 754.55,
+      "price_total_resident_estimated_pln": 597.74
     },
     {
       "id": "step1d-19dcd637c61871a4",
@@ -7625,16 +7625,16 @@
           "departure_at": "2026-11-15T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-15T21:50:00+01:00",
-          "price_regular_pln": 81.43,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 20.36,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261115&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 18.66,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7654,8 +7654,8 @@
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 583.26,
-      "price_total_resident_estimated_pln": 522.19
+      "price_total_regular_pln": 710.91,
+      "price_total_resident_estimated_pln": 554.1
     },
     {
       "id": "step1d-a3503b7d8d0035f8",
@@ -7674,16 +7674,16 @@
           "departure_at": "2026-11-16T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-16T10:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261116&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7703,8 +7703,8 @@
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 649.82,
-      "price_total_resident_estimated_pln": 538.83
+      "price_total_regular_pln": 710.91,
+      "price_total_resident_estimated_pln": 554.1
     },
     {
       "id": "step1d-9fe9a9c53477cba2",
@@ -7723,16 +7723,16 @@
           "departure_at": "2026-11-16T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-16T13:45:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261116&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7752,8 +7752,8 @@
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 649.82,
-      "price_total_resident_estimated_pln": 538.83
+      "price_total_regular_pln": 710.91,
+      "price_total_resident_estimated_pln": 554.1
     },
     {
       "id": "step1d-3719d083be7e8fe6",
@@ -7919,16 +7919,16 @@
           "departure_at": "2026-11-16T17:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-16T21:50:00+01:00",
-          "price_regular_pln": 147.99,
+          "price_regular_pln": 209.08,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 37.0,
+          "price_resident_estimated_pln": 52.27,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261116&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 33.91,
+          "price_source_amount": 47.91,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -7948,8 +7948,8 @@
           "price_source_amount": 49.99
         }
       ],
-      "price_total_regular_pln": 366.15,
-      "price_total_resident_estimated_pln": 255.16
+      "price_total_regular_pln": 427.24,
+      "price_total_resident_estimated_pln": 270.43
     },
     {
       "id": "step1d-90c3cc014fe8c40a",
@@ -9089,16 +9089,16 @@
           "departure_at": "2026-11-20T07:05:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-20T10:50:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261120&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -9118,8 +9118,8 @@
           "price_source_amount": 89.99
         }
       ],
-      "price_total_regular_pln": 601.81,
-      "price_total_resident_estimated_pln": 445.0
+      "price_total_regular_pln": 474.16,
+      "price_total_resident_estimated_pln": 413.09
     },
     {
       "id": "step1d-1d9dc39621c99556",
@@ -9138,16 +9138,16 @@
           "departure_at": "2026-11-20T09:55:00+00:00",
           "arrival_airport": "MAD",
           "arrival_at": "2026-11-20T13:45:00+01:00",
-          "price_regular_pln": 209.08,
+          "price_regular_pln": 81.43,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 52.27,
+          "price_resident_estimated_pln": 20.36,
           "resident_price_source": "estimated as configured percentage of Air Europa official regular route-day fare",
           "booking_url": "https://www.aireuropa.com/es/es/deeplink?departure_airport=TFN&arrival_airport=MAD&departure_date=20261120&adults=1&children=0&infants=0&channel=trfx&trip_type=O&config_ext=int&residentType=SPANISH_RESIDENT_RC",
           "price_source": "Air Europa official branded fare feed",
           "price_scope": "lowest_official_route_day_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 47.91,
+          "price_source_amount": 18.66,
           "schedule_source": "Air Europa official booking results; verified timetable template 2026-10-21"
         },
         {
@@ -9167,8 +9167,8 @@
           "price_source_amount": 89.99
         }
       ],
-      "price_total_regular_pln": 601.81,
-      "price_total_resident_estimated_pln": 445.0
+      "price_total_regular_pln": 474.16,
+      "price_total_resident_estimated_pln": 413.09
     }
   ]
 }
