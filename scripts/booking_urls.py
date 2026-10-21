@@ -216,13 +216,14 @@ def air_europa_booking_url(
     adults: int = 1,
     children: int = 0,
     infants: int = 0,
+    resident_discount: bool = True,
 ) -> str:
     """Return Air Europa's official, reusable one-way deeplink.
 
     The parameters match the URL returned by Air Europa's branded deeplink
-    service.  The link contains route, date and passenger counts only; it has
-    no cookies, API keys or browser-session identifiers.  Air Europa asks the
-    customer to confirm resident eligibility during purchase.
+    service. ``residentType=true`` tells Air Europa to resolve the official
+    resident code for the selected domestic route. The link contains no
+    cookies, API keys or browser-session identifiers.
     """
 
     passenger_counts = (adults, children, infants)
@@ -232,7 +233,7 @@ def air_europa_booking_url(
         raise ValueError("At least one adult passenger is required")
 
     compact_date = date.fromisoformat(_departure_date(departure)).strftime("%Y%m%d")
-    query = urlencode({
+    query_params = {
         "departure_airport": _iata(origin),
         "arrival_airport": _iata(destination),
         "departure_date": compact_date,
@@ -242,6 +243,9 @@ def air_europa_booking_url(
         "channel": "trfx",
         "trip_type": "O",
         "config_ext": "int",
-    })
+    }
+    if resident_discount:
+        query_params["residentType"] = "true"
+    query = urlencode(query_params)
     return f"https://www.aireuropa.com/es/es/deeplink?{query}"
 

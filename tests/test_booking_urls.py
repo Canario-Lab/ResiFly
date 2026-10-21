@@ -71,7 +71,7 @@ class VuelingBookingUrlTests(unittest.TestCase):
 
 
 class AirEuropaBookingUrlTests(unittest.TestCase):
-    def test_builds_official_deeplink_without_session_data(self):
+    def test_builds_official_resident_deeplink_without_session_data(self):
         url = air_europa_booking_url("tfn", "mad", "2026-10-29T07:05:00+00:00")
         self.assertTrue(url.startswith("https://www.aireuropa.com/es/es/deeplink?"))
         self.assertIn("departure_airport=TFN", url)
@@ -79,7 +79,14 @@ class AirEuropaBookingUrlTests(unittest.TestCase):
         self.assertIn("departure_date=20261029", url)
         self.assertIn("adults=1", url)
         self.assertIn("trip_type=O", url)
+        self.assertIn("residentType=true", url)
         self.assertNotIn("token", url.lower())
+
+    def test_omits_resident_parameter_for_regular_search(self):
+        url = air_europa_booking_url(
+            "mad", "tfn", "2026-10-29", resident_discount=False
+        )
+        self.assertNotIn("residentType", url)
 
 
 if __name__ == "__main__":

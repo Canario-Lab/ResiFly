@@ -92,9 +92,10 @@ Odcinki Vuelinga otrzymują oficjalny podstawowy deeplink przewoźnika z trasą,
 datą, pasażerami i parametrem zniżki rezydenta. Link również nie zawiera tokenu
 ani danych sesji.
 
-Odcinki Air Europa otrzymują oficjalny deeplink przewoźnika z trasą, datą i
-liczbą pasażerów. Zniżkę rezydenta użytkownik potwierdza podczas zakupu; link
-nie zawiera klucza feedu, tokenu ani danych sesji.
+Odcinki Air Europa otrzymują oficjalny deeplink przewoźnika z trasą, datą,
+liczbą pasażerów i obsługiwanym przez Air Europa parametrem rezydenta. Strona
+ResiFly dodaje go tylko wtedy, gdy filtr rezydenta jest zaznaczony, i usuwa go
+dla ceny regularnej. Link nie zawiera klucza feedu, tokenu ani danych sesji.
 
 Linki Ryanair są generowane analogicznie i prowadzą bezpośrednio do oficjalnego
 ekranu wyboru lotu Ryanaira z ustawioną trasą i dokładnym dniem. Istniejące

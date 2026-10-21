@@ -157,7 +157,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Generować wariant poleceniem `scripts/collect_step1d.py`, a publiczny wynik
   zapisywać w `data/step1d-results.json`. Nie filtrować wyników cenowo.
 - Każdy odcinek Air Europa otrzymuje oficjalny, trwały `booking_url` z trasą,
-  datą i liczbą pasażerów, bez cookies, kluczy API ani tokenów sesji.
+  datą, liczbą pasażerów i publicznym parametrem `residentType=true`. Strona
+  usuwa ten parametr, gdy użytkownik wyłączy filtr rezydenta. Link nie zawiera
+  cookies, kluczy API ani tokenów sesji.
 
 ## Krok 2 — loty bezpośrednie
 

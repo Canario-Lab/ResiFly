@@ -705,15 +705,21 @@ function purchaseLegPriceRows(leg, filters) {
 function bookingUrlForFilters(leg, filters) {
   const fallback = carrierPurchaseUrls[leg.carrier] || "#";
   const rawUrl = leg.booking_url || fallback;
-  if (leg.carrier !== "Vueling" || !leg.booking_url) return rawUrl;
+  if (!leg.booking_url || !["Vueling", "Air Europa"].includes(leg.carrier)) return rawUrl;
 
   try {
     const url = new URL(rawUrl, window.location.href);
     const useResidentDiscount = filters.resident && leg.resident_discount_eligible;
-    url.searchParams.set("dt", useResidentDiscount ? "1" : "0");
+    if (leg.carrier === "Vueling") {
+      url.searchParams.set("dt", useResidentDiscount ? "1" : "0");
+    } else if (useResidentDiscount) {
+      url.searchParams.set("residentType", "true");
+    } else {
+      url.searchParams.delete("residentType");
+    }
     return url.toString();
   } catch (error) {
-    console.warn("Nie udało się dopasować linku Vuelinga do filtra rezydenta", error);
+    console.warn(`Nie udało się dopasować linku ${leg.carrier} do filtra rezydenta`, error);
     return fallback;
   }
 }
