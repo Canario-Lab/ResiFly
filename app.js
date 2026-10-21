@@ -92,8 +92,6 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_HIGHLIGHT_DURATION_MS = 30_000;
-const CALENDAR_SCROLL_CHECK_MS = 100;
-const CALENDAR_SCROLL_TIMEOUT_MS = 8_000;
 const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
 
@@ -107,10 +105,7 @@ let progressiveRenderVersion = 0;
 let progressiveObserver = null;
 let progressiveSentinel = null;
 let progressiveLoadingPaused = false;
-let progressiveResumeTimer;
-let calendarTargetLockReady = false;
 let calendarTargetCard = null;
-let calendarTargetObserver = null;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -990,7 +985,6 @@ function fareCalendarRenderKey(filters) {
 
 function stopProgressiveRendering() {
   progressiveRenderVersion += 1;
-  window.clearTimeout(progressiveResumeTimer);
   window.clearTimeout(calendarHighlightTimer);
   progressiveObserver?.disconnect();
   progressiveObserver = null;
@@ -1000,76 +994,23 @@ function stopProgressiveRendering() {
   progressiveResultCount = 0;
   progressiveLoadedResultIndexes = new Set();
   progressiveLoadingPaused = false;
-  calendarTargetObserver?.disconnect();
-  calendarTargetObserver = null;
-  calendarTargetLockReady = false;
   calendarTargetCard = null;
 }
 
 function resumeProgressiveLoading(expectedVersion = progressiveRenderVersion) {
   if (expectedVersion !== progressiveRenderVersion) return;
   progressiveLoadingPaused = false;
-  calendarTargetObserver?.disconnect();
-  calendarTargetObserver = null;
-  calendarTargetLockReady = false;
-  observeProgressiveSentinel(expectedVersion);
-}
-
-function lockProgressiveLoadingToCalendarTarget(expectedVersion) {
-  if (expectedVersion !== progressiveRenderVersion || !calendarTargetCard?.isConnected) return;
-  calendarTargetLockReady = true;
-  calendarTargetObserver?.disconnect();
-  if (!("IntersectionObserver" in window)) return;
-
-  const target = calendarTargetCard;
-  calendarTargetObserver = new IntersectionObserver(entries => {
-    const targetEntry = entries.find(entry => entry.target === target);
-    if (
-      targetEntry &&
-      !targetEntry.isIntersecting &&
-      expectedVersion === progressiveRenderVersion &&
-      progressiveLoadingPaused &&
-      calendarTargetLockReady
-    ) {
-      resumeProgressiveLoading(expectedVersion);
-    }
-  }, { threshold: 0.01 });
-  calendarTargetObserver.observe(target);
-}
-
-function waitForCalendarTargetToSettle(expectedVersion, startedAt, previousTop = null, stableChecks = 0) {
-  progressiveResumeTimer = window.setTimeout(() => {
-    if (expectedVersion !== progressiveRenderVersion || !calendarTargetCard?.isConnected) return;
-    const currentTop = visibleCalendarTargetTop();
-    const nextStableChecks = currentTop !== null && previousTop !== null && Math.abs(currentTop - previousTop) < 1
-      ? stableChecks + 1
-      : 0;
-
-    if (nextStableChecks >= 3) {
-      lockProgressiveLoadingToCalendarTarget(expectedVersion);
-      return;
-    }
-
-    if (performance.now() - startedAt >= CALENDAR_SCROLL_TIMEOUT_MS) {
-      if (currentTop === null) resumeProgressiveLoading(expectedVersion);
-      else lockProgressiveLoadingToCalendarTarget(expectedVersion);
-      return;
-    }
-
-    waitForCalendarTargetToSettle(expectedVersion, startedAt, currentTop, nextStableChecks);
-  }, CALENDAR_SCROLL_CHECK_MS);
+  renderProgressiveSentinelLoading();
+  appendNextResultBatch(expectedVersion);
+  progressiveLoadingPaused = true;
+  renderProgressiveSentinelPaused(expectedVersion);
 }
 
 function pauseProgressiveLoading() {
   progressiveLoadingPaused = true;
-  calendarTargetLockReady = false;
   progressiveObserver?.disconnect();
   progressiveObserver = null;
-  calendarTargetObserver?.disconnect();
-  calendarTargetObserver = null;
-  window.clearTimeout(progressiveResumeTimer);
-  const expectedVersion = progressiveRenderVersion;
-  waitForCalendarTargetToSettle(expectedVersion, performance.now());
+  renderProgressiveSentinelPaused(progressiveRenderVersion);
 }
 
 function visibleCalendarTargetTop() {
@@ -1083,6 +1024,28 @@ function restoreCalendarTargetPosition(previousTop) {
   if (previousTop === null || !calendarTargetCard?.isConnected) return;
   const shift = calendarTargetCard.getBoundingClientRect().top - previousTop;
   if (Math.abs(shift) >= 1) window.scrollBy(0, shift);
+}
+
+function renderProgressiveSentinelLoading() {
+  if (!progressiveSentinel) return;
+  progressiveSentinel.classList.remove("is-paused");
+  progressiveSentinel.innerHTML = `
+    <span class="loader" aria-hidden="true"></span>
+    <span class="results-load-sentinel-label"></span>
+  `;
+}
+
+function renderProgressiveSentinelPaused(expectedVersion) {
+  if (!progressiveSentinel) return;
+  progressiveSentinel.classList.add("is-paused");
+  const message = document.createElement("span");
+  message.textContent = "Dogrywanie wstrzymane, aby wskazany lot pozostał na ekranie.";
+  const resume = document.createElement("button");
+  resume.className = "results-load-more";
+  resume.type = "button";
+  resume.textContent = "Wczytaj 30 kolejnych wyników";
+  resume.addEventListener("click", () => resumeProgressiveLoading(expectedVersion));
+  progressiveSentinel.replaceChildren(message, resume);
 }
 
 function updateProgressiveSentinel() {
@@ -1113,16 +1076,20 @@ function renderResultAtIndex(index) {
 function appendNextResultBatch(expectedVersion = progressiveRenderVersion) {
   if (
     expectedVersion !== progressiveRenderVersion ||
+    progressiveLoadingPaused ||
     !progressiveFilters ||
     !progressiveSentinel?.isConnected
   ) return;
 
   const calendarTargetTop = visibleCalendarTargetTop();
-  const end = Math.min(progressiveResultCount + RESULT_BATCH_SIZE, progressiveResults.length);
-  for (let index = progressiveResultCount; index < end; index += 1) {
+  let appended = 0;
+  while (progressiveResultCount < progressiveResults.length && appended < RESULT_BATCH_SIZE) {
+    const index = progressiveResultCount;
+    progressiveResultCount += 1;
+    if (progressiveLoadedResultIndexes.has(index)) continue;
     renderResultAtIndex(index);
+    appended += 1;
   }
-  progressiveResultCount = end;
   restoreCalendarTargetPosition(calendarTargetTop);
 
   if (progressiveResultCount >= progressiveResults.length) {
@@ -1185,10 +1152,7 @@ function renderResultCards(results, filters) {
   progressiveSentinel = document.createElement("div");
   progressiveSentinel.className = "results-load-sentinel";
   progressiveSentinel.setAttribute("role", "status");
-  progressiveSentinel.innerHTML = `
-    <span class="loader" aria-hidden="true"></span>
-    <span class="results-load-sentinel-label"></span>
-  `;
+  renderProgressiveSentinelLoading();
   elements.list.replaceChildren(progressiveSentinel);
   appendNextResultBatch(expectedVersion);
   for (const day of elements.calendarMonths.querySelectorAll(".calendar-day[data-result-id]")) {

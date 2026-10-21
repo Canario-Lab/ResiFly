@@ -736,6 +736,10 @@ input[type="range"]::-moz-range-thumb {
   text-align: center;
 }
 
+.results-load-sentinel.is-paused {
+  flex-wrap: wrap;
+}
+
 .results-load-sentinel .loader {
   width: 22px;
   height: 22px;
