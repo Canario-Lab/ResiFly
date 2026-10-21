@@ -176,8 +176,10 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
   Sprawdza oba kierunki i łączy odcinek Volotei z dozwolonym odcinkiem Ryanair
   albo Wizz Air do WAW, WMI, KTW lub KRK.
-- Pytać oficjalny endpoint osobno o każdy potrzebny dzień, ponieważ odpowiedź
-  dla długiego okresu może zawierać tylko najtańszy lot w całym okresie.
+- Pytać oficjalny endpoint osobno o każdy dzień pełnego skonfigurowanego okna
+  dat w obu kierunkach, niezależnie od rozkładu Wizz Air/Ryanair. Dopiero po
+  tym pełnym skanie dopasowywać przesiadki. Odpowiedź dla długiego okresu może
+  zawierać tylko najtańszy lot w całym okresie.
 - Regularną cenę Volotei pobierać jako cenę z opłatami. Cenę rezydenta zapisać
   jako jawnie oznaczony szacunek 25% tej ceny; podatki mogą nie podlegać pełnej
   zniżce.

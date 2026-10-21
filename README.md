@@ -64,7 +64,8 @@ Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air Europa; zapisane
 szablony rozkładu mają okres ważności i muszą zostać ponownie zweryfikowane po
 jego zakończeniu.
 Wariant 1E pobiera rozkład, numer lotu i cenę bezpośrednio z oficjalnego
-publicznego endpointu Volotei, osobno dla każdego potrzebnego dnia.
+publicznego endpointu Volotei, osobno dla każdego dnia pełnego okna dat i w obu
+kierunkach; dopiero potem dopasowuje możliwe przesiadki.
 
 ## Linki do zakupu Wizz Air
 

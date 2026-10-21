@@ -111,6 +111,9 @@
   or hard-code transfer routes during a regular price collection.
 - Read dates, times, flight numbers and regular fares with fees directly from
   Volotea's official public MinPrice endpoint, one saved route/day at a time.
+  Check every calendar day in the complete configured date window in both
+  directions, independently of which dates currently have a matching Wizz Air
+  or Ryanair leg. Match connections only after this complete scan.
   Never use Google Flights for Step 1E and never invent schedule data.
 - Calculate the resident estimate with the saved `0.25` multiplier and label
   it as an estimate; taxes may not receive the full resident discount. A

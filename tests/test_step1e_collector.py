@@ -6,12 +6,12 @@ import unittest
 from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
 from scripts.collect_step1e import (
     build_connections,
-    candidate_volotea_trips,
     collect_volotea_legs,
     low_cost_route_matrix,
     parse_volotea_response,
     validate_allowlist,
     validate_document,
+    volotea_route_days,
 )
 
 
@@ -65,8 +65,8 @@ def fare_payload(
                 "Market": market,
                 "DepartureFlightDate": day,
                 "FlightNumber": number,
-                "DepartureTime": f"{day}T09:40:00+01:00",
-                "ArrivalTime": f"{day}T13:50:00+01:00",
+                "DepartureTime": f"{day}T09:40:00",
+                "ArrivalTime": f"{day}T13:50:00",
                 "PriceWithFee": price,
                 "Taxes": 9.65,
                 "ConnectionInformation": connections or [],
@@ -127,7 +127,7 @@ class Step1ECollectorTests(unittest.TestCase):
         self.assertEqual(len(legs), 1)
         leg = legs[0]
         self.assertEqual(leg["flight_number"], "V73523")
-        self.assertEqual(leg["departure_at"], "2026-11-15T09:40:00+01:00")
+        self.assertEqual(leg["departure_at"], "2026-11-15T09:40:00+00:00")
         self.assertEqual(leg["arrival_at"], "2026-11-15T13:50:00+01:00")
         self.assertEqual(leg["price_regular_pln"], 509.88)
         self.assertEqual(leg["price_resident_estimated_pln"], 127.47)
@@ -163,29 +163,34 @@ class Step1ECollectorTests(unittest.TestCase):
         )
         self.assertEqual([leg["flight_number"] for leg in legs], ["V73523"])
 
-    def test_candidate_days_cover_same_and_adjacent_day(self):
-        rules = {item["iata"]: item for item in self.allowlist["airports"]}
-        candidates = candidate_volotea_trips(
-            [
-                low_cost_leg(
-                    "WAW", "2026-11-14T16:00:00+01:00",
-                    "BIO", "2026-11-14T19:20:00+01:00",
-                ),
-                low_cost_leg(
-                    "BIO", "2026-11-16T10:00:00+01:00",
-                    "KRK", "2026-11-16T13:00:00+01:00",
-                ),
-            ],
-            rules,
-            date(2026, 11, 1),
-            date(2026, 11, 30),
+    def test_route_days_cover_every_day_in_both_directions(self):
+        route_days = volotea_route_days(
+            self.allowlist,
+            date(2026, 10, 21),
+            date(2026, 11, 20),
         )
-        self.assertEqual(candidates, {
-            ("BIO", "TFS", date(2026, 11, 14)),
-            ("BIO", "TFS", date(2026, 11, 15)),
-            ("TFS", "BIO", date(2026, 11, 15)),
-            ("TFS", "BIO", date(2026, 11, 16)),
-        })
+        self.assertEqual(len(route_days), 62)
+        for day in (date(2026, 10, 21), date(2026, 11, 15), date(2026, 11, 20)):
+            self.assertIn(("TFS", "BIO", day), route_days)
+            self.assertIn(("BIO", "TFS", day), route_days)
+
+    def test_uses_airport_timezones_even_when_volotea_offsets_are_wrong(self):
+        payload = fare_payload()
+        record = payload["Content"][0]["Value"][0]
+        record["Market"] = "BIO-TFS"
+        record["DepartureTime"] = "2026-11-15T06:45:00+00:00"
+        record["ArrivalTime"] = "2026-11-15T09:00:00+01:00"
+        legs = parse_volotea_response(
+            payload,
+            "BIO",
+            "TFS",
+            date(2026, 11, 15),
+            0.25,
+            {"EUR": CurrencyRate("EUR", 4.0)},
+            self.allowlist["fare_feed"],
+        )
+        self.assertEqual(legs[0]["departure_at"], "2026-11-15T06:45:00+01:00")
+        self.assertEqual(legs[0]["arrival_at"], "2026-11-15T09:00:00+00:00")
 
     def test_builds_both_directions_without_price_limit(self):
         results = build_connections(

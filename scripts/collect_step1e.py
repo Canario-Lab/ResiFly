@@ -33,7 +33,9 @@ from scripts.collect_step1 import (
     TENERIFE_AIRPORTS,
     CurrencyRate,
     configure_airports_from_allowlist,
+    date_range,
     dt,
+    local_datetime,
     money_pln,
     nbp_eur_rate,
     serialize_datetime,
@@ -98,31 +100,25 @@ def low_cost_route_matrix(
     return sorted(routes)
 
 
-def candidate_volotea_trips(
-    low_cost_legs: list[dict[str, Any]],
-    transfer_rules: dict[str, dict[str, Any]],
+def volotea_route_days(
+    allowlist: dict[str, Any],
     start: date,
     end: date,
 ) -> set[tuple[str, str, date]]:
-    candidates: set[tuple[str, str, date]] = set()
-    for leg in low_cost_legs:
-        origin = leg["departure_airport"]
-        destination = leg["arrival_airport"]
-        if origin in POLISH_AIRPORTS:
-            transfer = destination
-            arrival_day = date.fromisoformat(leg["arrival_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for day in (arrival_day, arrival_day + timedelta(days=1)):
-                    if start <= day <= end:
-                        candidates.add((transfer, tenerife, day))
-        else:
-            transfer = origin
-            departure_day = date.fromisoformat(leg["departure_at"][:10])
-            for tenerife in transfer_rules[transfer]["tenerife_airports"]:
-                for day in (departure_day - timedelta(days=1), departure_day):
-                    if start <= day <= end:
-                        candidates.add((tenerife, transfer, day))
-    return candidates
+    """Return every saved Volotea route/day in both directions.
+
+    The carrier calendar must be collected independently of the low-cost
+    timetable.  Connections are matched only after the complete Volotea
+    window has been fetched.
+    """
+
+    route_days: set[tuple[str, str, date]] = set()
+    for transfer in allowlist["airports"]:
+        for tenerife in transfer["tenerife_airports"]:
+            for day in date_range(start, end):
+                route_days.add((tenerife, transfer["iata"], day))
+                route_days.add((transfer["iata"], tenerife, day))
+    return route_days
 
 
 class VoloteaFareClient:
@@ -194,12 +190,12 @@ def parse_volotea_response(
             if record.get("ConnectionInformation"):
                 continue
             try:
-                departure = datetime.fromisoformat(str(record["DepartureTime"]))
-                arrival = datetime.fromisoformat(str(record["ArrivalTime"]))
+                departure = local_datetime(str(record["DepartureTime"]), origin)
+                arrival = local_datetime(str(record["ArrivalTime"]), destination)
                 amount = float(record[price_field])
             except (KeyError, TypeError, ValueError):
                 continue
-            if departure.tzinfo is None or arrival.tzinfo is None or arrival <= departure:
+            if arrival <= departure:
                 continue
             if amount <= 0:
                 continue
@@ -372,8 +368,6 @@ def main() -> None:
     allowlist = json.loads(TRANSFER_FILE.read_text(encoding="utf-8"))
     validate_allowlist(allowlist)
     configure_airports_from_allowlist(allowlist)
-    rules = {airport["iata"]: airport for airport in allowlist["airports"]}
-
     eur = nbp_eur_rate(args.from_date)
     rates = {"EUR": eur, "PLN": CurrencyRate("PLN", 1.0)}
     print(f"NBP EUR: {eur.pln:.4f} PLN", flush=True)
@@ -389,9 +383,9 @@ def main() -> None:
         )
     print(f"Odcinki Ryanair/Wizz Air: {len(low_cost)}", flush=True)
 
-    candidates = candidate_volotea_trips(low_cost, rules, args.from_date, end)
-    print(f"Zapytania Volotea do sprawdzenia: {len(candidates)}", flush=True)
-    volotea = collect_volotea_legs(candidates, allowlist, rates, args.workers)
+    route_days = volotea_route_days(allowlist, args.from_date, end)
+    print(f"Zapytania Volotea do sprawdzenia: {len(route_days)}", flush=True)
+    volotea = collect_volotea_legs(route_days, allowlist, rates, args.workers)
     print(f"Odcinki Volotea: {len(volotea)}", flush=True)
     results = build_connections(low_cost, volotea)
 
