@@ -90,6 +90,7 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 });
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
+const CALENDAR_HIGHLIGHT_DURATION_MS = 12_000;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -279,6 +280,10 @@ function optionLabel(code) {
   return airportLabels[code] || code;
 }
 
+function airportCityLabel(code) {
+  return (airportLabels[code] || code).replace(new RegExp(`\\s*\\(${code}\\)$`), "");
+}
+
 function addOptions(select, values, formatter = value => value) {
   for (const value of values) {
     const option = document.createElement("option");
@@ -378,6 +383,18 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
 
 let calendarHighlightTimer;
 
+function setCardDetailsExpanded(card, expanded) {
+  const toggle = card.querySelector(".details-toggle");
+  const details = card.querySelector(".price-details");
+  if (!toggle || !details) return;
+
+  toggle.setAttribute("aria-expanded", String(expanded));
+  toggle.querySelector("span").textContent = expanded
+    ? "Ukryj szczegóły ceny"
+    : "Pokaż szczegóły ceny";
+  details.hidden = !expanded;
+}
+
 function scrollToResult(resultId) {
   const card = [...elements.list.querySelectorAll(".flight-card")]
     .find(item => item.dataset.resultId === resultId);
@@ -386,6 +403,7 @@ function scrollToResult(resultId) {
   elements.list.querySelectorAll(".is-calendar-target").forEach(item => {
     item.classList.remove("is-calendar-target");
   });
+  setCardDetailsExpanded(card, true);
   card.classList.add("is-calendar-target");
   card.scrollIntoView({
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
@@ -395,7 +413,7 @@ function scrollToResult(resultId) {
   window.clearTimeout(calendarHighlightTimer);
   calendarHighlightTimer = window.setTimeout(() => {
     card.classList.remove("is-calendar-target");
-  }, 1800);
+  }, CALENDAR_HIGHLIGHT_DURATION_MS);
 }
 
 function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {
@@ -613,7 +631,42 @@ function createJourney(result) {
   const transfer = document.createElement("div");
   transfer.className = "transfer-stop";
   const nextDayMarker = datePart(second.departure_at) > datePart(first.arrival_at) ? "*" : "";
-  transfer.innerHTML = `<strong>${timePart(first.arrival_at)} · ${result.transfer_airport} · ${timePart(second.departure_at)}${nextDayMarker}</strong><span>${formatDuration(result.layover_minutes)} przerwy</span>`;
+
+  const routeSummary = document.createElement("div");
+  routeSummary.className = "transfer-route-summary";
+
+  const arrivalTime = document.createElement("strong");
+  arrivalTime.className = "transfer-time";
+  arrivalTime.textContent = timePart(first.arrival_at);
+
+  const firstSeparator = document.createElement("span");
+  firstSeparator.className = "transfer-separator";
+  firstSeparator.textContent = "·";
+
+  const location = document.createElement("span");
+  location.className = "transfer-location";
+
+  const city = document.createElement("span");
+  city.className = "transfer-city";
+  city.textContent = airportCityLabel(result.transfer_airport);
+
+  const airportCode = document.createElement("strong");
+  airportCode.className = "transfer-airport-code";
+  airportCode.textContent = result.transfer_airport;
+  location.append(city, airportCode);
+
+  const secondSeparator = firstSeparator.cloneNode(true);
+
+  const departureTime = document.createElement("strong");
+  departureTime.className = "transfer-time";
+  departureTime.textContent = `${timePart(second.departure_at)}${nextDayMarker}`;
+
+  routeSummary.append(arrivalTime, firstSeparator, location, secondSeparator, departureTime);
+
+  const layover = document.createElement("span");
+  layover.className = "layover-badge";
+  layover.textContent = `${formatDuration(result.layover_minutes)} przerwy`;
+  transfer.append(routeSummary, layover);
 
   const secondLine = createLegLine(second);
 
@@ -858,9 +911,7 @@ function createResultCard(result, filters) {
   const toggle = fragment.querySelector(".details-toggle");
   toggle.addEventListener("click", () => {
     const expanded = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!expanded));
-    toggle.querySelector("span").textContent = expanded ? "Pokaż szczegóły ceny" : "Ukryj szczegóły ceny";
-    details.hidden = expanded;
+    setCardDetailsExpanded(card, !expanded);
   });
 
   return fragment;
