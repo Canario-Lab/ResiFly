@@ -79,7 +79,7 @@ class AirEuropaBookingUrlTests(unittest.TestCase):
         self.assertIn("departure_date=20261029", url)
         self.assertIn("adults=1", url)
         self.assertIn("trip_type=O", url)
-        self.assertIn("residentType=true", url)
+        self.assertIn("residentType=SPANISH_RESIDENT_RC", url)
         self.assertNotIn("token", url.lower())
 
     def test_omits_resident_parameter_for_regular_search(self):

@@ -713,7 +713,7 @@ function bookingUrlForFilters(leg, filters) {
     if (leg.carrier === "Vueling") {
       url.searchParams.set("dt", useResidentDiscount ? "1" : "0");
     } else if (useResidentDiscount) {
-      url.searchParams.set("residentType", "true");
+      url.searchParams.set("residentType", "SPANISH_RESIDENT_RC");
     } else {
       url.searchParams.delete("residentType");
     }

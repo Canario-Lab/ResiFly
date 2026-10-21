@@ -221,9 +221,11 @@ def air_europa_booking_url(
     """Return Air Europa's official, reusable one-way deeplink.
 
     The parameters match the URL returned by Air Europa's branded deeplink
-    service. ``residentType=true`` tells Air Europa to resolve the official
-    resident code for the selected domestic route. The link contains no
-    cookies, API keys or browser-session identifiers.
+    service. Air Europa's public route endpoint returns
+    ``SPANISH_RESIDENT_RC`` for the eligible Tenerife routes. Passing that
+    concrete value avoids the intermediate ``residentType=true`` resolution
+    that can leave the carrier's redirect on its loading screen. The link
+    contains no cookies, API keys or browser-session identifiers.
     """
 
     passenger_counts = (adults, children, infants)
@@ -245,7 +247,7 @@ def air_europa_booking_url(
         "config_ext": "int",
     }
     if resident_discount:
-        query_params["residentType"] = "true"
+        query_params["residentType"] = "SPANISH_RESIDENT_RC"
     query = urlencode(query_params)
     return f"https://www.aireuropa.com/es/es/deeplink?{query}"
 
