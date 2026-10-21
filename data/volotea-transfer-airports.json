@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Volotea dla kroku 1E",
+  "verified_on": "2026-10-21",
+  "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Volotea + Ryanair/Wizz Air w kroku 1E.",
+  "scope": {
+    "tenerife_airports": ["TFS"],
+    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
+    "tenerife_leg_airlines": ["Volotea"],
+    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+  },
+  "usage_policy": {
+    "step": "1E",
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj wyłącznie aktualne rozkłady i ceny dla tras zapisanych w polu airports.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "primary_route_source": "Oficjalna strona Volotei z lotami z Tenerife Sur oraz oficjalny publiczny endpoint MinPrice.",
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1E obejmuje obecnie wyłącznie bezpośredni odcinek Volotea TFS-BIO."
+  },
+  "fare_feed": {
+    "endpoint": "https://api.volotea.com/v1/Cache/MinPrice",
+    "fare_type": "R",
+    "currency": "EUR",
+    "price_field": "PriceWithFee",
+    "airline_code": "V7"
+  },
+  "airports": [
+    {
+      "iata": "BIO",
+      "name_pl": "Bilbao",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": ["TFS"],
+      "resident_discount_eligible_on_volotea_leg": true,
+      "volotea_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+      ]
+    }
+  ],
+  "excluded_airports": [
+    {
+      "iata": "OVD",
+      "name_pl": "Asturia",
+      "reason": "Volotea lata bezpośrednio z TFS, ale nie ma aktualnej bezpośredniej trasy Ryanair/Wizz Air do WAW, WMI, KTW ani KRK."
+    }
+  ],
+  "sources": [
+    {
+      "name": "Volotea — bezpośrednie loty z Tenerife Sur",
+      "url": "https://www.volotea.com/en/direct-flights/from-tenerife-south/",
+      "finding": "Oficjalna strona przewoźnika potwierdza bezpośrednie trasy z TFS do Bilbao i Asturii."
+    },
+    {
+      "name": "Volotea — TFS-BIO",
+      "url": "https://www.volotea.com/es/vuelos-baratos/tenerife-sur/bilbao/",
+      "finding": "Oficjalna strona trasy i jej publiczny endpoint MinPrice potwierdzają lot operowany przez Volotea oraz zwracają cenę, datę, godziny i numer lotu."
+    },
+    {
+      "name": "Volotea — warunki przewozu i zniżka rezydenta",
+      "url": "https://www.volotea.com/en/legal-conditions/conditions-of-carriage/",
+      "finding": "Volotea potwierdza zniżkę 75% dla uprawnionych mieszkańców Wysp Kanaryjskich na bezpośrednich lotach między archipelagiem a Hiszpanią kontynentalną."
+    },
+    {
+      "name": "Wizz Air timetableV2",
+      "finding": "Oficjalny publiczny rozkład Wizz Air potwierdza bezpośrednie trasy BIO-WAW i BIO-KRK w obu kierunkach."
+    }
+  ]
+}

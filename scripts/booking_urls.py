@@ -251,3 +251,26 @@ def air_europa_booking_url(
     query = urlencode(query_params)
     return f"https://www.aireuropa.com/es/es/deeplink?{query}"
 
+
+def volotea_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+) -> str:
+    """Return Volotea's reusable official route-and-date search URL.
+
+    Volotea's own route-search code generates this URL shape.  It identifies
+    the route and outbound date without carrying cookies, tokens or a browser
+    session.  Resident status is confirmed in Volotea's passenger selector;
+    the public URL format does not expose a supported resident parameter.
+    """
+
+    query = urlencode({
+        "departureDate": _departure_date(departure),
+        "returnDate": "",
+    })
+    return (
+        "https://www.volotea.com/es/ofertas-vuelos/"
+        f"{_iata(origin).lower()}/{_iata(destination).lower()}/?{query}"
+    )
+

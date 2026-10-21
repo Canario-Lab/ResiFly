@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-10-21T17:20:29+01:00",
+  "period_from": "2026-10-21",
+  "period_to": "2026-11-20",
+  "step": "1E",
+  "directions": [
+    "tenerife_to_poland",
+    "poland_to_tenerife"
+  ],
+  "transfer_airports": [
+    "BIO"
+  ],
+  "price_filtering": {
+    "applied_during_collection": false,
+    "controlled_by": "website"
+  },
+  "exchange_rates": {
+    "EUR_PLN": {
+      "rate": 4.3641,
+      "source": "NBP tabela A",
+      "effective_for": "2026-10-21"
+    }
+  },
+  "sources": {
+    "volotea_routes_schedules_and_prices": "Volotea official route pages and public MinPrice endpoint; regular fare with fees, no Google Flights",
+    "volotea_resident_price": "estimate: 25% of official regular fare with fees; taxes may not receive the full resident discount",
+    "ryanair": "Ryanair Fare Finder",
+    "wizz_air": "Wizz Air timetableV2"
+  },
+  "result_status": "ok",
+  "results": [
+    {
+      "id": "step1e-112781b33a8fc5d0",
+      "origin_airport": "KRK",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "BIO",
+      "layover_minutes": 1280,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W62049",
+          "departure_airport": "KRK",
+          "departure_at": "2026-11-14T06:15:00+01:00",
+          "arrival_airport": "BIO",
+          "arrival_at": "2026-11-14T09:25:00+01:00",
+          "price_regular_pln": 199.9,
+          "price_wizz_discount_club_pln": 160.8,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 199.9,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/BIO/2026-11-14/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 199.9
+        },
+        {
+          "carrier": "Volotea",
+          "flight_number": "V73522",
+          "departure_airport": "BIO",
+          "departure_at": "2026-11-15T06:45:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-11-15T09:00:00+01:00",
+          "price_regular_pln": 269.13,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 67.28,
+          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
+          "price_source": "Volotea official MinPrice endpoint",
+          "price_scope": "official_route_flight_fare_with_fees",
+          "price_source_currency": "EUR",
+          "price_source_amount": 61.67,
+          "schedule_source": "Volotea official MinPrice endpoint",
+          "price_source_taxes": 10.48
+        }
+      ],
+      "price_total_regular_pln": 469.03,
+      "price_total_resident_estimated_pln": 267.18
+    },
+    {
+      "id": "step1e-a62aba76a6067d3b",
+      "origin_airport": "WAW",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "BIO",
+      "layover_minutes": 690,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61455",
+          "departure_airport": "WAW",
+          "departure_at": "2026-11-14T15:50:00+01:00",
+          "arrival_airport": "BIO",
+          "arrival_at": "2026-11-14T19:15:00+01:00",
+          "price_regular_pln": 199.9,
+          "price_wizz_discount_club_pln": 160.8,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 199.9,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/BIO/2026-11-14/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 199.9
+        },
+        {
+          "carrier": "Volotea",
+          "flight_number": "V73522",
+          "departure_airport": "BIO",
+          "departure_at": "2026-11-15T06:45:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-11-15T09:00:00+01:00",
+          "price_regular_pln": 269.13,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 67.28,
+          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
+          "price_source": "Volotea official MinPrice endpoint",
+          "price_scope": "official_route_flight_fare_with_fees",
+          "price_source_currency": "EUR",
+          "price_source_amount": 61.67,
+          "schedule_source": "Volotea official MinPrice endpoint",
+          "price_source_taxes": 10.48
+        }
+      ],
+      "price_total_regular_pln": 469.03,
+      "price_total_resident_estimated_pln": 267.18
+    }
+  ]
+}

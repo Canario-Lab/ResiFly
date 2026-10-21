@@ -18,6 +18,7 @@ from scripts.booking_urls import (
     air_europa_booking_url,
     iberia_booking_url,
     ryanair_booking_url,
+    volotea_booking_url,
     vueling_booking_url,
     wizz_booking_url,
 )
@@ -41,6 +42,8 @@ def booking_url_for_leg(leg: dict[str, Any]) -> str | None:
         return vueling_booking_url(origin, destination, departure)
     if leg.get("carrier") == "Air Europa":
         return air_europa_booking_url(origin, destination, departure)
+    if leg.get("carrier") == "Volotea":
+        return volotea_booking_url(origin, destination, departure)
     return None
 
 

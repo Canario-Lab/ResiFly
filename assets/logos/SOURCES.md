@@ -7,5 +7,7 @@
 - `air-europa.svg` — oficjalny CDN używany przez stronę Air Europa,
   `https://assets.airtrfx.com/media-em/ux/logo2.svg`
 - `iberia-express.svg` — Wikimedia Commons, `File:Iberia Express.svg`
+- `volotea.svg` — oficjalny sprite SVG używany przez stronę Volotei,
+  `https://www.volotea.com/assets/img/sprite.svg#svg-logo-solid`
 
 The names and logos remain trademarks of their respective owners. They are used here only to identify the operating airline.

@@ -5,6 +5,7 @@ from scripts.booking_urls import (
     air_europa_booking_url,
     iberia_booking_url,
     ryanair_booking_url,
+    volotea_booking_url,
     vueling_booking_url,
     wizz_booking_url,
 )
@@ -87,6 +88,17 @@ class AirEuropaBookingUrlTests(unittest.TestCase):
             "mad", "tfn", "2026-10-29", resident_discount=False
         )
         self.assertNotIn("residentType", url)
+
+
+class VoloteaBookingUrlTests(unittest.TestCase):
+    def test_builds_official_route_and_date_url_without_session_data(self):
+        url = volotea_booking_url("tfs", "bio", "2026-11-15T09:40:00+01:00")
+        self.assertEqual(
+            url,
+            "https://www.volotea.com/es/ofertas-vuelos/tfs/bio/"
+            "?departureDate=2026-11-15&returnDate=",
+        )
+        self.assertNotIn("token", url.lower())
 
 
 if __name__ == "__main__":

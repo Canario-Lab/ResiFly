@@ -47,7 +47,7 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
-Krok 1 ma cztery niezależne warianty. Wszystkie są częścią tego samego kroku, więc
+Krok 1 ma pięć niezależnych wariantów. Wszystkie są częścią tego samego kroku, więc
 cała procedura nadal zawiera dokładnie pięć głównych kroków.
 
 ### Krok 1A — Binter + Ryanair lub Wizz Air
@@ -163,6 +163,33 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   ponieważ przekierowanie przewoźnika może utknąć podczas jej rozpoznawania.
   Strona usuwa parametr, gdy użytkownik wyłączy filtr rezydenta. Link nie
   zawiera cookies, kluczy API ani tokenów sesji.
+
+### Krok 1E — Volotea + Ryanair lub Wizz Air
+
+- Używać wyłącznie lotnisk i zapisanych połączeń do Polski z kanonicznej listy
+  `data/volotea-transfer-airports.json`. Aktualnie jedynym kwalifikującym się
+  lotniskiem jest Bilbao (BIO), połączone przez Voloteę z Tenerife Sur (TFS),
+  a przez Wizz Air z Warszawą Chopina (WAW) i Krakowem (KRK).
+- Oficjalna strona tras Volotei i jej publiczny endpoint MinPrice są
+  nadrzędnymi źródłami trasy, dat, godzin, numerów lotów i cen. W tym wariancie
+  nie wolno używać Google Flights ani tworzyć szablonów rozkładu.
+- Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
+  Sprawdza oba kierunki i łączy odcinek Volotei z dozwolonym odcinkiem Ryanair
+  albo Wizz Air do WAW, WMI, KTW lub KRK.
+- Pytać oficjalny endpoint osobno o każdy potrzebny dzień, ponieważ odpowiedź
+  dla długiego okresu może zawierać tylko najtańszy lot w całym okresie.
+- Regularną cenę Volotei pobierać jako cenę z opłatami. Cenę rezydenta zapisać
+  jako jawnie oznaczony szacunek 25% tej ceny; podatki mogą nie podlegać pełnej
+  zniżce.
+- Pusta, ale poprawna odpowiedź dla trasy i dnia oznacza brak dostępności. Błąd
+  oficjalnego endpointu musi przerwać kolektor bez nadpisywania poprzedniego
+  feedu.
+- Generować wariant poleceniem `scripts/collect_step1e.py`, a publiczny wynik
+  zapisywać w `data/step1e-results.json`. Nie filtrować wyników cenowo.
+- Każdy odcinek Volotei otrzymuje trwały `booking_url` prowadzący do oficjalnej
+  strony właściwej trasy i dnia, bez cookies ani tokenów sesji. Status rezydenta
+  pasażer potwierdza w selektorze pasażerów Volotei, ponieważ publiczny format
+  URL przewoźnika nie udostępnia obsługiwanego parametru tej zniżki.
 
 ## Krok 2 — loty bezpośrednie
 
