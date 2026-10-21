@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime, timezone
 
-from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
+from scripts.booking_urls import iberia_booking_url, ryanair_booking_url, wizz_booking_url
 
 
 class WizzBookingUrlTests(unittest.TestCase):
@@ -36,6 +36,19 @@ class RyanairBookingUrlTests(unittest.TestCase):
         self.assertIn("originIata=WMI", url)
         self.assertIn("destinationIata=TFS", url)
         self.assertNotIn("token", url.lower())
+
+
+class IberiaBookingUrlTests(unittest.TestCase):
+    def test_builds_stable_canary_resident_search_url(self):
+        url = iberia_booking_url("tfn", "mad", "2026-11-03T08:30:00+00:00")
+        self.assertTrue(url.startswith("https://www.iberia.com/flights/?"))
+        self.assertIn("BEGIN_CITY_01=TFN", url)
+        self.assertIn("END_CITY_01=MAD", url)
+        self.assertIn("BEGIN_DAY_01=03", url)
+        self.assertIn("BEGIN_MONTH_01=202611", url)
+        self.assertIn("residentCode=RC", url)
+        self.assertNotIn("token", url.lower())
+        self.assertTrue(url.endswith("#!/availability"))
 
 
 if __name__ == "__main__":

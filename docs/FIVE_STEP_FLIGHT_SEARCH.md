@@ -45,7 +45,12 @@ wyraźnej decyzji użytkownika.
 - Jeśli krok nie zwróci wyników, zapisać informację, co sprawdzono i że nie
   znaleziono połączeń spełniających warunki.
 
-## Krok 1 — Binter + Ryanair lub Wizz Air
+## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
+
+Krok 1 ma dwa niezależne warianty. Oba są częścią tego samego kroku, więc
+cała procedura nadal zawiera dokładnie pięć głównych kroków.
+
+### Krok 1A — Binter + Ryanair lub Wizz Air
 
 - Używać wyłącznie lotnisk z kanonicznej listy
   `data/binter-transfer-airports.json`. Aktualnie są to: Fuerteventura (FUE),
@@ -73,6 +78,29 @@ wyraźnej decyzji użytkownika.
   policzyć w pełnej cenie.
 - W wynikach kroku umieścić krótką listę użytych lotnisk przesiadkowych oraz
   wszystkie znalezione połączenia.
+
+### Krok 1B — Iberia/Iberia Express + Ryanair lub Wizz Air
+
+- Używać wyłącznie lotnisk z kanonicznej listy
+  `data/iberia-transfer-airports.json`. Po sprawdzeniu siatki Iberii z TFN i
+  TFS jedynym kwalifikującym się lotniskiem jest Madryt (MAD).
+- Nie dodawać tras bez kanaryjskiej zniżki rezydenckiej. Cotygodniowy kolektor
+  nie odkrywa ponownie lotnisk i nie modyfikuje listy.
+- Sprawdzić oba kierunki oddzielnie:
+  1. WAW/WMI/KRK/KTW → MAD linią Ryanair albo Wizz Air → TFS/TFN linią
+     Iberia lub Iberia Express.
+  2. TFS/TFN → MAD linią Iberia lub Iberia Express → WAW/WMI/KRK/KTW linią
+     Ryanair albo Wizz Air.
+- W pierwszej kolejności pobierać rzeczywistą cenę wyszukiwarki Iberii z
+  rabatem rezydenta Wysp Kanaryjskich. Jeżeli źródło nie zwraca osobnej ceny
+  rezydenckiej, zapisać orientacyjną wartość równą 25% ceny regularnej i
+  oznaczyć jej źródło w odcinku.
+- Odcinek Wizz Air lub Ryanair liczyć w pełnej cenie. Nie filtrować wyników
+  cenowo w kolektorze.
+- Generować wariant poleceniem `scripts/collect_step1b.py`, a publiczny wynik
+  zapisywać w `data/step1b-results.json`.
+- Każdy odcinek Iberii otrzymuje trwały `booking_url` z trasą, datą, liczbą
+  pasażerów i kodem rezydenta, bez cookies ani tokenów sesji.
 
 ## Krok 2 — loty bezpośrednie
 
@@ -163,17 +191,22 @@ wyników w każdym kroku.
 ## Osobny wykrywacz nowych tras
 
 Cotygodniowe kolektory cen korzystają wyłącznie z zapisanych list i nie szukają
-nowych lotnisk przesiadkowych. Do okresowej kontroli siatki służy osobny skrypt:
+nowych lotnisk przesiadkowych. Do okresowej kontroli siatki kroku 1A oraz kroków
+3–5 służy osobny skrypt:
 
 ```bash
 python3 scripts/discover_transfer_routes.py
 ```
 
 Domyślnie jest to bezpieczny podgląd zmian bez zapisu. Opcja `--apply` dopisuje
-wyłącznie kompletne nowe pozycje do list kroków 1, 3, 4 i 5; nigdy automatycznie
+wyłącznie kompletne nowe pozycje do list kroków 1A, 3, 4 i 5; nigdy automatycznie
 nie usuwa istniejących pozycji. Krok 2 nie ma listy przesiadek, ponieważ jego
 kolektor zawsze sprawdza pełną macierz czterech polskich i dwóch teneryfskich
 lotnisk.
+
+Lista 1B jest aktualizowana osobno i może zawierać wyłącznie bezpośrednie trasy
+Iberii/Iberii Express z TFN lub TFS, na których obowiązuje kanaryjska zniżka
+rezydencka oraz istnieje dalszy odcinek Ryanair lub Wizz Air do Polski.
 
 Jeżeli nowa możliwość wykorzystuje Wizz Air, przed aktywacją muszą istnieć
 zweryfikowane numery lotów i czasy blokowe obu kierunków w rejestrze rozkładów.

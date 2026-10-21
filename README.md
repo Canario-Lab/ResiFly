@@ -1,7 +1,8 @@
 # ResiFly
 
 Prosta statyczna wyszukiwarka lotów między Teneryfą a Polską. Strona łączy
-wyniki z plików `data/step1-results.json`, `data/step2-results.json`,
+wyniki z plików `data/step1-results.json`, opcjonalnego wariantu
+`data/step1b-results.json`, `data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
 `data/step5-results.json` oraz
 pozwala filtrować je po kierunku, cenie, dacie, lotnisku, miejscu przesiadki,
@@ -22,13 +23,15 @@ maksymalną cenę wybiera użytkownik na stronie.
 python3 -m venv .venv
 .venv/bin/pip install -r scripts/requirements-flight-collector.txt
 .venv/bin/python scripts/collect_step1.py --days 30
+.venv/bin/python scripts/collect_step1b.py --days 30
 .venv/bin/python scripts/collect_step2.py --days 30
 .venv/bin/python scripts/collect_step3.py --days 30
 .venv/bin/python scripts/collect_step4.py --days 30
 .venv/bin/python scripts/collect_step5.py --days 30
 ```
 
-Generatory same zapisują `data/step1-results.json`, `data/step2-results.json`,
+Generatory same zapisują `data/step1-results.json`, `data/step1b-results.json`,
+`data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
 `data/step5-results.json`; plików wynikowych nie
 należy poprawiać ręcznie.
@@ -37,10 +40,12 @@ należy poprawiać ręcznie.
 
 Kolektory są sterowane plikami danych, a nie wpisanymi na stałe lotniskami w
 kodzie. Nowe lotnisko dodaje się do właściwej listy w `data/` razem ze strefą
-czasową i regułą zniżki. Krok 1 przechowuje potrzebne dane tras Wizz Air w
+czasową i regułą zniżki. Krok 1A przechowuje potrzebne dane tras Wizz Air w
 `data/binter-transfer-airports.json`; kroki 4 i 5 korzystają ze wspólnego
 rejestru `data/wizz-route-schedules.json`. Po uzupełnieniu tych danych nie
-trzeba zmieniać kodu kolektora.
+trzeba zmieniać kodu kolektora. Wariant 1B korzysta analogicznie z
+`data/iberia-transfer-airports.json`; ta lista zawiera wyłącznie trasy Iberii
+objęte zniżką rezydenta Wysp Kanaryjskich.
 
 ## Linki do zakupu Wizz Air
 
@@ -65,6 +70,10 @@ Przykład:
 Adres otwiera właściwą trasę i dzień. Numer lotu nie jest częścią adresu, więc
 jeżeli tego samego dnia dostępnych jest kilka lotów, użytkownik wybiera właściwy
 po godzinie.
+
+Odcinki Iberii i Iberii Express otrzymują analogiczny, trwały link z trasą,
+datą, liczbą pasażerów oraz kodem rezydenta Wysp Kanaryjskich. Link nie zawiera
+tokenu ani danych sesji przeglądarki.
 
 Linki Ryanair są generowane analogicznie i prowadzą bezpośrednio do oficjalnego
 ekranu wyboru lotu Ryanaira z ustawioną trasą i dokładnym dniem. Istniejące

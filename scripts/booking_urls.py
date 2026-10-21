@@ -110,3 +110,53 @@ def ryanair_booking_url(
     })
     return f"https://www.ryanair.com/{language}/trip/flights/select?{query}"
 
+
+def iberia_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+    *,
+    adults: int = 1,
+    children: int = 0,
+    infants: int = 0,
+    resident_code: str = "RC",
+) -> str:
+    """Return a reusable Iberia search link for one outbound journey.
+
+    ``RC`` is Iberia's public search code for a Canary Islands resident. The
+    URL contains search inputs only; no browser-session data is persisted.
+    """
+
+    passenger_counts = (adults, children, infants)
+    if any(not isinstance(count, int) or count < 0 for count in passenger_counts):
+        raise ValueError("Passenger counts must be non-negative integers")
+    if adults < 1:
+        raise ValueError("At least one adult passenger is required")
+
+    departure_day = date.fromisoformat(_departure_date(departure))
+    query = urlencode({
+        "market": "ES",
+        "language": "es",
+        "appliesOMB": "false",
+        "splitEndCity": "false",
+        "initializedOMB": "true",
+        "flexible": "false",
+        "TRIP_TYPE": 1,
+        "BEGIN_CITY_01": _iata(origin),
+        "END_CITY_01": _iata(destination),
+        "BEGIN_DAY_01": f"{departure_day.day:02d}",
+        "BEGIN_MONTH_01": departure_day.strftime("%Y%m"),
+        "BEGIN_YEAR_01": departure_day.year,
+        "FARE_TYPE": "R",
+        "ADT": adults,
+        "CHD": children,
+        "INF": infants,
+        "BNN": 0,
+        "YTH": 0,
+        "YCD": 0,
+        "residentCode": resident_code.strip().upper(),
+        "familianumerosa": "",
+        "bookingMarket": "ES",
+    })
+    return f"https://www.iberia.com/flights/?{query}#!/availability"
+

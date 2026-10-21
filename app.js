@@ -1,9 +1,10 @@
-const DATA_URLS = [
-  "data/step1-results.json",
-  "data/step2-results.json",
-  "data/step3-results.json",
-  "data/step4-results.json",
-  "data/step5-results.json",
+const DATA_SOURCES = [
+  { url: "data/step1-results.json" },
+  { url: "data/step1b-results.json", optional: true },
+  { url: "data/step2-results.json" },
+  { url: "data/step3-results.json" },
+  { url: "data/step4-results.json" },
+  { url: "data/step5-results.json" },
 ];
 
 const state = {
@@ -95,6 +96,8 @@ const carrierLogos = {
 
 const carrierPurchaseUrls = {
   Binter: "https://www.bintercanarias.com/es/buscar-vuelos",
+  Iberia: "https://www.iberia.com/flights/",
+  "Iberia Express": "https://www.iberia.com/flights/",
   "Wizz Air": "https://wizzair.com/pl-pl",
   Ryanair: "https://www.ryanair.com/pl/pl",
 };
@@ -931,10 +934,14 @@ function bindEvents() {
 
 async function loadFlights() {
   try {
-    const responses = await Promise.all(DATA_URLS.map(url => fetch(url, { cache: "no-store" })));
-    const failed = responses.find(response => !response.ok);
-    if (failed) throw new Error(`HTTP ${failed.status}`);
-    const documents = await Promise.all(responses.map(response => response.json()));
+    const responses = await Promise.all(DATA_SOURCES.map(async source => ({
+      source,
+      response: await fetch(source.url, { cache: "no-store" }),
+    })));
+    const failed = responses.find(({ source, response }) => !source.optional && !response.ok);
+    if (failed) throw new Error(`HTTP ${failed.response.status}: ${failed.source.url}`);
+    const available = responses.filter(({ response }) => response.ok);
+    const documents = await Promise.all(available.map(({ response }) => response.json()));
     state.document = {
       generated_at: documents.map(document => document.generated_at).sort().at(-1),
       period_from: documents.map(document => document.period_from).sort().at(-1),

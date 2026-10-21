@@ -8,19 +8,36 @@
 - Keep exactly five search steps. Do not add, remove, or silently reinterpret a
   step without an explicit user decision.
 
-## Canonical Binter transfer-airport list
+## Canonical Step 1A Binter transfer-airport list
 
-- The fixed airport allowlist for Step 1 is stored in
+- The fixed airport allowlist for Step 1A is stored in
   `data/binter-transfer-airports.json`.
-- Read the airport codes from that file whenever Step 1 is run. Do not
+- Read the airport codes from that file whenever Step 1A is run. Do not
   rediscover, add, or remove transfer airports during a weekly collection.
 - A weekly collection still fetches current schedules and prices for the
   listed airports; being on the allowlist does not imply current availability.
 - Update this allowlist only when the user explicitly asks to revise it.
-- Keep each Step 1 airport's IANA time zone and resident-discount eligibility
+- Keep each Step 1A airport's IANA time zone and resident-discount eligibility
   in `data/binter-transfer-airports.json`. Keep the verified Wizz routes needed
-  by Step 1 in that same file under `wizz_route_schedules`. Do not hard-code
-  new Step 1 airport knowledge in the collector.
+  by Step 1A in that same file under `wizz_route_schedules`. Do not hard-code
+  new Step 1A airport knowledge in the collector.
+
+## Canonical Step 1B Iberia transfer-airport list
+
+- Step 1B is a variant within Step 1, not a sixth top-level search step.
+- Its fixed Iberia/Iberia Express allowlist is stored in
+  `data/iberia-transfer-airports.json`. Only routes eligible for the Canary
+  resident discount may be present.
+- Generate Step 1B with `scripts/collect_step1b.py` and write the public feed
+  to `data/step1b-results.json`.
+- Read airport codes, time zones, discount eligibility, multiplier and Wizz
+  route metadata from that allowlist. Do not rediscover or hard-code transfer
+  airports during a regular price collection.
+- Prefer the actual Iberia fare returned with the `CANARIAS` resident discount.
+  Use the configured `0.25` multiplier only as an explicitly labelled fallback.
+- Never persist Iberia access tokens, cookies, browser-session URLs or other
+  temporary parameters. Every Iberia/Iberia Express leg must instead receive a
+  deterministic `booking_url` from `scripts.booking_urls.iberia_booking_url`.
 
 ## Step 2 direct-flight collection
 
@@ -121,6 +138,9 @@
   than one flight operates on the same route that day.
 - Keep the Ryanair `booking_url` on the individual leg for the same reason as
   the Wizz Air URL: self-transfer itineraries are purchased one leg at a time.
+- Every Iberia and Iberia Express leg written to a public results JSON must
+  contain a deterministic `booking_url` generated with
+  `scripts.booking_urls.iberia_booking_url`.
 - Do not hand-edit generated result JSON files. Update the collector/builder and
   regenerate them when the user explicitly asks for new data.
 
@@ -136,9 +156,10 @@
 ## Transfer-route detector
 
 - Use `scripts/discover_transfer_routes.py` to check whether the airline route
-  networks create new Step 1, 3, 4, or 5 transfer combinations. Step 2 has no
-  transfer allowlist: its collector always checks the complete fixed airport
-  matrix.
+  networks create new Step 1A, 3, 4, or 5 transfer combinations. Step 1B is
+  reviewed separately because its list may contain only Iberia routes eligible
+  for the Canary resident discount. Step 2 has no transfer allowlist: its
+  collector always checks the complete fixed airport matrix.
 - The detector is separate from the five price collectors. Do not run it as
   part of a normal price refresh unless route discovery was explicitly
   requested or separately scheduled.

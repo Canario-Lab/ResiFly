@@ -1,0 +1,175 @@
+import json
+from pathlib import Path
+import unittest
+
+from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
+from scripts.collect_step1b import (
+    apply_resident_prices,
+    build_connections,
+    parse_iberia_response,
+    validate_allowlist,
+    validate_document,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def low_cost_leg(origin, departure, destination, arrival, price=250.0):
+    return {
+        "carrier": "Wizz Air",
+        "flight_number": "W61472",
+        "departure_airport": origin,
+        "departure_at": departure,
+        "arrival_airport": destination,
+        "arrival_at": arrival,
+        "price_regular_pln": price,
+        "price_resident_estimated_pln": price,
+        "resident_discount_eligible": False,
+        "booking_url": "https://www.wizzair.com/example",
+    }
+
+
+def iberia_leg(origin, departure, destination, arrival, regular=800.0, resident=200.0):
+    return {
+        "carrier": "Iberia Express",
+        "flight_number": "IB1574",
+        "departure_airport": origin,
+        "departure_at": departure,
+        "arrival_airport": destination,
+        "arrival_at": arrival,
+        "price_regular_pln": regular,
+        "price_resident_estimated_pln": resident,
+        "resident_discount_eligible": True,
+        "resident_fare_multiplier": 0.25,
+        "booking_url": "https://www.iberia.com/flights/example",
+    }
+
+
+class Step1BCollectorTests(unittest.TestCase):
+    def setUp(self):
+        self.allowlist = json.loads(
+            (ROOT / "data" / "iberia-transfer-airports.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        validate_allowlist(self.allowlist)
+        configure_airports_from_allowlist(self.allowlist)
+
+    def test_allowlist_contains_only_discount_eligible_madrid(self):
+        self.assertEqual(
+            [airport["iata"] for airport in self.allowlist["airports"]],
+            ["MAD"],
+        )
+        airport = self.allowlist["airports"][0]
+        self.assertTrue(airport["resident_discount_eligible_on_iberia_leg"])
+        self.assertEqual(airport["iberia_resident_fare_multiplier"], 0.25)
+        self.assertEqual(set(airport["tenerife_airports"]), {"TFN", "TFS"})
+
+    def test_parses_direct_iberia_express_flight(self):
+        payload = {
+            "contextMetadata": {"currencies": [{"code": "EUR"}]},
+            "originDestinations": [{
+                "slices": [{
+                    "price": {"total": 100.0, "currency": "EUR"},
+                    "segments": [{
+                        "departure": {"code": "TFN"},
+                        "arrival": {"code": "MAD"},
+                        "departureDateTime": "2026-11-03 10:00:00",
+                        "arrivalDateTime": "2026-11-03 13:45:00",
+                        "flight": {
+                            "marketingCarrier": {"code": "IB"},
+                            "operationalCarrier": {
+                                "code": "I2",
+                                "name": "Iberia Express",
+                            },
+                            "marketingFlightNumber": "1574",
+                        },
+                    }],
+                }],
+            }],
+        }
+        legs = parse_iberia_response(
+            payload,
+            "TFN",
+            "MAD",
+            {"EUR": CurrencyRate("EUR", 4.3)},
+            {"IB", "I2"},
+            {"IB", "I2", "YW"},
+        )
+        self.assertEqual(len(legs), 1)
+        self.assertEqual(legs[0]["carrier"], "Iberia Express")
+        self.assertEqual(legs[0]["flight_number"], "IB1574")
+        self.assertEqual(legs[0]["price_regular_pln"], 430.0)
+        self.assertIn("residentCode=RC", legs[0]["booking_url"])
+
+    def test_prefers_real_resident_price_and_has_multiplier_fallback(self):
+        regular = [iberia_leg(
+            "TFN",
+            "2026-11-03T10:00:00+00:00",
+            "MAD",
+            "2026-11-03T13:45:00+01:00",
+            regular=800.0,
+            resident=800.0,
+        )]
+        actual = [dict(regular[0], price_regular_pln=180.0)]
+        merged = apply_resident_prices(regular, actual, 0.25)
+        self.assertEqual(merged[0]["price_resident_estimated_pln"], 180.0)
+        self.assertIn("CANARIAS", merged[0]["resident_price_source"])
+
+        fallback = apply_resident_prices(regular, [], 0.25)
+        self.assertEqual(fallback[0]["price_resident_estimated_pln"], 200.0)
+        self.assertEqual(
+            fallback[0]["resident_price_source"],
+            "estimated from configured multiplier",
+        )
+
+    def test_builds_both_directions_without_price_limit(self):
+        tenerife_to_madrid = iberia_leg(
+            "TFN",
+            "2026-11-03T08:00:00+00:00",
+            "MAD",
+            "2026-11-03T11:45:00+01:00",
+            regular=900.0,
+            resident=225.0,
+        )
+        madrid_to_poland = low_cost_leg(
+            "MAD",
+            "2026-11-03T15:00:00+01:00",
+            "WAW",
+            "2026-11-03T18:35:00+01:00",
+            price=400.0,
+        )
+        poland_to_madrid = low_cost_leg(
+            "WAW",
+            "2026-11-04T06:00:00+01:00",
+            "MAD",
+            "2026-11-04T10:00:00+01:00",
+            price=450.0,
+        )
+        madrid_to_tenerife = iberia_leg(
+            "MAD",
+            "2026-11-04T13:00:00+01:00",
+            "TFS",
+            "2026-11-04T15:00:00+00:00",
+            regular=1000.0,
+            resident=250.0,
+        )
+        results = build_connections(
+            [madrid_to_poland, poland_to_madrid],
+            [tenerife_to_madrid, madrid_to_tenerife],
+        )
+        self.assertEqual(len(results), 2)
+        self.assertEqual(
+            {result["direction"] for result in results},
+            {"tenerife_to_poland", "poland_to_tenerife"},
+        )
+        self.assertEqual(
+            {result["price_total_regular_pln"] for result in results},
+            {1300.0, 1450.0},
+        )
+        validate_document({"results": results})
+
+
+if __name__ == "__main__":
+    unittest.main()

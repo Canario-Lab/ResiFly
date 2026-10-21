@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Iberia dla kroku 1B",
+  "verified_on": "2026-10-21",
+  "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Iberia/Iberia Express + Ryanair/Wizz Air w kroku 1B.",
+  "scope": {
+    "tenerife_airports": [
+      "TFN",
+      "TFS"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK"
+    ],
+    "tenerife_leg_airlines": [
+      "Iberia",
+      "Iberia Express"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
+  },
+  "usage_policy": {
+    "step": "1B",
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj wyłącznie aktualne rozkłady i ceny dla lotnisk z pola airports.",
+    "do_not_rediscover_each_run": true,
+    "polish_route_evidence_is_not_a_search_limit": true,
+    "update_only_on_explicit_user_request": true,
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Kolektor sprawdza oba lotniska Teneryfy i wszystkie cztery polskie lotniska."
+  },
+  "airports": [
+    {
+      "iata": "MAD",
+      "name_pl": "Madryt",
+      "timezone": "Europe/Madrid",
+      "iberia_from_tenerife": true,
+      "tenerife_airports": [
+        "TFN",
+        "TFS"
+      ],
+      "resident_discount_eligible_on_iberia_leg": true,
+      "iberia_resident_fare_multiplier": 0.25,
+      "eligibility_evidence": [
+        {
+          "polish_airport": "WAW",
+          "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "WMI",
+          "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "KTW",
+          "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "KRK",
+          "airline": "Ryanair"
+        }
+      ]
+    }
+  ],
+  "iberia_airline_codes": {
+    "accepted_marketing": [
+      "IB",
+      "I2"
+    ],
+    "accepted_operating": [
+      "IB",
+      "I2",
+      "YW"
+    ],
+    "note": "YW (Air Nostrum) jest dopuszczone tylko wtedy, gdy lot jest sprzedawany przez Iberię pod kodem IB."
+  },
+  "wizz_route_schedules": [
+    {
+      "origin": "WAW",
+      "destination": "MAD",
+      "flight_number": "W61471",
+      "duration_minutes": 230
+    },
+    {
+      "origin": "MAD",
+      "destination": "WAW",
+      "flight_number": "W61472",
+      "duration_minutes": 215
+    },
+    {
+      "origin": "KTW",
+      "destination": "MAD",
+      "flight_number": "W61177",
+      "duration_minutes": 200
+    },
+    {
+      "origin": "MAD",
+      "destination": "KTW",
+      "flight_number": "W61178",
+      "duration_minutes": 205
+    }
+  ],
+  "sources": [
+    {
+      "name": "Aena — Iberia na lotnisku Tenerife Norte",
+      "url": "https://www.aena.es/es/tenerife-norte-ciudad-de-la-laguna/aerolineas/iberia.html",
+      "finding": "Jedynym kierunkiem grupy Iberia z TFN jest Madryt (MAD)."
+    },
+    {
+      "name": "Aena — kierunki z lotniska Tenerife Sur",
+      "url": "https://www.aena.es/es/tenerife-sur/aerolineas-y-destinos/destinos-aeropuerto.html",
+      "finding": "Dla Iberii z TFS wykazany jest Madryt (MAD)."
+    },
+    {
+      "name": "Ministerio de Transportes — Plan Estrategico de Subvenciones 2025–2027",
+      "url": "https://cdn.transportes.gob.es/portal-web-transportes/transparencia/2.pes_2025-2027.pdf",
+      "finding": "Zniżka 75% obejmuje podróże lotnicze rezydentów Wysp Kanaryjskich między archipelagiem a pozostałą częścią Hiszpanii."
+    }
+  ]
+}
