@@ -92,6 +92,7 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_HIGHLIGHT_DURATION_MS = 30_000;
+const CALENDAR_SCROLL_SETTLE_FALLBACK_MS = 1_200;
 const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
 const BACKGROUND_RESULT_BATCH_SIZE = 10;
@@ -103,12 +104,15 @@ let progressiveResults = [];
 let progressiveFilters = null;
 let progressiveResultCount = 0;
 let progressiveLoadedResultIndexes = new Set();
+let progressivePreparedResultCards = new Map();
 let progressiveRenderVersion = 0;
 let progressiveIdleHandle = null;
 let progressiveIdleUsesTimeout = false;
-let progressiveResumeHandler = null;
-let progressiveLoadingPaused = false;
+let progressiveCommitPending = false;
 let calendarTargetCard = null;
+let calendarNavigationPending = false;
+let calendarNavigationTimer = null;
+let calendarScrollEndHandler = null;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -415,6 +419,36 @@ function setCardDetailsExpanded(card, expanded) {
   details.hidden = !expanded;
 }
 
+function clearCalendarNavigationGuard() {
+  if (calendarNavigationTimer !== null) {
+    window.clearTimeout(calendarNavigationTimer);
+    calendarNavigationTimer = null;
+  }
+  if (calendarScrollEndHandler) {
+    window.removeEventListener("scrollend", calendarScrollEndHandler);
+    calendarScrollEndHandler = null;
+  }
+  calendarNavigationPending = false;
+}
+
+function finishCalendarNavigation() {
+  clearCalendarNavigationGuard();
+  if (!progressiveCommitPending) return;
+  progressiveCommitPending = false;
+  commitPreparedResults(progressiveRenderVersion);
+}
+
+function guardCalendarNavigation() {
+  clearCalendarNavigationGuard();
+  calendarNavigationPending = true;
+  calendarScrollEndHandler = finishCalendarNavigation;
+  window.addEventListener("scrollend", calendarScrollEndHandler, { once: true });
+  calendarNavigationTimer = window.setTimeout(
+    finishCalendarNavigation,
+    CALENDAR_SCROLL_SETTLE_FALLBACK_MS
+  );
+}
+
 function scrollToResult(resultId) {
   let card = [...elements.list.querySelectorAll(".flight-card")]
     .find(item => item.dataset.resultId === resultId);
@@ -431,7 +465,8 @@ function scrollToResult(resultId) {
   setCardDetailsExpanded(card, true);
   card.classList.add("is-calendar-target");
   calendarTargetCard = card;
-  pauseProgressiveLoading();
+  scheduleProgressiveBackground(progressiveRenderVersion);
+  guardCalendarNavigation();
   card.scrollIntoView({
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     block: "center",
@@ -997,112 +1032,147 @@ function cancelProgressiveIdleWork() {
   progressiveIdleUsesTimeout = false;
 }
 
-function disarmProgressiveResume() {
-  if (!progressiveResumeHandler) return;
-  window.removeEventListener("wheel", progressiveResumeHandler);
-  window.removeEventListener("touchmove", progressiveResumeHandler);
-  window.removeEventListener("keydown", progressiveResumeHandler);
-  progressiveResumeHandler = null;
-}
-
 function stopProgressiveRendering() {
   progressiveRenderVersion += 1;
   window.clearTimeout(calendarHighlightTimer);
   cancelProgressiveIdleWork();
-  disarmProgressiveResume();
+  clearCalendarNavigationGuard();
   progressiveResults = [];
   progressiveFilters = null;
   progressiveResultCount = 0;
   progressiveLoadedResultIndexes = new Set();
-  progressiveLoadingPaused = false;
+  progressivePreparedResultCards = new Map();
+  progressiveCommitPending = false;
   calendarTargetCard = null;
 }
 
-function resumeProgressiveLoading(expectedVersion = progressiveRenderVersion) {
-  if (expectedVersion !== progressiveRenderVersion) return;
-  progressiveLoadingPaused = false;
-  disarmProgressiveResume();
-  scheduleProgressiveBackground(expectedVersion);
+function visibleResultAnchor() {
+  const cards = [...elements.list.querySelectorAll(".flight-card")];
+  const targetBounds = calendarTargetCard?.isConnected
+    ? calendarTargetCard.getBoundingClientRect()
+    : null;
+  if (targetBounds && targetBounds.bottom > 0 && targetBounds.top < window.innerHeight) {
+    return { card: calendarTargetCard, top: targetBounds.top };
+  }
+
+  const card = cards.find(item => item.getBoundingClientRect().bottom > 0);
+  return card ? { card, top: card.getBoundingClientRect().top } : null;
 }
 
-function armProgressiveResume(expectedVersion) {
-  disarmProgressiveResume();
-  const scrollKeys = new Set(["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End", " "]);
-  progressiveResumeHandler = event => {
-    if (event.type === "keydown" && !scrollKeys.has(event.key)) return;
-    resumeProgressiveLoading(expectedVersion);
-  };
-  window.addEventListener("wheel", progressiveResumeHandler, { passive: true });
-  window.addEventListener("touchmove", progressiveResumeHandler, { passive: true });
-  window.addEventListener("keydown", progressiveResumeHandler);
+function restoreResultAnchor(anchor) {
+  if (!anchor?.card?.isConnected) return;
+  const shift = anchor.card.getBoundingClientRect().top - anchor.top;
+  if (Math.abs(shift) < 1) return;
+
+  const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = "auto";
+  window.scrollBy({ top: shift, left: 0, behavior: "auto" });
+  document.documentElement.style.scrollBehavior = previousScrollBehavior;
 }
 
-function pauseProgressiveLoading() {
-  progressiveLoadingPaused = true;
-  cancelProgressiveIdleWork();
-  armProgressiveResume(progressiveRenderVersion);
-}
-
-function visibleCalendarTargetTop() {
-  if (!calendarTargetCard?.isConnected) return null;
-  const bounds = calendarTargetCard.getBoundingClientRect();
-  if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return null;
-  return bounds.top;
-}
-
-function restoreCalendarTargetPosition(previousTop) {
-  if (previousTop === null || !calendarTargetCard?.isConnected) return;
-  const shift = calendarTargetCard.getBoundingClientRect().top - previousTop;
-  if (Math.abs(shift) >= 1) window.scrollBy(0, shift);
-}
-
-function renderResultAtIndex(index) {
-  if (
-    progressiveLoadedResultIndexes.has(index) ||
-    !progressiveResults[index] ||
-    !progressiveFilters
-  ) return;
-
+function createProgressiveResultCard(index) {
+  if (!progressiveResults[index] || !progressiveFilters) return null;
   const fragment = createResultCard(progressiveResults[index], progressiveFilters);
   const card = fragment.querySelector(".flight-card");
   card.dataset.resultIndex = String(index);
+  return card;
+}
+
+function renderResultAtIndex(index) {
+  if (progressiveLoadedResultIndexes.has(index)) return;
+
+  const card = progressivePreparedResultCards.get(index)
+    || createProgressiveResultCard(index);
+  if (!card) return;
+
+  progressivePreparedResultCards.delete(index);
   const nextCard = [...elements.list.querySelectorAll(".flight-card")]
     .find(item => Number(item.dataset.resultIndex) > index);
-  elements.list.insertBefore(fragment, nextCard || null);
+  elements.list.insertBefore(card, nextCard || null);
   progressiveLoadedResultIndexes.add(index);
 }
 
-function appendNextResultBatch(
-  expectedVersion = progressiveRenderVersion,
-  batchSize = RESULT_BATCH_SIZE
-) {
+function appendInitialResults(expectedVersion = progressiveRenderVersion) {
   if (
     expectedVersion !== progressiveRenderVersion ||
-    progressiveLoadingPaused ||
     !progressiveFilters
   ) return;
 
-  const calendarTargetTop = visibleCalendarTargetTop();
   let appended = 0;
-  while (progressiveResultCount < progressiveResults.length && appended < batchSize) {
+  while (progressiveResultCount < progressiveResults.length && appended < RESULT_BATCH_SIZE) {
     const index = progressiveResultCount;
     progressiveResultCount += 1;
     if (progressiveLoadedResultIndexes.has(index)) continue;
     renderResultAtIndex(index);
     appended += 1;
   }
-  restoreCalendarTargetPosition(calendarTargetTop);
+}
+
+function commitPreparedResults(expectedVersion) {
+  if (
+    expectedVersion !== progressiveRenderVersion ||
+    !progressiveFilters ||
+    progressiveResultCount < progressiveResults.length
+  ) return;
+  if (calendarNavigationPending) {
+    progressiveCommitPending = true;
+    return;
+  }
+
+  const anchor = visibleResultAnchor();
+  const renderedCards = new Map(
+    [...elements.list.querySelectorAll(".flight-card")]
+      .map(card => [Number(card.dataset.resultIndex), card])
+  );
+  const completeList = document.createDocumentFragment();
+
+  for (let index = 0; index < progressiveResults.length; index += 1) {
+    const card = renderedCards.get(index) || progressivePreparedResultCards.get(index);
+    if (!card) return;
+    completeList.append(card);
+  }
+
+  elements.list.replaceChildren(completeList);
+  progressiveLoadedResultIndexes = new Set(progressiveResults.map((_, index) => index));
+  progressivePreparedResultCards.clear();
+  progressiveCommitPending = false;
+  restoreResultAnchor(anchor);
+}
+
+function prepareNextResultBatch(
+  expectedVersion = progressiveRenderVersion,
+  batchSize = BACKGROUND_RESULT_BATCH_SIZE
+) {
+  if (
+    expectedVersion !== progressiveRenderVersion ||
+    !progressiveFilters
+  ) return;
+
+  let prepared = 0;
+  while (progressiveResultCount < progressiveResults.length && prepared < batchSize) {
+    const index = progressiveResultCount;
+    progressiveResultCount += 1;
+    if (
+      progressiveLoadedResultIndexes.has(index) ||
+      progressivePreparedResultCards.has(index)
+    ) continue;
+
+    const card = createProgressiveResultCard(index);
+    if (card) {
+      progressivePreparedResultCards.set(index, card);
+      prepared += 1;
+    }
+  }
 
   if (progressiveResultCount >= progressiveResults.length) {
     cancelProgressiveIdleWork();
-    disarmProgressiveResume();
+    commitPreparedResults(expectedVersion);
   }
 }
 
 function scheduleProgressiveBackground(expectedVersion) {
   if (
     progressiveIdleHandle !== null ||
-    progressiveLoadingPaused ||
     expectedVersion !== progressiveRenderVersion ||
     progressiveResultCount >= progressiveResults.length
   ) return;
@@ -1110,15 +1180,12 @@ function scheduleProgressiveBackground(expectedVersion) {
   const renderWhenIdle = deadline => {
     progressiveIdleHandle = null;
     progressiveIdleUsesTimeout = false;
-    if (
-      progressiveLoadingPaused ||
-      expectedVersion !== progressiveRenderVersion
-    ) return;
+    if (expectedVersion !== progressiveRenderVersion) return;
     if (deadline && !deadline.didTimeout && deadline.timeRemaining() < 5) {
       scheduleProgressiveBackground(expectedVersion);
       return;
     }
-    appendNextResultBatch(expectedVersion, BACKGROUND_RESULT_BATCH_SIZE);
+    prepareNextResultBatch(expectedVersion);
     scheduleProgressiveBackground(expectedVersion);
   };
 
@@ -1141,7 +1208,7 @@ function renderResultCards(results, filters) {
   progressiveFilters = filters;
 
   elements.list.replaceChildren();
-  appendNextResultBatch(expectedVersion);
+  appendInitialResults(expectedVersion);
   scheduleProgressiveBackground(expectedVersion);
 }
 
