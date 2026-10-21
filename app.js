@@ -698,6 +698,22 @@ function purchaseLegPriceRows(leg, filters) {
   }];
 }
 
+function bookingUrlForFilters(leg, filters) {
+  const fallback = carrierPurchaseUrls[leg.carrier] || "#";
+  const rawUrl = leg.booking_url || fallback;
+  if (leg.carrier !== "Vueling" || !leg.booking_url) return rawUrl;
+
+  try {
+    const url = new URL(rawUrl, window.location.href);
+    const useResidentDiscount = filters.resident && leg.resident_discount_eligible;
+    url.searchParams.set("dt", useResidentDiscount ? "1" : "0");
+    return url.toString();
+  } catch (error) {
+    console.warn("Nie udało się dopasować linku Vuelinga do filtra rezydenta", error);
+    return fallback;
+  }
+}
+
 function createPurchaseStep(leg, index, filters) {
   const step = document.createElement("article");
   step.className = "purchase-step";
@@ -756,7 +772,7 @@ function createPurchaseStep(leg, index, filters) {
 
   const openLink = document.createElement("a");
   openLink.className = "purchase-open-link";
-  openLink.href = leg.booking_url || carrierPurchaseUrls[leg.carrier] || "#";
+  openLink.href = bookingUrlForFilters(leg, filters);
   openLink.target = "_blank";
   openLink.rel = "noopener noreferrer";
   openLink.textContent = `Otwórz ${leg.carrier}`;
