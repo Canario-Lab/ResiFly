@@ -207,3 +207,41 @@ def vueling_booking_url(
     })
     return f"https://tickets.vueling.com/booking?{query}"
 
+
+def air_europa_booking_url(
+    origin: str,
+    destination: str,
+    departure: DateValue,
+    *,
+    adults: int = 1,
+    children: int = 0,
+    infants: int = 0,
+) -> str:
+    """Return Air Europa's official, reusable one-way deeplink.
+
+    The parameters match the URL returned by Air Europa's branded deeplink
+    service.  The link contains route, date and passenger counts only; it has
+    no cookies, API keys or browser-session identifiers.  Air Europa asks the
+    customer to confirm resident eligibility during purchase.
+    """
+
+    passenger_counts = (adults, children, infants)
+    if any(not isinstance(count, int) or count < 0 for count in passenger_counts):
+        raise ValueError("Passenger counts must be non-negative integers")
+    if adults < 1:
+        raise ValueError("At least one adult passenger is required")
+
+    compact_date = date.fromisoformat(_departure_date(departure)).strftime("%Y%m%d")
+    query = urlencode({
+        "departure_airport": _iata(origin),
+        "arrival_airport": _iata(destination),
+        "departure_date": compact_date,
+        "adults": adults,
+        "children": children,
+        "infants": infants,
+        "channel": "trfx",
+        "trip_type": "O",
+        "config_ext": "int",
+    })
+    return f"https://www.aireuropa.com/es/es/deeplink?{query}"
+

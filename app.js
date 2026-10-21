@@ -2,6 +2,7 @@ const DATA_SOURCES = [
   { url: "data/step1-results.json" },
   { url: "data/step1b-results.json", optional: true },
   { url: "data/step1c-results.json", optional: true },
+  { url: "data/step1d-results.json", optional: true },
   { url: "data/step2-results.json" },
   { url: "data/step3-results.json" },
   { url: "data/step4-results.json" },
@@ -94,6 +95,8 @@ const carrierLogos = {
   "Wizz Air": "assets/logos/wizz-air.svg",
   Ryanair: "assets/logos/ryanair.svg",
   Vueling: "assets/logos/vueling.svg",
+  "Air Europa": "assets/logos/air-europa.svg?v=20261021-1",
+  "Iberia Express": "assets/logos/iberia-express.svg",
 };
 
 const carrierPurchaseUrls = {
@@ -101,6 +104,7 @@ const carrierPurchaseUrls = {
   Iberia: "https://www.iberia.com/flights/",
   "Iberia Express": "https://www.iberia.com/flights/",
   Vueling: "https://www.vueling.com/es",
+  "Air Europa": "https://www.aireuropa.com/es/es/home",
   "Wizz Air": "https://wizzair.com/pl-pl",
   Ryanair: "https://www.ryanair.com/pl/pl",
 };

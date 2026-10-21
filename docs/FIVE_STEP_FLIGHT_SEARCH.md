@@ -47,7 +47,7 @@ wyraźnej decyzji użytkownika.
 
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
-Krok 1 ma trzy niezależne warianty. Wszystkie są częścią tego samego kroku, więc
+Krok 1 ma cztery niezależne warianty. Wszystkie są częścią tego samego kroku, więc
 cała procedura nadal zawiera dokładnie pięć głównych kroków.
 
 ### Krok 1A — Binter + Ryanair lub Wizz Air
@@ -133,6 +133,31 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Każdy odcinek Vuelinga otrzymuje oficjalny trwały `booking_url` z trasą,
   datą, liczbą pasażerów i parametrem zniżki rezydenta, bez cookies ani tokenów
   sesji.
+
+### Krok 1D — Air Europa + Ryanair lub Wizz Air
+
+- Używać wyłącznie lotnisk i zapisanych połączeń do Polski z kanonicznej listy
+  `data/air-europa-transfer-airports.json`. Aktualnie są to Madryt (MAD) i
+  Bilbao (BIO), połączone przez Air Europa wyłącznie z Tenerife Norte (TFN).
+- Oficjalne strony Air Europa i osadzony na nich publiczny feed taryfowy marki
+  Air Europa są nadrzędnym źródłem tras i cen. W tym wariancie nie wolno używać
+  Google Flights.
+- Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
+  Sprawdza oba kierunki i łączy odcinek Air Europa z dozwolonym odcinkiem
+  Ryanair albo Wizz Air do WAW, WMI, KTW lub KRK.
+- Regularną cenę Air Europa pobierać z oficjalnego feedu jako najniższą cenę
+  dla trasy i dnia. Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25%
+  tej ceny; podatki mogą nie podlegać pełnej zniżce.
+- Feed taryfowy nie podaje godzin ani numerów lotów. Korzystać wyłącznie z
+  datowanych, zweryfikowanych szablonów rozkładu w allowliście. Jeśli okno
+  wykracza poza ich ważność, przerwać bez nadpisywania wyników zamiast
+  wymyślać dane.
+- Jeśli oficjalny feed nie zwróci użytecznych cen, również przerwać bez
+  nadpisywania poprzedniego pliku wynikowego.
+- Generować wariant poleceniem `scripts/collect_step1d.py`, a publiczny wynik
+  zapisywać w `data/step1d-results.json`. Nie filtrować wyników cenowo.
+- Każdy odcinek Air Europa otrzymuje oficjalny, trwały `booking_url` z trasą,
+  datą i liczbą pasażerów, bez cookies, kluczy API ani tokenów sesji.
 
 ## Krok 2 — loty bezpośrednie
 
@@ -239,6 +264,10 @@ lotnisk.
 Lista 1B jest aktualizowana osobno i może zawierać wyłącznie bezpośrednie trasy
 Iberii/Iberii Express z TFN lub TFS, na których obowiązuje kanaryjska zniżka
 rezydencka oraz istnieje dalszy odcinek Ryanair lub Wizz Air do Polski.
+
+Listy 1C i 1D są również aktualizowane osobno. Dla 1D weryfikacja musi odbywać
+się bezpośrednio na oficjalnych stronach i w feedzie Air Europa, nigdy przez
+Google Flights.
 
 Jeżeli nowa możliwość wykorzystuje Wizz Air, przed aktywacją muszą istnieć
 zweryfikowane numery lotów i czasy blokowe obu kierunków w rejestrze rozkładów.

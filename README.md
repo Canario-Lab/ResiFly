@@ -2,7 +2,8 @@
 
 Prosta statyczna wyszukiwarka lotów między Teneryfą a Polską. Strona łączy
 wyniki z plików `data/step1-results.json`, opcjonalnych wariantów
-`data/step1b-results.json` i `data/step1c-results.json`, `data/step2-results.json`,
+`data/step1b-results.json`, `data/step1c-results.json` i
+`data/step1d-results.json`, `data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
 `data/step5-results.json` oraz
 pozwala filtrować je po kierunku, cenie, dacie, lotnisku, miejscu przesiadki,
@@ -16,9 +17,10 @@ wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
 wynikowych danych.
 
 Publiczne JSON-y strony są generowane z aktualnych danych Binter, Ryanair,
-Wizz Air, Google Flights dla Iberii/Iberii Express i Vuelinga oraz kursu NBP.
-W krokach 1B i 1C cena rezydenta jest jawnym oszacowaniem 25% regularnej ceny
-odpowiedniego przewoźnika. Wyniki
+Wizz Air, Google Flights dla Iberii/Iberii Express i Vuelinga, oficjalnego
+feedu taryfowego Air Europa dla 1D oraz kursu NBP. W krokach 1B, 1C i 1D cena
+rezydenta jest jawnym oszacowaniem 25% regularnej ceny odpowiedniego
+przewoźnika. Air Europa nie korzysta z Google Flights. Wyniki
 obejmują oba kierunki i nie mają limitu cenowego; maksymalną cenę wybiera
 użytkownik na stronie.
 
@@ -28,6 +30,7 @@ python3 -m venv .venv
 .venv/bin/python scripts/collect_step1.py --days 30
 .venv/bin/python scripts/collect_step1b.py --days 30
 .venv/bin/python scripts/collect_step1c.py --days 30
+.venv/bin/python scripts/collect_step1d.py --days 30
 .venv/bin/python scripts/collect_step2.py --days 30
 .venv/bin/python scripts/collect_step3.py --days 30
 .venv/bin/python scripts/collect_step4.py --days 30
@@ -35,7 +38,7 @@ python3 -m venv .venv
 ```
 
 Generatory same zapisują `data/step1-results.json`, `data/step1b-results.json`,
-`data/step1c-results.json`, `data/step2-results.json`,
+`data/step1c-results.json`, `data/step1d-results.json`, `data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
 `data/step5-results.json`; plików wynikowych nie
 należy poprawiać ręcznie.
@@ -47,11 +50,15 @@ kodzie. Nowe lotnisko dodaje się do właściwej listy w `data/` razem ze stref�
 czasową i regułą zniżki. Krok 1A przechowuje potrzebne dane tras Wizz Air w
 `data/binter-transfer-airports.json`; kroki 4 i 5 korzystają ze wspólnego
 rejestru `data/wizz-route-schedules.json`. Po uzupełnieniu tych danych nie
-trzeba zmieniać kodu kolektora. Warianty 1B i 1C korzystają analogicznie z
-`data/iberia-transfer-airports.json` i `data/vueling-transfer-airports.json`;
+trzeba zmieniać kodu kolektora. Warianty 1B, 1C i 1D korzystają analogicznie z
+`data/iberia-transfer-airports.json`, `data/vueling-transfer-airports.json` i
+`data/air-europa-transfer-airports.json`;
 listy zawierają wyłącznie trasy danego przewoźnika objęte zniżką rezydenta
 Wysp Kanaryjskich. Dla 1C nadrzędnym źródłem siatki jest oficjalna strona
 Vuelinga, a Aena służy tylko jako potwierdzenie pomocnicze.
+Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air Europa; zapisane
+szablony rozkładu mają okres ważności i muszą zostać ponownie zweryfikowane po
+jego zakończeniu.
 
 ## Linki do zakupu Wizz Air
 
@@ -84,6 +91,10 @@ tokenu ani danych sesji przeglądarki.
 Odcinki Vuelinga otrzymują oficjalny podstawowy deeplink przewoźnika z trasą,
 datą, pasażerami i parametrem zniżki rezydenta. Link również nie zawiera tokenu
 ani danych sesji.
+
+Odcinki Air Europa otrzymują oficjalny deeplink przewoźnika z trasą, datą i
+liczbą pasażerów. Zniżkę rezydenta użytkownik potwierdza podczas zakupu; link
+nie zawiera klucza feedu, tokenu ani danych sesji.
 
 Linki Ryanair są generowane analogicznie i prowadzą bezpośrednio do oficjalnego
 ekranu wyboru lotu Ryanaira z ustawioną trasą i dokładnym dniem. Istniejące

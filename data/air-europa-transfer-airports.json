@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "name": "Lotniska przesiadkowe Air Europa dla kroku 1D",
+  "verified_on": "2026-10-21",
+  "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Air Europa + Ryanair/Wizz Air w kroku 1D.",
+  "scope": {
+    "tenerife_airports": ["TFN"],
+    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
+    "tenerife_leg_airlines": ["Air Europa"],
+    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+  },
+  "usage_policy": {
+    "step": "1D",
+    "discovery_mode": "fixed_allowlist",
+    "weekly_run": "Sprawdzaj wyłącznie aktualne ceny i dostępność dla zapisanych tras. Nie używaj Google Flights dla Air Europa.",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "primary_route_and_price_source": "Oficjalne strony Air Europa i osadzony na nich publiczny feed taryfowy marki Air Europa.",
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1D obejmuje bezpośrednie odcinki Air Europa z/do TFN. TFS nie ma zapisanej kwalifikującej się trasy Air Europa."
+  },
+  "fare_feed": {
+    "config_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid",
+    "tenant": "ux",
+    "airline_code": "UX",
+    "market": "ES",
+    "language": "es"
+  },
+  "airports": [
+    {
+      "iata": "MAD",
+      "name_pl": "Madryt",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": ["TFN"],
+      "resident_discount_eligible_on_air_europa_leg": true,
+      "air_europa_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
+        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+      ],
+      "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid"
+    },
+    {
+      "iata": "BIO",
+      "name_pl": "Bilbao",
+      "timezone": "Europe/Madrid",
+      "tenerife_airports": ["TFN"],
+      "resident_discount_eligible_on_air_europa_leg": true,
+      "air_europa_resident_fare_multiplier": 0.25,
+      "polish_routes": [
+        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
+        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+      ],
+      "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-bilbao"
+    }
+  ],
+  "air_europa_schedule_templates": [
+    {
+      "origin": "TFN", "destination": "MAD",
+      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
+      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "departures": [
+        { "time": "07:10", "duration_minutes": 170 },
+        { "time": "09:55", "duration_minutes": 165 },
+        { "time": "17:55", "duration_minutes": 165 }
+      ]
+    },
+    {
+      "origin": "MAD", "destination": "TFN",
+      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
+      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "departures": [
+        { "time": "07:00", "duration_minutes": 175 },
+        { "time": "11:45", "duration_minutes": 175 },
+        { "time": "15:05", "duration_minutes": 175 }
+      ]
+    },
+    {
+      "origin": "TFN", "destination": "MAD",
+      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
+      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "departures": [
+        { "time": "07:05", "duration_minutes": 165 },
+        { "time": "09:55", "duration_minutes": 170 },
+        { "time": "17:55", "duration_minutes": 175 }
+      ]
+    },
+    {
+      "origin": "MAD", "destination": "TFN",
+      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
+      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "departures": [
+        { "time": "07:00", "duration_minutes": 175 },
+        { "time": "11:40", "duration_minutes": 175 },
+        { "time": "15:00", "duration_minutes": 175 }
+      ]
+    },
+    {
+      "origin": "TFN", "destination": "BIO",
+      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
+      "weekdays": [3],
+      "departures": [{ "time": "14:30", "duration_minutes": 180 }]
+    },
+    {
+      "origin": "BIO", "destination": "TFN",
+      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
+      "weekdays": [3],
+      "departures": [{ "time": "19:20", "duration_minutes": 185 }]
+    },
+    {
+      "origin": "TFN", "destination": "BIO",
+      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
+      "weekdays": [1, 3],
+      "departures": [{ "time": "14:25", "duration_minutes": 190 }]
+    },
+    {
+      "origin": "BIO", "destination": "TFN",
+      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
+      "weekdays": [1, 3],
+      "departures": [{ "time": "19:25", "duration_minutes": 190 }]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Air Europa — Tenerife–Madryt",
+      "url": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid",
+      "finding": "Oficjalna strona przewoźnika i jej wyszukiwarka potwierdzają bezpośrednią trasę TFN–MAD."
+    },
+    {
+      "name": "Air Europa — Tenerife–Bilbao",
+      "url": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-bilbao",
+      "finding": "Oficjalna strona przewoźnika i jej wyszukiwarka potwierdzają bezpośrednią trasę TFN–BIO."
+    },
+    {
+      "name": "Air Europa — zniżka rezydenta",
+      "url": "https://www.aireuropa.com/es/es/aea/faq.html",
+      "finding": "Air Europa potwierdza zniżkę 75% dla uprawnionych mieszkańców na lotach krajowych; opłaty i podatki są rozliczane zgodnie z warunkami przewoźnika."
+    },
+    {
+      "name": "Aena — Air Europa na Tenerife Norte",
+      "url": "https://www.aena.es/en/tenerife-norte-ciudad-de-la-laguna/airlines/air-europa.html",
+      "finding": "Pomocnicze potwierdzenie MAD i BIO; źródłem nadrzędnym pozostaje Air Europa."
+    }
+  ]
+}

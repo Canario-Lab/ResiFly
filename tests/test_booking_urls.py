@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime, timezone
 
 from scripts.booking_urls import (
+    air_europa_booking_url,
     iberia_booking_url,
     ryanair_booking_url,
     vueling_booking_url,
@@ -66,6 +67,18 @@ class VuelingBookingUrlTests(unittest.TestCase):
         self.assertIn("dt=1", url)
         self.assertIn("adt=1", url)
         self.assertIn("c=es-ES", url)
+        self.assertNotIn("token", url.lower())
+
+
+class AirEuropaBookingUrlTests(unittest.TestCase):
+    def test_builds_official_deeplink_without_session_data(self):
+        url = air_europa_booking_url("tfn", "mad", "2026-10-29T07:05:00+00:00")
+        self.assertTrue(url.startswith("https://www.aireuropa.com/es/es/deeplink?"))
+        self.assertIn("departure_airport=TFN", url)
+        self.assertIn("arrival_airport=MAD", url)
+        self.assertIn("departure_date=20261029", url)
+        self.assertIn("adults=1", url)
+        self.assertIn("trip_type=O", url)
         self.assertNotIn("token", url.lower())
 
 
