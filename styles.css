@@ -552,23 +552,24 @@ main,
   min-height: 0;
   display: block;
   border-radius: 7px 7px 2px 2px;
-  background: linear-gradient(180deg, #26a98b, var(--green-dark));
-  box-shadow: 0 5px 12px rgba(13, 118, 95, 0.16);
+  background: linear-gradient(180deg, #a9d8c8, #69b59e);
+  box-shadow: 0 4px 10px rgba(85, 158, 136, 0.14);
   transform-origin: bottom;
   transition: filter 150ms ease, transform 150ms ease;
 }
 
 .fare-chart-day.is-lowest .fare-chart-price {
-  color: #07594d;
+  color: var(--green-dark);
 }
 
 .fare-chart-day.is-lowest .fare-chart-bar {
-  background: linear-gradient(180deg, #31b596, #07594d);
-  box-shadow: 0 5px 14px rgba(7, 89, 77, 0.24);
+  background: linear-gradient(180deg, #9fd5c4, #62b39a);
+  outline: 2px solid rgba(13, 118, 95, 0.38);
+  outline-offset: 2px;
 }
 
 .fare-chart-day.is-clickable:hover .fare-chart-bar {
-  filter: saturate(1.12);
+  filter: saturate(1.08) brightness(0.97);
   transform: scaleX(1.08);
 }
 
