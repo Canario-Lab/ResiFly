@@ -49,6 +49,28 @@ wyraźnej decyzji użytkownika.
 - Jeśli krok nie zwróci wyników, zapisać informację, co sprawdzono i że nie
   znaleziono połączeń spełniających warunki.
 
+## Stabilność automatycznego uruchomienia
+
+- Adres publicznego API Wizz Air zawiera zmienny numer wersji. Nie wpisywać go
+  na stałe w kolektorach. Przed pierwszym zapytaniem proces odczytuje aktualną
+  bazę API z oficjalnej strony Wizz Air przez `scripts/wizz_api.py`, a potem
+  używa jej z pamięci. Sama zmiana numeru wersji nie wymaga zmiany kolektora.
+  Jeśli Wizz zmieni strukturę zapytania lub odpowiedzi, kolektor ma zakończyć
+  się błędem przed nadpisaniem poprzedniego JSON-a.
+- Zapytania HTTP do Google Flights w krokach 1B i 1C mogą działać równolegle
+  najwyżej w dwóch wątkach. Wspólny limit jest zapisany w
+  `scripts/collector_settings.py`; wartość `--workers` nie może go podnieść.
+  Pojedyncze zapytanie nadal korzysta z ograniczonych ponowień i narastającego
+  opóźnienia. Po ich wyczerpaniu kolektor nie nadpisuje poprzedniego feedu.
+- Wszystkie kroki jednego uruchomienia muszą korzystać z tego samego dziennego
+  zestawu kursów NBP. Pierwsze wywołanie pobiera tabele A i B dla ostatnich
+  opublikowanych kursów nie późniejszych niż data uruchomienia oraz zapisuje
+  komplet potrzebnych walut w `tmp/nbp-rates/YYYY-MM-DD.json`. Następne kroki
+  odczytują ten plik bez ponownego pytania NBP. W GitHub Actions wszystkie
+  kolektory należy uruchamiać kolejno w tym samym jobie albo przekazać ten plik
+  między jobami jako artefakt. Cache jest rozdzielony według daty i nie wolno
+  używać pliku z wcześniejszego dnia dla nowego uruchomienia.
+
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
 Krok 1 ma sześć niezależnych wariantów. Wszystkie są częścią tego samego kroku, więc

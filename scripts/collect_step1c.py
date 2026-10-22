@@ -25,6 +25,10 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.booking_urls import vueling_booking_url
+from scripts.collector_settings import (
+    GOOGLE_FLIGHTS_MAX_WORKERS,
+    google_flights_worker_count,
+)
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
     MIN_LAYOVER_MINUTES,
@@ -62,7 +66,7 @@ def cli() -> argparse.Namespace:
         help="Number of days after from-date, inclusive",
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--workers", type=int, default=4)
     return parser.parse_args()
 
 
@@ -293,7 +297,13 @@ def collect_vueling_legs(
         )
 
     legs: list[dict[str, Any]] = []
-    max_workers = min(max(workers, 1), 4)
+    max_workers = google_flights_worker_count(workers)
+    print(
+        "Google Flights: "
+        f"{max_workers} równoległe zapytania "
+        f"(bezpieczny limit {GOOGLE_FLIGHTS_MAX_WORKERS})",
+        flush=True,
+    )
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         for index, result in enumerate(executor.map(fetch, ordered), start=1):
             legs.extend(result)

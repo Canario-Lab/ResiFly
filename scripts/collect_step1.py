@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import time as time_module
@@ -39,6 +40,9 @@ POLISH_AIRPORTS = ("WAW", "WMI", "KTW", "KRK")
 MIN_LAYOVER_MINUTES = 120
 MAX_LAYOVER_MINUTES = 24 * 60
 BINTER_API = "https://services.bintercanarias.com/main/graphql"
+NBP_CACHE_DIR = ROOT / "tmp" / "nbp-rates"
+NBP_SHARED_CURRENCIES = ("EUR", "GBP", "HUF", "MAD", "RON", "USD")
+NBP_LOOKBACK_DAYS = 7
 
 AIRPORT_TIMEZONES = {
     "TFN": "Atlantic/Canary",
@@ -115,6 +119,9 @@ class CurrencyRate:
     pln: float
 
 
+_nbp_rates_by_day: dict[str, dict[str, CurrencyRate]] = {}
+
+
 def cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--from-date", type=date.fromisoformat, default=date.today())
@@ -155,26 +162,129 @@ def get_json(
     raise RuntimeError(f"Request failed after {attempts} attempts: {url}") from last_error
 
 
+def _nbp_cache_path(day: date) -> Path:
+    return NBP_CACHE_DIR / f"{day.isoformat()}.json"
+
+
+def _decode_nbp_cache(payload: Any, day: date) -> dict[str, CurrencyRate] | None:
+    if not isinstance(payload, dict) or payload.get("requested_for") != day.isoformat():
+        return None
+    raw_rates = payload.get("rates")
+    if not isinstance(raw_rates, dict):
+        return None
+    required = set(NBP_SHARED_CURRENCIES)
+    if not required <= set(raw_rates):
+        return None
+    try:
+        rates = {
+            code: CurrencyRate(code, float(raw_rates[code]["pln"]))
+            for code in NBP_SHARED_CURRENCIES
+        }
+    except (KeyError, TypeError, ValueError):
+        return None
+    rates["PLN"] = CurrencyRate("PLN", 1.0)
+    return rates
+
+
+def _read_nbp_cache(day: date) -> dict[str, CurrencyRate] | None:
+    path = _nbp_cache_path(day)
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return _decode_nbp_cache(payload, day)
+
+
+def _fetch_nbp_rates(day: date) -> tuple[dict[str, CurrencyRate], dict[str, Any]]:
+    start = day - timedelta(days=NBP_LOOKBACK_DAYS)
+    newest: dict[str, tuple[str, str, float]] = {}
+    errors: list[Exception] = []
+    for table in ("a", "b"):
+        url = (
+            "https://api.nbp.pl/api/exchangerates/tables/"
+            f"{table}/{start.isoformat()}/{day.isoformat()}/"
+        )
+        try:
+            documents = get_json("GET", url, params={"format": "json"})
+        except RuntimeError as error:
+            errors.append(error)
+            continue
+        if not isinstance(documents, list):
+            continue
+        for document in documents:
+            effective_date = str(document.get("effectiveDate") or "")
+            if not effective_date or effective_date > day.isoformat():
+                continue
+            for item in document.get("rates") or []:
+                code = str(item.get("code") or "").upper()
+                if code not in NBP_SHARED_CURRENCIES:
+                    continue
+                try:
+                    value = float(item["mid"])
+                except (KeyError, TypeError, ValueError):
+                    continue
+                previous = newest.get(code)
+                if previous is None or effective_date > previous[0]:
+                    newest[code] = (effective_date, table.upper(), value)
+
+    missing = sorted(set(NBP_SHARED_CURRENCIES) - set(newest))
+    if missing:
+        detail = f"; błędy tabel: {len(errors)}" if errors else ""
+        raise RuntimeError(
+            "NBP nie zwrócił kompletnego dziennego zestawu kursów: "
+            f"{', '.join(missing)}{detail}"
+        )
+
+    rates = {
+        code: CurrencyRate(code, newest[code][2])
+        for code in NBP_SHARED_CURRENCIES
+    }
+    rates["PLN"] = CurrencyRate("PLN", 1.0)
+    payload = {
+        "requested_for": day.isoformat(),
+        "rates": {
+            code: {
+                "pln": newest[code][2],
+                "effective_date": newest[code][0],
+                "table": newest[code][1],
+            }
+            for code in NBP_SHARED_CURRENCIES
+        },
+    }
+    return rates, payload
+
+
+def _write_nbp_cache(day: date, payload: dict[str, Any]) -> None:
+    path = _nbp_cache_path(day)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    temporary.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
+def nbp_rates(day: date) -> dict[str, CurrencyRate]:
+    """Return one shared, complete NBP snapshot for a collection date."""
+    key = day.isoformat()
+    cached = _nbp_rates_by_day.get(key)
+    if cached is not None:
+        return dict(cached)
+    cached = _read_nbp_cache(day)
+    if cached is None:
+        cached, payload = _fetch_nbp_rates(day)
+        _write_nbp_cache(day, payload)
+    _nbp_rates_by_day[key] = cached
+    return dict(cached)
+
+
 def nbp_rate(currency_code: str, day: date) -> CurrencyRate:
     code = currency_code.upper()
-    if code == "PLN":
-        return CurrencyRate("PLN", 1.0)
-    cursor = day
-    for _ in range(8):
-        for table in ("a", "b"):
-            url = (
-                "https://api.nbp.pl/api/exchangerates/rates/"
-                f"{table}/{code.lower()}/{cursor.isoformat()}/"
-            )
-            try:
-                payload = get_json("GET", url, params={"format": "json"}, attempts=1)
-                return CurrencyRate(code, float(payload["rates"][0]["mid"]))
-            except RuntimeError:
-                continue
-        cursor -= timedelta(days=1)
-    raise RuntimeError(
-        f"No NBP {code} rate available for {day.isoformat()} or preceding days"
-    )
+    try:
+        return nbp_rates(day)[code]
+    except KeyError as error:
+        raise RuntimeError(f"Nieobsługiwana waluta NBP: {code}") from error
 
 
 def nbp_eur_rate(day: date) -> CurrencyRate:
