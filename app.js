@@ -1823,7 +1823,7 @@ function resetFilters() {
   elements.firstCarrier.value = "all";
   elements.secondCarrier.value = "all";
   elements.layover.value = 6;
-  elements.sort.value = "price";
+  elements.sort.value = "departure";
   renderResults();
 }
 
