@@ -96,6 +96,7 @@ const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
 const BACKGROUND_RESULT_BATCH_SIZE = 10;
 const BACKGROUND_RESULT_FALLBACK_DELAY_MS = 80;
+const RESULT_CARD_CACHE_LIMIT = 2;
 
 let filterRenderTimer;
 let calendarRenderKey = null;
@@ -108,6 +109,8 @@ let progressiveRenderVersion = 0;
 let progressiveIdleHandle = null;
 let progressiveIdleUsesTimeout = false;
 let progressiveCommitPending = false;
+let activeResultCacheKey = null;
+const resultCardCache = new Map();
 let calendarTargetCard = null;
 let calendarNavigationPending = false;
 let calendarNavigationTimer = null;
@@ -1020,6 +1023,60 @@ function fareCalendarRenderKey(filters) {
   ]);
 }
 
+function resultCardsRenderKey(filters) {
+  return JSON.stringify([
+    filters.resident,
+    filters.wizzClub,
+    filters.maxPrice,
+    filters.dateFrom,
+    filters.dateTo,
+    filters.origin,
+    filters.destination,
+    filters.transfer,
+    filters.firstCarrier,
+    filters.secondCarrier,
+    filters.maxLayover,
+    filters.sort,
+    filters.direction,
+  ]);
+}
+
+function cacheCurrentResultCards() {
+  if (
+    !activeResultCacheKey ||
+    !progressiveResults.length ||
+    progressiveLoadedResultIndexes.size !== progressiveResults.length
+  ) return;
+
+  const cards = [...elements.list.querySelectorAll(".flight-card")];
+  if (
+    cards.length !== progressiveResults.length ||
+    cards.some((card, index) => card.dataset.resultId !== progressiveResults[index].id)
+  ) return;
+
+  resultCardCache.delete(activeResultCacheKey);
+  resultCardCache.set(activeResultCacheKey, { cards });
+  while (resultCardCache.size > RESULT_CARD_CACHE_LIMIT) {
+    resultCardCache.delete(resultCardCache.keys().next().value);
+  }
+}
+
+function cachedResultCards(cacheKey, results) {
+  const cached = resultCardCache.get(cacheKey);
+  if (
+    !cached ||
+    cached.cards.length !== results.length ||
+    cached.cards.some((card, index) => card.dataset.resultId !== results[index].id)
+  ) {
+    if (cached) resultCardCache.delete(cacheKey);
+    return null;
+  }
+
+  resultCardCache.delete(cacheKey);
+  resultCardCache.set(cacheKey, cached);
+  return cached.cards;
+}
+
 function cancelProgressiveIdleWork() {
   if (progressiveIdleHandle === null) return;
   if (progressiveIdleUsesTimeout) {
@@ -1041,6 +1098,7 @@ function stopProgressiveRendering() {
   progressiveLoadedResultIndexes = new Set();
   progressivePreparedResultCards = new Map();
   progressiveCommitPending = false;
+  activeResultCacheKey = null;
   calendarTargetCard = null;
 }
 
@@ -1135,6 +1193,7 @@ function commitPreparedResults(expectedVersion) {
   progressivePreparedResultCards.clear();
   progressiveCommitPending = false;
   restoreResultAnchor(anchor);
+  cacheCurrentResultCards();
 }
 
 function prepareNextResultBatch(
@@ -1200,10 +1259,22 @@ function scheduleProgressiveBackground(expectedVersion) {
 }
 
 function renderResultCards(results, filters) {
+  cacheCurrentResultCards();
   stopProgressiveRendering();
   const expectedVersion = progressiveRenderVersion;
+  const cacheKey = resultCardsRenderKey(filters);
   progressiveResults = results;
   progressiveFilters = filters;
+  activeResultCacheKey = cacheKey;
+
+  const cachedCards = cachedResultCards(cacheKey, results);
+  if (cachedCards) {
+    progressiveResultCount = results.length;
+    progressiveLoadedResultIndexes = new Set(results.map((_, index) => index));
+    elements.list.replaceChildren(...cachedCards);
+    calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+    return;
+  }
 
   elements.list.replaceChildren();
   appendInitialResults(expectedVersion);
@@ -1252,6 +1323,7 @@ function renderResults() {
 function scheduleRenderResults() {
   updateRangeLabels();
   window.clearTimeout(filterRenderTimer);
+  cacheCurrentResultCards();
   stopProgressiveRendering();
   elements.list.setAttribute("aria-busy", "true");
   filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
