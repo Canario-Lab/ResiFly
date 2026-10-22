@@ -94,9 +94,11 @@ const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_SCROLL_SETTLE_FALLBACK_MS = 1_200;
 const FILTER_RENDER_DELAY_MS = 150;
 const RESULT_BATCH_SIZE = 30;
-const BACKGROUND_RESULT_BATCH_SIZE = 10;
+const BACKGROUND_RESULT_BATCH_SIZE = 2;
+const BACKGROUND_RESULT_START_DELAY_MS = 350;
 const BACKGROUND_RESULT_FALLBACK_DELAY_MS = 80;
-const RESULT_CARD_CACHE_LIMIT = 2;
+const RESULT_VIEW_CACHE_LIMIT = 4;
+const RESULT_CARD_NODE_CACHE_LIMIT = 1_200;
 
 let filterRenderTimer;
 let calendarRenderKey = null;
@@ -110,7 +112,8 @@ let progressiveIdleHandle = null;
 let progressiveIdleUsesTimeout = false;
 let progressiveCommitPending = false;
 let activeResultCacheKey = null;
-const resultCardCache = new Map();
+const resultViewCache = new Map();
+const resultCardNodeCache = new Map();
 let calendarTargetCard = null;
 let calendarNavigationPending = false;
 let calendarNavigationTimer = null;
@@ -1041,40 +1044,77 @@ function resultCardsRenderKey(filters) {
   ]);
 }
 
-function cacheCurrentResultCards() {
-  if (
-    !activeResultCacheKey ||
-    !progressiveResults.length ||
-    progressiveLoadedResultIndexes.size !== progressiveResults.length
-  ) return;
+function resultCardNodeKey(result, filters) {
+  return JSON.stringify([result.id, filters.resident, filters.wizzClub]);
+}
 
-  const cards = [...elements.list.querySelectorAll(".flight-card")];
-  if (
-    cards.length !== progressiveResults.length ||
-    cards.some((card, index) => card.dataset.resultId !== progressiveResults[index].id)
-  ) return;
-
-  resultCardCache.delete(activeResultCacheKey);
-  resultCardCache.set(activeResultCacheKey, { cards });
-  while (resultCardCache.size > RESULT_CARD_CACHE_LIMIT) {
-    resultCardCache.delete(resultCardCache.keys().next().value);
+function rememberResultCardNode(cacheKey, card) {
+  resultCardNodeCache.delete(cacheKey);
+  resultCardNodeCache.set(cacheKey, card);
+  while (resultCardNodeCache.size > RESULT_CARD_NODE_CACHE_LIMIT) {
+    resultCardNodeCache.delete(resultCardNodeCache.keys().next().value);
   }
 }
 
-function cachedResultCards(cacheKey, results) {
-  const cached = resultCardCache.get(cacheKey);
-  if (
-    !cached ||
-    cached.cards.length !== results.length ||
-    cached.cards.some((card, index) => card.dataset.resultId !== results[index].id)
-  ) {
-    if (cached) resultCardCache.delete(cacheKey);
+function cachedResultCardNode(result, filters) {
+  const cacheKey = resultCardNodeKey(result, filters);
+  const card = resultCardNodeCache.get(cacheKey);
+  if (!card || card.dataset.resultId !== result.id) {
+    if (card) resultCardNodeCache.delete(cacheKey);
     return null;
   }
 
-  resultCardCache.delete(cacheKey);
-  resultCardCache.set(cacheKey, cached);
-  return cached.cards;
+  rememberResultCardNode(cacheKey, card);
+  return card;
+}
+
+function cacheCurrentResultCards() {
+  if (!activeResultCacheKey || !progressiveResults.length) return;
+
+  const cardsByIndex = new Map(progressivePreparedResultCards);
+  for (const card of elements.list.querySelectorAll(".flight-card")) {
+    const index = Number(card.dataset.resultIndex);
+    if (
+      !Number.isInteger(index) ||
+      progressiveResults[index]?.id !== card.dataset.resultId
+    ) continue;
+    cardsByIndex.set(index, card);
+  }
+  if (!cardsByIndex.size) return;
+
+  const loadedIndexes = new Set(
+    [...progressiveLoadedResultIndexes].filter(index => cardsByIndex.has(index))
+  );
+  const resultIds = progressiveResults.map(result => result.id);
+
+  resultViewCache.delete(activeResultCacheKey);
+  resultViewCache.set(activeResultCacheKey, {
+    resultIds,
+    cardsByIndex,
+    loadedIndexes,
+  });
+  while (resultViewCache.size > RESULT_VIEW_CACHE_LIMIT) {
+    resultViewCache.delete(resultViewCache.keys().next().value);
+  }
+}
+
+function cachedResultView(cacheKey, results) {
+  const cached = resultViewCache.get(cacheKey);
+  const valid = cached &&
+    cached.resultIds.length === results.length &&
+    cached.resultIds.every((resultId, index) => resultId === results[index].id) &&
+    [...cached.cardsByIndex].every(([index, card]) =>
+      results[index]?.id === card.dataset.resultId
+    );
+
+  if (!valid) {
+    if (cached) resultViewCache.delete(cacheKey);
+    return null;
+  }
+
+  resultViewCache.delete(cacheKey);
+  resultViewCache.set(cacheKey, cached);
+  return cached;
 }
 
 function cancelProgressiveIdleWork() {
@@ -1128,8 +1168,13 @@ function restoreResultAnchor(anchor) {
 
 function createProgressiveResultCard(index) {
   if (!progressiveResults[index] || !progressiveFilters) return null;
-  const fragment = createResultCard(progressiveResults[index], progressiveFilters);
-  const card = fragment.querySelector(".flight-card");
+  const result = progressiveResults[index];
+  let card = cachedResultCardNode(result, progressiveFilters);
+  if (!card) {
+    const fragment = createResultCard(result, progressiveFilters);
+    card = fragment.querySelector(".flight-card");
+    rememberResultCardNode(resultCardNodeKey(result, progressiveFilters), card);
+  }
   card.dataset.resultIndex = String(index);
   return card;
 }
@@ -1198,7 +1243,8 @@ function commitPreparedResults(expectedVersion) {
 
 function prepareNextResultBatch(
   expectedVersion = progressiveRenderVersion,
-  batchSize = BACKGROUND_RESULT_BATCH_SIZE
+  batchSize = BACKGROUND_RESULT_BATCH_SIZE,
+  deadline = null
 ) {
   if (
     expectedVersion !== progressiveRenderVersion ||
@@ -1207,6 +1253,13 @@ function prepareNextResultBatch(
 
   let prepared = 0;
   while (progressiveResultCount < progressiveResults.length && prepared < batchSize) {
+    if (
+      prepared > 0 &&
+      deadline &&
+      !deadline.didTimeout &&
+      deadline.timeRemaining() < 4
+    ) break;
+
     const index = progressiveResultCount;
     progressiveResultCount += 1;
     if (
@@ -1227,12 +1280,22 @@ function prepareNextResultBatch(
   }
 }
 
-function scheduleProgressiveBackground(expectedVersion) {
+function scheduleProgressiveBackground(expectedVersion, delayMs = 0) {
   if (
     progressiveIdleHandle !== null ||
     expectedVersion !== progressiveRenderVersion ||
     progressiveResultCount >= progressiveResults.length
   ) return;
+
+  if (delayMs > 0) {
+    progressiveIdleUsesTimeout = true;
+    progressiveIdleHandle = window.setTimeout(() => {
+      progressiveIdleHandle = null;
+      progressiveIdleUsesTimeout = false;
+      scheduleProgressiveBackground(expectedVersion);
+    }, delayMs);
+    return;
+  }
 
   const renderWhenIdle = deadline => {
     progressiveIdleHandle = null;
@@ -1242,7 +1305,7 @@ function scheduleProgressiveBackground(expectedVersion) {
       scheduleProgressiveBackground(expectedVersion);
       return;
     }
-    prepareNextResultBatch(expectedVersion);
+    prepareNextResultBatch(expectedVersion, BACKGROUND_RESULT_BATCH_SIZE, deadline);
     scheduleProgressiveBackground(expectedVersion);
   };
 
@@ -1258,6 +1321,40 @@ function scheduleProgressiveBackground(expectedVersion) {
   }
 }
 
+function restoreCachedResultView(cached, expectedVersion) {
+  const visibleCards = document.createDocumentFragment();
+  const loadedIndexes = new Set();
+  const preparedCards = new Map();
+  const sortedCards = [...cached.cardsByIndex].sort(([first], [second]) => first - second);
+
+  for (const [index, card] of sortedCards) {
+    card.dataset.resultIndex = String(index);
+    if (cached.loadedIndexes.has(index)) {
+      visibleCards.append(card);
+      loadedIndexes.add(index);
+    } else {
+      preparedCards.set(index, card);
+    }
+  }
+
+  elements.list.replaceChildren(visibleCards);
+  progressiveLoadedResultIndexes = loadedIndexes;
+  progressivePreparedResultCards = preparedCards;
+  progressiveResultCount = 0;
+  while (
+    progressiveResultCount < progressiveResults.length &&
+    (progressiveLoadedResultIndexes.has(progressiveResultCount) ||
+      progressivePreparedResultCards.has(progressiveResultCount))
+  ) {
+    progressiveResultCount += 1;
+  }
+  calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+
+  if (progressiveResultCount >= progressiveResults.length) {
+    commitPreparedResults(expectedVersion);
+  }
+}
+
 function renderResultCards(results, filters) {
   cacheCurrentResultCards();
   stopProgressiveRendering();
@@ -1267,18 +1364,17 @@ function renderResultCards(results, filters) {
   progressiveFilters = filters;
   activeResultCacheKey = cacheKey;
 
-  const cachedCards = cachedResultCards(cacheKey, results);
-  if (cachedCards) {
-    progressiveResultCount = results.length;
-    progressiveLoadedResultIndexes = new Set(results.map((_, index) => index));
-    elements.list.replaceChildren(...cachedCards);
-    calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+  const cachedView = cachedResultView(cacheKey, results);
+  if (cachedView) {
+    restoreCachedResultView(cachedView, expectedVersion);
+    scheduleProgressiveBackground(expectedVersion, BACKGROUND_RESULT_START_DELAY_MS);
     return;
   }
 
   elements.list.replaceChildren();
   appendInitialResults(expectedVersion);
-  scheduleProgressiveBackground(expectedVersion);
+  calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+  scheduleProgressiveBackground(expectedVersion, BACKGROUND_RESULT_START_DELAY_MS);
 }
 
 function ensureResultRendered(resultId) {
@@ -1363,6 +1459,20 @@ function bindEvents() {
     elements.layover,
     elements.sort,
   ];
+  const pauseBackgroundWork = () => cancelProgressiveIdleWork();
+  const resumeBackgroundWork = () => {
+    scheduleProgressiveBackground(
+      progressiveRenderVersion,
+      BACKGROUND_RESULT_START_DELAY_MS
+    );
+  };
+
+  [...filters, elements.direction].forEach(element => {
+    element.addEventListener("pointerdown", pauseBackgroundWork);
+    element.addEventListener("keydown", pauseBackgroundWork);
+    element.addEventListener("focus", pauseBackgroundWork);
+    element.addEventListener("blur", resumeBackgroundWork);
+  });
   filters.forEach(element => element.addEventListener("input", scheduleRenderResults));
   elements.direction.addEventListener("input", () => {
     updateAirportOptions();
