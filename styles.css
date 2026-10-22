@@ -1018,7 +1018,7 @@ input[type="range"]::-moz-range-thumb {
   margin-left: 2px;
   color: var(--green);
   font-family: "DM Sans", sans-serif;
-  font-size: 0.5em;
+  font-size: 0.62em;
   font-weight: 800;
   line-height: 0;
   vertical-align: super;
