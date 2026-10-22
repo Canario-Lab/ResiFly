@@ -1,13 +1,26 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Air Europa dla kroku 1D",
-  "verified_on": "2026-10-21",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Air Europa + Ryanair/Wizz Air w kroku 1D.",
   "scope": {
-    "tenerife_airports": ["TFN"],
-    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
-    "tenerife_leg_airlines": ["Air Europa"],
-    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+    "tenerife_airports": [
+      "TFN"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK",
+      "GDN"
+    ],
+    "tenerife_leg_airlines": [
+      "Air Europa"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
   },
   "usage_policy": {
     "step": "1D",
@@ -30,14 +43,43 @@
       "iata": "MAD",
       "name_pl": "Madryt",
       "timezone": "Europe/Madrid",
-      "tenerife_airports": ["TFN"],
+      "tenerife_airports": [
+        "TFN"
+      ],
       "resident_discount_eligible_on_air_europa_leg": true,
       "air_europa_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
-        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
       ],
       "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid"
     },
@@ -45,80 +87,206 @@
       "iata": "BIO",
       "name_pl": "Bilbao",
       "timezone": "Europe/Madrid",
-      "tenerife_airports": ["TFN"],
+      "tenerife_airports": [
+        "TFN"
+      ],
       "resident_discount_eligible_on_air_europa_leg": true,
       "air_europa_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
       ],
       "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-bilbao"
     }
   ],
   "air_europa_schedule_templates": [
     {
-      "origin": "TFN", "destination": "MAD",
-      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
-      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "origin": "TFN",
+      "destination": "MAD",
+      "valid_from": "2026-10-21",
+      "valid_to": "2026-10-24",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "departures": [
-        { "time": "07:10", "duration_minutes": 170 },
-        { "time": "09:55", "duration_minutes": 165 },
-        { "time": "17:55", "duration_minutes": 165 }
+        {
+          "time": "07:10",
+          "duration_minutes": 170
+        },
+        {
+          "time": "09:55",
+          "duration_minutes": 165
+        },
+        {
+          "time": "17:55",
+          "duration_minutes": 165
+        }
       ]
     },
     {
-      "origin": "MAD", "destination": "TFN",
-      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
-      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "origin": "MAD",
+      "destination": "TFN",
+      "valid_from": "2026-10-21",
+      "valid_to": "2026-10-24",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "departures": [
-        { "time": "07:00", "duration_minutes": 175 },
-        { "time": "11:45", "duration_minutes": 175 },
-        { "time": "15:05", "duration_minutes": 175 }
+        {
+          "time": "07:00",
+          "duration_minutes": 175
+        },
+        {
+          "time": "11:45",
+          "duration_minutes": 175
+        },
+        {
+          "time": "15:05",
+          "duration_minutes": 175
+        }
       ]
     },
     {
-      "origin": "TFN", "destination": "MAD",
-      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
-      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "origin": "TFN",
+      "destination": "MAD",
+      "valid_from": "2026-10-25",
+      "valid_to": "2027-03-27",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "departures": [
-        { "time": "07:05", "duration_minutes": 165 },
-        { "time": "09:55", "duration_minutes": 170 },
-        { "time": "17:55", "duration_minutes": 175 }
+        {
+          "time": "07:05",
+          "duration_minutes": 165
+        },
+        {
+          "time": "09:55",
+          "duration_minutes": 170
+        },
+        {
+          "time": "17:55",
+          "duration_minutes": 175
+        }
       ]
     },
     {
-      "origin": "MAD", "destination": "TFN",
-      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
-      "weekdays": [0, 1, 2, 3, 4, 5, 6],
+      "origin": "MAD",
+      "destination": "TFN",
+      "valid_from": "2026-10-25",
+      "valid_to": "2027-03-27",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "departures": [
-        { "time": "07:00", "duration_minutes": 175 },
-        { "time": "11:40", "duration_minutes": 175 },
-        { "time": "15:00", "duration_minutes": 175 }
+        {
+          "time": "07:00",
+          "duration_minutes": 175
+        },
+        {
+          "time": "11:40",
+          "duration_minutes": 175
+        },
+        {
+          "time": "15:00",
+          "duration_minutes": 175
+        }
       ]
     },
     {
-      "origin": "TFN", "destination": "BIO",
-      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
-      "weekdays": [3],
-      "departures": [{ "time": "14:30", "duration_minutes": 180 }]
+      "origin": "TFN",
+      "destination": "BIO",
+      "valid_from": "2026-10-21",
+      "valid_to": "2026-10-24",
+      "weekdays": [
+        3
+      ],
+      "departures": [
+        {
+          "time": "14:30",
+          "duration_minutes": 180
+        }
+      ]
     },
     {
-      "origin": "BIO", "destination": "TFN",
-      "valid_from": "2026-10-21", "valid_to": "2026-10-24",
-      "weekdays": [3],
-      "departures": [{ "time": "19:20", "duration_minutes": 185 }]
+      "origin": "BIO",
+      "destination": "TFN",
+      "valid_from": "2026-10-21",
+      "valid_to": "2026-10-24",
+      "weekdays": [
+        3
+      ],
+      "departures": [
+        {
+          "time": "19:20",
+          "duration_minutes": 185
+        }
+      ]
     },
     {
-      "origin": "TFN", "destination": "BIO",
-      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
-      "weekdays": [1, 3],
-      "departures": [{ "time": "14:25", "duration_minutes": 190 }]
+      "origin": "TFN",
+      "destination": "BIO",
+      "valid_from": "2026-10-25",
+      "valid_to": "2027-03-27",
+      "weekdays": [
+        1,
+        3
+      ],
+      "departures": [
+        {
+          "time": "14:25",
+          "duration_minutes": 190
+        }
+      ]
     },
     {
-      "origin": "BIO", "destination": "TFN",
-      "valid_from": "2026-10-25", "valid_to": "2027-03-27",
-      "weekdays": [1, 3],
-      "departures": [{ "time": "19:25", "duration_minutes": 190 }]
+      "origin": "BIO",
+      "destination": "TFN",
+      "valid_from": "2026-10-25",
+      "valid_to": "2027-03-27",
+      "weekdays": [
+        1,
+        3
+      ],
+      "departures": [
+        {
+          "time": "19:25",
+          "duration_minutes": 190
+        }
+      ]
     }
   ],
   "sources": [
@@ -141,6 +309,15 @@
       "name": "Aena — Air Europa na Tenerife Norte",
       "url": "https://www.aena.es/en/tenerife-norte-ciudad-de-la-laguna/airlines/air-europa.html",
       "finding": "Pomocnicze potwierdzenie MAD i BIO; źródłem nadrzędnym pozostaje Air Europa."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

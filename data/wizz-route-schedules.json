@@ -5,6 +5,30 @@
   "update_policy": "Nowe zweryfikowane trasy dopisuj tutaj, bez zmiany kodu kolektorów.",
   "routes": [
     {
+      "origin": "WAW",
+      "destination": "TFS",
+      "flight_number": "W61495",
+      "duration_minutes": 360
+    },
+    {
+      "origin": "TFS",
+      "destination": "WAW",
+      "flight_number": "W61496",
+      "duration_minutes": 330
+    },
+    {
+      "origin": "KTW",
+      "destination": "TFS",
+      "flight_number": "W61081",
+      "duration_minutes": 345
+    },
+    {
+      "origin": "TFS",
+      "destination": "KTW",
+      "flight_number": "W61082",
+      "duration_minutes": 320
+    },
+    {
       "origin": "AGA",
       "destination": "KTW",
       "flight_number": "W61078",
@@ -177,12 +201,6 @@
       "destination": "WAW",
       "flight_number": "W61442",
       "duration_minutes": 160
-    },
-    {
-      "origin": "GDN",
-      "destination": "TFS",
-      "flight_number": "W61709",
-      "duration_minutes": 365
     },
     {
       "origin": "KRK",
@@ -426,12 +444,6 @@
     },
     {
       "origin": "TFS",
-      "destination": "GDN",
-      "flight_number": "W61710",
-      "duration_minutes": 330
-    },
-    {
-      "origin": "TFS",
       "destination": "MXP",
       "flight_number": "W46324",
       "duration_minutes": 260
@@ -603,6 +615,222 @@
       "destination": "BCN",
       "flight_number": "W61411",
       "duration_minutes": 175
+    },
+    {
+      "origin": "AGA",
+      "destination": "GDN",
+      "flight_number": "W61660",
+      "duration_minutes": 300,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "AGP",
+      "destination": "GDN",
+      "flight_number": "W61614",
+      "duration_minutes": 235,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "ALC",
+      "destination": "GDN",
+      "flight_number": "W61708",
+      "duration_minutes": 215,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BCN",
+      "destination": "GDN",
+      "flight_number": "W61706",
+      "duration_minutes": 190,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BUD",
+      "destination": "GDN",
+      "flight_number": "W61690",
+      "duration_minutes": 95,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "EIN",
+      "destination": "GDN",
+      "flight_number": "W61642",
+      "duration_minutes": 100,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "FCO",
+      "destination": "GDN",
+      "flight_number": "W61700",
+      "duration_minutes": 155,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGA",
+      "flight_number": "W61659",
+      "duration_minutes": 320,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGP",
+      "flight_number": "W61613",
+      "duration_minutes": 250,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "ALC",
+      "flight_number": "W61707",
+      "duration_minutes": 220,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "BCN",
+      "flight_number": "W61705",
+      "duration_minutes": 185,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "BUD",
+      "flight_number": "W61689",
+      "duration_minutes": 95,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "EIN",
+      "flight_number": "W61641",
+      "duration_minutes": 110,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "FCO",
+      "flight_number": "W61699",
+      "duration_minutes": 155,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "LTN",
+      "flight_number": "W61601",
+      "duration_minutes": 145,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "flight_number": "W61701",
+      "duration_minutes": 205,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "MXP",
+      "flight_number": "W61713",
+      "duration_minutes": 140,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "PMI",
+      "flight_number": "W61703",
+      "duration_minutes": 205,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "GDN",
+      "destination": "TFS",
+      "flight_number": "W61709",
+      "duration_minutes": 355,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LTN",
+      "destination": "GDN",
+      "flight_number": "W61602",
+      "duration_minutes": 130,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "MAD",
+      "destination": "GDN",
+      "flight_number": "W61702",
+      "duration_minutes": 205,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "MXP",
+      "destination": "GDN",
+      "flight_number": "W61714",
+      "duration_minutes": 135,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "PMI",
+      "destination": "GDN",
+      "flight_number": "W61704",
+      "duration_minutes": 180,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "TFS",
+      "destination": "GDN",
+      "flight_number": "W61710",
+      "duration_minutes": 335,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -827,6 +1055,342 @@
       "destination": "MXP",
       "departure_time": "18:15",
       "flight_number": "W66390"
+    },
+    {
+      "origin": "AGA",
+      "destination": "GDN",
+      "departure_time": "11:40",
+      "flight_number": "W61660",
+      "duration_minutes": 300
+    },
+    {
+      "origin": "AGP",
+      "destination": "GDN",
+      "departure_time": "20:00",
+      "flight_number": "W61614",
+      "duration_minutes": 235
+    },
+    {
+      "origin": "AGP",
+      "destination": "GDN",
+      "departure_time": "20:40",
+      "flight_number": "W61614",
+      "duration_minutes": 235
+    },
+    {
+      "origin": "AGP",
+      "destination": "GDN",
+      "departure_time": "21:40",
+      "flight_number": "W61614",
+      "duration_minutes": 235
+    },
+    {
+      "origin": "ALC",
+      "destination": "GDN",
+      "departure_time": "18:55",
+      "flight_number": "W61708",
+      "duration_minutes": 215
+    },
+    {
+      "origin": "BCN",
+      "destination": "GDN",
+      "departure_time": "20:20",
+      "flight_number": "W61706",
+      "duration_minutes": 190
+    },
+    {
+      "origin": "BCN",
+      "destination": "GDN",
+      "departure_time": "21:25",
+      "flight_number": "W61706",
+      "duration_minutes": 190
+    },
+    {
+      "origin": "BCN",
+      "destination": "GDN",
+      "departure_time": "22:25",
+      "flight_number": "W61706",
+      "duration_minutes": 190
+    },
+    {
+      "origin": "BUD",
+      "destination": "GDN",
+      "departure_time": "17:20",
+      "flight_number": "W61690",
+      "duration_minutes": 95
+    },
+    {
+      "origin": "BUD",
+      "destination": "GDN",
+      "departure_time": "22:00",
+      "flight_number": "W61690",
+      "duration_minutes": 95
+    },
+    {
+      "origin": "EIN",
+      "destination": "GDN",
+      "departure_time": "09:20",
+      "flight_number": "W61642",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "EIN",
+      "destination": "GDN",
+      "departure_time": "14:50",
+      "flight_number": "W61642",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "FCO",
+      "destination": "GDN",
+      "departure_time": "22:10",
+      "flight_number": "W61700",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGA",
+      "departure_time": "06:45",
+      "flight_number": "W61659",
+      "duration_minutes": 320
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGP",
+      "departure_time": "15:05",
+      "flight_number": "W61613",
+      "duration_minutes": 250
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGP",
+      "departure_time": "15:45",
+      "flight_number": "W61613",
+      "duration_minutes": 250
+    },
+    {
+      "origin": "GDN",
+      "destination": "AGP",
+      "departure_time": "16:45",
+      "flight_number": "W61613",
+      "duration_minutes": 250
+    },
+    {
+      "origin": "GDN",
+      "destination": "ALC",
+      "departure_time": "14:25",
+      "flight_number": "W61707",
+      "duration_minutes": 225
+    },
+    {
+      "origin": "GDN",
+      "destination": "ALC",
+      "departure_time": "16:50",
+      "flight_number": "W61707",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "GDN",
+      "destination": "BCN",
+      "departure_time": "16:30",
+      "flight_number": "W61705",
+      "duration_minutes": 185
+    },
+    {
+      "origin": "GDN",
+      "destination": "BCN",
+      "departure_time": "17:35",
+      "flight_number": "W61705",
+      "duration_minutes": 185
+    },
+    {
+      "origin": "GDN",
+      "destination": "BCN",
+      "departure_time": "18:35",
+      "flight_number": "W61705",
+      "duration_minutes": 185
+    },
+    {
+      "origin": "GDN",
+      "destination": "BUD",
+      "departure_time": "14:45",
+      "flight_number": "W61689",
+      "duration_minutes": 95
+    },
+    {
+      "origin": "GDN",
+      "destination": "BUD",
+      "departure_time": "15:05",
+      "flight_number": "W61689",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "GDN",
+      "destination": "BUD",
+      "departure_time": "19:35",
+      "flight_number": "W61689",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "GDN",
+      "destination": "EIN",
+      "departure_time": "06:45",
+      "flight_number": "W61641",
+      "duration_minutes": 110
+    },
+    {
+      "origin": "GDN",
+      "destination": "FCO",
+      "departure_time": "05:30",
+      "flight_number": "W61699",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "GDN",
+      "destination": "FCO",
+      "departure_time": "18:55",
+      "flight_number": "W61699",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "GDN",
+      "destination": "LTN",
+      "departure_time": "06:10",
+      "flight_number": "W61601",
+      "duration_minutes": 145
+    },
+    {
+      "origin": "GDN",
+      "destination": "LTN",
+      "departure_time": "06:15",
+      "flight_number": "W61601",
+      "duration_minutes": 140
+    },
+    {
+      "origin": "GDN",
+      "destination": "LTN",
+      "departure_time": "19:35",
+      "flight_number": "W61607",
+      "duration_minutes": 150
+    },
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "departure_time": "06:00",
+      "flight_number": "W61701",
+      "duration_minutes": 225
+    },
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "departure_time": "06:20",
+      "flight_number": "W61701",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "GDN",
+      "destination": "MXP",
+      "departure_time": "18:25",
+      "flight_number": "W61713",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "GDN",
+      "destination": "MXP",
+      "departure_time": "19:00",
+      "flight_number": "W61713",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "GDN",
+      "destination": "MXP",
+      "departure_time": "19:05",
+      "flight_number": "W61713",
+      "duration_minutes": 140
+    },
+    {
+      "origin": "GDN",
+      "destination": "PMI",
+      "departure_time": "18:25",
+      "flight_number": "W61703",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "GDN",
+      "destination": "TFS",
+      "departure_time": "12:50",
+      "flight_number": "W61709",
+      "duration_minutes": 355
+    },
+    {
+      "origin": "GDN",
+      "destination": "TFS",
+      "departure_time": "13:35",
+      "flight_number": "W61709",
+      "duration_minutes": 355
+    },
+    {
+      "origin": "LTN",
+      "destination": "GDN",
+      "departure_time": "08:20",
+      "flight_number": "W61602",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "LTN",
+      "destination": "GDN",
+      "departure_time": "21:45",
+      "flight_number": "W61608",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "MAD",
+      "destination": "GDN",
+      "departure_time": "10:40",
+      "flight_number": "W61702",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "MXP",
+      "destination": "GDN",
+      "departure_time": "21:15",
+      "flight_number": "W61714",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "MXP",
+      "destination": "GDN",
+      "departure_time": "21:50",
+      "flight_number": "W61714",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "MXP",
+      "destination": "GDN",
+      "departure_time": "22:00",
+      "flight_number": "W61714",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "PMI",
+      "destination": "GDN",
+      "departure_time": "22:35",
+      "flight_number": "W61704",
+      "duration_minutes": 180
+    },
+    {
+      "origin": "TFS",
+      "destination": "GDN",
+      "departure_time": "18:30",
+      "flight_number": "W61710",
+      "duration_minutes": 335
+    },
+    {
+      "origin": "TFS",
+      "destination": "GDN",
+      "departure_time": "19:15",
+      "flight_number": "W61710",
+      "duration_minutes": 335
     }
   ]
 }

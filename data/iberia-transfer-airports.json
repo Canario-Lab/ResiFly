@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Iberia dla kroku 1B",
-  "verified_on": "2026-10-21",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Iberia/Iberia Express + Ryanair/Wizz Air w kroku 1B.",
   "scope": {
     "tenerife_airports": [
@@ -12,7 +12,8 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "tenerife_leg_airlines": [
       "Iberia",
@@ -30,7 +31,7 @@
     "do_not_rediscover_each_run": true,
     "polish_route_evidence_is_not_a_search_limit": true,
     "update_only_on_explicit_user_request": true,
-    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Kolektor sprawdza oba lotniska Teneryfy i wszystkie cztery polskie lotniska."
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Kolektor sprawdza oba lotniska Teneryfy i wszystkie pięć polskich lotniska."
   },
   "airports": [
     {
@@ -60,6 +61,14 @@
         {
           "polish_airport": "KRK",
           "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "GDN",
+          "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "GDN",
+          "airline": "Wizz Air"
         }
       ]
     }
@@ -100,6 +109,24 @@
       "destination": "KTW",
       "flight_number": "W61178",
       "duration_minutes": 205
+    },
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "flight_number": "W61701",
+      "duration_minutes": 205,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "MAD",
+      "destination": "GDN",
+      "flight_number": "W61702",
+      "duration_minutes": 205,
+      "verified_on": "2026-10-22",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "sources": [
@@ -117,6 +144,38 @@
       "name": "Ministerio de Transportes — Plan Estrategico de Subvenciones 2025–2027",
       "url": "https://cdn.transportes.gob.es/portal-web-transportes/transparencia/2.pes_2025-2027.pdf",
       "finding": "Zniżka 75% obejmuje podróże lotnicze rezydentów Wysp Kanaryjskich między archipelagiem a pozostałą częścią Hiszpanii."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    }
+  ],
+  "flight_number_overrides_by_departure_time": [
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "departure_time": "06:00",
+      "flight_number": "W61701",
+      "duration_minutes": 225
+    },
+    {
+      "origin": "GDN",
+      "destination": "MAD",
+      "departure_time": "06:20",
+      "flight_number": "W61701",
+      "duration_minutes": 205
+    },
+    {
+      "origin": "MAD",
+      "destination": "GDN",
+      "departure_time": "10:40",
+      "flight_number": "W61702",
+      "duration_minutes": 205
     }
   ]
 }

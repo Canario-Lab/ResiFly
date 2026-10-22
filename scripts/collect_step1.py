@@ -15,9 +15,11 @@ from dataclasses import dataclass
 from datetime import date, datetime, time, timedelta
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import sys
+import threading
 import time as time_module
 from typing import Any, Iterable
 from zoneinfo import ZoneInfo
@@ -26,8 +28,14 @@ from curl_cffi import requests
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    # Later lazy imports of the shared direct-flight collector must reuse these
+    # configured time zones instead of loading a second copy of this module.
+    sys.modules.setdefault("scripts.collect_step1", sys.modules[__name__])
 
-from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
+from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
+from scripts.booking_urls import wizz_booking_url
+from scripts.search_airports import ENDPOINT_TIMEZONES, POLISH_AIRPORTS, TENERIFE_AIRPORTS
+from scripts.wizz_schedules import read_overrides, resolve_schedule
 from scripts.wizz_api import wizz_api_base
 
 
@@ -35,8 +43,6 @@ ROOT = Path(__file__).resolve().parents[1]
 TRANSFER_FILE = ROOT / "data" / "binter-transfer-airports.json"
 DEFAULT_OUTPUT = ROOT / "data" / "step1-results.json"
 
-TENERIFE_AIRPORTS = ("TFN", "TFS")
-POLISH_AIRPORTS = ("WAW", "WMI", "KTW", "KRK")
 MIN_LAYOVER_MINUTES = 120
 MAX_LAYOVER_MINUTES = 24 * 60
 BINTER_API = "https://services.bintercanarias.com/main/graphql"
@@ -44,14 +50,9 @@ NBP_CACHE_DIR = ROOT / "tmp" / "nbp-rates"
 NBP_SHARED_CURRENCIES = ("EUR", "GBP", "HUF", "MAD", "RON", "USD")
 NBP_LOOKBACK_DAYS = 7
 
-AIRPORT_TIMEZONES = {
-    "TFN": "Atlantic/Canary",
-    "TFS": "Atlantic/Canary",
-    "WAW": "Europe/Warsaw",
-    "WMI": "Europe/Warsaw",
-    "KTW": "Europe/Warsaw",
-    "KRK": "Europe/Warsaw",
-}
+AIRPORT_TIMEZONES = dict(ENDPOINT_TIMEZONES)
+_ryanair_client_version = None
+_ryanair_client_lock = threading.Lock()
 
 def configure_airports_from_allowlist(allowlist: dict[str, Any]) -> None:
     """Register transfer-airport time zones stored in an allowlist file."""
@@ -64,11 +65,19 @@ def configure_airports_from_allowlist(allowlist: dict[str, Any]) -> None:
         AIRPORT_TIMEZONES[code] = timezone
 
 
+class WizzSchedules(dict):
+    """Route schedules with optional verified departure-time number overrides."""
+
+    def __init__(self):
+        super().__init__()
+        self.overrides = {}
+
+
 def wizz_schedules_from_allowlist(
     allowlist: dict[str, Any],
 ) -> dict[tuple[str, str], tuple[str, int]]:
     """Read Wizz route identifiers and block times from the Step 1 list."""
-    schedules: dict[tuple[str, str], tuple[str, int]] = {}
+    schedules = WizzSchedules()
     for route in allowlist.get("wizz_route_schedules", []):
         key = (route["origin"], route["destination"])
         if key in schedules:
@@ -77,6 +86,7 @@ def wizz_schedules_from_allowlist(
         if duration <= 0:
             raise RuntimeError(f"Invalid Wizz duration in Step 1 list: {key}")
         schedules[key] = (route["flight_number"], duration)
+    schedules.overrides = read_overrides(allowlist.get("flight_number_overrides_by_departure_time", []), schedules)
     return schedules
 
 BINTER_QUERY = """
@@ -140,6 +150,7 @@ def get_json(
     params: dict[str, Any] | None = None,
     impersonate: str | None = None,
     attempts: int = 4,
+    empty_market: bool = False,
 ) -> Any:
     last_error: Exception | None = None
     for attempt in range(attempts):
@@ -153,6 +164,8 @@ def get_json(
                 impersonate=impersonate,
                 timeout=60,
             )
+            if empty_market and response.status_code == 400 and "InvalidMarket" in response.text:
+                return {"outboundFlights": []}
             response.raise_for_status()
             return response.json()
         except Exception as error:  # network errors need a bounded retry
@@ -344,7 +357,10 @@ def wizz_timetable(
         headers={"content-type": "application/json"},
         payload=payload,
         impersonate="safari184",
+        empty_market=True,
     )
+    if not isinstance(response, dict) or not isinstance(response.get("outboundFlights"), list):
+        raise RuntimeError(f"Invalid Wizz timetable response {origin}-{destination}")
     return [
         item
         for item in response.get("outboundFlights", [])
@@ -355,6 +371,7 @@ def wizz_timetable(
     ]
 
 
+@calendar_collector("Wizz Air", "timetableV2")
 def collect_wizz_route(
     origin: str,
     destination: str,
@@ -363,17 +380,19 @@ def collect_wizz_route(
     rates: dict[str, CurrencyRate],
     schedules: dict[tuple[str, str], tuple[str, int]],
 ) -> list[dict[str, Any]]:
+    regular = wizz_timetable(origin, destination, start, end, "regular")
+    if not regular:
+        return []
     schedule = schedules.get((origin, destination))
     if schedule is None:
-        return []
-    regular = wizz_timetable(origin, destination, start, end, "regular")
+        raise RuntimeError(f"Active Wizz route {origin}-{destination} needs verified local schedule metadata")
     club = wizz_timetable(origin, destination, start, end, "wdc")
     club_by_departure = {item["departureDate"]: item for item in club}
-    flight_number, duration_minutes = schedule
     legs: list[dict[str, Any]] = []
     for item in regular:
         departure = local_datetime(item["departureDate"], origin)
-        arrival = (departure + timedelta(minutes=duration_minutes)).astimezone(
+        number, duration = resolve_schedule(schedules, getattr(schedules, "overrides", {}), origin, destination, departure)
+        arrival = (departure + timedelta(minutes=duration)).astimezone(
             ZoneInfo(AIRPORT_TIMEZONES[destination])
         )
         price = item["price"]
@@ -387,7 +406,7 @@ def collect_wizz_route(
             )
         legs.append({
             "carrier": "Wizz Air",
-            "flight_number": flight_number,
+            "flight_number": number,
             "departure_airport": origin,
             "departure_at": serialize_datetime(departure),
             "arrival_airport": destination,
@@ -410,52 +429,19 @@ def collect_ryanair_route(
     end: date,
     rates: dict[str, CurrencyRate],
 ) -> list[dict[str, Any]]:
-    params = {
-        "departureAirportIataCode": origin,
-        "arrivalAirportIataCode": destination,
-        "outboundDepartureDateFrom": start.isoformat(),
-        "outboundDepartureDateTo": end.isoformat(),
-        "currency": "EUR",
-        "limit": 200,
-    }
-    try:
-        response = get_json(
-            "GET",
-            "https://www.ryanair.com/api/farfnd/3/oneWayFares",
-            params=params,
-            impersonate="safari184",
-            attempts=3,
-        )
-    except RuntimeError:
-        return []
-    legs = []
-    for fare in response.get("fares", []):
-        item = fare.get("outbound") or {}
-        if item.get("departureAirport", {}).get("iataCode") != origin:
-            continue
-        if item.get("arrivalAirport", {}).get("iataCode") != destination:
-            continue
-        price = item.get("price") or {}
-        if not price.get("value"):
-            continue
-        departure = local_datetime(item["departureDate"], origin)
-        arrival = local_datetime(item["arrivalDate"], destination)
-        regular_pln = money_pln(price["value"], price["currencyCode"], rates)
-        legs.append({
-            "carrier": "Ryanair",
-            "flight_number": item.get("flightNumber") or "Ryanair",
-            "departure_airport": origin,
-            "departure_at": serialize_datetime(departure),
-            "arrival_airport": destination,
-            "arrival_at": serialize_datetime(arrival),
-            "price_regular_pln": regular_pln,
-            "resident_discount_eligible": False,
-            "price_resident_estimated_pln": regular_pln,
-            "booking_url": ryanair_booking_url(origin, destination, departure),
-            "price_source_currency": price["currencyCode"],
-            "price_source_amount": float(price["value"]),
-        })
-    return legs
+    """Use full availability calendars, not the cheapest fare for 31 days.
+
+    The import is deliberately lazy: Step 2 imports the shared date/currency
+    helpers from this module. It is safe after module initialization.
+    """
+    from scripts.collect_step2 import collect_ryanair_route as collect_full_route
+    from scripts.collect_step2 import ryanair_client_version
+
+    global _ryanair_client_version
+    with _ryanair_client_lock:
+        if _ryanair_client_version is None:
+            _ryanair_client_version = ryanair_client_version()
+    return collect_full_route(origin, destination, start, end, rates, _ryanair_client_version)
 
 
 def binter_headers() -> dict[str, str]:
@@ -475,19 +461,29 @@ def binter_headers() -> dict[str, str]:
 def lowest_eur_fare(fares: list[dict[str, Any]]) -> tuple[float, float] | None:
     choices: list[tuple[float, float]] = []
     for fare in fares:
+        if not isinstance(fare, dict):
+            raise RuntimeError("Malformed Binter fare")
+        if fare.get("seats") == 0:
+            continue
         amounts = fare.get("amounts") or {}
         regular = amounts.get("noResident") or {}
         resident = amounts.get("resident") or {}
+        # Binter returns loyalty-point awards alongside cash fares. These
+        # are intentionally outside our EUR cash-price search, not errors.
+        if regular.get("currency", {}).get("code") == resident.get("currency", {}).get("code") == "PTS":
+            continue
         if regular.get("currency", {}).get("code") != "EUR":
-            continue
+            raise RuntimeError("Binter fare missing regular EUR price")
         if resident.get("currency", {}).get("code") != "EUR":
-            continue
-        if fare.get("seats") == 0:
-            continue
-        choices.append((float(regular["totalAmount"]), float(resident["totalAmount"])))
+            raise RuntimeError("Binter fare missing resident EUR price")
+        prices = (float(regular["totalAmount"]), float(resident["totalAmount"]))
+        if not all(math.isfinite(amount) and amount > 0 for amount in prices):
+            raise RuntimeError("Invalid Binter fare amount")
+        choices.append(prices)
     return min(choices, key=lambda pair: pair[0]) if choices else None
 
 
+@calendar_collector("Binter", "booking_search")
 def collect_binter_trip(
     origin: str,
     destination: str,
@@ -519,13 +515,17 @@ def collect_binter_trip(
             },
             impersonate="safari184",
         )
-    except RuntimeError:
-        return []
-    search = (response.get("data") or {}).get("booking_search") or {}
+    except RuntimeError as error:
+        raise RuntimeError(
+            f"Binter {origin}-{destination} on {departure_date}: request failed; publication blocked"
+        ) from error
+    search = validate_binter_response(response, origin, destination, departure_date)
     legs: list[dict[str, Any]] = []
     for availability in search.get("availability") or []:
-        for flight in availability.get("flights") or []:
-            segments = flight.get("flightSegments") or []
+        for flight in availability["flights"]:
+            if not isinstance(flight, dict) or not isinstance(flight.get("flightSegments"), list) or not isinstance(flight.get("fares"), list):
+                raise RuntimeError(f"Malformed Binter flight {origin}-{destination} on {departure_date}")
+            segments = flight["flightSegments"]
             if len(segments) != 1:
                 continue
             segment = segments[0]
@@ -562,6 +562,29 @@ def collect_binter_trip(
                 "price_source_amount": regular_eur,
             })
     return legs
+
+
+def validate_binter_response(response, origin, destination, departure_date):
+    context = f"Binter {origin}-{destination} on {departure_date}"
+    if not isinstance(response, dict) or response.get("errors"):
+        raise RuntimeError(f"{context}: GraphQL error or invalid response; publication blocked")
+    data = response.get("data")
+    search = data.get("booking_search") if isinstance(data, dict) else None
+    if not isinstance(search, dict) or not isinstance(search.get("availability"), list):
+        raise RuntimeError(f"{context}: missing availability; publication blocked")
+    messages = search.get("messages", [])
+    if not isinstance(messages, list) or any(
+        not isinstance(message, dict) or any(word in str(message.get("type", "")).upper() for word in ("ERROR", "FATAL"))
+        for message in messages
+    ):
+        raise RuntimeError(f"{context}: booking_search error; publication blocked")
+    for item in search["availability"]:
+        if not isinstance(item, dict) or not isinstance(item.get("flights"), list):
+            raise RuntimeError(f"{context}: malformed availability; publication blocked")
+        trip = item.get("trip")
+        if not isinstance(trip, dict) or trip.get("origin", {}).get("iata") != origin or trip.get("destination", {}).get("iata") != destination or str(trip.get("date", ""))[:10] != departure_date.isoformat():
+            raise RuntimeError(f"{context}: mismatched availability route/date; publication blocked")
+    return search
 
 
 def collect_low_cost_legs(
@@ -749,8 +772,8 @@ def validate_document(document: dict[str, Any]) -> None:
                 raise RuntimeError(f"Missing Wizz booking_url in {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("1")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -810,14 +833,14 @@ def main() -> None:
         },
         "sources": {
             "binter": "Binter booking_search GraphQL",
-            "ryanair": "Ryanair Fare Finder",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
             "wizz_air": "Wizz Air timetableV2",
         },
         "results": results,
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

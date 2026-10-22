@@ -29,6 +29,11 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Optional
 
+if __package__ in {None, ""}:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS, ENDPOINT_TRANSFER_EXCEPTIONS
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -39,8 +44,6 @@ STEP4_FILE = DATA / "wizzair-transfer-airports.json"
 STEP5_FILE = DATA / "mixed-transfer-airports.json"
 WIZZ_SCHEDULE_FILE = DATA / "wizz-route-schedules.json"
 
-POLISH_AIRPORTS = ("WAW", "WMI", "KTW", "KRK")
-TENERIFE_AIRPORTS = ("TFN", "TFS")
 ENDPOINTS = set(POLISH_AIRPORTS + TENERIFE_AIRPORTS)
 
 RYANAIR_ROUTES_URL = "https://www.ryanair.com/api/views/locate/3/routes"
@@ -175,16 +178,21 @@ def direct_neighbors(routes: set[tuple[str, str]], airport: str) -> set[str]:
 def candidate_intersection(
     tenerife_routes: set[tuple[str, str]],
     poland_routes: set[tuple[str, str]],
+    step: str = "",
 ) -> list[Candidate]:
     """Return transfer airports joining a Tenerife graph to a Poland graph."""
+    exceptions = {code: allowed for (key, code), allowed in ENDPOINT_TRANSFER_EXCEPTIONS.items() if key == step}
+    excluded = ENDPOINTS - set(exceptions)
     tenerife_by_transfer: dict[str, set[str]] = {}
     for tenerife in TENERIFE_AIRPORTS:
-        for transfer in direct_neighbors(tenerife_routes, tenerife) - ENDPOINTS:
+        for transfer in direct_neighbors(tenerife_routes, tenerife) - excluded:
             tenerife_by_transfer.setdefault(transfer, set()).add(tenerife)
 
     poland_by_transfer: dict[str, set[str]] = {}
     for polish in POLISH_AIRPORTS:
-        for transfer in direct_neighbors(poland_routes, polish) - ENDPOINTS:
+        for transfer in direct_neighbors(poland_routes, polish) - excluded:
+            if transfer == polish or (transfer in exceptions and polish not in exceptions[transfer]):
+                continue
             poland_by_transfer.setdefault(transfer, set()).add(polish)
 
     return [
@@ -227,7 +235,7 @@ def discover_candidates(snapshot: Mapping[str, Any]) -> dict[str, list[Candidate
         "step3": candidate_intersection(ryanair, ryanair),
         "step4": candidate_intersection(wizzair, wizzair),
         "step5_variant_a": candidate_intersection(ryanair, wizzair),
-        "step5_variant_b": candidate_intersection(wizzair, ryanair),
+        "step5_variant_b": candidate_intersection(wizzair, ryanair, "step5_variant_b"),
     }
 
 
@@ -359,7 +367,7 @@ def build_plan(
         "discovered_total": 0,
         "note": (
             "Krok 2 nie ma listy lotnisk przesiadkowych. Kolektor zawsze sprawdza "
-            "pełną, stałą macierz WAW/WMI/KTW/KRK ↔ TFN/TFS."
+            f"pełną macierz {'/'.join(POLISH_AIRPORTS)} ↔ TFN/TFS."
         ),
     }
 

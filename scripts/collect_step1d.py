@@ -27,6 +27,7 @@ from curl_cffi import requests
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, record_checked
 from scripts.booking_urls import air_europa_booking_url
 from scripts.collect_step1 import (
     AIRPORT_TIMEZONES,
@@ -354,6 +355,9 @@ def collect_air_europa_legs(
             f"Air Europa: {origin}-{destination}: {len(fares)} dni z ceną",
             flush=True,
         )
+        record_checked("Air Europa", origin, destination, min(days), max(days),
+                       [leg for leg in legs if leg["departure_airport"] == origin and leg["arrival_airport"] == destination],
+                       "official_route_day_fares")
     return sorted(legs, key=lambda leg: leg["departure_at"])
 
 
@@ -441,8 +445,8 @@ def validate_document(document: dict[str, Any]) -> None:
                 raise RuntimeError(f"Niedozwolone źródło ceny w {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("1d")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -507,7 +511,7 @@ def main() -> None:
                 "estimate: 25% of official regular route-day fare; taxes may not "
                 "receive the full resident discount"
             ),
-            "ryanair": "Ryanair Fare Finder",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",
@@ -515,10 +519,7 @@ def main() -> None:
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     print(f"Zapisano {len(results)} połączeń do {args.output}", flush=True)
 
 

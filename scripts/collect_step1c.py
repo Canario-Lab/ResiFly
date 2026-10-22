@@ -24,6 +24,7 @@ from zoneinfo import ZoneInfo
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, record_checked
 from scripts.booking_urls import vueling_booking_url
 from scripts.collector_settings import (
     GOOGLE_FLIGHTS_MAX_WORKERS,
@@ -288,13 +289,15 @@ def collect_vueling_legs(
         rule = transfer_rules[transfer]
         multiplier = float(rule["vueling_resident_fare_multiplier"])
         html = GoogleFlightsClient().availability(origin, destination, day)
-        return parse_google_flights_response(
+        result = parse_google_flights_response(
             html,
             origin,
             destination,
             multiplier,
             accepted_marketing,
         )
+        record_checked("Vueling", origin, destination, day, day, result, "google_flights_http")
+        return result
 
     legs: list[dict[str, Any]] = []
     max_workers = google_flights_worker_count(workers)
@@ -404,8 +407,8 @@ def validate_document(document: dict[str, Any]) -> None:
                 raise RuntimeError(f"Brak booking_url w {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("1c")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -473,7 +476,7 @@ def main() -> None:
                 "Google Flights: regularna cena w PLN; cena rezydenta "
                 "oszacowana jako 25% ceny regularnej zgodnie z listą lotnisk"
             ),
-            "ryanair": "Ryanair Fare Finder",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",
@@ -481,10 +484,7 @@ def main() -> None:
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

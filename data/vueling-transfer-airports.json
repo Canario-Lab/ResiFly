@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Vueling dla kroku 1C",
-  "verified_on": "2026-10-21",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Vueling + Ryanair/Wizz Air w kroku 1C.",
   "scope": {
     "tenerife_airports": [
@@ -11,7 +11,8 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "tenerife_leg_airlines": [
       "Vueling"
@@ -46,10 +47,39 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
-        { "polish_airport": "KTW", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
       ]
     },
     {
@@ -62,10 +92,39 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "WMI", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
       ]
     },
     {
@@ -78,8 +137,18 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
       ]
     },
     {
@@ -92,10 +161,40 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
-        { "polish_airport": "KTW", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
       ]
     },
     {
@@ -108,7 +207,12 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WMI", "airlines": ["Wizz Air"] }
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
       ]
     },
     {
@@ -121,8 +225,19 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Ryanair", "Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
       ]
     },
     {
@@ -135,9 +250,25 @@
       "resident_discount_eligible_on_vueling_leg": true,
       "vueling_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "WMI", "airlines": ["Ryanair"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair", "Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
       ]
     }
   ],
@@ -177,6 +308,15 @@
     {
       "name": "Ryanair route API i Wizz Air route map",
       "finding": "Aktualne siatki przewoźników użyte do potwierdzenia bezpośredniego drugiego odcinka do co najmniej jednego z czterech polskich lotnisk."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

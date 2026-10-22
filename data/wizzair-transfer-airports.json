@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Wizz Air dla kroku 4",
-  "verified_on": "2026-10-20",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Wizz Air + Wizz Air między Teneryfą a Polską w kroku 4.",
   "scope": {
     "tenerife_airports": [
@@ -12,32 +12,34 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "airline": "Wizz Air",
     "resident_discount_considered": true
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK.",
+    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "result_count": 6,
     "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
   },
   "airport_timezones": {
-  "BBU": "Europe/Bucharest",
-  "BUD": "Europe/Budapest",
-  "FCO": "Europe/Rome",
-  "MXP": "Europe/Rome",
-  "OTP": "Europe/Bucharest",
-  "SCQ": "Europe/Madrid"
-},
+    "BBU": "Europe/Bucharest",
+    "BUD": "Europe/Budapest",
+    "FCO": "Europe/Rome",
+    "MXP": "Europe/Rome",
+    "OTP": "Europe/Bucharest",
+    "SCQ": "Europe/Madrid"
+  },
   "resident_discount_on_tenerife_leg": {
     "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
     "discount_percent": 75,
@@ -71,43 +73,75 @@
       "iata": "BBU",
       "name_pl": "Bukareszt-Băneasa",
       "country_pl": "Rumunia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK"
+      ]
     },
     {
       "iata": "BUD",
       "name_pl": "Budapeszt",
       "country_pl": "Węgry",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "FCO",
       "name_pl": "Rzym-Fiumicino",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "MXP",
       "name_pl": "Mediolan-Malpensa",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "OTP",
       "name_pl": "Bukareszt-Otopeni",
       "country_pl": "Rumunia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW"
+      ]
     },
     {
       "iata": "SCQ",
       "name_pl": "Santiago de Compostela",
       "country_pl": "Hiszpania",
-      "tenerife_airports": ["TFN"],
-      "polish_airports": ["WMI"]
+      "tenerife_airports": [
+        "TFN"
+      ],
+      "polish_airports": [
+        "WMI"
+      ]
     }
   ],
   "sources": [
@@ -130,6 +164,15 @@
     {
       "name": "Ministerstwo Transportu Hiszpanii — bonifikaty w transporcie lotniczym",
       "url": "https://sede.transportes.gob.es/areas-activity/aviacion-civil-aereo/liquidacion-bonificaciones-transporte-aereo"
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

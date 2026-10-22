@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
     MIN_LAYOVER_MINUTES,
@@ -30,6 +31,7 @@ from scripts.collect_step1 import (
     nbp_rate,
 )
 from scripts.collect_step2 import ryanair_client_version
+from scripts.search_airports import validate_polish_transfer
 from scripts.collect_step3 import collect_routes as collect_ryanair_routes
 from scripts.collect_step4 import collect_routes as collect_wizz_routes
 
@@ -66,7 +68,7 @@ def route_matrix(allowlist: dict[str, Any]) -> dict[str, list[tuple[str, str]]]:
         "Ryanair": set(),
         "Wizz Air": set(),
     }
-    for variant in allowlist["variants"].values():
+    for variant_key, variant in allowlist["variants"].items():
         tenerife_carrier = variant["tenerife_leg_airline"]
         poland_carrier = variant["poland_leg_airline"]
         for transfer_data in variant["airports"]:
@@ -75,6 +77,7 @@ def route_matrix(allowlist: dict[str, Any]) -> dict[str, list[tuple[str, str]]]:
                 routes[tenerife_carrier].add((tenerife, transfer))
                 routes[tenerife_carrier].add((transfer, tenerife))
             for polish in transfer_data["polish_airports"]:
+                validate_polish_transfer(polish, transfer, "step5_variant_a" if variant_key == VARIANT_A else "step5_variant_b")
                 routes[poland_carrier].add((polish, transfer))
                 routes[poland_carrier].add((transfer, polish))
     return {carrier: sorted(values) for carrier, values in routes.items()}
@@ -308,6 +311,7 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
         else:
             polish = result["destination_airport"]
             tenerife = result["origin_airport"]
+        validate_polish_transfer(polish, transfer, "step5_variant_a" if variant_key == VARIANT_A else "step5_variant_b")
         if polish not in rule["polish_airports"] or tenerife not in rule["tenerife_airports"]:
             raise RuntimeError(f"Route outside Step 5 allowlist in {result['id']}")
 
@@ -336,8 +340,8 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
                 raise RuntimeError(f"Incorrect resident discount in {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("5")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     if args.workers < 1:
@@ -430,10 +434,7 @@ def main() -> None:
     }
     validate_document(document, allowlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     counts = {
         "total": len(results),
         "variants": {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-22T12:02:49+01:00",
+  "generated_at": "2026-10-22T18:19:57+01:00",
   "period_from": "2026-10-22",
   "period_to": "2026-11-21",
   "step": "1E",
@@ -25,7 +25,7 @@
   "sources": {
     "volotea_routes_schedules_and_prices": "Volotea official route pages and public MinPrice endpoint; regular fare with fees, no Google Flights",
     "volotea_resident_price": "estimate: 25% of official regular fare with fees; taxes may not receive the full resident discount",
-    "ryanair": "Ryanair Fare Finder",
+    "ryanair": "Ryanair availability, active-dates and daily Fare Finder fallback APIs",
     "wizz_air": "Wizz Air timetableV2"
   },
   "result_status": "ok",
@@ -63,22 +63,22 @@
           "departure_at": "2026-11-01T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-01T09:00:00+00:00",
-          "price_regular_pln": 983.48,
+          "price_regular_pln": 781.39,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 245.87,
+          "price_resident_estimated_pln": 195.35,
           "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 225.13,
+          "price_source_amount": 178.87,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48
         }
       ],
-      "price_total_regular_pln": 1352.48,
-      "price_total_resident_estimated_pln": 614.87
+      "price_total_regular_pln": 1150.39,
+      "price_total_resident_estimated_pln": 564.35
     },
     {
       "id": "step1e-3ac4f11097afe292",
@@ -113,22 +113,22 @@
           "departure_at": "2026-11-01T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-01T09:00:00+00:00",
-          "price_regular_pln": 983.48,
+          "price_regular_pln": 781.39,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 245.87,
+          "price_resident_estimated_pln": 195.35,
           "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 225.13,
+          "price_source_amount": 178.87,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48
         }
       ],
-      "price_total_regular_pln": 1212.48,
-      "price_total_resident_estimated_pln": 474.87
+      "price_total_regular_pln": 1010.39,
+      "price_total_resident_estimated_pln": 424.35
     },
     {
       "id": "step1e-5888738cb0a70362",
@@ -147,14 +147,14 @@
           "departure_at": "2026-11-07T06:15:00+01:00",
           "arrival_airport": "BIO",
           "arrival_at": "2026-11-07T09:25:00+01:00",
-          "price_regular_pln": 409.0,
-          "price_wizz_discount_club_pln": 363.0,
+          "price_regular_pln": 459.0,
+          "price_wizz_discount_club_pln": 413.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 409.0,
+          "price_resident_estimated_pln": 459.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/BIO/2026-11-07/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 409.0
+          "price_source_amount": 459.0
         },
         {
           "carrier": "Volotea",
@@ -163,22 +163,22 @@
           "departure_at": "2026-11-08T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-08T09:00:00+00:00",
-          "price_regular_pln": 449.04,
+          "price_regular_pln": 404.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 112.26,
+          "price_resident_estimated_pln": 101.03,
           "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 102.79,
+          "price_source_amount": 92.51,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48
         }
       ],
-      "price_total_regular_pln": 858.04,
-      "price_total_resident_estimated_pln": 521.26
+      "price_total_regular_pln": 863.13,
+      "price_total_resident_estimated_pln": 560.03
     },
     {
       "id": "step1e-cce67385cbae00d7",
@@ -213,22 +213,22 @@
           "departure_at": "2026-11-08T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-08T09:00:00+00:00",
-          "price_regular_pln": 449.04,
+          "price_regular_pln": 404.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 112.26,
+          "price_resident_estimated_pln": 101.03,
           "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 102.79,
+          "price_source_amount": 92.51,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48
         }
       ],
-      "price_total_regular_pln": 908.04,
-      "price_total_resident_estimated_pln": 571.26
+      "price_total_regular_pln": 863.13,
+      "price_total_resident_estimated_pln": 560.03
     },
     {
       "id": "step1e-a1bad75cef5a9b2c",

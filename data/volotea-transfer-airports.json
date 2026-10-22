@@ -1,13 +1,26 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Volotea dla kroku 1E",
-  "verified_on": "2026-10-21",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Volotea + Ryanair/Wizz Air w kroku 1E.",
   "scope": {
-    "tenerife_airports": ["TFS"],
-    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
-    "tenerife_leg_airlines": ["Volotea"],
-    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+    "tenerife_airports": [
+      "TFS"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK",
+      "GDN"
+    ],
+    "tenerife_leg_airlines": [
+      "Volotea"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
   },
   "usage_policy": {
     "step": "1E",
@@ -30,12 +43,24 @@
       "iata": "BIO",
       "name_pl": "Bilbao",
       "timezone": "Europe/Madrid",
-      "tenerife_airports": ["TFS"],
+      "tenerife_airports": [
+        "TFS"
+      ],
       "resident_discount_eligible_on_volotea_leg": true,
       "volotea_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Wizz Air"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
       ]
     }
   ],
@@ -65,6 +90,15 @@
     {
       "name": "Wizz Air timetableV2",
       "finding": "Oficjalny publiczny rozkład Wizz Air potwierdza bezpośrednie trasy BIO-WAW i BIO-KRK w obu kierunkach."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

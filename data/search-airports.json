@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "polish_airports": [
+    { "iata": "WAW", "name_pl": "Warszawa Chopina", "timezone": "Europe/Warsaw" },
+    { "iata": "WMI", "name_pl": "Warszawa Modlin", "timezone": "Europe/Warsaw" },
+    { "iata": "KTW", "name_pl": "Katowice", "timezone": "Europe/Warsaw" },
+    { "iata": "KRK", "name_pl": "Kraków", "timezone": "Europe/Warsaw" },
+    { "iata": "GDN", "name_pl": "Gdańsk", "timezone": "Europe/Warsaw" }
+  ],
+  "tenerife_airports": [
+    { "iata": "TFN", "name_pl": "Teneryfa Północ", "timezone": "Atlantic/Canary" },
+    { "iata": "TFS", "name_pl": "Teneryfa Południe", "timezone": "Atlantic/Canary" }
+  ],
+  "endpoint_transfer_exceptions": [
+    { "step": "step5_variant_b", "iata": "GDN", "polish_airports": ["KRK"] }
+  ]
+}

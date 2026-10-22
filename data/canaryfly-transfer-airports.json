@@ -1,13 +1,26 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Canaryfly dla kroku 1F",
-  "verified_on": "2026-10-21",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista lotnisk kanaryjskich objętych zniżką rezydencką, przez które wolno budować połączenia Canaryfly + Ryanair/Wizz Air w kroku 1F.",
   "scope": {
-    "tenerife_airports": ["TFN"],
-    "polish_airports": ["WAW", "WMI", "KTW", "KRK"],
-    "tenerife_leg_airlines": ["Canaryfly"],
-    "poland_leg_airlines": ["Ryanair", "Wizz Air"]
+    "tenerife_airports": [
+      "TFN"
+    ],
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK",
+      "GDN"
+    ],
+    "tenerife_leg_airlines": [
+      "Canaryfly"
+    ],
+    "poland_leg_airlines": [
+      "Ryanair",
+      "Wizz Air"
+    ]
   },
   "usage_policy": {
     "step": "1F",
@@ -29,24 +42,48 @@
       "iata": "FUE",
       "name_pl": "Fuerteventura",
       "timezone": "Atlantic/Canary",
-      "tenerife_airports": ["TFN"],
+      "tenerife_airports": [
+        "TFN"
+      ],
       "resident_discount_eligible_on_canaryfly_leg": true,
       "canaryfly_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "WAW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KTW", "airlines": ["Wizz Air"] },
-        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
       ]
     },
     {
       "iata": "LPA",
       "name_pl": "Gran Canaria",
       "timezone": "Atlantic/Canary",
-      "tenerife_airports": ["TFN"],
+      "tenerife_airports": [
+        "TFN"
+      ],
       "resident_discount_eligible_on_canaryfly_leg": true,
       "canaryfly_resident_fare_multiplier": 0.25,
       "polish_routes": [
-        { "polish_airport": "KRK", "airlines": ["Ryanair"] }
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
       ]
     }
   ],
@@ -86,6 +123,15 @@
     {
       "name": "Oficjalne siatki Ryanair i Wizz Air",
       "finding": "Bieżące rozkłady potwierdzają trasy FUE-WAW i FUE-KTW linią Wizz Air oraz FUE-KRK i LPA-KRK linią Ryanair w obu kierunkach."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

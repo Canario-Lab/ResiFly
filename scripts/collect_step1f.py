@@ -23,6 +23,7 @@ from zoneinfo import ZoneInfo
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, record_checked
 from scripts.booking_urls import canaryfly_booking_url
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
@@ -322,6 +323,10 @@ def collect_canaryfly_available_days(
         days = available_days_from_calendar(
             payload, origin, destination, start, end
         )
+        month_end = (anchor.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+        record_checked("Canaryfly", origin, destination, max(start, anchor), min(end, month_end),
+                       [{"departure_at": day.isoformat()} for day in days if anchor <= day <= month_end],
+                       "booking_calendar")
         return origin, destination, days
 
     with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as pool:
@@ -464,7 +469,7 @@ def collect_canaryfly_legs(
         origin, destination, day = candidate
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         multiplier = float(rules[transfer]["canaryfly_resident_fare_multiplier"])
-        return parse_canaryfly_search(
+        result = parse_canaryfly_search(
             fare_client.search(origin, destination, day),
             origin,
             destination,
@@ -473,6 +478,8 @@ def collect_canaryfly_legs(
             rates,
             config,
         )
+        record_checked("Canaryfly", origin, destination, day, day, result, "booking_search", "details")
+        return result
 
     legs: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as pool:
@@ -592,8 +599,8 @@ def validate_document(document: dict[str, Any]) -> None:
                     )
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("1f")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -660,7 +667,7 @@ def main() -> None:
                 "Canaryfly official booking_calendar and booking_search GraphQL; "
                 "full monthly calendars plus flight-specific regular and resident fares"
             ),
-            "ryanair": "Ryanair Fare Finder",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",
@@ -668,10 +675,7 @@ def main() -> None:
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

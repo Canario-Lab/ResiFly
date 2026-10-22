@@ -21,7 +21,9 @@ from zoneinfo import ZoneInfo
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
 from scripts.booking_urls import wizz_booking_url
+from scripts.search_airports import validate_polish_transfer
 from scripts.collect_step1 import (
     AIRPORT_TIMEZONES,
     MAX_LAYOVER_MINUTES,
@@ -39,6 +41,7 @@ from scripts.collect_step1 import (
     wizz_schedules_from_allowlist,
 )
 from scripts.collect_step2 import wizz_timetable
+from scripts.wizz_schedules import WIZZ_ROUTE_FILE, load_wizz_route_data, resolve_schedule
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,35 +49,6 @@ TRANSFER_FILE = ROOT / "data" / "wizzair-transfer-airports.json"
 DEFAULT_OUTPUT = ROOT / "data" / "step4-results.json"
 SOURCE_CURRENCIES = ("EUR", "HUF", "PLN", "RON")
 STEP1_ALLOWLIST = json.loads(STEP1_TRANSFER_FILE.read_text(encoding="utf-8"))
-
-WIZZ_ROUTE_FILE = ROOT / "data" / "wizz-route-schedules.json"
-
-
-def load_wizz_route_data(
-    path: Path = WIZZ_ROUTE_FILE,
-) -> tuple[
-    dict[tuple[str, str], tuple[str, int]],
-    dict[tuple[str, str, str], str],
-]:
-    document = json.loads(path.read_text(encoding="utf-8"))
-    schedules: dict[tuple[str, str], tuple[str, int]] = {}
-    for route in document["routes"]:
-        key = (route["origin"], route["destination"])
-        if key in schedules:
-            raise RuntimeError(f"Duplicate Wizz route schedule: {key}")
-        duration = int(route["duration_minutes"])
-        if duration <= 0:
-            raise RuntimeError(f"Invalid Wizz route duration: {key}")
-        schedules[key] = (route["flight_number"], duration)
-
-    overrides: dict[tuple[str, str, str], str] = {}
-    for item in document.get("flight_number_overrides_by_departure_time", []):
-        key = (item["origin"], item["destination"], item["departure_time"])
-        if key in overrides:
-            raise RuntimeError(f"Duplicate Wizz flight-number override: {key}")
-        overrides[key] = item["flight_number"]
-    return schedules, overrides
-
 
 _SHARED_WIZZ_SCHEDULES, WIZZ_FLIGHT_NUMBERS_BY_TIME = load_wizz_route_data()
 WIZZ_ROUTE_SCHEDULES: dict[tuple[str, str], tuple[str, int]] = {
@@ -104,27 +78,17 @@ def route_matrix(allowlist: dict[str, Any]) -> list[tuple[str, str]]:
             routes.add((tenerife, code))
             routes.add((code, tenerife))
         for polish in transfer["polish_airports"]:
+            validate_polish_transfer(polish, code, "step4")
             routes.add((polish, code))
             routes.add((code, polish))
     return sorted(routes)
 
 
 def schedule_for(origin: str, destination: str, departure: datetime) -> tuple[str, int]:
-    try:
-        default_number, duration_minutes = WIZZ_ROUTE_SCHEDULES[(origin, destination)]
-    except KeyError as error:
-        raise RuntimeError(
-            f"Wizz Air returned a newly active allowlisted route {origin}-{destination}; "
-            "add its verified flight number and duration to WIZZ_ROUTE_SCHEDULES"
-        ) from error
-    time_key = departure.strftime("%H:%M")
-    number = WIZZ_FLIGHT_NUMBERS_BY_TIME.get(
-        (origin, destination, time_key),
-        default_number,
-    )
-    return number, duration_minutes
+    return resolve_schedule(WIZZ_ROUTE_SCHEDULES, WIZZ_FLIGHT_NUMBERS_BY_TIME, origin, destination, departure)
 
 
+@calendar_collector("Wizz Air", "timetableV2")
 def collect_wizz_route(
     origin: str,
     destination: str,
@@ -349,6 +313,7 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
         else:
             polish = result["destination_airport"]
             tenerife = result["origin_airport"]
+        validate_polish_transfer(polish, transfer, "step4")
         if polish not in rule["polish_airports"] or tenerife not in rule["tenerife_airports"]:
             raise RuntimeError(f"Route outside Step 4 allowlist in {result['id']}")
         for leg in result["legs"]:
@@ -363,8 +328,8 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
                 raise RuntimeError(f"Incorrect resident discount in {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("4")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     if args.workers < 1:
@@ -426,10 +391,7 @@ def main() -> None:
     }
     validate_document(document, allowlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

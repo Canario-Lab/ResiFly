@@ -1,5 +1,14 @@
 # ResiFly project rules
 
+## Canonical endpoint registry
+
+- Read Polish endpoints and their time zones from `data/search-airports.json`
+  through `scripts.search_airports`. The approved endpoints are WAW, WMI,
+  KTW, KRK and GDN. Collectors and route discovery must share this registry.
+- GDN also retains its existing Step 5 variant B transfer to KRK. The precise
+  exception is stored in the endpoint registry; do not enable self-routes or
+  silently expand other endpoint-as-transfer roles.
+
 ## Canonical five-step flight search
 
 - The complete, durable procedure for recurring flight collection is stored in
@@ -23,6 +32,10 @@
 - Check every calendar day in the complete configured window for every saved
   Binter route in both directions, independently of the Wizz Air/Ryanair
   calendar. Match connections only after both full calendars are collected.
+- Never turn a failed request or GraphQL error into an empty availability
+  list, including GraphQL errors returned with HTTP 200. Preserve the previous
+  public feed on failure. Binter loyalty-point (`PTS`) fares are not EUR cash
+  fares and may be skipped without discarding the flight's valid EUR fares.
 - Update this allowlist only when the user explicitly asks to revise it.
 - Keep each Step 1A airport's IANA time zone and resident-discount eligibility
   in `data/binter-transfer-airports.json`. Keep the verified Wizz routes needed
@@ -179,7 +192,7 @@
 ## Step 2 direct-flight collection
 
 - Generate Step 2 with `scripts/collect_step2.py`.
-- Check the complete matrix between WAW, WMI, KRK, KTW and TFN, TFS in both
+- Check the complete matrix between WAW, WMI, KRK, KTW, GDN and TFN, TFS in both
   directions for Wizz Air and Ryanair.
 - Fetch the complete configured date window for every route/carrier pair before
   producing results; do not prefilter dates with another source.
@@ -310,6 +323,22 @@
   rules. The website applies the user's selected maximum-price filter.
 - Keep regular, resident, and Wizz Air Discount Club prices as separate values
   whenever the source provides them.
+
+## Collection completeness and publication
+
+- Read `docs/COLLECTION_RELIABILITY.md` when changing source collection or
+  publication. Keep route/day coverage in `scripts.collection_coverage` for
+  standalone collectors as well as the full staged batch.
+- Ryanair Fare Finder minima, whether monthly or daily, cannot certify all
+  flights. Use full availability; retry smaller daily full-availability
+  requests on failure, then fail closed if still unavailable. Never publish
+  cheapest-fare substitutes as complete calendars.
+- A public feed requires complete independently planned route/day coverage.
+  All ten feeds in a promoted batch must have matching complete sidecar
+  reports, current canonical coverage and the same collection run ID.
+- On failure preserve previous public feeds, write an explicit failure report
+  and never mix old and new flight prices. Do not attach new completeness
+  certificates to old generated feeds; recollection is required.
 
 ## Transfer-route detector
 

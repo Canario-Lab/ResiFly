@@ -12,6 +12,7 @@ import argparse
 from datetime import date, datetime, timedelta
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -25,8 +26,10 @@ from curl_cffi import requests
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
 from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
 from scripts.wizz_api import wizz_api_base
+from scripts.wizz_schedules import load_wizz_route_data, resolve_schedule
 from scripts.collect_step1 import (
     AIRPORT_TIMEZONES,
     CurrencyRate,
@@ -42,19 +45,11 @@ from scripts.collect_step1 import (
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "data" / "step2-results.json"
 RYANAIR_DATES_API = "https://www.ryanair.com/api/farfnd/v4/oneWayFares"
-RYANAIR_FARE_FINDER_API = "https://www.ryanair.com/api/farfnd/3/oneWayFares"
 RYANAIR_AVAILABILITY_API = "https://www.ryanair.com/api/booking/v4/en-gb/availability"
 RYANAIR_VERSION_PAGE = "https://www.ryanair.com/ie/en/trip/flights/select"
 
-# Wizz's timetable price endpoint omits the arrival time and flight number.
-# Direct routes found in the complete airport matrix must have a corresponding
-# schedule entry here; otherwise validation fails instead of inventing data.
-WIZZ_DIRECT_SCHEDULES = {
-    ("WAW", "TFS"): ("W61495", 360),
-    ("TFS", "WAW"): ("W61496", 330),
-    ("KTW", "TFS"): ("W61081", 345),
-    ("TFS", "KTW"): ("W61082", 320),
-}
+# The same verified data is used by direct and transfer collectors.
+WIZZ_DIRECT_SCHEDULES, WIZZ_DIRECT_OVERRIDES = load_wizz_route_data()
 
 
 def cli() -> argparse.Namespace:
@@ -106,6 +101,8 @@ def wizz_timetable(
                 return []
             response.raise_for_status()
             body = response.json()
+            if not isinstance(body, dict) or not isinstance(body.get("outboundFlights"), list):
+                raise RuntimeError(f"Invalid Wizz timetable response {origin}-{destination}")
             return [
                 item
                 for item in body.get("outboundFlights", [])
@@ -125,6 +122,7 @@ def wizz_timetable(
     raise RuntimeError(f"Wizz Air request failed for {origin}-{destination}") from last_error
 
 
+@calendar_collector("Wizz Air", "timetableV2")
 def collect_wizz_route(
     origin: str,
     destination: str,
@@ -139,15 +137,15 @@ def collect_wizz_route(
     if schedule is None:
         raise RuntimeError(
             f"Wizz Air returned a new direct route {origin}-{destination}; "
-            "add its verified flight number and duration to WIZZ_DIRECT_SCHEDULES"
+            "add its verified flight number and duration to data/wizz-route-schedules.json"
         )
     club = wizz_timetable(origin, destination, start, end, "wdc")
     club_by_departure = {item["departureDate"]: item for item in club}
-    flight_number, duration_minutes = schedule
     legs: list[dict[str, Any]] = []
     for item in regular:
         departure = local_datetime(item["departureDate"], origin)
-        arrival = (departure + timedelta(minutes=duration_minutes)).astimezone(
+        number, duration = resolve_schedule(WIZZ_DIRECT_SCHEDULES, WIZZ_DIRECT_OVERRIDES, origin, destination, departure)
+        arrival = (departure + timedelta(minutes=duration)).astimezone(
             ZoneInfo(AIRPORT_TIMEZONES[destination])
         )
         price = item["price"]
@@ -162,7 +160,7 @@ def collect_wizz_route(
         regular_pln = money_pln(price["amount"], price["currencyCode"], rates)
         legs.append({
             "carrier": "Wizz Air",
-            "flight_number": flight_number,
+            "flight_number": number,
             "departure_airport": origin,
             "departure_at": serialize_datetime(departure),
             "arrival_airport": destination,
@@ -201,10 +199,11 @@ def ryanair_available_dates(origin: str, destination: str) -> list[date]:
     for attempt in range(4):
         try:
             response = requests.get(url, impersonate="safari184", timeout=60)
-            if response.status_code in {400, 404}:
-                return []
             response.raise_for_status()
-            return [date.fromisoformat(value) for value in response.json()]
+            payload = response.json()
+            if not isinstance(payload, list) or any(not isinstance(value, str) for value in payload):
+                raise RuntimeError("Invalid Ryanair active-dates response")
+            return sorted({date.fromisoformat(value) for value in payload})
         except Exception as error:
             last_error = error
             if attempt < 3:
@@ -231,6 +230,8 @@ def ryanair_availability(
     destination: str,
     center: date,
     client_version: str,
+    *,
+    exact_day: bool = False,
 ) -> dict[str, Any]:
     params = {
         "ADT": 1,
@@ -244,8 +245,8 @@ def ryanair_availability(
         "TEEN": 0,
         "promoCode": "",
         "IncludeConnectingFlights": "false",
-        "FlexDaysBeforeOut": 2,
-        "FlexDaysOut": 4,
+        "FlexDaysBeforeOut": 0 if exact_day else 2,
+        "FlexDaysOut": 0 if exact_day else 4,
         "FlexDaysBeforeIn": 2,
         "FlexDaysIn": 2,
         "RoundTrip": "false",
@@ -291,77 +292,16 @@ def collect_ryanair_farefinder_dates(
     end: date,
     rates: dict[str, CurrencyRate],
 ) -> list[dict[str, Any]]:
-    """Fallback for markets declined by the full availability endpoint.
-
-    Fare Finder returns only the cheapest result for a date range, so each
-    known active date is requested separately to avoid losing travel dates.
-    """
-
-    legs_by_key: dict[str, dict[str, Any]] = {}
-    for active_date in sorted(day for day in active_dates if start <= day <= end):
-        params = {
-            "departureAirportIataCode": origin,
-            "arrivalAirportIataCode": destination,
-            "outboundDepartureDateFrom": active_date.isoformat(),
-            "outboundDepartureDateTo": active_date.isoformat(),
-            "currency": "EUR",
-            "limit": 20,
-        }
-        last_error: Exception | None = None
-        for attempt in range(4):
-            try:
-                response = requests.get(
-                    RYANAIR_FARE_FINDER_API,
-                    params=params,
-                    impersonate="safari184",
-                    timeout=60,
-                )
-                response.raise_for_status()
-                payload = response.json()
-                break
-            except Exception as error:
-                last_error = error
-                if attempt < 3:
-                    time_module.sleep(1.5 * (attempt + 1))
-        else:
-            raise RuntimeError(
-                f"Ryanair Fare Finder failed for {origin}-{destination} on {active_date}"
-            ) from last_error
-
-        for fare in payload.get("fares", []):
-            item = fare.get("outbound") or {}
-            if item.get("departureAirport", {}).get("iataCode") != origin:
-                continue
-            if item.get("arrivalAirport", {}).get("iataCode") != destination:
-                continue
-            price = item.get("price") or {}
-            if not price.get("value"):
-                continue
-            departure = local_datetime(item["departureDate"], origin)
-            arrival = local_datetime(item["arrivalDate"], destination)
-            currency = price["currencyCode"]
-            regular_amount = float(price["value"])
-            key = item.get("flightKey") or (
-                f"{item.get('flightNumber')}:{departure.isoformat()}:{arrival.isoformat()}"
-            )
-            legs_by_key[key] = {
-                "carrier": "Ryanair",
-                "flight_number": str(item.get("flightNumber") or "Ryanair").replace(" ", ""),
-                "departure_airport": origin,
-                "departure_at": serialize_datetime(departure),
-                "arrival_airport": destination,
-                "arrival_at": serialize_datetime(arrival),
-                "price_regular_pln": money_pln(regular_amount, currency, rates),
-                "resident_discount_eligible": False,
-                "price_resident_estimated_pln": money_pln(regular_amount, currency, rates),
-                "booking_url": ryanair_booking_url(origin, destination, departure),
-                "price_source_currency": currency,
-                "price_source_amount": regular_amount,
-                "price_source": "Ryanair Fare Finder daily fallback",
-            }
-    return sorted(legs_by_key.values(), key=lambda leg: leg["departure_at"])
+    """Legacy entry point: a minimum fare cannot certify all flight times."""
+    raise RuntimeError(
+        f"Ryanair {origin}-{destination} {start}..{end}: Fare Finder is not a "
+        "complete flight source; publication blocked. Full availability is required."
+    )
 
 
+
+
+@calendar_collector("Ryanair", "full_availability")
 def collect_ryanair_route(
     origin: str,
     destination: str,
@@ -379,56 +319,104 @@ def collect_ryanair_route(
     for center in centers:
         try:
             payload = ryanair_availability(origin, destination, center, client_version)
-        except RuntimeError as error:
-            if "Availability declined" in str(error):
-                return collect_ryanair_farefinder_dates(
-                    origin,
-                    destination,
-                    active_dates,
-                    start,
-                    end,
-                    rates,
-                )
-            raise
-        currency = payload["currency"]
-        for trip in payload.get("trips", []):
-            if trip.get("origin") != origin or trip.get("destination") != destination:
-                continue
-            for day in trip.get("dates", []):
-                for flight in day.get("flights", []):
-                    segments = flight.get("segments") or []
-                    fare = flight.get("regularFare") or {}
-                    adult_fares = [item for item in fare.get("fares", []) if item.get("type") == "ADT"]
-                    if len(segments) != 1 or not adult_fares:
-                        continue
-                    segment = segments[0]
-                    times = segment.get("time") or []
-                    if len(times) != 2:
-                        continue
-                    departure = local_datetime(times[0], origin)
-                    if not start <= departure.date() <= end:
-                        continue
-                    arrival = local_datetime(times[1], destination)
-                    regular_amount = float(adult_fares[0]["amount"])
-                    regular_pln = money_pln(regular_amount, currency, rates)
-                    key = flight.get("flightKey") or (
-                        f"{segment.get('flightNumber')}:{departure.isoformat()}:{arrival.isoformat()}"
-                    )
-                    legs_by_key[key] = {
-                        "carrier": "Ryanair",
-                        "flight_number": str(segment.get("flightNumber") or flight["flightNumber"]).replace(" ", ""),
-                        "departure_airport": origin,
-                        "departure_at": serialize_datetime(departure),
-                        "arrival_airport": destination,
-                        "arrival_at": serialize_datetime(arrival),
-                        "price_regular_pln": regular_pln,
-                        "resident_discount_eligible": False,
-                        "price_resident_estimated_pln": regular_pln,
-                        "booking_url": ryanair_booking_url(origin, destination, departure),
-                        "price_source_currency": currency,
-                        "price_source_amount": regular_amount,
-                    }
+        except RuntimeError:
+            # Retry the same full-flight source in smaller requests. A daily
+            # cheapest-fare endpoint is NOT an acceptable substitute.
+            recovered = []
+            for day in sorted(set(active_dates)):
+                if start <= day <= end and center - timedelta(days=2) <= day <= center + timedelta(days=4):
+                    try:
+                        recovered.append((ryanair_availability(
+                            origin, destination, day, client_version, exact_day=True,
+                        ), {day}))
+                    except RuntimeError as error:
+                        raise RuntimeError(
+                            f"Incomplete Ryanair calendar {origin}-{destination} on {day}; "
+                            "full availability failed, publication blocked"
+                        ) from error
+            payloads = recovered
+        else:
+            expected = {day for day in active_dates if start <= day <= end and center - timedelta(days=2) <= day <= center + timedelta(days=4)}
+            payloads = [(payload, expected)]
+        for payload, expected in payloads:
+            validate_ryanair_calendar(payload, origin, destination, expected)
+        for payload, _ in payloads:
+            _parse_ryanair_calendar(payload, origin, destination, start, end, rates, legs_by_key)
     return sorted(legs_by_key.values(), key=lambda leg: leg["departure_at"])
+
+
+def validate_ryanair_calendar(payload, origin, destination, expected_days):
+    if not isinstance(payload, dict) or not isinstance(payload.get("currency"), str) or not payload["currency"] or not isinstance(payload.get("trips"), list):
+        raise RuntimeError(f"Invalid Ryanair calendar {origin}-{destination}")
+    covered = set()
+    for trip in payload["trips"]:
+        if not isinstance(trip, dict) or trip.get("origin") != origin or trip.get("destination") != destination or not isinstance(trip.get("dates"), list):
+            raise RuntimeError(f"Invalid Ryanair trip {origin}-{destination}")
+        for day in trip["dates"]:
+            if not isinstance(day, dict) or not isinstance(day.get("flights"), list):
+                raise RuntimeError(f"Invalid Ryanair day {origin}-{destination}")
+            try:
+                departure_day = date.fromisoformat(day["dateOut"][:10])
+                covered.add(departure_day)
+            except (KeyError, TypeError, ValueError) as error:
+                raise RuntimeError(f"Invalid Ryanair date {origin}-{destination}") from error
+            for flight in day["flights"]:
+                if (not isinstance(flight, dict) or "regularFare" not in flight
+                        or not isinstance(flight.get("segments"), list)):
+                    raise RuntimeError(f"Malformed Ryanair flight {origin}-{destination} on {departure_day}")
+                for segment in flight["segments"]:
+                    times = segment.get("time") if isinstance(segment, dict) else None
+                    if not isinstance(times, list) or len(times) != 2 or str(times[0])[:10] != departure_day.isoformat():
+                        raise RuntimeError(f"Mismatched Ryanair flight date/times {origin}-{destination} on {departure_day}")
+    missing = expected_days - covered
+    if missing:
+        raise RuntimeError(f"Incomplete Ryanair calendar {origin}-{destination}; missing dates: {sorted(missing)}")
+
+
+def _parse_ryanair_calendar(payload, origin, destination, start, end, rates, legs_by_key):
+    currency = payload["currency"]
+    for trip in payload.get("trips", []):
+        if trip.get("origin") != origin or trip.get("destination") != destination:
+            continue
+        for day in trip.get("dates", []):
+            for flight in day.get("flights", []):
+                segments = flight.get("segments") or []
+                fare = flight.get("regularFare") or {}
+                adult_fares = [item for item in fare.get("fares", []) if item.get("type") == "ADT"]
+                if not fare:
+                    # A fully returned but sold-out flight is not bookable.
+                    continue
+                if len(segments) != 1 or not adult_fares:
+                    raise RuntimeError(f"Malformed Ryanair flight {origin}-{destination}")
+                segment = segments[0]
+                times = segment.get("time") or []
+                if len(times) != 2:
+                    raise RuntimeError(f"Missing Ryanair flight times {origin}-{destination}")
+                departure = local_datetime(times[0], origin)
+                if not start <= departure.date() <= end:
+                    continue
+                arrival = local_datetime(times[1], destination)
+                regular_amount = float(adult_fares[0]["amount"])
+                if not math.isfinite(regular_amount) or regular_amount <= 0:
+                    raise RuntimeError(f"Invalid Ryanair fare {origin}-{destination}")
+                regular_pln = money_pln(regular_amount, currency, rates)
+                key = flight.get("flightKey") or (
+                    f"{segment.get('flightNumber')}:{departure.isoformat()}:{arrival.isoformat()}"
+                )
+                legs_by_key[key] = {
+                    "carrier": "Ryanair",
+                    "flight_number": str(segment.get("flightNumber") or flight["flightNumber"]).replace(" ", ""),
+                    "departure_airport": origin,
+                    "departure_at": serialize_datetime(departure),
+                    "arrival_airport": destination,
+                    "arrival_at": serialize_datetime(arrival),
+                    "price_regular_pln": regular_pln,
+                    "resident_discount_eligible": False,
+                    "price_resident_estimated_pln": regular_pln,
+                    "booking_url": ryanair_booking_url(origin, destination, departure),
+                    "price_source_currency": currency,
+                    "price_source_amount": regular_amount,
+                }
 
 
 def result_id(leg: dict[str, Any]) -> str:
@@ -485,8 +473,8 @@ def validate_document(document: dict[str, Any]) -> None:
             raise RuntimeError(f"Missing booking_url in {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("2")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -548,7 +536,7 @@ def main() -> None:
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

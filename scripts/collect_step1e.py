@@ -25,6 +25,7 @@ from curl_cffi import requests
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document, record_checked
 from scripts.booking_urls import volotea_booking_url
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
@@ -256,9 +257,11 @@ def collect_volotea_legs(
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         multiplier = float(rules[transfer]["volotea_resident_fare_multiplier"])
         payload = fare_client.search(origin, destination, day)
-        return parse_volotea_response(
+        result = parse_volotea_response(
             payload, origin, destination, day, multiplier, rates, config
         )
+        record_checked("Volotea", origin, destination, day, day, result, "official_minprice")
+        return result
 
     legs: list[dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as executor:
@@ -360,8 +363,8 @@ def validate_document(document: dict[str, Any]) -> None:
                 raise RuntimeError(f"Niedozwolone źródło ceny w {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("1e")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     end = args.from_date + timedelta(days=args.days)
@@ -420,7 +423,7 @@ def main() -> None:
                 "estimate: 25% of official regular fare with fees; taxes may not "
                 "receive the full resident discount"
             ),
-            "ryanair": "Ryanair Fare Finder",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",
@@ -428,10 +431,7 @@ def main() -> None:
     }
     validate_document(document)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    publish_document(document, args.output)
     print(f"Zapisano {len(results)} połączeń do {args.output}", flush=True)
 
 

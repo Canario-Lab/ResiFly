@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Ryanair dla kroku 3",
-  "verified_on": "2026-10-20",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Ryanair + Ryanair między Teneryfą a Polską w kroku 3.",
   "scope": {
     "tenerife_airports": [
@@ -12,13 +12,14 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "airline": "Ryanair",
     "resident_discount_considered": false
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK.",
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN.",
     "route_filter": {
       "operator": "RYANAIR",
       "connectingAirport": null
@@ -29,47 +30,48 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "result_count": 34,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
   },
   "airport_timezones": {
-  "AGA": "Africa/Casablanca",
-  "AGP": "Europe/Madrid",
-  "BGY": "Europe/Rome",
-  "BHX": "Europe/London",
-  "BLQ": "Europe/Rome",
-  "BOH": "Europe/London",
-  "BRS": "Europe/London",
-  "BUD": "Europe/Budapest",
-  "BVA": "Europe/Paris",
-  "CRL": "Europe/Brussels",
-  "DUB": "Europe/Dublin",
-  "EDI": "Europe/London",
-  "EIN": "Europe/Amsterdam",
-  "EMA": "Europe/London",
-  "FCO": "Europe/Rome",
-  "FMM": "Europe/Berlin",
-  "LBA": "Europe/London",
-  "LPL": "Europe/London",
-  "LTN": "Europe/London",
-  "MAN": "Europe/London",
-  "MRS": "Europe/Paris",
-  "MXP": "Europe/Rome",
-  "NAP": "Europe/Rome",
-  "NCL": "Europe/London",
-  "OPO": "Europe/Lisbon",
-  "PSA": "Europe/Rome",
-  "RAK": "Africa/Casablanca",
-  "SNN": "Europe/Dublin",
-  "STN": "Europe/London",
-  "SVQ": "Europe/Madrid",
-  "TLS": "Europe/Paris",
-  "TSF": "Europe/Rome",
-  "VIE": "Europe/Vienna",
-  "VLC": "Europe/Madrid"
-},
+    "AGA": "Africa/Casablanca",
+    "AGP": "Europe/Madrid",
+    "BGY": "Europe/Rome",
+    "BHX": "Europe/London",
+    "BLQ": "Europe/Rome",
+    "BOH": "Europe/London",
+    "BRS": "Europe/London",
+    "BUD": "Europe/Budapest",
+    "BVA": "Europe/Paris",
+    "CRL": "Europe/Brussels",
+    "DUB": "Europe/Dublin",
+    "EDI": "Europe/London",
+    "EIN": "Europe/Amsterdam",
+    "EMA": "Europe/London",
+    "FCO": "Europe/Rome",
+    "FMM": "Europe/Berlin",
+    "LBA": "Europe/London",
+    "LPL": "Europe/London",
+    "LTN": "Europe/London",
+    "MAN": "Europe/London",
+    "MRS": "Europe/Paris",
+    "MXP": "Europe/Rome",
+    "NAP": "Europe/Rome",
+    "NCL": "Europe/London",
+    "OPO": "Europe/Lisbon",
+    "PSA": "Europe/Rome",
+    "RAK": "Africa/Casablanca",
+    "SNN": "Europe/Dublin",
+    "STN": "Europe/London",
+    "SVQ": "Europe/Madrid",
+    "TLS": "Europe/Paris",
+    "TSF": "Europe/Rome",
+    "VIE": "Europe/Vienna",
+    "VLC": "Europe/Madrid"
+  },
   "resident_discount_on_tenerife_leg": {
     "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
     "discount_percent": 75,
@@ -131,239 +133,435 @@
       "iata": "AGA",
       "name_pl": "Agadir",
       "country_pl": "Maroko",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "AGP",
       "name_pl": "Malaga",
       "country_pl": "Hiszpania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "BGY",
       "name_pl": "Mediolan-Bergamo",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "BHX",
       "name_pl": "Birmingham",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK"
+      ]
     },
     {
       "iata": "BLQ",
       "name_pl": "Bolonia",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KRK"
+      ]
     },
     {
       "iata": "BOH",
       "name_pl": "Bournemouth",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "BRS",
       "name_pl": "Bristol",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "BUD",
       "name_pl": "Budapeszt",
       "country_pl": "Węgry",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "BVA",
       "name_pl": "Paryż-Beauvais",
       "country_pl": "Francja",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "CRL",
       "name_pl": "Bruksela-Charleroi",
       "country_pl": "Belgia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KTW",
+        "KRK"
+      ]
     },
     {
       "iata": "DUB",
       "name_pl": "Dublin",
       "country_pl": "Irlandia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "EDI",
       "name_pl": "Edynburg",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "EIN",
       "name_pl": "Eindhoven",
       "country_pl": "Holandia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK"
+      ]
     },
     {
       "iata": "EMA",
       "name_pl": "East Midlands",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "FCO",
       "name_pl": "Rzym-Fiumicino",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KTW"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KTW",
+        "GDN"
+      ]
     },
     {
       "iata": "FMM",
       "name_pl": "Memmingen",
       "country_pl": "Niemcy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "LBA",
       "name_pl": "Leeds-Bradford",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "LPL",
       "name_pl": "Liverpool",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "LTN",
       "name_pl": "Londyn-Luton",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "MAN",
       "name_pl": "Manchester",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "MRS",
       "name_pl": "Marsylia",
       "country_pl": "Francja",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "MXP",
       "name_pl": "Mediolan-Malpensa",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "NAP",
       "name_pl": "Neapol",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "NCL",
       "name_pl": "Newcastle",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "OPO",
       "name_pl": "Porto",
       "country_pl": "Portugalia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "WMI",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "PSA",
       "name_pl": "Piza",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "RAK",
       "name_pl": "Marrakesz",
       "country_pl": "Maroko",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "SNN",
       "name_pl": "Shannon",
       "country_pl": "Irlandia",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK"
+      ]
     },
     {
       "iata": "STN",
       "name_pl": "Londyn-Stansted",
       "country_pl": "Wielka Brytania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "SVQ",
       "name_pl": "Sewilla",
       "country_pl": "Hiszpania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK"
+      ]
     },
     {
       "iata": "TLS",
       "name_pl": "Tuluza",
       "country_pl": "Francja",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "KRK"
+      ]
     },
     {
       "iata": "TSF",
       "name_pl": "Wenecja-Treviso",
       "country_pl": "Włochy",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KTW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KTW",
+        "KRK",
+        "GDN"
+      ]
     },
     {
       "iata": "VIE",
       "name_pl": "Wiedeń",
       "country_pl": "Austria",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WAW", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WAW",
+        "KRK"
+      ]
     },
     {
       "iata": "VLC",
       "name_pl": "Walencja",
       "country_pl": "Hiszpania",
-      "tenerife_airports": ["TFS"],
-      "polish_airports": ["WMI", "KRK"]
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "WMI",
+        "KRK"
+      ]
     }
   ],
   "sources": [
@@ -390,6 +588,15 @@
     {
       "name": "Ministerstwo Transportu Hiszpanii — zniżki dotyczą krajowych regularnych połączeń lotniczych",
       "url": "https://sede.transportes.gob.es/areas-actividad/aviacion-civil-aereo/liquidacion-bonificaciones-transporte-aereo"
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

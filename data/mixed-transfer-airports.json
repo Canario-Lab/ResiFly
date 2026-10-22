@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Ryanair × Wizz Air dla kroku 5",
-  "verified_on": "2026-10-20",
+  "verified_on": "2026-10-22",
   "purpose": "Stała lista lotnisk dla mieszanych połączeń Ryanair i Wizz Air między Teneryfą a Polską w kroku 5.",
   "scope": {
     "tenerife_airports": [
@@ -12,7 +12,8 @@
       "WAW",
       "WMI",
       "KTW",
-      "KRK"
+      "KRK",
+      "GDN"
     ],
     "directions": [
       "POLAND_TO_TENERIFE",
@@ -22,8 +23,8 @@
     "resident_discount_considered": true
   },
   "selection_method": {
-    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK.",
-    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK.",
+    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN.",
+    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -33,33 +34,35 @@
       "KRK"
     ],
     "variant_a_result_count": 19,
-    "variant_b_result_count": 5,
-    "unique_transfer_airport_count": 21,
-    "note": "W chwili weryfikacji żaden wariant mieszany nie dawał kompletnego połączenia przez TFN. Wszystkie zapisane kombinacje prowadzą przez TFS. WMI-SCQ rozpoczyna się 1 grudnia 2026 roku, więc wariant przez SCQ nie będzie dostępny we wcześniejszych 30-dniowych oknach."
+    "variant_b_result_count": 6,
+    "unique_transfer_airport_count": 22,
+    "note": "W chwili weryfikacji żaden wariant mieszany nie dawał kompletnego połączenia przez TFN. Wszystkie zapisane kombinacje prowadzą przez TFS. WMI-SCQ rozpoczyna się 1 grudnia 2026 roku, więc wariant przez SCQ nie będzie dostępny we wcześniejszych 30-dniowych oknach.",
+    "endpoint_transfer_exception": "GDN zachowuje istniejącą przesiadkę tylko w wariancie B do KRK; nowe endpointy GDN korzystają z pozostałych zatwierdzonych hubów."
   },
   "airport_timezones": {
-  "AGA": "Africa/Casablanca",
-  "AGP": "Europe/Madrid",
-  "BBU": "Europe/Bucharest",
-  "BGY": "Europe/Rome",
-  "BLQ": "Europe/Rome",
-  "BUD": "Europe/Budapest",
-  "CRL": "Europe/Brussels",
-  "EIN": "Europe/Amsterdam",
-  "FCO": "Europe/Rome",
-  "GDN": "Europe/Warsaw",
-  "LBA": "Europe/London",
-  "LPL": "Europe/London",
-  "LTN": "Europe/London",
-  "MXP": "Europe/Rome",
-  "NAP": "Europe/Rome",
-  "OPO": "Europe/Lisbon",
-  "PSA": "Europe/Rome",
-  "RAK": "Africa/Casablanca",
-  "SCQ": "Europe/Madrid",
-  "SVQ": "Europe/Madrid",
-  "VLC": "Europe/Madrid"
-},
+    "AGA": "Africa/Casablanca",
+    "AGP": "Europe/Madrid",
+    "BBU": "Europe/Bucharest",
+    "BGY": "Europe/Rome",
+    "BLQ": "Europe/Rome",
+    "BUD": "Europe/Budapest",
+    "CRL": "Europe/Brussels",
+    "EIN": "Europe/Amsterdam",
+    "FCO": "Europe/Rome",
+    "GDN": "Europe/Warsaw",
+    "LBA": "Europe/London",
+    "LPL": "Europe/London",
+    "LTN": "Europe/London",
+    "MXP": "Europe/Rome",
+    "NAP": "Europe/Rome",
+    "OPO": "Europe/Lisbon",
+    "PSA": "Europe/Rome",
+    "RAK": "Africa/Casablanca",
+    "SCQ": "Europe/Madrid",
+    "SVQ": "Europe/Madrid",
+    "VLC": "Europe/Madrid",
+    "OTP": "Europe/Bucharest"
+  },
   "resident_discount_on_tenerife_leg": {
     "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
     "discount_percent": 75,
@@ -98,7 +101,8 @@
         "BUD",
         "FCO",
         "GDN",
-        "MXP"
+        "MXP",
+        "OTP"
       ]
     },
     "calculation": "Pomnóż regularną cenę odcinka TFS/TFN przez 0.25 tylko wtedy, gdy lotnisko przesiadkowe znajduje się na liście eligible_transfer_airports odpowiedniego wariantu. W pozostałych przypadkach użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
@@ -122,8 +126,14 @@
           "iata": "AGA",
           "name_pl": "Agadir",
           "country_pl": "Maroko",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -131,8 +141,15 @@
           "iata": "AGP",
           "name_pl": "Malaga",
           "country_pl": "Hiszpania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": true,
           "tenerife_leg_fare_multiplier": 0.25
         },
@@ -140,8 +157,13 @@
           "iata": "BGY",
           "name_pl": "Mediolan-Bergamo",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "WMI"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "WMI"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -149,8 +171,12 @@
           "iata": "BLQ",
           "name_pl": "Bolonia",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -158,8 +184,14 @@
           "iata": "BUD",
           "name_pl": "Budapeszt",
           "country_pl": "Węgry",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -167,8 +199,12 @@
           "iata": "CRL",
           "name_pl": "Bruksela-Charleroi",
           "country_pl": "Belgia",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -176,8 +212,15 @@
           "iata": "EIN",
           "name_pl": "Eindhoven",
           "country_pl": "Holandia",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -185,8 +228,15 @@
           "iata": "FCO",
           "name_pl": "Rzym-Fiumicino",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -194,8 +244,12 @@
           "iata": "LBA",
           "name_pl": "Leeds-Bradford",
           "country_pl": "Wielka Brytania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -203,8 +257,12 @@
           "iata": "LPL",
           "name_pl": "Liverpool",
           "country_pl": "Wielka Brytania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -212,8 +270,15 @@
           "iata": "LTN",
           "name_pl": "Londyn-Luton",
           "country_pl": "Wielka Brytania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -221,8 +286,14 @@
           "iata": "MXP",
           "name_pl": "Mediolan-Malpensa",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -230,8 +301,13 @@
           "iata": "NAP",
           "name_pl": "Neapol",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -239,8 +315,13 @@
           "iata": "OPO",
           "name_pl": "Porto",
           "country_pl": "Portugalia",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KTW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KTW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -248,8 +329,12 @@
           "iata": "PSA",
           "name_pl": "Piza",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -257,8 +342,12 @@
           "iata": "RAK",
           "name_pl": "Marrakesz",
           "country_pl": "Maroko",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -266,8 +355,12 @@
           "iata": "SCQ",
           "name_pl": "Santiago de Compostela",
           "country_pl": "Hiszpania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WMI"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WMI"
+          ],
           "resident_discount_eligible_on_tenerife_leg": true,
           "tenerife_leg_fare_multiplier": 0.25
         },
@@ -275,8 +368,12 @@
           "iata": "SVQ",
           "name_pl": "Sewilla",
           "country_pl": "Hiszpania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW"
+          ],
           "resident_discount_eligible_on_tenerife_leg": true,
           "tenerife_leg_fare_multiplier": 0.25
         },
@@ -284,8 +381,13 @@
           "iata": "VLC",
           "name_pl": "Walencja",
           "country_pl": "Hiszpania",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WAW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WAW",
+            "KRK"
+          ],
           "resident_discount_eligible_on_tenerife_leg": true,
           "tenerife_leg_fare_multiplier": 0.25
         }
@@ -300,8 +402,12 @@
           "iata": "BBU",
           "name_pl": "Bukareszt-Băneasa",
           "country_pl": "Rumunia",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "KRK"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -309,8 +415,15 @@
           "iata": "BUD",
           "name_pl": "Budapeszt",
           "country_pl": "Węgry",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WMI", "KTW", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WMI",
+            "KTW",
+            "KRK",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -318,8 +431,13 @@
           "iata": "FCO",
           "name_pl": "Rzym-Fiumicino",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["KTW"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "KTW",
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -327,8 +445,12 @@
           "iata": "GDN",
           "name_pl": "Gdańsk",
           "country_pl": "Polska",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "KRK"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         },
@@ -336,8 +458,27 @@
           "iata": "MXP",
           "name_pl": "Mediolan-Malpensa",
           "country_pl": "Włochy",
-          "tenerife_airports": ["TFS"],
-          "polish_airports": ["WMI", "KRK"],
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "WMI",
+            "KRK",
+            "GDN"
+          ],
+          "resident_discount_eligible_on_tenerife_leg": false,
+          "tenerife_leg_fare_multiplier": 1.0
+        },
+        {
+          "iata": "OTP",
+          "name_pl": "Bucharest Otopeni",
+          "country_pl": "Rumunia",
+          "tenerife_airports": [
+            "TFS"
+          ],
+          "polish_airports": [
+            "GDN"
+          ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
         }
@@ -368,6 +509,15 @@
     {
       "name": "Ministerstwo Transportu Hiszpanii — bonifikaty w transporcie lotniczym",
       "url": "https://sede.transportes.gob.es/areas-activity/aviacion-civil-aereo/liquidacion-bonificaciones-transporte-aereo"
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o Gdańsk GDN",
+      "verified_on": "2026-10-22",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
     }
   ]
 }

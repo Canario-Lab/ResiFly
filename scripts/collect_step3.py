@@ -21,6 +21,7 @@ from zoneinfo import ZoneInfo
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.collection_coverage import collection_entrypoint, publish_document
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
     MIN_LAYOVER_MINUTES,
@@ -32,6 +33,7 @@ from scripts.collect_step1 import (
     nbp_rate,
 )
 from scripts.collect_step2 import collect_ryanair_route, ryanair_client_version
+from scripts.search_airports import validate_polish_transfer
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +63,7 @@ def route_matrix(allowlist: dict[str, Any]) -> list[tuple[str, str]]:
             routes.add((tenerife, code))
             routes.add((code, tenerife))
         for polish in transfer["polish_airports"]:
+            validate_polish_transfer(polish, code, "step3")
             routes.add((polish, code))
             routes.add((code, polish))
     return sorted(routes)
@@ -230,6 +233,7 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
         else:
             polish = result["destination_airport"]
             tenerife = result["origin_airport"]
+        validate_polish_transfer(polish, transfer, "step3")
         if polish not in rule["polish_airports"] or tenerife not in rule["tenerife_airports"]:
             raise RuntimeError(f"Route outside Step 3 allowlist in {result['id']}")
         for leg in result["legs"]:
@@ -244,8 +248,8 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
                 raise RuntimeError(f"Incorrect resident discount in {result['id']}")
 
 
-def main() -> None:
-    args = cli()
+@collection_entrypoint("3")
+def main(args) -> None:
     if args.days < 0:
         raise SystemExit("--days must be non-negative")
     if args.workers < 1:
@@ -303,13 +307,13 @@ def main() -> None:
         },
         "sources": {
             "allowlist": "data/ryanair-transfer-airports.json",
-            "ryanair": "Ryanair availability, active-dates and daily Fare Finder fallback APIs",
+            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
         },
         "results": results,
     }
     validate_document(document, allowlist)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    publish_document(document, args.output)
     counts = {
         direction: sum(result["direction"] == direction for result in results)
         for direction in document["directions"]

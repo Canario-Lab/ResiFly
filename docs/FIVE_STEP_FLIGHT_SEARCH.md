@@ -14,7 +14,11 @@ wyraźnej decyzji użytkownika.
 
 - Okno wyszukiwania: od dnia uruchomienia do 30 dni naprzód.
 - Polskie lotniska: Warszawa Chopina (WAW), Warszawa Modlin (WMI), Kraków
-  (KRK) i Katowice (KTW).
+  (KRK), Katowice (KTW) i Gdańsk (GDN). Kanoniczny rejestr kodów i stref jest
+  zapisany w `data/search-airports.json` i wspólny dla kolektorów oraz detektora.
+- GDN zachowuje także istniejącą rolę przesiadki wariantu 5B do KRK, zgodnie
+  z jawnym wyjątkiem rejestru. Transfer nie może być końcem ani początkiem
+  tej samej podróży; nie wolno tworzyć odcinka GDN–GDN.
 - Teneryfa: Tenerife Sur (TFS) lub Tenerife Norte (TFN).
 - Kierunki `Polska → Teneryfa` i `Teneryfa → Polska` analizować i pokazywać
   oddzielnie. Nie łączyć ich w podróż w obie strony i nie dobierać długości
@@ -51,6 +55,29 @@ wyraźnej decyzji użytkownika.
 
 ## Stabilność automatycznego uruchomienia
 
+- Te same zabezpieczenia obowiązują lokalnie, bez GitHub Actions. Każdy
+  kolektor prowadzi raport pokrycia wszystkich zapisanych tras/dni, wyliczany
+  niezależnie od znalezionych lotów. Błąd pobrania nie oznacza braku lotów.
+  Poprawna pusta odpowiedź może oznaczać brak dostępności; nieprawidłowa
+  struktura lub błąd źródła przerywają zapis. Dotyczy to również błędów
+  GraphQL Bintera zwracanych z HTTP 200. Taryfy Bintera w punktach `PTS`
+  pomijać, zachowując prawidłowe taryfy gotówkowe EUR.
+- Ryanair: pobierać pełną dostępność wszystkich lotów. Po nieudanym oknie
+  ponowić pobranie z tego samego źródła osobno dla aktywnych dni. Fare Finder
+  nie jest dozwolonym zastępstwem: nawet cena minimalna dla jednego dnia może
+  pomijać inne godziny lotów. Brak pełnej odpowiedzi ma blokować aktualizację,
+  nie publikować wyniku częściowego. Błąd indeksu aktywnych dat również nie
+  może stać się pustym kalendarzem. Wspólna poprawka obejmuje 1A–1F, 2, 3 i 5.
+- Każdy nowy feed zawiera `collection_coverage`, a obok powstaje
+  `step*-results.collection-report.json`. Zapis feedu jest atomowy i dozwolony
+  tylko przy kompletnym raporcie. Przy błędzie dotychczasowy feed pozostaje
+  nietknięty, a raport opisuje brakujące trasy/dni i przyczynę błędu.
+- Pełną bazę aktualizować przez `scripts/collect_five_steps.py`: wszystkie
+  dziesięć feedów najpierw do stagingu, walidacja raportów i wspólnego
+  `run_id`, dopiero potem `--promote`. Nie mieszać cen ze starego uruchomienia
+  z nowymi. Stare feedy bez raportów nie mogą przejść nowej walidacji — trzeba
+  je zebrać ponownie. Wznowienie części kroków wymaga `--run-id` pierwotnego
+  uruchomienia i tych samych dat. Szczegóły: `docs/COLLECTION_RELIABILITY.md`.
 - Adres publicznego API Wizz Air zawiera zmienny numer wersji. Nie wpisywać go
   na stałe w kolektorach. Przed pierwszym zapytaniem proces odczytuje aktualną
   bazę API z oficjalnej strony Wizz Air przez `scripts/wizz_api.py`, a potem
@@ -96,9 +123,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   na Maderze, ponieważ na połączenia z Maderą nie obowiązuje kanaryjska zniżka
   rezydencka 75%.
 - Dla każdego lotniska z listy sprawdzić oba kierunki:
-  1. WAW/WMI/KRK/KTW → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
+  1. WAW/WMI/KRK/KTW/GDN → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
      TFS/TFN linią Binter.
-  2. TFS/TFN → lotnisko przesiadkowe linią Binter → WAW/WMI/KRK/KTW linią
+  2. TFS/TFN → lotnisko przesiadkowe linią Binter → WAW/WMI/KRK/KTW/GDN linią
      Ryanair albo Wizz Air.
 - Każdą zapisaną trasę Bintera sprawdzić we wszystkie dni pełnego okna dat w
   obu kierunkach, niezależnie od kalendarza Ryanair/Wizz Air. Dopiero potem
@@ -116,9 +143,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Nie dodawać tras bez kanaryjskiej zniżki rezydenckiej. Cotygodniowy kolektor
   nie odkrywa ponownie lotnisk i nie modyfikuje listy.
 - Sprawdzić oba kierunki oddzielnie:
-  1. WAW/WMI/KRK/KTW → MAD linią Ryanair albo Wizz Air → TFS/TFN linią
+  1. WAW/WMI/KRK/KTW/GDN → MAD linią Ryanair albo Wizz Air → TFS/TFN linią
      Iberia lub Iberia Express.
-  2. TFS/TFN → MAD linią Iberia lub Iberia Express → WAW/WMI/KRK/KTW linią
+  2. TFS/TFN → MAD linią Iberia lub Iberia Express → WAW/WMI/KRK/KTW/GDN linią
      Ryanair albo Wizz Air.
 - Każdą zapisaną trasę Iberii/Iberii Express sprawdzić we wszystkie dni
   pełnego okna dat w obu kierunkach, niezależnie od kalendarza Ryanair/Wizz
@@ -148,9 +175,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
   Sprawdza wyłącznie bieżące rozkłady i ceny dla zapisanych kombinacji.
 - Sprawdzić oba kierunki oddzielnie:
-  1. WAW/WMI/KRK/KTW → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
+  1. WAW/WMI/KRK/KTW/GDN → lotnisko przesiadkowe linią Ryanair albo Wizz Air →
      TFN linią Vueling.
-  2. TFN → lotnisko przesiadkowe linią Vueling → WAW/WMI/KRK/KTW linią
+  2. TFN → lotnisko przesiadkowe linią Vueling → WAW/WMI/KRK/KTW/GDN linią
      Ryanair albo Wizz Air.
 - Pobierać regularną cenę Vuelinga w PLN z Google Flights zwykłym zapytaniem
   HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta zapisać jako
@@ -179,7 +206,7 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   Google Flights.
 - Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
   Sprawdza oba kierunki i łączy odcinek Air Europa z dozwolonym odcinkiem
-  Ryanair albo Wizz Air do WAW, WMI, KTW lub KRK.
+  Ryanair albo Wizz Air do WAW, WMI, KTW, KRK lub GDN.
 - Regularną cenę Air Europa pobierać z oficjalnego feedu jako najniższą cenę
   dla trasy i dnia. Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25%
   tej ceny; podatki mogą nie podlegać pełnej zniżce.
@@ -212,8 +239,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   nadrzędnymi źródłami trasy, dat, godzin, numerów lotów i cen. W tym wariancie
   nie wolno używać Google Flights ani tworzyć szablonów rozkładu.
 - Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
-  Sprawdza oba kierunki i łączy odcinek Volotei z dozwolonym odcinkiem Ryanair
-  albo Wizz Air do WAW, WMI, KTW lub KRK.
+  Sprawdza oba kierunki i łączy odcinek Volotei wyłącznie z trasami Ryanair
+  albo Wizz Air zapisanymi w `polish_routes` tej listy. Dodanie GDN do zakresu
+  endpointów nie tworzy niepotwierdzonego połączenia BIO–GDN.
 - Pytać oficjalny endpoint osobno o każdy dzień pełnego skonfigurowanego okna
   dat w obu kierunkach, niezależnie od rozkładu Wizz Air/Ryanair. Dopiero po
   tym pełnym skanie dopasowywać przesiadki. Odpowiedź dla długiego okresu może
@@ -263,8 +291,13 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 ## Krok 2 — loty bezpośrednie
 
 - Sprawdzić wyłącznie bezpośrednie loty Ryanair i Wizz Air między WAW, WMI,
-  KRK lub KTW a TFS lub TFN.
+  KRK, KTW lub GDN a TFS lub TFN.
 - Sprawdzić oba kierunki oddzielnie.
+- Wspólny wykonawca kalendarza Ryanaira jest używany również dla odcinków
+  low-cost w wariantach 1A–1F. Zapytanie Fare Finder o najtańszą ofertę
+  całego zakresu nie jest pełnym kalendarzem, podobnie jak minimum dla jednego
+  dnia. Tryb awaryjny pyta o pełną dostępność osobno dla aktywnych dat;
+  nieudane lub niekompletne pobranie przerywa kolekcję.
 - Dla każdej pary lotnisk i każdego przewoźnika pobrać pełne skonfigurowane
   okno dat; nie ograniczać dni na podstawie innego źródła.
 - Używać pełnej aktualnej ceny lotu; nie stosować mnożnika 25%.
@@ -329,9 +362,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   przesiadkowych, nie rozszerzać listy i nie usuwać z niej pozycji. Sprawdzać
   tylko bieżące rozkłady oraz ceny dla kombinacji zapisanych w pliku.
 - Wariant A: Ryanair obsługuje odcinek TFS/TFN ↔ przesiadka, a Wizz Air odcinek
-  przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
+  przesiadka ↔ WAW/WMI/KRK/KTW/GDN. Sprawdzić oba kierunki oddzielnie.
 - Wariant B: Wizz Air obsługuje odcinek TFS/TFN ↔ przesiadka, a Ryanair odcinek
-  przesiadka ↔ WAW/WMI/KRK/KTW. Sprawdzić oba kierunki oddzielnie.
+  przesiadka ↔ WAW/WMI/KRK/KTW/GDN. Sprawdzić oba kierunki oddzielnie.
 - Dla obu wariantów najpierw pobrać pełne okno dat wszystkich zapisanych
   odcinków Ryanair i Wizz Air w obu kierunkach, a dopiero potem dopasowywać
   połączenia. Kalendarz jednej linii nie może ograniczać zapytań do drugiej.
@@ -368,7 +401,7 @@ python3 scripts/discover_transfer_routes.py
 Domyślnie jest to bezpieczny podgląd zmian bez zapisu. Opcja `--apply` dopisuje
 wyłącznie kompletne nowe pozycje do list kroków 1A, 3, 4 i 5; nigdy automatycznie
 nie usuwa istniejących pozycji. Krok 2 nie ma listy przesiadek, ponieważ jego
-kolektor zawsze sprawdza pełną macierz czterech polskich i dwóch teneryfskich
+kolektor zawsze sprawdza pełną macierz pięciu polskich i dwóch teneryfskich
 lotnisk.
 
 Lista 1B jest aktualizowana osobno i może zawierać wyłącznie bezpośrednie trasy

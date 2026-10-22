@@ -56,6 +56,58 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK i GDN. Ich wspólny rejestr
+`data/search-airports.json` jest odczytywany przez `scripts.search_airports`
+zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
+każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
+osobnego audytu siatki i zapisania konkretnych par lotnisko/przewoźnik;
+nie oznacza dopisania go do wszystkich hubów. Procedurę opisuje
+`docs/PLAN_DODANIA_GDANSKA_GDN.md`.
+
+GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
+precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
+
+Cały zestaw można zebrać lokalnie do stagingu, z jednym dniem i cache NBP:
+
+```bash
+.venv/bin/python scripts/collect_five_steps.py --from-date 2026-10-22 --days 30 --stage-directory tmp/flight-batch --workers 4
+.venv/bin/python scripts/collect_five_steps.py --from-date 2026-10-22 --days 30 --stage-directory tmp/flight-batch --validate-only --promote
+```
+
+Datę w przykładzie zastąpić dniem uruchomienia w `Atlantic/Canary`.
+Druga komenda waliduje wszystkie dziesięć feedów przed lokalną podmianą i
+zachowuje ich poprzedni komplet w stagingu. Sprawdza też wspólne okno, dzienne
+kursy, unikalność ID i poprawność odcinków. Błąd podmiany przywraca poprzedni
+komplet; nie jest to pojedyncza atomowa operacja na wszystkich plikach.
+Skrypt nie wykonuje żadnej operacji Git.
+Zweryfikowane dane Wizz dla bezpośrednich i przesiadkowych lotów czyta wspólny
+loader `scripts/wizz_schedules.py`; lokalne rejestry 1A/1B pozostają w allowlistach.
+Ryanair w wariantach 1A–1F używa tego samego pełnego kalendarza co krok 2;
+zapytanie Fare Finder o najtańszą ofertę z całego miesiąca nie zastępuje
+pełnego skanu dat. Także minimum dzienne nie obejmuje wszystkich godzin.
+Awaryjnie kolektor ponawia pełną dostępność osobno dla aktywnych dni; jeśli
+to nie działa, przerywa aktualizację bez zapisu niepełnych wyników.
+
+Każdy kolektor wymaga raportu `collection_coverage` dla wszystkich zapisanych
+tras/dni, także przy uruchomieniu samodzielnym. Obok feedu zapisuje
+`step*-results.collection-report.json`; błąd Bintera (również GraphQL przy
+HTTP 200) nie może udawać braku lotów. Batch dopuszcza tylko komplet dziesięciu
+feedów z tego samego `run_id` i zgodnymi raportami. Stare feedy bez raportów
+pozostają wyświetlane, ale nie przejdą ponownej promocji bez nowego pobrania.
+Wznowienie wybranych kroków wymaga `--run-id` z raportu pierwotnego batcha.
+Opis działania i ograniczeń: `docs/COLLECTION_RELIABILITY.md`.
+
+Testy bez pobierania cen:
+
+```bash
+.venv/bin/python -m unittest discover -s tests
+node --test tests/test_airport_ui.mjs
+```
+
+Testy JavaScript sprawdzają produkcyjną logikę strony na lokalnych feedach,
+ale nie zastępują wizualnej kontroli w przeglądarce.
+Raport wdrożenia GDN: `docs/WDROZENIE_GDANSKA_LOKALNIE.md`.
+
 Kolektory są sterowane plikami danych, a nie wpisanymi na stałe lotniskami w
 kodzie. Nowe lotnisko dodaje się do właściwej listy w `data/` razem ze strefą
 czasową i regułą zniżki. Krok 1A przechowuje potrzebne dane tras Wizz Air w
