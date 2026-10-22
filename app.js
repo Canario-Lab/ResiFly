@@ -881,9 +881,25 @@ function updateRangeLabels() {
   elements.layover.closest(".layover-field").classList.toggle("is-disabled", directSelected);
   elements.secondCarrier.disabled = directSelected;
   elements.secondCarrier.closest(".second-carrier-field").classList.toggle("is-disabled", directSelected);
+  updateChangedSelectStyles();
   setRangeProgress(elements.price);
   setRangeProgress(elements.layover);
   updateCalendarDirection();
+}
+
+function updateChangedSelectStyles() {
+  [
+    elements.origin,
+    elements.destination,
+    elements.firstCarrier,
+    elements.secondCarrier,
+    elements.transfer,
+  ].forEach(select => {
+    select.closest(".filter-field").classList.toggle(
+      "is-filtered",
+      select.value !== "all" && !select.disabled
+    );
+  });
 }
 
 function updateCalendarDirection() {
