@@ -1096,7 +1096,9 @@ function renderActiveFilters(filters = currentFilters()) {
   if (filters.resident) {
     chips.push({ label: "Rezydent Wysp Kanaryjskich", removable: "resident" });
   }
-  if (filters.wizzClub) chips.push({ label: "Wizz Air Discount Club" });
+  if (filters.wizzClub) {
+    chips.push({ label: "Wizz Air Discount Club", removable: "wizzClub" });
+  }
   if (filters.origin !== "all") {
     chips.push({ label: `Wylot: ${filters.origin}`, removable: "origin" });
   }
@@ -1153,6 +1155,11 @@ function clearActiveFilter(filterKey) {
   if (filterKey === "resident") {
     elements.resident.checked = false;
     elements.resident.dispatchEvent(new Event("input", { bubbles: true }));
+    return;
+  }
+  if (filterKey === "wizzClub") {
+    elements.wizzClub.checked = false;
+    elements.wizzClub.dispatchEvent(new Event("input", { bubbles: true }));
     return;
   }
 
