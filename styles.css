@@ -439,6 +439,178 @@ main,
   border-radius: 20px;
 }
 
+.fare-chart {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.fare-chart-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.fare-chart-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.fare-chart-heading span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.fare-chart-scroll {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 3px 1px 9px;
+  scrollbar-color: #9bc8bb #edf3f1;
+  scrollbar-width: thin;
+}
+
+.fare-chart-scroll:focus-visible {
+  border-radius: 10px;
+  outline: 3px solid rgba(13, 118, 95, 0.2);
+  outline-offset: 3px;
+}
+
+.fare-chart-scroll::-webkit-scrollbar {
+  height: 7px;
+}
+
+.fare-chart-scroll::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: #edf3f1;
+}
+
+.fare-chart-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #9bc8bb;
+}
+
+.fare-price-chart {
+  height: 146px;
+  min-width: max(100%, calc(var(--fare-chart-days, 31) * 58px));
+  display: grid;
+  grid-template-columns: repeat(var(--fare-chart-days, 31), minmax(0, 1fr));
+  gap: 5px;
+}
+
+.fare-chart-day {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: 23px minmax(0, 1fr) 31px;
+  align-items: stretch;
+  padding: 0 2px;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: center;
+}
+
+.fare-chart-day.is-clickable {
+  cursor: pointer;
+}
+
+.fare-chart-price {
+  align-self: center;
+  overflow: hidden;
+  color: var(--green-dark);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.62rem;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fare-chart-plot {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom: 1px solid #d9e5e1;
+}
+
+.fare-chart-bar {
+  width: min(28px, 72%);
+  height: var(--fare-bar-height, 0%);
+  min-height: 0;
+  display: block;
+  border-radius: 7px 7px 2px 2px;
+  background: linear-gradient(180deg, #26a98b, var(--green-dark));
+  box-shadow: 0 5px 12px rgba(13, 118, 95, 0.16);
+  transform-origin: bottom;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.fare-chart-day.is-lowest .fare-chart-price {
+  color: #07594d;
+}
+
+.fare-chart-day.is-lowest .fare-chart-bar {
+  background: linear-gradient(180deg, #31b596, #07594d);
+  box-shadow: 0 5px 14px rgba(7, 89, 77, 0.24);
+}
+
+.fare-chart-day.is-clickable:hover .fare-chart-bar {
+  filter: saturate(1.12);
+  transform: scaleX(1.08);
+}
+
+.fare-chart-day.is-clickable:focus-visible {
+  border-radius: 8px;
+  outline: 3px solid rgba(13, 118, 95, 0.22);
+  outline-offset: 0;
+}
+
+.fare-chart-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1px;
+  padding-top: 5px;
+  color: var(--muted);
+  font-size: 0.58rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.fare-chart-date strong {
+  color: var(--ink);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.fare-chart-day.has-no-price .fare-chart-price {
+  color: #a2acab;
+}
+
+.fare-chart-day.has-no-price .fare-chart-bar {
+  height: 10px;
+  border: 1px dashed #c7d1ce;
+  background: transparent;
+  box-shadow: none;
+}
+
+.fare-chart-loading {
+  grid-column: 1 / -1;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
 .panel-heading,
 .results-heading {
   display: flex;
@@ -1799,6 +1971,21 @@ input[type="range"]::-moz-range-thumb {
 
   .calendar-day-regular-price {
     font-size: clamp(0.48rem, 2.05vw, 0.59rem);
+  }
+
+  .fare-chart {
+    margin-top: 18px;
+    padding: 16px 6px 0;
+  }
+
+  .fare-chart-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .fare-price-chart {
+    min-width: calc(var(--fare-chart-days, 31) * 54px);
   }
 
   .panel-heading,

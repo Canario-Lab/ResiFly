@@ -45,6 +45,7 @@ const elements = {
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
+  farePriceChart: document.querySelector("#fare-price-chart"),
   calendarDirectionLabel: document.querySelector("#calendar-direction-label"),
   calendarDirectionSwap: document.querySelector("#calendar-direction-swap"),
   calendarLegendSelected: document.querySelector(".calendar-legend-resident"),
@@ -74,6 +75,15 @@ const calendarCurrency = new Intl.NumberFormat("pl-PL", {
   currency: "PLN",
   minimumFractionDigits: 0,
   maximumFractionDigits: 2,
+});
+
+const chartWeekday = new Intl.DateTimeFormat("pl-PL", {
+  weekday: "short",
+});
+
+const chartDate = new Intl.DateTimeFormat("pl-PL", {
+  day: "numeric",
+  month: "short",
 });
 
 const longDate = new Intl.DateTimeFormat("pl-PL", {
@@ -714,6 +724,81 @@ function createCalendarMonth(monthDate, rangeStart, rangeEnd, prices) {
   return card;
 }
 
+function datesInRange(rangeStart, rangeEnd) {
+  const dates = [];
+  const current = parseDateOnly(rangeStart);
+  const end = parseDateOnly(rangeEnd);
+  while (current <= end) {
+    dates.push(toDateOnly(current));
+    current.setUTCDate(current.getUTCDate() + 1);
+  }
+  return dates;
+}
+
+function createFareChartDay(isoDate, price, minPrice, maxPrice) {
+  const date = parseDateOnly(isoDate);
+  const day = document.createElement(price ? "button" : "div");
+  day.className = "fare-chart-day";
+
+  const priceLabel = document.createElement("strong");
+  priceLabel.className = "fare-chart-price";
+  priceLabel.textContent = price
+    ? `${calendarCurrency.format(price.total)}${price.total < price.regular ? "*" : ""}`
+    : "—";
+
+  const plot = document.createElement("span");
+  plot.className = "fare-chart-plot";
+  const bar = document.createElement("span");
+  bar.className = "fare-chart-bar";
+
+  if (price) {
+    day.type = "button";
+    day.classList.add("is-clickable");
+    const spread = maxPrice - minPrice;
+    const normalized = spread > 0 ? (price.total - minPrice) / spread : 0.5;
+    bar.style.setProperty("--fare-bar-height", `${32 + normalized * 60}%`);
+    if (Math.abs(price.total - minPrice) < 0.005) day.classList.add("is-lowest");
+    day.setAttribute(
+      "aria-label",
+      `${formatDate(isoDate)}, ${selectedPriceCaption(price).toLowerCase()} ${currency.format(price.total)}. Pokaż lot.`
+    );
+    day.addEventListener("click", () => scrollToResult(price.resultId));
+  } else {
+    day.classList.add("has-no-price");
+    day.setAttribute("role", "img");
+    day.setAttribute("aria-label", `${formatDate(isoDate)}, brak połączeń`);
+  }
+  plot.append(bar);
+
+  const dateLabel = document.createElement("span");
+  dateLabel.className = "fare-chart-date";
+  const weekday = document.createElement("span");
+  weekday.textContent = chartWeekday.format(date).replace(".", "");
+  const calendarDate = document.createElement("strong");
+  calendarDate.textContent = chartDate.format(date).replace(".", "");
+  dateLabel.append(weekday, calendarDate);
+
+  day.append(priceLabel, plot, dateLabel);
+  return day;
+}
+
+function renderFareChart(rangeStart, rangeEnd, prices) {
+  const dates = datesInRange(rangeStart, rangeEnd);
+  const available = dates.map(date => prices.get(date)).filter(Boolean);
+  const totals = available.map(price => price.total);
+  const minPrice = totals.length ? Math.min(...totals) : 0;
+  const maxPrice = totals.length ? Math.max(...totals) : 0;
+  const chart = document.createDocumentFragment();
+
+  for (const isoDate of dates) {
+    chart.append(createFareChartDay(isoDate, prices.get(isoDate), minPrice, maxPrice));
+  }
+
+  elements.farePriceChart.style.setProperty("--fare-chart-days", String(dates.length));
+  elements.farePriceChart.replaceChildren(chart);
+  elements.farePriceChart.setAttribute("aria-busy", "false");
+}
+
 function renderFareCalendar(results, filters) {
   const rangeStart = filters.dateFrom;
   const rangeEnd = filters.dateTo;
@@ -743,6 +828,7 @@ function renderFareCalendar(results, filters) {
     createCalendarMonth(firstMonth, rangeStart, rangeEnd, prices),
     createCalendarMonth(secondMonth, rangeStart, rangeEnd, prices)
   );
+  renderFareChart(rangeStart, rangeEnd, prices);
   elements.calendarMonths.setAttribute("aria-busy", "false");
 }
 
@@ -1921,6 +2007,8 @@ async function loadFlights() {
     elements.updatedAt.textContent = "Brak danych";
     elements.calendarMonths.setAttribute("aria-busy", "false");
     elements.calendarMonths.innerHTML = `<div class="calendar-loading">Nie udało się wczytać kalendarza cen.</div>`;
+    elements.farePriceChart.setAttribute("aria-busy", "false");
+    elements.farePriceChart.innerHTML = `<div class="fare-chart-loading">Nie udało się wczytać wykresu cen.</div>`;
     elements.list.setAttribute("aria-busy", "false");
     setResultLoadStatus("Nie udało się wczytać połączeń.", "empty");
     hideResultPreparationProgress();

@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-46" />
+    <link rel="stylesheet" href="styles.css?v=20261022-47" />
   </head>
   <body>
     <header class="site-header">
@@ -223,6 +223,21 @@
         <div class="calendar-months" id="calendar-months" aria-live="polite" aria-busy="true">
           <div class="calendar-loading">Wczytuję kalendarz cen…</div>
         </div>
+        <section class="fare-chart" aria-labelledby="fare-chart-title">
+          <div class="fare-chart-heading">
+            <h3 id="fare-chart-title">Ceny dzień po dniu</h3>
+            <span>Kliknij słupek, aby zobaczyć lot</span>
+          </div>
+          <div
+            class="fare-chart-scroll"
+            tabindex="0"
+            aria-label="Wykres najniższych cen lotów według dnia"
+          >
+            <div class="fare-price-chart" id="fare-price-chart" aria-live="polite" aria-busy="true">
+              <div class="fare-chart-loading">Wczytuję wykres cen…</div>
+            </div>
+          </div>
+        </section>
       </section>
 
       <section class="results-section" aria-labelledby="results-title">
@@ -371,6 +386,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261022-69" defer></script>
+    <script src="app.js?v=20261022-70" defer></script>
   </body>
 </html>
