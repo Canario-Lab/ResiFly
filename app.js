@@ -1526,7 +1526,7 @@ function restoreCachedResultView(cached, expectedVersion) {
   }
 }
 
-function restoreReusableVisibleResults(expectedVersion) {
+function restoreReusableVisibleResults(expectedVersion, preserveAnchor = true) {
   const previousCards = [...elements.list.querySelectorAll(".flight-card")];
   if (!previousCards.length || !progressiveFilters) return false;
 
@@ -1545,7 +1545,7 @@ function restoreReusableVisibleResults(expectedVersion) {
 
   if (!reusableCards.length) return false;
 
-  const anchor = visibleResultAnchor();
+  const anchor = preserveAnchor ? visibleResultAnchor() : null;
   const visibleCards = document.createDocumentFragment();
   reusableCards
     .sort(([first], [second]) => first - second)
@@ -1569,7 +1569,7 @@ function restoreReusableVisibleResults(expectedVersion) {
   return true;
 }
 
-function renderResultCards(results, filters) {
+function renderResultCards(results, filters, preserveAnchor = true) {
   cacheCurrentResultCards();
   stopProgressiveRendering();
   const expectedVersion = progressiveRenderVersion;
@@ -1585,7 +1585,7 @@ function renderResultCards(results, filters) {
     return;
   }
 
-  if (restoreReusableVisibleResults(expectedVersion)) {
+  if (restoreReusableVisibleResults(expectedVersion, preserveAnchor)) {
     if (progressiveResultCount >= progressiveResults.length) {
       commitPreparedResults(expectedVersion);
     } else {
@@ -1608,7 +1608,7 @@ function ensureResultRendered(resultId) {
   updateResultLoadStatus();
 }
 
-function renderResults() {
+function renderResults({ preserveAnchor = true } = {}) {
   window.clearTimeout(filterRenderTimer);
   filterRenderTimer = undefined;
   updateRangeLabels();
@@ -1639,17 +1639,20 @@ function renderResults() {
     return;
   }
 
-  renderResultCards(results, filters);
+  renderResultCards(results, filters, preserveAnchor);
 }
 
-function scheduleRenderResults() {
+function scheduleRenderResults({ preserveAnchor = true } = {}) {
   updateRangeLabels();
   window.clearTimeout(filterRenderTimer);
   cacheCurrentResultCards();
   stopProgressiveRendering();
   elements.list.setAttribute("aria-busy", "true");
   setResultLoadStatus("Aktualizuję listę połączeń…");
-  filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
+  filterRenderTimer = window.setTimeout(
+    () => renderResults({ preserveAnchor }),
+    FILTER_RENDER_DELAY_MS
+  );
 }
 
 function resetFilters() {
@@ -1700,7 +1703,12 @@ function bindEvents() {
     element.addEventListener("focus", pauseBackgroundWork);
     element.addEventListener("blur", resumeBackgroundWork);
   });
-  filters.forEach(element => element.addEventListener("input", scheduleRenderResults));
+  filters
+    .filter(element => element !== elements.sort)
+    .forEach(element => element.addEventListener("input", scheduleRenderResults));
+  elements.sort.addEventListener("input", () => {
+    scheduleRenderResults({ preserveAnchor: false });
+  });
   elements.direction.addEventListener("input", () => {
     updateAirportOptions();
     scheduleRenderResults();
