@@ -67,7 +67,8 @@ function harness() {
     selectedResultPricing, lowestPricesByDate, renderActiveFilters, clearActiveFilter,
     createCalendarDay, createFareChartDay, parseDateOnly, shareUrlForResult,
     sharedResultFromUrl, configureSharedResultFilters, journeyDuration, dayOffset,
-    createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters};
+    createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters,
+    bookingUrlForFilters, createPurchaseStep};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
   const api = context.api;
@@ -251,4 +252,29 @@ test("a shared flight above 1000 PLN still opens with its explicit price setting
   assert.equal(api.sharedResultFromUrl().id, result.id);
   assert.ok(Number(api.elements.price.value) >= result.price_total_regular_pln);
   assert.ok(api.filteredResults().some(candidate => candidate.id === result.id));
+});
+
+test("Google-sourced Air Europa keeps official route/date links and resident toggling", () => {
+  const api = harness();
+  const leg = {
+    carrier: "Air Europa", flight_number: "UX9048", departure_airport: "MAD", arrival_airport: "TFN",
+    departure_at: "2026-11-01T15:00:00+01:00", arrival_at: "2026-11-01T16:55:00+00:00",
+    price_source: "Google Flights", price_scope: "individual_flight_offer",
+    price_regular_pln: 659, price_resident_estimated_pln: 164.75, resident_discount_eligible: true,
+    booking_url: "https://www.aireuropa.com/es/es/deeplink?departure_airport=MAD&arrival_airport=TFN&departure_date=20261101&adults=1&residentType=SPANISH_RESIDENT_RC",
+  };
+  for (const resident of [true, false, true]) {
+    const selected = filters("poland_to_tenerife", { resident });
+    const url = new URL(api.bookingUrlForFilters(leg, selected));
+    assert.equal(url.hostname, "www.aireuropa.com");
+    assert.equal(url.searchParams.get("departure_airport"), "MAD");
+    assert.equal(url.searchParams.get("arrival_airport"), "TFN");
+    assert.equal(url.searchParams.get("departure_date"), "20261101");
+    assert.equal(url.searchParams.get("residentType"), resident ? "SPANISH_RESIDENT_RC" : null);
+    const step = api.createPurchaseStep(leg, 0, selected);
+    assert.equal(step.children.find(child => child.className === "purchase-step-flight").textContent, "Numer lotu: UX9048");
+    const link = step.children.find(child => child.className === "purchase-step-actions").children[0];
+    assert.equal(link.href, url.toString());
+  }
+  assert.equal(new URL(api.bookingUrlForFilters({ ...leg, resident_discount_eligible: false }, filters())).searchParams.get("residentType"), null);
 });

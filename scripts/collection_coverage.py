@@ -20,9 +20,9 @@ import uuid
 
 _active = None
 METHODS = {
-    "Ryanair": {"full_availability"}, "Wizz Air": {"timetableV2"},
+    "Ryanair": {"google_flights_http"}, "Wizz Air": {"timetableV2"},
     "Binter": {"booking_search"}, "Iberia": {"google_flights_http"},
-    "Vueling": {"google_flights_http"}, "Air Europa": {"official_route_day_fares"},
+    "Vueling": {"google_flights_http"}, "Air Europa": {"google_flights_http"},
     "Volotea": {"official_minprice"}, "Canaryfly": {"booking_calendar", "booking_search"},
 }
 

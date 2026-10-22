@@ -288,14 +288,30 @@ def collect_vueling_legs(
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         rule = transfer_rules[transfer]
         multiplier = float(rule["vueling_resident_fare_multiplier"])
-        html = GoogleFlightsClient().availability(origin, destination, day)
-        result = parse_google_flights_response(
-            html,
-            origin,
-            destination,
-            multiplier,
-            accepted_marketing,
-        )
+        client = GoogleFlightsClient()
+        last_error: Exception | None = None
+        result = None
+        for attempt in range(4):
+            try:
+                html = client.availability(origin, destination, day)
+                result = parse_google_flights_response(
+                    html,
+                    origin,
+                    destination,
+                    multiplier,
+                    accepted_marketing,
+                )
+                last_error = None
+                break
+            except (RuntimeError, json.JSONDecodeError, ValueError) as error:
+                last_error = error
+                if attempt + 1 < 4:
+                    time_module.sleep(1.5 * (attempt + 1))
+        if last_error is not None or result is None:
+            raise RuntimeError(
+                f"Google Flights Vueling failed for {origin}-{destination} on {day}; "
+                "publication blocked"
+            ) from last_error
         record_checked("Vueling", origin, destination, day, day, result, "google_flights_http")
         return result
 
@@ -476,7 +492,7 @@ def main(args) -> None:
                 "Google Flights: regularna cena w PLN; cena rezydenta "
                 "oszacowana jako 25% ceny regularnej zgodnie z listą lotnisk"
             ),
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",

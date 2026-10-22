@@ -364,6 +364,7 @@ def main(args) -> None:
         flush=True,
     )
     client_version = ryanair_client_version()
+    print("Ryanair source: Google Flights HTTP (FR + RK, max 2 requests)", flush=True)
     ryanair_legs, wizz_legs = collect_full_calendars(
         routes,
         args.from_date,
@@ -423,7 +424,7 @@ def main(args) -> None:
         },
         "sources": {
             "allowlist": "data/mixed-transfer-airports.json",
-            "ryanair": "Ryanair public availability API with daily Fare Finder fallback",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air public timetableV2 API",
             "wizz_schedule_map": (
                 "verified route flight numbers and published block times in "

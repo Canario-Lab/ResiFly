@@ -45,7 +45,10 @@ pozostają te same; nie dodano niekwalifikujących się hubów.
   kierunków z GDN nie dało dodatkowego kwalifikującego się huba poza MAD/PMI.
 - Vueling: https://www.vueling.com/es/vuelos-baratos-desde-tenerife — także
   ponowny przegląd OVD/GRX; GDN nie ma wymaganego odcinka Ryanair/Wizz.
-- Air Europa: oficjalne strony MAD/BIO i branded fare feed.
+- Air Europa: w pierwotnym wdrożeniu oficjalne strony MAD/BIO i branded fare
+  feed. Aktualizacja zasad 22.10.2026: bieżące numery rejsów, daty/godziny
+  i indywidualne ceny pobiera wyłącznie Google Flights HTTP (maks. 2 wątki),
+  bez minimum dnia i szablonów. Wiążąca procedura: `FIVE_STEP_FLIGHT_SEARCH.md`.
 - Volotea: oficjalne bezpośrednie trasy i MinPrice; brak GDN–BIO/OVD.
 - Canaryfly: oficjalne trasy i kalendarze GraphQL; brak odpowiedniego odcinka
   GDN do wysp obsługiwanych przez tę linię, także ACE/SPC/VDE.

@@ -667,7 +667,7 @@ def main(args) -> None:
                 "Canaryfly official booking_calendar and booking_search GraphQL; "
                 "full monthly calendars plus flight-specific regular and resident fares"
             ),
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",

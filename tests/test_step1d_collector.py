@@ -1,200 +1,195 @@
-import json
+import copy
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
+import json
 from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
+from scripts import collect_step1d as collector, collection_coverage as coverage
+from scripts.booking_urls import air_europa_booking_url
 from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
-from scripts.collect_step1d import (
-    air_europa_route_days,
-    build_connections,
-    collect_air_europa_legs,
-    extract_sputnik_config,
-    low_cost_route_matrix,
-    parse_air_europa_fares,
-    scheduled_departures,
-    validate_allowlist,
-    validate_document,
-)
 
 
-ROOT = Path(__file__).resolve().parents[1]
+def google_offer(number="9048", hour=15, price=659, carrier="UX", origin="MAD", destination="TFN", day=date(2026, 11, 1)):
+    segment = [None] * 23
+    segment[2], segment[3], segment[6] = "Air Europa", origin, destination
+    segment[8], segment[10] = [hour, 0], [hour + 1, 55]
+    segment[20] = segment[21] = [day.year, day.month, day.day]
+    segment[22] = [carrier, number]
+    return [[None, None, [segment]], [[None, price]]]
 
 
-def low_cost_leg(origin, departure, destination, arrival, price=250.0):
-    return {
-        "carrier": "Wizz Air",
-        "flight_number": "W60000",
-        "departure_airport": origin,
-        "departure_at": departure,
-        "arrival_airport": destination,
-        "arrival_at": arrival,
-        "price_regular_pln": price,
-        "price_resident_estimated_pln": price,
-        "resident_discount_eligible": False,
-        "booking_url": "https://www.wizzair.com/example",
-    }
+def google_html(*offers, additional=None):
+    payload = [None, additional, None, [list(offers)]]
+    return '<html>PLN<script class="ds:1">AF_initDataCallback({data:' + json.dumps(payload) + ',sideChannel:{}});</script></html>'
 
 
-def air_europa_leg(origin, departure, destination, arrival, regular=800.0):
-    return {
-        "carrier": "Air Europa",
-        "flight_number": "UX",
-        "departure_airport": origin,
-        "departure_at": departure,
-        "arrival_airport": destination,
-        "arrival_at": arrival,
-        "price_regular_pln": regular,
-        "price_resident_estimated_pln": regular * 0.25,
-        "resident_discount_eligible": True,
-        "resident_fare_multiplier": 0.25,
-        "booking_url": "https://www.aireuropa.com/es/es/deeplink?example=1",
-        "price_source": "Air Europa official branded fare feed",
-    }
+def low_cost_leg(origin, departure, destination, arrival, price=250):
+    return {"carrier": "Wizz Air", "flight_number": "W60000", "departure_airport": origin,
+            "departure_at": departure, "arrival_airport": destination, "arrival_at": arrival,
+            "price_regular_pln": price, "price_resident_estimated_pln": price,
+            "resident_discount_eligible": False, "booking_url": "https://www.wizzair.com/example"}
 
 
-class FakeFareClient:
-    def search(self, origin, destination, start, end):
-        return [{
-            "outboundFlight": {
-                "departureAirportIataCode": origin,
-                "arrivalAirportIataCode": destination,
-                "departureDate": "2026-10-29",
-            },
-            "airline": {"iataCode": "UX"},
-            "priceSpecification": {
-                "totalPrice": 100,
-                "currencyCode": "EUR",
-            },
-        }]
+def air_europa_leg(origin, departure, destination, arrival, regular=800):
+    return {"carrier": "Air Europa", "flight_number": "UX9048", "departure_airport": origin,
+            "departure_at": departure, "arrival_airport": destination, "arrival_at": arrival,
+            "price_regular_pln": regular, "price_resident_estimated_pln": regular * .25,
+            "resident_discount_eligible": True, "resident_fare_multiplier": .25,
+            "booking_url": air_europa_booking_url(origin, destination, departure),
+            "price_source": "Google Flights", "price_scope": "individual_flight_offer"}
 
 
 class Step1DCollectorTests(unittest.TestCase):
     def setUp(self):
-        self.allowlist = json.loads(
-            (ROOT / "data" / "air-europa-transfer-airports.json").read_text(
-                encoding="utf-8"
-            )
-        )
-        validate_allowlist(self.allowlist)
+        self.allowlist = json.loads(collector.TRANSFER_FILE.read_text())
+        collector.validate_allowlist(self.allowlist)
         configure_airports_from_allowlist(self.allowlist)
 
-    def test_allowlist_contains_only_verified_discount_routes(self):
-        self.assertEqual(
-            [airport["iata"] for airport in self.allowlist["airports"]],
-            ["MAD", "BIO"],
-        )
+    def parse(self, html):
+        return collector.parse_google_flights_response(html, "MAD", "TFN", date(2026, 11, 1), .25, {"UX"})
+
+    def test_only_google_allowed_without_active_fare_feed_or_templates(self):
+        self.assertNotIn("fare_feed", self.allowlist)
+        self.assertNotIn("air_europa_schedule_templates", self.allowlist)
+        self.assertEqual([a["iata"] for a in self.allowlist["airports"]], ["MAD", "BIO"])
         for airport in self.allowlist["airports"]:
             self.assertEqual(airport["tenerife_airports"], ["TFN"])
-            self.assertTrue(
-                airport["resident_discount_eligible_on_air_europa_leg"]
-            )
-            self.assertEqual(
-                airport["air_europa_resident_fare_multiplier"], 0.25
-            )
+            self.assertTrue(airport["resident_discount_eligible_on_air_europa_leg"])
+            self.assertEqual(airport["air_europa_resident_fare_multiplier"], .25)
+        self.allowlist["usage_policy"]["flight_data_source"] = "official_route_day_fares"
+        with self.assertRaisesRegex(RuntimeError, "Google Flights"):
+            collector.validate_allowlist(self.allowlist)
 
     def test_route_matrix_uses_only_saved_low_cost_pairs(self):
-        routes = set(low_cost_route_matrix(self.allowlist))
-        self.assertIn(("Wizz Air", "MAD", "WAW"), routes)
-        self.assertIn(("Ryanair", "KRK", "MAD"), routes)
-        self.assertIn(("Wizz Air", "BIO", "KRK"), routes)
+        routes = set(collector.low_cost_route_matrix(self.allowlist))
+        for pair in (("Wizz Air", "MAD", "WAW"), ("Ryanair", "KRK", "MAD"), ("Wizz Air", "BIO", "KRK"), ("Wizz Air", "GDN", "MAD")):
+            self.assertIn(pair, routes)
         self.assertNotIn(("Ryanair", "BIO", "WAW"), routes)
 
-    def test_route_days_cover_every_day_in_both_directions(self):
-        start = date(2026, 10, 21)
-        end = date(2026, 11, 20)
-        route_days = air_europa_route_days(self.allowlist, start, end)
-        route_pairs = sum(
-            len(airport["tenerife_airports"])
-            for airport in self.allowlist["airports"]
-        )
-        self.assertEqual(len(route_days), route_pairs * 2 * 31)
-        for day in (start, date(2026, 11, 5), end):
-            self.assertIn(("TFN", "MAD", day), route_days)
-            self.assertIn(("MAD", "TFN", day), route_days)
+    def test_route_days_cover_every_day_both_ways_without_template_expiry(self):
+        start, end = date(2027, 8, 1), date(2027, 8, 31)
+        plan = collector.air_europa_route_days(self.allowlist, start, end)
+        self.assertEqual(len(plan), 124)
+        for day in (start, date(2027, 8, 15), end):
+            for origin, destination in (("MAD", "TFN"), ("TFN", "MAD"), ("BIO", "TFN"), ("TFN", "BIO")):
+                self.assertIn((origin, destination, day), plan)
 
-    def test_extracts_dynamic_key_from_official_page_config(self):
-        next_data = {
-            "props": {"servicesConfig": {"sputnikSearch": {"config": {
-                "endpoint": "https://example.test/%%tenantCode%%/search",
-                "axiosConfig": {"headers": {"EM-API-Key": "temporary"}},
-            }}}}
-        }
-        html = (
-            '<script id="__NEXT_DATA__" type="application/json">'
-            + json.dumps(next_data)
-            + "</script>"
-        )
-        endpoint, headers = extract_sputnik_config(html, "ux")
-        self.assertEqual(endpoint, "https://example.test/ux/search")
-        self.assertEqual(headers["EM-API-Key"], "temporary")
+    def test_every_flight_has_own_price_number_and_booking_link(self):
+        legs = self.parse(google_html(google_offer("9059", 7, 283), google_offer("9118", 11, 344), google_offer(), google_offer("9057", 19, 257)))
+        self.assertEqual([r["price_regular_pln"] for r in legs], [283, 344, 659, 257])
+        self.assertEqual([r["flight_number"] for r in legs], ["UX9059", "UX9118", "UX9048", "UX9057"])
+        self.assertEqual(legs[2]["price_resident_estimated_pln"], 164.75)
+        self.assertEqual(legs[2]["price_scope"], "individual_flight_offer")
+        self.assertEqual(legs[2]["booking_url_scope"], "route_date_search")
+        self.assertIn("residentType=SPANISH_RESIDENT_RC", legs[2]["booking_url"])
+        self.assertNotIn("token", json.dumps(legs).lower())
 
-    def test_parses_only_direct_air_europa_fares_and_keeps_lowest(self):
-        def fare(code, amount, destination="MAD"):
-            return {
-                "outboundFlight": {
-                    "departureAirportIataCode": "TFN",
-                    "arrivalAirportIataCode": destination,
-                    "departureDate": "2026-10-29",
-                },
-                "airline": {"iataCode": code},
-                "priceSpecification": {
-                    "totalPrice": amount,
-                    "currencyCode": "EUR",
-                },
-            }
+    def test_extra_offer_bucket_and_duplicate_fares_are_handled_per_flight(self):
+        legs = self.parse(google_html(google_offer(price=700), additional=[google_offer(price=659), google_offer("9059", 7, 283)]))
+        self.assertEqual(len(legs), 2)
+        self.assertEqual(legs[1]["price_regular_pln"], 659)
 
-        fares = parse_air_europa_fares(
-            [fare("UX", 120), fare("UX", 92.91), fare("IB", 50), fare("UX", 20, "BIO")],
-            "TFN",
-            "MAD",
-        )
-        self.assertEqual(len(fares), 1)
-        amount, currency = fares[next(iter(fares))]
-        self.assertEqual(amount, 92.91)
-        self.assertEqual(currency, "EUR")
+    def test_other_carrier_route_or_date_is_not_relabelled(self):
+        self.assertEqual(self.parse(google_html(google_offer(carrier="IB"), google_offer(destination="BIO"), google_offer(day=date(2026, 11, 2)))), [])
 
-    def test_expands_official_route_day_fare_over_saved_schedule(self):
-        candidates = {("TFN", "MAD", date(2026, 10, 29))}
-        legs = collect_air_europa_legs(
-            candidates,
-            self.allowlist,
-            {"EUR": CurrencyRate("EUR", 4.0)},
-            FakeFareClient(),
-        )
-        self.assertEqual(len(legs), 3)
-        self.assertEqual(legs[0]["departure_at"][11:16], "07:05")
-        self.assertEqual(legs[0]["price_regular_pln"], 400.0)
-        self.assertEqual(legs[0]["price_resident_estimated_pln"], 100.0)
-        self.assertEqual(
-            legs[0]["price_source"], "Air Europa official branded fare feed"
-        )
-        self.assertEqual(legs[0]["price_scope"], "lowest_official_route_day_fare")
+    def test_high_price_not_filtered_and_overnight_date_not_invented(self):
+        value = google_offer(hour=23, price=5000)
+        value[0][2][0][10], value[0][2][0][21] = [1, 55], [2026, 11, 2]
+        legs = self.parse(google_html(value))
+        self.assertEqual(legs[0]["price_regular_pln"], 5000)
+        self.assertTrue(legs[0]["arrival_at"].startswith("2026-11-02T01:55"))
 
-    def test_bilbao_schedule_is_tuesday_and_thursday(self):
-        self.assertEqual(len(scheduled_departures(self.allowlist, "TFN", "BIO", date(2026, 10, 27))), 1)
-        self.assertEqual(len(scheduled_departures(self.allowlist, "TFN", "BIO", date(2026, 10, 28))), 0)
+    def test_missing_price_cannot_borrow_another_flights_price(self):
+        with self.assertRaisesRegex(RuntimeError, "bez ceny"):
+            self.parse(google_html(google_offer(price=None), google_offer("9059", 7, 283)))
+        self.assertEqual(self.parse(google_html(google_offer(price=None), google_offer()))[0]["price_regular_pln"], 659)
+
+    def test_missing_number_or_clock_cannot_use_placeholder(self):
+        with self.assertRaisesRegex(RuntimeError, "numer"):
+            self.parse(google_html(google_offer(number="")))
+        value = google_offer()
+        for invalid in (None, []):
+            value[0][2][0][8] = invalid
+            with self.assertRaisesRegex(RuntimeError, "godziny"):
+                self.parse(google_html(value))
+
+    def test_google_compact_clock_omits_zero_minutes(self):
+        value = google_offer()
+        value[0][2][0][8] = [15]
+        self.assertEqual(self.parse(google_html(value))[0]["departure_at"], "2026-11-01T15:00:00+01:00")
+
+    def test_invalid_clock_is_not_coerced_to_midnight(self):
+        for clock in (["15"], [15, ""], [24], [-1, 0], [15, 60], [True, 0], [15, False]):
+            value = google_offer()
+            value[0][2][0][8] = clock
+            with self.assertRaisesRegex(RuntimeError, "godzina"):
+                self.parse(google_html(value))
+
+    def test_malformed_source_is_not_a_successful_empty_day(self):
+        for html in ("<html>error</html>", '<script class="ds:1">data:{},x:0</script>'):
+            with self.assertRaises((RuntimeError, ValueError)):
+                self.parse(html)
+        self.assertEqual(self.parse(google_html()), [])
+
+    @patch("scripts.collect_step1d.ThreadPoolExecutor", wraps=ThreadPoolExecutor)
+    @patch("scripts.collect_step1d.GoogleFlightsClient.availability", autospec=True)
+    def test_full_calendar_coverage_and_two_worker_cap(self, availability, pool):
+        start, end = date(2026, 10, 22), date(2026, 11, 21)
+        plan = collector.air_europa_route_days(self.allowlist, start, end)
+        expected = {("Air Europa", o, d, str(day), "calendar") for o, d, day in plan}
+        tracker = coverage.Coverage("1d", start, end, expected)
+        availability.side_effect = lambda client, o, d, day: google_html(google_offer(origin=o, destination=d, day=day, hour=7))
+        with patch.object(coverage, "_active", tracker):
+            rows = collector.collect_air_europa_legs(plan, self.allowlist, 99)
+        self.assertEqual(len(rows), 124)
+        self.assertEqual(availability.call_count, 124)
+        self.assertEqual(pool.call_args.kwargs["max_workers"], 2)
+        self.assertEqual(tracker.verify()["completed_queries"], 124)
+
+    def test_old_day_minimum_coverage_is_no_longer_valid(self):
+        tracker = coverage.Coverage("1d", date(2026, 11, 1), date(2026, 11, 1), set())
+        with self.assertRaisesRegex(RuntimeError, "Unverified"):
+            tracker.record("Air Europa", "MAD", "TFN", date(2026, 11, 1), date(2026, 11, 1), [], "official_route_day_fares")
+
+    @patch("scripts.collect_step1d.GoogleFlightsClient.availability", side_effect=RuntimeError("Google unavailable"))
+    @patch("scripts.collect_step1d.collect_low_cost_legs", return_value=[{}])
+    @patch("scripts.collect_step1d.nbp_eur_rate", return_value=CurrencyRate("EUR", 4.0))
+    def test_failure_preserves_previous_public_file(self, rate, low, availability):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "step1d-results.json"
+            output.write_text("previous feed")
+            with patch("sys.argv", ["collect_step1d", "--from-date", "2026-11-01", "--days", "0", "--output", str(output)]):
+                with self.assertRaises(RuntimeError):
+                    collector.main()
+            self.assertEqual(output.read_text(), "previous feed")
+            report = json.loads(output.with_suffix(".collection-report.json").read_text())
+            self.assertEqual(report["status"], "failed")
+            self.assertGreater(report["missing_queries"], 0)
+            # At most two route/day workers run concurrently. Each worker may
+            # retry the same transient Google/parser failure up to four times.
+            self.assertLessEqual(availability.call_count, 8)
 
     def test_builds_both_directions_without_price_limit(self):
-        out = build_connections(
-            [
-                low_cost_leg("MAD", "2026-10-29T14:00:00+01:00", "WAW", "2026-10-29T17:00:00+01:00", 500),
-                low_cost_leg("WAW", "2026-10-30T06:00:00+01:00", "MAD", "2026-10-30T09:30:00+01:00", 600),
-            ],
-            [
-                air_europa_leg("TFN", "2026-10-29T07:05:00+00:00", "MAD", "2026-10-29T10:50:00+01:00", 1000),
-                air_europa_leg("MAD", "2026-10-30T15:00:00+01:00", "TFN", "2026-10-30T16:55:00+00:00", 1200),
-            ],
-        )
+        out = collector.build_connections([
+            low_cost_leg("MAD", "2026-10-29T14:00:00+01:00", "WAW", "2026-10-29T17:00:00+01:00", 500),
+            low_cost_leg("WAW", "2026-10-30T06:00:00+01:00", "MAD", "2026-10-30T09:30:00+01:00", 600),
+        ], [
+            air_europa_leg("TFN", "2026-10-29T07:05:00+00:00", "MAD", "2026-10-29T10:50:00+01:00", 1000),
+            air_europa_leg("MAD", "2026-10-30T15:00:00+01:00", "TFN", "2026-10-30T16:55:00+00:00", 1200),
+        ])
         self.assertEqual(len(out), 2)
-        self.assertEqual(
-            {item["direction"] for item in out},
-            {"tenerife_to_poland", "poland_to_tenerife"},
-        )
-        self.assertEqual(
-            {item["price_total_regular_pln"] for item in out},
-            {1500.0, 1800.0},
-        )
-        validate_document({"results": out})
+        self.assertEqual({r["direction"] for r in out}, {"tenerife_to_poland", "poland_to_tenerife"})
+        self.assertEqual({r["price_total_regular_pln"] for r in out}, {1500, 1800})
+        collector.validate_document({"results": out})
+        for field, invalid in (("flight_number", "UX"), ("price_source", "Air Europa official branded fare feed"), ("price_scope", "lowest_official_route_day_fare")):
+            broken = copy.deepcopy(out)
+            leg = next(leg for leg in broken[0]["legs"] if leg["carrier"] == "Air Europa")
+            leg[field] = invalid
+            with self.assertRaises(RuntimeError):
+                collector.validate_document({"results": broken})
 
 
 if __name__ == "__main__":

@@ -62,12 +62,13 @@ wyraźnej decyzji użytkownika.
   struktura lub błąd źródła przerywają zapis. Dotyczy to również błędów
   GraphQL Bintera zwracanych z HTTP 200. Taryfy Bintera w punktach `PTS`
   pomijać, zachowując prawidłowe taryfy gotówkowe EUR.
-- Ryanair: pobierać pełną dostępność wszystkich lotów. Po nieudanym oknie
-  ponowić pobranie z tego samego źródła osobno dla aktywnych dni. Fare Finder
-  nie jest dozwolonym zastępstwem: nawet cena minimalna dla jednego dnia może
-  pomijać inne godziny lotów. Brak pełnej odpowiedzi ma blokować aktualizację,
-  nie publikować wyniku częściowego. Błąd indeksu aktywnych dat również nie
-  może stać się pustym kalendarzem. Wspólna poprawka obejmuje 1A–1F, 2, 3 i 5.
+- Ryanair: pobierać z Google Flights HTTP każdy zapisany dzień każdej trasy,
+  zachowując indywidualne ceny, numery i godziny wszystkich bezpośrednich
+  ofert z kodami marketingowymi `FR` oraz Ryanair UK `RK`. Nie rozwijać
+  minimum dnia na inne rejsy i nie używać Fare Finder jako zastępstwa.
+  Niekompletna odpowiedź, rejs bez ceny lub błąd dnia blokuje publikację.
+  Maksymalnie dwa zapytania Google równolegle; wspólny trwały cache trasa/dzień
+  pozwala dziesięciu feedom jednego batcha użyć tego samego odczytu.
 - Każdy nowy feed zawiera `collection_coverage`, a obok powstaje
   `step*-results.collection-report.json`. Zapis feedu jest atomowy i dozwolony
   tylko przy kompletnym raporcie. Przy błędzie dotychczasowy feed pozostaje
@@ -84,7 +85,7 @@ wyraźnej decyzji użytkownika.
   używa jej z pamięci. Sama zmiana numeru wersji nie wymaga zmiany kolektora.
   Jeśli Wizz zmieni strukturę zapytania lub odpowiedzi, kolektor ma zakończyć
   się błędem przed nadpisaniem poprzedniego JSON-a.
-- Zapytania HTTP do Google Flights w krokach 1B i 1C mogą działać równolegle
+- Zapytania HTTP do Google Flights dla Ryanaira oraz w krokach 1B, 1C i 1D mogą działać równolegle
   najwyżej w dwóch wątkach. Wspólny limit jest zapisany w
   `scripts/collector_settings.py`; wartość `--workers` nie może go podnieść.
   Pojedyncze zapytanie nadal korzysta z ograniczonych ponowień i narastającego
@@ -201,24 +202,26 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Używać wyłącznie lotnisk i zapisanych połączeń do Polski z kanonicznej listy
   `data/air-europa-transfer-airports.json`. Aktualnie są to Madryt (MAD) i
   Bilbao (BIO), połączone przez Air Europa wyłącznie z Tenerife Norte (TFN).
-- Oficjalne strony Air Europa i osadzony na nich publiczny feed taryfowy marki
-  Air Europa są nadrzędnym źródłem tras i cen. W tym wariancie nie wolno używać
-  Google Flights.
+- Zapisane oficjalne źródła Air Europa pozostają podstawą listy tras.
+  Od decyzji użytkownika z 22.10.2026 jedynym źródłem bieżących numerów rejsów,
+  dat, godzin i indywidualnych cen Air Europa jest Google Flights przez HTTP.
 - Cotygodniowy kolektor nie odkrywa ponownie lotnisk i nie modyfikuje listy.
   Sprawdza oba kierunki i łączy odcinek Air Europa z dozwolonym odcinkiem
   Ryanair albo Wizz Air do WAW, WMI, KTW, KRK lub GDN.
-- Regularną cenę Air Europa pobierać z oficjalnego feedu jako najniższą cenę
-  dla trasy i dnia. Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25%
-  tej ceny; podatki mogą nie podlegać pełnej zniżce.
+- Pobierać regularną cenę w PLN dla każdego konkretnego rejsu osobno, z jego
+  pełnym numerem (np. UX9048), datami i godzinami. Sprawdzać wszystkie znane
+  bloki ofert, nie tylko pierwszy. Maksymalnie dwa równoległe zapytania,
+  zgodnie ze wspólnym limitem `scripts/collector_settings.py`.
+- Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25% regularnej ceny
+  Google; nie jest to oficjalna wycena rezydenta, podatki mogą podlegać innym zasadom.
 - Sprawdzać każdy dzień pełnego skonfigurowanego okna dat dla każdej zapisanej
   trasy Air Europa w obu kierunkach, niezależnie od dni lotów Wizz Air/Ryanair.
   Dopiero po pełnym skanie Air Europa dopasowywać możliwe przesiadki.
-- Feed taryfowy nie podaje godzin ani numerów lotów. Korzystać wyłącznie z
-  datowanych, zweryfikowanych szablonów rozkładu w allowliście. Jeśli okno
-  wykracza poza ich ważność, przerwać bez nadpisywania wyników zamiast
-  wymyślać dane.
-- Jeśli oficjalny feed nie zwróci użytecznych cen, również przerwać bez
-  nadpisywania poprzedniego pliku wynikowego.
+- Zabronione jest zastępowanie ceny rejsu minimum trasy/dnia, rozwijanie ceny
+  dziennej na szablon godzin lub powrót do promocyjnego feedu Air Europa.
+- Błąd Google, brak ceny lub pełnego numeru/godziny zwróconego rejsu, albo
+  brak użytecznych ofert całego skanu ma przerwać zapis. Zachować poprzedni
+  publiczny JSON i raport braków. Poprawnie sprawdzony pusty dzień jest dozwolony.
 - Generować wariant poleceniem `scripts/collect_step1d.py`, a publiczny wynik
   zapisywać w `data/step1d-results.json`. Nie filtrować wyników cenowo.
 - Każdy odcinek Air Europa otrzymuje oficjalny, trwały `booking_url` z trasą,
@@ -228,6 +231,12 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   ponieważ przekierowanie przewoźnika może utknąć podczas jej rozpoznawania.
   Strona usuwa parametr, gdy użytkownik wyłączy filtr rezydenta. Link nie
   zawiera cookies, kluczy API ani tokenów sesji.
+- Zmiana źródła danych na Google nie zmienia przewoźnika docelowego linku:
+  zakup nadal na Air Europa. Obecny trwały link przekazuje trasę, datę,
+  pasażerów i rezydenta, ale NIE wybiera automatycznie konkretnego numeru lotu.
+  Nie dopisywać niezweryfikowanych parametrów wyboru rejsu ani nie zapisywać
+  tymczasowych linków Google/Amadeus. Numer i godziny rejsu służą do jego
+  wskazania użytkownikowi na liście przewoźnika.
 
 ### Krok 1E — Volotea + Ryanair lub Wizz Air
 
@@ -293,11 +302,10 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Sprawdzić wyłącznie bezpośrednie loty Ryanair i Wizz Air między WAW, WMI,
   KRK, KTW lub GDN a TFS lub TFN.
 - Sprawdzić oba kierunki oddzielnie.
-- Wspólny wykonawca kalendarza Ryanaira jest używany również dla odcinków
-  low-cost w wariantach 1A–1F. Zapytanie Fare Finder o najtańszą ofertę
-  całego zakresu nie jest pełnym kalendarzem, podobnie jak minimum dla jednego
-  dnia. Tryb awaryjny pyta o pełną dostępność osobno dla aktywnych dat;
-  nieudane lub niekompletne pobranie przerywa kolekcję.
+- Wspólny wykonawca Ryanaira z Google Flights HTTP jest używany również dla
+  odcinków low-cost w wariantach 1A–1F, krokach 3 i 5. Każdy dzień jest
+  sprawdzany osobno, z kodami `FR` i `RK`; nieudane, niekompletne lub
+  pozbawione indywidualnej ceny pobranie przerywa kolekcję.
 - Dla każdej pary lotnisk i każdego przewoźnika pobrać pełne skonfigurowane
   okno dat; nie ograniczać dni na podstawie innego źródła.
 - Używać pełnej aktualnej ceny lotu; nie stosować mnożnika 25%.
@@ -408,9 +416,9 @@ Lista 1B jest aktualizowana osobno i może zawierać wyłącznie bezpośrednie t
 Iberii/Iberii Express z TFN lub TFS, na których obowiązuje kanaryjska zniżka
 rezydencka oraz istnieje dalszy odcinek Ryanair lub Wizz Air do Polski.
 
-Listy 1C i 1D są również aktualizowane osobno. Dla 1D weryfikacja musi odbywać
-się bezpośrednio na oficjalnych stronach i w feedzie Air Europa, nigdy przez
-Google Flights.
+Listy 1C i 1D są również aktualizowane osobno. Dla 1D listę tras weryfikować
+na oficjalnych stronach Air Europa, a bieżące numery, daty, godziny i ceny
+poszczególnych rejsów pobierać wyłącznie z Google Flights przez HTTP.
 
 Jeżeli nowa możliwość wykorzystuje Wizz Air, przed aktywacją muszą istnieć
 zweryfikowane numery lotów i czasy blokowe obu kierunków w rejestrze rozkładów.

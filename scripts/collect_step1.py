@@ -833,7 +833,7 @@ def main(args) -> None:
         },
         "sources": {
             "binter": "Binter booking_search GraphQL",
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "results": results,

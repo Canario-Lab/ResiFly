@@ -171,7 +171,7 @@ odświeżanie cen nadal używa zapisanych allowlist.
 | 1A Binter | Oficjalna siatka/rozkład Bintera, uprawnienie do zniżki; ceny i loty z obecnego GraphQL. |
 | 1B Iberia/Express | Oficjalne bezpośrednie trasy ze zniżką; regularne ceny z Google Flights przez HTTP. |
 | 1C Vueling | Oficjalna strona tras Vuelinga jest nadrzędna; Aena tylko pomocniczo; ceny z Google Flights przez HTTP. |
-| 1D Air Europa | Oficjalne strony i branded feed; zweryfikowane, datowane szablony rozkładu. Bez Google Flights. |
+| 1D Air Europa | Lista tras z zapisanych oficjalnych źródeł; od 22.10.2026 numery rejsów, godziny i ceny tylko z Google Flights HTTP, maksymalnie 2 zapytania równolegle. Bez minimum dnia i szablonów. |
 | 1E Volotea | Oficjalna strona tras i MinPrice; odrębne zapytania o każdy dzień i oba kierunki. Bez Google Flights. |
 | 1F Canaryfly | Oficjalne trasy i GraphQL: pełne kalendarze miesięczne, następnie szczegóły dostępnych dni. Bez Google Flights. |
 | 2–5 | Oficjalne siatki Ryanair/Wizz i obecne publiczne źródła rozkładów/cen; Wizz wymaga technicznych danych uzupełniających. |
@@ -277,7 +277,7 @@ nie uzasadni dodania GDN do konkretnego huba:
 | `data/binter-transfer-airports.json` | FUE, LPA, MAD, PMI, SVQ, VLC | Dopisać GDN do scope; uzupełnić dowody, lokalne Wizz metadata i ewentualne nowe kwalifikujące się huby. `eligibility_evidence` jest dowodem, a nie limitem skanu. |
 | `data/iberia-transfer-airports.json` | MAD | Scope, dowody GDN/przewoźnik, lokalne Wizz metadata, ewentualny nowy hub tylko po potwierdzeniu zniżki. Poprawić tekst „wszystkie cztery”. |
 | `data/vueling-transfer-airports.json` | ALC, BCN, BIO, AGP, SCQ, SVQ, VLC | Scope i konkretne `polish_routes` dla GDN; ponowna kontrola OVD/GRX i całej kwalifikującej się siatki Vuelinga. |
-| `data/air-europa-transfer-airports.json` | MAD, BIO | Scope i `polish_routes`; nowy hub wymaga oficjalnej strony, feedu i zweryfikowanych, ważnych szablonów rozkładu. |
+| `data/air-europa-transfer-airports.json` | MAD, BIO | Scope i `polish_routes`; nowy hub wymaga weryfikacji oficjalnej trasy i zniżki, a indywidualne dane rejsów i ceny zbiera Google Flights HTTP. |
 | `data/volotea-transfer-airports.json` | BIO | Scope i `polish_routes`; ponowna kontrola OVD i pozostałej kwalifikującej się siatki, z oficjalnego źródła. |
 | `data/canaryfly-transfer-airports.json` | FUE, LPA | Scope i `polish_routes`; kontrola ACE/SPC/VDE i pozostałej bezpośredniej siatki kwalifikującej się do zniżki. |
 | `data/ryanair-transfer-airports.json` | 34 rekordy hubów | Scope i GDN w `airports[].polish_airports` tylko przy potwierdzonym Ryanair; nowe huby, strefy, reguły zniżki, opisy i liczniki. |
@@ -314,7 +314,7 @@ Samo GDN nie wymaga nowej waluty ani zmiany formatu kursów NBP.
 | `collect_step1.py` (1A) | Każdy zapisany hub × pięć polskich endpointów × dwa kierunki × dwie linie low-cost; potwierdzone Wizz nie są pomijane bez zapytania. Pełny kalendarz Bintera niezależny od low-cost. |
 | `collect_step1b.py` | Analogiczny pełny iloczyn low-cost; użycie własnych Wizz metadata; pełne niezależne dni Iberii, limit Google Flights 2. |
 | `collect_step1c.py` | Tylko zatwierdzone `polish_routes`, z GDN tam, gdzie potwierdzone; pełne dni Vuelinga i właściwe źródło cen. |
-| `collect_step1d.py` | Faktyczne wywołanie wykonawcy low-cost z 1C obejmuje jego własną allowlistę GDN; ważny pełny rozkład Air Europa. |
+| `collect_step1d.py` | Wykonawca low-cost z 1C obejmuje jego własną allowlistę GDN; pełne niezależne kalendarze indywidualnych ofert Air Europa z Google Flights. |
 | `collect_step1e.py` | Analogiczna obsługa GDN, zapytanie MinPrice o każdą trasę i każdy dzień, puste odpowiedzi odróżnione od błędów. |
 | `collect_step1f.py` | Analogiczna obsługa GDN, pełne kalendarze miesięczne i szczegóły wszystkich dostępnych dni Canaryfly. |
 | `collect_step2.py` | Dokładnie 20 skierowanych par lotnisk na linię, 40 kombinacji para/linia. Obejmuje GDN ↔ TFN/TFS dla Wizz i Ryanair; brak rynku nie jest zmyślonym lotem. |

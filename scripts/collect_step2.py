@@ -28,6 +28,7 @@ if __package__ in {None, ""}:
 
 from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
 from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
+from scripts.ryanair_google import collect_route_days as collect_ryanair_google_route_days
 from scripts.wizz_api import wizz_api_base
 from scripts.wizz_schedules import load_wizz_route_data, resolve_schedule
 from scripts.collect_step1 import (
@@ -177,20 +178,8 @@ def collect_wizz_route(
 
 
 def ryanair_client_version() -> str:
-    last_error: Exception | None = None
-    for attempt in range(4):
-        try:
-            response = requests.get(RYANAIR_VERSION_PAGE, impersonate="chrome", timeout=60)
-            response.raise_for_status()
-            match = re.search(r"Desktop version: (\d+\.\d+\.\d+)", response.text)
-            if not match:
-                raise RuntimeError("Could not discover the current Ryanair desktop client version")
-            return match.group(1)
-        except Exception as error:
-            last_error = error
-            if attempt < 3:
-                time_module.sleep(1.5 * (attempt + 1))
-    raise RuntimeError("Could not discover the current Ryanair desktop client version") from last_error
+    """Compatibility token for callers that still pass a source identifier."""
+    return "google-flights-http"
 
 
 def ryanair_available_dates(origin: str, destination: str) -> list[date]:
@@ -301,7 +290,7 @@ def collect_ryanair_farefinder_dates(
 
 
 
-@calendar_collector("Ryanair", "full_availability")
+@calendar_collector("Ryanair", "google_flights_http")
 def collect_ryanair_route(
     origin: str,
     destination: str,
@@ -310,39 +299,11 @@ def collect_ryanair_route(
     rates: dict[str, CurrencyRate],
     client_version: str,
 ) -> list[dict[str, Any]]:
-    active_dates = ryanair_available_dates(origin, destination)
-    centers = ryanair_windows(active_dates, start, end)
-    if not centers:
-        return []
-
-    legs_by_key: dict[str, dict[str, Any]] = {}
-    for center in centers:
-        try:
-            payload = ryanair_availability(origin, destination, center, client_version)
-        except RuntimeError:
-            # Retry the same full-flight source in smaller requests. A daily
-            # cheapest-fare endpoint is NOT an acceptable substitute.
-            recovered = []
-            for day in sorted(set(active_dates)):
-                if start <= day <= end and center - timedelta(days=2) <= day <= center + timedelta(days=4):
-                    try:
-                        recovered.append((ryanair_availability(
-                            origin, destination, day, client_version, exact_day=True,
-                        ), {day}))
-                    except RuntimeError as error:
-                        raise RuntimeError(
-                            f"Incomplete Ryanair calendar {origin}-{destination} on {day}; "
-                            "full availability failed, publication blocked"
-                        ) from error
-            payloads = recovered
-        else:
-            expected = {day for day in active_dates if start <= day <= end and center - timedelta(days=2) <= day <= center + timedelta(days=4)}
-            payloads = [(payload, expected)]
-        for payload, expected in payloads:
-            validate_ryanair_calendar(payload, origin, destination, expected)
-        for payload, _ in payloads:
-            _parse_ryanair_calendar(payload, origin, destination, start, end, rates, legs_by_key)
-    return sorted(legs_by_key.values(), key=lambda leg: leg["departure_at"])
+    # ``rates`` and ``client_version`` remain in the signature so the shared
+    # Step 1/3/5 call sites stay stable. Google already returns PLN and the
+    # persistent route/day cache is shared by all collectors in the batch.
+    del rates, client_version
+    return collect_ryanair_google_route_days(origin, destination, start, end)
 
 
 def validate_ryanair_calendar(payload, origin, destination, expected_days):
@@ -490,7 +451,7 @@ def main(args) -> None:
             legs.extend(route_legs)
 
     client_version = ryanair_client_version()
-    print(f"Ryanair client version: {client_version}", flush=True)
+    print("Ryanair source: Google Flights HTTP (FR + RK, max 2 requests)", flush=True)
     for origin, destination in route_matrix():
         route_legs = collect_ryanair_route(
             origin,
@@ -529,7 +490,7 @@ def main(args) -> None:
             }
         },
         "sources": {
-            "ryanair": "Ryanair availability and active-dates APIs",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "results": results,

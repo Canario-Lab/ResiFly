@@ -423,7 +423,7 @@ def main(args) -> None:
                 "estimate: 25% of official regular fare with fees; taxes may not "
                 "receive the full resident discount"
             ),
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",

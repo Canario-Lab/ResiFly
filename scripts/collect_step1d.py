@@ -1,36 +1,38 @@
 #!/usr/bin/env python3
 """Build Step 1D: Air Europa + Ryanair or Wizz Air.
 
-Air Europa prices come directly from the public branded fare feed embedded in
-the carrier's official offer pages.  Google Flights is deliberately not used.
-The feed exposes the lowest regular route/day fare but not flight times, so the
-collector combines it with the verified, date-bounded timetable templates in
-the fixed Step 1D allowlist.  The resident value is explicitly an estimate of
-25% of the regular fare.  Price filtering is left to the website.
+Google Flights HTTP is the only source of Air Europa flight numbers, dates,
+times and individual flight prices. Route/day minima and timetable templates
+are not a fallback. The resident value is explicitly a 25% estimate. Official
+Air Europa route/date booking links remain independent from the price source.
 """
 
 from __future__ import annotations
 
 import argparse
-from datetime import date, datetime, time, timedelta
+from concurrent.futures import ThreadPoolExecutor
+from datetime import date, datetime, timedelta
 import hashlib
-from html import unescape
 import json
+import math
 from pathlib import Path
 import re
 import sys
-from typing import Any, Iterable
+import threading
+import time as time_module
+from typing import Any
 from zoneinfo import ZoneInfo
 
-from curl_cffi import requests
+from selectolax.lexbor import LexborHTMLParser
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from scripts.collection_coverage import collection_entrypoint, publish_document, record_checked
+from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
 from scripts.booking_urls import air_europa_booking_url
+from scripts.collector_settings import GOOGLE_FLIGHTS_MAX_WORKERS, google_flights_worker_count
+from scripts.collect_step1b import GoogleFlightsClient, _at, _google_datetime
 from scripts.collect_step1 import (
-    AIRPORT_TIMEZONES,
     MAX_LAYOVER_MINUTES,
     MIN_LAYOVER_MINUTES,
     POLISH_AIRPORTS,
@@ -39,7 +41,6 @@ from scripts.collect_step1 import (
     configure_airports_from_allowlist,
     date_range,
     dt,
-    money_pln,
     nbp_eur_rate,
     serialize_datetime,
 )
@@ -49,10 +50,6 @@ from scripts.collect_step1c import collect_low_cost_legs
 ROOT = Path(__file__).resolve().parents[1]
 TRANSFER_FILE = ROOT / "data" / "air-europa-transfer-airports.json"
 DEFAULT_OUTPUT = ROOT / "data" / "step1d-results.json"
-NEXT_DATA = re.compile(
-    r'<script[^>]+id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>',
-    re.DOTALL,
-)
 
 
 def cli() -> argparse.Namespace:
@@ -64,97 +61,15 @@ def cli() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _walk(value: Any) -> Iterable[dict[str, Any]]:
-    if isinstance(value, dict):
-        yield value
-        for child in value.values():
-            yield from _walk(child)
-    elif isinstance(value, list):
-        for child in value:
-            yield from _walk(child)
-
-
-def extract_sputnik_config(page_html: str, tenant: str) -> tuple[str, dict[str, str]]:
-    """Extract the temporary fare-feed endpoint/key from Air Europa's page."""
-
-    match = NEXT_DATA.search(page_html)
-    if not match:
-        raise RuntimeError("Strona Air Europa nie zawiera konfiguracji taryf")
-    try:
-        page_data = json.loads(unescape(match.group(1)))
-    except json.JSONDecodeError as error:
-        raise RuntimeError("Nie można odczytać konfiguracji strony Air Europa") from error
-
-    for node in _walk(page_data):
-        service = node.get("sputnikSearch")
-        if not isinstance(service, dict):
-            continue
-        config = service.get("config") or service
-        if not isinstance(config, dict):
-            continue
-        endpoint = config.get("endpoint")
-        axios = config.get("axiosConfig") or {}
-        headers = axios.get("headers") or {}
-        if not isinstance(endpoint, str) or not isinstance(headers, dict):
-            continue
-        normalized_headers = {str(key): str(value) for key, value in headers.items()}
-        if not any(key.lower() == "em-api-key" for key in normalized_headers):
-            continue
-        endpoint = endpoint.replace("%%tenantCode%%", tenant)
-        return endpoint, normalized_headers
-    raise RuntimeError("Strona Air Europa nie udostępniła klucza do feedu taryf")
-
-
-class AirEuropaFareClient:
-    """Read-only client for the fare feed configured by Air Europa's website."""
-
-    def __init__(self, config_page: str, tenant: str, market: str, language: str):
-        response = requests.get(config_page, impersonate="chrome", timeout=60)
-        response.raise_for_status()
-        self.endpoint, feed_headers = extract_sputnik_config(response.text, tenant)
-        self.config_page = config_page
-        self.market = market
-        self.language = language
-        self.headers = {
-            **feed_headers,
-            "content-type": "application/json",
-            "origin": "https://www.aireuropa.com",
-            "referer": config_page,
-        }
-
-    def search(
-        self,
-        origin: str,
-        destination: str,
-        start: date,
-        end: date,
-    ) -> Any:
-        payload = {
-            "autoSettings": {"language": self.language, "market": self.market},
-            "origins": [origin],
-            "destinations": [destination],
-            "journeyType": "ONE_WAY",
-            "departure": {"start": start.isoformat(), "end": end.isoformat()},
-            "routesLimit": 1,
-            "faresLimit": 100,
-            "faresPerRoute": 100,
-        }
-        response = requests.post(
-            self.endpoint,
-            headers=self.headers,
-            json=payload,
-            impersonate="chrome",
-            timeout=60,
-        )
-        response.raise_for_status()
-        return response.json()
-
-
 def validate_allowlist(allowlist: dict[str, Any]) -> None:
     if allowlist.get("usage_policy", {}).get("step") != "1D":
         raise RuntimeError("Lista Air Europa nie jest oznaczona jako krok 1D")
     if not allowlist.get("airports"):
         raise RuntimeError("Lista lotnisk Air Europa jest pusta")
+    if allowlist.get("usage_policy", {}).get("flight_data_source") != "google_flights_http":
+        raise RuntimeError("Air Europa wymaga wyłącznie indywidualnych ofert Google Flights")
+    if allowlist.get("air_europa_airline_codes", {}).get("accepted_marketing") != ["UX"]:
+        raise RuntimeError("Nieprawidłowa lista kodów marketingowych Air Europa")
     for airport in allowlist["airports"]:
         code = airport["iata"]
         ZoneInfo(airport["timezone"])
@@ -173,31 +88,6 @@ def validate_allowlist(allowlist: dict[str, Any]) -> None:
             carriers = set(route.get("airlines") or [])
             if not carriers or not carriers <= {"Ryanair", "Wizz Air"}:
                 raise RuntimeError(f"Nieprawidłowy drugi przewoźnik dla {code}")
-
-    direct_routes = {
-        (tenerife, airport["iata"])
-        for airport in allowlist["airports"]
-        for tenerife in airport["tenerife_airports"]
-    }
-    direct_routes |= {(destination, origin) for origin, destination in direct_routes}
-    schedule_routes = {
-        (item["origin"], item["destination"])
-        for item in allowlist.get("air_europa_schedule_templates", [])
-    }
-    missing = direct_routes - schedule_routes
-    if missing:
-        raise RuntimeError(f"Brak rozkładu Air Europa dla tras: {sorted(missing)}")
-
-
-def validate_schedule_window(allowlist: dict[str, Any], start: date, end: date) -> None:
-    templates = allowlist["air_europa_schedule_templates"]
-    first = min(date.fromisoformat(item["valid_from"]) for item in templates)
-    last = max(date.fromisoformat(item["valid_to"]) for item in templates)
-    if start < first or end > last:
-        raise RuntimeError(
-            "Okno wyszukiwania wykracza poza zweryfikowany rozkład Air Europa "
-            f"({first}–{last}); przed zapisem trzeba odświeżyć szablony w allowliście"
-        )
 
 
 def low_cost_route_matrix(
@@ -233,131 +123,153 @@ def air_europa_route_days(
     return route_days
 
 
-def parse_air_europa_fares(
-    payload: Any,
-    origin: str,
-    destination: str,
-    airline_code: str = "UX",
-) -> dict[date, tuple[float, str]]:
-    """Return the lowest official regular fare for each route/day."""
+def _google_offers(value: Any):
+    """Visit all recognized offer buckets, not only Google's first group."""
+    if not isinstance(value, list):
+        return
+    segments = _at(_at(value, 0, []), 2, [])
+    if (isinstance(segments, list) and segments and all(
+        isinstance(segment, list) and isinstance(_at(segment, 22), list)
+        and isinstance(_at(segment, 3), str) and isinstance(_at(segment, 6), str)
+        for segment in segments
+    )):
+        yield value
+        return
+    for child in value:
+        yield from _google_offers(child)
 
-    best: dict[date, tuple[float, str]] = {}
-    for record in _walk(payload):
-        flight = record.get("outboundFlight")
-        price = record.get("priceSpecification")
-        if not isinstance(flight, dict) or not isinstance(price, dict):
+
+def parse_google_flights_response(
+    html: str, origin: str, destination: str, departure_date: date,
+    multiplier: float, accepted_marketing: set[str],
+) -> list[dict[str, Any]]:
+    parser = LexborHTMLParser(html)
+    node = next((n for n in parser.css("script") if "ds:1" in (n.attributes.get("class") or "").split()), None)
+    if node is None or "data:" not in node.text():
+        raise RuntimeError("Google Flights nie zwrócił danych lotów Air Europa")
+    raw = node.text().split("data:", 1)[1].lstrip()
+    payload, _ = json.JSONDecoder().raw_decode(raw)
+    if (not isinstance(payload, list) or len(payload) <= 3 or
+        payload[3] is not None and (not isinstance(payload[3], list) or not payload[3])):
+        raise RuntimeError("Nieznana struktura odpowiedzi Google Flights dla Air Europa")
+    best, unpriced = {}, set()
+    for offer in _google_offers(payload):
+        segments = _at(_at(offer, 0, []), 2, [])
+        if len(segments) != 1:
             continue
-        if str(flight.get("departureAirportIataCode", "")).upper() != origin:
+        segment = segments[0]
+        if _at(segment, 3) != origin or _at(segment, 6) != destination:
             continue
-        if str(flight.get("arrivalAirportIataCode", "")).upper() != destination:
+        flight = _at(segment, 22, [])
+        marketing = str(_at(flight, 0, "")).upper()
+        if marketing not in accepted_marketing:
             continue
-        airline = record.get("airline") or flight.get("airline") or {}
-        if str(airline.get("iataCode", "")).upper() != airline_code:
+        for index in (8, 10):
+            clock = _at(segment, index)
+            # Google's compact clock arrays omit trailing zero minutes:
+            # [15] is 15:00, not an incomplete timestamp. A missing clock
+            # object still fails; no timetable or another flight is consulted.
+            if not isinstance(clock, list) or not clock:
+                raise RuntimeError("Brak pełnej godziny rejsu Air Europa; zapis zablokowany")
+            hour, minute = _at(clock, 0, 0), _at(clock, 1, 0)
+            hour = 0 if hour is None else hour
+            minute = 0 if minute is None else minute
+            if (any(not isinstance(part, int) or isinstance(part, bool) for part in (hour, minute)) or
+                not 0 <= hour < 24 or not 0 <= minute < 60):
+                raise RuntimeError("Nieprawidłowa godzina rejsu Air Europa; zapis zablokowany")
+        departure = _google_datetime(_at(segment, 20), _at(segment, 8), origin)
+        arrival = _google_datetime(_at(segment, 21), _at(segment, 10), destination)
+        if departure.date() != departure_date:
             continue
-        raw_day = flight.get("departureDate") or record.get("departureDate")
+        number = str(_at(flight, 1, "")).replace(" ", "").upper()
+        number = number if number.startswith(marketing) else marketing + number
+        if not re.fullmatch(r"UX\d{1,5}", number) or arrival <= departure:
+            raise RuntimeError("Nieprawidłowy numer lub daty rejsu Air Europa")
+        key = (number, departure.isoformat(), arrival.isoformat())
+        amount = _at(_at(_at(offer, 1, []), 0, []), 1)
+        if (not isinstance(amount, (int, float)) or isinstance(amount, bool) or
+            not math.isfinite(amount) or amount <= 0):
+            unpriced.add(key)
+            continue
+        regular = round(float(amount), 2)
+        leg = {
+            "carrier": "Air Europa", "flight_number": number,
+            "departure_airport": origin, "arrival_airport": destination,
+            "departure_at": serialize_datetime(departure), "arrival_at": serialize_datetime(arrival),
+            "price_regular_pln": regular, "price_resident_estimated_pln": round(regular * multiplier, 2),
+            "resident_discount_eligible": True, "resident_fare_multiplier": multiplier,
+            "resident_price_source": "estimate: configured percentage of Google Flights non-resident fare",
+            "booking_url": air_europa_booking_url(origin, destination, departure),
+            "booking_url_scope": "route_date_search",
+            "price_source": "Google Flights", "price_scope": "individual_flight_offer",
+            "price_source_currency": "PLN", "price_source_amount": regular,
+            "price_seller_verified": False, "schedule_source": "Google Flights individual flight offer",
+        }
+        if key not in best or regular < best[key]["price_regular_pln"]:
+            best[key] = leg
+    if unpriced - best.keys():
+        raise RuntimeError(f"Google Flights zwrócił rejs Air Europa bez ceny dla {origin}-{destination} {departure_date}; brak zastępowania minimum dnia")
+    return sorted(best.values(), key=lambda leg: (leg["departure_at"], leg["flight_number"]))
+
+
+@calendar_collector("Air Europa", "google_flights_http")
+def collect_air_europa_trip(
+    client: GoogleFlightsClient, origin: str, destination: str,
+    departure_date: date, multiplier: float, accepted_marketing: set[str],
+) -> list[dict[str, Any]]:
+    last_error: Exception | None = None
+    for attempt in range(4):
         try:
-            day = date.fromisoformat(str(raw_day)[:10])
-            amount = float(price["totalPrice"])
-            currency = str(price["currencyCode"]).upper()
-        except (KeyError, TypeError, ValueError):
-            continue
-        if amount <= 0 or not re.fullmatch(r"[A-Z]{3}", currency):
-            continue
-        previous = best.get(day)
-        if previous is None or amount < previous[0]:
-            best[day] = (amount, currency)
-    return best
-
-
-def scheduled_departures(
-    allowlist: dict[str, Any], origin: str, destination: str, day: date
-) -> list[tuple[datetime, datetime]]:
-    results: list[tuple[datetime, datetime]] = []
-    for template in allowlist["air_europa_schedule_templates"]:
-        if (template["origin"], template["destination"]) != (origin, destination):
-            continue
-        if not date.fromisoformat(template["valid_from"]) <= day <= date.fromisoformat(
-            template["valid_to"]
-        ):
-            continue
-        if day.weekday() not in template["weekdays"]:
-            continue
-        for item in template["departures"]:
-            departure = datetime.combine(
-                day,
-                time.fromisoformat(item["time"]),
-                tzinfo=ZoneInfo(AIRPORT_TIMEZONES[origin]),
+            html = client.availability(origin, destination, departure_date)
+            if "PLN" not in html and "zł" not in html:
+                raise RuntimeError("Nie potwierdzono waluty PLN odpowiedzi Air Europa Google Flights")
+            return parse_google_flights_response(
+                html, origin, destination, departure_date, multiplier, accepted_marketing,
             )
-            arrival = (departure + timedelta(minutes=int(item["duration_minutes"]))).astimezone(
-                ZoneInfo(AIRPORT_TIMEZONES[destination])
-            )
-            results.append((departure, arrival))
-    return sorted(results)
+        except (RuntimeError, json.JSONDecodeError, ValueError) as error:
+            last_error = error
+            if attempt + 1 < 4:
+                time_module.sleep(1.5 * (attempt + 1))
+    raise RuntimeError(
+        f"Google Flights Air Europa failed for {origin}-{destination} on {departure_date}; "
+        "publication blocked"
+    ) from last_error
 
 
 def collect_air_europa_legs(
     route_days: set[tuple[str, str, date]],
     allowlist: dict[str, Any],
-    rates: dict[str, CurrencyRate],
-    client: AirEuropaFareClient,
+    workers: int,
 ) -> list[dict[str, Any]]:
     if not route_days:
         return []
-    config = allowlist["fare_feed"]
     rules = {airport["iata"]: airport for airport in allowlist["airports"]}
-    grouped_route_days: dict[tuple[str, str], set[date]] = {}
-    for origin, destination, day in route_days:
-        grouped_route_days.setdefault((origin, destination), set()).add(day)
+    accepted = set(allowlist["air_europa_airline_codes"]["accepted_marketing"])
+    ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
+    abort, local = threading.Event(), threading.local()
 
-    legs: list[dict[str, Any]] = []
-    for origin, destination in sorted(grouped_route_days):
-        days = grouped_route_days[(origin, destination)]
-        payload = client.search(origin, destination, min(days), max(days))
-        fares = parse_air_europa_fares(
-            payload, origin, destination, config["airline_code"]
-        )
+    def fetch(candidate):
+        if abort.is_set():
+            raise RuntimeError("Pobieranie Air Europa zatrzymane po błędzie Google Flights")
+        origin, destination, day = candidate
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
-        multiplier = float(rules[transfer]["air_europa_resident_fare_multiplier"])
-        for day in sorted(days):
-            if day not in fares:
-                continue
-            amount, currency = fares[day]
-            regular_pln = money_pln(amount, currency, rates)
-            for departure, arrival in scheduled_departures(
-                allowlist, origin, destination, day
-            ):
-                legs.append({
-                    "carrier": "Air Europa",
-                    "flight_number": "UX",
-                    "departure_airport": origin,
-                    "departure_at": serialize_datetime(departure),
-                    "arrival_airport": destination,
-                    "arrival_at": serialize_datetime(arrival),
-                    "price_regular_pln": regular_pln,
-                    "resident_discount_eligible": True,
-                    "resident_fare_multiplier": multiplier,
-                    "price_resident_estimated_pln": round(regular_pln * multiplier, 2),
-                    "resident_price_source": (
-                        "estimated as configured percentage of Air Europa official "
-                        "regular route-day fare"
-                    ),
-                    "booking_url": air_europa_booking_url(origin, destination, departure),
-                    "price_source": "Air Europa official branded fare feed",
-                    "price_scope": "lowest_official_route_day_fare",
-                    "price_source_currency": currency,
-                    "price_source_amount": amount,
-                    "schedule_source": (
-                        "Air Europa official booking results; verified timetable "
-                        f"template {allowlist['verified_on']}"
-                    ),
-                })
-        print(
-            f"Air Europa: {origin}-{destination}: {len(fares)} dni z ceną",
-            flush=True,
-        )
-        record_checked("Air Europa", origin, destination, min(days), max(days),
-                       [leg for leg in legs if leg["departure_airport"] == origin and leg["arrival_airport"] == destination],
-                       "official_route_day_fares")
+        try:
+            if not hasattr(local, "client"):
+                local.client = GoogleFlightsClient()
+            return collect_air_europa_trip(local.client, origin, destination, day,
+                float(rules[transfer]["air_europa_resident_fare_multiplier"]), accepted)
+        except Exception:
+            abort.set()
+            raise
+
+    max_workers = google_flights_worker_count(workers)
+    print(f"Google Flights Air Europa: {max_workers} równoległe zapytania (limit {GOOGLE_FLIGHTS_MAX_WORKERS})", flush=True)
+    legs: list[dict[str, Any]] = []
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        for index, result in enumerate(executor.map(fetch, ordered), start=1):
+            legs.extend(result)
+            if index % 10 == 0 or index == len(ordered):
+                print(f"Air Europa przez Google Flights: {index}/{len(ordered)} tras/dni", flush=True)
     return sorted(legs, key=lambda leg: leg["departure_at"])
 
 
@@ -439,10 +351,14 @@ def validate_document(document: dict[str, Any]) -> None:
         for leg in result["legs"]:
             if not leg.get("booking_url"):
                 raise RuntimeError(f"Brak booking_url w {result['id']}")
-            if leg["carrier"] == "Air Europa" and leg.get("price_source") != (
-                "Air Europa official branded fare feed"
-            ):
-                raise RuntimeError(f"Niedozwolone źródło ceny w {result['id']}")
+            if leg["carrier"] == "Air Europa":
+                if leg.get("price_source") != "Google Flights" or leg.get("price_scope") != "individual_flight_offer":
+                    raise RuntimeError(f"Niedozwolone źródło lub zakres ceny w {result['id']}")
+                if not re.fullmatch(r"UX\d{1,5}", leg.get("flight_number", "")):
+                    raise RuntimeError(f"Brak pełnego numeru lotu Air Europa w {result['id']}")
+                expected_url = air_europa_booking_url(leg["departure_airport"], leg["arrival_airport"], leg["departure_at"])
+                if leg["booking_url"] != expected_url:
+                    raise RuntimeError(f"Nietrwały lub nieprawidłowy link Air Europa w {result['id']}")
 
 
 @collection_entrypoint("1d")
@@ -452,7 +368,6 @@ def main(args) -> None:
     end = args.from_date + timedelta(days=args.days)
     allowlist = json.loads(TRANSFER_FILE.read_text(encoding="utf-8"))
     validate_allowlist(allowlist)
-    validate_schedule_window(allowlist, args.from_date, end)
     configure_airports_from_allowlist(allowlist)
 
     eur = nbp_eur_rate(args.from_date)
@@ -471,17 +386,10 @@ def main(args) -> None:
 
     route_days = air_europa_route_days(allowlist, args.from_date, end)
     print(f"Dni tras Air Europa do sprawdzenia: {len(route_days)}", flush=True)
-    config = allowlist["fare_feed"]
-    client = AirEuropaFareClient(
-        config["config_page"],
-        config["tenant"],
-        config["market"],
-        config["language"],
-    )
-    air_europa = collect_air_europa_legs(route_days, allowlist, rates, client)
+    air_europa = collect_air_europa_legs(route_days, allowlist, args.workers)
     if route_days and not air_europa:
         raise RuntimeError(
-            "Oficjalny feed Air Europa nie zwrócił użytecznych cen; "
+            "Google Flights nie zwrócił użytecznych indywidualnych ofert Air Europa; "
             "wynik 1D nie zostanie nadpisany"
         )
     results = build_connections(low_cost, air_europa)
@@ -504,14 +412,14 @@ def main(args) -> None:
         },
         "sources": {
             "air_europa_routes_and_prices": (
-                "Air Europa official offer pages and their branded public fare feed; "
-                "regular route-day fare, no Google Flights"
+                "Google Flights HTTP only: individual Air Europa flight numbers, "
+                "dates, times and regular fares; no day-minimum or timetable-template fallback"
             ),
             "air_europa_resident_price": (
-                "estimate: 25% of official regular route-day fare; taxes may not "
+                "estimate: 25% of Google Flights regular flight fare; taxes may not "
                 "receive the full resident discount"
             ),
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",

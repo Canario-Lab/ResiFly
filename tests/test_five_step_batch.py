@@ -38,9 +38,9 @@ class FiveStepBatchTests(unittest.TestCase):
                                expected_queries(step, date(2026, 10, 22), date(2026, 11, 21)), "test-batch")
             for carrier, origin, destination, day, kind in tracker.expected:
                 tracker.completed[(carrier, origin, destination, day, kind)] = (0, {
-                    "Ryanair": "full_availability", "Wizz Air": "timetableV2", "Binter": "booking_search",
+                    "Ryanair": "google_flights_http", "Wizz Air": "timetableV2", "Binter": "booking_search",
                     "Iberia": "google_flights_http", "Vueling": "google_flights_http",
-                    "Volotea": "official_minprice", "Air Europa": "official_route_day_fares", "Canaryfly": "booking_calendar",
+                    "Volotea": "official_minprice", "Air Europa": "google_flights_http", "Canaryfly": "booking_calendar",
                 }[carrier])
             document["collection_coverage"] = tracker.verify()
             documents[step] = document

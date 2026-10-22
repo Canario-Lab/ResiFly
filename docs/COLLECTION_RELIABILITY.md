@@ -7,26 +7,18 @@ dat, obydwa kierunki, zniżki i filtrowanie cen na stronie pozostają bez zmian.
 ## Ryanair
 
 Wspólna funkcja w `scripts/collect_step2.py` jest używana przez kroki 1A–1F,
-2, 3 i 5. Pobiera własny indeks aktywnych dat przewoźnika i pełną dostępność,
-bez ograniczania dat rozkładem drugiej linii. Sprawdza obecność wszystkich
-oczekiwanych aktywnych dni w odpowiedzi. Zachowuje wszystkie zwrócone
-bezpośrednie loty mające dostępną taryfę, także różne godziny tego samego dnia.
+2, 3 i 5. Od decyzji z 22.10.2026 jedynym bieżącym źródłem numerów, dat,
+godzin i indywidualnych cen Ryanaira jest Google Flights HTTP. Każda zapisana
+trasa jest pytana osobno o każdy dzień pełnego okna, niezależnie od rozkładu
+drugiej linii. Parser zachowuje wszystkie bezpośrednie oferty z kodami `FR`
+oraz Ryanair UK `RK`, także kilka godzin tego samego dnia.
 
-Po błędzie pełnego okna próbuje tych samych pełnych danych z elastycznością
-dat ustawioną na zero, osobno dla aktywnych dni tego okna. Nie ponawia już
-poprawnie zebranych okien. Po niepowodzeniu przerywa aktualizację i podaje
-trasę oraz datę. Nie traktuje HTTP 400/404 indeksu dat jako potwierdzenia
-braku połączenia; prawidłowa lista `[]` jest dopuszczalna.
-
-Fare Finder nie jest źródłem zastępczym do publikacji: minimum miesięczne
-pomija dni, a minimum dzienne może pomijać inne godziny. Dawne wejście
-`collect_ryanair_farefinder_dates` zawsze zgłasza blokadę, zamiast wysyłać
-zapytanie i poświadczać niekompletny wynik.
-
-To zabezpieczenie nie omija odmowy przewoźnika ani nie gwarantuje dostępności
-API. Jeżeli pełne źródło odrzuca również zapytanie dzienne, aktualizacja
-pozostaje zablokowana. Inne źródło zastępcze wymaga osobnej weryfikacji
-kompletności godzin i cen, nie tylko znalezienia jednej oferty.
+Wszystkie zapytania Ryanaira są ograniczone do dwóch równoległych wywołań.
+Znormalizowane poprawne odpowiedzi trasa/dzień trafiają do trwałego cache i są
+ponownie używane przez dziesięć kolektorów tego samego batcha. Brak ceny
+konkretnego rejsu, nieznana struktura albo wyczerpanie ponowień blokuje
+publikację; poprawny pusty dzień jest dozwolony. Minimum dnia i Fare Finder
+nie są źródłami zastępczymi i nie mogą poświadczyć kompletnego kalendarza.
 
 ## Binter
 
@@ -39,6 +31,28 @@ nie jest poprawnym pustym dniem.
 Poprawna pusta dostępność i wyprzedane taryfy (`seats=0`) są dozwolone.
 Punkty lojalnościowe `PTS` są celowo pomijane, a taryfy pieniężne EUR są
 przetwarzane niezależnie. Nieprawidłowa taryfa gotówkowa blokuje wynik.
+
+## Air Europa — wyłącznie Google Flights od 22.10.2026
+
+Krok 1D pobiera numery rejsów, pełne daty/godziny i regularne ceny w PLN
+wyłącznie z indywidualnych ofert Google Flights HTTP. Dla każdego rejsu
+zachowuje jego własną najniższą zwróconą taryfę. Nie wolno zastępować ceny
+konkretnego lotu promocyjnym minimum trasy/dnia ani rozkładem z szablonu.
+Usunięto dotychczasowy klient branded feedu i aktywne szablony z allowlisty.
+
+Obowiązuje wspólny limit dwóch równoległych zapytań, także gdy `--workers`
+jest większy. Błąd źródła zatrzymuje dalsze zapytania; pozostały aktywny
+wątek może dokończyć swoją próbę. Pusty, poprawnie sprawdzony dzień jest
+dozwolony. Brak ceny, pełnego numeru lub godzin zwróconego rejsu blokuje zapis.
+Raport pokrycia dopuszcza tylko metodę `google_flights_http` dla Air Europa,
+więc stary raport minimum dnia nie może poświadczyć nowego pobrania.
+
+Cena rezydenta pozostaje jawnie oznaczonym szacunkiem 25%, nie oficjalną
+wyceną przewoźnika. Trwały link zakupu nadal prowadzi do Air Europa,
+z trasą/datą/pasażerami i parametrem `residentType=SPANISH_RESIDENT_RC`,
+usuwanym przez stronę po wyłączeniu rezydenta. Obecny format jest wyszukiwaniem
+trasy/dnia, nie potwierdzonym automatycznym wyborem numeru rejsu. Nie wolno
+dodawać niezweryfikowanych parametrów wyboru lotu lub utrwalać linków sesyjnych.
 
 ## Raport pokrycia
 

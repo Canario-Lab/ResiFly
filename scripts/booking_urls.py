@@ -226,6 +226,11 @@ def air_europa_booking_url(
     concrete value avoids the intermediate ``residentType=true`` resolution
     that can leave the carrier's redirect on its loading screen. The link
     contains no cookies, API keys or browser-session identifiers.
+
+    This is a route/date search URL, not a flight-number preselection. The
+    public deeplink handler reads airports, dates, passengers and residentType;
+    no verified stable flight-number parameter is used. Changing the price
+    source to Google Flights does not change this official carrier link.
     """
 
     passenger_counts = (adults, children, infants)

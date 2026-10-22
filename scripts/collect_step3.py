@@ -268,7 +268,7 @@ def main(args) -> None:
     print(f"Trasy z zapisanej listy: {len(routes)}", flush=True)
 
     client_version = ryanair_client_version()
-    print(f"Ryanair client version: {client_version}", flush=True)
+    print("Ryanair source: Google Flights HTTP (FR + RK, max 2 requests)", flush=True)
     legs = collect_routes(routes, args.from_date, end, rates, client_version, args.workers)
     print(f"Odcinki Ryanair: {len(legs)}", flush=True)
     results = build_connections(legs, allowlist)
@@ -307,7 +307,7 @@ def main(args) -> None:
         },
         "sources": {
             "allowlist": "data/ryanair-transfer-airports.json",
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
         },
         "results": results,
     }

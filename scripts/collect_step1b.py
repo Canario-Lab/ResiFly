@@ -170,8 +170,11 @@ def _google_flights_payload(html: str) -> list[Any]:
     text = script.text()
     if "data:" not in text:
         raise RuntimeError("Nieznany format odpowiedzi Google Flights")
-    raw = text.split("data:", 1)[1].rsplit(",", 1)[0]
-    payload = json.loads(raw)
+    # Google may append more than one callback field after ``data``. Decode
+    # exactly the first JSON value instead of assuming the final comma belongs
+    # to ``sideChannel``.
+    raw = text.split("data:", 1)[1].lstrip()
+    payload, _ = json.JSONDecoder().raw_decode(raw)
     try:
         result_block = payload[3]
     except (IndexError, TypeError):
@@ -271,13 +274,24 @@ def collect_iberia_trip(
     multiplier: float,
     accepted_marketing: set[str],
 ) -> list[dict[str, Any]]:
-    return parse_google_flights_response(
-        client.availability(origin, destination, departure_date),
-        origin,
-        destination,
-        multiplier,
-        accepted_marketing,
-    )
+    last_error: Exception | None = None
+    for attempt in range(4):
+        try:
+            return parse_google_flights_response(
+                client.availability(origin, destination, departure_date),
+                origin,
+                destination,
+                multiplier,
+                accepted_marketing,
+            )
+        except (RuntimeError, json.JSONDecodeError, ValueError) as error:
+            last_error = error
+            if attempt + 1 < 4:
+                time_module.sleep(1.5 * (attempt + 1))
+    raise RuntimeError(
+        f"Google Flights Iberia failed for {origin}-{destination} on {departure_date}; "
+        "publication blocked"
+    ) from last_error
 
 
 def iberia_route_days(
@@ -522,7 +536,7 @@ def main(args) -> None:
                 "Google Flights: regularna cena w PLN; cena rezydenta "
                 "oszacowana jako 25% ceny regularnej zgodnie z listą lotnisk"
             ),
-            "ryanair": "Ryanair full availability and active-dates APIs; no minimum-fare substitution",
+            "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },
         "result_status": "ok" if results else "no_matching_connections",

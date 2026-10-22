@@ -35,10 +35,16 @@ def binter_response(flights=None):
 
 
 class RyanairCompletenessTests(unittest.TestCase):
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[DAY])
-    @patch("scripts.collect_step2.ryanair_availability")
-    def test_keeps_both_flights_and_more_expensive_one_can_be_only_valid_connection(self, availability, dates):
-        availability.return_value = calendar()
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days")
+    def test_keeps_both_flights_and_more_expensive_one_can_be_only_valid_connection(self, google):
+        def google_leg(number, departure, arrival, price):
+            return {"carrier": "Ryanair", "flight_number": number,
+                    "departure_airport": "WMI", "arrival_airport": "MAD",
+                    "departure_at": f"{DAY}T{departure}:00+01:00",
+                    "arrival_at": f"{DAY}T{arrival}:00+01:00",
+                    "price_regular_pln": price, "price_resident_estimated_pln": price,
+                    "resident_discount_eligible": False, "booking_url": "https://example.com"}
+        google.return_value = [google_leg("FR1", "14:00", "17:00", 86), google_leg("FR2", "09:00", "12:00", 172)]
         legs = ryanair.collect_ryanair_route("WMI", "MAD", DAY, DAY, RATES, "test")
         self.assertEqual({leg["flight_number"] for leg in legs}, {"FR1", "FR2"})
         resident_leg = {"carrier": "Binter", "flight_number": "NT1", "departure_airport": "MAD",
@@ -49,19 +55,15 @@ class RyanairCompletenessTests(unittest.TestCase):
         self.assertEqual(len(connections), 1)
         self.assertEqual(connections[0]["legs"][0]["flight_number"], "FR2")
 
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[DAY, DAY + timedelta(days=1)])
-    @patch("scripts.collect_step2.ryanair_availability")
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days", return_value=[])
     @patch("scripts.collect_step2.collect_ryanair_farefinder_dates")
-    def test_failed_window_retries_full_availability_each_day_not_minimum_fares(self, minimum, availability, dates):
-        availability.side_effect = [RuntimeError("Availability declined"), calendar(flights=[]), calendar(DAY + timedelta(days=1), flights=[])]
+    def test_verified_empty_google_window_does_not_use_minimum_fares(self, minimum, google):
         self.assertEqual(ryanair.collect_ryanair_route("WMI", "MAD", DAY, DAY + timedelta(days=1), RATES, "test"), [])
-        self.assertEqual(availability.call_count, 3)
-        self.assertEqual([c.kwargs for c in availability.call_args_list], [{}, {"exact_day": True}, {"exact_day": True}])
+        google.assert_called_once_with("WMI", "MAD", DAY, DAY + timedelta(days=1))
         minimum.assert_not_called()
 
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[DAY])
-    @patch("scripts.collect_step2.ryanair_availability", side_effect=RuntimeError("Availability declined"))
-    def test_failed_daily_full_source_propagates_in_steps_3_and_5(self, availability, dates):
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days", side_effect=RuntimeError("Google route/day failed; publication blocked"))
+    def test_failed_daily_google_source_propagates_in_steps_3_and_5(self, google):
         with self.assertRaisesRegex(RuntimeError, "publication blocked"):
             collect_step3.collect_routes([("WMI", "MAD")], DAY, DAY, RATES, "test", 1)
         with patch("scripts.collect_step5.collect_wizz_routes") as wizz:
@@ -69,11 +71,9 @@ class RyanairCompletenessTests(unittest.TestCase):
                 collect_step5.collect_full_calendars({"Ryanair": [("WMI", "MAD")], "Wizz Air": []}, DAY, DAY, RATES, "test", 1)
             wizz.assert_not_called()
 
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[DAY, DAY + timedelta(days=1)])
-    @patch("scripts.collect_step2.ryanair_availability")
-    def test_successful_http_response_missing_an_active_day_is_rejected(self, availability, dates):
-        availability.return_value = calendar(flights=[])
-        with self.assertRaisesRegex(RuntimeError, "missing dates"):
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days", side_effect=RuntimeError("missing route/day"))
+    def test_missing_google_route_day_is_rejected(self, google):
+        with self.assertRaisesRegex(RuntimeError, "missing route/day"):
             ryanair.collect_ryanair_route("WMI", "MAD", DAY, DAY + timedelta(days=1), RATES, "test")
 
     @patch("scripts.collect_step2.time_module.sleep")
@@ -157,8 +157,8 @@ class CoverageTests(unittest.TestCase):
     @patch("scripts.collect_step1.wizz_timetable", return_value=[])
     @patch("scripts.collect_step1.get_json", return_value={"data": {"booking_search": {"messages": [], "availability": []}}})
     @patch("scripts.collect_step2.ryanair_client_version", return_value="test")
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[])
-    def test_successful_standalone_step1_records_every_planned_empty_route_and_day(self, dates, version, get, wizz, nbp, print_mock):
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days", return_value=[])
+    def test_successful_standalone_step1_records_every_planned_empty_route_and_day(self, google, version, get, wizz, nbp, print_mock):
         def source_reply(*args, **kwargs):
             trip = kwargs["payload"]["variables"]["search"]["trips"][0]
             if {trip["origin"], trip["destination"]} != {"TFN", "MAD"}:
@@ -193,8 +193,8 @@ class CoverageTests(unittest.TestCase):
     @patch("scripts.collect_step2.nbp_eur_rate", return_value=RATES["EUR"])
     @patch("scripts.collect_step2.wizz_timetable", return_value=[])
     @patch("scripts.collect_step2.ryanair_client_version", return_value="test")
-    @patch("scripts.collect_step2.ryanair_available_dates", return_value=[])
-    def test_successful_step2_certifies_all_forty_route_carrier_pairs(self, dates, version, wizz, nbp, print_mock):
+    @patch("scripts.collect_step2.collect_ryanair_google_route_days", return_value=[])
+    def test_successful_step2_certifies_all_forty_route_carrier_pairs(self, google, version, wizz, nbp, print_mock):
         wizz.side_effect = lambda origin, destination, start, end, price_type: ([{
             "departureDate": f"{DAY}T10:00:00", "price": {"currencyCode": "EUR", "amount": 50},
         }] if {origin, destination} == {"WAW", "TFS"} else [])

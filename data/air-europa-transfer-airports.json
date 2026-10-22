@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "name": "Lotniska przesiadkowe Air Europa dla kroku 1D",
   "verified_on": "2026-10-22",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Air Europa + Ryanair/Wizz Air w kroku 1D.",
@@ -25,18 +25,12 @@
   "usage_policy": {
     "step": "1D",
     "discovery_mode": "fixed_allowlist",
-    "weekly_run": "Sprawdzaj wyłącznie aktualne ceny i dostępność dla zapisanych tras. Nie używaj Google Flights dla Air Europa.",
+    "weekly_run": "Pobieraj wyłącznie indywidualne oferty Air Europa z Google Flights HTTP dla wszystkich zapisanych tras/dni, maksymalnie dwa zapytania równolegle. Bez zastępowania minimum dnia lub szablonem rozkładu.",
     "do_not_rediscover_each_run": true,
     "update_only_on_explicit_user_request": true,
-    "primary_route_and_price_source": "Oficjalne strony Air Europa i osadzony na nich publiczny feed taryfowy marki Air Europa.",
-    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1D obejmuje bezpośrednie odcinki Air Europa z/do TFN. TFS nie ma zapisanej kwalifikującej się trasy Air Europa."
-  },
-  "fare_feed": {
-    "config_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid",
-    "tenant": "ux",
-    "airline_code": "UX",
-    "market": "ES",
-    "language": "es"
+    "primary_route_and_price_source": "Trasy: zapisane oficjalne źródła Air Europa. Numery rejsów, daty, godziny i indywidualne ceny: wyłącznie Google Flights HTTP.",
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1D obejmuje bezpośrednie odcinki Air Europa z/do TFN. TFS nie ma zapisanej kwalifikującej się trasy Air Europa.",
+    "flight_data_source": "google_flights_http"
   },
   "airports": [
     {
@@ -109,186 +103,6 @@
       "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-bilbao"
     }
   ],
-  "air_europa_schedule_templates": [
-    {
-      "origin": "TFN",
-      "destination": "MAD",
-      "valid_from": "2026-10-21",
-      "valid_to": "2026-10-24",
-      "weekdays": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "departures": [
-        {
-          "time": "07:10",
-          "duration_minutes": 170
-        },
-        {
-          "time": "09:55",
-          "duration_minutes": 165
-        },
-        {
-          "time": "17:55",
-          "duration_minutes": 165
-        }
-      ]
-    },
-    {
-      "origin": "MAD",
-      "destination": "TFN",
-      "valid_from": "2026-10-21",
-      "valid_to": "2026-10-24",
-      "weekdays": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "departures": [
-        {
-          "time": "07:00",
-          "duration_minutes": 175
-        },
-        {
-          "time": "11:45",
-          "duration_minutes": 175
-        },
-        {
-          "time": "15:05",
-          "duration_minutes": 175
-        }
-      ]
-    },
-    {
-      "origin": "TFN",
-      "destination": "MAD",
-      "valid_from": "2026-10-25",
-      "valid_to": "2027-03-27",
-      "weekdays": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "departures": [
-        {
-          "time": "07:05",
-          "duration_minutes": 165
-        },
-        {
-          "time": "09:55",
-          "duration_minutes": 170
-        },
-        {
-          "time": "17:55",
-          "duration_minutes": 175
-        }
-      ]
-    },
-    {
-      "origin": "MAD",
-      "destination": "TFN",
-      "valid_from": "2026-10-25",
-      "valid_to": "2027-03-27",
-      "weekdays": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "departures": [
-        {
-          "time": "07:00",
-          "duration_minutes": 175
-        },
-        {
-          "time": "11:40",
-          "duration_minutes": 175
-        },
-        {
-          "time": "15:00",
-          "duration_minutes": 175
-        }
-      ]
-    },
-    {
-      "origin": "TFN",
-      "destination": "BIO",
-      "valid_from": "2026-10-21",
-      "valid_to": "2026-10-24",
-      "weekdays": [
-        3
-      ],
-      "departures": [
-        {
-          "time": "14:30",
-          "duration_minutes": 180
-        }
-      ]
-    },
-    {
-      "origin": "BIO",
-      "destination": "TFN",
-      "valid_from": "2026-10-21",
-      "valid_to": "2026-10-24",
-      "weekdays": [
-        3
-      ],
-      "departures": [
-        {
-          "time": "19:20",
-          "duration_minutes": 185
-        }
-      ]
-    },
-    {
-      "origin": "TFN",
-      "destination": "BIO",
-      "valid_from": "2026-10-25",
-      "valid_to": "2027-03-27",
-      "weekdays": [
-        1,
-        3
-      ],
-      "departures": [
-        {
-          "time": "14:25",
-          "duration_minutes": 190
-        }
-      ]
-    },
-    {
-      "origin": "BIO",
-      "destination": "TFN",
-      "valid_from": "2026-10-25",
-      "valid_to": "2027-03-27",
-      "weekdays": [
-        1,
-        3
-      ],
-      "departures": [
-        {
-          "time": "19:25",
-          "duration_minutes": 190
-        }
-      ]
-    }
-  ],
   "sources": [
     {
       "name": "Air Europa — Tenerife–Madryt",
@@ -318,6 +132,16 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    },
+    {
+      "name": "Google Flights — indywidualne oferty Air Europa",
+      "url": "https://www.google.com/travel/flights",
+      "finding": "Od decyzji użytkownika 2026-10-22 jedyne źródło cen i bieżących danych poszczególnych rejsów. Bez minimum dnia i bez szablonów godzin."
     }
-  ]
+  ],
+  "air_europa_airline_codes": {
+    "accepted_marketing": [
+      "UX"
+    ]
+  }
 }
