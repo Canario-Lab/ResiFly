@@ -111,6 +111,7 @@ query booking_search($search: BookingSearchInput!) {
           class
           seats
           bestPrice
+          token
           amounts {
             resident { totalAmount currency { code } }
             noResident { totalAmount currency { code } }
@@ -121,6 +122,41 @@ query booking_search($search: BookingSearchInput!) {
   }
 }
 """
+
+BINTER_IMPORTS_QUERY = """
+query booking_getImports(
+  $itineraries: [Token!]!
+  $passengers: [PassengersTypeInput!]!
+) {
+  booking_getImports(
+    itineraries: $itineraries
+    passengers: $passengers
+  ) {
+    passengerAmounts {
+      fare { mainAmount totalAmount currency { code } }
+      taxes { mainAmount totalAmount currency { code } }
+      suplements { mainAmount totalAmount currency { code } }
+      serviceFee { mainAmount totalAmount currency { code } }
+      managementFee { mainAmount totalAmount currency { code } }
+      mobilidadeDiscounts { mainAmount totalAmount currency { code } }
+      passenger {
+        typeCode
+        residentCode
+        isResident
+        isSpanishResident
+      }
+    }
+  }
+}
+"""
+
+BINTER_FINAL_PRICE_COMPONENTS = (
+    "fare",
+    "taxes",
+    "suplements",
+    "serviceFee",
+    "managementFee",
+)
 
 
 @dataclass(frozen=True)
@@ -458,8 +494,10 @@ def binter_headers() -> dict[str, str]:
     }
 
 
-def lowest_eur_fare(fares: list[dict[str, Any]]) -> tuple[float, float] | None:
-    choices: list[tuple[float, float]] = []
+def _binter_eur_fare_choices(
+    fares: list[dict[str, Any]],
+) -> list[tuple[float, float, dict[str, Any]]]:
+    choices: list[tuple[float, float, dict[str, Any]]] = []
     for fare in fares:
         if not isinstance(fare, dict):
             raise RuntimeError("Malformed Binter fare")
@@ -479,8 +517,175 @@ def lowest_eur_fare(fares: list[dict[str, Any]]) -> tuple[float, float] | None:
         prices = (float(regular["totalAmount"]), float(resident["totalAmount"]))
         if not all(math.isfinite(amount) and amount > 0 for amount in prices):
             raise RuntimeError("Invalid Binter fare amount")
-        choices.append(prices)
-    return min(choices, key=lambda pair: pair[0]) if choices else None
+        choices.append((prices[0], prices[1], fare))
+    return choices
+
+
+def lowest_eur_fare(fares: list[dict[str, Any]]) -> tuple[float, float] | None:
+    choices = _binter_eur_fare_choices(fares)
+    if not choices:
+        return None
+    regular, resident, _ = min(choices, key=lambda choice: choice[0])
+    return regular, resident
+
+
+def lowest_eur_fare_with_token(
+    fares: list[dict[str, Any]],
+) -> tuple[float, float, str] | None:
+    choices = _binter_eur_fare_choices(fares)
+    if not choices:
+        return None
+    regular, resident, fare = min(choices, key=lambda choice: choice[0])
+    token = fare.get("token")
+    if not isinstance(token, str) or not token:
+        raise RuntimeError("Binter cash fare missing import token")
+    return regular, resident, token
+
+
+def _binter_import_amount(
+    raw: Any,
+    component: str,
+    context: str,
+) -> tuple[float, float]:
+    if not isinstance(raw, dict):
+        raise RuntimeError(
+            f"{context}: missing {component} amount in booking_getImports; "
+            "publication blocked"
+        )
+    if (raw.get("currency") or {}).get("code") != "EUR":
+        raise RuntimeError(
+            f"{context}: {component} is not an EUR amount in booking_getImports; "
+            "publication blocked"
+        )
+    try:
+        regular = float(raw["mainAmount"])
+        resident = float(raw["totalAmount"])
+    except (KeyError, TypeError, ValueError) as error:
+        raise RuntimeError(
+            f"{context}: malformed {component} amount in booking_getImports; "
+            "publication blocked"
+        ) from error
+    if not all(math.isfinite(amount) and amount >= 0 for amount in (regular, resident)):
+        raise RuntimeError(
+            f"{context}: invalid {component} amount in booking_getImports; "
+            "publication blocked"
+        )
+    return regular, resident
+
+
+def validate_binter_imports_response(
+    response: Any,
+    context: str,
+    resident_discount_eligible: bool,
+) -> tuple[float, float]:
+    if not isinstance(response, dict) or response.get("errors"):
+        raise RuntimeError(
+            f"{context}: booking_getImports GraphQL error or invalid response; "
+            "publication blocked"
+        )
+    data = response.get("data")
+    imports = data.get("booking_getImports") if isinstance(data, dict) else None
+    passenger_amounts = (
+        imports.get("passengerAmounts") if isinstance(imports, dict) else None
+    )
+    if not isinstance(passenger_amounts, list) or len(passenger_amounts) != 1:
+        raise RuntimeError(
+            f"{context}: missing one-passenger booking_getImports totals; "
+            "publication blocked"
+        )
+    amounts = passenger_amounts[0]
+    if not isinstance(amounts, dict):
+        raise RuntimeError(
+            f"{context}: malformed booking_getImports totals; publication blocked"
+        )
+    passenger = amounts.get("passenger")
+    if not isinstance(passenger, dict) or passenger.get("typeCode") != "ADT":
+        raise RuntimeError(
+            f"{context}: booking_getImports did not price one adult; "
+            "publication blocked"
+        )
+    if resident_discount_eligible and not (
+        passenger.get("residentCode") == "RC"
+        or passenger.get("isSpanishResident") is True
+    ):
+        raise RuntimeError(
+            f"{context}: booking_getImports did not apply Spanish resident status; "
+            "publication blocked"
+        )
+
+    regular_total = 0.0
+    resident_total = 0.0
+    for component in BINTER_FINAL_PRICE_COMPONENTS:
+        regular, resident = _binter_import_amount(
+            amounts.get(component), component, context
+        )
+        regular_total += regular
+        resident_total += resident
+
+    mobility = amounts.get("mobilidadeDiscounts")
+    if isinstance(mobility, dict):
+        mobility_regular, mobility_resident = _binter_import_amount(
+            mobility, "mobilidadeDiscounts", context
+        )
+        if mobility_regular != 0 or mobility_resident != 0:
+            raise RuntimeError(
+                f"{context}: unsupported non-zero mobility discount; "
+                "publication blocked"
+            )
+    elif mobility not in (None, []):
+        raise RuntimeError(
+            f"{context}: malformed mobility discount; publication blocked"
+        )
+
+    regular_total = round(regular_total, 2)
+    resident_total = round(resident_total, 2)
+    if regular_total <= 0 or resident_total <= 0:
+        raise RuntimeError(
+            f"{context}: invalid final booking_getImports total; publication blocked"
+        )
+    if resident_discount_eligible and resident_total > regular_total:
+        raise RuntimeError(
+            f"{context}: resident total exceeds regular total; publication blocked"
+        )
+    return regular_total, resident_total
+
+
+def fetch_binter_final_prices(
+    fare_token: str,
+    context: str,
+    resident_discount_eligible: bool,
+) -> tuple[float, float]:
+    passengers = [{
+        "type": {
+            "code": "ADT",
+            "discounts": ["RC"] if resident_discount_eligible else [],
+        },
+        "quantity": 1,
+    }]
+    try:
+        response = get_json(
+            "POST",
+            BINTER_API,
+            headers=binter_headers(),
+            payload={
+                "query": BINTER_IMPORTS_QUERY,
+                "variables": {
+                    "itineraries": [{"token": fare_token}],
+                    "passengers": passengers,
+                },
+                "operationName": "booking_getImports",
+            },
+            impersonate="safari184",
+        )
+    except RuntimeError as error:
+        raise RuntimeError(
+            f"{context}: booking_getImports request failed; publication blocked"
+        ) from error
+    return validate_binter_imports_response(
+        response,
+        context,
+        resident_discount_eligible,
+    )
 
 
 @calendar_collector("Binter", "booking_search")
@@ -533,10 +738,26 @@ def collect_binter_trip(
             segment_destination = segment.get("destination", {}).get("iata")
             if segment_origin != origin or segment_destination != destination:
                 continue
-            fare = lowest_eur_fare(flight.get("fares") or [])
+            fare = lowest_eur_fare_with_token(flight.get("fares") or [])
             if fare is None:
                 continue
-            regular_eur, resident_eur = fare
+            preview_regular_eur, preview_resident_eur, fare_token = fare
+            context = (
+                f"Binter {origin}-{destination} on {departure_date} "
+                f"flight {segment.get('line') or 'NT'}{segment.get('flightNumber')}"
+            )
+            regular_eur, resident_eur = fetch_binter_final_prices(
+                fare_token,
+                context,
+                resident_discount_eligible,
+            )
+            if regular_eur < preview_regular_eur or (
+                resident_discount_eligible and resident_eur < preview_resident_eur
+            ):
+                raise RuntimeError(
+                    f"{context}: final booking total is lower than its fare; "
+                    "publication blocked"
+                )
             effective_resident_eur = (
                 resident_eur if resident_discount_eligible else regular_eur
             )
@@ -557,9 +778,18 @@ def collect_binter_trip(
                     "EUR",
                     rates,
                 ),
+                "resident_price_is_estimate": False,
+                "resident_price_source": (
+                    "Binter official booking_getImports final total"
+                ),
                 "booking_url": "https://www.bintercanarias.com/es/buscar-vuelos",
+                "price_source": (
+                    "Binter official booking_search + booking_getImports GraphQL"
+                ),
+                "price_scope": "official_final_payable_total_with_taxes_and_fees",
                 "price_source_currency": "EUR",
                 "price_source_amount": regular_eur,
+                "price_source_resident_amount": effective_resident_eur,
             })
     return legs
 
@@ -832,7 +1062,7 @@ def main(args) -> None:
             }
         },
         "sources": {
-            "binter": "Binter booking_search GraphQL",
+            "binter": "Binter booking_search + booking_getImports GraphQL final totals",
             "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",
         },

@@ -34,6 +34,31 @@ def binter_response(flights=None):
     }]}}}
 
 
+def binter_amount(regular, resident):
+    return {
+        "mainAmount": regular,
+        "totalAmount": resident,
+        "currency": {"code": "EUR"},
+    }
+
+
+def binter_imports_response():
+    return {"data": {"booking_getImports": {"passengerAmounts": [{
+        "fare": binter_amount(375, 93.75),
+        "taxes": binter_amount(8.91, 8.91),
+        "suplements": binter_amount(0, 0),
+        "serviceFee": binter_amount(12, 3),
+        "managementFee": binter_amount(0, 0),
+        "mobilidadeDiscounts": [],
+        "passenger": {
+            "typeCode": "ADT",
+            "residentCode": "RC",
+            "isResident": True,
+            "isSpanishResident": True,
+        },
+    }]}}}
+
+
 class RyanairCompletenessTests(unittest.TestCase):
     @patch("scripts.collect_step2.collect_ryanair_google_route_days")
     def test_keeps_both_flights_and_more_expensive_one_can_be_only_valid_connection(self, google):
@@ -132,6 +157,75 @@ class BinterCompletenessTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             binter.lowest_eur_fare([{"seats": 2, "amounts": {}}])
 
+    @patch("scripts.collect_step1.get_json")
+    def test_uses_official_final_totals_instead_of_fare_list_amounts(self, get):
+        search = binter_response([{
+            "flightSegments": [{
+                "line": "NT",
+                "flightNumber": 6072,
+                "origin": {"iata": "TFN"},
+                "destination": {"iata": "MAD"},
+                "departureTime": f"{DAY}T10:05:00+00:00",
+                "arrivalTime": f"{DAY}T13:55:00+01:00",
+            }],
+            "fares": [{
+                "seats": None,
+                "token": "opaque-fare-token",
+                "amounts": {
+                    "noResident": {
+                        "currency": {"code": "EUR"},
+                        "totalAmount": 375,
+                    },
+                    "resident": {
+                        "currency": {"code": "EUR"},
+                        "totalAmount": 93.75,
+                    },
+                },
+            }],
+        }])
+        get.side_effect = [search, binter_imports_response()]
+
+        legs = binter.collect_binter_trip(
+            "TFN", "MAD", DAY, RATES, True, .25
+        )
+
+        self.assertEqual(len(legs), 1)
+        leg = legs[0]
+        self.assertEqual(leg["price_regular_pln"], 1702.41)
+        self.assertEqual(leg["price_resident_estimated_pln"], 454.34)
+        self.assertEqual(leg["price_source_amount"], 395.91)
+        self.assertEqual(leg["price_source_resident_amount"], 105.66)
+        self.assertFalse(leg["resident_price_is_estimate"])
+        self.assertNotIn("opaque-fare-token", str(leg))
+
+        imports_call = get.call_args_list[1].kwargs["payload"]
+        self.assertEqual(imports_call["operationName"], "booking_getImports")
+        self.assertEqual(
+            imports_call["variables"]["itineraries"],
+            [{"token": "opaque-fare-token"}],
+        )
+        self.assertEqual(
+            imports_call["variables"]["passengers"][0]["type"]["discounts"],
+            ["RC"],
+        )
+
+    def test_incomplete_or_non_resident_final_price_is_rejected(self):
+        context = "Binter TFN-MAD test"
+        with self.assertRaisesRegex(RuntimeError, "booking_getImports"):
+            binter.validate_binter_imports_response(
+                {"errors": [{"message": "failed"}]}, context, True
+            )
+        incomplete = binter_imports_response()
+        del incomplete["data"]["booking_getImports"]["passengerAmounts"][0]["taxes"]
+        with self.assertRaisesRegex(RuntimeError, "missing taxes"):
+            binter.validate_binter_imports_response(incomplete, context, True)
+        non_resident = binter_imports_response()
+        passenger = non_resident["data"]["booking_getImports"]["passengerAmounts"][0]["passenger"]
+        passenger["residentCode"] = None
+        passenger["isSpanishResident"] = False
+        with self.assertRaisesRegex(RuntimeError, "resident status"):
+            binter.validate_binter_imports_response(non_resident, context, True)
+
     @patch("scripts.collect_step1.nbp_eur_rate", return_value=RATES["EUR"])
     @patch("scripts.collect_step1.collect_low_cost_legs", return_value=[])
     @patch("scripts.collect_step1.get_json", side_effect=RuntimeError("HTTP 503"))
@@ -160,6 +254,8 @@ class CoverageTests(unittest.TestCase):
     @patch("scripts.collect_step2.collect_ryanair_google_route_days", return_value=[])
     def test_successful_standalone_step1_records_every_planned_empty_route_and_day(self, google, version, get, wizz, nbp, print_mock):
         def source_reply(*args, **kwargs):
+            if kwargs["payload"]["operationName"] == "booking_getImports":
+                return binter_imports_response()
             trip = kwargs["payload"]["variables"]["search"]["trips"][0]
             if {trip["origin"], trip["destination"]} != {"TFN", "MAD"}:
                 return {"data": {"booking_search": {"messages": [], "availability": []}}}
@@ -168,7 +264,7 @@ class CoverageTests(unittest.TestCase):
                                     "destination": {"iata": trip["destination"]},
                                     "departureTime": f"{DAY}T08:00:00+00:00" if trip["origin"] == "TFN" else f"{DAY}T14:00:00+01:00",
                                     "arrivalTime": f"{DAY}T12:00:00+01:00" if trip["origin"] == "TFN" else f"{DAY}T16:00:00+00:00"}],
-                "fares": [{"seats": None, "amounts": {
+                "fares": [{"seats": None, "token": "opaque-test-token", "amounts": {
                     "noResident": {"currency": {"code": "EUR"}, "totalAmount": 100},
                     "resident": {"currency": {"code": "EUR"}, "totalAmount": 25}}}],
             }])

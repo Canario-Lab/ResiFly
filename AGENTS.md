@@ -36,6 +36,12 @@
   list, including GraphQL errors returned with HTTP 200. Preserve the previous
   public feed on failure. Binter loyalty-point (`PTS`) fares are not EUR cash
   fares and may be skipped without discarding the flight's valid EUR fares.
+- Treat Binter `booking_search` amounts only as fare-list values used to select
+  a cash fare. For every selected fare, use its opaque token in an in-memory
+  `booking_getImports` request for one adult (`RC` on eligible routes), and
+  save the final payable regular and resident totals reconstructed from fare,
+  taxes, supplements, service fee and management fee. Never persist the token.
+  Missing or malformed final-price components must fail before publication.
 - Update this allowlist only when the user explicitly asks to revise it.
 - Keep each Step 1A airport's IANA time zone and resident-discount eligibility
   in `data/binter-transfer-airports.json`. Keep the verified Wizz routes needed

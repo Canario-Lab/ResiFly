@@ -32,6 +32,26 @@ Poprawna pusta dostępność i wyprzedane taryfy (`seats=0`) są dozwolone.
 Punkty lojalnościowe `PTS` są celowo pomijane, a taryfy pieniężne EUR są
 przetwarzane niezależnie. Nieprawidłowa taryfa gotówkowa blokuje wynik.
 
+`booking_search` zwraca kwotę samej taryfy, a nie zawsze końcową cenę płatną.
+Po wybraniu najtańszej taryfy EUR kolektor przekazuje jej nieutrwalany token do
+`booking_getImports` dla jednego dorosłego (`RC` na trasie ze zniżką). Cena
+regularna jest sumą wartości bazowych `mainAmount`, a cena rezydenta sumą
+końcowych `totalAmount` dla taryfy, podatków, dopłat, opłaty serwisowej i
+opłaty za obsługę. Dzięki temu np. 375,00/93,75 EUR z listy taryf staje się
+395,91/105,66 EUR do zapłaty. Błąd, brak składnika, inna waluta lub brak
+potwierdzenia statusu rezydenta blokuje publikację.
+
+Jednorazowa naprawa istniejącego feedu jest wykonywana przez
+`scripts/reprice_binter_final_prices.py --apply`. Skrypt nie zbiera ponownie
+innych przewoźników ani nie dodaje nowych połączeń: odświeża końcowe ceny
+wyłącznie lotów Bintera już zapisanych w `step1-results.json`, wymaga dokładnego
+dopasowania każdego nadal dostępnego numeru i godzin, przelicza zależne sumy
+oraz dopiero po kompletnym sukcesie atomowo podmienia feed. Jeśli oficjalna
+odpowiedź dla poprawnie sprawdzonej trasy i dnia nie zawiera już zapisanego
+lotu, skrypt usuwa wyłącznie połączenia oparte na tym niedostępnym odcinku i
+zapisuje je w raporcie. Kopia przed zmianą, staging i raport pozostają w
+`tmp/binter-price-repair/`.
+
 ## Szacunki cen rezydenta i opłaty Aeny
 
 Wspólny rejestr `data/spanish-resident-fees.json` zawiera kierunkowe opłaty

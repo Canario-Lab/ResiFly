@@ -150,9 +150,16 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Każdą zapisaną trasę Bintera sprawdzić we wszystkie dni pełnego okna dat w
   obu kierunkach, niezależnie od kalendarza Ryanair/Wizz Air. Dopiero potem
   dopasować możliwe przesiadki.
-- Dla odcinka Bintera zachować oficjalną cenę rezydenta zwróconą przez GraphQL
-  przewoźnika. Nie wyliczać jej mnożnikiem `0.25`; taryfy punktowe `PTS` nie są
-  cenami gotówkowymi EUR. Drugi odcinek policzyć w pełnej cenie.
+- Kwoty z listy taryf `booking_search` służą wyłącznie do wybrania najtańszej
+  taryfy gotówkowej EUR. Dla jej tymczasowego tokenu wykonać
+  `booking_getImports` dla jednego dorosłego z kodem `RC` i zapisać końcowe
+  ceny do zapłaty: regularną jako sumę `mainAmount`, a rezydencką jako sumę
+  `totalAmount` dla taryfy, podatków, dopłat, opłaty serwisowej i opłaty za
+  obsługę. Token pozostaje wyłącznie w pamięci i nie trafia do feedu.
+- Dla odcinka Bintera zachować tę oficjalną końcową cenę rezydenta. Nie
+  wyliczać jej mnożnikiem `0.25`; taryfy punktowe `PTS` nie są cenami
+  gotówkowymi EUR. Brak pełnego rozbicia końcowej ceny blokuje publikację.
+  Drugi odcinek policzyć w pełnej cenie.
 - W wynikach kroku umieścić krótką listę użytych lotnisk przesiadkowych oraz
   wszystkie znalezione połączenia.
 
