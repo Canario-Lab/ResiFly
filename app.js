@@ -1121,6 +1121,10 @@ function resultCardNodeKey(result, filters) {
   return JSON.stringify([result.id, filters.resident, filters.wizzClub]);
 }
 
+function resultCardPricingMode(filters) {
+  return `${filters.resident ? 1 : 0}:${filters.wizzClub ? 1 : 0}`;
+}
+
 function rememberResultCardNode(cacheKey, card) {
   resultCardNodeCache.delete(cacheKey);
   resultCardNodeCache.set(cacheKey, card);
@@ -1249,6 +1253,7 @@ function createProgressiveResultCard(index) {
     rememberResultCardNode(resultCardNodeKey(result, progressiveFilters), card);
   }
   card.dataset.resultIndex = String(index);
+  card.dataset.pricingMode = resultCardPricingMode(progressiveFilters);
   return card;
 }
 
@@ -1272,13 +1277,14 @@ function appendInitialResults(expectedVersion = progressiveRenderVersion) {
     !progressiveFilters
   ) return;
 
-  let appended = 0;
-  while (progressiveResultCount < progressiveResults.length && appended < RESULT_BATCH_SIZE) {
+  while (
+    progressiveResultCount < progressiveResults.length &&
+    progressiveLoadedResultIndexes.size < RESULT_BATCH_SIZE
+  ) {
     const index = progressiveResultCount;
     progressiveResultCount += 1;
     if (progressiveLoadedResultIndexes.has(index)) continue;
     renderResultAtIndex(index);
-    appended += 1;
   }
 }
 
@@ -1433,6 +1439,49 @@ function restoreCachedResultView(cached, expectedVersion) {
   }
 }
 
+function restoreReusableVisibleResults(expectedVersion) {
+  const previousCards = [...elements.list.querySelectorAll(".flight-card")];
+  if (!previousCards.length || !progressiveFilters) return false;
+
+  const resultIndexes = new Map(
+    progressiveResults.map((result, index) => [result.id, index])
+  );
+  const pricingMode = resultCardPricingMode(progressiveFilters);
+  const reusableCards = [];
+
+  for (const card of previousCards) {
+    const index = resultIndexes.get(card.dataset.resultId);
+    if (index === undefined || card.dataset.pricingMode !== pricingMode) continue;
+    card.dataset.resultIndex = String(index);
+    reusableCards.push([index, card]);
+  }
+
+  if (!reusableCards.length) return false;
+
+  const anchor = visibleResultAnchor();
+  const visibleCards = document.createDocumentFragment();
+  reusableCards
+    .sort(([first], [second]) => first - second)
+    .forEach(([, card]) => visibleCards.append(card));
+
+  elements.list.replaceChildren(visibleCards);
+  progressiveLoadedResultIndexes = new Set(reusableCards.map(([index]) => index));
+  progressivePreparedResultCards = new Map();
+  progressiveResultCount = 0;
+  while (
+    progressiveResultCount < progressiveResults.length &&
+    progressiveLoadedResultIndexes.has(progressiveResultCount)
+  ) {
+    progressiveResultCount += 1;
+  }
+
+  appendInitialResults(expectedVersion);
+  calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+  restoreResultAnchor(anchor);
+  updateResultLoadStatus();
+  return true;
+}
+
 function renderResultCards(results, filters) {
   cacheCurrentResultCards();
   stopProgressiveRendering();
@@ -1446,6 +1495,15 @@ function renderResultCards(results, filters) {
   if (cachedView) {
     restoreCachedResultView(cachedView, expectedVersion);
     scheduleProgressiveBackground(expectedVersion, BACKGROUND_RESULT_START_DELAY_MS);
+    return;
+  }
+
+  if (restoreReusableVisibleResults(expectedVersion)) {
+    if (progressiveResultCount >= progressiveResults.length) {
+      commitPreparedResults(expectedVersion);
+    } else {
+      scheduleProgressiveBackground(expectedVersion, BACKGROUND_RESULT_START_DELAY_MS);
+    }
     return;
   }
 
