@@ -893,8 +893,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .results-header-progress .results-load-status {
-  min-height: 0;
-  margin: 0;
+  display: none;
 }
 
 .results-header-progress .results-preparation-progress {
