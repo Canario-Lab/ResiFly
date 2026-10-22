@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-35" />
+    <link rel="stylesheet" href="styles.css?v=20261022-36" />
   </head>
   <body>
     <header class="site-header">
@@ -228,19 +228,6 @@
             <h2 id="results-title"><span id="results-count">—</span> <span id="results-noun">wyników</span></h2>
           </div>
           <div class="results-controls">
-            <label class="sort-field">
-              <span>Sortuj:</span>
-              <select id="sort-results">
-                <option value="price">Najniższa cena</option>
-                <option value="departure">Najbliższy termin</option>
-                <option value="journey">Najkrótszy czas całej podróży</option>
-                <option value="departure_time">Najwcześniejszy wylot</option>
-                <option value="arrival_time">Najwcześniejszy przylot</option>
-                <option value="direct">Bezpośrednie najpierw</option>
-                <option value="layover">Najkrótsza przesiadka</option>
-                <option value="regular">Najniższa cena regularna</option>
-              </select>
-            </label>
             <div class="results-header-progress" aria-hidden="true">
               <p class="results-load-status is-loading" id="results-header-load-status">
                 Wczytuję połączenia…
@@ -258,6 +245,19 @@
                 </div>
               </div>
             </div>
+            <label class="sort-field">
+              <span>Sortuj:</span>
+              <select id="sort-results">
+                <option value="price">Najniższa cena</option>
+                <option value="departure">Najbliższy termin</option>
+                <option value="journey">Najkrótszy czas całej podróży</option>
+                <option value="departure_time">Najwcześniejszy wylot</option>
+                <option value="arrival_time">Najwcześniejszy przylot</option>
+                <option value="direct">Bezpośrednie najpierw</option>
+                <option value="layover">Najkrótsza przesiadka</option>
+                <option value="regular">Najniższa cena regularna</option>
+              </select>
+            </label>
           </div>
         </div>
 

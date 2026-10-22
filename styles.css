@@ -885,8 +885,8 @@ input[type="range"]::-moz-range-thumb {
 
 .results-header-progress {
   position: absolute;
-  top: calc(100% + 1px);
   right: 0;
+  bottom: calc(100% + 8px);
   width: 200px;
   display: grid;
   gap: 4px;
@@ -1785,7 +1785,7 @@ input[type="range"]::-moz-range-thumb {
   .results-header-progress {
     position: static;
     width: 100%;
-    margin-top: 14px;
+    margin-bottom: 14px;
     gap: 10px;
   }
 
