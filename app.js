@@ -262,16 +262,6 @@ function setResultLoadStatus(message, state = "loading") {
   elements.resultsLoadStatus.classList.toggle("is-empty", state === "empty");
 }
 
-function setResultPreparationLoading() {
-  elements.resultsPreparation.hidden = false;
-  elements.resultsPreparation.classList.add("is-indeterminate");
-  elements.resultsPreparation.classList.remove("is-complete");
-  elements.resultsPreparationPercent.textContent = "—";
-  elements.resultsPreparation.style.removeProperty("--prepared-progress");
-  elements.resultsPreparationTrack.removeAttribute("aria-valuenow");
-  elements.resultsPreparationTrack.setAttribute("aria-valuetext", "Aktualizuję listę połączeń");
-}
-
 function hideResultPreparationProgress() {
   elements.resultsPreparation.hidden = true;
   elements.resultsPreparation.classList.remove("is-indeterminate", "is-complete");
@@ -1562,7 +1552,6 @@ function scheduleRenderResults() {
   stopProgressiveRendering();
   elements.list.setAttribute("aria-busy", "true");
   setResultLoadStatus("Aktualizuję listę połączeń…");
-  setResultPreparationLoading();
   filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
 }
 
