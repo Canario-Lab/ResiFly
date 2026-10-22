@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-31" />
+    <link rel="stylesheet" href="styles.css?v=20261022-32" />
   </head>
   <body>
     <header class="site-header">
@@ -76,7 +76,7 @@
                 <label class="benefit-option">
                   <input id="resident-filter" type="checkbox" checked />
                   <span class="benefit-check" aria-hidden="true"></span>
-                  <span>Jestem rezydentem Teneryfy</span>
+                  <span>Jestem rezydentem Wysp Kanaryjskich</span>
                 </label>
                 <label class="benefit-option">
                   <input id="wizz-club-filter" type="checkbox" />
@@ -185,6 +185,12 @@
         </div>
       </section>
 
+      <div
+        class="active-filters calendar-active-filters"
+        id="calendar-active-filters"
+        aria-label="Wybrane filtry kalendarza"
+      ></div>
+
       <section class="fare-calendar" aria-labelledby="fare-calendar-title">
         <div class="fare-calendar-heading">
           <div>
@@ -210,11 +216,6 @@
             <span class="calendar-legend-regular">Cena regularna</span>
           </div>
         </div>
-        <div
-          class="active-filters calendar-active-filters"
-          id="calendar-active-filters"
-          aria-label="Wybrane filtry kalendarza"
-        ></div>
         <div class="calendar-months" id="calendar-months" aria-live="polite" aria-busy="true">
           <div class="calendar-loading">Wczytuję kalendarz cen…</div>
         </div>
@@ -299,6 +300,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261022-56" defer></script>
+    <script src="app.js?v=20261022-57" defer></script>
   </body>
 </html>

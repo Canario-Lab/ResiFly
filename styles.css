@@ -893,19 +893,59 @@ input[type="range"]::-moz-range-thumb {
 
 .calendar-active-filters {
   min-height: 28px;
-  margin: -6px 4px 20px;
+  margin: 24px 4px 12px;
+}
+
+.calendar-active-filters + .fare-calendar {
+  margin-top: 0;
 }
 
 .filter-chip {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: 28px;
   padding: 5px 10px;
   color: var(--green-dark);
+  border: 0;
   border-radius: 999px;
   background: var(--green-soft);
+  font-family: inherit;
   font-size: 0.75rem;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.filter-chip.is-removable {
+  cursor: pointer;
+  transition: color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.filter-chip-remove {
+  width: 17px;
+  height: 17px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(13, 118, 95, 0.12);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.filter-chip.is-removable:hover {
+  color: white;
+  background: var(--green);
+  box-shadow: 0 6px 14px rgba(13, 118, 95, 0.16);
+}
+
+.filter-chip.is-removable:hover .filter-chip-remove {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.filter-chip.is-removable:focus-visible {
+  outline: 3px solid rgba(13, 118, 95, 0.22);
+  outline-offset: 2px;
 }
 
 .results-list {

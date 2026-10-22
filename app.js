@@ -1060,27 +1060,51 @@ function createResultCard(result, filters) {
 }
 
 function renderActiveFilters(filters = currentFilters()) {
-  const chips = [`Do ${currency.format(filters.maxPrice)}`];
-  chips.push(filters.direction === "poland_to_tenerife" ? "Polska → Teneryfa" : "Teneryfa → Polska");
-  if (filters.resident) chips.push("Rezydent Teneryfy");
-  if (filters.wizzClub) chips.push("Wizz Air Discount Club");
-  if (filters.origin !== "all") chips.push(`Wylot: ${filters.origin}`);
-  if (filters.destination !== "all") chips.push(`Przylot: ${filters.destination}`);
-  if (filters.transfer === "direct") chips.push("Bez przesiadek");
-  if (filters.transfer !== "all" && filters.transfer !== "direct") chips.push(`Przez: ${filters.transfer}`);
-  if (filters.firstCarrier !== "all") chips.push(`Pierwsza linia: ${filters.firstCarrier}`);
-  if (filters.secondCarrier !== "all") chips.push(`Druga linia: ${filters.secondCarrier}`);
+  const chips = [{ label: `Do ${currency.format(filters.maxPrice)}` }];
+  chips.push({
+    label: filters.direction === "poland_to_tenerife" ? "Polska → Teneryfa" : "Teneryfa → Polska",
+  });
+  if (filters.resident) {
+    chips.push({ label: "Rezydent Wysp Kanaryjskich", removable: "resident" });
+  }
+  if (filters.wizzClub) chips.push({ label: "Wizz Air Discount Club" });
+  if (filters.origin !== "all") chips.push({ label: `Wylot: ${filters.origin}` });
+  if (filters.destination !== "all") chips.push({ label: `Przylot: ${filters.destination}` });
+  if (filters.transfer === "direct") chips.push({ label: "Bez przesiadek" });
+  if (filters.transfer !== "all" && filters.transfer !== "direct") {
+    chips.push({ label: `Przez: ${filters.transfer}` });
+  }
+  if (filters.firstCarrier !== "all") chips.push({ label: `Pierwsza linia: ${filters.firstCarrier}` });
+  if (filters.secondCarrier !== "all") chips.push({ label: `Druga linia: ${filters.secondCarrier}` });
   if (filters.transfer !== "direct" && filters.maxLayover < 24 * 60) {
-    chips.push(`Przesiadka do ${formatDuration(filters.maxLayover)}`);
+    chips.push({ label: `Przesiadka do ${formatDuration(filters.maxLayover)}` });
   }
   if (filters.dateFrom !== state.document.period_from || filters.dateTo !== state.document.period_to) {
-    chips.push(`${filters.dateFrom} – ${filters.dateTo}`);
+    chips.push({ label: `${filters.dateFrom} – ${filters.dateTo}` });
   }
   for (const container of [elements.calendarActiveFilters, elements.activeFilters]) {
-    container.replaceChildren(...chips.map(label => {
-      const chip = document.createElement("span");
+    container.replaceChildren(...chips.map(({ label, removable }) => {
+      const chip = document.createElement(removable ? "button" : "span");
       chip.className = "filter-chip";
-      chip.textContent = label;
+      if (!removable) {
+        chip.textContent = label;
+        return chip;
+      }
+
+      chip.type = "button";
+      chip.classList.add("is-removable");
+      chip.setAttribute("aria-label", `Wyłącz filtr: ${label}`);
+      const chipLabel = document.createElement("span");
+      chipLabel.textContent = label;
+      const removeIcon = document.createElement("span");
+      removeIcon.className = "filter-chip-remove";
+      removeIcon.setAttribute("aria-hidden", "true");
+      removeIcon.textContent = "×";
+      chip.append(chipLabel, removeIcon);
+      chip.addEventListener("click", () => {
+        elements.resident.checked = false;
+        elements.resident.dispatchEvent(new Event("input", { bubbles: true }));
+      });
       return chip;
     }));
   }
