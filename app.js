@@ -118,6 +118,7 @@ const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_SCROLL_SETTLE_FALLBACK_MS = 1_200;
 const FILTER_RENDER_DELAY_MS = 150;
 const DEFAULT_MAX_PRICE = 1000;
+const DEFAULT_DIRECTION = "poland_to_tenerife";
 const RESULT_BATCH_SIZE = 30;
 const BACKGROUND_RESULT_BATCH_SIZE = 5;
 const BACKGROUND_RESULT_START_DELAY_MS = 350;
@@ -838,6 +839,7 @@ function setRangeProgress(input) {
 }
 
 function initializeFilters() {
+  elements.direction.value = DEFAULT_DIRECTION;
   elements.dateFrom.min = state.document.period_from;
   elements.dateFrom.max = state.document.period_to;
   elements.dateFrom.value = state.document.period_from;
@@ -1913,7 +1915,7 @@ function resetFilters() {
   elements.resident.checked = true;
   elements.wizzClub.checked = false;
   elements.price.value = String(DEFAULT_MAX_PRICE);
-  elements.direction.value = "tenerife_to_poland";
+  elements.direction.value = DEFAULT_DIRECTION;
   updateAirportOptions();
   elements.dateFrom.value = state.document.period_from;
   elements.dateTo.value = state.document.period_to;

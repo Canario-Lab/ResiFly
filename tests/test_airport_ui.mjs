@@ -197,7 +197,7 @@ test("overnight GDN arrivals get the +1 marker", () => {
   assert.equal(time.children.at(-1).textContent, "+1");
 });
 
-test("direct GDN flights disable second carrier and reset keeps nearest-date sorting", () => {
+test("direct GDN flights disable second carrier and reset restores Poland to Tenerife", () => {
   const api = harness();
   api.elements.transfer.value = "direct";
   api.elements.secondCarrier.value = "Ryanair";
@@ -208,7 +208,7 @@ test("direct GDN flights disable second carrier and reset keeps nearest-date sor
   api.resetFilters();
   assert.equal(api.elements.origin.value, "all");
   assert.equal(api.elements.destination.value, "all");
-  assert.equal(api.elements.direction.value, "tenerife_to_poland");
+  assert.equal(api.elements.direction.value, "poland_to_tenerife");
   assert.equal(api.elements.sort.value, "departure");
   assert.equal(Number(api.elements.price.value), 1000);
   assert.equal(Number(api.elements.layover.value), 6);
@@ -218,6 +218,7 @@ test("initial price limit is 1000 PLN without discarding more expensive flights"
   const api = harness();
   const originalCount = api.state.results.length;
   api.initializeFilters();
+  assert.equal(api.elements.direction.value, "poland_to_tenerife");
   assert.equal(Number(api.elements.price.value), 1000);
   assert.ok(Number(api.elements.price.max) > 1000);
   assert.equal(Number(api.elements.layover.value), 6);
