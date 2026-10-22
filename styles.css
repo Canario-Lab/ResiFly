@@ -885,11 +885,11 @@ input[type="range"]::-moz-range-thumb {
 
 .results-header-progress {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 1px);
   right: 0;
-  width: 100%;
+  width: 200px;
   display: grid;
-  gap: 10px;
+  gap: 4px;
 }
 
 .results-header-progress .results-load-status {
@@ -898,6 +898,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .results-header-progress .results-preparation-progress {
+  gap: 2px;
   margin: 0;
 }
 
@@ -1783,7 +1784,13 @@ input[type="range"]::-moz-range-thumb {
 
   .results-header-progress {
     position: static;
+    width: 100%;
     margin-top: 14px;
+    gap: 10px;
+  }
+
+  .results-header-progress .results-preparation-progress {
+    gap: 6px;
   }
 
   .sort-field,
