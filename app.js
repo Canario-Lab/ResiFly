@@ -45,6 +45,7 @@ const elements = {
   calendarDirectionSwap: document.querySelector("#calendar-direction-swap"),
   calendarLegendSelected: document.querySelector(".calendar-legend-resident"),
   calendarLegendRegular: document.querySelector(".calendar-legend-regular"),
+  calendarActiveFilters: document.querySelector("#calendar-active-filters"),
   activeFilters: document.querySelector("#active-filters"),
   count: document.querySelector("#results-count"),
   countNoun: document.querySelector("#results-noun"),
@@ -1075,12 +1076,14 @@ function renderActiveFilters(filters = currentFilters()) {
   if (filters.dateFrom !== state.document.period_from || filters.dateTo !== state.document.period_to) {
     chips.push(`${filters.dateFrom} – ${filters.dateTo}`);
   }
-  elements.activeFilters.replaceChildren(...chips.map(label => {
-    const chip = document.createElement("span");
-    chip.className = "filter-chip";
-    chip.textContent = label;
-    return chip;
-  }));
+  for (const container of [elements.calendarActiveFilters, elements.activeFilters]) {
+    container.replaceChildren(...chips.map(label => {
+      const chip = document.createElement("span");
+      chip.className = "filter-chip";
+      chip.textContent = label;
+      return chip;
+    }));
+  }
 }
 
 function fareCalendarRenderKey(filters) {

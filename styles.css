@@ -891,6 +891,11 @@ input[type="range"]::-moz-range-thumb {
   margin: 20px 4px 12px;
 }
 
+.calendar-active-filters {
+  min-height: 28px;
+  margin: -6px 4px 20px;
+}
+
 .filter-chip {
   display: inline-flex;
   align-items: center;
