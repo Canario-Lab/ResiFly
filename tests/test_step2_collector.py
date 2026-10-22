@@ -29,7 +29,16 @@ def leg(carrier, number, origin, destination, regular):
 class Step2CollectorTests(unittest.TestCase):
     @patch("scripts.collect_step2.time_module.sleep")
     @patch("scripts.collect_step2.requests.post")
-    def test_wizz_full_calendar_recovers_from_transient_503(self, post, sleep):
+    @patch(
+        "scripts.collect_step2.wizz_api_base",
+        return_value="https://be.wizzair.com/29.22.0/Api",
+    )
+    def test_wizz_full_calendar_recovers_from_transient_503(
+        self,
+        api_base,
+        post,
+        sleep,
+    ):
         failure = Mock(status_code=503, text="")
         failure.raise_for_status.side_effect = RuntimeError("HTTP 503")
         success = Mock(status_code=200, text="")
@@ -54,6 +63,7 @@ class Step2CollectorTests(unittest.TestCase):
         )
 
         self.assertEqual(len(rows), 1)
+        api_base.assert_called()
         self.assertEqual(post.call_count, 2)
         sleep.assert_called_once_with(3)
 

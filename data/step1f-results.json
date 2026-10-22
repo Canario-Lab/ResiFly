@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T19:18:35+01:00",
-  "period_from": "2026-10-21",
-  "period_to": "2026-11-20",
+  "generated_at": "2026-10-22T12:03:24+01:00",
+  "period_from": "2026-10-22",
+  "period_to": "2026-11-21",
   "step": "1F",
   "directions": [
     "tenerife_to_poland",
@@ -18,9 +18,9 @@
   },
   "exchange_rates": {
     "EUR_PLN": {
-      "rate": 4.3641,
+      "rate": 4.3685,
       "source": "NBP tabela A",
-      "effective_for": "2026-10-21"
+      "effective_for": "2026-10-22"
     }
   },
   "sources": {
@@ -30,206 +30,6 @@
   },
   "result_status": "ok",
   "results": [
-    {
-      "id": "step1f-cbe82188badf58e3",
-      "origin_airport": "TFN",
-      "destination_airport": "KRK",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "FUE",
-      "layover_minutes": 1235,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM374",
-          "departure_airport": "TFN",
-          "departure_at": "2026-10-24T14:30:00+01:00",
-          "arrival_airport": "FUE",
-          "arrival_at": "2026-10-24T15:20:00+01:00",
-          "price_regular_pln": 266.21,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-24",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 61.0,
-          "price_source_resident_amount": 15.25,
-          "fare_code": "KDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        },
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR9836",
-          "departure_airport": "FUE",
-          "departure_at": "2026-10-25T10:55:00+00:00",
-          "arrival_airport": "KRK",
-          "arrival_at": "2026-10-25T17:05:00+01:00",
-          "price_regular_pln": 122.15,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 122.15,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 27.99
-        }
-      ],
-      "price_total_regular_pln": 388.36,
-      "price_total_resident_estimated_pln": 188.7
-    },
-    {
-      "id": "step1f-4063244f02a7e69b",
-      "origin_airport": "TFN",
-      "destination_airport": "KRK",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 1310,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM668",
-          "departure_airport": "TFN",
-          "departure_at": "2026-10-24T19:10:00+01:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-10-24T19:40:00+01:00",
-          "price_regular_pln": 480.05,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 120.01,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria/2026-10-24",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 110.0,
-          "price_source_resident_amount": 27.5,
-          "fare_code": "RD",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        },
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4504",
-          "departure_airport": "LPA",
-          "departure_at": "2026-10-25T16:30:00+00:00",
-          "arrival_airport": "KRK",
-          "arrival_at": "2026-10-25T22:55:00+01:00",
-          "price_regular_pln": 122.15,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 122.15,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 27.99
-        }
-      ],
-      "price_total_regular_pln": 602.2,
-      "price_total_resident_estimated_pln": 242.16
-    },
-    {
-      "id": "step1f-54c360b3780b831c",
-      "origin_airport": "TFN",
-      "destination_airport": "KRK",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 450,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM616",
-          "departure_airport": "TFN",
-          "departure_at": "2026-10-25T08:30:00+00:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-10-25T09:00:00+00:00",
-          "price_regular_pln": 370.95,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 92.74,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria/2026-10-25",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 85.0,
-          "price_source_resident_amount": 21.25,
-          "fare_code": "YD",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        },
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4504",
-          "departure_airport": "LPA",
-          "departure_at": "2026-10-25T16:30:00+00:00",
-          "arrival_airport": "KRK",
-          "arrival_at": "2026-10-25T22:55:00+01:00",
-          "price_regular_pln": 122.15,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 122.15,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 27.99
-        }
-      ],
-      "price_total_regular_pln": 493.1,
-      "price_total_resident_estimated_pln": 214.89
-    },
-    {
-      "id": "step1f-eced6e54a0bb5b32",
-      "origin_airport": "TFN",
-      "destination_airport": "KRK",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 315,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM618",
-          "departure_airport": "TFN",
-          "departure_at": "2026-10-25T10:45:00+00:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-10-25T11:15:00+00:00",
-          "price_regular_pln": 370.95,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 92.74,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria/2026-10-25",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 85.0,
-          "price_source_resident_amount": 21.25,
-          "fare_code": "YD",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        },
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4504",
-          "departure_airport": "LPA",
-          "departure_at": "2026-10-25T16:30:00+00:00",
-          "arrival_airport": "KRK",
-          "arrival_at": "2026-10-25T22:55:00+01:00",
-          "price_regular_pln": 122.15,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 122.15,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 27.99
-        }
-      ],
-      "price_total_regular_pln": 493.1,
-      "price_total_resident_estimated_pln": 214.89
-    },
     {
       "id": "step1f-7c9116746e6c68fe",
       "origin_airport": "TFN",
@@ -247,10 +47,10 @@
           "departure_at": "2026-10-25T16:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-25T17:35:00+00:00",
-          "price_regular_pln": 689.53,
+          "price_regular_pln": 690.22,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 172.38,
+          "price_resident_estimated_pln": 172.56,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-25",
@@ -269,18 +69,172 @@
           "departure_at": "2026-10-26T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-10-26T18:40:00+01:00",
-          "price_regular_pln": 287.99,
-          "price_wizz_discount_club_pln": 244.35,
+          "price_regular_pln": 288.28,
+          "price_wizz_discount_club_pln": 244.59,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 287.99,
+          "price_resident_estimated_pln": 288.28,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-10-26/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 65.99
         }
       ],
-      "price_total_regular_pln": 977.52,
-      "price_total_resident_estimated_pln": 460.37
+      "price_total_regular_pln": 978.5,
+      "price_total_resident_estimated_pln": 460.84
+    },
+    {
+      "id": "step1f-21204211c18d8ba5",
+      "origin_airport": "KTW",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 570,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61083",
+          "departure_airport": "KTW",
+          "departure_at": "2026-10-26T07:10:00+01:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T11:40:00+00:00",
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 689.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-26/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 689.0
+        },
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM377",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-26T21:10:00+00:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-26T22:00:00+00:00",
+          "price_regular_pln": 192.21,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 48.05,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-26",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 44.0,
+          "price_source_resident_amount": 11.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        }
+      ],
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
+    },
+    {
+      "id": "step1f-248b13cf5db5ed71",
+      "origin_airport": "KTW",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1405,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61083",
+          "departure_airport": "KTW",
+          "departure_at": "2026-10-26T07:10:00+01:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T11:40:00+00:00",
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 689.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-26/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 689.0
+        },
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM375",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T11:05:00+00:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-10-27T11:55:00+00:00",
+          "price_regular_pln": 192.21,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 48.05,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-27",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 44.0,
+          "price_source_resident_amount": 11.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        }
+      ],
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
+    },
+    {
+      "id": "step1f-2489c6d2c10b5034",
+      "origin_airport": "TFN",
+      "destination_airport": "KRK",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 900,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM376",
+          "departure_airport": "TFN",
+          "departure_at": "2026-10-26T19:50:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-10-26T20:40:00+00:00",
+          "price_regular_pln": 192.21,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 48.05,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-26",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 44.0,
+          "price_source_resident_amount": 11.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        },
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR9836",
+          "departure_airport": "FUE",
+          "departure_at": "2026-10-27T11:40:00+00:00",
+          "arrival_airport": "KRK",
+          "arrival_at": "2026-10-27T17:50:00+01:00",
+          "price_regular_pln": 122.27,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 122.27,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-27&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 27.99
+        }
+      ],
+      "price_total_regular_pln": 314.48,
+      "price_total_resident_estimated_pln": 170.32
     },
     {
       "id": "step1f-c253597d743f6d92",
@@ -299,10 +253,10 @@
           "departure_at": "2026-10-26T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-26T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-26",
@@ -321,18 +275,18 @@
           "departure_at": "2026-10-27T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-27T23:10:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-10-27/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 497.46,
-      "price_total_resident_estimated_pln": 353.45
+      "price_total_regular_pln": 497.96,
+      "price_total_resident_estimated_pln": 353.8
     },
     {
       "id": "step1f-a79fde3ec7f01632",
@@ -351,10 +305,10 @@
           "departure_at": "2026-10-27T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-27T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-27",
@@ -373,18 +327,18 @@
           "departure_at": "2026-10-27T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-27T23:10:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-10-27/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 497.46,
-      "price_total_resident_estimated_pln": 353.45
+      "price_total_regular_pln": 497.96,
+      "price_total_resident_estimated_pln": 353.8
     },
     {
       "id": "step1f-2b2a70e05e5f7708",
@@ -403,14 +357,14 @@
           "departure_at": "2026-10-27T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-27T15:55:00+00:00",
-          "price_regular_pln": 459.0,
-          "price_wizz_discount_club_pln": 413.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 459.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-10-27/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 459.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -419,10 +373,10 @@
           "departure_at": "2026-10-27T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-27T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-27",
@@ -435,8 +389,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 651.02,
-      "price_total_resident_estimated_pln": 507.01
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
     },
     {
       "id": "step1f-6d4e3be6ef250d3f",
@@ -455,14 +409,14 @@
           "departure_at": "2026-10-27T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-27T15:55:00+00:00",
-          "price_regular_pln": 459.0,
-          "price_wizz_discount_club_pln": 413.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 459.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-10-27/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 459.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -471,24 +425,24 @@
           "departure_at": "2026-10-28T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-28T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-28",
           "price_source": "Canaryfly official booking_search GraphQL",
           "price_scope": "official_flight_specific_lowest_available_fare",
           "price_source_currency": "EUR",
-          "price_source_amount": 44.0,
-          "price_source_resident_amount": 11.0,
-          "fare_code": "PDBSC",
+          "price_source_amount": 61.0,
+          "price_source_resident_amount": 15.25,
+          "fare_code": "KDBSC",
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 651.02,
-      "price_total_resident_estimated_pln": 507.01
+      "price_total_regular_pln": 955.48,
+      "price_total_resident_estimated_pln": 755.62
     },
     {
       "id": "step1f-db2f23879e919106",
@@ -507,10 +461,10 @@
           "departure_at": "2026-10-27T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-27T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-27",
@@ -529,18 +483,18 @@
           "departure_at": "2026-10-28T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-10-28T18:40:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-10-28/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 497.46,
-      "price_total_resident_estimated_pln": 353.45
+      "price_total_regular_pln": 497.96,
+      "price_total_resident_estimated_pln": 353.8
     },
     {
       "id": "step1f-4f35418e9efa55fe",
@@ -575,10 +529,10 @@
           "departure_at": "2026-10-28T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-28T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-28",
@@ -591,8 +545,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 651.02,
-      "price_total_resident_estimated_pln": 507.01
+      "price_total_regular_pln": 651.21,
+      "price_total_resident_estimated_pln": 507.05
     },
     {
       "id": "step1f-b329cf735923e399",
@@ -627,10 +581,10 @@
           "departure_at": "2026-10-29T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-29T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-29",
@@ -643,8 +597,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 651.02,
-      "price_total_resident_estimated_pln": 507.01
+      "price_total_regular_pln": 651.21,
+      "price_total_resident_estimated_pln": 507.05
     },
     {
       "id": "step1f-f11f814eb9518221",
@@ -663,10 +617,10 @@
           "departure_at": "2026-10-28T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-28T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-28",
@@ -685,18 +639,18 @@
           "departure_at": "2026-10-29T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-29T23:10:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-10-29/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 497.46,
-      "price_total_resident_estimated_pln": 353.45
+      "price_total_regular_pln": 497.96,
+      "price_total_resident_estimated_pln": 353.8
     },
     {
       "id": "step1f-0cc73e8e9adcdef7",
@@ -715,10 +669,10 @@
           "departure_at": "2026-10-29T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-29T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-29",
@@ -737,18 +691,18 @@
           "departure_at": "2026-10-29T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-29T23:10:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-10-29/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 497.46,
-      "price_total_resident_estimated_pln": 353.45
+      "price_total_regular_pln": 497.96,
+      "price_total_resident_estimated_pln": 353.8
     },
     {
       "id": "step1f-6034a7b95ae9b0af",
@@ -767,14 +721,14 @@
           "departure_at": "2026-10-29T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-29T15:55:00+00:00",
-          "price_regular_pln": 529.0,
-          "price_wizz_discount_club_pln": 483.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 529.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-10-29/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 529.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -783,10 +737,10 @@
           "departure_at": "2026-10-29T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-29T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-29",
@@ -799,8 +753,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 721.02,
-      "price_total_resident_estimated_pln": 577.01
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
     },
     {
       "id": "step1f-038132a748954cfa",
@@ -819,10 +773,10 @@
           "departure_at": "2026-10-29T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-29T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-29",
@@ -841,18 +795,18 @@
           "departure_at": "2026-10-30T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-10-30T18:40:00+01:00",
-          "price_regular_pln": 287.99,
-          "price_wizz_discount_club_pln": 244.35,
+          "price_regular_pln": 288.28,
+          "price_wizz_discount_club_pln": 244.59,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 287.99,
+          "price_resident_estimated_pln": 288.28,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-10-30/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 65.99
         }
       ],
-      "price_total_regular_pln": 480.01,
-      "price_total_resident_estimated_pln": 336.0
+      "price_total_regular_pln": 480.49,
+      "price_total_resident_estimated_pln": 336.33
     },
     {
       "id": "step1f-a55fa8237393bbc0",
@@ -871,14 +825,14 @@
           "departure_at": "2026-10-30T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-30T11:40:00+00:00",
-          "price_regular_pln": 569.0,
-          "price_wizz_discount_club_pln": 523.0,
+          "price_regular_pln": 299.0,
+          "price_wizz_discount_club_pln": 253.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 569.0,
+          "price_resident_estimated_pln": 299.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-30/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 569.0
+          "price_source_amount": 299.0
         },
         {
           "carrier": "Canaryfly",
@@ -887,10 +841,10 @@
           "departure_at": "2026-10-30T18:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-10-30T18:55:00+00:00",
-          "price_regular_pln": 344.76,
+          "price_regular_pln": 345.11,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 86.19,
+          "price_resident_estimated_pln": 86.28,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-30",
@@ -903,8 +857,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 913.76,
-      "price_total_resident_estimated_pln": 655.19
+      "price_total_regular_pln": 644.11,
+      "price_total_resident_estimated_pln": 385.28
     },
     {
       "id": "step1f-0f1739f7fddc2087",
@@ -923,10 +877,10 @@
           "departure_at": "2026-10-30T16:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-10-30T17:35:00+00:00",
-          "price_regular_pln": 689.53,
+          "price_regular_pln": 690.22,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 172.38,
+          "price_resident_estimated_pln": 172.56,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-10-30",
@@ -945,18 +899,18 @@
           "departure_at": "2026-10-31T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-31T23:10:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 502.33,
+          "price_wizz_discount_club_pln": 458.65,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 502.33,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-10-31/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 69.99
+          "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 994.97,
-      "price_total_resident_estimated_pln": 477.82
+      "price_total_regular_pln": 1192.55,
+      "price_total_resident_estimated_pln": 674.89
     },
     {
       "id": "step1f-44f0f68f6657aae0",
@@ -975,10 +929,10 @@
           "departure_at": "2026-11-01T16:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-01T17:35:00+00:00",
-          "price_regular_pln": 266.21,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-01",
@@ -997,18 +951,18 @@
           "departure_at": "2026-11-02T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-02T18:40:00+01:00",
-          "price_regular_pln": 305.44,
-          "price_wizz_discount_club_pln": 261.8,
+          "price_regular_pln": 305.75,
+          "price_wizz_discount_club_pln": 262.07,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 305.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-02/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 571.65,
-      "price_total_resident_estimated_pln": 371.99
+      "price_total_regular_pln": 572.23,
+      "price_total_resident_estimated_pln": 372.37
     },
     {
       "id": "step1f-266a56bd9530699b",
@@ -1027,14 +981,14 @@
           "departure_at": "2026-11-02T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-02T11:40:00+00:00",
-          "price_regular_pln": 299.0,
-          "price_wizz_discount_club_pln": 253.0,
+          "price_regular_pln": 319.0,
+          "price_wizz_discount_club_pln": 273.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 299.0,
+          "price_resident_estimated_pln": 319.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-02/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 299.0
+          "price_source_amount": 319.0
         },
         {
           "carrier": "Canaryfly",
@@ -1043,10 +997,10 @@
           "departure_at": "2026-11-03T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-03T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-03",
@@ -1059,8 +1013,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 491.02,
-      "price_total_resident_estimated_pln": 347.01
+      "price_total_regular_pln": 511.21,
+      "price_total_resident_estimated_pln": 367.05
     },
     {
       "id": "step1f-31381d9571e04283",
@@ -1079,14 +1033,14 @@
           "departure_at": "2026-11-02T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-02T11:40:00+00:00",
-          "price_regular_pln": 299.0,
-          "price_wizz_discount_club_pln": 253.0,
+          "price_regular_pln": 319.0,
+          "price_wizz_discount_club_pln": 273.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 299.0,
+          "price_resident_estimated_pln": 319.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-02/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 299.0
+          "price_source_amount": 319.0
         },
         {
           "carrier": "Canaryfly",
@@ -1095,10 +1049,10 @@
           "departure_at": "2026-11-02T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-02T22:00:00+00:00",
-          "price_regular_pln": 344.76,
+          "price_regular_pln": 345.11,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 86.19,
+          "price_resident_estimated_pln": 86.28,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-02",
@@ -1111,8 +1065,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 643.76,
-      "price_total_resident_estimated_pln": 385.19
+      "price_total_regular_pln": 664.11,
+      "price_total_resident_estimated_pln": 405.28
     },
     {
       "id": "step1f-561f02658820e5e3",
@@ -1131,10 +1085,10 @@
           "departure_at": "2026-11-02T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-02T20:40:00+00:00",
-          "price_regular_pln": 266.21,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-02",
@@ -1153,18 +1107,18 @@
           "departure_at": "2026-11-03T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-03T23:10:00+01:00",
-          "price_regular_pln": 349.08,
-          "price_wizz_discount_club_pln": 305.44,
+          "price_regular_pln": 546.02,
+          "price_wizz_discount_club_pln": 502.33,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 349.08,
+          "price_resident_estimated_pln": 546.02,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-03/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 124.99
         }
       ],
-      "price_total_regular_pln": 615.29,
-      "price_total_resident_estimated_pln": 415.63
+      "price_total_regular_pln": 812.5,
+      "price_total_resident_estimated_pln": 612.64
     },
     {
       "id": "step1f-1354f5d2b3d75c9b",
@@ -1183,10 +1137,10 @@
           "departure_at": "2026-11-03T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-03",
@@ -1205,18 +1159,18 @@
           "departure_at": "2026-11-03T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-03T23:10:00+01:00",
-          "price_regular_pln": 349.08,
-          "price_wizz_discount_club_pln": 305.44,
+          "price_regular_pln": 546.02,
+          "price_wizz_discount_club_pln": 502.33,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 349.08,
+          "price_resident_estimated_pln": 546.02,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-03/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 124.99
         }
       ],
-      "price_total_regular_pln": 541.1,
-      "price_total_resident_estimated_pln": 397.09
+      "price_total_regular_pln": 738.23,
+      "price_total_resident_estimated_pln": 594.07
     },
     {
       "id": "step1f-23f00507f5b826f3",
@@ -1235,14 +1189,14 @@
           "departure_at": "2026-11-03T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T15:55:00+00:00",
-          "price_regular_pln": 369.0,
-          "price_wizz_discount_club_pln": 323.0,
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 369.0,
+          "price_resident_estimated_pln": 619.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-03/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 369.0
+          "price_source_amount": 619.0
         },
         {
           "carrier": "Canaryfly",
@@ -1251,10 +1205,10 @@
           "departure_at": "2026-11-03T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-03T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-03",
@@ -1267,8 +1221,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 561.02,
-      "price_total_resident_estimated_pln": 417.01
+      "price_total_regular_pln": 811.21,
+      "price_total_resident_estimated_pln": 667.05
     },
     {
       "id": "step1f-a208ed444928576a",
@@ -1287,14 +1241,14 @@
           "departure_at": "2026-11-03T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T15:55:00+00:00",
-          "price_regular_pln": 369.0,
-          "price_wizz_discount_club_pln": 323.0,
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 369.0,
+          "price_resident_estimated_pln": 619.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-03/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 369.0
+          "price_source_amount": 619.0
         },
         {
           "carrier": "Canaryfly",
@@ -1303,10 +1257,10 @@
           "departure_at": "2026-11-04T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-04T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-04",
@@ -1319,8 +1273,58 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 561.02,
-      "price_total_resident_estimated_pln": 417.01
+      "price_total_regular_pln": 811.21,
+      "price_total_resident_estimated_pln": 667.05
+    },
+    {
+      "id": "step1f-8797fa6ddae9af90",
+      "origin_airport": "TFN",
+      "destination_airport": "KRK",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "LPA",
+      "layover_minutes": 1295,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM668",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-03T19:10:00+00:00",
+          "arrival_airport": "LPA",
+          "arrival_at": "2026-11-03T19:40:00+00:00",
+          "price_regular_pln": 122.32,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 30.58,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria/2026-11-03",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 28.0,
+          "price_source_resident_amount": 7.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        },
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR4504",
+          "departure_airport": "LPA",
+          "departure_at": "2026-11-04T17:15:00+00:00",
+          "arrival_airport": "KRK",
+          "arrival_at": "2026-11-04T23:40:00+01:00",
+          "price_regular_pln": 165.26,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 165.26,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 37.83
+        }
+      ],
+      "price_total_regular_pln": 287.58,
+      "price_total_resident_estimated_pln": 195.84
     },
     {
       "id": "step1f-2bb4b1b065fffa69",
@@ -1339,10 +1343,10 @@
           "departure_at": "2026-11-03T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-03",
@@ -1361,18 +1365,18 @@
           "departure_at": "2026-11-04T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-04T18:40:00+01:00",
-          "price_regular_pln": 287.99,
-          "price_wizz_discount_club_pln": 244.35,
+          "price_regular_pln": 288.28,
+          "price_wizz_discount_club_pln": 244.59,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 287.99,
+          "price_resident_estimated_pln": 288.28,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-04/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 65.99
         }
       ],
-      "price_total_regular_pln": 480.01,
-      "price_total_resident_estimated_pln": 336.0
+      "price_total_regular_pln": 480.49,
+      "price_total_resident_estimated_pln": 336.33
     },
     {
       "id": "step1f-1d905dbc43fd3cfc",
@@ -1391,14 +1395,14 @@
           "departure_at": "2026-11-04T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-04T11:40:00+00:00",
-          "price_regular_pln": 299.0,
-          "price_wizz_discount_club_pln": 253.0,
+          "price_regular_pln": 369.0,
+          "price_wizz_discount_club_pln": 323.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 299.0,
+          "price_resident_estimated_pln": 369.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-04/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 299.0
+          "price_source_amount": 369.0
         },
         {
           "carrier": "Canaryfly",
@@ -1407,10 +1411,10 @@
           "departure_at": "2026-11-04T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-04T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-04",
@@ -1423,8 +1427,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 491.02,
-      "price_total_resident_estimated_pln": 347.01
+      "price_total_regular_pln": 561.21,
+      "price_total_resident_estimated_pln": 417.05
     },
     {
       "id": "step1f-defc96d7fc0a3644",
@@ -1443,14 +1447,14 @@
           "departure_at": "2026-11-04T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-04T11:40:00+00:00",
-          "price_regular_pln": 299.0,
-          "price_wizz_discount_club_pln": 253.0,
+          "price_regular_pln": 369.0,
+          "price_wizz_discount_club_pln": 323.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 299.0,
+          "price_resident_estimated_pln": 369.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-04/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 299.0
+          "price_source_amount": 369.0
         },
         {
           "carrier": "Canaryfly",
@@ -1459,10 +1463,10 @@
           "departure_at": "2026-11-05T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-05T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-05",
@@ -1475,8 +1479,58 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 491.02,
-      "price_total_resident_estimated_pln": 347.01
+      "price_total_regular_pln": 561.21,
+      "price_total_resident_estimated_pln": 417.05
+    },
+    {
+      "id": "step1f-ce01f88bd64591cb",
+      "origin_airport": "TFN",
+      "destination_airport": "KRK",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "LPA",
+      "layover_minutes": 495,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM616",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-04T08:30:00+00:00",
+          "arrival_airport": "LPA",
+          "arrival_at": "2026-11-04T09:00:00+00:00",
+          "price_regular_pln": 122.32,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 30.58,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/gran-canaria/2026-11-04",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 28.0,
+          "price_source_resident_amount": 7.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        },
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR4504",
+          "departure_airport": "LPA",
+          "departure_at": "2026-11-04T17:15:00+00:00",
+          "arrival_airport": "KRK",
+          "arrival_at": "2026-11-04T23:40:00+01:00",
+          "price_regular_pln": 165.26,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 165.26,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 37.83
+        }
+      ],
+      "price_total_regular_pln": 287.58,
+      "price_total_resident_estimated_pln": 195.84
     },
     {
       "id": "step1f-095f0b96638226c0",
@@ -1495,10 +1549,10 @@
           "departure_at": "2026-11-04T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-04T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-04",
@@ -1517,18 +1571,18 @@
           "departure_at": "2026-11-05T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-05T23:10:00+01:00",
-          "price_regular_pln": 349.08,
-          "price_wizz_discount_club_pln": 305.44,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 349.08,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-05/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 541.1,
-      "price_total_resident_estimated_pln": 397.09
+      "price_total_regular_pln": 781.91,
+      "price_total_resident_estimated_pln": 637.75
     },
     {
       "id": "step1f-01252f3d86fbb1c9",
@@ -1547,10 +1601,10 @@
           "departure_at": "2026-11-05T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-05T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-05",
@@ -1569,18 +1623,18 @@
           "departure_at": "2026-11-05T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-05T23:10:00+01:00",
-          "price_regular_pln": 349.08,
-          "price_wizz_discount_club_pln": 305.44,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 349.08,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-05/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 541.1,
-      "price_total_resident_estimated_pln": 397.09
+      "price_total_regular_pln": 781.91,
+      "price_total_resident_estimated_pln": 637.75
     },
     {
       "id": "step1f-28312b56de3eaa51",
@@ -1599,10 +1653,10 @@
           "departure_at": "2026-11-05T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-05T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-05",
@@ -1621,18 +1675,18 @@
           "departure_at": "2026-11-06T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-06T18:40:00+01:00",
-          "price_regular_pln": 349.08,
-          "price_wizz_discount_club_pln": 305.44,
+          "price_regular_pln": 655.23,
+          "price_wizz_discount_club_pln": 611.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 349.08,
+          "price_resident_estimated_pln": 655.23,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-06/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 541.1,
-      "price_total_resident_estimated_pln": 397.09
+      "price_total_regular_pln": 847.44,
+      "price_total_resident_estimated_pln": 703.28
     },
     {
       "id": "step1f-ce5c2ecb7f2952ef",
@@ -1651,14 +1705,14 @@
           "departure_at": "2026-11-06T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-06T11:40:00+00:00",
-          "price_regular_pln": 529.0,
-          "price_wizz_discount_club_pln": 483.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 529.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-06/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 529.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -1667,10 +1721,10 @@
           "departure_at": "2026-11-06T18:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-06T18:55:00+00:00",
-          "price_regular_pln": 266.21,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-06",
@@ -1683,8 +1737,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 795.21,
-      "price_total_resident_estimated_pln": 595.55
+      "price_total_regular_pln": 955.48,
+      "price_total_resident_estimated_pln": 755.62
     },
     {
       "id": "step1f-74046f25ecb6239d",
@@ -1703,10 +1757,10 @@
           "departure_at": "2026-11-06T16:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-06T17:35:00+00:00",
-          "price_regular_pln": 532.42,
+          "price_regular_pln": 532.96,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 133.11,
+          "price_resident_estimated_pln": 133.24,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-06",
@@ -1725,18 +1779,18 @@
           "departure_at": "2026-11-07T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-07T23:10:00+01:00",
-          "price_regular_pln": 654.57,
-          "price_wizz_discount_club_pln": 610.93,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 654.57,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-07/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 149.99
+          "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 1186.99,
-      "price_total_resident_estimated_pln": 787.68
+      "price_total_regular_pln": 1122.66,
+      "price_total_resident_estimated_pln": 722.94
     },
     {
       "id": "step1f-782b4116317abe31",
@@ -1755,10 +1809,10 @@
           "departure_at": "2026-11-08T16:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-08T17:35:00+00:00",
-          "price_regular_pln": 532.42,
+          "price_regular_pln": 532.96,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 133.11,
+          "price_resident_estimated_pln": 133.24,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-08",
@@ -1777,18 +1831,18 @@
           "departure_at": "2026-11-09T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-09T18:40:00+01:00",
-          "price_regular_pln": 501.83,
-          "price_wizz_discount_club_pln": 458.19,
+          "price_regular_pln": 655.23,
+          "price_wizz_discount_club_pln": 611.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 501.83,
+          "price_resident_estimated_pln": 655.23,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-09/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 114.99
+          "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 1034.25,
-      "price_total_resident_estimated_pln": 634.94
+      "price_total_regular_pln": 1188.19,
+      "price_total_resident_estimated_pln": 788.47
     },
     {
       "id": "step1f-01bd10005d3da983",
@@ -1807,10 +1861,10 @@
           "departure_at": "2026-11-09T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-09T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-09",
@@ -1829,18 +1883,18 @@
           "departure_at": "2026-11-10T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-10T23:10:00+01:00",
-          "price_regular_pln": 589.11,
-          "price_wizz_discount_club_pln": 545.47,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.11,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-10/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 781.13,
-      "price_total_resident_estimated_pln": 637.12
+      "price_total_regular_pln": 781.91,
+      "price_total_resident_estimated_pln": 637.75
     },
     {
       "id": "step1f-b8e2ab8bd224efe3",
@@ -1859,10 +1913,10 @@
           "departure_at": "2026-11-10T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-10T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-10",
@@ -1881,18 +1935,18 @@
           "departure_at": "2026-11-10T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-10T23:10:00+01:00",
-          "price_regular_pln": 589.11,
-          "price_wizz_discount_club_pln": 545.47,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.11,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-10/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 781.13,
-      "price_total_resident_estimated_pln": 637.12
+      "price_total_regular_pln": 781.91,
+      "price_total_resident_estimated_pln": 637.75
     },
     {
       "id": "step1f-96f75fd3c32934d9",
@@ -1911,14 +1965,14 @@
           "departure_at": "2026-11-10T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-10T15:55:00+00:00",
-          "price_regular_pln": 409.0,
-          "price_wizz_discount_club_pln": 363.0,
+          "price_regular_pln": 569.0,
+          "price_wizz_discount_club_pln": 523.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 409.0,
+          "price_resident_estimated_pln": 569.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-10/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 409.0
+          "price_source_amount": 569.0
         },
         {
           "carrier": "Canaryfly",
@@ -1927,10 +1981,10 @@
           "departure_at": "2026-11-10T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-10T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-10",
@@ -1943,8 +1997,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 601.02,
-      "price_total_resident_estimated_pln": 457.01
+      "price_total_regular_pln": 761.21,
+      "price_total_resident_estimated_pln": 617.05
     },
     {
       "id": "step1f-a10063fcf5c35110",
@@ -1963,14 +2017,14 @@
           "departure_at": "2026-11-10T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-10T15:55:00+00:00",
-          "price_regular_pln": 409.0,
-          "price_wizz_discount_club_pln": 363.0,
+          "price_regular_pln": 569.0,
+          "price_wizz_discount_club_pln": 523.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 409.0,
+          "price_resident_estimated_pln": 569.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-10/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 409.0
+          "price_source_amount": 569.0
         },
         {
           "carrier": "Canaryfly",
@@ -1979,10 +2033,10 @@
           "departure_at": "2026-11-11T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-11T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-11",
@@ -1995,8 +2049,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 601.02,
-      "price_total_resident_estimated_pln": 457.01
+      "price_total_regular_pln": 761.21,
+      "price_total_resident_estimated_pln": 617.05
     },
     {
       "id": "step1f-51470714997c72a2",
@@ -2015,10 +2069,10 @@
           "departure_at": "2026-11-10T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-10T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-10",
@@ -2037,18 +2091,18 @@
           "departure_at": "2026-11-11T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-11T18:40:00+01:00",
-          "price_regular_pln": 545.47,
-          "price_wizz_discount_club_pln": 501.83,
+          "price_regular_pln": 655.23,
+          "price_wizz_discount_club_pln": 611.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 545.47,
+          "price_resident_estimated_pln": 655.23,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-11/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 124.99
+          "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 737.49,
-      "price_total_resident_estimated_pln": 593.48
+      "price_total_regular_pln": 847.44,
+      "price_total_resident_estimated_pln": 703.28
     },
     {
       "id": "step1f-032e35bd1e57bd04",
@@ -2067,14 +2121,14 @@
           "departure_at": "2026-11-11T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-11T11:40:00+00:00",
-          "price_regular_pln": 569.0,
-          "price_wizz_discount_club_pln": 523.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 569.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-11/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 569.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -2083,10 +2137,10 @@
           "departure_at": "2026-11-11T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-11T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-11",
@@ -2099,8 +2153,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 761.02,
-      "price_total_resident_estimated_pln": 617.01
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
     },
     {
       "id": "step1f-a2c951e24b3025cd",
@@ -2119,14 +2173,14 @@
           "departure_at": "2026-11-11T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-11T11:40:00+00:00",
-          "price_regular_pln": 569.0,
-          "price_wizz_discount_club_pln": 523.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 569.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-11/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 569.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -2135,10 +2189,10 @@
           "departure_at": "2026-11-12T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-12T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-12",
@@ -2151,8 +2205,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 761.02,
-      "price_total_resident_estimated_pln": 617.01
+      "price_total_regular_pln": 881.21,
+      "price_total_resident_estimated_pln": 737.05
     },
     {
       "id": "step1f-068afa89a8029da4",
@@ -2171,10 +2225,10 @@
           "departure_at": "2026-11-11T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-11T20:40:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-11",
@@ -2193,18 +2247,18 @@
           "departure_at": "2026-11-12T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-12T23:10:00+01:00",
-          "price_regular_pln": 501.83,
-          "price_wizz_discount_club_pln": 458.19,
+          "price_regular_pln": 502.33,
+          "price_wizz_discount_club_pln": 458.65,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 501.83,
+          "price_resident_estimated_pln": 502.33,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-12/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 693.85,
-      "price_total_resident_estimated_pln": 549.84
+      "price_total_regular_pln": 694.54,
+      "price_total_resident_estimated_pln": 550.38
     },
     {
       "id": "step1f-122f07749a227748",
@@ -2223,10 +2277,10 @@
           "departure_at": "2026-11-12T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-12T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-12",
@@ -2245,18 +2299,18 @@
           "departure_at": "2026-11-12T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-12T23:10:00+01:00",
-          "price_regular_pln": 501.83,
-          "price_wizz_discount_club_pln": 458.19,
+          "price_regular_pln": 502.33,
+          "price_wizz_discount_club_pln": 458.65,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 501.83,
+          "price_resident_estimated_pln": 502.33,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-12/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 693.85,
-      "price_total_resident_estimated_pln": 549.84
+      "price_total_regular_pln": 694.54,
+      "price_total_resident_estimated_pln": 550.38
     },
     {
       "id": "step1f-46af2963b2b8ceae",
@@ -2275,14 +2329,14 @@
           "departure_at": "2026-11-12T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-12T15:55:00+00:00",
-          "price_regular_pln": 369.0,
-          "price_wizz_discount_club_pln": 323.0,
+          "price_regular_pln": 569.0,
+          "price_wizz_discount_club_pln": 523.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 369.0,
+          "price_resident_estimated_pln": 569.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-12/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 369.0
+          "price_source_amount": 569.0
         },
         {
           "carrier": "Canaryfly",
@@ -2291,10 +2345,10 @@
           "departure_at": "2026-11-12T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-12T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-12",
@@ -2307,8 +2361,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 561.02,
-      "price_total_resident_estimated_pln": 417.01
+      "price_total_regular_pln": 761.21,
+      "price_total_resident_estimated_pln": 617.05
     },
     {
       "id": "step1f-d5d0e1226e924909",
@@ -2327,14 +2381,14 @@
           "departure_at": "2026-11-13T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-13T11:40:00+00:00",
-          "price_regular_pln": 369.0,
-          "price_wizz_discount_club_pln": 323.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 369.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-13/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 369.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -2343,10 +2397,10 @@
           "departure_at": "2026-11-13T18:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-13T18:55:00+00:00",
-          "price_regular_pln": 266.21,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-13",
@@ -2359,8 +2413,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 635.21,
-      "price_total_resident_estimated_pln": 435.55
+      "price_total_regular_pln": 955.48,
+      "price_total_resident_estimated_pln": 755.62
     },
     {
       "id": "step1f-63afb34cc5514c0a",
@@ -2379,12 +2433,12 @@
           "departure_at": "2026-11-15T06:00:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-15T10:20:00+00:00",
-          "price_regular_pln": 305.44,
+          "price_regular_pln": 270.8,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 305.44,
+          "price_resident_estimated_pln": 270.8,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "price_source_currency": "EUR",
-          "price_source_amount": 69.99
+          "price_source_amount": 61.99
         },
         {
           "carrier": "Canaryfly",
@@ -2393,10 +2447,10 @@
           "departure_at": "2026-11-15T18:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-15T18:55:00+00:00",
-          "price_regular_pln": 532.42,
+          "price_regular_pln": 532.96,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 133.11,
+          "price_resident_estimated_pln": 133.24,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-15",
@@ -2409,8 +2463,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 837.86,
-      "price_total_resident_estimated_pln": 438.55
+      "price_total_regular_pln": 803.76,
+      "price_total_resident_estimated_pln": 404.04
     },
     {
       "id": "step1f-0f7448f0e3a12028",
@@ -2429,14 +2483,14 @@
           "departure_at": "2026-11-16T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-16T11:40:00+00:00",
-          "price_regular_pln": 259.0,
-          "price_wizz_discount_club_pln": 213.0,
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 259.0,
+          "price_resident_estimated_pln": 619.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-16/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 259.0
+          "price_source_amount": 619.0
         },
         {
           "carrier": "Canaryfly",
@@ -2445,10 +2499,10 @@
           "departure_at": "2026-11-17T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-17T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-17",
@@ -2461,8 +2515,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 451.02,
-      "price_total_resident_estimated_pln": 307.01
+      "price_total_regular_pln": 811.21,
+      "price_total_resident_estimated_pln": 667.05
     },
     {
       "id": "step1f-13a83569e7b867b2",
@@ -2481,14 +2535,14 @@
           "departure_at": "2026-11-16T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-16T11:40:00+00:00",
-          "price_regular_pln": 259.0,
-          "price_wizz_discount_club_pln": 213.0,
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 259.0,
+          "price_resident_estimated_pln": 619.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-16/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 259.0
+          "price_source_amount": 619.0
         },
         {
           "carrier": "Canaryfly",
@@ -2497,10 +2551,10 @@
           "departure_at": "2026-11-16T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-16T22:00:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-16",
@@ -2513,8 +2567,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 451.02,
-      "price_total_resident_estimated_pln": 307.01
+      "price_total_regular_pln": 811.21,
+      "price_total_resident_estimated_pln": 667.05
     },
     {
       "id": "step1f-6d1941e8515cc819",
@@ -2533,10 +2587,10 @@
           "departure_at": "2026-11-16T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-16T20:40:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-16",
@@ -2555,18 +2609,18 @@
           "departure_at": "2026-11-17T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-17T23:10:00+01:00",
-          "price_regular_pln": 589.11,
-          "price_wizz_discount_club_pln": 545.47,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.11,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-17/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 728.76,
-      "price_total_resident_estimated_pln": 624.02
+      "price_total_regular_pln": 729.49,
+      "price_total_resident_estimated_pln": 624.65
     },
     {
       "id": "step1f-cb88a25ace91b45f",
@@ -2585,10 +2639,10 @@
           "departure_at": "2026-11-17T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-17T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-17",
@@ -2607,18 +2661,18 @@
           "departure_at": "2026-11-17T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-17T23:10:00+01:00",
-          "price_regular_pln": 589.11,
-          "price_wizz_discount_club_pln": 545.47,
+          "price_regular_pln": 589.7,
+          "price_wizz_discount_club_pln": 546.02,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.11,
+          "price_resident_estimated_pln": 589.7,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-17/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 134.99
         }
       ],
-      "price_total_regular_pln": 781.13,
-      "price_total_resident_estimated_pln": 637.12
+      "price_total_regular_pln": 781.91,
+      "price_total_resident_estimated_pln": 637.75
     },
     {
       "id": "step1f-17f6fd9a527a88c3",
@@ -2637,14 +2691,14 @@
           "departure_at": "2026-11-17T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-17T15:55:00+00:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
+          "price_regular_pln": 529.0,
+          "price_wizz_discount_club_pln": 483.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
+          "price_resident_estimated_pln": 529.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-17/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 319.0
+          "price_source_amount": 529.0
         },
         {
           "carrier": "Canaryfly",
@@ -2653,10 +2707,10 @@
           "departure_at": "2026-11-17T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-17T22:00:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-17",
@@ -2669,8 +2723,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 458.65,
-      "price_total_resident_estimated_pln": 353.91
+      "price_total_regular_pln": 668.79,
+      "price_total_resident_estimated_pln": 563.95
     },
     {
       "id": "step1f-249ed46ea98daa57",
@@ -2689,14 +2743,14 @@
           "departure_at": "2026-11-17T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-17T15:55:00+00:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
+          "price_regular_pln": 529.0,
+          "price_wizz_discount_club_pln": 483.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
+          "price_resident_estimated_pln": 529.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-17/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 319.0
+          "price_source_amount": 529.0
         },
         {
           "carrier": "Canaryfly",
@@ -2705,10 +2759,10 @@
           "departure_at": "2026-11-18T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-18T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-18",
@@ -2721,8 +2775,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 511.02,
-      "price_total_resident_estimated_pln": 367.01
+      "price_total_regular_pln": 721.21,
+      "price_total_resident_estimated_pln": 577.05
     },
     {
       "id": "step1f-a13d2b3c90c0d2cd",
@@ -2741,10 +2795,10 @@
           "departure_at": "2026-11-17T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-17T20:40:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-17",
@@ -2763,18 +2817,18 @@
           "departure_at": "2026-11-18T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-18T18:40:00+01:00",
-          "price_regular_pln": 654.57,
-          "price_wizz_discount_club_pln": 610.93,
+          "price_regular_pln": 655.23,
+          "price_wizz_discount_club_pln": 611.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 654.57,
+          "price_resident_estimated_pln": 655.23,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-18/null/1/0/0/null",
           "price_source_currency": "EUR",
           "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 794.22,
-      "price_total_resident_estimated_pln": 689.48
+      "price_total_regular_pln": 795.02,
+      "price_total_resident_estimated_pln": 690.18
     },
     {
       "id": "step1f-b8e6b59cf3f62112",
@@ -2793,14 +2847,14 @@
           "departure_at": "2026-11-18T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-18T11:40:00+00:00",
-          "price_regular_pln": 229.0,
-          "price_wizz_discount_club_pln": 183.0,
+          "price_regular_pln": 459.0,
+          "price_wizz_discount_club_pln": 413.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 229.0,
+          "price_resident_estimated_pln": 459.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-18/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 229.0
+          "price_source_amount": 459.0
         },
         {
           "carrier": "Canaryfly",
@@ -2809,10 +2863,10 @@
           "departure_at": "2026-11-18T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-18T22:00:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-18",
@@ -2825,8 +2879,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 368.65,
-      "price_total_resident_estimated_pln": 263.91
+      "price_total_regular_pln": 598.79,
+      "price_total_resident_estimated_pln": 493.95
     },
     {
       "id": "step1f-631d50f2a50463e7",
@@ -2845,14 +2899,14 @@
           "departure_at": "2026-11-18T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-18T11:40:00+00:00",
-          "price_regular_pln": 229.0,
-          "price_wizz_discount_club_pln": 183.0,
+          "price_regular_pln": 459.0,
+          "price_wizz_discount_club_pln": 413.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 229.0,
+          "price_resident_estimated_pln": 459.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-18/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 229.0
+          "price_source_amount": 459.0
         },
         {
           "carrier": "Canaryfly",
@@ -2861,10 +2915,10 @@
           "departure_at": "2026-11-19T11:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-19T11:55:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-19",
@@ -2877,8 +2931,108 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 421.02,
-      "price_total_resident_estimated_pln": 277.01
+      "price_total_regular_pln": 651.21,
+      "price_total_resident_estimated_pln": 507.05
+    },
+    {
+      "id": "step1f-38e21e47d7466577",
+      "origin_airport": "KRK",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "LPA",
+      "layover_minutes": 890,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR4505",
+          "departure_airport": "KRK",
+          "departure_at": "2026-11-18T12:05:00+01:00",
+          "arrival_airport": "LPA",
+          "arrival_at": "2026-11-18T16:40:00+00:00",
+          "price_regular_pln": 266.43,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 266.43,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 60.99
+        },
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM615",
+          "departure_airport": "LPA",
+          "departure_at": "2026-11-19T07:30:00+00:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-11-19T08:00:00+00:00",
+          "price_regular_pln": 122.32,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 30.58,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-19",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 28.0,
+          "price_source_resident_amount": 7.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        }
+      ],
+      "price_total_regular_pln": 388.75,
+      "price_total_resident_estimated_pln": 297.01
+    },
+    {
+      "id": "step1f-8e5415217d698e90",
+      "origin_airport": "KRK",
+      "destination_airport": "TFN",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "LPA",
+      "layover_minutes": 1400,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Ryanair",
+          "flight_number": "FR4505",
+          "departure_airport": "KRK",
+          "departure_at": "2026-11-18T12:05:00+01:00",
+          "arrival_airport": "LPA",
+          "arrival_at": "2026-11-18T16:40:00+00:00",
+          "price_regular_pln": 266.43,
+          "resident_discount_eligible": false,
+          "price_resident_estimated_pln": 266.43,
+          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
+          "price_source_currency": "EUR",
+          "price_source_amount": 60.99
+        },
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM623",
+          "departure_airport": "LPA",
+          "departure_at": "2026-11-19T16:00:00+00:00",
+          "arrival_airport": "TFN",
+          "arrival_at": "2026-11-19T16:30:00+00:00",
+          "price_regular_pln": 174.74,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 43.69,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-19",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 40.0,
+          "price_source_resident_amount": 10.0,
+          "fare_code": "KDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        }
+      ],
+      "price_total_regular_pln": 441.17,
+      "price_total_resident_estimated_pln": 310.12
     },
     {
       "id": "step1f-129bd6c7583837ab",
@@ -2897,10 +3051,10 @@
           "departure_at": "2026-11-18T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-18T20:40:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-18",
@@ -2919,18 +3073,18 @@
           "departure_at": "2026-11-19T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-19T23:10:00+01:00",
-          "price_regular_pln": 654.57,
-          "price_wizz_discount_club_pln": 610.93,
+          "price_regular_pln": 786.29,
+          "price_wizz_discount_club_pln": 742.6,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 654.57,
+          "price_resident_estimated_pln": 786.29,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-19/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 149.99
+          "price_source_amount": 179.99
         }
       ],
-      "price_total_regular_pln": 794.22,
-      "price_total_resident_estimated_pln": 689.48
+      "price_total_regular_pln": 926.08,
+      "price_total_resident_estimated_pln": 821.24
     },
     {
       "id": "step1f-0a5437f272750d5c",
@@ -2949,10 +3103,10 @@
           "departure_at": "2026-11-19T09:45:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-19T10:35:00+00:00",
-          "price_regular_pln": 192.02,
+          "price_regular_pln": 192.21,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 48.01,
+          "price_resident_estimated_pln": 48.05,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-19",
@@ -2971,18 +3125,18 @@
           "departure_at": "2026-11-19T16:45:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-19T23:10:00+01:00",
-          "price_regular_pln": 654.57,
-          "price_wizz_discount_club_pln": 610.93,
+          "price_regular_pln": 786.29,
+          "price_wizz_discount_club_pln": 742.6,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 654.57,
+          "price_resident_estimated_pln": 786.29,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-19/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 149.99
+          "price_source_amount": 179.99
         }
       ],
-      "price_total_regular_pln": 846.59,
-      "price_total_resident_estimated_pln": 702.58
+      "price_total_regular_pln": 978.5,
+      "price_total_resident_estimated_pln": 834.34
     },
     {
       "id": "step1f-8634bba46d39dd9b",
@@ -3001,14 +3155,14 @@
           "departure_at": "2026-11-19T11:15:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-19T15:55:00+00:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
+          "price_regular_pln": 529.0,
+          "price_wizz_discount_club_pln": 483.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
+          "price_resident_estimated_pln": 529.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FUE/2026-11-19/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 319.0
+          "price_source_amount": 529.0
         },
         {
           "carrier": "Canaryfly",
@@ -3017,10 +3171,10 @@
           "departure_at": "2026-11-19T21:10:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-19T22:00:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-19",
@@ -3033,208 +3187,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 458.65,
-      "price_total_resident_estimated_pln": 353.91
-    },
-    {
-      "id": "step1f-35e3a1ec563fc921",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 860,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4505",
-          "departure_airport": "KRK",
-          "departure_at": "2026-11-19T12:35:00+01:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-11-19T17:10:00+00:00",
-          "price_regular_pln": 236.45,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 236.45,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 54.18
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM615",
-          "departure_airport": "LPA",
-          "departure_at": "2026-11-20T07:30:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-20T08:00:00+00:00",
-          "price_regular_pln": 100.37,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 25.09,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-20",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 23.0,
-          "price_source_resident_amount": 5.75,
-          "fare_code": "UDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 336.82,
-      "price_total_resident_estimated_pln": 261.54
-    },
-    {
-      "id": "step1f-ab3054f5a9eb9eae",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 995,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4505",
-          "departure_airport": "KRK",
-          "departure_at": "2026-11-19T12:35:00+01:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-11-19T17:10:00+00:00",
-          "price_regular_pln": 236.45,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 236.45,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 54.18
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM617",
-          "departure_airport": "LPA",
-          "departure_at": "2026-11-20T09:45:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-20T10:15:00+00:00",
-          "price_regular_pln": 100.37,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 25.09,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-20",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 23.0,
-          "price_source_resident_amount": 5.75,
-          "fare_code": "UDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 336.82,
-      "price_total_resident_estimated_pln": 261.54
-    },
-    {
-      "id": "step1f-0d401112d61f0841",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 1250,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4505",
-          "departure_airport": "KRK",
-          "departure_at": "2026-11-19T12:35:00+01:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-11-19T17:10:00+00:00",
-          "price_regular_pln": 236.45,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 236.45,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 54.18
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM627",
-          "departure_airport": "LPA",
-          "departure_at": "2026-11-20T14:00:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-20T14:30:00+00:00",
-          "price_regular_pln": 122.19,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 30.55,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-20",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 28.0,
-          "price_source_resident_amount": 7.0,
-          "fare_code": "PDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 358.64,
-      "price_total_resident_estimated_pln": 267.0
-    },
-    {
-      "id": "step1f-735d65c0329078f7",
-      "origin_airport": "KRK",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "LPA",
-      "layover_minutes": 1370,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Ryanair",
-          "flight_number": "FR4505",
-          "departure_airport": "KRK",
-          "departure_at": "2026-11-19T12:35:00+01:00",
-          "arrival_airport": "LPA",
-          "arrival_at": "2026-11-19T17:10:00+00:00",
-          "price_regular_pln": 236.45,
-          "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 236.45,
-          "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
-          "price_source_currency": "EUR",
-          "price_source_amount": 54.18
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM623",
-          "departure_airport": "LPA",
-          "departure_at": "2026-11-20T16:00:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-11-20T16:30:00+00:00",
-          "price_regular_pln": 122.19,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 30.55,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_search resident total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/gran-canaria/tenerife-norte/2026-11-20",
-          "price_source": "Canaryfly official booking_search GraphQL",
-          "price_scope": "official_flight_specific_lowest_available_fare",
-          "price_source_currency": "EUR",
-          "price_source_amount": 28.0,
-          "price_source_resident_amount": 7.0,
-          "fare_code": "PDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 358.64,
-      "price_total_resident_estimated_pln": 267.0
+      "price_total_regular_pln": 668.79,
+      "price_total_resident_estimated_pln": 563.95
     },
     {
       "id": "step1f-248c06215c261af3",
@@ -3253,10 +3207,10 @@
           "departure_at": "2026-11-19T19:50:00+00:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-19T20:40:00+00:00",
-          "price_regular_pln": 139.65,
+          "price_regular_pln": 139.79,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 34.91,
+          "price_resident_estimated_pln": 34.95,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-19",
@@ -3275,18 +3229,18 @@
           "departure_at": "2026-11-20T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-20T18:40:00+01:00",
-          "price_regular_pln": 589.11,
-          "price_wizz_discount_club_pln": 545.47,
+          "price_regular_pln": 655.23,
+          "price_wizz_discount_club_pln": 611.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.11,
+          "price_resident_estimated_pln": 655.23,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-20/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 134.99
+          "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 728.76,
-      "price_total_resident_estimated_pln": 624.02
+      "price_total_regular_pln": 795.02,
+      "price_total_resident_estimated_pln": 690.18
     },
     {
       "id": "step1f-3341d41cc2ec5aa9",
@@ -3305,14 +3259,14 @@
           "departure_at": "2026-11-20T07:10:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-20T11:40:00+00:00",
-          "price_regular_pln": 229.0,
-          "price_wizz_discount_club_pln": 183.0,
+          "price_regular_pln": 689.0,
+          "price_wizz_discount_club_pln": 643.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 229.0,
+          "price_resident_estimated_pln": 689.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-11-20/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 229.0
+          "price_source_amount": 689.0
         },
         {
           "carrier": "Canaryfly",
@@ -3321,10 +3275,10 @@
           "departure_at": "2026-11-20T18:05:00+00:00",
           "arrival_airport": "TFN",
           "arrival_at": "2026-11-20T18:55:00+00:00",
-          "price_regular_pln": 266.21,
+          "price_regular_pln": 266.48,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.55,
+          "price_resident_estimated_pln": 66.62,
           "resident_price_is_estimate": false,
           "resident_price_source": "Canaryfly official booking_search resident total",
           "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-11-20",
@@ -3337,8 +3291,60 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 495.21,
-      "price_total_resident_estimated_pln": 295.55
+      "price_total_regular_pln": 955.48,
+      "price_total_resident_estimated_pln": 755.62
+    },
+    {
+      "id": "step1f-ab24196bc7f1afe4",
+      "origin_airport": "TFN",
+      "destination_airport": "WAW",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "FUE",
+      "layover_minutes": 1390,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Canaryfly",
+          "flight_number": "PM374",
+          "departure_airport": "TFN",
+          "departure_at": "2026-11-20T16:45:00+00:00",
+          "arrival_airport": "FUE",
+          "arrival_at": "2026-11-20T17:35:00+00:00",
+          "price_regular_pln": 192.21,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "price_resident_estimated_pln": 48.05,
+          "resident_price_is_estimate": false,
+          "resident_price_source": "Canaryfly official booking_search resident total",
+          "booking_url": "https://www.canaryfly.es/en/cheap-flights/tenerife-norte/fuerteventura/2026-11-20",
+          "price_source": "Canaryfly official booking_search GraphQL",
+          "price_scope": "official_flight_specific_lowest_available_fare",
+          "price_source_currency": "EUR",
+          "price_source_amount": 44.0,
+          "price_source_resident_amount": 11.0,
+          "fare_code": "PDBSC",
+          "schedule_source": "Canaryfly official booking_search GraphQL"
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61332",
+          "departure_airport": "FUE",
+          "departure_at": "2026-11-21T16:45:00+00:00",
+          "arrival_airport": "WAW",
+          "arrival_at": "2026-11-21T23:10:00+01:00",
+          "price_regular_pln": 786.29,
+          "price_wizz_discount_club_pln": 742.6,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 786.29,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/WAW/2026-11-21/null/1/0/0/null",
+          "price_source_currency": "EUR",
+          "price_source_amount": 179.99
+        }
+      ],
+      "price_total_regular_pln": 978.5,
+      "price_total_resident_estimated_pln": 834.34
     }
   ]
 }

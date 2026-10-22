@@ -27,6 +27,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
+from scripts.wizz_api import wizz_api_base
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +38,6 @@ TENERIFE_AIRPORTS = ("TFN", "TFS")
 POLISH_AIRPORTS = ("WAW", "WMI", "KTW", "KRK")
 MIN_LAYOVER_MINUTES = 120
 MAX_LAYOVER_MINUTES = 24 * 60
-WIZZ_API = "https://be.wizzair.com/29.21.0/Api"
 BINTER_API = "https://services.bintercanarias.com/main/graphql"
 
 AIRPORT_TIMEZONES = {
@@ -230,7 +230,7 @@ def wizz_timetable(
     }
     response = get_json(
         "POST",
-        f"{WIZZ_API}/search/timetableV2",
+        f"{wizz_api_base()}/search/timetableV2",
         headers={"content-type": "application/json"},
         payload=payload,
         impersonate="safari184",

@@ -26,6 +26,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.booking_urls import ryanair_booking_url, wizz_booking_url
+from scripts.wizz_api import wizz_api_base
 from scripts.collect_step1 import (
     AIRPORT_TIMEZONES,
     CurrencyRate,
@@ -40,7 +41,6 @@ from scripts.collect_step1 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "data" / "step2-results.json"
-WIZZ_API = "https://be.wizzair.com/29.21.0/Api"
 RYANAIR_DATES_API = "https://www.ryanair.com/api/farfnd/v4/oneWayFares"
 RYANAIR_FARE_FINDER_API = "https://www.ryanair.com/api/farfnd/3/oneWayFares"
 RYANAIR_AVAILABILITY_API = "https://www.ryanair.com/api/booking/v4/en-gb/availability"
@@ -96,7 +96,7 @@ def wizz_timetable(
     for attempt in range(max_attempts):
         try:
             response = requests.post(
-                f"{WIZZ_API}/search/timetableV2",
+                f"{wizz_api_base()}/search/timetableV2",
                 headers={"content-type": "application/json"},
                 json=payload,
                 impersonate="safari184",
