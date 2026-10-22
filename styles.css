@@ -605,7 +605,8 @@ main,
   flex: none;
 }
 
-.layover-field.is-disabled {
+.layover-field.is-disabled,
+.second-carrier-field.is-disabled {
   opacity: 0.48;
 }
 

@@ -695,6 +695,7 @@ function initializeFilters() {
 
 function updateRangeLabels() {
   const directSelected = elements.transfer.value === "direct";
+  if (directSelected) elements.secondCarrier.value = "all";
   elements.priceOutput.textContent = currency.format(Number(elements.price.value));
   elements.priceContext.textContent = elements.resident.checked && elements.wizzClub.checked
     ? "po wybranych zniżkach"
@@ -706,6 +707,8 @@ function updateRangeLabels() {
   elements.layoverOutput.textContent = `${elements.layover.value} godz.`;
   elements.layover.disabled = directSelected;
   elements.layover.closest(".layover-field").classList.toggle("is-disabled", directSelected);
+  elements.secondCarrier.disabled = directSelected;
+  elements.secondCarrier.closest(".second-carrier-field").classList.toggle("is-disabled", directSelected);
   setRangeProgress(elements.price);
   setRangeProgress(elements.layover);
   updateCalendarDirection();
