@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-38" />
+    <link rel="stylesheet" href="styles.css?v=20261022-42" />
   </head>
   <body>
     <header class="site-header">
@@ -41,21 +41,25 @@
           <p class="hero-description">
             Znajdź najtańsze loty bezpośrednie lub z przesiadką. Obejmuje wszystkie
             możliwe połączenia ze zniżką Rezydenta.
+            <button
+              class="search-info-button"
+              id="search-info-button"
+              type="button"
+              aria-label="Informacje o zakresie wyszukiwania"
+              aria-haspopup="dialog"
+              aria-controls="search-info-dialog"
+            >
+              <span aria-hidden="true">i</span>
+            </button>
           </p>
         </div>
-        <div class="hero-route" aria-label="Obecnie wyszukiwana trasa">
-          <div>
-            <span class="route-code">TFS / TFN</span>
-            <span class="route-city">Teneryfa</span>
-          </div>
-          <div class="route-line" aria-hidden="true">
-            <span></span>
-            <svg viewBox="0 0 24 24"><path d="m2 16 20-9-7 13-3.8-4.2L6 19l1.8-5.5L2 16Z" /></svg>
-          </div>
-          <div class="route-end">
-            <span class="route-code">WAW</span>
-            <span class="route-city">Warszawa</span>
-          </div>
+        <div class="hero-route">
+          <img
+            src="assets/poland-tenerife-ticket-v2.png?v=20261022-1"
+            width="1862"
+            height="845"
+            alt="Ilustrowany bilet lotniczy na trasie Polska–Teneryfa"
+          />
         </div>
       </section>
 
@@ -308,6 +312,47 @@
       </article>
     </template>
 
+    <dialog
+      class="purchase-dialog search-info-dialog"
+      id="search-info-dialog"
+      aria-labelledby="search-info-dialog-title"
+    >
+      <div class="purchase-dialog-card">
+        <header class="purchase-dialog-header">
+          <div>
+            <p class="section-kicker">Zakres wyszukiwania</p>
+            <h2 id="search-info-dialog-title">Jakich lotów szukamy?</h2>
+          </div>
+          <button
+            class="dialog-close"
+            type="button"
+            data-close-search-info
+            aria-label="Zamknij informacje o wyszukiwaniu"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          </button>
+        </header>
+        <p class="search-info-lead">
+          Pokazujemy dostępne loty na 30 dni do przodu — bezpośrednie i z przesiadką.
+        </p>
+        <div class="search-info-grid">
+          <section>
+            <h3>Linie lotnicze</h3>
+            <p>Air Europa, Binter, Canaryfly, Iberia Express, Ryanair, Volotea, Vueling i Wizz Air.</p>
+          </section>
+          <section>
+            <h3>Lotniska na Teneryfie</h3>
+            <p>Teneryfa Północ (TFN) i Teneryfa Południe (TFS).</p>
+          </section>
+          <section>
+            <h3>Lotniska w Polsce</h3>
+            <p>Warszawa Chopina (WAW), Warszawa Modlin (WMI), Kraków (KRK) i Katowice (KTW).</p>
+          </section>
+        </div>
+        <p class="search-info-note">Kolejne lotniska w Polsce wkrótce.</p>
+      </div>
+    </dialog>
+
     <dialog class="purchase-dialog" id="purchase-dialog" aria-labelledby="purchase-dialog-title">
       <div class="purchase-dialog-card">
         <header class="purchase-dialog-header">
@@ -323,6 +368,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261022-62" defer></script>
+    <script src="app.js?v=20261022-64" defer></script>
   </body>
 </html>

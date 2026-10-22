@@ -162,94 +162,39 @@ main,
   line-height: 1.7;
 }
 
-.hero-route {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 20px;
-  min-height: 180px;
-  padding: 36px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.68);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
-}
-
-.hero-route::before,
-.hero-route::after {
-  position: absolute;
-  content: "";
+.search-info-button {
+  width: 1.45rem;
+  height: 1.45rem;
+  display: inline-grid;
+  place-items: center;
+  margin: 0 0 0 0.28rem;
+  padding: 0;
+  vertical-align: 0.08em;
+  color: var(--green-dark);
+  border: 1.5px solid currentColor;
   border-radius: 50%;
-}
-
-.hero-route::before {
-  width: 170px;
-  height: 170px;
-  right: -70px;
-  top: -70px;
-  background: rgba(243, 198, 77, 0.24);
-}
-
-.hero-route::after {
-  width: 90px;
-  height: 90px;
-  left: 45%;
-  bottom: -55px;
-  background: rgba(13, 118, 95, 0.1);
-}
-
-.route-code {
-  position: relative;
-  z-index: 1;
-  display: block;
+  background: rgba(255, 255, 255, 0.72);
   font-family: "Manrope", sans-serif;
-  font-size: 1.65rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
+  line-height: 1;
+  transition: color 150ms ease, background 150ms ease, transform 150ms ease;
 }
 
-.route-city {
-  position: relative;
-  z-index: 1;
+.search-info-button:hover {
+  color: #fff;
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+.hero-route {
+  width: 100%;
+}
+
+.hero-route img {
   display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 0.86rem;
-}
-
-.route-end {
-  text-align: right;
-}
-
-.route-line {
-  position: relative;
-  height: 38px;
-}
-
-.route-line span {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  border-top: 2px dashed #9db8b0;
-}
-
-.route-line svg {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 27px;
-  height: 27px;
-  padding: 5px;
-  transform: translate(-50%, -50%);
-  fill: var(--green);
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 12px rgba(13, 118, 95, 0.16);
+  width: 100%;
+  height: auto;
 }
 
 .fare-calendar,
@@ -1325,6 +1270,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .purchase-button:focus-visible,
+.search-info-button:focus-visible,
 .dialog-close:focus-visible,
 .purchase-open-link:focus-visible,
 .purchase-kiwi-link:focus-visible {
@@ -1397,6 +1343,61 @@ input[type="range"]::-moz-range-thumb {
   margin: 20px 0 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.search-info-dialog {
+  width: min(650px, calc(100% - 32px));
+}
+
+.search-info-lead {
+  margin: 22px 0 0;
+  color: var(--ink);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.search-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.search-info-grid section {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8faf9;
+}
+
+.search-info-grid section:first-child {
+  grid-column: 1 / -1;
+}
+
+.search-info-grid h3 {
+  margin: 0;
+  color: var(--green-dark);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.88rem;
+}
+
+.search-info-grid p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.search-info-note {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  color: #66551d;
+  border-radius: 12px;
+  background: var(--yellow-soft);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .purchase-steps {
@@ -1680,15 +1681,6 @@ input[type="range"]::-moz-range-thumb {
     font-size: 0.96rem;
   }
 
-  .hero-route {
-    min-height: 150px;
-    padding: 27px 22px;
-  }
-
-  .route-code {
-    font-size: 1.28rem;
-  }
-
   .search-panel {
     margin-top: -30px;
     padding: 23px 18px;
@@ -1876,6 +1868,14 @@ input[type="range"]::-moz-range-thumb {
 
   .purchase-dialog-header h2 {
     font-size: 1.55rem;
+  }
+
+  .search-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-info-grid section:first-child {
+    grid-column: auto;
   }
 
   .purchase-steps {

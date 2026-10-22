@@ -55,6 +55,8 @@ const elements = {
   countNoun: document.querySelector("#results-noun"),
   list: document.querySelector("#results-list"),
   template: document.querySelector("#result-template"),
+  searchInfoButton: document.querySelector("#search-info-button"),
+  searchInfoDialog: document.querySelector("#search-info-dialog"),
   purchaseDialog: document.querySelector("#purchase-dialog"),
   purchaseDialogContent: document.querySelector("#purchase-dialog-content"),
 };
@@ -1072,8 +1074,8 @@ function createResultCard(result, filters) {
     : "";
   regularPrice.hidden = !discounted;
   fragment.querySelector(".purchase-ticket-count").textContent = direct
-    ? "1 rezerwacja"
-    : `${result.legs.length} osobne bilety`;
+    ? "Potrzebny 1 bilet"
+    : "Potrzebne dwa osobne bilety";
   fragment.querySelector(".purchase-button").addEventListener("click", () => showPurchaseDialog(result, filters));
 
   const details = fragment.querySelector(".price-details");
@@ -1727,6 +1729,15 @@ function bindEvents() {
     elements.direction.dispatchEvent(new Event("input", { bubbles: true }));
   });
   elements.reset.addEventListener("click", resetFilters);
+  elements.searchInfoButton.addEventListener("click", () => {
+    elements.searchInfoDialog.showModal();
+  });
+  elements.searchInfoDialog.querySelector("[data-close-search-info]").addEventListener("click", () => {
+    elements.searchInfoDialog.close();
+  });
+  elements.searchInfoDialog.addEventListener("click", event => {
+    if (event.target === elements.searchInfoDialog) elements.searchInfoDialog.close();
+  });
   elements.purchaseDialog.querySelector("[data-close-purchase]").addEventListener("click", () => {
     elements.purchaseDialog.close();
   });
