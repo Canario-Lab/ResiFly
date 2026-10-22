@@ -1068,14 +1068,24 @@ function renderActiveFilters(filters = currentFilters()) {
     chips.push({ label: "Rezydent Wysp Kanaryjskich", removable: "resident" });
   }
   if (filters.wizzClub) chips.push({ label: "Wizz Air Discount Club" });
-  if (filters.origin !== "all") chips.push({ label: `Wylot: ${filters.origin}` });
-  if (filters.destination !== "all") chips.push({ label: `Przylot: ${filters.destination}` });
-  if (filters.transfer === "direct") chips.push({ label: "Bez przesiadek" });
-  if (filters.transfer !== "all" && filters.transfer !== "direct") {
-    chips.push({ label: `Przez: ${filters.transfer}` });
+  if (filters.origin !== "all") {
+    chips.push({ label: `Wylot: ${filters.origin}`, removable: "origin" });
   }
-  if (filters.firstCarrier !== "all") chips.push({ label: `Pierwsza linia: ${filters.firstCarrier}` });
-  if (filters.secondCarrier !== "all") chips.push({ label: `Druga linia: ${filters.secondCarrier}` });
+  if (filters.destination !== "all") {
+    chips.push({ label: `Przylot: ${filters.destination}`, removable: "destination" });
+  }
+  if (filters.transfer === "direct") {
+    chips.push({ label: "Bez przesiadek", removable: "transfer" });
+  }
+  if (filters.transfer !== "all" && filters.transfer !== "direct") {
+    chips.push({ label: `Przez: ${filters.transfer}`, removable: "transfer" });
+  }
+  if (filters.firstCarrier !== "all") {
+    chips.push({ label: `Pierwsza linia: ${filters.firstCarrier}`, removable: "firstCarrier" });
+  }
+  if (filters.secondCarrier !== "all") {
+    chips.push({ label: `Druga linia: ${filters.secondCarrier}`, removable: "secondCarrier" });
+  }
   if (filters.transfer !== "direct" && filters.maxLayover < 24 * 60) {
     chips.push({ label: `Przesiadka do ${formatDuration(filters.maxLayover)}` });
   }
@@ -1093,7 +1103,8 @@ function renderActiveFilters(filters = currentFilters()) {
 
       chip.type = "button";
       chip.classList.add("is-removable");
-      chip.setAttribute("aria-label", `Wyłącz filtr: ${label}`);
+      chip.dataset.filterKey = removable;
+      chip.setAttribute("aria-label", `Wyczyść filtr: ${label}`);
       const chipLabel = document.createElement("span");
       chipLabel.textContent = label;
       const removeIcon = document.createElement("span");
@@ -1102,12 +1113,31 @@ function renderActiveFilters(filters = currentFilters()) {
       removeIcon.textContent = "×";
       chip.append(chipLabel, removeIcon);
       chip.addEventListener("click", () => {
-        elements.resident.checked = false;
-        elements.resident.dispatchEvent(new Event("input", { bubbles: true }));
+        clearActiveFilter(removable);
       });
       return chip;
     }));
   }
+}
+
+function clearActiveFilter(filterKey) {
+  if (filterKey === "resident") {
+    elements.resident.checked = false;
+    elements.resident.dispatchEvent(new Event("input", { bubbles: true }));
+    return;
+  }
+
+  const selectByFilter = {
+    origin: elements.origin,
+    destination: elements.destination,
+    transfer: elements.transfer,
+    firstCarrier: elements.firstCarrier,
+    secondCarrier: elements.secondCarrier,
+  };
+  const select = selectByFilter[filterKey];
+  if (!select) return;
+  select.value = "all";
+  select.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
 function fareCalendarRenderKey(filters) {
