@@ -558,16 +558,6 @@ main,
   transition: filter 150ms ease, transform 150ms ease;
 }
 
-.fare-chart-day.is-lowest .fare-chart-price {
-  color: var(--green-dark);
-}
-
-.fare-chart-day.is-lowest .fare-chart-bar {
-  background: linear-gradient(180deg, #9fd5c4, #62b39a);
-  outline: 2px solid rgba(13, 118, 95, 0.38);
-  outline-offset: 2px;
-}
-
 .fare-chart-day.is-clickable:hover .fare-chart-bar {
   filter: saturate(1.08) brightness(0.97);
   transform: scaleX(1.08);
