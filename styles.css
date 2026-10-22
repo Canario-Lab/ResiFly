@@ -639,6 +639,95 @@ main,
   box-shadow: 0 0 0 3px rgba(154, 168, 170, 0.12);
 }
 
+.results-preparation-progress {
+  display: grid;
+  gap: 6px;
+  margin: -19px 5px 0;
+}
+
+.results-preparation-progress[hidden] {
+  display: none;
+}
+
+.results-preparation-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 650;
+}
+
+.results-preparation-heading strong {
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.72rem;
+}
+
+.results-preparation-track {
+  position: relative;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #dfe8e5;
+  box-shadow: inset 0 1px 2px rgba(16, 48, 44, 0.08);
+}
+
+.results-preparation-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green-dark), var(--green));
+  transform: scaleX(var(--prepared-progress, 0));
+  transform-origin: left center;
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.results-preparation-fill::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: preparation-shine 1.25s linear infinite;
+}
+
+.results-preparation-progress.is-complete .results-preparation-heading,
+.results-preparation-progress.is-complete .results-preparation-heading strong {
+  color: var(--green-dark);
+}
+
+.results-preparation-progress.is-complete .results-preparation-fill::after {
+  opacity: 0;
+  animation: none;
+}
+
+.results-preparation-progress.is-indeterminate .results-preparation-fill {
+  inset: 0 auto 0 0;
+  width: 38%;
+  transform: translateX(-110%);
+  animation: preparation-indeterminate 1.1s ease-in-out infinite;
+}
+
+@keyframes preparation-shine {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes preparation-indeterminate {
+  55% {
+    transform: translateX(165%);
+  }
+
+  100% {
+    transform: translateX(270%);
+  }
+}
+
 .filter-label {
   color: var(--muted);
   font-size: 0.76rem;

@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-28" />
+    <link rel="stylesheet" href="styles.css?v=20261022-29" />
   </head>
   <body>
     <header class="site-header">
@@ -164,6 +164,23 @@
             <p class="results-load-status is-loading" id="results-load-status" role="status" aria-live="polite" aria-atomic="true">
               Wczytuję połączenia…
             </p>
+            <div class="results-preparation-progress is-indeterminate" id="results-preparation-progress">
+              <div class="results-preparation-heading" aria-hidden="true">
+                <span>Przygotowano karty</span>
+                <strong id="results-preparation-percent">—</strong>
+              </div>
+              <div
+                class="results-preparation-track"
+                id="results-preparation-track"
+                role="progressbar"
+                aria-label="Przygotowanie kart połączeń"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuetext="Wczytuję dane lotów"
+              >
+                <span class="results-preparation-fill" aria-hidden="true"></span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -263,6 +280,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261022-49" defer></script>
+    <script src="app.js?v=20261022-50" defer></script>
   </body>
 </html>

@@ -35,6 +35,9 @@ const elements = {
   layover: document.querySelector("#layover-filter"),
   layoverOutput: document.querySelector("#layover-output"),
   resultsLoadStatus: document.querySelector("#results-load-status"),
+  resultsPreparation: document.querySelector("#results-preparation-progress"),
+  resultsPreparationPercent: document.querySelector("#results-preparation-percent"),
+  resultsPreparationTrack: document.querySelector("#results-preparation-track"),
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
@@ -259,12 +262,56 @@ function setResultLoadStatus(message, state = "loading") {
   elements.resultsLoadStatus.classList.toggle("is-empty", state === "empty");
 }
 
+function setResultPreparationLoading() {
+  elements.resultsPreparation.hidden = false;
+  elements.resultsPreparation.classList.add("is-indeterminate");
+  elements.resultsPreparation.classList.remove("is-complete");
+  elements.resultsPreparationPercent.textContent = "—";
+  elements.resultsPreparation.style.removeProperty("--prepared-progress");
+  elements.resultsPreparationTrack.removeAttribute("aria-valuenow");
+  elements.resultsPreparationTrack.setAttribute("aria-valuetext", "Aktualizuję listę połączeń");
+}
+
+function hideResultPreparationProgress() {
+  elements.resultsPreparation.hidden = true;
+  elements.resultsPreparation.classList.remove("is-indeterminate", "is-complete");
+}
+
+function updateResultPreparationProgress() {
+  const total = progressiveResults.length;
+  if (!total) {
+    hideResultPreparationProgress();
+    return;
+  }
+
+  const prepared = Math.min(
+    total,
+    progressiveLoadedResultIndexes.size + progressivePreparedResultCards.size
+  );
+  const complete = prepared >= total;
+  const percent = complete ? 100 : Math.floor((prepared / total) * 100);
+
+  elements.resultsPreparation.hidden = false;
+  elements.resultsPreparation.classList.remove("is-indeterminate");
+  elements.resultsPreparation.classList.toggle("is-complete", complete);
+  elements.resultsPreparationPercent.textContent = `${percent}%`;
+  elements.resultsPreparation.style.setProperty("--prepared-progress", String(prepared / total));
+  elements.resultsPreparationTrack.setAttribute("aria-valuenow", String(percent));
+  elements.resultsPreparationTrack.setAttribute(
+    "aria-valuetext",
+    `Przygotowano ${prepared} z ${total} kart, ${percent}%`
+  );
+}
+
 function updateResultLoadStatus() {
   const total = progressiveResults.length;
   if (!total) {
+    hideResultPreparationProgress();
     setResultLoadStatus("Brak połączeń dla wybranych filtrów.", "empty");
     return;
   }
+
+  updateResultPreparationProgress();
 
   const visible = elements.list.querySelectorAll(".flight-card").length;
   if (visible >= total) {
@@ -1301,6 +1348,8 @@ function prepareNextResultBatch(
     }
   }
 
+  updateResultPreparationProgress();
+
   if (progressiveResultCount >= progressiveResults.length) {
     cancelProgressiveIdleWork();
     commitPreparedResults(expectedVersion);
@@ -1455,6 +1504,7 @@ function scheduleRenderResults() {
   stopProgressiveRendering();
   elements.list.setAttribute("aria-busy", "true");
   setResultLoadStatus("Aktualizuję listę połączeń…");
+  setResultPreparationLoading();
   filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
 }
 
@@ -1549,6 +1599,7 @@ async function loadFlights() {
     elements.calendarMonths.innerHTML = `<div class="calendar-loading">Nie udało się wczytać kalendarza cen.</div>`;
     elements.list.setAttribute("aria-busy", "false");
     setResultLoadStatus("Nie udało się wczytać połączeń.", "empty");
+    hideResultPreparationProgress();
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
