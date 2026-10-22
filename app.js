@@ -1285,7 +1285,7 @@ function renderActiveFilters(filters = currentFilters()) {
     chips.push({ label: "Rezydent Wysp Kanaryjskich", removable: "resident" });
   }
   if (filters.wizzClub) {
-    chips.push({ label: "Wizz Air Discount Club", removable: "wizzClub" });
+    chips.push({ label: "WIZZ Discount Club", removable: "wizzClub" });
   }
   if (filters.origin !== "all") {
     chips.push({ label: `Wylot: ${filters.origin}`, removable: "origin" });

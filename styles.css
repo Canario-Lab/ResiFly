@@ -162,12 +162,19 @@ main,
   line-height: 1.7;
 }
 
+.hero-info-tail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  white-space: nowrap;
+}
+
 .search-info-button {
   width: 1.45rem;
   height: 1.45rem;
   display: inline-grid;
   place-items: center;
-  margin: 0 0 0 0.28rem;
+  margin: 0;
   padding: 0;
   vertical-align: 0.08em;
   color: var(--green-dark);
