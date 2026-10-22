@@ -2,9 +2,11 @@
 """Build Step 1D: Air Europa + Ryanair or Wizz Air.
 
 Google Flights HTTP is the only source of Air Europa flight numbers, dates,
-times and individual flight prices. Route/day minima and timetable templates
-are not a fallback. The resident value is explicitly a 25% estimate. Official
-Air Europa route/date booking links remain independent from the price source.
+times and individual regular prices. Route/day minima and timetable templates
+are not a fallback. The resident value is explicitly an estimate: discount
+only the fare component by 75%, then add the fixed, non-discountable route fees
+stored in the shared Aena fee registry. Official Air Europa route/date booking links remain
+independent from the price source.
 """
 
 from __future__ import annotations
@@ -31,6 +33,11 @@ if __package__ in {None, ""}:
 from scripts.collection_coverage import collection_entrypoint, publish_document, calendar_collector
 from scripts.booking_urls import air_europa_booking_url
 from scripts.collector_settings import GOOGLE_FLIGHTS_MAX_WORKERS, google_flights_worker_count
+from scripts.spanish_resident_fees import (
+    apply_resident_price_estimate,
+    resident_price_estimate,
+    validate_resident_price_estimate,
+)
 from scripts.collect_step1b import GoogleFlightsClient, _at, _google_datetime
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
@@ -88,8 +95,6 @@ def validate_allowlist(allowlist: dict[str, Any]) -> None:
             carriers = set(route.get("airlines") or [])
             if not carriers or not carriers <= {"Ryanair", "Wizz Air"}:
                 raise RuntimeError(f"Nieprawidłowy drugi przewoźnik dla {code}")
-
-
 def low_cost_route_matrix(
     allowlist: dict[str, Any],
 ) -> list[tuple[str, str, str]]:
@@ -141,7 +146,7 @@ def _google_offers(value: Any):
 
 def parse_google_flights_response(
     html: str, origin: str, destination: str, departure_date: date,
-    multiplier: float, accepted_marketing: set[str],
+    multiplier: float, eur_pln: float, accepted_marketing: set[str],
 ) -> list[dict[str, Any]]:
     parser = LexborHTMLParser(html)
     node = next((n for n in parser.css("script") if "ds:1" in (n.attributes.get("class") or "").split()), None)
@@ -196,15 +201,15 @@ def parse_google_flights_response(
             "carrier": "Air Europa", "flight_number": number,
             "departure_airport": origin, "arrival_airport": destination,
             "departure_at": serialize_datetime(departure), "arrival_at": serialize_datetime(arrival),
-            "price_regular_pln": regular, "price_resident_estimated_pln": round(regular * multiplier, 2),
-            "resident_discount_eligible": True, "resident_fare_multiplier": multiplier,
-            "resident_price_source": "estimate: configured percentage of Google Flights non-resident fare",
+            "price_regular_pln": regular,
+            "resident_fare_multiplier": multiplier,
             "booking_url": air_europa_booking_url(origin, destination, departure),
             "booking_url_scope": "route_date_search",
             "price_source": "Google Flights", "price_scope": "individual_flight_offer",
             "price_source_currency": "PLN", "price_source_amount": regular,
             "price_seller_verified": False, "schedule_source": "Google Flights individual flight offer",
         }
+        apply_resident_price_estimate(leg, eur_pln)
         if key not in best or regular < best[key]["price_regular_pln"]:
             best[key] = leg
     if unpriced - best.keys():
@@ -215,7 +220,8 @@ def parse_google_flights_response(
 @calendar_collector("Air Europa", "google_flights_http")
 def collect_air_europa_trip(
     client: GoogleFlightsClient, origin: str, destination: str,
-    departure_date: date, multiplier: float, accepted_marketing: set[str],
+    departure_date: date, multiplier: float, eur_pln: float,
+    accepted_marketing: set[str],
 ) -> list[dict[str, Any]]:
     last_error: Exception | None = None
     for attempt in range(4):
@@ -224,7 +230,8 @@ def collect_air_europa_trip(
             if "PLN" not in html and "zł" not in html:
                 raise RuntimeError("Nie potwierdzono waluty PLN odpowiedzi Air Europa Google Flights")
             return parse_google_flights_response(
-                html, origin, destination, departure_date, multiplier, accepted_marketing,
+                html, origin, destination, departure_date, multiplier, eur_pln,
+                accepted_marketing,
             )
         except (RuntimeError, json.JSONDecodeError, ValueError) as error:
             last_error = error
@@ -240,6 +247,7 @@ def collect_air_europa_legs(
     route_days: set[tuple[str, str, date]],
     allowlist: dict[str, Any],
     workers: int,
+    eur_pln: float,
 ) -> list[dict[str, Any]]:
     if not route_days:
         return []
@@ -257,7 +265,8 @@ def collect_air_europa_legs(
             if not hasattr(local, "client"):
                 local.client = GoogleFlightsClient()
             return collect_air_europa_trip(local.client, origin, destination, day,
-                float(rules[transfer]["air_europa_resident_fare_multiplier"]), accepted)
+                float(rules[transfer]["air_europa_resident_fare_multiplier"]),
+                eur_pln, accepted)
         except Exception:
             abort.set()
             raise
@@ -354,6 +363,12 @@ def validate_document(document: dict[str, Any]) -> None:
             if leg["carrier"] == "Air Europa":
                 if leg.get("price_source") != "Google Flights" or leg.get("price_scope") != "individual_flight_offer":
                     raise RuntimeError(f"Niedozwolone źródło lub zakres ceny w {result['id']}")
+                try:
+                    validate_resident_price_estimate(leg)
+                except RuntimeError as error:
+                    raise RuntimeError(
+                        f"Nieprawidłowy szacunek ceny rezydenta w {result['id']}"
+                    ) from error
                 if not re.fullmatch(r"UX\d{1,5}", leg.get("flight_number", "")):
                     raise RuntimeError(f"Brak pełnego numeru lotu Air Europa w {result['id']}")
                 expected_url = air_europa_booking_url(leg["departure_airport"], leg["arrival_airport"], leg["departure_at"])
@@ -386,7 +401,7 @@ def main(args) -> None:
 
     route_days = air_europa_route_days(allowlist, args.from_date, end)
     print(f"Dni tras Air Europa do sprawdzenia: {len(route_days)}", flush=True)
-    air_europa = collect_air_europa_legs(route_days, allowlist, args.workers)
+    air_europa = collect_air_europa_legs(route_days, allowlist, args.workers, eur.pln)
     if route_days and not air_europa:
         raise RuntimeError(
             "Google Flights nie zwrócił użytecznych indywidualnych ofert Air Europa; "
@@ -416,8 +431,8 @@ def main(args) -> None:
                 "dates, times and regular fares; no day-minimum or timetable-template fallback"
             ),
             "air_europa_resident_price": (
-                "estimate: 25% of Google Flights regular flight fare; taxes may not "
-                "receive the full resident discount"
+                "estimate: 25% of the Google Flights fare component after subtracting "
+                "the shared Aena fixed non-discountable route fees, then adding those fees"
             ),
             "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",

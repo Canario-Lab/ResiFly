@@ -4,8 +4,8 @@
 The collector reads the fixed Vueling transfer-airport allowlist, checks both
 travel directions and keeps every valid 2–24 hour self-transfer.  Vueling's
 own website is the primary route-list source.  Regular Vueling fares are read
-from Google Flights by HTTP and the Canary resident value is explicitly stored
-as a 25% estimate.  Price filtering is left to the website.
+from Google Flights by HTTP and the Canary resident estimate discounts only the
+fare component while preserving fixed Aena fees. Price filtering is left to the website.
 """
 
 from __future__ import annotations
@@ -29,6 +29,10 @@ from scripts.booking_urls import vueling_booking_url
 from scripts.collector_settings import (
     GOOGLE_FLIGHTS_MAX_WORKERS,
     google_flights_worker_count,
+)
+from scripts.spanish_resident_fees import (
+    apply_resident_price_estimate,
+    validate_resident_price_estimate,
 )
 from scripts.collect_step1 import (
     MAX_LAYOVER_MINUTES,
@@ -205,6 +209,7 @@ def parse_google_flights_response(
     origin: str,
     destination: str,
     multiplier: float,
+    eur_pln: float,
     accepted_marketing: set[str],
 ) -> list[dict[str, Any]]:
     """Transform direct, Vueling-marketed Google Flights offers."""
@@ -255,15 +260,12 @@ def parse_google_flights_response(
             "price_regular_pln": regular_pln,
             "resident_discount_eligible": True,
             "resident_fare_multiplier": multiplier,
-            "price_resident_estimated_pln": round(regular_pln * multiplier, 2),
-            "resident_price_source": (
-                "estimated as configured percentage of Google Flights regular fare"
-            ),
             "booking_url": vueling_booking_url(origin, destination, departure),
             "price_source": "Google Flights",
             "price_source_currency": "PLN",
             "price_source_amount": amount,
         }
+        apply_resident_price_estimate(leg, eur_pln)
         numeric_flight = "".join(character for character in raw_number if character.isdigit())
         key = (numeric_flight or raw_number, leg["departure_at"], leg["arrival_at"])
         previous = best_by_flight.get(key)
@@ -277,6 +279,7 @@ def collect_vueling_legs(
     transfer_rules: dict[str, dict[str, Any]],
     airline_codes: dict[str, Any],
     workers: int,
+    eur_pln: float,
 ) -> list[dict[str, Any]]:
     if not route_days:
         return []
@@ -299,6 +302,7 @@ def collect_vueling_legs(
                     origin,
                     destination,
                     multiplier,
+                    eur_pln,
                     accepted_marketing,
                 )
                 last_error = None
@@ -421,6 +425,8 @@ def validate_document(document: dict[str, Any]) -> None:
         for leg in result["legs"]:
             if not leg.get("booking_url"):
                 raise RuntimeError(f"Brak booking_url w {result['id']}")
+            if leg["carrier"] == "Vueling":
+                validate_resident_price_estimate(leg)
 
 
 @collection_entrypoint("1c")
@@ -456,6 +462,7 @@ def main(args) -> None:
         transfer_rules,
         allowlist["vueling_airline_codes"],
         args.workers,
+        eur.pln,
     )
     if route_days and not vueling_legs:
         raise RuntimeError(
@@ -490,7 +497,7 @@ def main(args) -> None:
             "vueling_routes": "Vueling official Tenerife route page",
             "vueling_prices": (
                 "Google Flights: regularna cena w PLN; cena rezydenta "
-                "oszacowana jako 25% ceny regularnej zgodnie z listą lotnisk"
+                "oszacowana jako 25% części taryfowej plus stałe opłaty Aena"
             ),
             "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",

@@ -32,6 +32,23 @@ Poprawna pusta dostępność i wyprzedane taryfy (`seats=0`) są dozwolone.
 Punkty lojalnościowe `PTS` są celowo pomijane, a taryfy pieniężne EUR są
 przetwarzane niezależnie. Nieprawidłowa taryfa gotówkowa blokuje wynik.
 
+## Szacunki cen rezydenta i opłaty Aeny
+
+Wspólny rejestr `data/spanish-resident-fees.json` zawiera kierunkowe opłaty
+niedyskontowane i jawny okres ich ważności. `scripts.spanish_resident_fees`
+stosuje wzór `opłaty + 0.25 × (cena regularna − opłaty)` do Iberii/Iberii
+Express, Vuelinga, Air Europy, Volotei oraz kwalifikujących się hiszpańskich
+odcinków Ryanaira i Wizz Aira w krokach 3–5. Wszystkie opłaty są przeliczane
+jednym kursem EUR/PLN batcha. Brak stawki lub wyjście poza okres ważności
+rejestru blokuje publikację.
+
+Binter i Canaryfly są wyłączone ze wspólnego estymatora: ich źródła zwracają
+oficjalne ceny rezydenta dla konkretnych rejsów. Skrypt
+`scripts/reprice_spanish_resident_estimates.py` służy wyłącznie do poprawienia
+pól pochodnych w już zebranych feedach i nie wykonuje zapytań sieciowych.
+Zachowuje rozkłady, ceny regularne, linki, daty kolekcji, raporty pokrycia i
+`run_id`.
+
 ## Air Europa — wyłącznie Google Flights od 22.10.2026
 
 Krok 1D pobiera numery rejsów, pełne daty/godziny i regularne ceny w PLN
@@ -47,8 +64,12 @@ dozwolony. Brak ceny, pełnego numeru lub godzin zwróconego rejsu blokuje zapis
 Raport pokrycia dopuszcza tylko metodę `google_flights_http` dla Air Europa,
 więc stary raport minimum dnia nie może poświadczyć nowego pobrania.
 
-Cena rezydenta pozostaje jawnie oznaczonym szacunkiem 25%, nie oficjalną
-wyceną przewoźnika. Trwały link zakupu nadal prowadzi do Air Europa,
+Cena rezydenta pozostaje jawnie oznaczonym szacunkiem, nie oficjalną wyceną
+przewoźnika. Kolektor odejmuje kierunkowe stałe opłaty zapisane we wspólnym
+`data/spanish-resident-fees.json`,
+stosuje `0.25` wyłącznie do części taryfowej i dodaje opłaty z powrotem,
+przeliczając EUR jednym kursem NBP batcha. Brak reguły opłat blokuje zapis;
+nie wolno mnożyć całej regularnej ceny przez `0.25`. Trwały link zakupu nadal prowadzi do Air Europa,
 z trasą/datą/pasażerami i parametrem `residentType=SPANISH_RESIDENT_RC`,
 usuwanym przez stronę po wyłączeniu rezydenta. Obecny format jest wyszukiwaniem
 trasy/dnia, nie potwierdzonym automatycznym wyborem numeru rejsu. Nie wolno

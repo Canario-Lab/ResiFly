@@ -13,6 +13,7 @@ from scripts.collect_step1e import (
     validate_document,
     volotea_route_days,
 )
+from scripts.spanish_resident_fees import apply_resident_price_estimate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,7 +35,7 @@ def low_cost_leg(origin, departure, destination, arrival, price=250.0):
 
 
 def volotea_leg(origin, departure, destination, arrival, regular=400.0):
-    return {
+    leg = {
         "carrier": "Volotea",
         "flight_number": "V73523",
         "departure_airport": origin,
@@ -42,12 +43,13 @@ def volotea_leg(origin, departure, destination, arrival, regular=400.0):
         "arrival_airport": destination,
         "arrival_at": arrival,
         "price_regular_pln": regular,
-        "price_resident_estimated_pln": regular * 0.25,
         "resident_discount_eligible": True,
         "resident_fare_multiplier": 0.25,
         "booking_url": "https://www.volotea.com/es/ofertas-vuelos/tfs/bio/",
         "price_source": "Volotea official MinPrice endpoint",
     }
+    apply_resident_price_estimate(leg, 4.0)
+    return leg
 
 
 def fare_payload(
@@ -130,7 +132,7 @@ class Step1ECollectorTests(unittest.TestCase):
         self.assertEqual(leg["departure_at"], "2026-11-15T09:40:00+00:00")
         self.assertEqual(leg["arrival_at"], "2026-11-15T13:50:00+01:00")
         self.assertEqual(leg["price_regular_pln"], 509.88)
-        self.assertEqual(leg["price_resident_estimated_pln"], 127.47)
+        self.assertEqual(leg["price_resident_estimated_pln"], 156.42)
         self.assertIn("departureDate=2026-11-15", leg["booking_url"])
         self.assertEqual(leg["price_source_taxes"], 9.65)
 
@@ -178,6 +180,7 @@ class Step1ECollectorTests(unittest.TestCase):
         payload = fare_payload()
         record = payload["Content"][0]["Value"][0]
         record["Market"] = "BIO-TFS"
+        record["Taxes"] = 10.48
         record["DepartureTime"] = "2026-11-15T06:45:00+00:00"
         record["ArrivalTime"] = "2026-11-15T09:00:00+01:00"
         legs = parse_volotea_response(

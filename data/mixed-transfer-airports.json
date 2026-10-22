@@ -105,7 +105,7 @@
         "OTP"
       ]
     },
-    "calculation": "Pomnóż regularną cenę odcinka TFS/TFN przez 0.25 tylko wtedy, gdy lotnisko przesiadkowe znajduje się na liście eligible_transfer_airports odpowiedniego wariantu. W pozostałych przypadkach użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
+    "calculation": "Gdy lotnisko przesiadkowe znajduje się na liście eligible_transfer_airports odpowiedniego wariantu, odejmij kierunkową opłatę z data/spanish-resident-fees.json, pomnóż przez 0.25 wyłącznie pozostałą część taryfową odcinka TFS/TFN i dodaj opłatę z powrotem. W pozostałych przypadkach użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
   },
   "usage_policy": {
     "step": 5,

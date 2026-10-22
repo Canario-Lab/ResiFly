@@ -47,11 +47,30 @@ wyraźnej decyzji użytkownika.
   - przewoźnika każdego odcinka,
   - czas przesiadki,
   - zwykłą cenę odcinka z/do TFS lub TFN,
-  - cenę tego odcinka po pomnożeniu przez 25%,
+  - cenę rezydenta tego odcinka: oficjalną, jeżeli zwraca ją przewoźnik, albo
+    jawnie oznaczony szacunek uwzględniający pełne opłaty niedyskontowane,
   - cenę pozostałego odcinka,
   - cenę całkowitą w PLN.
 - Jeśli krok nie zwróci wyników, zapisać informację, co sprawdzono i że nie
   znaleziono połączeń spełniających warunki.
+
+### Wspólne liczenie szacowanej ceny rezydenta
+
+- Kierunkowe opłaty, których nie obejmuje 75-procentowa bonifikata, znajdują
+  się wyłącznie w `data/spanish-resident-fees.json` i są odczytywane przez
+  `scripts.spanish_resident_fees`.
+- Regułę stosować do Iberii/Iberii Express, Vuelinga, Air Europy, Volotei oraz
+  kwalifikujących się hiszpańskich odcinków Ryanaira i Wizz Aira w krokach
+  3–5: `opłaty + 0.25 × (cena regularna − opłaty)`.
+- Wszystkie opłaty EUR przeliczać jednym kursem NBP użytym przez cały batch.
+  Brak trasy w tabeli albo data odlotu poza okresem jej ważności blokuje
+  publikację; nie wolno zgadywać opłat.
+- Nie stosować tego szacunku do Bintera ani Canaryfly, ponieważ ich oficjalne
+  API zwracają cenę rezydenta dla konkretnego lotu.
+- Istniejące feedy można przeliczyć bez ponownego pobierania lotów poleceniem
+  `scripts/reprice_spanish_resident_estimates.py`. Taki przebieg może zmienić
+  tylko pola pochodne ceny rezydenta i sumy, nigdy loty, ceny regularne, linki,
+  datę zebrania, raport pokrycia ani identyfikator uruchomienia.
 
 ## Stabilność automatycznego uruchomienia
 
@@ -131,8 +150,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Każdą zapisaną trasę Bintera sprawdzić we wszystkie dni pełnego okna dat w
   obu kierunkach, niezależnie od kalendarza Ryanair/Wizz Air. Dopiero potem
   dopasować możliwe przesiadki.
-- Zwykłą cenę wyłącznie odcinka Bintera pomnożyć przez 25%. Drugi odcinek
-  policzyć w pełnej cenie.
+- Dla odcinka Bintera zachować oficjalną cenę rezydenta zwróconą przez GraphQL
+  przewoźnika. Nie wyliczać jej mnożnikiem `0.25`; taryfy punktowe `PTS` nie są
+  cenami gotówkowymi EUR. Drugi odcinek policzyć w pełnej cenie.
 - W wynikach kroku umieścić krótką listę użytych lotnisk przesiadkowych oraz
   wszystkie znalezione połączenia.
 
@@ -153,8 +173,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   Air. Dopiero potem dopasować możliwe przesiadki.
 - Pobierać regularną cenę Iberii/Iberii Express w PLN z Google Flights zwykłym
   zapytaniem HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta
-  zapisać jako orientacyjną wartość równą 25% tej ceny regularnej i wyraźnie
-  oznaczyć sposób wyliczenia w odcinku.
+  oszacować przez odjęcie właściwych dla kierunku opłat z
+  `data/spanish-resident-fees.json`, zastosowanie `0.25` tylko do pozostałej
+  części taryfowej i dodanie opłat z powrotem. Wyraźnie oznaczyć szacunek.
 - Jeśli Google Flights nie zwróci użytecznych danych Iberii, przerwać wykonanie
   bez nadpisywania poprzedniego pliku wynikowego. Nie tworzyć cen zastępczych.
 - Odcinek Wizz Air lub Ryanair liczyć w pełnej cenie. Nie filtrować wyników
@@ -181,8 +202,9 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   2. TFN → lotnisko przesiadkowe linią Vueling → WAW/WMI/KRK/KTW/GDN linią
      Ryanair albo Wizz Air.
 - Pobierać regularną cenę Vuelinga w PLN z Google Flights zwykłym zapytaniem
-  HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta zapisać jako
-  orientacyjną wartość równą 25% ceny regularnej i oznaczyć sposób wyliczenia.
+  HTTP, bez uruchamiania prawdziwej przeglądarki. Cenę rezydenta oszacować
+  wspólną regułą opłat Aeny z `data/spanish-resident-fees.json`; nie mnożyć
+  całej ceny regularnej przez `0.25`.
 - Sprawdzać każdy dzień pełnego skonfigurowanego okna dat dla każdej zapisanej
   trasy Vuelinga w obu kierunkach, niezależnie od dni lotów Wizz Air/Ryanair.
   Dopiero po pełnym skanie Vuelinga dopasowywać możliwe przesiadki.
@@ -212,8 +234,13 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   pełnym numerem (np. UX9048), datami i godzinami. Sprawdzać wszystkie znane
   bloki ofert, nie tylko pierwszy. Maksymalnie dwa równoległe zapytania,
   zgodnie ze wspólnym limitem `scripts/collector_settings.py`.
-- Cenę rezydenta zapisać jako jawnie oznaczony szacunek 25% regularnej ceny
-  Google; nie jest to oficjalna wycena rezydenta, podatki mogą podlegać innym zasadom.
+- Cenę rezydenta zapisać jako jawnie oznaczony szacunek: od regularnej ceny
+  Google odjąć stałe, niedyskontowane opłaty dla danego kierunku zapisane w
+  `data/spanish-resident-fees.json`, zastosować mnożnik `0.25` tylko do
+  pozostałej części taryfy i
+  dodać opłaty z powrotem. Opłaty EUR przeliczać jednym kursem NBP całego
+  batcha. Nie stosować `0.25` do całej ceny i nie zgadywać brakującej opłaty.
+  Wynik nadal nie jest oficjalną wyceną rezydenta.
 - Sprawdzać każdy dzień pełnego skonfigurowanego okna dat dla każdej zapisanej
   trasy Air Europa w obu kierunkach, niezależnie od dni lotów Wizz Air/Ryanair.
   Dopiero po pełnym skanie Air Europa dopasowywać możliwe przesiadki.
@@ -256,8 +283,10 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   tym pełnym skanie dopasowywać przesiadki. Odpowiedź dla długiego okresu może
   zawierać tylko najtańszy lot w całym okresie.
 - Regularną cenę Volotei pobierać jako cenę z opłatami. Cenę rezydenta zapisać
-  jako jawnie oznaczony szacunek 25% tej ceny; podatki mogą nie podlegać pełnej
-  zniżce.
+  jako jawnie oznaczony szacunek: odjąć opłatę dla kierunku z
+  `data/spanish-resident-fees.json`, pomnożyć część taryfową przez `0.25` i
+  dodać opłatę z powrotem. Jeżeli Volotea zwraca pole podatków/opłat, musi ono
+  zgadzać się z rejestrem; opłaty nie podlegają zniżce.
 - Pusta, ale poprawna odpowiedź dla trasy i dnia oznacza brak dostępności. Błąd
   oficjalnego endpointu musi przerwać kolektor bez nadpisywania poprzedniego
   feedu.
@@ -328,9 +357,10 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Najpierw pobrać pełne okno dat obu odcinków Ryanaira każdej zapisanej trasy,
   a dopiero potem je łączyć.
 - Uprawnienie do zniżki odczytywać z pola
-  `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
-  wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
-  się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
+  `resident_discount_on_tenerife_leg` w pliku listy. Dla kwalifikującego się
+  odcinka TFS/TFN ↔ przesiadka odjąć kierunkową opłatę z
+  `data/spanish-resident-fees.json`, zastosować `0.25` tylko do części
+  taryfowej i dodać opłatę z powrotem. Dla pozostałych lotnisk stosować pełną
   cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
   w pełnej cenie.
 - W wynikach kroku najpierw podać aktualną listę lotnisk przesiadkowych i
@@ -354,9 +384,10 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - Najpierw pobrać pełne okno dat obu odcinków Wizz Air każdej zapisanej trasy,
   a dopiero potem je łączyć.
 - Uprawnienie do zniżki odczytywać z pola
-  `resident_discount_on_tenerife_leg` w pliku listy. Mnożnik `0.25` stosować
-  wyłącznie do odcinka TFS/TFN ↔ przesiadka, gdy lotnisko przesiadkowe znajduje
-  się w `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną
+  `resident_discount_on_tenerife_leg` w pliku listy. Dla kwalifikującego się
+  odcinka TFS/TFN ↔ przesiadka odjąć kierunkową opłatę z
+  `data/spanish-resident-fees.json`, zastosować `0.25` tylko do części
+  taryfowej i dodać opłatę z powrotem. Dla pozostałych lotnisk stosować pełną
   cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
   w pełnej cenie.
 - W wynikach kroku najpierw podać aktualną listę lotnisk przesiadkowych i
@@ -377,11 +408,12 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   odcinków Ryanair i Wizz Air w obu kierunkach, a dopiero potem dopasowywać
   połączenia. Kalendarz jednej linii nie może ograniczać zapytań do drugiej.
 - Uprawnienie do zniżki odczytywać osobno dla właściwego wariantu z pola
-  `resident_discount_on_tenerife_leg`. Mnożnik `0.25` stosować wyłącznie do
-  odcinka TFS/TFN ↔ przesiadka, gdy lotnisko znajduje się w odpowiednim
-  `eligible_transfer_airports`. Dla pozostałych lotnisk stosować pełną cenę
-  (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć w
-  pełnej cenie.
+  `resident_discount_on_tenerife_leg`. Dla kwalifikującego się odcinka
+  TFS/TFN ↔ przesiadka odjąć kierunkową opłatę z
+  `data/spanish-resident-fees.json`, zastosować `0.25` tylko do części
+  taryfowej i dodać opłatę z powrotem. Dla pozostałych lotnisk stosować pełną
+  cenę (`1.0`). Odcinek między Polską a lotniskiem przesiadkowym zawsze liczyć
+  w pełnej cenie.
 - Listę zmieniać wyłącznie na wyraźne polecenie użytkownika. Obecność na liście
   nie gwarantuje połączenia w danym 30-dniowym oknie.
 - Strefy czasowe lotnisk przechowywać w `airport_timezones` w tym samym pliku

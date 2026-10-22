@@ -58,7 +58,7 @@
     ],
     "eligible_count": 1,
     "ineligible_count": 5,
-    "calculation": "Dla SCQ pomnóż regularną cenę odcinka TFN/TFS przez 0.25. Dla BBU, BUD, FCO, MXP i OTP użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
+    "calculation": "Dla SCQ odejmij kierunkową opłatę z data/spanish-resident-fees.json, pomnóż przez 0.25 wyłącznie pozostałą część taryfową odcinka TFN/TFS i dodaj opłatę z powrotem. Dla BBU, BUD, FCO, MXP i OTP użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
   },
   "usage_policy": {
     "step": 4,

@@ -73,13 +73,16 @@ class Step3CollectorTests(unittest.TestCase):
             leg("FR3", "KRK", "2026-11-02T06:00:00+01:00", "AGP", "2026-11-02T09:30:00+01:00", 1000),
             leg("FR4", "AGP", "2026-11-02T12:00:00+01:00", "TFS", "2026-11-02T14:00:00+00:00", 1400),
         ]
-        results = build_connections(legs, allowlist())
+        results = build_connections(legs, allowlist(), 4.0)
         self.assertEqual(len(results), 2)
         self.assertEqual({result["direction"] for result in results}, {
             "tenerife_to_poland", "poland_to_tenerife",
         })
         self.assertEqual({result["price_total_regular_pln"] for result in results}, {2100, 2400})
-        self.assertEqual({result["price_total_resident_estimated_pln"] for result in results}, {1200, 1350})
+        self.assertEqual(
+            {result["price_total_resident_estimated_pln"] for result in results},
+            {1228.95, 1384.05},
+        )
         for result in results:
             tenerife_legs = [
                 item for item in result["legs"]
@@ -94,7 +97,7 @@ class Step3CollectorTests(unittest.TestCase):
             leg("FR5", "TFS", "2026-11-03T08:00:00+00:00", "STN", "2026-11-03T12:20:00+00:00", 800),
             leg("FR6", "STN", "2026-11-03T15:00:00+00:00", "WMI", "2026-11-03T18:20:00+01:00", 500),
         ]
-        result = build_connections(legs, allowlist())[0]
+        result = build_connections(legs, allowlist(), 4.0)[0]
         self.assertEqual(result["price_total_regular_pln"], 1300)
         self.assertEqual(result["price_total_resident_estimated_pln"], 1300)
         self.assertTrue(all(not item["resident_discount_eligible"] for item in result["legs"]))

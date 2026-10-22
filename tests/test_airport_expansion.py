@@ -132,7 +132,9 @@ class AirportExpansionTests(unittest.TestCase):
                 leg("Ryanair", "TFS", "2026-10-24T19:00:00+01:00", "AGP", arrival.isoformat(), "FR1"),
                 leg("Wizz Air", "AGP", departure.isoformat(), "GDN", landing.isoformat(), "W61614"),
             ]
-            results = collect_step5.build_connections(legs, collect_step5.load_allowlist())
+            results = collect_step5.build_connections(
+                legs, collect_step5.load_allowlist(), 4.0
+            )
             self.assertEqual(len(results), expected, wait)
             if results:
                 self.assertEqual(results[0]["layover_minutes"], wait)
@@ -161,7 +163,7 @@ class AirportExpansionTests(unittest.TestCase):
                     leg(polish_carrier, "GDN", "2026-11-02T06:00:00+01:00", hub, "2026-11-02T09:00:00+01:00", "TEST3"),
                     leg(tenerife_carrier, hub, "2026-11-02T12:00:00+01:00", "TFS", "2026-11-02T15:00:00+00:00", "TEST4"),
                 ]
-                results = module.build_connections(legs, module.load_allowlist())
+                results = module.build_connections(legs, module.load_allowlist(), 4.0)
                 self.assertEqual(len(results), 2)
                 module.validate_document({"results": results}, module.load_allowlist())
 
@@ -172,7 +174,9 @@ class AirportExpansionTests(unittest.TestCase):
             leg("Ryanair", "KRK", "2026-11-02T07:00:00+01:00", "GDN", "2026-11-02T08:00:00+01:00", "FR2"),
             leg("Wizz Air", "GDN", "2026-11-02T11:00:00+01:00", "TFS", "2026-11-02T16:00:00+00:00", "W61709"),
         ]
-        results = collect_step5.build_connections(legs, collect_step5.load_allowlist())
+        results = collect_step5.build_connections(
+            legs, collect_step5.load_allowlist(), 4.0
+        )
         self.assertEqual(len(results), 2)
         self.assertTrue(all(row["transfer_airport"] == "GDN" for row in results))
         self.assertTrue(all(row["price_total_regular_pln"] == row["price_total_resident_estimated_pln"] for row in results))

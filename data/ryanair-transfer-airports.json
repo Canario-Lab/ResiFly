@@ -118,7 +118,7 @@
     ],
     "eligible_count": 3,
     "ineligible_count": 31,
-    "calculation": "Dla AGP, SVQ i VLC pomnóż regularną cenę odcinka TFS/TFN przez 0.25. Dla każdego pozostałego lotniska użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
+    "calculation": "Dla AGP, SVQ i VLC odejmij kierunkową opłatę z data/spanish-resident-fees.json, pomnóż przez 0.25 wyłącznie pozostałą część taryfową odcinka TFS/TFN i dodaj opłatę z powrotem. Dla każdego pozostałego lotniska użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
   },
   "usage_policy": {
     "step": 3,

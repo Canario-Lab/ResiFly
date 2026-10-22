@@ -11,6 +11,7 @@ from scripts.collect_step1b import (
     validate_allowlist,
     validate_document,
 )
+from scripts.spanish_resident_fees import apply_resident_price_estimate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,8 +32,8 @@ def low_cost_leg(origin, departure, destination, arrival, price=250.0):
     }
 
 
-def iberia_leg(origin, departure, destination, arrival, regular=800.0, resident=200.0):
-    return {
+def iberia_leg(origin, departure, destination, arrival, regular=800.0):
+    leg = {
         "carrier": "Iberia Express",
         "flight_number": "IB1574",
         "departure_airport": origin,
@@ -40,11 +41,12 @@ def iberia_leg(origin, departure, destination, arrival, regular=800.0, resident=
         "arrival_airport": destination,
         "arrival_at": arrival,
         "price_regular_pln": regular,
-        "price_resident_estimated_pln": resident,
         "resident_discount_eligible": True,
         "resident_fare_multiplier": 0.25,
         "booking_url": "https://www.iberia.com/flights/example",
     }
+    apply_resident_price_estimate(leg, 4.0)
+    return leg
 
 
 class Step1BCollectorTests(unittest.TestCase):
@@ -113,13 +115,14 @@ class Step1BCollectorTests(unittest.TestCase):
             "TFN",
             "MAD",
             0.25,
+            4.0,
             {"IB", "I2"},
         )
         self.assertEqual(len(legs), 1)
         self.assertEqual(legs[0]["carrier"], "Iberia Express")
         self.assertEqual(legs[0]["flight_number"], "I21574")
         self.assertEqual(legs[0]["price_regular_pln"], 430.0)
-        self.assertEqual(legs[0]["price_resident_estimated_pln"], 107.5)
+        self.assertEqual(legs[0]["price_resident_estimated_pln"], 134.23)
         self.assertEqual(legs[0]["price_source"], "Google Flights")
         self.assertIn("residentCode=RC", legs[0]["booking_url"])
 
@@ -137,6 +140,7 @@ class Step1BCollectorTests(unittest.TestCase):
                 "TFN",
                 "MAD",
                 0.25,
+                4.0,
                 {"IB", "I2"},
             ),
             [],
@@ -149,7 +153,6 @@ class Step1BCollectorTests(unittest.TestCase):
             "MAD",
             "2026-11-03T11:45:00+01:00",
             regular=900.0,
-            resident=225.0,
         )
         madrid_to_poland = low_cost_leg(
             "MAD",
@@ -171,7 +174,6 @@ class Step1BCollectorTests(unittest.TestCase):
             "TFS",
             "2026-11-04T15:00:00+00:00",
             regular=1000.0,
-            resident=250.0,
         )
         results = build_connections(
             [madrid_to_poland, poland_to_madrid],

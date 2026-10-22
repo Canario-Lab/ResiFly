@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "name": "Stałe opłaty niedyskontowane przy szacowaniu cen rezydenta",
+  "currency": "EUR",
+  "verified_on": "2026-10-22",
+  "valid_for_departures_from": "2026-03-01",
+  "valid_for_departures_through": "2026-12-31",
+  "calculation": "Od regularnej ceny z opłatami odejmij opłatę właściwą dla kierunku, pomnóż pozostałą część taryfową przez 0.25 i dodaj opłatę z powrotem.",
+  "fees_include": [
+    "Aena passenger departure charge",
+    "Aena PMR charge",
+    "Aena airport security charge",
+    "AESA aviation safety and surveillance fee",
+    "Aena 0.12% 2026 border-control cost surcharge where applicable"
+  ],
+  "peninsula_departure_fees_eur": {
+    "ALC": 11.35,
+    "AGP": 11.35,
+    "BCN": 18.60,
+    "BIO": 10.48,
+    "MAD": 19.57,
+    "SCQ": 10.48,
+    "SVQ": 10.48,
+    "VLC": 10.48
+  },
+  "tenerife_to_peninsula_departure_fees_eur": {
+    "TFN": 8.91,
+    "TFS": 9.65
+  },
+  "sources": [
+    {
+      "name": "Aena — Guía de Tarifas 2026, edición agosto",
+      "url": "https://www.aena.es/es/oportunidades-de-negocio/precios-y-facturacion.html",
+      "finding": "Sekcje 2.2.1, 2.2.2 i 7.1 określają opłaty pasażerskie, PMR, bezpieczeństwa lotniskowego i bezpieczeństwa lotniczego; tabela uwzględnia klasy lotnisk i kierunek lotu."
+    },
+    {
+      "name": "Air Europa — zweryfikowane rozbicia ceny",
+      "verified_on": "2026-10-22",
+      "finding": "Rozbicia MAD-TFN i TFN-MAD potwierdziły sposób grupowania i zaokrąglania stałych opłat stosowany na bilecie przewoźnika."
+    }
+  ]
+}

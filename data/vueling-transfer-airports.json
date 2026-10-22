@@ -26,6 +26,7 @@
     "step": "1C",
     "discovery_mode": "fixed_allowlist",
     "weekly_run": "Sprawdzaj wyłącznie aktualne rozkłady i ceny dla tras zapisanych w polu airports.",
+    "resident_estimate_fee_registry": "data/spanish-resident-fees.json",
     "do_not_rediscover_each_run": true,
     "update_only_on_explicit_user_request": true,
     "primary_route_source": "Oficjalna strona Vueling z lotami z Teneryfy; Aena jest wyłącznie potwierdzeniem pomocniczym.",

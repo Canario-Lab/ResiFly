@@ -41,6 +41,10 @@ from scripts.collect_step1 import (
     wizz_schedules_from_allowlist,
 )
 from scripts.collect_step2 import wizz_timetable
+from scripts.spanish_resident_fees import (
+    apply_resident_price_estimate,
+    validate_resident_price_estimate,
+)
 from scripts.wizz_schedules import WIZZ_ROUTE_FILE, load_wizz_route_data, resolve_schedule
 
 
@@ -171,6 +175,7 @@ def discounted_leg(
     leg: dict[str, Any],
     transfer: str,
     eligible_transfers: set[str],
+    eur_pln: float,
 ) -> dict[str, Any]:
     result = dict(leg)
     is_tenerife_leg = (
@@ -181,10 +186,9 @@ def discounted_leg(
     regular = float(result["price_regular_pln"])
     result["resident_discount_eligible"] = eligible
     result["resident_fare_multiplier"] = 0.25 if eligible else 1.0
-    result["price_resident_estimated_pln"] = round(
-        regular * result["resident_fare_multiplier"],
-        2,
-    )
+    result["price_resident_estimated_pln"] = regular
+    if eligible:
+        apply_resident_price_estimate(result, eur_pln)
     return result
 
 
@@ -199,6 +203,7 @@ def connection_id(legs: list[dict[str, Any]]) -> str:
 def build_connections(
     legs: list[dict[str, Any]],
     allowlist: dict[str, Any],
+    eur_pln: float,
 ) -> list[dict[str, Any]]:
     by_route: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for leg in legs:
@@ -225,8 +230,8 @@ def build_connections(
                 if not MIN_LAYOVER_MINUTES <= layover <= MAX_LAYOVER_MINUTES:
                     continue
                 connection_legs = [
-                    discounted_leg(first, transfer, eligible_transfers),
-                    discounted_leg(second, transfer, eligible_transfers),
+                    discounted_leg(first, transfer, eligible_transfers, eur_pln),
+                    discounted_leg(second, transfer, eligible_transfers, eur_pln),
                 ]
                 regular_total = round(
                     sum(float(leg["price_regular_pln"]) for leg in connection_legs),
@@ -326,6 +331,8 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
             expected_eligible = is_tenerife_leg and transfer in eligible_transfers
             if leg["resident_discount_eligible"] != expected_eligible:
                 raise RuntimeError(f"Incorrect resident discount in {result['id']}")
+            if expected_eligible:
+                validate_resident_price_estimate(leg)
 
 
 @collection_entrypoint("4")
@@ -348,7 +355,7 @@ def main(args) -> None:
     print(f"Trasy z zapisanej listy: {len(routes)}", flush=True)
     legs = collect_routes(routes, args.from_date, end, rates, args.workers)
     print(f"Odcinki Wizz Air: {len(legs)}", flush=True)
-    results = build_connections(legs, allowlist)
+    results = build_connections(legs, allowlist, rates["EUR"].pln)
 
     discount_rule = allowlist["resident_discount_on_tenerife_leg"]
     document = {
@@ -386,6 +393,7 @@ def main(args) -> None:
             "allowlist": "data/wizzair-transfer-airports.json",
             "wizz_air": "Wizz Air public timetableV2 API",
             "schedule_map": "verified route flight numbers and published block times in scripts/collect_step4.py",
+            "resident_price_estimate": "25% of fare component plus fixed Aena fees",
         },
         "results": results,
     }

@@ -26,7 +26,8 @@
     "volotea_routes_schedules_and_prices": "Volotea official route pages and public MinPrice endpoint; regular fare with fees, no Google Flights",
     "volotea_resident_price": "estimate: 25% of official regular fare with fees; taxes may not receive the full resident discount",
     "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
-    "wizz_air": "Wizz Air timetableV2"
+    "wizz_air": "Wizz Air timetableV2",
+    "resident_price_estimate": "25% of fare component plus fixed non-discountable fees from data/spanish-resident-fees.json"
   },
   "result_status": "ok",
   "results": [
@@ -66,19 +67,22 @@
           "price_regular_pln": 781.39,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 195.35,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 229.68,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 178.87,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 1150.39,
-      "price_total_resident_estimated_pln": 564.35
+      "price_total_resident_estimated_pln": 598.68
     },
     {
       "id": "step1e-3ac4f11097afe292",
@@ -116,19 +120,22 @@
           "price_regular_pln": 781.39,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 195.35,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 229.68,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 178.87,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 1010.39,
-      "price_total_resident_estimated_pln": 424.35
+      "price_total_resident_estimated_pln": 458.68
     },
     {
       "id": "step1e-5888738cb0a70362",
@@ -166,19 +173,22 @@
           "price_regular_pln": 404.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 101.03,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 135.37,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 92.51,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 863.13,
-      "price_total_resident_estimated_pln": 560.03
+      "price_total_resident_estimated_pln": 594.37
     },
     {
       "id": "step1e-cce67385cbae00d7",
@@ -216,19 +226,22 @@
           "price_regular_pln": 404.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 101.03,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 135.37,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 92.51,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 933.13,
-      "price_total_resident_estimated_pln": 630.03
+      "price_total_resident_estimated_pln": 664.37
     },
     {
       "id": "step1e-a1bad75cef5a9b2c",
@@ -266,19 +279,22 @@
           "price_regular_pln": 314.31,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 78.58,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 112.91,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 71.95,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 633.31,
-      "price_total_resident_estimated_pln": 397.58
+      "price_total_resident_estimated_pln": 431.91
     },
     {
       "id": "step1e-c5b2a6515a760119",
@@ -316,19 +332,22 @@
           "price_regular_pln": 314.31,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 78.58,
-          "resident_price_source": "estimated as configured percentage of Volotea official regular fare with fees",
+          "price_resident_estimated_pln": 112.91,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
           "price_source_amount": 71.95,
           "schedule_source": "Volotea official MinPrice endpoint",
-          "price_source_taxes": 10.48
+          "price_source_taxes": 10.48,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 45.78,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685
         }
       ],
       "price_total_regular_pln": 613.31,
-      "price_total_resident_estimated_pln": 377.58
+      "price_total_resident_estimated_pln": 411.91
     }
   ],
   "collection_coverage": {
@@ -1509,5 +1528,14 @@
         ]
       }
     ]
+  },
+  "derived_prices_updated_at": "2026-10-22T23:20:08+01:00",
+  "derived_price_update": {
+    "scope": "estimated Spanish resident leg prices and dependent totals only",
+    "network_requests": false,
+    "source_collection_generated_at": "2026-10-22T22:28:49+01:00",
+    "collection_run_id": "3451bb82-354a-4785-9f0a-fcc676625f47",
+    "fee_registry": "data/spanish-resident-fees.json",
+    "fee_registry_verified_on": "2026-10-22"
   }
 }

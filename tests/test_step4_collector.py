@@ -84,13 +84,16 @@ class Step4CollectorTests(unittest.TestCase):
             leg("W61407", "WMI", "2026-12-18T05:45:00+01:00", "SCQ", "2026-12-18T09:35:00+01:00", 1000, 850),
             leg("W47465", "SCQ", "2026-12-18T12:00:00+01:00", "TFN", "2026-12-18T13:40:00+00:00", 1400, 1200),
         ]
-        results = build_connections(legs, allowlist())
+        results = build_connections(legs, allowlist(), 4.0)
         self.assertEqual(len(results), 2)
         self.assertEqual({result["direction"] for result in results}, {
             "tenerife_to_poland", "poland_to_tenerife",
         })
         self.assertEqual({result["price_total_regular_pln"] for result in results}, {2100, 2400})
-        self.assertEqual({result["price_total_resident_estimated_pln"] for result in results}, {1200, 1350})
+        self.assertEqual(
+            {result["price_total_resident_estimated_pln"] for result in results},
+            {1226.73, 1381.44},
+        )
         self.assertEqual({result["price_total_wizz_discount_club_pln"] for result in results}, {1900, 2050})
         for result in results:
             tenerife_legs = [
@@ -106,7 +109,7 @@ class Step4CollectorTests(unittest.TestCase):
             leg("W62494", "TFS", "2026-11-03T08:00:00+00:00", "BUD", "2026-11-03T14:05:00+01:00", 800, 700),
             leg("W62467", "BUD", "2026-11-03T17:00:00+01:00", "WAW", "2026-11-03T18:15:00+01:00", 500, 450),
         ]
-        result = build_connections(legs, allowlist())[0]
+        result = build_connections(legs, allowlist(), 4.0)[0]
         self.assertEqual(result["price_total_regular_pln"], 1300)
         self.assertEqual(result["price_total_resident_estimated_pln"], 1300)
         self.assertEqual(result["price_total_wizz_discount_club_pln"], 1150)

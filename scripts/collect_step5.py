@@ -34,6 +34,10 @@ from scripts.collect_step2 import ryanair_client_version
 from scripts.search_airports import validate_polish_transfer
 from scripts.collect_step3 import collect_routes as collect_ryanair_routes
 from scripts.collect_step4 import collect_routes as collect_wizz_routes
+from scripts.spanish_resident_fees import (
+    apply_resident_price_estimate,
+    validate_resident_price_estimate,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -113,6 +117,7 @@ def discounted_leg(
     leg: dict[str, Any],
     transfer: str,
     eligible_transfers: set[str],
+    eur_pln: float,
 ) -> dict[str, Any]:
     result = dict(leg)
     is_tenerife_leg = (
@@ -123,10 +128,9 @@ def discounted_leg(
     regular = float(result["price_regular_pln"])
     result["resident_discount_eligible"] = eligible
     result["resident_fare_multiplier"] = 0.25 if eligible else 1.0
-    result["price_resident_estimated_pln"] = round(
-        regular * result["resident_fare_multiplier"],
-        2,
-    )
+    result["price_resident_estimated_pln"] = regular
+    if eligible:
+        apply_resident_price_estimate(result, eur_pln)
     return result
 
 
@@ -141,6 +145,7 @@ def connection_id(variant: str, legs: list[dict[str, Any]]) -> str:
 def build_connections(
     legs: list[dict[str, Any]],
     allowlist: dict[str, Any],
+    eur_pln: float,
 ) -> list[dict[str, Any]]:
     by_carrier_route: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
     for leg in legs:
@@ -168,8 +173,8 @@ def build_connections(
                 if not MIN_LAYOVER_MINUTES <= layover <= MAX_LAYOVER_MINUTES:
                     continue
                 connection_legs = [
-                    discounted_leg(first, transfer, eligible_transfers),
-                    discounted_leg(second, transfer, eligible_transfers),
+                    discounted_leg(first, transfer, eligible_transfers, eur_pln),
+                    discounted_leg(second, transfer, eligible_transfers, eur_pln),
                 ]
                 regular_total = round(
                     sum(float(leg["price_regular_pln"]) for leg in connection_legs),
@@ -338,6 +343,8 @@ def validate_document(document: dict[str, Any], allowlist: dict[str, Any]) -> No
             expected_eligible = is_tenerife_leg and transfer in eligible_transfers
             if leg["resident_discount_eligible"] != expected_eligible:
                 raise RuntimeError(f"Incorrect resident discount in {result['id']}")
+            if expected_eligible:
+                validate_resident_price_estimate(leg)
 
 
 @collection_entrypoint("5")
@@ -377,7 +384,9 @@ def main(args) -> None:
         f"Odcinki: Ryanair={len(ryanair_legs)}, Wizz Air={len(wizz_legs)}",
         flush=True,
     )
-    results = build_connections(ryanair_legs + wizz_legs, allowlist)
+    results = build_connections(
+        ryanair_legs + wizz_legs, allowlist, rates["EUR"].pln
+    )
 
     variants_metadata = {
         variant_key: {
@@ -430,6 +439,7 @@ def main(args) -> None:
                 "verified route flight numbers and published block times in "
                 "scripts/collect_step4.py"
             ),
+            "resident_price_estimate": "25% of fare component plus fixed Aena fees",
         },
         "results": results,
     }

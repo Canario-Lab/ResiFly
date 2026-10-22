@@ -12,6 +12,7 @@ from scripts.collect_step1c import (
     validate_document,
     vueling_route_days,
 )
+from scripts.spanish_resident_fees import apply_resident_price_estimate
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,7 +34,7 @@ def low_cost_leg(origin, departure, destination, arrival, price=250.0):
 
 
 def vueling_leg(origin, departure, destination, arrival, regular=800.0):
-    return {
+    leg = {
         "carrier": "Vueling",
         "flight_number": "VY3210",
         "departure_airport": origin,
@@ -41,11 +42,12 @@ def vueling_leg(origin, departure, destination, arrival, regular=800.0):
         "arrival_airport": destination,
         "arrival_at": arrival,
         "price_regular_pln": regular,
-        "price_resident_estimated_pln": regular * 0.25,
         "resident_discount_eligible": True,
         "resident_fare_multiplier": 0.25,
         "booking_url": "https://tickets.vueling.com/booking?example=1",
     }
+    apply_resident_price_estimate(leg, 4.0)
+    return leg
 
 
 class Step1CCollectorTests(unittest.TestCase):
@@ -122,13 +124,14 @@ class Step1CCollectorTests(unittest.TestCase):
             "TFN",
             "BCN",
             0.25,
+            4.0,
             {"VY"},
         )
         self.assertEqual(len(legs), 1)
         self.assertEqual(legs[0]["carrier"], "Vueling")
         self.assertEqual(legs[0]["flight_number"], "VY3210")
         self.assertEqual(legs[0]["price_regular_pln"], 360.0)
-        self.assertEqual(legs[0]["price_resident_estimated_pln"], 90.0)
+        self.assertEqual(legs[0]["price_resident_estimated_pln"], 116.73)
         self.assertEqual(legs[0]["price_source"], "Google Flights")
         self.assertIn("tickets.vueling.com/booking", legs[0]["booking_url"])
         self.assertIn("dt=1", legs[0]["booking_url"])

@@ -7,7 +7,11 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from scripts import collect_step1d as collector, collection_coverage as coverage
+from scripts import (
+    collect_step1d as collector,
+    collection_coverage as coverage,
+    reprice_spanish_resident_estimates as repricer,
+)
 from scripts.booking_urls import air_europa_booking_url
 from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
 
@@ -34,10 +38,15 @@ def low_cost_leg(origin, departure, destination, arrival, price=250):
 
 
 def air_europa_leg(origin, departure, destination, arrival, regular=800):
+    fee = {("MAD", "TFN"): 19.57, ("TFN", "MAD"): 8.91}[(origin, destination)]
+    resident, fee_pln = collector.resident_price_estimate(regular, .25, fee, 4.0)
     return {"carrier": "Air Europa", "flight_number": "UX9048", "departure_airport": origin,
             "departure_at": departure, "arrival_airport": destination, "arrival_at": arrival,
-            "price_regular_pln": regular, "price_resident_estimated_pln": regular * .25,
+            "price_regular_pln": regular, "price_resident_estimated_pln": resident,
             "resident_discount_eligible": True, "resident_fare_multiplier": .25,
+            "resident_nondiscountable_fees_eur": fee,
+            "resident_nondiscountable_fees_pln": fee_pln,
+            "resident_estimate_exchange_rate_eur_pln": 4.0,
             "booking_url": air_europa_booking_url(origin, destination, departure),
             "price_source": "Google Flights", "price_scope": "individual_flight_offer"}
 
@@ -49,7 +58,9 @@ class Step1DCollectorTests(unittest.TestCase):
         configure_airports_from_allowlist(self.allowlist)
 
     def parse(self, html):
-        return collector.parse_google_flights_response(html, "MAD", "TFN", date(2026, 11, 1), .25, {"UX"})
+        return collector.parse_google_flights_response(
+            html, "MAD", "TFN", date(2026, 11, 1), .25, 4.3685, {"UX"}
+        )
 
     def test_only_google_allowed_without_active_fare_feed_or_templates(self):
         self.assertNotIn("fare_feed", self.allowlist)
@@ -59,6 +70,10 @@ class Step1DCollectorTests(unittest.TestCase):
             self.assertEqual(airport["tenerife_airports"], ["TFN"])
             self.assertTrue(airport["resident_discount_eligible_on_air_europa_leg"])
             self.assertEqual(airport["air_europa_resident_fare_multiplier"], .25)
+        self.assertEqual(
+            self.allowlist["usage_policy"]["resident_estimate_fee_registry"],
+            "data/spanish-resident-fees.json",
+        )
         self.allowlist["usage_policy"]["flight_data_source"] = "official_route_day_fares"
         with self.assertRaisesRegex(RuntimeError, "Google Flights"):
             collector.validate_allowlist(self.allowlist)
@@ -81,7 +96,9 @@ class Step1DCollectorTests(unittest.TestCase):
         legs = self.parse(google_html(google_offer("9059", 7, 283), google_offer("9118", 11, 344), google_offer(), google_offer("9057", 19, 257)))
         self.assertEqual([r["price_regular_pln"] for r in legs], [283, 344, 659, 257])
         self.assertEqual([r["flight_number"] for r in legs], ["UX9059", "UX9118", "UX9048", "UX9057"])
-        self.assertEqual(legs[2]["price_resident_estimated_pln"], 164.75)
+        self.assertEqual(legs[2]["price_resident_estimated_pln"], 228.87)
+        self.assertEqual(legs[2]["resident_nondiscountable_fees_eur"], 19.57)
+        self.assertEqual(legs[2]["resident_nondiscountable_fees_pln"], 85.49)
         self.assertEqual(legs[2]["price_scope"], "individual_flight_offer")
         self.assertEqual(legs[2]["booking_url_scope"], "route_date_search")
         self.assertIn("residentType=SPANISH_RESIDENT_RC", legs[2]["booking_url"])
@@ -143,7 +160,7 @@ class Step1DCollectorTests(unittest.TestCase):
         tracker = coverage.Coverage("1d", start, end, expected)
         availability.side_effect = lambda client, o, d, day: google_html(google_offer(origin=o, destination=d, day=day, hour=7))
         with patch.object(coverage, "_active", tracker):
-            rows = collector.collect_air_europa_legs(plan, self.allowlist, 99)
+            rows = collector.collect_air_europa_legs(plan, self.allowlist, 99, 4.0)
         self.assertEqual(len(rows), 124)
         self.assertEqual(availability.call_count, 124)
         self.assertEqual(pool.call_args.kwargs["max_workers"], 2)
@@ -153,6 +170,50 @@ class Step1DCollectorTests(unittest.TestCase):
         tracker = coverage.Coverage("1d", date(2026, 11, 1), date(2026, 11, 1), set())
         with self.assertRaisesRegex(RuntimeError, "Unverified"):
             tracker.record("Air Europa", "MAD", "TFN", date(2026, 11, 1), date(2026, 11, 1), [], "official_route_day_fares")
+
+    def test_resident_estimate_discounts_fare_but_not_fixed_fees(self):
+        official_example, _ = collector.resident_price_estimate(150.57, .25, 19.57, 1.0)
+        self.assertEqual(official_example, 52.32)
+        resident, fees_pln = collector.resident_price_estimate(659, .25, 19.57, 4.3685)
+        self.assertEqual(fees_pln, 85.49)
+        self.assertEqual(resident, 228.87)
+        reverse, reverse_fees = collector.resident_price_estimate(659, .25, 8.91, 4.3685)
+        self.assertEqual(reverse_fees, 38.92)
+        self.assertEqual(reverse, 193.94)
+        with self.assertRaisesRegex(RuntimeError, "niższa"):
+            collector.resident_price_estimate(20, .25, 19.57, 4.3685)
+
+    @patch("scripts.reprice_spanish_resident_estimates.validate_coverage")
+    def test_existing_feed_reprice_is_offline_and_preserves_flight_data(self, validate_coverage):
+        result = collector.build_connections([
+            low_cost_leg("WAW", "2026-11-01T08:20:00+01:00", "MAD", "2026-11-01T12:05:00+01:00", 183),
+        ], [
+            air_europa_leg("MAD", "2026-11-01T15:00:00+01:00", "TFN", "2026-11-01T16:55:00+00:00", 659),
+        ])[0]
+        air_leg = next(leg for leg in result["legs"] if leg["carrier"] == "Air Europa")
+        air_leg["price_resident_estimated_pln"] = 164.75
+        result["price_total_resident_estimated_pln"] = 347.75
+        flight_identity = {
+            key: air_leg[key] for key in (
+                "flight_number", "departure_airport", "arrival_airport",
+                "departure_at", "arrival_at", "price_regular_pln", "booking_url",
+            )
+        }
+        document = {
+            "step": "1D", "period_from": "2026-10-22", "period_to": "2026-11-21",
+            "generated_at": "2026-10-22T22:28:41+01:00",
+            "exchange_rates": {"EUR_PLN": {"rate": 4.3685}},
+            "sources": {"air_europa_resident_price": "old"},
+            "collection_coverage": {"run_id": "saved-run"}, "results": [result],
+        }
+        changed = repricer.reprice_document("1d", document, repricer.load_fee_registry())
+        self.assertEqual(changed, 1)
+        self.assertEqual(air_leg["price_resident_estimated_pln"], 228.87)
+        self.assertEqual(result["price_total_resident_estimated_pln"], 411.87)
+        self.assertEqual(flight_identity, {key: air_leg[key] for key in flight_identity})
+        self.assertFalse(document["derived_price_update"]["network_requests"])
+        self.assertEqual(document["generated_at"], "2026-10-22T22:28:41+01:00")
+        validate_coverage.assert_called_once()
 
     @patch("scripts.collect_step1d.GoogleFlightsClient.availability", side_effect=RuntimeError("Google unavailable"))
     @patch("scripts.collect_step1d.collect_low_cost_legs", return_value=[{}])

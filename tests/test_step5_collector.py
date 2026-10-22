@@ -111,7 +111,7 @@ class Step5CollectorTests(unittest.TestCase):
             leg("Ryanair", "FR4", "KRK", "2026-11-04T07:00:00+01:00", "BUD", "2026-11-04T08:15:00+01:00", 350),
             leg("Wizz Air", "W64", "BUD", "2026-11-04T11:00:00+01:00", "TFS", "2026-11-04T15:00:00+00:00", 900, 700),
         ]
-        results = build_connections(legs, allowlist())
+        results = build_connections(legs, allowlist(), 4.0)
         self.assertEqual(len(results), 4)
         self.assertEqual({result["variant"] for result in results}, {VARIANT_A, VARIANT_B})
         self.assertEqual({result["direction"] for result in results}, {
@@ -119,7 +119,10 @@ class Step5CollectorTests(unittest.TestCase):
         })
         variant_a = [result for result in results if result["variant"] == VARIANT_A]
         self.assertEqual({result["price_total_regular_pln"] for result in variant_a}, {1000, 1200})
-        self.assertEqual({result["price_total_resident_estimated_pln"] for result in variant_a}, {700, 825})
+        self.assertEqual(
+            {result["price_total_resident_estimated_pln"] for result in variant_a},
+            {728.95, 859.05},
+        )
         self.assertEqual({result["price_total_wizz_discount_club_pln"] for result in variant_a}, {900, 1050})
         for result in variant_a:
             tenerife_leg = next(
@@ -137,7 +140,7 @@ class Step5CollectorTests(unittest.TestCase):
             leg("Ryanair", "FR1", "TFS", "2026-11-01T08:00:00+00:00", "AGP", "2026-11-01T12:00:00+01:00", 400),
             leg("Wizz Air", "W61", "AGP", "2026-11-01T13:59:00+01:00", "WAW", "2026-11-01T18:00:00+01:00", 600, 500),
         ]
-        self.assertEqual(build_connections(legs, allowlist()), [])
+        self.assertEqual(build_connections(legs, allowlist(), 4.0), [])
 
 
 if __name__ == "__main__":

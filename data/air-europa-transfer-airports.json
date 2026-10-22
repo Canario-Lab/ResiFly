@@ -30,7 +30,8 @@
     "update_only_on_explicit_user_request": true,
     "primary_route_and_price_source": "Trasy: zapisane oficjalne źródła Air Europa. Numery rejsów, daty, godziny i indywidualne ceny: wyłącznie Google Flights HTTP.",
     "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Krok 1D obejmuje bezpośrednie odcinki Air Europa z/do TFN. TFS nie ma zapisanej kwalifikującej się trasy Air Europa.",
-    "flight_data_source": "google_flights_http"
+    "flight_data_source": "google_flights_http",
+    "resident_estimate_fee_registry": "data/spanish-resident-fees.json"
   },
   "airports": [
     {
@@ -137,6 +138,11 @@
       "name": "Google Flights — indywidualne oferty Air Europa",
       "url": "https://www.google.com/travel/flights",
       "finding": "Od decyzji użytkownika 2026-10-22 jedyne źródło cen i bieżących danych poszczególnych rejsów. Bez minimum dnia i bez szablonów godzin."
+    },
+    {
+      "name": "Aena — Guía de Tarifas 2026, edición agosto",
+      "url": "https://www.aena.es/es/oportunidades-de-negocio/precios-y-facturacion.html",
+      "finding": "Oficjalne stawki pasażerskie, PMR, bezpieczeństwa lotniskowego i bezpieczeństwa lotniczego użyte do potwierdzenia stałych opłat zależnych od kierunku."
     }
   ],
   "air_europa_airline_codes": {

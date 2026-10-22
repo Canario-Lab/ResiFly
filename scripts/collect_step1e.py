@@ -3,8 +3,8 @@
 
 Volotea route, schedule and regular-fare data come directly from the carrier's
 official public MinPrice endpoint.  Google Flights is deliberately not used.
-The Canary resident value is stored as an explicit estimate of 25% of the
-official regular fare with fees.  Price filtering is left to the website.
+The Canary resident estimate discounts only the fare component and preserves
+fixed Aena fees. Price filtering is left to the website.
 """
 
 from __future__ import annotations
@@ -42,6 +42,11 @@ from scripts.collect_step1 import (
     serialize_datetime,
 )
 from scripts.collect_step1c import collect_low_cost_legs
+from scripts.spanish_resident_fees import (
+    apply_resident_price_estimate,
+    nondiscountable_fee_eur,
+    validate_resident_price_estimate,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -217,11 +222,6 @@ def parse_volotea_response(
                 "price_regular_pln": regular_pln,
                 "resident_discount_eligible": True,
                 "resident_fare_multiplier": multiplier,
-                "price_resident_estimated_pln": round(regular_pln * multiplier, 2),
-                "resident_price_source": (
-                    "estimated as configured percentage of Volotea official "
-                    "regular fare with fees"
-                ),
                 "booking_url": volotea_booking_url(origin, destination, departure),
                 "price_source": "Volotea official MinPrice endpoint",
                 "price_scope": "official_route_flight_fare_with_fees",
@@ -231,6 +231,12 @@ def parse_volotea_response(
             }
             if isinstance(record.get("Taxes"), (int, float)):
                 leg["price_source_taxes"] = float(record["Taxes"])
+                expected_taxes = nondiscountable_fee_eur(origin, destination, departure)
+                if round(float(record["Taxes"]), 2) != expected_taxes:
+                    raise RuntimeError(
+                        f"Podatki Volotei nie zgadzają się z tabelą Aena dla {origin}-{destination}"
+                    )
+            apply_resident_price_estimate(leg, rates["EUR"].pln)
             key = (number, leg["departure_at"], leg["arrival_at"])
             previous = best.get(key)
             if previous is None or regular_pln < previous["price_regular_pln"]:
@@ -361,6 +367,8 @@ def validate_document(document: dict[str, Any]) -> None:
                 "Volotea official MinPrice endpoint"
             ):
                 raise RuntimeError(f"Niedozwolone źródło ceny w {result['id']}")
+            if leg["carrier"] == "Volotea":
+                validate_resident_price_estimate(leg)
 
 
 @collection_entrypoint("1e")
@@ -420,8 +428,7 @@ def main(args) -> None:
                 "regular fare with fees, no Google Flights"
             ),
             "volotea_resident_price": (
-                "estimate: 25% of official regular fare with fees; taxes may not "
-                "receive the full resident discount"
+                "estimate: 25% of the official fare component plus fixed Aena fees"
             ),
             "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",

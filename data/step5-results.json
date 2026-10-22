@@ -143,7 +143,8 @@
     "allowlist": "data/mixed-transfer-airports.json",
     "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
     "wizz_air": "Wizz Air public timetableV2 API",
-    "wizz_schedule_map": "verified route flight numbers and published block times in scripts/collect_step4.py"
+    "wizz_schedule_map": "verified route flight numbers and published block times in scripts/collect_step4.py",
+    "resident_price_estimate": "25% of fare component plus fixed non-discountable fees from data/spanish-resident-fees.json"
   },
   "results": [
     {
@@ -329,7 +330,7 @@
           "arrival_at": "2026-10-23T11:40:00+02:00",
           "price_regular_pln": 384.0,
           "resident_discount_eligible": true,
-          "price_resident_estimated_pln": 96.0,
+          "price_resident_estimated_pln": 127.62,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-23&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=AGP&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
@@ -338,7 +339,11 @@
           "price_source_amount": 384.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer",
-          "resident_fare_multiplier": 0.25
+          "resident_fare_multiplier": 0.25,
+          "resident_nondiscountable_fees_eur": 9.65,
+          "resident_nondiscountable_fees_pln": 42.16,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         },
         {
           "carrier": "Wizz Air",
@@ -359,8 +364,8 @@
       ],
       "price_total_regular_pln": 759.65,
       "price_total_wizz_discount_club_pln": 715.96,
-      "price_total_resident_estimated_pln": 471.65,
-      "price_total_resident_wizz_discount_club_pln": 427.96
+      "price_total_resident_estimated_pln": 503.27,
+      "price_total_resident_wizz_discount_club_pln": 459.58
     },
     {
       "id": "step5-38f1c6d16230139c",
@@ -383,7 +388,7 @@
           "arrival_at": "2026-10-23T11:40:00+02:00",
           "price_regular_pln": 384.0,
           "resident_discount_eligible": true,
-          "price_resident_estimated_pln": 96.0,
+          "price_resident_estimated_pln": 127.62,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-23&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=AGP&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
@@ -392,7 +397,11 @@
           "price_source_amount": 384.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer",
-          "resident_fare_multiplier": 0.25
+          "resident_fare_multiplier": 0.25,
+          "resident_nondiscountable_fees_eur": 9.65,
+          "resident_nondiscountable_fees_pln": 42.16,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         },
         {
           "carrier": "Wizz Air",
@@ -413,8 +422,8 @@
       ],
       "price_total_regular_pln": 886.33,
       "price_total_wizz_discount_club_pln": 842.65,
-      "price_total_resident_estimated_pln": 598.33,
-      "price_total_resident_wizz_discount_club_pln": 554.65
+      "price_total_resident_estimated_pln": 629.95,
+      "price_total_resident_wizz_discount_club_pln": 586.27
     },
     {
       "id": "step5-e2eff0e021e832a5",
@@ -437,7 +446,7 @@
           "arrival_at": "2026-10-23T11:40:00+02:00",
           "price_regular_pln": 384.0,
           "resident_discount_eligible": true,
-          "price_resident_estimated_pln": 96.0,
+          "price_resident_estimated_pln": 127.62,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-23&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=AGP&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
@@ -446,7 +455,11 @@
           "price_source_amount": 384.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer",
-          "resident_fare_multiplier": 0.25
+          "resident_fare_multiplier": 0.25,
+          "resident_nondiscountable_fees_eur": 9.65,
+          "resident_nondiscountable_fees_pln": 42.16,
+          "resident_estimate_exchange_rate_eur_pln": 4.3685,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         },
         {
           "carrier": "Wizz Air",
@@ -467,8 +480,8 @@
       ],
       "price_total_regular_pln": 973.7,
       "price_total_wizz_discount_club_pln": 930.02,
-      "price_total_resident_estimated_pln": 685.7,
-      "price_total_resident_wizz_discount_club_pln": 642.02
+      "price_total_resident_estimated_pln": 717.32,
+      "price_total_resident_wizz_discount_club_pln": 673.64
     },
     {
       "id": "step5-3fb13d08c0c26df2",
@@ -65201,5 +65214,14 @@
         ]
       }
     ]
+  },
+  "derived_prices_updated_at": "2026-10-22T23:20:08+01:00",
+  "derived_price_update": {
+    "scope": "estimated Spanish resident leg prices and dependent totals only",
+    "network_requests": false,
+    "source_collection_generated_at": "2026-10-22T22:30:58+01:00",
+    "collection_run_id": "3451bb82-354a-4785-9f0a-fcc676625f47",
+    "fee_registry": "data/spanish-resident-fees.json",
+    "fee_registry_verified_on": "2026-10-22"
   }
 }
