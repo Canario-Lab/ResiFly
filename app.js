@@ -209,6 +209,30 @@ function timePart(iso) {
   return iso.slice(11, 16);
 }
 
+function dayOffset(referenceTimestamp, timestamp) {
+  const reference = Date.parse(`${datePart(referenceTimestamp)}T00:00:00Z`);
+  const compared = Date.parse(`${datePart(timestamp)}T00:00:00Z`);
+  return Math.max(0, Math.round((compared - reference) / 86_400_000));
+}
+
+function createJourneyTime(timestamp, referenceTimestamp, className = "") {
+  const time = document.createElement("strong");
+  if (className) time.className = className;
+  time.append(timePart(timestamp));
+
+  const offset = dayOffset(referenceTimestamp, timestamp);
+  if (offset > 0) {
+    const marker = document.createElement("sup");
+    marker.className = "day-offset";
+    marker.textContent = `+${offset}`;
+    marker.title = offset === 1 ? "Następnego dnia" : `${offset} dni później`;
+    marker.setAttribute("aria-label", marker.title);
+    time.append(marker);
+  }
+
+  return time;
+}
+
 function parseDateOnly(iso) {
   return new Date(`${iso}T12:00:00Z`);
 }
@@ -853,13 +877,19 @@ function createJourney(result) {
 
   const origin = document.createElement("div");
   origin.className = "airport-stop";
-  origin.innerHTML = `<strong>${timePart(first.departure_at)}</strong><span class="airport-code">${first.departure_airport}</span>`;
+  const originCode = document.createElement("span");
+  originCode.className = "airport-code";
+  originCode.textContent = first.departure_airport;
+  origin.append(createJourneyTime(first.departure_at, first.departure_at), originCode);
 
   const firstLine = createLegLine(first);
 
   const destination = document.createElement("div");
   destination.className = "airport-stop destination";
-  destination.innerHTML = `<strong>${timePart(last.arrival_at)}</strong><span class="airport-code">${last.arrival_airport}</span>`;
+  const destinationCode = document.createElement("span");
+  destinationCode.className = "airport-code";
+  destinationCode.textContent = last.arrival_airport;
+  destination.append(createJourneyTime(last.arrival_at, first.departure_at), destinationCode);
 
   if (isDirectConnection(result)) {
     journey.append(origin, firstLine, destination);
@@ -870,14 +900,15 @@ function createJourney(result) {
 
   const transfer = document.createElement("div");
   transfer.className = "transfer-stop";
-  const nextDayMarker = datePart(second.departure_at) > datePart(first.arrival_at) ? "*" : "";
 
   const routeSummary = document.createElement("div");
   routeSummary.className = "transfer-route-summary";
 
-  const arrivalTime = document.createElement("strong");
-  arrivalTime.className = "transfer-time";
-  arrivalTime.textContent = timePart(first.arrival_at);
+  const arrivalTime = createJourneyTime(
+    first.arrival_at,
+    first.departure_at,
+    "transfer-time"
+  );
 
   const firstSeparator = document.createElement("span");
   firstSeparator.className = "transfer-separator";
@@ -897,9 +928,11 @@ function createJourney(result) {
 
   const secondSeparator = firstSeparator.cloneNode(true);
 
-  const departureTime = document.createElement("strong");
-  departureTime.className = "transfer-time";
-  departureTime.textContent = `${timePart(second.departure_at)}${nextDayMarker}`;
+  const departureTime = createJourneyTime(
+    second.departure_at,
+    first.departure_at,
+    "transfer-time"
+  );
 
   routeSummary.append(arrivalTime, firstSeparator, location, secondSeparator, departureTime);
 
