@@ -739,6 +739,10 @@ function filteredResults(filters = currentFilters()) {
     regular: (a, b) => a.price_total_regular_pln - b.price_total_regular_pln,
     layover: (a, b) => (a.layover_minutes ?? 0) - (b.layover_minutes ?? 0),
     departure: (a, b) => a.legs[0].departure_at.localeCompare(b.legs[0].departure_at),
+    journey: (a, b) => journeyDuration(a) - journeyDuration(b),
+    departure_time: (a, b) => timePart(a.legs[0].departure_at).localeCompare(timePart(b.legs[0].departure_at)),
+    arrival_time: (a, b) => timePart(a.legs.at(-1).arrival_at).localeCompare(timePart(b.legs.at(-1).arrival_at)),
+    direct: (a, b) => Number(!isDirectConnection(a)) - Number(!isDirectConnection(b)),
   };
 
   return filtered.sort((a, b) => {
