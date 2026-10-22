@@ -1123,7 +1123,10 @@ function renderActiveFilters(filters = currentFilters()) {
     chips.push({ label: `Przesiadka do ${formatDuration(filters.maxLayover)}` });
   }
   if (filters.dateFrom !== state.document.period_from || filters.dateTo !== state.document.period_to) {
-    chips.push({ label: `${filters.dateFrom} – ${filters.dateTo}` });
+    chips.push({
+      label: `${filters.dateFrom} – ${filters.dateTo}`,
+      removable: "dateRange",
+    });
   }
   for (const container of [elements.calendarActiveFilters, elements.activeFilters]) {
     container.replaceChildren(...chips.map(({ label, removable }) => {
@@ -1162,6 +1165,12 @@ function clearActiveFilter(filterKey) {
   if (filterKey === "wizzClub") {
     elements.wizzClub.checked = false;
     elements.wizzClub.dispatchEvent(new Event("input", { bubbles: true }));
+    return;
+  }
+  if (filterKey === "dateRange") {
+    elements.dateFrom.value = state.document.period_from;
+    elements.dateTo.value = state.document.period_to;
+    elements.dateFrom.dispatchEvent(new Event("input", { bubbles: true }));
     return;
   }
 
