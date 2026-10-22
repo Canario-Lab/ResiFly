@@ -38,6 +38,10 @@ const elements = {
   resultsPreparation: document.querySelector("#results-preparation-progress"),
   resultsPreparationPercent: document.querySelector("#results-preparation-percent"),
   resultsPreparationTrack: document.querySelector("#results-preparation-track"),
+  resultsHeaderLoadStatus: document.querySelector("#results-header-load-status"),
+  resultsHeaderPreparation: document.querySelector("#results-header-preparation-progress"),
+  resultsHeaderPreparationPercent: document.querySelector("#results-header-preparation-percent"),
+  resultsHeaderPreparationTrack: document.querySelector("#results-header-preparation-track"),
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
@@ -259,15 +263,34 @@ function pluralizeResults(count) {
 }
 
 function setResultLoadStatus(message, state = "loading") {
-  elements.resultsLoadStatus.textContent = message;
-  elements.resultsLoadStatus.classList.toggle("is-loading", state === "loading");
-  elements.resultsLoadStatus.classList.toggle("is-complete", state === "complete");
-  elements.resultsLoadStatus.classList.toggle("is-empty", state === "empty");
+  [elements.resultsLoadStatus, elements.resultsHeaderLoadStatus].forEach((status) => {
+    status.textContent = message;
+    status.classList.toggle("is-loading", state === "loading");
+    status.classList.toggle("is-complete", state === "complete");
+    status.classList.toggle("is-empty", state === "empty");
+  });
+}
+
+function resultPreparationDisplays() {
+  return [
+    {
+      container: elements.resultsPreparation,
+      percent: elements.resultsPreparationPercent,
+      track: elements.resultsPreparationTrack,
+    },
+    {
+      container: elements.resultsHeaderPreparation,
+      percent: elements.resultsHeaderPreparationPercent,
+      track: elements.resultsHeaderPreparationTrack,
+    },
+  ];
 }
 
 function hideResultPreparationProgress() {
-  elements.resultsPreparation.hidden = true;
-  elements.resultsPreparation.classList.remove("is-indeterminate", "is-complete");
+  resultPreparationDisplays().forEach(({ container }) => {
+    container.hidden = true;
+    container.classList.remove("is-indeterminate", "is-complete");
+  });
 }
 
 function updateResultPreparationProgress() {
@@ -284,16 +307,18 @@ function updateResultPreparationProgress() {
   const complete = prepared >= total;
   const percent = complete ? 100 : Math.floor((prepared / total) * 100);
 
-  elements.resultsPreparation.hidden = false;
-  elements.resultsPreparation.classList.remove("is-indeterminate");
-  elements.resultsPreparation.classList.toggle("is-complete", complete);
-  elements.resultsPreparationPercent.textContent = `${percent}%`;
-  elements.resultsPreparation.style.setProperty("--prepared-progress", String(prepared / total));
-  elements.resultsPreparationTrack.setAttribute("aria-valuenow", String(percent));
-  elements.resultsPreparationTrack.setAttribute(
-    "aria-valuetext",
-    `Przygotowano ${prepared} z ${total} lotów, ${percent}%`
-  );
+  resultPreparationDisplays().forEach(({ container, percent: percentElement, track }) => {
+    container.hidden = false;
+    container.classList.remove("is-indeterminate");
+    container.classList.toggle("is-complete", complete);
+    percentElement.textContent = `${percent}%`;
+    container.style.setProperty("--prepared-progress", String(prepared / total));
+    track.setAttribute("aria-valuenow", String(percent));
+    track.setAttribute(
+      "aria-valuetext",
+      `Przygotowano ${prepared} z ${total} lotów, ${percent}%`
+    );
+  });
 }
 
 function updateResultLoadStatus() {

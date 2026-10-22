@@ -869,6 +869,38 @@ input[type="range"]::-moz-range-thumb {
   padding: 0 4px;
 }
 
+.results-controls {
+  width: min(100%, 330px);
+  position: relative;
+}
+
+.results-controls .sort-field {
+  justify-content: flex-end;
+}
+
+.results-controls .sort-field select {
+  min-width: 240px;
+  max-width: 100%;
+}
+
+.results-header-progress {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 100%;
+  display: grid;
+  gap: 10px;
+}
+
+.results-header-progress .results-load-status {
+  min-height: 0;
+  margin: 0;
+}
+
+.results-header-progress .results-preparation-progress {
+  margin: 0;
+}
+
 .sort-field {
   display: flex;
   align-items: center;
@@ -1735,6 +1767,23 @@ input[type="range"]::-moz-range-thumb {
   .results-heading {
     flex-direction: column;
     gap: 18px;
+  }
+
+  .results-controls {
+    width: 100%;
+  }
+
+  .results-controls .sort-field {
+    justify-content: flex-start;
+  }
+
+  .results-controls .sort-field select {
+    min-width: 0;
+  }
+
+  .results-header-progress {
+    position: static;
+    margin-top: 14px;
   }
 
   .sort-field,
