@@ -604,6 +604,41 @@ main,
   opacity: 0.48;
 }
 
+.results-load-status {
+  min-height: 2.8em;
+  margin: -14px 5px 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.results-load-status::before {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  margin-right: 7px;
+  content: "";
+  border-radius: 50%;
+  background: #c8a34d;
+  box-shadow: 0 0 0 3px rgba(200, 163, 77, 0.12);
+  vertical-align: 1px;
+}
+
+.results-load-status.is-complete {
+  color: var(--green-dark);
+}
+
+.results-load-status.is-complete::before {
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(13, 118, 95, 0.12);
+}
+
+.results-load-status.is-empty::before {
+  background: #9aa8aa;
+  box-shadow: 0 0 0 3px rgba(154, 168, 170, 0.12);
+}
+
 .filter-label {
   color: var(--muted);
   font-size: 0.76rem;

@@ -34,6 +34,7 @@ const elements = {
   secondCarrier: document.querySelector("#second-carrier-filter"),
   layover: document.querySelector("#layover-filter"),
   layoverOutput: document.querySelector("#layover-output"),
+  resultsLoadStatus: document.querySelector("#results-load-status"),
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
@@ -249,6 +250,31 @@ function pluralizeResults(count) {
   const last = count % 10;
   if (last >= 2 && last <= 4 && !(lastTwo >= 12 && lastTwo <= 14)) return "wyniki";
   return "wyników";
+}
+
+function setResultLoadStatus(message, state = "loading") {
+  elements.resultsLoadStatus.textContent = message;
+  elements.resultsLoadStatus.classList.toggle("is-loading", state === "loading");
+  elements.resultsLoadStatus.classList.toggle("is-complete", state === "complete");
+  elements.resultsLoadStatus.classList.toggle("is-empty", state === "empty");
+}
+
+function updateResultLoadStatus() {
+  const total = progressiveResults.length;
+  if (!total) {
+    setResultLoadStatus("Brak połączeń dla wybranych filtrów.", "empty");
+    return;
+  }
+
+  const visible = elements.list.querySelectorAll(".flight-card").length;
+  if (visible >= total) {
+    setResultLoadStatus(`Karty na ekranie: ${total}/${total}. Wszystkie są gotowe.`, "complete");
+    return;
+  }
+
+  setResultLoadStatus(
+    `Karty na ekranie: ${visible}/${total}. Pozostałe są przygotowywane…`
+  );
 }
 
 const airportLabels = {
@@ -1239,6 +1265,7 @@ function commitPreparedResults(expectedVersion) {
   progressiveCommitPending = false;
   restoreResultAnchor(anchor);
   cacheCurrentResultCards();
+  updateResultLoadStatus();
 }
 
 function prepareNextResultBatch(
@@ -1352,6 +1379,8 @@ function restoreCachedResultView(cached, expectedVersion) {
 
   if (progressiveResultCount >= progressiveResults.length) {
     commitPreparedResults(expectedVersion);
+  } else {
+    updateResultLoadStatus();
   }
 }
 
@@ -1374,6 +1403,7 @@ function renderResultCards(results, filters) {
   elements.list.replaceChildren();
   appendInitialResults(expectedVersion);
   calendarTargetCard = elements.list.querySelector(".is-calendar-target");
+  updateResultLoadStatus();
   scheduleProgressiveBackground(expectedVersion, BACKGROUND_RESULT_START_DELAY_MS);
 }
 
@@ -1381,6 +1411,7 @@ function ensureResultRendered(resultId) {
   const targetIndex = progressiveResults.findIndex(result => result.id === resultId);
   if (targetIndex < 0) return;
   renderResultAtIndex(targetIndex);
+  updateResultLoadStatus();
 }
 
 function renderResults() {
@@ -1401,6 +1432,7 @@ function renderResults() {
 
   if (!results.length) {
     stopProgressiveRendering();
+    setResultLoadStatus("Brak połączeń dla wybranych filtrów.", "empty");
     const directSelected = filters.transfer === "direct";
     elements.list.innerHTML = `
       <div class="empty-state">
@@ -1422,6 +1454,7 @@ function scheduleRenderResults() {
   cacheCurrentResultCards();
   stopProgressiveRendering();
   elements.list.setAttribute("aria-busy", "true");
+  setResultLoadStatus("Aktualizuję listę połączeń…");
   filterRenderTimer = window.setTimeout(renderResults, FILTER_RENDER_DELAY_MS);
 }
 
@@ -1515,6 +1548,7 @@ async function loadFlights() {
     elements.calendarMonths.setAttribute("aria-busy", "false");
     elements.calendarMonths.innerHTML = `<div class="calendar-loading">Nie udało się wczytać kalendarza cen.</div>`;
     elements.list.setAttribute("aria-busy", "false");
+    setResultLoadStatus("Nie udało się wczytać połączeń.", "empty");
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
