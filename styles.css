@@ -272,9 +272,9 @@ main,
 }
 
 .fare-calendar-heading {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: flex-end;
-  justify-content: space-between;
   gap: 24px;
   margin-bottom: 26px;
 }
@@ -284,10 +284,70 @@ main,
   font-size: 1.8rem;
 }
 
+.calendar-direction-control {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 10px;
+  padding: 5px 6px 5px 16px;
+  border: 1px solid #d8e5e1;
+  border-radius: 999px;
+  background: #f5f8f6;
+  box-shadow: 0 7px 18px rgba(16, 48, 44, 0.07);
+  white-space: nowrap;
+}
+
+.calendar-direction-control strong {
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: -0.025em;
+}
+
+.calendar-direction-swap {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  color: var(--green-dark);
+  border: 1px solid #bcd8cf;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 10px rgba(13, 118, 95, 0.12);
+  cursor: pointer;
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.calendar-direction-swap svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.calendar-direction-swap:hover {
+  color: white;
+  border-color: var(--green);
+  background: var(--green);
+  transform: translateY(-1px);
+}
+
+.calendar-direction-swap:focus-visible {
+  outline: 3px solid rgba(13, 118, 95, 0.22);
+  outline-offset: 2px;
+}
+
 .calendar-legend {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-self: end;
   gap: 4px;
   margin: 0 0 3px;
   font-size: 0.83rem;
@@ -1563,9 +1623,9 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .fare-calendar-heading {
+    grid-template-columns: 1fr;
     align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     padding-inline: 6px;
   }
 
@@ -1575,7 +1635,12 @@ input[type="range"]::-moz-range-thumb {
 
   .calendar-legend {
     align-items: flex-start;
+    justify-self: start;
     text-align: left;
+  }
+
+  .calendar-direction-control {
+    justify-self: start;
   }
 
   .calendar-month-card {

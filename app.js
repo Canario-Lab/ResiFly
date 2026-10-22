@@ -41,6 +41,8 @@ const elements = {
   sort: document.querySelector("#sort-results"),
   reset: document.querySelector("#reset-filters"),
   calendarMonths: document.querySelector("#calendar-months"),
+  calendarDirectionLabel: document.querySelector("#calendar-direction-label"),
+  calendarDirectionSwap: document.querySelector("#calendar-direction-swap"),
   calendarLegendSelected: document.querySelector(".calendar-legend-resident"),
   calendarLegendRegular: document.querySelector(".calendar-legend-regular"),
   activeFilters: document.querySelector("#active-filters"),
@@ -678,6 +680,15 @@ function updateRangeLabels() {
   elements.layover.closest(".layover-field").classList.toggle("is-disabled", directSelected);
   setRangeProgress(elements.price);
   setRangeProgress(elements.layover);
+  updateCalendarDirection();
+}
+
+function updateCalendarDirection() {
+  const tenerifeToPoland = elements.direction.value === "tenerife_to_poland";
+  const currentLabel = tenerifeToPoland ? "Teneryfa → Polska" : "Polska → Teneryfa";
+  const nextLabel = tenerifeToPoland ? "Polska → Teneryfa" : "Teneryfa → Polska";
+  elements.calendarDirectionLabel.textContent = currentLabel;
+  elements.calendarDirectionSwap.setAttribute("aria-label", `Zmień kierunek na ${nextLabel}`);
 }
 
 function currentFilters() {
@@ -1607,6 +1618,12 @@ function bindEvents() {
   elements.direction.addEventListener("input", () => {
     updateAirportOptions();
     scheduleRenderResults();
+  });
+  elements.calendarDirectionSwap.addEventListener("click", () => {
+    elements.direction.value = elements.direction.value === "tenerife_to_poland"
+      ? "poland_to_tenerife"
+      : "tenerife_to_poland";
+    elements.direction.dispatchEvent(new Event("input", { bubbles: true }));
   });
   elements.reset.addEventListener("click", resetFilters);
   elements.purchaseDialog.querySelector("[data-close-purchase]").addEventListener("click", () => {
