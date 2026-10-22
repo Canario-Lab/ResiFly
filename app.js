@@ -59,6 +59,7 @@ const elements = {
   searchInfoDialog: document.querySelector("#search-info-dialog"),
   purchaseDialog: document.querySelector("#purchase-dialog"),
   purchaseDialogContent: document.querySelector("#purchase-dialog-content"),
+  shareStatus: document.querySelector("#share-status"),
 };
 
 const currency = new Intl.NumberFormat("pl-PL", {
@@ -131,6 +132,7 @@ let calendarTargetCard = null;
 let calendarNavigationPending = false;
 let calendarNavigationTimer = null;
 let calendarScrollEndHandler = null;
+let shareStatusTimer = null;
 
 const carrierLogos = {
   Binter: "assets/logos/binter.svg",
@@ -506,13 +508,76 @@ function createCalendarDay(date, rangeStart, rangeEnd, prices) {
 function setCardDetailsExpanded(card, expanded) {
   const toggle = card.querySelector(".details-toggle");
   const details = card.querySelector(".price-details");
-  if (!toggle || !details) return;
+  const shareButton = card.querySelector(".share-flight-button");
+  if (!toggle || !details || !shareButton) return;
 
   toggle.setAttribute("aria-expanded", String(expanded));
   toggle.querySelector("span").textContent = expanded
     ? "Ukryj szczegóły ceny"
     : "Pokaż szczegóły ceny";
   details.hidden = !expanded;
+  shareButton.hidden = !expanded;
+  if (!expanded) {
+    shareButton.textContent = "Kopiuj link do lotu";
+    shareButton.classList.remove("is-copied");
+  }
+}
+
+function showShareStatus(message, { error = false, persistent = false } = {}) {
+  window.clearTimeout(shareStatusTimer);
+  elements.shareStatus.textContent = message;
+  elements.shareStatus.classList.toggle("is-error", error);
+  elements.shareStatus.hidden = false;
+  shareStatusTimer = persistent
+    ? null
+    : window.setTimeout(() => {
+      elements.shareStatus.hidden = true;
+    }, 3_200);
+}
+
+function shareUrlForResult(result, filters) {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+  url.searchParams.set("flight", result.id);
+  url.searchParams.set("resident", filters.resident ? "1" : "0");
+  url.searchParams.set("wizz", filters.wizzClub ? "1" : "0");
+  return url.toString();
+}
+
+async function writeClipboardText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.append(textarea);
+  textarea.select();
+  const copied = document.execCommand("copy");
+  textarea.remove();
+  if (!copied) throw new Error("Browser did not copy the flight link");
+}
+
+async function copyFlightLink(result, filters, button) {
+  try {
+    await writeClipboardText(shareUrlForResult(result, filters));
+    button.textContent = "Link skopiowany ✓";
+    button.classList.add("is-copied");
+    showShareStatus("Link do lotu został skopiowany.");
+    window.setTimeout(() => {
+      if (!button.isConnected) return;
+      button.textContent = "Kopiuj link do lotu";
+      button.classList.remove("is-copied");
+    }, 2_800);
+  } catch (error) {
+    console.error("Nie udało się skopiować linku do lotu", error);
+    showShareStatus("Nie udało się skopiować linku. Spróbuj ponownie.", { error: true });
+  }
 }
 
 function clearCalendarTarget() {
@@ -1080,6 +1145,8 @@ function createResultCard(result, filters) {
     ? "Potrzebny 1 bilet"
     : "Potrzebne dwa osobne bilety";
   fragment.querySelector(".purchase-button").addEventListener("click", () => showPurchaseDialog(result, filters));
+  const shareButton = fragment.querySelector(".share-flight-button");
+  shareButton.addEventListener("click", () => copyFlightLink(result, filters, shareButton));
 
   const details = fragment.querySelector(".price-details");
   details.innerHTML = priceDetails(result, filters);
@@ -1663,6 +1730,38 @@ function renderResults({ preserveAnchor = true } = {}) {
   renderResultCards(results, filters, preserveAnchor);
 }
 
+function configureSharedResultFilters(result, params) {
+  elements.resident.checked = params.get("resident") !== "0";
+  elements.wizzClub.checked = params.get("wizz") === "1";
+  elements.price.value = elements.price.max;
+  elements.direction.value = result.direction;
+  updateAirportOptions();
+  elements.dateFrom.value = state.document.period_from;
+  elements.dateTo.value = state.document.period_to;
+  elements.origin.value = "all";
+  elements.destination.value = "all";
+  elements.transfer.value = "all";
+  elements.firstCarrier.value = "all";
+  elements.secondCarrier.value = "all";
+  elements.layover.value = elements.layover.max;
+}
+
+function sharedResultFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const resultId = params.get("flight");
+  if (!resultId) return null;
+  const result = state.results.find(candidate => candidate.id === resultId);
+  if (!result) {
+    showShareStatus("Ten lot nie jest już dostępny w aktualnej bazie.", {
+      error: true,
+      persistent: true,
+    });
+    return null;
+  }
+  configureSharedResultFilters(result, params);
+  return result;
+}
+
 function scheduleRenderResults({ preserveAnchor = true } = {}) {
   updateRangeLabels();
   window.clearTimeout(filterRenderTimer);
@@ -1779,7 +1878,11 @@ async function loadFlights() {
     elements.updatedAt.textContent = `Aktualizacja ${shortDate.format(generated)}`;
     initializeFilters();
     bindEvents();
-    renderResults();
+    const sharedResult = sharedResultFromUrl();
+    renderResults({ preserveAnchor: false });
+    if (sharedResult) {
+      window.requestAnimationFrame(() => scrollToResult(sharedResult.id));
+    }
   } catch (error) {
     console.error("Nie udało się wczytać danych lotów", error);
     elements.updatedAt.textContent = "Brak danych";

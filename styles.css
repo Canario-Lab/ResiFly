@@ -1270,7 +1270,62 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 10px 22px rgba(13, 118, 95, 0.22);
 }
 
+.share-flight-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  color: var(--green-dark);
+  border: 1px solid rgba(13, 118, 95, 0.42);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.76);
+  font-size: 0.74rem;
+  font-weight: 700;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.share-flight-button[hidden] {
+  display: none;
+}
+
+.share-flight-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--green);
+  background: #fff;
+}
+
+.share-flight-button.is-copied {
+  border-color: rgba(13, 118, 95, 0.25);
+  background: var(--green-soft);
+}
+
+.share-status {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: 22px;
+  max-width: min(460px, calc(100% - 32px));
+  margin: 0;
+  padding: 11px 16px;
+  color: #fff;
+  border-radius: 999px;
+  background: var(--green-dark);
+  box-shadow: 0 12px 34px rgba(19, 42, 47, 0.24);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.share-status.is-error {
+  background: #7d3f2c;
+}
+
+.share-status[hidden] {
+  display: none;
+}
+
 .purchase-button:focus-visible,
+.share-flight-button:focus-visible,
 .search-info-button:focus-visible,
 .dialog-close:focus-visible,
 .purchase-open-link:focus-visible,
