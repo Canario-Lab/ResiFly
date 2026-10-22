@@ -66,7 +66,7 @@ wyraźnej decyzji użytkownika.
   Brak trasy w tabeli albo data odlotu poza okresem jej ważności blokuje
   publikację; nie wolno zgadywać opłat.
 - Nie stosować tego szacunku do Bintera ani Canaryfly, ponieważ ich oficjalne
-  API zwracają cenę rezydenta dla konkretnego lotu.
+  operacje końcowego rozliczenia zwracają ceny dla konkretnego lotu.
 - Istniejące feedy można przeliczyć bez ponownego pobierania lotów poleceniem
   `scripts/reprice_spanish_resident_estimates.py`. Taki przebieg może zmienić
   tylko pola pochodne ceny rezydenta i sumy, nigdy loty, ceny regularne, linki,
@@ -317,10 +317,14 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
   kompletnych kalendarzy pobierać szczegóły każdego dostępnego dnia, a po
   zebraniu obu linii dopasowywać przesiadki. Nie ograniczać dni Canaryfly
   rozkładem Ryanair/Wizz Air.
-- Daty, godziny, numery lotów oraz regularne i rezydenckie ceny pobierać
-  bezpośrednio z oficjalnych operacji GraphQL `booking_calendar` i
-  `booking_search` Canaryfly. Cena rezydenta jest kwotą zwróconą przez
-  przewoźnika dla konkretnego lotu, a nie oszacowaniem 25%.
+- Daty, godziny i numery lotów pobierać bezpośrednio z oficjalnych operacji
+  GraphQL `booking_calendar` i `booking_search` Canaryfly. Kwoty z listy taryf
+  `booking_search` służą wyłącznie do wybrania taryfy. Jej tymczasowy token
+  przekazać do `booking_getImports` dla jednego dorosłego z kodem `DC` i
+  zapisać końcowe ceny do zapłaty: regularną jako sumę `mainAmount`, a
+  rezydencką jako sumę `totalAmount` dla taryfy, podatków, dopłat, opłaty
+  serwisowej i opłaty za obsługę. Tokenu nie zapisywać. Cena rezydenta jest
+  oficjalną kwotą dla konkretnego lotu, a nie oszacowaniem z tabeli Aeny.
 - Pomijać połączenia Canaryfly z przesiadką wewnętrzną; odcinek między TFN a
   lotniskiem przesiadkowym ResiFly musi być bezpośredni. Nie używać Google
   Flights ani nie wymyślać rozkładu lub ceny.

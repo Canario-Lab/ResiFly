@@ -28,14 +28,16 @@
     "weekly_run": "Pobierz pełny kalendarz każdego zapisanego kierunku Canaryfly i pełny kalendarz każdej zapisanej trasy Ryanair/Wizz Air, a dopiero potem dopasuj przesiadki.",
     "do_not_rediscover_each_run": true,
     "update_only_on_explicit_user_request": true,
-    "primary_route_source": "Oficjalne strony tras Canaryfly oraz oficjalny publiczny endpoint GraphQL booking_calendar i booking_search.",
+    "primary_route_source": "Oficjalne strony tras Canaryfly oraz oficjalny publiczny endpoint GraphQL booking_calendar, booking_search i booking_getImports.",
     "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Szczegóły lotów pobierane są tylko dla dni oznaczonych jako dostępne w kompletnym kalendarzu miesięcznym przewoźnika."
   },
   "fare_feed": {
     "endpoint": "https://services.canaryfly.es/graphql/main",
     "calendar_range": "MONTHLY",
     "currency": "EUR",
-    "airline_code": "PM"
+    "airline_code": "PM",
+    "final_price_operation": "booking_getImports",
+    "resident_discount_code": "DC"
   },
   "airports": [
     {
@@ -118,7 +120,7 @@
     {
       "name": "Canaryfly — warunki zniżek",
       "url": "https://www.canaryfly.es/en/legal-information/discount-conditions",
-      "finding": "Przewoźnik opisuje zniżkę dla mieszkańców Wysp Kanaryjskich, a booking_search zwraca osobne kwoty resident i noResident."
+      "finding": "Przewoźnik opisuje zniżkę dla mieszkańców Wysp Kanaryjskich. booking_search zwraca osobne taryfy resident i noResident, a booking_getImports z kodem DC zwraca końcowe kwoty z podatkami i opłatami dla konkretnego lotu."
     },
     {
       "name": "Oficjalne siatki Ryanair i Wizz Air",

@@ -79,6 +79,7 @@ query booking_search($search: BookingSearchInput!) {
         }
         flightTime
         fares {
+          token
           code
           class
           seats
@@ -93,6 +94,35 @@ query booking_search($search: BookingSearchInput!) {
   }
 }
 """
+
+CANARYFLY_IMPORTS_QUERY = """
+query booking_getImports(
+  $itineraries: [Token!]!
+  $passengers: [PassengersTypeInput!]!
+) {
+  booking_getImports(
+    itineraries: $itineraries
+    passengers: $passengers
+  ) {
+    passengerAmounts {
+      fare { mainAmount totalAmount currency { code } }
+      taxes { mainAmount totalAmount currency { code } }
+      suplements { mainAmount totalAmount currency { code } }
+      serviceFee { mainAmount totalAmount currency { code } }
+      managementFee { mainAmount totalAmount currency { code } }
+      passenger { typeCode residentCode isResident }
+    }
+  }
+}
+"""
+
+CANARYFLY_FINAL_COMPONENTS = (
+    "fare",
+    "taxes",
+    "suplements",
+    "serviceFee",
+    "managementFee",
+)
 
 
 def cli() -> argparse.Namespace:
@@ -119,6 +149,11 @@ def validate_allowlist(allowlist: dict[str, Any]) -> None:
         raise RuntimeError("Krok 1F musi pobierać pełne kalendarze miesięczne")
     if config.get("currency") != "EUR" or config.get("airline_code") != "PM":
         raise RuntimeError("Nieprawidłowa konfiguracja taryf Canaryfly")
+    if (
+        config.get("final_price_operation") != "booking_getImports"
+        or config.get("resident_discount_code") != "DC"
+    ):
+        raise RuntimeError("Nieprawidłowa konfiguracja ceny końcowej Canaryfly")
     airports = allowlist.get("airports") or []
     if not airports:
         raise RuntimeError("Lista lotnisk Canaryfly jest pusta")
@@ -199,9 +234,15 @@ def booking_search_input(origin: str, destination: str, day: date) -> dict[str, 
 class CanaryflyClient:
     """Read-only client for Canaryfly's official public GraphQL service."""
 
-    def __init__(self, endpoint: str, calendar_range: str = "MONTHLY"):
+    def __init__(
+        self,
+        endpoint: str,
+        calendar_range: str = "MONTHLY",
+        resident_discount_code: str = "DC",
+    ):
         self.endpoint = endpoint
         self.calendar_range = calendar_range
+        self.resident_discount_code = resident_discount_code
 
     @staticmethod
     def headers() -> dict[str, str]:
@@ -263,6 +304,22 @@ class CanaryflyClient:
             {"search": booking_search_input(origin, destination, day)},
         )
 
+    def imports(self, fare_token: str) -> dict[str, Any]:
+        return self._post(
+            CANARYFLY_IMPORTS_QUERY,
+            "booking_getImports",
+            {
+                "itineraries": [{"token": fare_token}],
+                "passengers": [{
+                    "type": {
+                        "code": "ADT",
+                        "discounts": [self.resident_discount_code],
+                    },
+                    "quantity": 1,
+                }],
+            },
+        )
+
 
 def available_days_from_calendar(
     payload: dict[str, Any],
@@ -308,7 +365,9 @@ def collect_canaryfly_available_days(
 ) -> set[tuple[str, str, date]]:
     config = allowlist["fare_feed"]
     fare_client = client or CanaryflyClient(
-        config["endpoint"], config["calendar_range"]
+        config["endpoint"],
+        config["calendar_range"],
+        config["resident_discount_code"],
     )
     jobs = [
         (origin, destination, anchor)
@@ -350,6 +409,8 @@ def lowest_canaryfly_fare(
     for fare in fares:
         if fare.get("seats") == 0:
             continue
+        if not str(fare.get("token") or ""):
+            continue
         amounts = fare.get("amounts") or {}
         regular = amounts.get("noResident") or {}
         resident = amounts.get("resident") or {}
@@ -370,6 +431,87 @@ def lowest_canaryfly_fare(
     return min(choices, key=lambda item: item[0]) if choices else None
 
 
+def _canaryfly_import_amount(
+    component: Any,
+    amount_field: str,
+    currency: str,
+    context: str,
+) -> float:
+    if not isinstance(component, dict):
+        raise RuntimeError(
+            f"{context}: brak składnika booking_getImports; publikacja zablokowana"
+        )
+    if component.get("currency", {}).get("code") != currency:
+        raise RuntimeError(
+            f"{context}: składnik booking_getImports nie jest w {currency}; "
+            "publikacja zablokowana"
+        )
+    try:
+        amount = float(component[amount_field])
+    except (KeyError, TypeError, ValueError) as error:
+        raise RuntimeError(
+            f"{context}: nieprawidłowa kwota booking_getImports; "
+            "publikacja zablokowana"
+        ) from error
+    if amount < 0:
+        raise RuntimeError(
+            f"{context}: ujemna kwota booking_getImports; publikacja zablokowana"
+        )
+    return amount
+
+
+def validate_canaryfly_imports_response(
+    payload: dict[str, Any],
+    context: str,
+    currency: str,
+) -> tuple[float, float]:
+    if not isinstance(payload, dict) or payload.get("errors"):
+        raise RuntimeError(
+            f"{context}: błąd GraphQL booking_getImports; publikacja zablokowana"
+        )
+    imports = (payload.get("data") or {}).get("booking_getImports")
+    passenger_amounts = imports.get("passengerAmounts") if isinstance(imports, dict) else None
+    if not isinstance(passenger_amounts, list) or len(passenger_amounts) != 1:
+        raise RuntimeError(
+            f"{context}: brak końcowej wyceny jednego pasażera; "
+            "publikacja zablokowana"
+        )
+    amounts = passenger_amounts[0]
+    if not isinstance(amounts, dict):
+        raise RuntimeError(
+            f"{context}: nieprawidłowa końcowa wycena; publikacja zablokowana"
+        )
+    passenger = amounts.get("passenger") or {}
+    if (
+        passenger.get("typeCode") != "ADT"
+        or passenger.get("residentCode") != "DC"
+        or passenger.get("isResident") is not True
+    ):
+        raise RuntimeError(
+            f"{context}: booking_getImports nie potwierdził rezydenta; "
+            "publikacja zablokowana"
+        )
+
+    regular_total = 0.0
+    resident_total = 0.0
+    for component_name in CANARYFLY_FINAL_COMPONENTS:
+        component = amounts.get(component_name)
+        regular_total += _canaryfly_import_amount(
+            component, "mainAmount", currency, context
+        )
+        resident_total += _canaryfly_import_amount(
+            component, "totalAmount", currency, context
+        )
+    regular_total = round(regular_total, 2)
+    resident_total = round(resident_total, 2)
+    if regular_total <= 0 or resident_total <= 0 or resident_total > regular_total:
+        raise RuntimeError(
+            f"{context}: nieprawidłowa końcowa cena Canaryfly; "
+            "publikacja zablokowana"
+        )
+    return regular_total, resident_total
+
+
 def parse_canaryfly_search(
     payload: dict[str, Any],
     origin: str,
@@ -378,6 +520,7 @@ def parse_canaryfly_search(
     multiplier: float,
     rates: dict[str, CurrencyRate],
     config: dict[str, Any],
+    client: CanaryflyClient,
 ) -> list[dict[str, Any]]:
     search = (payload.get("data") or {}).get("booking_search")
     if not isinstance(search, dict):
@@ -402,7 +545,7 @@ def parse_canaryfly_search(
             selected = lowest_canaryfly_fare(flight.get("fares") or [], currency)
             if selected is None:
                 continue
-            regular_amount, resident_amount, fare = selected
+            _listed_regular, _listed_resident, fare = selected
             try:
                 departure = local_datetime(segment["departureTime"], origin)
                 arrival = local_datetime(segment["arrivalTime"], destination)
@@ -414,6 +557,12 @@ def parse_canaryfly_search(
             line = str(segment.get("line") or airline_code).upper()
             if line != airline_code:
                 continue
+            context = f"{line}{number} {origin}-{destination} {day}"
+            regular_amount, resident_amount = validate_canaryfly_imports_response(
+                client.imports(str(fare["token"])),
+                context,
+                currency,
+            )
             regular_pln = money_pln(regular_amount, currency, rates)
             resident_pln = money_pln(resident_amount, currency, rates)
             leg = {
@@ -429,13 +578,15 @@ def parse_canaryfly_search(
                 "price_resident_estimated_pln": resident_pln,
                 "resident_price_is_estimate": False,
                 "resident_price_source": (
-                    "Canaryfly official booking_search resident total"
+                    "Canaryfly official booking_getImports final total"
                 ),
                 "booking_url": canaryfly_booking_url(
                     origin, destination, departure
                 ),
-                "price_source": "Canaryfly official booking_search GraphQL",
-                "price_scope": "official_flight_specific_lowest_available_fare",
+                "price_source": (
+                    "Canaryfly official booking_search + booking_getImports GraphQL"
+                ),
+                "price_scope": "official_final_payable_total_with_taxes_and_fees",
                 "price_source_currency": currency,
                 "price_source_amount": regular_amount,
                 "price_source_resident_amount": resident_amount,
@@ -461,7 +612,9 @@ def collect_canaryfly_legs(
     config = allowlist["fare_feed"]
     rules = {airport["iata"]: airport for airport in allowlist["airports"]}
     fare_client = client or CanaryflyClient(
-        config["endpoint"], config["calendar_range"]
+        config["endpoint"],
+        config["calendar_range"],
+        config["resident_discount_code"],
     )
     ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
 
@@ -477,6 +630,7 @@ def collect_canaryfly_legs(
             multiplier,
             rates,
             config,
+            fare_client,
         )
         record_checked("Canaryfly", origin, destination, day, day, result, "booking_search", "details")
         return result
@@ -590,7 +744,7 @@ def validate_document(document: dict[str, Any]) -> None:
                 raise RuntimeError(f"Brak booking_url w {result['id']}")
             if leg["carrier"] == "Canaryfly":
                 if leg.get("price_source") != (
-                    "Canaryfly official booking_search GraphQL"
+                    "Canaryfly official booking_search + booking_getImports GraphQL"
                 ):
                     raise RuntimeError(f"Niedozwolone źródło ceny w {result['id']}")
                 if leg.get("resident_price_is_estimate") is not False:
@@ -664,8 +818,9 @@ def main(args) -> None:
         },
         "sources": {
             "canaryfly": (
-                "Canaryfly official booking_calendar and booking_search GraphQL; "
-                "full monthly calendars plus flight-specific regular and resident fares"
+                "Canaryfly official booking_calendar, booking_search and "
+                "booking_getImports GraphQL; full monthly calendars plus "
+                "flight-specific final regular and resident totals"
             ),
             "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
             "wizz_air": "Wizz Air timetableV2",

@@ -2,6 +2,7 @@ import json
 from datetime import date
 from pathlib import Path
 import unittest
+from unittest.mock import Mock
 
 from scripts.collect_step1 import CurrencyRate, configure_airports_from_allowlist
 from scripts.collect_step1f import (
@@ -13,6 +14,7 @@ from scripts.collect_step1f import (
     collect_canaryfly_legs,
     low_cost_route_matrix,
     parse_canaryfly_search,
+    validate_canaryfly_imports_response,
     validate_allowlist,
     validate_document,
 )
@@ -72,6 +74,7 @@ def search_payload(origin="TFN", destination="FUE", day="2026-10-22"):
                             "flightTime": 50,
                             "fares": [
                                 {
+                                    "token": "fare-token-yd",
                                     "code": "YD",
                                     "class": "Y",
                                     "seats": None,
@@ -88,6 +91,7 @@ def search_payload(origin="TFN", destination="FUE", day="2026-10-22"):
                                     },
                                 },
                                 {
+                                    "token": "fare-token-rd",
                                     "code": "RD",
                                     "class": "R",
                                     "seats": 3,
@@ -132,6 +136,35 @@ def search_payload(origin="TFN", destination="FUE", day="2026-10-22"):
     }
 
 
+def amount(main, total):
+    return {
+        "mainAmount": main,
+        "totalAmount": total,
+        "currency": {"code": "EUR"},
+    }
+
+
+def imports_payload():
+    return {
+        "data": {
+            "booking_getImports": {
+                "passengerAmounts": [{
+                    "fare": amount(122, 30.5),
+                    "taxes": amount(2.53, 2.53),
+                    "suplements": amount(0, 0),
+                    "serviceFee": amount(6, 1.5),
+                    "managementFee": amount(0, 0),
+                    "passenger": {
+                        "typeCode": "ADT",
+                        "residentCode": "DC",
+                        "isResident": True,
+                    },
+                }],
+            }
+        }
+    }
+
+
 def low_cost_leg(origin, departure, destination, arrival, carrier="Wizz Air"):
     return {
         "carrier": carrier,
@@ -160,7 +193,9 @@ def canaryfly_leg(origin, departure, destination, arrival):
         "resident_discount_eligible": True,
         "resident_price_is_estimate": False,
         "booking_url": "https://www.canaryfly.es/en/cheap-flights/example",
-        "price_source": "Canaryfly official booking_search GraphQL",
+        "price_source": (
+            "Canaryfly official booking_search + booking_getImports GraphQL"
+        ),
     }
 
 
@@ -170,6 +205,11 @@ class FakeClient:
 
     def search(self, origin, destination, day):
         return search_payload(origin, destination, day.isoformat())
+
+    def imports(self, fare_token):
+        if fare_token != "fare-token-yd":
+            raise AssertionError(f"Unexpected fare token: {fare_token}")
+        return imports_payload()
 
 
 class Step1FCollectorTests(unittest.TestCase):
@@ -245,7 +285,8 @@ class Step1FCollectorTests(unittest.TestCase):
         for origin, destination in canaryfly_routes(self.allowlist):
             self.assertIn((origin, destination, date(2026, 10, 22)), available)
 
-    def test_parses_direct_schedule_and_exact_official_resident_price(self):
+    def test_parses_direct_schedule_and_exact_official_final_prices(self):
+        client = FakeClient()
         legs = parse_canaryfly_search(
             search_payload(),
             "TFN",
@@ -254,17 +295,49 @@ class Step1FCollectorTests(unittest.TestCase):
             0.25,
             {"EUR": CurrencyRate("EUR", 4.0)},
             self.allowlist["fare_feed"],
+            client,
         )
         self.assertEqual(len(legs), 1)
         leg = legs[0]
         self.assertEqual(leg["flight_number"], "PM374")
         self.assertEqual(leg["departure_at"], "2026-10-22T14:30:00+01:00")
         self.assertEqual(leg["arrival_at"], "2026-10-22T15:20:00+01:00")
-        self.assertEqual(leg["price_regular_pln"], 488.0)
-        self.assertEqual(leg["price_resident_estimated_pln"], 122.0)
+        self.assertEqual(leg["price_regular_pln"], 522.12)
+        self.assertEqual(leg["price_resident_estimated_pln"], 138.12)
+        self.assertEqual(leg["price_source_amount"], 130.53)
+        self.assertEqual(leg["price_source_resident_amount"], 34.53)
         self.assertFalse(leg["resident_price_is_estimate"])
         self.assertEqual(leg["fare_code"], "YD")
+        self.assertNotIn("token", leg)
         self.assertTrue(leg["booking_url"].endswith("/2026-10-22"))
+
+    def test_imports_request_uses_canaryfly_dc_resident_code(self):
+        from scripts.collect_step1f import CanaryflyClient
+
+        client = CanaryflyClient("https://services.canaryfly.es/graphql/main")
+        client._post = Mock(return_value={})
+        client.imports("temporary-fare-token")
+        query, operation, variables = client._post.call_args.args
+        self.assertIn("booking_getImports", query)
+        self.assertEqual(operation, "booking_getImports")
+        self.assertEqual(variables["itineraries"], [{"token": "temporary-fare-token"}])
+        self.assertEqual(
+            variables["passengers"],
+            [{"type": {"code": "ADT", "discounts": ["DC"]}, "quantity": 1}],
+        )
+
+    def test_incomplete_or_nonresident_imports_fail_closed(self):
+        incomplete = imports_payload()
+        del incomplete["data"]["booking_getImports"]["passengerAmounts"][0]["taxes"]
+        with self.assertRaisesRegex(RuntimeError, "brak składnika"):
+            validate_canaryfly_imports_response(incomplete, "PM374", "EUR")
+
+        nonresident = imports_payload()
+        passenger = nonresident["data"]["booking_getImports"]["passengerAmounts"][0]["passenger"]
+        passenger["residentCode"] = "NO"
+        passenger["isResident"] = False
+        with self.assertRaisesRegex(RuntimeError, "nie potwierdził rezydenta"):
+            validate_canaryfly_imports_response(nonresident, "PM374", "EUR")
 
     def test_available_day_details_are_collected_without_connections(self):
         candidates = {("TFN", "FUE", date(2026, 10, 22))}

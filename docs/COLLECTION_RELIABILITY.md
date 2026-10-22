@@ -69,6 +69,24 @@ pól pochodnych w już zebranych feedach i nie wykonuje zapytań sieciowych.
 Zachowuje rozkłady, ceny regularne, linki, daty kolekcji, raporty pokrycia i
 `run_id`.
 
+W Canaryfly kwoty z `booking_search` są wartościami listy taryf i nie są
+końcową ceną płatną. Kolektor przekazuje nieutrwalany token wybranej taryfy do
+`booking_getImports` dla jednego dorosłego z kodem rezydenta `DC`. Tak jak w
+Binterze, cena regularna jest sumą `mainAmount`, a rezydencka sumą
+`totalAmount` dla taryfy, podatków, dopłat, opłaty serwisowej i opłaty za
+obsługę. Brak któregokolwiek składnika lub brak potwierdzenia rezydenta blokuje
+publikację. Opłaty międzywyspowe pochodzą z końcowego rozliczenia przewoźnika,
+nie z tabeli opłat dla tras Teneryfa–Półwysep.
+
+Jednorazowa naprawa istniejącego Step 1F jest wykonywana przez
+`scripts/reprice_canaryfly_final_prices.py --apply`. Skrypt nie pobiera
+ponownie miesięcznych kalendarzy ani pozostałych linii: sprawdza tylko trasy i
+dni lotów Canaryfly zapisanych już w feedzie, pobiera ich końcowe ceny,
+przelicza zależne sumy i podmienia plik atomowo po pełnym sukcesie. Jeśli
+poprawnie sprawdzona trasa i dzień nie zawierają już starego lotu, usuwane są
+wyłącznie połączenia zależne od tego niedostępnego odcinka. Kopia wejścia,
+staging i raport pozostają w `tmp/canaryfly-price-repair/`.
+
 ## Air Europa — wyłącznie Google Flights od 22.10.2026
 
 Krok 1D pobiera numery rejsów, pełne daty/godziny i regularne ceny w PLN
