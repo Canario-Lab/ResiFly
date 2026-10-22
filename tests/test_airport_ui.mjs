@@ -67,7 +67,7 @@ function harness() {
     selectedResultPricing, lowestPricesByDate, renderActiveFilters, clearActiveFilter,
     createCalendarDay, createFareChartDay, parseDateOnly, shareUrlForResult,
     sharedResultFromUrl, configureSharedResultFilters, journeyDuration, dayOffset,
-    createJourneyTime, updateRangeLabels, resetFilters};
+    createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
   const api = context.api;
@@ -75,8 +75,11 @@ function harness() {
   api.state.results = results;
   for (const key of ["origin", "destination", "transfer", "firstCarrier", "secondCarrier"]) api.elements[key].value = "all";
   Object.assign(api.elements.direction, { value: "tenerife_to_poland" });
-  Object.assign(api.elements.price, { min: "0", max: "4300", value: "4300" });
+  Object.assign(api.elements.price, { min: "0", max: "4300", value: "1000" });
   Object.assign(api.elements.layover, { min: "2", max: "24", value: "6" });
+  api.elements.resident.checked = true;
+  api.elements.wizzClub.checked = false;
+  api.elements.sort.value = "departure";
   return { ...api, context };
 }
 
@@ -206,4 +209,46 @@ test("direct GDN flights disable second carrier and reset keeps nearest-date sor
   assert.equal(api.elements.destination.value, "all");
   assert.equal(api.elements.direction.value, "tenerife_to_poland");
   assert.equal(api.elements.sort.value, "departure");
+  assert.equal(Number(api.elements.price.value), 1000);
+  assert.equal(Number(api.elements.layover.value), 6);
+});
+
+test("initial price limit is 1000 PLN without discarding more expensive flights", () => {
+  const api = harness();
+  const originalCount = api.state.results.length;
+  api.initializeFilters();
+  assert.equal(Number(api.elements.price.value), 1000);
+  assert.ok(Number(api.elements.price.max) > 1000);
+  assert.equal(Number(api.elements.layover.value), 6);
+  const defaults = api.currentFilters();
+  const displayed = api.filteredResults(defaults);
+  assert.ok(displayed.length > 0);
+  assert.ok(displayed.every(result => api.selectedResultPricing(result, defaults).total <= 1000));
+  const expanded = { ...defaults, maxPrice: Number(api.elements.price.max) };
+  const expandedResults = api.filteredResults(expanded);
+  assert.ok(expandedResults.length > displayed.length);
+  assert.ok(expandedResults.some(result => api.selectedResultPricing(result, expanded).total > 1000));
+  assert.equal(api.state.results.length, originalCount);
+  api.elements.price.value = api.elements.price.max;
+  api.resetFilters();
+  assert.equal(Number(api.elements.price.value), 1000);
+});
+
+test("1000 PLN remains selectable when all loaded fares are lower", () => {
+  const api = harness();
+  api.state.results = api.state.results.filter(result => result.price_total_regular_pln < 1000);
+  api.initializeFilters();
+  assert.equal(Number(api.elements.price.max), 1000);
+  assert.equal(Number(api.elements.price.value), 1000);
+});
+
+test("a shared flight above 1000 PLN still opens with its explicit price settings", () => {
+  const api = harness();
+  api.initializeFilters();
+  const result = results.find(result => result.origin_airport === "GDN" && result.price_total_regular_pln > 1000);
+  assert.ok(result);
+  api.context.window.location = new URL(api.shareUrlForResult(result, { resident: false, wizzClub: false }));
+  assert.equal(api.sharedResultFromUrl().id, result.id);
+  assert.ok(Number(api.elements.price.value) >= result.price_total_regular_pln);
+  assert.ok(api.filteredResults().some(candidate => candidate.id === result.id));
 });

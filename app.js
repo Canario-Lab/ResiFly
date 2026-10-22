@@ -117,6 +117,7 @@ const purchaseDate = new Intl.DateTimeFormat("pl-PL", {
 const calendarWeekdays = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 const CALENDAR_SCROLL_SETTLE_FALLBACK_MS = 1_200;
 const FILTER_RENDER_DELAY_MS = 150;
+const DEFAULT_MAX_PRICE = 1000;
 const RESULT_BATCH_SIZE = 30;
 const BACKGROUND_RESULT_BATCH_SIZE = 5;
 const BACKGROUND_RESULT_START_DELAY_MS = 350;
@@ -848,9 +849,9 @@ function initializeFilters() {
     0,
     ...state.results.map(result => finitePrice(result.price_total_regular_pln) ?? 0)
   );
-  const configuredLimit = Math.max(100, Math.ceil(highestRegularPrice / 100) * 100);
+  const configuredLimit = Math.max(DEFAULT_MAX_PRICE, Math.ceil(highestRegularPrice / 100) * 100);
   elements.price.max = String(configuredLimit);
-  elements.price.value = String(configuredLimit);
+  elements.price.value = String(DEFAULT_MAX_PRICE);
   elements.priceMaxLabel.textContent = `${configuredLimit.toLocaleString("pl-PL")} zł`;
   updateAirportOptions();
 
@@ -1911,7 +1912,7 @@ function resetFilters() {
   window.clearTimeout(filterRenderTimer);
   elements.resident.checked = true;
   elements.wizzClub.checked = false;
-  elements.price.value = elements.price.max;
+  elements.price.value = String(DEFAULT_MAX_PRICE);
   elements.direction.value = "tenerife_to_poland";
   updateAirportOptions();
   elements.dateFrom.value = state.document.period_from;
