@@ -735,7 +735,7 @@ function datesInRange(rangeStart, rangeEnd) {
   return dates;
 }
 
-function createFareChartDay(isoDate, price, minPrice, maxPrice) {
+function createFareChartDay(isoDate, price, maxPrice) {
   const date = parseDateOnly(isoDate);
   const day = document.createElement(price ? "button" : "div");
   day.className = "fare-chart-day";
@@ -754,10 +754,8 @@ function createFareChartDay(isoDate, price, minPrice, maxPrice) {
   if (price) {
     day.type = "button";
     day.classList.add("is-clickable");
-    const spread = maxPrice - minPrice;
-    const normalized = spread > 0 ? (price.total - minPrice) / spread : 0.5;
-    bar.style.setProperty("--fare-bar-height", `${32 + normalized * 60}%`);
-    if (Math.abs(price.total - minPrice) < 0.005) day.classList.add("is-lowest");
+    const proportionalHeight = maxPrice > 0 ? (price.total / maxPrice) * 95 : 12;
+    bar.style.setProperty("--fare-bar-height", `${Math.max(12, proportionalHeight)}%`);
     day.setAttribute(
       "aria-label",
       `${formatDate(isoDate)}, ${selectedPriceCaption(price).toLowerCase()} ${currency.format(price.total)}. Pokaż lot.`
@@ -786,12 +784,11 @@ function renderFareChart(rangeStart, rangeEnd, prices) {
   const dates = datesInRange(rangeStart, rangeEnd);
   const available = dates.map(date => prices.get(date)).filter(Boolean);
   const totals = available.map(price => price.total);
-  const minPrice = totals.length ? Math.min(...totals) : 0;
   const maxPrice = totals.length ? Math.max(...totals) : 0;
   const chart = document.createDocumentFragment();
 
   for (const isoDate of dates) {
-    chart.append(createFareChartDay(isoDate, prices.get(isoDate), minPrice, maxPrice));
+    chart.append(createFareChartDay(isoDate, prices.get(isoDate), maxPrice));
   }
 
   elements.farePriceChart.style.setProperty("--fare-chart-days", String(dates.length));
