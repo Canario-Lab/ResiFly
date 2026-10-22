@@ -299,7 +299,7 @@ function updateResultPreparationProgress() {
   elements.resultsPreparationTrack.setAttribute("aria-valuenow", String(percent));
   elements.resultsPreparationTrack.setAttribute(
     "aria-valuetext",
-    `Przygotowano ${prepared} z ${total} kart, ${percent}%`
+    `Przygotowano ${prepared} z ${total} lotów, ${percent}%`
   );
 }
 
@@ -315,12 +315,12 @@ function updateResultLoadStatus() {
 
   const visible = elements.list.querySelectorAll(".flight-card").length;
   if (visible >= total) {
-    setResultLoadStatus(`Karty na ekranie: ${total}/${total}. Wszystkie są gotowe.`, "complete");
+    setResultLoadStatus(`Loty na ekranie: ${total}/${total}. Wszystkie są gotowe.`, "complete");
     return;
   }
 
   setResultLoadStatus(
-    `Karty na ekranie: ${visible}/${total}. Pozostałe są przygotowywane…`
+    `Loty na ekranie: ${visible}/${total}. Pozostałe są przygotowywane…`
   );
 }
 
