@@ -831,6 +831,132 @@
       "verified_on": "2026-10-22",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "AGP",
+      "destination": "WRO",
+      "flight_number": "W61864",
+      "duration_minutes": 220,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "flight_number": "W61812",
+      "duration_minutes": 170,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BIO",
+      "destination": "WRO",
+      "flight_number": "W61880",
+      "duration_minutes": 170,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BUD",
+      "destination": "WRO",
+      "flight_number": "W61840",
+      "duration_minutes": 75,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "EIN",
+      "destination": "WRO",
+      "flight_number": "W61826",
+      "duration_minutes": 100,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "flight_number": "W61870",
+      "duration_minutes": 310,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LTN",
+      "destination": "WRO",
+      "flight_number": "W61802",
+      "duration_minutes": 130,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "AGP",
+      "flight_number": "W61863",
+      "duration_minutes": 225,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "flight_number": "W61811",
+      "duration_minutes": 160,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "BIO",
+      "flight_number": "W61879",
+      "duration_minutes": 175,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "BUD",
+      "flight_number": "W61839",
+      "duration_minutes": 75,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "EIN",
+      "flight_number": "W61825",
+      "duration_minutes": 100,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "flight_number": "W61869",
+      "duration_minutes": 330,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "LTN",
+      "flight_number": "W61801",
+      "duration_minutes": 135,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -1391,6 +1517,226 @@
       "departure_time": "19:15",
       "flight_number": "W61710",
       "duration_minutes": 335
+    },
+    {
+      "origin": "AGP",
+      "destination": "WRO",
+      "departure_time": "10:15",
+      "flight_number": "W61864",
+      "duration_minutes": 220
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "08:15",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "09:30",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "09:45",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "10:05",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "10:10",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BCN",
+      "destination": "WRO",
+      "departure_time": "22:45",
+      "flight_number": "W61812",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BIO",
+      "destination": "WRO",
+      "departure_time": "20:20",
+      "flight_number": "W61880",
+      "duration_minutes": 170
+    },
+    {
+      "origin": "BUD",
+      "destination": "WRO",
+      "departure_time": "22:00",
+      "flight_number": "W61840",
+      "duration_minutes": 75
+    },
+    {
+      "origin": "EIN",
+      "destination": "WRO",
+      "departure_time": "17:05",
+      "flight_number": "W61826",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "EIN",
+      "destination": "WRO",
+      "departure_time": "17:35",
+      "flight_number": "W61826",
+      "duration_minutes": 90
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "departure_time": "18:55",
+      "flight_number": "W61870",
+      "duration_minutes": 310
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "departure_time": "19:00",
+      "flight_number": "W61870",
+      "duration_minutes": 310
+    },
+    {
+      "origin": "LTN",
+      "destination": "WRO",
+      "departure_time": "21:20",
+      "flight_number": "W61802",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "LTN",
+      "destination": "WRO",
+      "departure_time": "21:45",
+      "flight_number": "W61802",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "WRO",
+      "destination": "AGP",
+      "departure_time": "05:45",
+      "flight_number": "W61863",
+      "duration_minutes": 225
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "04:40",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "05:25",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "05:40",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "06:00",
+      "flight_number": "W61811",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "06:15",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "06:25",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BCN",
+      "departure_time": "19:15",
+      "flight_number": "W61811",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "WRO",
+      "destination": "BIO",
+      "departure_time": "16:40",
+      "flight_number": "W61879",
+      "duration_minutes": 175
+    },
+    {
+      "origin": "WRO",
+      "destination": "BUD",
+      "departure_time": "19:40",
+      "flight_number": "W61839",
+      "duration_minutes": 75
+    },
+    {
+      "origin": "WRO",
+      "destination": "EIN",
+      "departure_time": "14:50",
+      "flight_number": "W61825",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "WRO",
+      "destination": "EIN",
+      "departure_time": "15:20",
+      "flight_number": "W61825",
+      "duration_minutes": 100
+    },
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "departure_time": "13:45",
+      "flight_number": "W61869",
+      "duration_minutes": 325
+    },
+    {
+      "origin": "WRO",
+      "destination": "LTN",
+      "departure_time": "19:25",
+      "flight_number": "W61801",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "WRO",
+      "destination": "LTN",
+      "departure_time": "19:45",
+      "flight_number": "W61801",
+      "duration_minutes": 140
+    }
+  ],
+  "flight_number_overrides_by_departure_weekday_and_time": [
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "departure_time": "13:45",
+      "departure_weekday": 1,
+      "flight_number": "W61869",
+      "duration_minutes": 330
     }
   ]
 }

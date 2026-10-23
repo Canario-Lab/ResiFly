@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-22T22:28:49+01:00",
-  "period_from": "2026-10-22",
-  "period_to": "2026-11-21",
+  "generated_at": "2026-10-23T11:43:26+01:00",
+  "period_from": "2026-10-23",
+  "period_to": "2026-11-22",
   "step": "1E",
   "directions": [
     "tenerife_to_poland",
@@ -17,17 +17,16 @@
   },
   "exchange_rates": {
     "EUR_PLN": {
-      "rate": 4.3685,
+      "rate": 4.3917,
       "source": "NBP tabela A",
-      "effective_for": "2026-10-22"
+      "effective_for": "2026-10-23"
     }
   },
   "sources": {
     "volotea_routes_schedules_and_prices": "Volotea official route pages and public MinPrice endpoint; regular fare with fees, no Google Flights",
-    "volotea_resident_price": "estimate: 25% of official regular fare with fees; taxes may not receive the full resident discount",
+    "volotea_resident_price": "estimate: 25% of the official fare component plus fixed Aena fees",
     "ryanair": "Google Flights HTTP individual Ryanair offers (FR and RK)",
-    "wizz_air": "Wizz Air timetableV2",
-    "resident_price_estimate": "25% of fare component plus fixed non-discountable fees from data/spanish-resident-fees.json"
+    "wizz_air": "Wizz Air timetableV2"
   },
   "result_status": "ok",
   "results": [
@@ -64,25 +63,25 @@
           "departure_at": "2026-11-01T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-01T09:00:00+00:00",
-          "price_regular_pln": 781.39,
+          "price_regular_pln": 672.68,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 229.68,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 178.87,
+          "price_source_amount": 153.17,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 202.69,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 1150.39,
-      "price_total_resident_estimated_pln": 598.68
+      "price_total_regular_pln": 1041.68,
+      "price_total_resident_estimated_pln": 571.69
     },
     {
       "id": "step1e-3ac4f11097afe292",
@@ -117,25 +116,25 @@
           "departure_at": "2026-11-01T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-01T09:00:00+00:00",
-          "price_regular_pln": 781.39,
+          "price_regular_pln": 672.68,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 229.68,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-01&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 178.87,
+          "price_source_amount": 153.17,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 202.69,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 1010.39,
-      "price_total_resident_estimated_pln": 458.68
+      "price_total_regular_pln": 901.68,
+      "price_total_resident_estimated_pln": 431.69
     },
     {
       "id": "step1e-5888738cb0a70362",
@@ -170,25 +169,25 @@
           "departure_at": "2026-11-08T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-08T09:00:00+00:00",
-          "price_regular_pln": 404.13,
+          "price_regular_pln": 361.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 135.37,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 92.51,
+          "price_source_amount": 82.23,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 124.81,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 863.13,
-      "price_total_resident_estimated_pln": 594.37
+      "price_total_regular_pln": 820.13,
+      "price_total_resident_estimated_pln": 583.81
     },
     {
       "id": "step1e-cce67385cbae00d7",
@@ -223,25 +222,25 @@
           "departure_at": "2026-11-08T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-08T09:00:00+00:00",
-          "price_regular_pln": 404.13,
+          "price_regular_pln": 361.13,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 135.37,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-08&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 92.51,
+          "price_source_amount": 82.23,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 124.81,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 933.13,
-      "price_total_resident_estimated_pln": 664.37
+      "price_total_regular_pln": 890.13,
+      "price_total_resident_estimated_pln": 653.81
     },
     {
       "id": "step1e-a1bad75cef5a9b2c",
@@ -276,25 +275,25 @@
           "departure_at": "2026-11-15T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-15T09:00:00+00:00",
-          "price_regular_pln": 314.31,
+          "price_regular_pln": 270.84,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 112.91,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 71.95,
+          "price_source_amount": 61.67,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 102.23,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 633.31,
-      "price_total_resident_estimated_pln": 431.91
+      "price_total_regular_pln": 589.84,
+      "price_total_resident_estimated_pln": 421.23
     },
     {
       "id": "step1e-c5b2a6515a760119",
@@ -329,36 +328,142 @@
           "departure_at": "2026-11-15T06:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-15T09:00:00+00:00",
-          "price_regular_pln": 314.31,
+          "price_regular_pln": 270.84,
           "resident_discount_eligible": true,
           "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 112.91,
-          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees",
           "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-15&returnDate=",
           "price_source": "Volotea official MinPrice endpoint",
           "price_scope": "official_route_flight_fare_with_fees",
           "price_source_currency": "EUR",
-          "price_source_amount": 71.95,
+          "price_source_amount": 61.67,
           "schedule_source": "Volotea official MinPrice endpoint",
           "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 102.23,
           "resident_nondiscountable_fees_eur": 10.48,
-          "resident_nondiscountable_fees_pln": 45.78,
-          "resident_estimate_exchange_rate_eur_pln": 4.3685
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 613.31,
-      "price_total_resident_estimated_pln": 411.91
+      "price_total_regular_pln": 569.84,
+      "price_total_resident_estimated_pln": 401.23
+    },
+    {
+      "id": "step1e-dc5fad19edd1799d",
+      "origin_airport": "KRK",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "BIO",
+      "layover_minutes": 1280,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W62049",
+          "departure_airport": "KRK",
+          "departure_at": "2026-11-21T06:15:00+01:00",
+          "arrival_airport": "BIO",
+          "arrival_at": "2026-11-21T09:25:00+01:00",
+          "price_regular_pln": 269.0,
+          "price_wizz_discount_club_pln": 223.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 269.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/BIO/2026-11-21/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 269.0
+        },
+        {
+          "carrier": "Volotea",
+          "flight_number": "V73522",
+          "departure_airport": "BIO",
+          "departure_at": "2026-11-22T06:45:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-11-22T09:00:00+00:00",
+          "price_regular_pln": 121.87,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-22&returnDate=",
+          "price_source": "Volotea official MinPrice endpoint",
+          "price_scope": "official_route_flight_fare_with_fees",
+          "price_source_currency": "EUR",
+          "price_source_amount": 27.75,
+          "schedule_source": "Volotea official MinPrice endpoint",
+          "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 64.99,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
+        }
+      ],
+      "price_total_regular_pln": 390.87,
+      "price_total_resident_estimated_pln": 333.99
+    },
+    {
+      "id": "step1e-19d2a6ceff9be1b8",
+      "origin_airport": "WAW",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "one_stop",
+      "transfer_airport": "BIO",
+      "layover_minutes": 690,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61455",
+          "departure_airport": "WAW",
+          "departure_at": "2026-11-21T15:50:00+01:00",
+          "arrival_airport": "BIO",
+          "arrival_at": "2026-11-21T19:15:00+01:00",
+          "price_regular_pln": 259.0,
+          "price_wizz_discount_club_pln": 213.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 259.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/BIO/2026-11-21/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 259.0
+        },
+        {
+          "carrier": "Volotea",
+          "flight_number": "V73522",
+          "departure_airport": "BIO",
+          "departure_at": "2026-11-22T06:45:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-11-22T09:00:00+00:00",
+          "price_regular_pln": 121.87,
+          "resident_discount_eligible": true,
+          "resident_fare_multiplier": 0.25,
+          "booking_url": "https://www.volotea.com/es/ofertas-vuelos/bio/tfs/?departureDate=2026-11-22&returnDate=",
+          "price_source": "Volotea official MinPrice endpoint",
+          "price_scope": "official_route_flight_fare_with_fees",
+          "price_source_currency": "EUR",
+          "price_source_amount": 27.75,
+          "schedule_source": "Volotea official MinPrice endpoint",
+          "price_source_taxes": 10.48,
+          "price_resident_estimated_pln": 64.99,
+          "resident_nondiscountable_fees_eur": 10.48,
+          "resident_nondiscountable_fees_pln": 46.03,
+          "resident_estimate_exchange_rate_eur_pln": 4.3917,
+          "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
+        }
+      ],
+      "price_total_regular_pln": 380.87,
+      "price_total_resident_estimated_pln": 323.99
     }
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "3451bb82-354a-4785-9f0a-fcc676625f47",
+    "run_id": "efa7d3ee-f865-4353-84a7-90b73f3eb21e",
     "step": "1e",
-    "period_from": "2026-10-22",
-    "period_to": "2026-11-21",
+    "period_from": "2026-10-23",
+    "period_to": "2026-11-22",
     "status": "complete",
-    "expected_queries": 186,
-    "completed_queries": 186,
+    "expected_queries": 248,
+    "completed_queries": 248,
     "missing_queries": 0,
     "unexpected_queries": 0,
     "error": null,
@@ -370,12 +475,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "official_minprice"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -553,6 +652,12 @@
             "date": "2026-11-21",
             "status": "checked",
             "flights": 0,
+            "method": "official_minprice"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 1,
             "method": "official_minprice"
           }
         ]
@@ -564,12 +669,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "official_minprice"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -584,7 +683,7 @@
           {
             "date": "2026-10-25",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "official_minprice"
           },
           {
@@ -626,7 +725,7 @@
           {
             "date": "2026-11-01",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "official_minprice"
           },
           {
@@ -747,6 +846,12 @@
             "date": "2026-11-21",
             "status": "checked",
             "flights": 0,
+            "method": "official_minprice"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 1,
             "method": "official_minprice"
           }
         ]
@@ -758,12 +863,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -941,6 +1040,12 @@
             "date": "2026-11-21",
             "status": "checked",
             "flights": 1,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
             "method": "timetableV2"
           }
         ]
@@ -952,12 +1057,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -1135,6 +1234,206 @@
             "date": "2026-11-21",
             "status": "checked",
             "flights": 1,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          }
+        ]
+      },
+      {
+        "carrier": "Wizz Air",
+        "origin": "BIO",
+        "destination": "WRO",
+        "kind": "calendar",
+        "days": [
+          {
+            "date": "2026-10-23",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-24",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-25",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-26",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-27",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-28",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-29",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-30",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-31",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-01",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-02",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-03",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-04",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-05",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-06",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-07",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-08",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-09",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-10",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-11",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-12",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-13",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-14",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-15",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-16",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-17",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-18",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-19",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-20",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-21",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
             "method": "timetableV2"
           }
         ]
@@ -1146,12 +1445,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -1329,6 +1622,12 @@
             "date": "2026-11-21",
             "status": "checked",
             "flights": 1,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
             "method": "timetableV2"
           }
         ]
@@ -1340,12 +1639,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-22",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-23",
             "status": "checked",
             "flights": 0,
@@ -1524,18 +1817,209 @@
             "status": "checked",
             "flights": 1,
             "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          }
+        ]
+      },
+      {
+        "carrier": "Wizz Air",
+        "origin": "WRO",
+        "destination": "BIO",
+        "kind": "calendar",
+        "days": [
+          {
+            "date": "2026-10-23",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-24",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-25",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-26",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-27",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-28",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-29",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-30",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-10-31",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-01",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-02",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-03",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-04",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-05",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-06",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-07",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-08",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-09",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-10",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-11",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-12",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-13",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-14",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-15",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-16",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-17",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-18",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-19",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-20",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-21",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
           }
         ]
       }
     ]
-  },
-  "derived_prices_updated_at": "2026-10-22T23:20:08+01:00",
-  "derived_price_update": {
-    "scope": "estimated Spanish resident leg prices and dependent totals only",
-    "network_requests": false,
-    "source_collection_generated_at": "2026-10-22T22:28:49+01:00",
-    "collection_run_id": "3451bb82-354a-4785-9f0a-fcc676625f47",
-    "fee_registry": "data/spanish-resident-fees.json",
-    "fee_registry_verified_on": "2026-10-22"
   }
 }

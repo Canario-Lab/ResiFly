@@ -104,7 +104,7 @@ class Step1ECollectorTests(unittest.TestCase):
         self.assertEqual(airport["volotea_resident_fare_multiplier"], 0.25)
         self.assertEqual(
             {(item["polish_airport"], tuple(item["airlines"])) for item in airport["polish_routes"]},
-            {("WAW", ("Wizz Air",)), ("KRK", ("Wizz Air",))},
+            {("WAW", ("Wizz Air",)), ("KRK", ("Wizz Air",)), ("WRO", ("Wizz Air",))},
         )
 
     def test_route_matrix_uses_only_saved_pairs_in_both_directions(self):
@@ -114,6 +114,8 @@ class Step1ECollectorTests(unittest.TestCase):
             ("Wizz Air", "BIO", "WAW"),
             ("Wizz Air", "KRK", "BIO"),
             ("Wizz Air", "WAW", "BIO"),
+            ("Wizz Air", "WRO", "BIO"),
+            ("Wizz Air", "BIO", "WRO"),
         })
 
     def test_parses_official_direct_flight_price_schedule_and_number(self):

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Ryanair dla kroku 3",
-  "verified_on": "2026-10-22",
+  "verified_on": "2026-10-23",
   "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Ryanair + Ryanair między Teneryfą a Polską w kroku 3.",
   "scope": {
     "tenerife_airports": [
@@ -13,13 +13,14 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "airline": "Ryanair",
     "resident_discount_considered": false
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN.",
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO.",
     "route_filter": {
       "operator": "RYANAIR",
       "connectingAirport": null
@@ -31,7 +32,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "result_count": 34,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
@@ -138,7 +140,8 @@
       ],
       "polish_airports": [
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -153,7 +156,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -167,7 +171,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -179,7 +184,8 @@
       ],
       "polish_airports": [
         "WMI",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -192,7 +198,8 @@
       "polish_airports": [
         "WAW",
         "WMI",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -203,7 +210,8 @@
         "TFS"
       ],
       "polish_airports": [
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -216,7 +224,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -243,7 +252,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -257,7 +267,8 @@
         "WAW",
         "WMI",
         "KTW",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -271,7 +282,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -284,7 +296,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -308,7 +321,8 @@
       ],
       "polish_airports": [
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -344,7 +358,8 @@
       "polish_airports": [
         "WAW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -358,7 +373,8 @@
         "WAW",
         "WMI",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -369,7 +385,8 @@
         "TFS"
       ],
       "polish_airports": [
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -384,7 +401,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -395,7 +413,8 @@
         "TFS"
       ],
       "polish_airports": [
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -423,7 +442,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -435,7 +455,8 @@
       ],
       "polish_airports": [
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -449,7 +470,8 @@
         "WAW",
         "WMI",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -462,7 +484,8 @@
       "polish_airports": [
         "WAW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -473,7 +496,8 @@
         "TFS"
       ],
       "polish_airports": [
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -485,7 +509,8 @@
       ],
       "polish_airports": [
         "WMI",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -499,7 +524,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -511,7 +537,8 @@
       ],
       "polish_airports": [
         "WAW",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     },
     {
@@ -536,7 +563,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "WRO"
       ]
     },
     {
@@ -560,7 +588,8 @@
       ],
       "polish_airports": [
         "WMI",
-        "KRK"
+        "KRK",
+        "WRO"
       ]
     }
   ],
@@ -597,6 +626,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o WRO",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

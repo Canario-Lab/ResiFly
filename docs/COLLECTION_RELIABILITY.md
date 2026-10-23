@@ -139,12 +139,16 @@ nigdy nie zwróci poprawnie wyglądających, lecz niepełnych danych.
   serializacji; błąd nie obcina starego pliku.
 - Całą bazę zbierać przez `scripts/collect_five_steps.py` do stagingu.
   Wszystkie dziesięć feedów otrzymuje to samo `RESIFLY_COLLECTION_RUN_ID`.
+  Runner przydziela im świeży plik cache Ryanaira dla konkretnego runu
+  i przekazuje go jako `RESIFLY_RYANAIR_GOOGLE_CACHE`. Wznowienie zachowuje
+  ten sam cache; inne daty lub konfiguracja tras dla tego samego ID są odrzucane.
 - `validate_batch` wymaga zgodności raportu w feedzie i sidecarze, bieżącego
   planu tras/dni oraz wspólnego `run_id`, oprócz walidacji okna, kursów,
   odcinków i wyników. Brak raportu lub pomieszanie uruchomień blokuje zapis.
 - `promote_batch` sam ponownie waliduje zestaw przed pierwszą zmianą plików.
-  Przy obsłużonym błędzie podmiany przywraca poprzednie pliki. Jak wcześniej,
-  dziesięć podmian nie jest pojedynczą transakcją systemu plików odporną na
+  Przy obsłużonym błędzie podmiany przywraca poprzednie pliki. Promocja obejmuje dziesięć feedów i ich dziesięć sidecarów,
+  z backupem poprzednich plików i informacją o wcześniej brakujących raportach.
+  Jak wcześniej, dwadzieścia podmian nie jest pojedynczą transakcją systemu plików odporną na
   nagłe zabicie procesu lub utratę zasilania.
 - Po błędzie batch zapisuje `validation-report.json` ze statusem `failed`,
   identyfikatorem i krokiem, a nie pozostawia pozornego raportu sukcesu.
@@ -177,3 +181,17 @@ jednego dnia i zachowanie poprzednich plików. Mały test żywych źródeł zwr�
 cztery loty Bintera TFN–MAD; Ryanair WMI–TFS odrzucił pełną dostępność także
 przy próbie dziennej, co prawidłowo zablokowało wynik. Pełnej bazy ponownie
 nie zbierano i nie wykonywano operacji Git.
+
+## Lokalna kolekcja sześciu endpointów 2026-10-23
+
+Przy wdrożeniu WRO wykonano nową pełną kolekcję dziesięciu feedów dla
+2026-10-23–2026-11-22. Wszystkie mają run ID
+`efa7d3ee-f865-4353-84a7-90b73f3eb21e`, kompletne osadzone raporty i zgodne
+sidecary. Lokalna promocja objęła dwadzieścia plików i zachowała backup
+poprzedniej bazy. Nie użyto starszego stagingu GDN ani starych cen.
+Przejściowe nieprawidłowe odpowiedzi Google w 1C i 3 blokowały publikację;
+wznowienia z tym samym cache zakończyły brakujące zapytania bez osłabiania
+walidacji. Zakres, wyniki, testy i ograniczenie odbioru wizualnego opisuje
+[`WDROZENIE_WROCLAWIA_WRO.md`](WDROZENIE_WROCLAWIA_WRO.md). Pierwszy odbiór
+odbył się bez commita i push. Następnie 2026-10-23 użytkownik autoryzował
+publikację całego pakietu WRO i nowej bazy na GitHub.

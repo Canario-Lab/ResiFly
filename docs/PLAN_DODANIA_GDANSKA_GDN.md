@@ -1,5 +1,9 @@
 # Plan wdrożenia Gdańska (GDN) jako piątego polskiego lotniska ResiFly
 
+Dokument historyczny: Gdańsk został już wdrożony. Aktualny plan kolejnego
+rozszerzenia, uwzględniający obecną piątkę endpointów i późniejsze poprawki
+kolektorów, znajduje się w [PLAN_DODANIA_WROCLAWIA_WRO.md](PLAN_DODANIA_WROCLAWIA_WRO.md).
+
 Dokument dla Codexa realizującego wdrożenie. Przygotowany 22 października 2026 r.
 na podstawie lokalnego repozytorium, HEAD `52d504872547341e857ab6b30cb5ad2ea928d00a`.
 Numery linii poniżej dotyczą tego stanu i mogą się przesunąć.

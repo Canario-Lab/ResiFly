@@ -56,13 +56,19 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK i GDN. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN i WRO. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
 osobnego audytu siatki i zapisania konkretnych par lotnisko/przewoźnik;
-nie oznacza dopisania go do wszystkich hubów. Procedurę opisuje
-`docs/PLAN_DODANIA_GDANSKA_GDN.md`.
+nie oznacza dopisania go do wszystkich hubów. Historyczny plan Gdańska:
+`docs/PLAN_DODANIA_GDANSKA_GDN.md`. Aktualny plan dodania Wrocławia (WRO)
+jako szóstego endpointu jest zapisany w
+[`docs/PLAN_DODANIA_WROCLAWIA_WRO.md`](docs/PLAN_DODANIA_WROCLAWIA_WRO.md).
+WRO wdrożono lokalnie zgodnie z tym planem; zakres, wyniki i dowody zawiera
+[`docs/WDROZENIE_WROCLAWIA_WRO.md`](docs/WDROZENIE_WROCLAWIA_WRO.md).
+Pakiet WRO obejmuje konfigurację, kolektory, testy oraz komplet dziesięciu
+odświeżonych feedów z raportami pokrycia.
 
 GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
@@ -85,8 +91,9 @@ loader `scripts/wizz_schedules.py`; lokalne rejestry 1A/1B pozostają w allowlis
 Ryanair w wariantach 1A–1F używa tego samego pełnego kalendarza co krok 2;
 zapytanie Fare Finder o najtańszą ofertę z całego miesiąca nie zastępuje
 pełnego skanu dat. Także minimum dzienne nie obejmuje wszystkich godzin.
-Awaryjnie kolektor ponawia pełną dostępność osobno dla aktywnych dni; jeśli
-to nie działa, przerywa aktualizację bez zapisu niepełnych wyników.
+Aktualne numery, godziny i indywidualne ceny Ryanaira pochodzą wyłącznie
+z Google Flights HTTP, dla wszystkich dni zapisanych tras, z kodami FR/RK.
+Błąd źródła przerywa aktualizację; nie ma powrotu do starego API cenowego.
 
 Każdy kolektor wymaga raportu `collection_coverage` dla wszystkich zapisanych
 tras/dni, także przy uruchomieniu samodzielnym. Obok feedu zapisuje

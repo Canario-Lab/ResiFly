@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Iberia dla kroku 1B",
-  "verified_on": "2026-10-22",
+  "verified_on": "2026-10-23",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Iberia/Iberia Express + Ryanair/Wizz Air w kroku 1B.",
   "scope": {
     "tenerife_airports": [
@@ -13,7 +13,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "tenerife_leg_airlines": [
       "Iberia",
@@ -32,7 +33,7 @@
     "do_not_rediscover_each_run": true,
     "polish_route_evidence_is_not_a_search_limit": true,
     "update_only_on_explicit_user_request": true,
-    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Kolektor sprawdza oba lotniska Teneryfy i wszystkie pięć polskich lotniska."
+    "availability_note": "Obecność na liście nie gwarantuje lotu w każdym 30-dniowym oknie. Kolektor sprawdza oba lotniska Teneryfy i wszystkie sześć polskich lotnisk."
   },
   "airports": [
     {
@@ -70,6 +71,10 @@
         {
           "polish_airport": "GDN",
           "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "WRO",
+          "airline": "Ryanair"
         }
       ]
     }
@@ -154,6 +159,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o WRO",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ],
   "flight_number_overrides_by_departure_time": [

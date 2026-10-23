@@ -414,6 +414,7 @@ const airportLabels = {
   FCO: "Rzym-Fiumicino (FCO)",
   FMM: "Memmingen (FMM)",
   GDN: "Gdańsk (GDN)",
+  WRO: "Wrocław (WRO)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",

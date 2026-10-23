@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "name": "Lotniska przesiadkowe Air Europa dla kroku 1D",
-  "verified_on": "2026-10-22",
+  "verified_on": "2026-10-23",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Air Europa + Ryanair/Wizz Air w kroku 1D.",
   "scope": {
     "tenerife_airports": [
@@ -12,7 +12,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "tenerife_leg_airlines": [
       "Air Europa"
@@ -74,6 +75,12 @@
             "Ryanair",
             "Wizz Air"
           ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
         }
       ],
       "official_route_page": "https://www.aireuropa.com/es-es/ofertas-de-vuelos-desde-tenerife-a-madrid"
@@ -96,6 +103,12 @@
         },
         {
           "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
           "airlines": [
             "Wizz Air"
           ]
@@ -143,6 +156,15 @@
       "name": "Aena — Guía de Tarifas 2026, edición agosto",
       "url": "https://www.aena.es/es/oportunidades-de-negocio/precios-y-facturacion.html",
       "finding": "Oficjalne stawki pasażerskie, PMR, bezpieczeństwa lotniskowego i bezpieczeństwa lotniczego użyte do potwierdzenia stałych opłat zależnych od kierunku."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o WRO",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ],
   "air_europa_airline_codes": {

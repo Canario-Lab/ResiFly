@@ -4,7 +4,7 @@
 
 - Read Polish endpoints and their time zones from `data/search-airports.json`
   through `scripts.search_airports`. The approved endpoints are WAW, WMI,
-  KTW, KRK and GDN. Collectors and route discovery must share this registry.
+  KTW, KRK, GDN and WRO. Collectors and route discovery must share this registry.
 - GDN also retains its existing Step 5 variant B transfer to KRK. The precise
   exception is stored in the endpoint registry; do not enable self-routes or
   silently expand other endpoint-as-transfer roles.
@@ -220,6 +220,16 @@
 - Use the shared `data/wizz-route-schedules.json` registry for Wizz Air route
   numbers and block times needed by Step 1F.
 
+## Verified Wizz calendar overrides
+
+- Resolve all Wizz technical schedules through `scripts.wizz_schedules`.
+  Preserve shared and local Step 1A/1B metadata consistently.
+- When verified block times or numbers differ at the same departure clock,
+  use `flight_number_overrides_by_departure_weekday_and_time` (ISO weekday
+  1–7) or `flight_number_overrides_by_departure_date_and_time` for a verified
+  date-specific exception. Date overrides take precedence over weekday and
+  clock-only overrides. Never arbitrarily select one conflicting observation.
+
 ## Shared Spanish resident-estimate fee registry
 
 - The canonical direction-specific non-discountable fee table is
@@ -244,7 +254,7 @@
 ## Step 2 direct-flight collection
 
 - Generate Step 2 with `scripts/collect_step2.py`.
-- Check the complete matrix between WAW, WMI, KRK, KTW, GDN and TFN, TFS in both
+- Check the complete matrix between WAW, WMI, KRK, KTW, GDN, WRO and TFN, TFS in both
   directions for Wizz Air and Ryanair.
 - Fetch the complete configured date window for every route/carrier pair before
   producing results; do not prefilter dates with another source.

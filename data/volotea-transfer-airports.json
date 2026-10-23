@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Volotea dla kroku 1E",
-  "verified_on": "2026-10-22",
+  "verified_on": "2026-10-23",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Volotea + Ryanair/Wizz Air w kroku 1E.",
   "scope": {
     "tenerife_airports": [
@@ -12,7 +12,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "tenerife_leg_airlines": [
       "Volotea"
@@ -61,6 +62,12 @@
           "airlines": [
             "Wizz Air"
           ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Wizz Air"
+          ]
         }
       ]
     }
@@ -100,6 +107,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o WRO",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

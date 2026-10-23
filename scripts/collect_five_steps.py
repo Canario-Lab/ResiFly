@@ -7,6 +7,7 @@ and the entire batch validates. All collectors receive the same explicit date.
 
 import argparse
 from collections import Counter
+import hashlib
 from datetime import date, datetime, timedelta
 import importlib
 import json
@@ -107,6 +108,16 @@ def validate_batch(directory, start, days, expected_run_id=None):
             "gdn_endpoint_directions": dict(Counter(row["direction"] for row in document["results"] if "GDN" in (row["origin_airport"], row["destination_airport"]))),
             "variants": dict(Counter(row.get("variant", step) for row in document["results"])),
             "gdn_endpoint_variants": dict(Counter(row.get("variant", step) for row in document["results"] if "GDN" in (row["origin_airport"], row["destination_airport"]))),
+            "endpoint_directions": {
+                code: dict(Counter(row["direction"] for row in document["results"]
+                                   if code in (row["origin_airport"], row["destination_airport"])))
+                for code in POLISH_AIRPORTS
+            },
+            "endpoint_variants": {
+                code: dict(Counter(row.get("variant", step) for row in document["results"]
+                                   if code in (row["origin_airport"], row["destination_airport"])))
+                for code in POLISH_AIRPORTS
+            },
         }
     return summary
 
@@ -123,17 +134,24 @@ def promote_batch(directory, public_directory=ROOT / "data"):
         rollback = Path(rollback)
         try:
             # Prepare every file before replacing the first public feed.
-            for step in STEPS:
-                filename = f"step{step}-results.json"
+            filenames = [name for step in STEPS for name in (
+                f"step{step}-results.json", f"step{step}-results.collection-report.json")]
+            manifest_path = backup / "manifest.json"
+            manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+            for filename in filenames:
                 target = public_directory / filename
-                shutil.copy2(target, rollback / filename)
-                if not (backup / filename).exists():
-                    shutil.copy2(target, backup / filename)
+                if target.exists():
+                    shutil.copy2(target, rollback / filename)
+                if filename not in manifest:
+                    manifest[filename] = {"existed": target.exists()}
+                    if target.exists():
+                        shutil.copy2(target, backup / filename)
                 temporary = target.with_suffix(".json.pending")
                 if temporary.exists():
                     raise RuntimeError(f"Unexpected pending feed; refusing to overwrite: {temporary}")
                 pending.append(temporary)
                 shutil.copyfile(directory / filename, temporary)
+            atomic_json(manifest_path, manifest)
             replaced = []
             try:
                 for temporary in pending:
@@ -142,7 +160,11 @@ def promote_batch(directory, public_directory=ROOT / "data"):
                     replaced.append(target)
             except Exception:
                 for target in replaced:
-                    shutil.copy2(rollback / target.name, target)
+                    previous = rollback / target.name
+                    if previous.exists():
+                        shutil.copy2(previous, target)
+                    else:
+                        target.unlink(missing_ok=True)
                 raise
         finally:
             for temporary in pending:
@@ -174,8 +196,26 @@ def main():
     report = {"status": "running", "run_id": run_id, "from_date": args.from_date.isoformat(), "days": args.days}
     try:
         if not args.validate_only:
+            config_files = [ROOT / "data" / "search-airports.json",
+                            ROOT / "data" / "wizz-route-schedules.json",
+                            ROOT / "data" / "spanish-resident-fees.json"]
+            config_files += sorted((ROOT / "data").glob("*transfer-airports.json"))
+            configuration_hash = hashlib.sha256(b"".join(p.read_bytes() for p in config_files)).hexdigest()
+            cache = directory / ("ryanair-google-" + hashlib.sha256(run_id.encode()).hexdigest()[:20] + ".jsonl")
+            metadata = directory / (cache.stem + ".metadata.json")
+            identity = {"run_id": run_id, "from_date": args.from_date.isoformat(),
+                        "days": args.days, "configuration_hash": configuration_hash}
+            if metadata.exists():
+                if json.loads(metadata.read_text()) != identity:
+                    raise RuntimeError("Cannot resume with changed dates or route configuration")
+            else:
+                if cache.exists():
+                    raise RuntimeError("Unidentified Ryanair cache; refusing to reuse")
+                atomic_json(metadata, identity)
+            report.update(identity, ryanair_google_cache=str(cache))
             atomic_json(directory / "validation-report.json", report)
-            environment = dict(os.environ, RESIFLY_COLLECTION_RUN_ID=run_id)
+            environment = dict(os.environ, RESIFLY_COLLECTION_RUN_ID=run_id,
+                               RESIFLY_RYANAIR_GOOGLE_CACHE=str(cache))
             for step in STEPS:
                 if step not in args.refresh_steps:
                     continue

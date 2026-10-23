@@ -241,6 +241,7 @@ class Step1FCollectorTests(unittest.TestCase):
             ("FUE", "KTW", ("Wizz Air",)),
             ("FUE", "KRK", ("Ryanair",)),
             ("LPA", "KRK", ("Ryanair",)),
+            ("LPA", "WRO", ("Wizz Air",)),
         })
 
     def test_route_matrices_use_only_allowlisted_pairs_in_both_directions(self):
@@ -251,7 +252,7 @@ class Step1FCollectorTests(unittest.TestCase):
             ("LPA", "TFN"),
         })
         low_cost = set(low_cost_route_matrix(self.allowlist))
-        self.assertEqual(len(low_cost), 8)
+        self.assertEqual(len(low_cost), 10)
         self.assertIn(("Wizz Air", "WAW", "FUE"), low_cost)
         self.assertIn(("Ryanair", "LPA", "KRK"), low_cost)
 

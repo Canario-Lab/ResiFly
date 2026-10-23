@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Binter dla kroku 1",
-  "verified_on": "2026-10-22",
+  "verified_on": "2026-10-23",
   "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Binter + Ryanair/Wizz Air w kroku 1.",
   "scope": {
     "tenerife_airports": [
@@ -13,7 +13,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "GDN"
+      "GDN",
+      "WRO"
     ],
     "poland_leg_airlines": [
       "Ryanair",
@@ -55,6 +56,10 @@
         {
           "polish_airport": "KRK",
           "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "WRO",
+          "airline": "Wizz Air"
         }
       ]
     },
@@ -81,6 +86,10 @@
         {
           "polish_airport": "GDN",
           "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "WRO",
+          "airline": "Ryanair"
         }
       ]
     },
@@ -103,6 +112,10 @@
         {
           "polish_airport": "GDN",
           "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "WRO",
+          "airline": "Ryanair"
         }
       ]
     },
@@ -116,6 +129,10 @@
       "eligibility_evidence": [
         {
           "polish_airport": "KRK",
+          "airline": "Ryanair"
+        },
+        {
+          "polish_airport": "WRO",
           "airline": "Ryanair"
         }
       ]
@@ -135,6 +152,10 @@
         {
           "polish_airport": "KRK",
           "airline": "Wizz Air"
+        },
+        {
+          "polish_airport": "WRO",
+          "airline": "Ryanair"
         }
       ]
     }
@@ -271,6 +292,24 @@
       "verified_on": "2026-10-22",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "flight_number": "W61870",
+      "duration_minutes": 310,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "flight_number": "W61869",
+      "duration_minutes": 330,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "excluded_airports": [
@@ -301,6 +340,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono GDN w oficjalnych siatkach obu linii; potwierdzone techniczne rozkłady Wizz zweryfikowano przez Google Flights HTTP. Nie rozszerzano niezwiązanych tras starych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o WRO",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -338,6 +386,37 @@
       "departure_time": "22:35",
       "flight_number": "W61704",
       "duration_minutes": 180
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "departure_time": "18:55",
+      "flight_number": "W61870",
+      "duration_minutes": 310
+    },
+    {
+      "origin": "LPA",
+      "destination": "WRO",
+      "departure_time": "19:00",
+      "flight_number": "W61870",
+      "duration_minutes": 310
+    },
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "departure_time": "13:45",
+      "flight_number": "W61869",
+      "duration_minutes": 325
+    }
+  ],
+  "flight_number_overrides_by_departure_weekday_and_time": [
+    {
+      "origin": "WRO",
+      "destination": "LPA",
+      "departure_time": "13:45",
+      "departure_weekday": 1,
+      "flight_number": "W61869",
+      "duration_minutes": 330
     }
   ]
 }

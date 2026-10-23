@@ -86,7 +86,9 @@ def wizz_schedules_from_allowlist(
         if duration <= 0:
             raise RuntimeError(f"Invalid Wizz duration in Step 1 list: {key}")
         schedules[key] = (route["flight_number"], duration)
-    schedules.overrides = read_overrides(allowlist.get("flight_number_overrides_by_departure_time", []), schedules)
+    schedules.overrides = read_overrides(allowlist.get("flight_number_overrides_by_departure_time", []), schedules,
+                                        allowlist.get("flight_number_overrides_by_departure_weekday_and_time", []),
+                                        allowlist.get("flight_number_overrides_by_departure_date_and_time", []))
     return schedules
 
 BINTER_QUERY = """

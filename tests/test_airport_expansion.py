@@ -29,8 +29,8 @@ def leg(carrier, origin, departure, destination, arrival, number="W60001"):
 
 
 class AirportExpansionTests(unittest.TestCase):
-    def test_all_nine_allowlist_scopes_use_exactly_five_endpoints(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN"))
+    def test_all_nine_allowlist_scopes_use_exactly_six_endpoints(self):
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO"))
         self.assertEqual(ENDPOINT_TIMEZONES["GDN"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -88,7 +88,7 @@ class AirportExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 22), date(2026, 11, 21)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 20)
+            self.assertEqual(collector.call_count, 24)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("GDN", hub, start, end), calls)
@@ -146,7 +146,7 @@ class AirportExpansionTests(unittest.TestCase):
             resident = [leg(carrier, "TFN", "2026-11-01T08:00:00+00:00", "MAD", "2026-11-01T12:00:00+01:00", "XX1")]
             with patch.object(module, "POLISH_AIRPORTS", POLISH_AIRPORTS[:-1]):
                 before = module.build_connections(low[:-1], resident)
-            after = [row for row in module.build_connections(low, resident) if row["destination_airport"] != "GDN"]
+            after = [row for row in module.build_connections(low, resident) if row["destination_airport"] != "WRO"]
             self.assertEqual(before, after, suffix)
 
     def test_gdn_endpoint_in_steps_three_four_and_both_mixed_variants(self):
