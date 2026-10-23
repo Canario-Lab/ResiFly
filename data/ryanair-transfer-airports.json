@@ -15,13 +15,14 @@
       "KRK",
       "GDN",
       "WRO",
-      "POZ"
+      "POZ",
+      "LCJ"
     ],
     "airline": "Ryanair",
     "resident_discount_considered": false
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO/POZ.",
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ.",
     "route_filter": {
       "operator": "RYANAIR",
       "connectingAirport": null
@@ -35,7 +36,8 @@
       "KRK",
       "GDN",
       "WRO",
-      "POZ"
+      "POZ",
+      "LCJ"
     ],
     "result_count": 34,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
@@ -160,7 +162,8 @@
         "KRK",
         "GDN",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -176,7 +179,8 @@
         "KRK",
         "GDN",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -190,7 +194,8 @@
         "WMI",
         "KRK",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -276,7 +281,8 @@
         "KTW",
         "KRK",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -292,7 +298,8 @@
         "KRK",
         "GDN",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -541,7 +548,8 @@
         "KRK",
         "GDN",
         "WRO",
-        "POZ"
+        "POZ",
+        "LCJ"
       ]
     },
     {
@@ -662,6 +670,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o LCJ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono LCJ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T14:51:26+01:00",
+  "generated_at": "2026-10-23T17:52:37+01:00",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
   "step": "1F",
@@ -179,21 +179,21 @@
           "departure_at": "2026-10-25T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-10-25T22:55:00+01:00",
-          "price_regular_pln": 205.0,
+          "price_regular_pln": 206.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 205.0,
+          "price_resident_estimated_pln": 206.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 205.0,
+          "price_source_amount": 206.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 615.76,
-      "price_total_resident_estimated_pln": 316.02
+      "price_total_regular_pln": 616.76,
+      "price_total_resident_estimated_pln": 317.02
     },
     {
       "id": "step1f-eced6e54a0bb5b32",
@@ -234,21 +234,21 @@
           "departure_at": "2026-10-25T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-10-25T22:55:00+01:00",
-          "price_regular_pln": 205.0,
+          "price_regular_pln": 206.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 205.0,
+          "price_resident_estimated_pln": 206.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-10-25&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 205.0,
+          "price_source_amount": 206.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 615.76,
-      "price_total_resident_estimated_pln": 316.02
+      "price_total_regular_pln": 616.76,
+      "price_total_resident_estimated_pln": 317.02
     },
     {
       "id": "step1f-82986dc758c92e74",
@@ -356,110 +356,6 @@
       ],
       "price_total_regular_pln": 1082.64,
       "price_total_resident_estimated_pln": 542.46
-    },
-    {
-      "id": "step1f-21204211c18d8ba5",
-      "origin_airport": "KTW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "FUE",
-      "layover_minutes": 570,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61083",
-          "departure_airport": "KTW",
-          "departure_at": "2026-10-26T07:10:00+01:00",
-          "arrival_airport": "FUE",
-          "arrival_at": "2026-10-26T11:40:00+00:00",
-          "price_regular_pln": 619.0,
-          "price_wizz_discount_club_pln": 573.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 619.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-26/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 619.0
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM377",
-          "departure_airport": "FUE",
-          "departure_at": "2026-10-26T21:10:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-26T22:00:00+00:00",
-          "price_regular_pln": 305.35,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 84.67,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_getImports final total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-26",
-          "price_source": "Canaryfly official booking_search + booking_getImports GraphQL",
-          "price_scope": "official_final_payable_total_with_taxes_and_fees",
-          "price_source_currency": "EUR",
-          "price_source_amount": 69.53,
-          "price_source_resident_amount": 19.28,
-          "fare_code": "KDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 924.35,
-      "price_total_resident_estimated_pln": 703.67
-    },
-    {
-      "id": "step1f-248b13cf5db5ed71",
-      "origin_airport": "KTW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "FUE",
-      "layover_minutes": 1405,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61083",
-          "departure_airport": "KTW",
-          "departure_at": "2026-10-26T07:10:00+01:00",
-          "arrival_airport": "FUE",
-          "arrival_at": "2026-10-26T11:40:00+00:00",
-          "price_regular_pln": 619.0,
-          "price_wizz_discount_club_pln": 573.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 619.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-26/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 619.0
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM375",
-          "departure_airport": "FUE",
-          "departure_at": "2026-10-27T11:05:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-27T11:55:00+00:00",
-          "price_regular_pln": 305.35,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 84.67,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_getImports final total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-27",
-          "price_source": "Canaryfly official booking_search + booking_getImports GraphQL",
-          "price_scope": "official_final_payable_total_with_taxes_and_fees",
-          "price_source_currency": "EUR",
-          "price_source_amount": 69.53,
-          "price_source_resident_amount": 19.28,
-          "fare_code": "KDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 924.35,
-      "price_total_resident_estimated_pln": 703.67
     },
     {
       "id": "step1f-6be27fa80ed1785c",
@@ -1258,110 +1154,6 @@
       ],
       "price_total_regular_pln": 757.7,
       "price_total_resident_estimated_pln": 593.01
-    },
-    {
-      "id": "step1f-4f35418e9efa55fe",
-      "origin_airport": "KTW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "FUE",
-      "layover_minutes": 570,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61083",
-          "departure_airport": "KTW",
-          "departure_at": "2026-10-28T07:10:00+01:00",
-          "arrival_airport": "FUE",
-          "arrival_at": "2026-10-28T11:40:00+00:00",
-          "price_regular_pln": 529.0,
-          "price_wizz_discount_club_pln": 483.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 529.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-28/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 529.0
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM377",
-          "departure_airport": "FUE",
-          "departure_at": "2026-10-28T21:10:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-28T22:00:00+00:00",
-          "price_regular_pln": 230.7,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.01,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_getImports final total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-28",
-          "price_source": "Canaryfly official booking_search + booking_getImports GraphQL",
-          "price_scope": "official_final_payable_total_with_taxes_and_fees",
-          "price_source_currency": "EUR",
-          "price_source_amount": 52.53,
-          "price_source_resident_amount": 15.03,
-          "fare_code": "PDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 759.7,
-      "price_total_resident_estimated_pln": 595.01
-    },
-    {
-      "id": "step1f-b329cf735923e399",
-      "origin_airport": "KTW",
-      "destination_airport": "TFN",
-      "direction": "poland_to_tenerife",
-      "connection_type": "one_stop",
-      "transfer_airport": "FUE",
-      "layover_minutes": 1405,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61083",
-          "departure_airport": "KTW",
-          "departure_at": "2026-10-28T07:10:00+01:00",
-          "arrival_airport": "FUE",
-          "arrival_at": "2026-10-28T11:40:00+00:00",
-          "price_regular_pln": 529.0,
-          "price_wizz_discount_club_pln": 483.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 529.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/FUE/2026-10-28/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 529.0
-        },
-        {
-          "carrier": "Canaryfly",
-          "flight_number": "PM375",
-          "departure_airport": "FUE",
-          "departure_at": "2026-10-29T11:05:00+00:00",
-          "arrival_airport": "TFN",
-          "arrival_at": "2026-10-29T11:55:00+00:00",
-          "price_regular_pln": 230.7,
-          "resident_discount_eligible": true,
-          "resident_fare_multiplier": 0.25,
-          "price_resident_estimated_pln": 66.01,
-          "resident_price_is_estimate": false,
-          "resident_price_source": "Canaryfly official booking_getImports final total",
-          "booking_url": "https://www.canaryfly.es/en/cheap-flights/fuerteventura/tenerife-norte/2026-10-29",
-          "price_source": "Canaryfly official booking_search + booking_getImports GraphQL",
-          "price_scope": "official_final_payable_total_with_taxes_and_fees",
-          "price_source_currency": "EUR",
-          "price_source_amount": 52.53,
-          "price_source_resident_amount": 15.03,
-          "fare_code": "PDBSC",
-          "schedule_source": "Canaryfly official booking_search GraphQL"
-        }
-      ],
-      "price_total_regular_pln": 759.7,
-      "price_total_resident_estimated_pln": 595.01
     },
     {
       "id": "step1f-8d3e064b28796321",
@@ -2316,18 +2108,18 @@
           "departure_at": "2026-10-30T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-10-30T18:40:00+01:00",
-          "price_regular_pln": 289.81,
-          "price_wizz_discount_club_pln": 245.89,
+          "price_regular_pln": 307.38,
+          "price_wizz_discount_club_pln": 263.46,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 289.81,
+          "price_resident_estimated_pln": 307.38,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-10-30/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 65.99
+          "price_source_amount": 69.99
         }
       ],
-      "price_total_regular_pln": 595.16,
-      "price_total_resident_estimated_pln": 374.48
+      "price_total_regular_pln": 612.73,
+      "price_total_resident_estimated_pln": 392.05
     },
     {
       "id": "step1f-a55fa8237393bbc0",
@@ -3114,21 +2906,21 @@
           "departure_at": "2026-11-01T10:55:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-01T17:05:00+01:00",
-          "price_regular_pln": 809.0,
+          "price_regular_pln": 779.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 809.0,
+          "price_resident_estimated_pln": 779.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 809.0,
+          "price_source_amount": 779.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1114.35,
-      "price_total_resident_estimated_pln": 893.67
+      "price_total_regular_pln": 1084.35,
+      "price_total_resident_estimated_pln": 863.67
     },
     {
       "id": "step1f-e597d5d3ce94d8b1",
@@ -3224,21 +3016,21 @@
           "departure_at": "2026-11-01T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-01T22:55:00+01:00",
-          "price_regular_pln": 1078.0,
+          "price_regular_pln": 1083.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1078.0,
+          "price_resident_estimated_pln": 1083.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1078.0,
+          "price_source_amount": 1083.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1291.13,
-      "price_total_resident_estimated_pln": 1139.62
+      "price_total_regular_pln": 1296.13,
+      "price_total_resident_estimated_pln": 1144.62
     },
     {
       "id": "step1f-b20701d7523d2f6c",
@@ -3279,21 +3071,21 @@
           "departure_at": "2026-11-01T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-01T22:55:00+01:00",
-          "price_regular_pln": 1078.0,
+          "price_regular_pln": 1083.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1078.0,
+          "price_resident_estimated_pln": 1083.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1078.0,
+          "price_source_amount": 1083.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1291.13,
-      "price_total_resident_estimated_pln": 1139.62
+      "price_total_regular_pln": 1296.13,
+      "price_total_resident_estimated_pln": 1144.62
     },
     {
       "id": "step1f-9b0d893437ff8ef5",
@@ -3312,15 +3104,15 @@
           "departure_at": "2026-11-01T11:20:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-01T15:55:00+00:00",
-          "price_regular_pln": 710.0,
+          "price_regular_pln": 678.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 710.0,
+          "price_resident_estimated_pln": 678.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-01&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 710.0,
+          "price_source_amount": 678.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -3347,8 +3139,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 871.61,
-      "price_total_resident_estimated_pln": 759.63
+      "price_total_regular_pln": 839.61,
+      "price_total_resident_estimated_pln": 727.63
     },
     {
       "id": "step1f-44f0f68f6657aae0",
@@ -3389,18 +3181,18 @@
           "departure_at": "2026-11-02T12:30:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-02T18:40:00+01:00",
-          "price_regular_pln": 351.29,
-          "price_wizz_discount_club_pln": 307.38,
+          "price_regular_pln": 439.13,
+          "price_wizz_discount_club_pln": 395.21,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 351.29,
+          "price_resident_estimated_pln": 439.13,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FUE/KTW/2026-11-02/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 656.64,
-      "price_total_resident_estimated_pln": 435.96
+      "price_total_regular_pln": 744.48,
+      "price_total_resident_estimated_pln": 523.8
     },
     {
       "id": "step1f-f2191024c6d135a0",
@@ -3838,15 +3630,15 @@
           "departure_at": "2026-11-03T06:45:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T11:05:00+00:00",
-          "price_regular_pln": 752.0,
+          "price_regular_pln": 688.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 752.0,
+          "price_resident_estimated_pln": 688.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 752.0,
+          "price_source_amount": 688.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -3873,8 +3665,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 982.7,
-      "price_total_resident_estimated_pln": 818.01
+      "price_total_regular_pln": 918.7,
+      "price_total_resident_estimated_pln": 754.01
     },
     {
       "id": "step1f-e0cdfa27b8d89980",
@@ -3893,15 +3685,15 @@
           "departure_at": "2026-11-03T06:45:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-03T11:05:00+00:00",
-          "price_regular_pln": 752.0,
+          "price_regular_pln": 688.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 752.0,
+          "price_resident_estimated_pln": 688.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 752.0,
+          "price_source_amount": 688.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -3928,8 +3720,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 982.7,
-      "price_total_resident_estimated_pln": 818.01
+      "price_total_regular_pln": 918.7,
+      "price_total_resident_estimated_pln": 754.01
     },
     {
       "id": "step1f-1354f5d2b3d75c9b",
@@ -4233,21 +4025,21 @@
           "departure_at": "2026-11-04T11:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-04T17:40:00+01:00",
-          "price_regular_pln": 242.0,
+          "price_regular_pln": 243.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 242.0,
+          "price_resident_estimated_pln": 243.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 242.0,
+          "price_source_amount": 243.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 472.7,
-      "price_total_resident_estimated_pln": 308.01
+      "price_total_regular_pln": 473.7,
+      "price_total_resident_estimated_pln": 309.01
     },
     {
       "id": "step1f-2bb4b1b065fffa69",
@@ -4318,15 +4110,15 @@
           "departure_at": "2026-11-04T06:35:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-04T10:55:00+00:00",
-          "price_regular_pln": 693.0,
+          "price_regular_pln": 661.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 693.0,
+          "price_resident_estimated_pln": 661.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 693.0,
+          "price_source_amount": 661.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -4353,8 +4145,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 923.7,
-      "price_total_resident_estimated_pln": 759.01
+      "price_total_regular_pln": 891.7,
+      "price_total_resident_estimated_pln": 727.01
     },
     {
       "id": "step1f-1d905dbc43fd3cfc",
@@ -4584,15 +4376,15 @@
           "departure_at": "2026-11-04T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-04T16:40:00+00:00",
-          "price_regular_pln": 388.0,
+          "price_regular_pln": 355.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 388.0,
+          "price_resident_estimated_pln": 355.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 388.0,
+          "price_source_amount": 355.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -4619,8 +4411,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 549.61,
-      "price_total_resident_estimated_pln": 437.63
+      "price_total_regular_pln": 516.61,
+      "price_total_resident_estimated_pln": 404.63
     },
     {
       "id": "step1f-99edd01421ad02ec",
@@ -4639,15 +4431,15 @@
           "departure_at": "2026-11-04T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-04T16:40:00+00:00",
-          "price_regular_pln": 388.0,
+          "price_regular_pln": 355.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 388.0,
+          "price_resident_estimated_pln": 355.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-04&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 388.0,
+          "price_source_amount": 355.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -4674,8 +4466,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 602.31,
-      "price_total_resident_estimated_pln": 450.8
+      "price_total_regular_pln": 569.31,
+      "price_total_resident_estimated_pln": 417.8
     },
     {
       "id": "step1f-9f5a294d9cc3b439",
@@ -5012,15 +4804,15 @@
           "departure_at": "2026-11-05T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-05T17:10:00+00:00",
-          "price_regular_pln": 491.0,
+          "price_regular_pln": 435.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 491.0,
+          "price_resident_estimated_pln": 435.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 491.0,
+          "price_source_amount": 435.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5047,8 +4839,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 652.61,
-      "price_total_resident_estimated_pln": 540.63
+      "price_total_regular_pln": 596.61,
+      "price_total_resident_estimated_pln": 484.63
     },
     {
       "id": "step1f-99aab0c0e8bc2ce3",
@@ -5067,15 +4859,15 @@
           "departure_at": "2026-11-05T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-05T17:10:00+00:00",
-          "price_regular_pln": 491.0,
+          "price_regular_pln": 435.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 491.0,
+          "price_resident_estimated_pln": 435.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 491.0,
+          "price_source_amount": 435.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5102,8 +4894,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 652.61,
-      "price_total_resident_estimated_pln": 540.63
+      "price_total_regular_pln": 596.61,
+      "price_total_resident_estimated_pln": 484.63
     },
     {
       "id": "step1f-bdb1e8f750c2a634",
@@ -5122,15 +4914,15 @@
           "departure_at": "2026-11-05T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-05T17:10:00+00:00",
-          "price_regular_pln": 491.0,
+          "price_regular_pln": 435.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 491.0,
+          "price_resident_estimated_pln": 435.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 491.0,
+          "price_source_amount": 435.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5157,8 +4949,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 652.61,
-      "price_total_resident_estimated_pln": 540.63
+      "price_total_regular_pln": 596.61,
+      "price_total_resident_estimated_pln": 484.63
     },
     {
       "id": "step1f-ec548a5a9452ee70",
@@ -5177,15 +4969,15 @@
           "departure_at": "2026-11-05T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-05T17:10:00+00:00",
-          "price_regular_pln": 491.0,
+          "price_regular_pln": 435.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 491.0,
+          "price_resident_estimated_pln": 435.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 491.0,
+          "price_source_amount": 435.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5212,8 +5004,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 652.61,
-      "price_total_resident_estimated_pln": 540.63
+      "price_total_regular_pln": 596.61,
+      "price_total_resident_estimated_pln": 484.63
     },
     {
       "id": "step1f-dfd7bbc99e8f2fed",
@@ -5657,15 +5449,15 @@
           "departure_at": "2026-11-06T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T17:45:00+00:00",
-          "price_regular_pln": 688.0,
+          "price_regular_pln": 722.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 688.0,
+          "price_resident_estimated_pln": 722.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 688.0,
+          "price_source_amount": 722.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5692,8 +5484,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 849.61,
-      "price_total_resident_estimated_pln": 737.63
+      "price_total_regular_pln": 883.61,
+      "price_total_resident_estimated_pln": 771.63
     },
     {
       "id": "step1f-dbb3ae540a596806",
@@ -5712,15 +5504,15 @@
           "departure_at": "2026-11-06T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T17:45:00+00:00",
-          "price_regular_pln": 688.0,
+          "price_regular_pln": 722.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 688.0,
+          "price_resident_estimated_pln": 722.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 688.0,
+          "price_source_amount": 722.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5747,8 +5539,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 849.61,
-      "price_total_resident_estimated_pln": 737.63
+      "price_total_regular_pln": 883.61,
+      "price_total_resident_estimated_pln": 771.63
     },
     {
       "id": "step1f-0d52074e9fe89a55",
@@ -5767,15 +5559,15 @@
           "departure_at": "2026-11-06T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T17:45:00+00:00",
-          "price_regular_pln": 688.0,
+          "price_regular_pln": 722.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 688.0,
+          "price_resident_estimated_pln": 722.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-06&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 688.0,
+          "price_source_amount": 722.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -5802,8 +5594,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 902.31,
-      "price_total_resident_estimated_pln": 750.8
+      "price_total_regular_pln": 936.31,
+      "price_total_resident_estimated_pln": 784.8
     },
     {
       "id": "step1f-04cc45c8a9acc552",
@@ -5822,14 +5614,14 @@
           "departure_at": "2026-11-06T13:45:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T18:10:00+00:00",
-          "price_regular_pln": 589.0,
-          "price_wizz_discount_club_pln": 543.0,
+          "price_regular_pln": 659.0,
+          "price_wizz_discount_club_pln": 613.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 659.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WRO/LPA/2026-11-06/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0
+          "price_source_amount": 659.0
         },
         {
           "carrier": "Canaryfly",
@@ -5854,8 +5646,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 750.61,
-      "price_total_resident_estimated_pln": 638.63
+      "price_total_regular_pln": 820.61,
+      "price_total_resident_estimated_pln": 708.63
     },
     {
       "id": "step1f-560aa275f852e2e9",
@@ -5874,14 +5666,14 @@
           "departure_at": "2026-11-06T13:45:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T18:10:00+00:00",
-          "price_regular_pln": 589.0,
-          "price_wizz_discount_club_pln": 543.0,
+          "price_regular_pln": 659.0,
+          "price_wizz_discount_club_pln": 613.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 659.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WRO/LPA/2026-11-06/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0
+          "price_source_amount": 659.0
         },
         {
           "carrier": "Canaryfly",
@@ -5906,8 +5698,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 750.61,
-      "price_total_resident_estimated_pln": 638.63
+      "price_total_regular_pln": 820.61,
+      "price_total_resident_estimated_pln": 708.63
     },
     {
       "id": "step1f-778c064f79e3df7c",
@@ -5926,14 +5718,14 @@
           "departure_at": "2026-11-06T13:45:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-06T18:10:00+00:00",
-          "price_regular_pln": 589.0,
-          "price_wizz_discount_club_pln": 543.0,
+          "price_regular_pln": 659.0,
+          "price_wizz_discount_club_pln": 613.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 659.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WRO/LPA/2026-11-06/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0
+          "price_source_amount": 659.0
         },
         {
           "carrier": "Canaryfly",
@@ -5958,8 +5750,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 803.31,
-      "price_total_resident_estimated_pln": 651.8
+      "price_total_regular_pln": 873.31,
+      "price_total_resident_estimated_pln": 721.8
     },
     {
       "id": "step1f-ded600c00cad915f",
@@ -6159,21 +5951,21 @@
           "departure_at": "2026-11-08T10:55:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-08T17:05:00+01:00",
-          "price_regular_pln": 522.0,
+          "price_regular_pln": 482.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 522.0,
+          "price_resident_estimated_pln": 482.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 522.0,
+          "price_source_amount": 482.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 752.7,
-      "price_total_resident_estimated_pln": 588.01
+      "price_total_regular_pln": 712.7,
+      "price_total_resident_estimated_pln": 548.01
     },
     {
       "id": "step1f-c4a0d1c279638241",
@@ -6214,21 +6006,21 @@
           "departure_at": "2026-11-08T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-08T22:55:00+01:00",
-          "price_regular_pln": 423.0,
+          "price_regular_pln": 405.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 423.0,
+          "price_resident_estimated_pln": 405.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 423.0,
+          "price_source_amount": 405.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 636.13,
-      "price_total_resident_estimated_pln": 484.62
+      "price_total_regular_pln": 618.13,
+      "price_total_resident_estimated_pln": 466.62
     },
     {
       "id": "step1f-ff8a155b5d0ac726",
@@ -6269,21 +6061,21 @@
           "departure_at": "2026-11-08T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-08T22:55:00+01:00",
-          "price_regular_pln": 423.0,
+          "price_regular_pln": 405.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 423.0,
+          "price_resident_estimated_pln": 405.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 423.0,
+          "price_source_amount": 405.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 583.43,
-      "price_total_resident_estimated_pln": 471.44
+      "price_total_regular_pln": 565.43,
+      "price_total_resident_estimated_pln": 453.44
     },
     {
       "id": "step1f-3a54a903022f962d",
@@ -6324,21 +6116,21 @@
           "departure_at": "2026-11-08T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-08T22:55:00+01:00",
-          "price_regular_pln": 423.0,
+          "price_regular_pln": 405.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 423.0,
+          "price_resident_estimated_pln": 405.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 423.0,
+          "price_source_amount": 405.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 583.43,
-      "price_total_resident_estimated_pln": 471.44
+      "price_total_regular_pln": 565.43,
+      "price_total_resident_estimated_pln": 453.44
     },
     {
       "id": "step1f-c9702f3d4f8154b0",
@@ -6357,15 +6149,15 @@
           "departure_at": "2026-11-08T11:20:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-08T15:55:00+00:00",
-          "price_regular_pln": 867.0,
+          "price_regular_pln": 827.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 867.0,
+          "price_resident_estimated_pln": 827.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-08&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 867.0,
+          "price_source_amount": 827.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -6392,8 +6184,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 1028.61,
-      "price_total_resident_estimated_pln": 916.63
+      "price_total_regular_pln": 988.61,
+      "price_total_resident_estimated_pln": 876.63
     },
     {
       "id": "step1f-782b4116317abe31",
@@ -6642,21 +6434,21 @@
           "departure_at": "2026-11-10T11:40:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-10T17:50:00+01:00",
-          "price_regular_pln": 342.0,
+          "price_regular_pln": 343.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 342.0,
+          "price_resident_estimated_pln": 343.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-10&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 342.0,
+          "price_source_amount": 343.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 572.7,
-      "price_total_resident_estimated_pln": 408.01
+      "price_total_regular_pln": 573.7,
+      "price_total_resident_estimated_pln": 409.01
     },
     {
       "id": "step1f-01bd10005d3da983",
@@ -7067,21 +6859,21 @@
           "departure_at": "2026-11-11T17:15:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-11T23:40:00+01:00",
-          "price_regular_pln": 1021.0,
+          "price_regular_pln": 1224.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1021.0,
+          "price_resident_estimated_pln": 1224.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1021.0,
+          "price_source_amount": 1224.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1181.43,
-      "price_total_resident_estimated_pln": 1069.44
+      "price_total_regular_pln": 1384.43,
+      "price_total_resident_estimated_pln": 1272.44
     },
     {
       "id": "step1f-88ac8a6a15307e54",
@@ -7122,21 +6914,21 @@
           "departure_at": "2026-11-11T11:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-11T17:40:00+01:00",
-          "price_regular_pln": 519.0,
+          "price_regular_pln": 515.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 519.0,
+          "price_resident_estimated_pln": 515.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 519.0,
+          "price_source_amount": 515.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 749.7,
-      "price_total_resident_estimated_pln": 585.01
+      "price_total_regular_pln": 745.7,
+      "price_total_resident_estimated_pln": 581.01
     },
     {
       "id": "step1f-51470714997c72a2",
@@ -7207,15 +6999,15 @@
           "departure_at": "2026-11-11T06:35:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-11T10:55:00+00:00",
-          "price_regular_pln": 611.0,
+          "price_regular_pln": 560.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 611.0,
+          "price_resident_estimated_pln": 560.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 611.0,
+          "price_source_amount": 560.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -7242,8 +7034,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 841.7,
-      "price_total_resident_estimated_pln": 677.01
+      "price_total_regular_pln": 790.7,
+      "price_total_resident_estimated_pln": 626.01
     },
     {
       "id": "step1f-032e35bd1e57bd04",
@@ -7440,21 +7232,21 @@
           "departure_at": "2026-11-11T17:15:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-11T23:40:00+01:00",
-          "price_regular_pln": 1021.0,
+          "price_regular_pln": 1224.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1021.0,
+          "price_resident_estimated_pln": 1224.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1021.0,
+          "price_source_amount": 1224.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1181.43,
-      "price_total_resident_estimated_pln": 1069.44
+      "price_total_regular_pln": 1384.43,
+      "price_total_resident_estimated_pln": 1272.44
     },
     {
       "id": "step1f-204cf3d7c5af5c73",
@@ -7473,15 +7265,15 @@
           "departure_at": "2026-11-11T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-11T16:40:00+00:00",
-          "price_regular_pln": 634.0,
+          "price_regular_pln": 580.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 634.0,
+          "price_resident_estimated_pln": 580.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 634.0,
+          "price_source_amount": 580.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -7508,8 +7300,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 795.61,
-      "price_total_resident_estimated_pln": 683.63
+      "price_total_regular_pln": 741.61,
+      "price_total_resident_estimated_pln": 629.63
     },
     {
       "id": "step1f-ce6aa166f83c2f67",
@@ -7528,15 +7320,15 @@
           "departure_at": "2026-11-11T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-11T16:40:00+00:00",
-          "price_regular_pln": 634.0,
+          "price_regular_pln": 580.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 634.0,
+          "price_resident_estimated_pln": 580.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-11&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 634.0,
+          "price_source_amount": 580.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -7563,8 +7355,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 795.61,
-      "price_total_resident_estimated_pln": 683.63
+      "price_total_regular_pln": 741.61,
+      "price_total_resident_estimated_pln": 629.63
     },
     {
       "id": "step1f-02c5e449389c30bd",
@@ -7709,21 +7501,21 @@
           "departure_at": "2026-11-12T17:45:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-13T00:10:00+01:00",
-          "price_regular_pln": 625.0,
+          "price_regular_pln": 573.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 625.0,
+          "price_resident_estimated_pln": 573.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 625.0,
+          "price_source_amount": 573.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 785.43,
-      "price_total_resident_estimated_pln": 673.44
+      "price_total_regular_pln": 733.43,
+      "price_total_resident_estimated_pln": 621.44
     },
     {
       "id": "step1f-068afa89a8029da4",
@@ -7816,21 +7608,21 @@
           "departure_at": "2026-11-12T17:45:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-13T00:10:00+01:00",
-          "price_regular_pln": 625.0,
+          "price_regular_pln": 573.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 625.0,
+          "price_resident_estimated_pln": 573.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 625.0,
+          "price_source_amount": 573.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 785.43,
-      "price_total_resident_estimated_pln": 673.44
+      "price_total_regular_pln": 733.43,
+      "price_total_resident_estimated_pln": 621.44
     },
     {
       "id": "step1f-122f07749a227748",
@@ -7953,15 +7745,15 @@
           "departure_at": "2026-11-12T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-12T17:10:00+00:00",
-          "price_regular_pln": 451.0,
+          "price_regular_pln": 399.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 451.0,
+          "price_resident_estimated_pln": 399.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 451.0,
+          "price_source_amount": 399.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -7988,8 +7780,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 612.61,
-      "price_total_resident_estimated_pln": 500.63
+      "price_total_regular_pln": 560.61,
+      "price_total_resident_estimated_pln": 448.63
     },
     {
       "id": "step1f-a3942a4e6e8ed898",
@@ -8008,15 +7800,15 @@
           "departure_at": "2026-11-12T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-12T17:10:00+00:00",
-          "price_regular_pln": 451.0,
+          "price_regular_pln": 399.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 451.0,
+          "price_resident_estimated_pln": 399.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 451.0,
+          "price_source_amount": 399.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -8043,8 +7835,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 612.61,
-      "price_total_resident_estimated_pln": 500.63
+      "price_total_regular_pln": 560.61,
+      "price_total_resident_estimated_pln": 448.63
     },
     {
       "id": "step1f-c075d1a7a0addaa4",
@@ -8063,15 +7855,15 @@
           "departure_at": "2026-11-12T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-12T17:10:00+00:00",
-          "price_regular_pln": 451.0,
+          "price_regular_pln": 399.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 451.0,
+          "price_resident_estimated_pln": 399.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 451.0,
+          "price_source_amount": 399.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -8098,8 +7890,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 612.61,
-      "price_total_resident_estimated_pln": 500.63
+      "price_total_regular_pln": 560.61,
+      "price_total_resident_estimated_pln": 448.63
     },
     {
       "id": "step1f-4def25e464456070",
@@ -8118,15 +7910,15 @@
           "departure_at": "2026-11-12T12:35:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-12T17:10:00+00:00",
-          "price_regular_pln": 451.0,
+          "price_regular_pln": 399.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 451.0,
+          "price_resident_estimated_pln": 399.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-12&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 451.0,
+          "price_source_amount": 399.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -8153,8 +7945,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 665.31,
-      "price_total_resident_estimated_pln": 513.8
+      "price_total_regular_pln": 613.31,
+      "price_total_resident_estimated_pln": 461.8
     },
     {
       "id": "step1f-3d15b1a1770e784d",
@@ -8195,21 +7987,21 @@
           "departure_at": "2026-11-13T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-14T00:45:00+01:00",
-          "price_regular_pln": 826.0,
+          "price_regular_pln": 827.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 826.0,
+          "price_resident_estimated_pln": 827.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 826.0,
+          "price_source_amount": 827.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 986.43,
-      "price_total_resident_estimated_pln": 874.44
+      "price_total_regular_pln": 987.43,
+      "price_total_resident_estimated_pln": 875.44
     },
     {
       "id": "step1f-d5d0e1226e924909",
@@ -8302,21 +8094,21 @@
           "departure_at": "2026-11-13T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-14T00:45:00+01:00",
-          "price_regular_pln": 826.0,
+          "price_regular_pln": 827.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 826.0,
+          "price_resident_estimated_pln": 827.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 826.0,
+          "price_source_amount": 827.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 986.43,
-      "price_total_resident_estimated_pln": 874.44
+      "price_total_regular_pln": 987.43,
+      "price_total_resident_estimated_pln": 875.44
     },
     {
       "id": "step1f-fd00111c13b4c53c",
@@ -8357,21 +8149,21 @@
           "departure_at": "2026-11-13T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-14T00:45:00+01:00",
-          "price_regular_pln": 826.0,
+          "price_regular_pln": 827.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 826.0,
+          "price_resident_estimated_pln": 827.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 826.0,
+          "price_source_amount": 827.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 986.43,
-      "price_total_resident_estimated_pln": 874.44
+      "price_total_regular_pln": 987.43,
+      "price_total_resident_estimated_pln": 875.44
     },
     {
       "id": "step1f-95d423bbf42739ea",
@@ -8733,21 +8525,21 @@
           "departure_at": "2026-11-13T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-14T00:45:00+01:00",
-          "price_regular_pln": 826.0,
+          "price_regular_pln": 827.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 826.0,
+          "price_resident_estimated_pln": 827.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 826.0,
+          "price_source_amount": 827.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1039.13,
-      "price_total_resident_estimated_pln": 887.62
+      "price_total_regular_pln": 1040.13,
+      "price_total_resident_estimated_pln": 888.62
     },
     {
       "id": "step1f-204bb3013d46aafd",
@@ -8788,21 +8580,21 @@
           "departure_at": "2026-11-15T10:55:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-15T17:05:00+01:00",
-          "price_regular_pln": 1086.0,
+          "price_regular_pln": 1140.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1086.0,
+          "price_resident_estimated_pln": 1140.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1086.0,
+          "price_source_amount": 1140.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1316.7,
-      "price_total_resident_estimated_pln": 1152.01
+      "price_total_regular_pln": 1370.7,
+      "price_total_resident_estimated_pln": 1206.01
     },
     {
       "id": "step1f-4359684b3f3ceffa",
@@ -8843,21 +8635,21 @@
           "departure_at": "2026-11-15T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-15T22:55:00+01:00",
-          "price_regular_pln": 1118.0,
+          "price_regular_pln": 1119.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1118.0,
+          "price_resident_estimated_pln": 1119.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1118.0,
+          "price_source_amount": 1119.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1278.43,
-      "price_total_resident_estimated_pln": 1166.44
+      "price_total_regular_pln": 1279.43,
+      "price_total_resident_estimated_pln": 1167.44
     },
     {
       "id": "step1f-63afb34cc5514c0a",
@@ -8876,15 +8668,15 @@
           "departure_at": "2026-11-15T06:00:00+01:00",
           "arrival_airport": "FUE",
           "arrival_at": "2026-11-15T10:20:00+00:00",
-          "price_regular_pln": 324.0,
+          "price_regular_pln": 315.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 324.0,
+          "price_resident_estimated_pln": 315.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=FUE&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 324.0,
+          "price_source_amount": 315.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -8911,8 +8703,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 897.25,
-      "price_total_resident_estimated_pln": 475.65
+      "price_total_regular_pln": 888.25,
+      "price_total_resident_estimated_pln": 466.65
     },
     {
       "id": "step1f-f1aebba93a6a0626",
@@ -8953,21 +8745,21 @@
           "departure_at": "2026-11-15T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-15T22:55:00+01:00",
-          "price_regular_pln": 1118.0,
+          "price_regular_pln": 1119.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1118.0,
+          "price_resident_estimated_pln": 1119.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1118.0,
+          "price_source_amount": 1119.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1278.43,
-      "price_total_resident_estimated_pln": 1166.44
+      "price_total_regular_pln": 1279.43,
+      "price_total_resident_estimated_pln": 1167.44
     },
     {
       "id": "step1f-a1a8af9b52709c38",
@@ -9008,21 +8800,21 @@
           "departure_at": "2026-11-15T16:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-15T22:55:00+01:00",
-          "price_regular_pln": 1118.0,
+          "price_regular_pln": 1119.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1118.0,
+          "price_resident_estimated_pln": 1119.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-15&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1118.0,
+          "price_source_amount": 1119.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1278.43,
-      "price_total_resident_estimated_pln": 1166.44
+      "price_total_regular_pln": 1279.43,
+      "price_total_resident_estimated_pln": 1167.44
     },
     {
       "id": "step1f-6b4736be085ac8c7",
@@ -9430,21 +9222,21 @@
           "departure_at": "2026-11-17T11:40:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-17T17:50:00+01:00",
-          "price_regular_pln": 488.0,
+          "price_regular_pln": 529.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 488.0,
+          "price_resident_estimated_pln": 529.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-17&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 488.0,
+          "price_source_amount": 529.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 718.7,
-      "price_total_resident_estimated_pln": 554.01
+      "price_total_regular_pln": 759.7,
+      "price_total_resident_estimated_pln": 595.01
     },
     {
       "id": "step1f-6d1941e8515cc819",
@@ -9910,21 +9702,21 @@
           "departure_at": "2026-11-18T11:30:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-18T17:40:00+01:00",
-          "price_regular_pln": 352.0,
+          "price_regular_pln": 353.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 352.0,
+          "price_resident_estimated_pln": 353.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 352.0,
+          "price_source_amount": 353.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 582.7,
-      "price_total_resident_estimated_pln": 418.01
+      "price_total_regular_pln": 583.7,
+      "price_total_resident_estimated_pln": 419.01
     },
     {
       "id": "step1f-a13d2b3c90c0d2cd",
@@ -10261,15 +10053,15 @@
           "departure_at": "2026-11-18T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-18T16:40:00+00:00",
-          "price_regular_pln": 328.0,
+          "price_regular_pln": 337.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 328.0,
+          "price_resident_estimated_pln": 337.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 328.0,
+          "price_source_amount": 337.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -10296,8 +10088,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 489.61,
-      "price_total_resident_estimated_pln": 377.63
+      "price_total_regular_pln": 498.61,
+      "price_total_resident_estimated_pln": 386.63
     },
     {
       "id": "step1f-8e5415217d698e90",
@@ -10316,15 +10108,15 @@
           "departure_at": "2026-11-18T12:05:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-18T16:40:00+00:00",
-          "price_regular_pln": 328.0,
+          "price_regular_pln": 337.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 328.0,
+          "price_resident_estimated_pln": 337.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-18&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 328.0,
+          "price_source_amount": 337.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -10351,8 +10143,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 542.31,
-      "price_total_resident_estimated_pln": 390.8
+      "price_total_regular_pln": 551.31,
+      "price_total_resident_estimated_pln": 399.8
     },
     {
       "id": "step1f-8ff2ee2d24d75910",
@@ -10983,21 +10775,21 @@
           "departure_at": "2026-11-20T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-21T00:45:00+01:00",
-          "price_regular_pln": 589.0,
+          "price_regular_pln": 590.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 590.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0,
+          "price_source_amount": 590.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 727.47,
-      "price_total_resident_estimated_pln": 631.95
+      "price_total_regular_pln": 728.47,
+      "price_total_resident_estimated_pln": 632.95
     },
     {
       "id": "step1f-2944839b7e70b9cf",
@@ -11194,21 +10986,21 @@
           "departure_at": "2026-11-20T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-21T00:45:00+01:00",
-          "price_regular_pln": 589.0,
+          "price_regular_pln": 590.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 590.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0,
+          "price_source_amount": 590.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 727.47,
-      "price_total_resident_estimated_pln": 631.95
+      "price_total_regular_pln": 728.47,
+      "price_total_resident_estimated_pln": 632.95
     },
     {
       "id": "step1f-d3b1795d3af2852d",
@@ -11301,21 +11093,21 @@
           "departure_at": "2026-11-20T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-21T00:45:00+01:00",
-          "price_regular_pln": 589.0,
+          "price_regular_pln": 590.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 590.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0,
+          "price_source_amount": 590.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 727.47,
-      "price_total_resident_estimated_pln": 631.95
+      "price_total_regular_pln": 728.47,
+      "price_total_resident_estimated_pln": 632.95
     },
     {
       "id": "step1f-a76d33985b2573bd",
@@ -11386,15 +11178,15 @@
           "departure_at": "2026-11-20T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-20T17:45:00+00:00",
-          "price_regular_pln": 263.0,
+          "price_regular_pln": 280.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 263.0,
+          "price_resident_estimated_pln": 280.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 263.0,
+          "price_source_amount": 280.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -11421,8 +11213,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 424.61,
-      "price_total_resident_estimated_pln": 312.63
+      "price_total_regular_pln": 441.61,
+      "price_total_resident_estimated_pln": 329.63
     },
     {
       "id": "step1f-b9dc020a36fe1b19",
@@ -11441,15 +11233,15 @@
           "departure_at": "2026-11-20T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-20T17:45:00+00:00",
-          "price_regular_pln": 263.0,
+          "price_regular_pln": 280.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 263.0,
+          "price_resident_estimated_pln": 280.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 263.0,
+          "price_source_amount": 280.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -11476,8 +11268,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 424.61,
-      "price_total_resident_estimated_pln": 312.63
+      "price_total_regular_pln": 441.61,
+      "price_total_resident_estimated_pln": 329.63
     },
     {
       "id": "step1f-b295bc3ddb60bad7",
@@ -11496,15 +11288,15 @@
           "departure_at": "2026-11-20T13:10:00+01:00",
           "arrival_airport": "LPA",
           "arrival_at": "2026-11-20T17:45:00+00:00",
-          "price_regular_pln": 263.0,
+          "price_regular_pln": 280.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 263.0,
+          "price_resident_estimated_pln": 280.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=KRK&destinationIata=LPA&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 263.0,
+          "price_source_amount": 280.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         },
@@ -11531,8 +11323,8 @@
           "schedule_source": "Canaryfly official booking_search GraphQL"
         }
       ],
-      "price_total_regular_pln": 530.02,
-      "price_total_resident_estimated_pln": 338.98
+      "price_total_regular_pln": 547.02,
+      "price_total_resident_estimated_pln": 355.98
     },
     {
       "id": "step1f-51cd7ccf5d0b63de",
@@ -11729,21 +11521,21 @@
           "departure_at": "2026-11-20T18:20:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-21T00:45:00+01:00",
-          "price_regular_pln": 589.0,
+          "price_regular_pln": 590.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 590.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=LPA&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0,
+          "price_source_amount": 590.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 749.43,
-      "price_total_resident_estimated_pln": 637.44
+      "price_total_regular_pln": 750.43,
+      "price_total_resident_estimated_pln": 638.44
     },
     {
       "id": "step1f-9b00dde5ff0bfe03",
@@ -11836,21 +11628,21 @@
           "departure_at": "2026-11-22T10:55:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-22T17:05:00+01:00",
-          "price_regular_pln": 554.0,
+          "price_regular_pln": 555.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 554.0,
+          "price_resident_estimated_pln": 555.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-22&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=FUE&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 554.0,
+          "price_source_amount": 555.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 732.0,
-      "price_total_resident_estimated_pln": 606.83
+      "price_total_regular_pln": 733.0,
+      "price_total_resident_estimated_pln": 607.83
     },
     {
       "id": "step1f-10271216d2bb494e",
@@ -12020,7 +11812,7 @@
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "3f11be44-c429-4c52-82e5-4ae9b41d6a61",
+    "run_id": "a6f8a0e8-f295-4f20-984e-74607fc6cb08",
     "step": "1f",
     "period_from": "2026-10-23",
     "period_to": "2026-11-22",
@@ -12234,7 +12026,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "booking_search"
           },
           {
@@ -13010,7 +12802,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "booking_search"
           },
           {
@@ -14774,7 +14566,7 @@
           {
             "date": "2026-10-26",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -14786,7 +14578,7 @@
           {
             "date": "2026-10-28",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {

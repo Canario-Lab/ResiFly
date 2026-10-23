@@ -7,7 +7,8 @@
     { "iata": "KRK", "name_pl": "Kraków", "timezone": "Europe/Warsaw" },
     { "iata": "GDN", "name_pl": "Gdańsk", "timezone": "Europe/Warsaw" },
     { "iata": "WRO", "name_pl": "Wrocław", "timezone": "Europe/Warsaw" },
-    { "iata": "POZ", "name_pl": "Poznań", "timezone": "Europe/Warsaw" }
+    { "iata": "POZ", "name_pl": "Poznań", "timezone": "Europe/Warsaw" },
+    { "iata": "LCJ", "name_pl": "Łódź", "timezone": "Europe/Warsaw" }
   ],
   "tenerife_airports": [
     { "iata": "TFN", "name_pl": "Teneryfa Północ", "timezone": "Atlantic/Canary" },

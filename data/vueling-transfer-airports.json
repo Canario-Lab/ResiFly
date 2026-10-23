@@ -14,7 +14,8 @@
       "KRK",
       "GDN",
       "WRO",
-      "POZ"
+      "POZ",
+      "LCJ"
     ],
     "tenerife_leg_airlines": [
       "Vueling"
@@ -91,6 +92,12 @@
         },
         {
           "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "LCJ",
           "airlines": [
             "Ryanair"
           ]
@@ -237,6 +244,12 @@
         },
         {
           "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "LCJ",
           "airlines": [
             "Ryanair"
           ]
@@ -399,6 +412,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o LCJ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono LCJ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

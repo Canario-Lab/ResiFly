@@ -416,6 +416,7 @@ const airportLabels = {
   GDN: "Gdańsk (GDN)",
   WRO: "Wrocław (WRO)",
   POZ: "Poznań (POZ)",
+  LCJ: "Łódź (LCJ)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",

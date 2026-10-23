@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T15:23:20+01:00",
+  "generated_at": "2026-10-23T18:25:41+01:00",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
   "step": 4,
@@ -128,14 +128,14 @@
           "departure_at": "2026-10-24T21:30:00+02:00",
           "arrival_airport": "FCO",
           "arrival_at": "2026-10-25T00:00:00+02:00",
-          "price_regular_pln": 209.0,
-          "price_wizz_discount_club_pln": 163.0,
+          "price_regular_pln": 259.0,
+          "price_wizz_discount_club_pln": 213.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 209.0,
+          "price_resident_estimated_pln": 259.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/FCO/2026-10-24/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 209.0
+          "price_source_amount": 259.0
         },
         {
           "carrier": "Wizz Air",
@@ -154,9 +154,9 @@
           "price_source_amount": 129.99
         }
       ],
-      "price_total_regular_pln": 779.88,
-      "price_total_wizz_discount_club_pln": 689.96,
-      "price_total_resident_estimated_pln": 779.88
+      "price_total_regular_pln": 829.88,
+      "price_total_wizz_discount_club_pln": 739.96,
+      "price_total_resident_estimated_pln": 829.88
     },
     {
       "id": "step4-78cca5537ead0f87",
@@ -457,14 +457,14 @@
           "departure_at": "2026-10-26T19:10:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-10-27T01:15:00+01:00",
-          "price_regular_pln": 266.05,
+          "price_regular_pln": 333.73,
           "price_wizz_discount_club_pln": 289.81,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 266.05,
+          "price_resident_estimated_pln": 333.73,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-26/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 60.58
+          "price_source_amount": 75.99
         },
         {
           "carrier": "Wizz Air",
@@ -473,19 +473,19 @@
           "departure_at": "2026-10-27T06:20:00+01:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-27T07:35:00+01:00",
-          "price_regular_pln": 210.59,
-          "price_wizz_discount_club_pln": 164.67,
+          "price_regular_pln": 229.74,
+          "price_wizz_discount_club_pln": 183.83,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 210.59,
+          "price_resident_estimated_pln": 229.74,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/WAW/2026-10-27/null/1/0/0/null",
           "price_source_currency": "HUF",
-          "price_source_amount": 17590.0
+          "price_source_amount": 19190.0
         }
       ],
-      "price_total_regular_pln": 476.64,
-      "price_total_wizz_discount_club_pln": 454.48,
-      "price_total_resident_estimated_pln": 476.64
+      "price_total_regular_pln": 563.47,
+      "price_total_wizz_discount_club_pln": 473.64,
+      "price_total_resident_estimated_pln": 563.47
     },
     {
       "id": "step4-72d31d7d67f628de",
@@ -504,14 +504,14 @@
           "departure_at": "2026-10-26T19:10:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-10-27T01:15:00+01:00",
-          "price_regular_pln": 266.05,
+          "price_regular_pln": 333.73,
           "price_wizz_discount_club_pln": 289.81,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 266.05,
+          "price_resident_estimated_pln": 333.73,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-26/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 60.58
+          "price_source_amount": 75.99
         },
         {
           "carrier": "Wizz Air",
@@ -530,9 +530,9 @@
           "price_source_amount": 22990.0
         }
       ],
-      "price_total_regular_pln": 541.29,
+      "price_total_regular_pln": 608.97,
       "price_total_wizz_discount_club_pln": 519.13,
-      "price_total_resident_estimated_pln": 541.29
+      "price_total_resident_estimated_pln": 608.97
     },
     {
       "id": "step4-d7c4d7d70c2e4887",
@@ -786,14 +786,14 @@
           "departure_at": "2026-10-28T18:40:00+01:00",
           "arrival_airport": "FCO",
           "arrival_at": "2026-10-28T20:45:00+01:00",
-          "price_regular_pln": 159.0,
-          "price_wizz_discount_club_pln": 113.0,
+          "price_regular_pln": 179.0,
+          "price_wizz_discount_club_pln": 133.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 159.0,
+          "price_resident_estimated_pln": 179.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/FCO/2026-10-28/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 159.0
+          "price_source_amount": 179.0
         },
         {
           "carrier": "Wizz Air",
@@ -812,9 +812,9 @@
           "price_source_amount": 79.99
         }
       ],
-      "price_total_regular_pln": 510.29,
-      "price_total_wizz_discount_club_pln": 420.38,
-      "price_total_resident_estimated_pln": 510.29
+      "price_total_regular_pln": 530.29,
+      "price_total_wizz_discount_club_pln": 440.38,
+      "price_total_resident_estimated_pln": 530.29
     },
     {
       "id": "step4-42e4504d897ebe58",
@@ -880,14 +880,14 @@
           "departure_at": "2026-10-28T19:10:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-10-29T01:15:00+01:00",
-          "price_regular_pln": 266.05,
+          "price_regular_pln": 333.73,
           "price_wizz_discount_club_pln": 289.81,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 266.05,
+          "price_resident_estimated_pln": 333.73,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-28/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 60.58
+          "price_source_amount": 75.99
         },
         {
           "carrier": "Wizz Air",
@@ -906,9 +906,9 @@
           "price_source_amount": 15290.0
         }
       ],
-      "price_total_regular_pln": 449.1,
+      "price_total_regular_pln": 516.78,
       "price_total_wizz_discount_club_pln": 426.95,
-      "price_total_resident_estimated_pln": 449.1
+      "price_total_resident_estimated_pln": 516.78
     },
     {
       "id": "step4-217b21af46f9aaff",
@@ -927,14 +927,14 @@
           "departure_at": "2026-10-28T19:10:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-10-29T01:15:00+01:00",
-          "price_regular_pln": 266.05,
+          "price_regular_pln": 333.73,
           "price_wizz_discount_club_pln": 289.81,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 266.05,
+          "price_resident_estimated_pln": 333.73,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-28/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 60.58
+          "price_source_amount": 75.99
         },
         {
           "carrier": "Wizz Air",
@@ -953,9 +953,9 @@
           "price_source_amount": 21490.0
         }
       ],
-      "price_total_regular_pln": 523.33,
+      "price_total_regular_pln": 591.01,
       "price_total_wizz_discount_club_pln": 501.18,
-      "price_total_resident_estimated_pln": 523.33
+      "price_total_resident_estimated_pln": 591.01
     },
     {
       "id": "step4-78afbfd0c36c5d36",
@@ -1052,53 +1052,6 @@
       "price_total_resident_estimated_pln": 508.92
     },
     {
-      "id": "step4-ac4a4ca717208999",
-      "origin_airport": "TFS",
-      "destination_airport": "GDN",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "BUD",
-      "layover_minutes": 965,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W62494",
-          "departure_airport": "TFS",
-          "departure_at": "2026-10-29T19:10:00+00:00",
-          "arrival_airport": "BUD",
-          "arrival_at": "2026-10-30T01:15:00+01:00",
-          "price_regular_pln": 343.83,
-          "price_wizz_discount_club_pln": 304.3,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 343.83,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-29/null/1/0/0/null",
-          "price_source_currency": "EUR",
-          "price_source_amount": 78.29
-        },
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61690",
-          "departure_airport": "BUD",
-          "departure_at": "2026-10-30T17:20:00+01:00",
-          "arrival_airport": "GDN",
-          "arrival_at": "2026-10-30T18:55:00+01:00",
-          "price_regular_pln": 257.28,
-          "price_wizz_discount_club_pln": 211.37,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 257.28,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/GDN/2026-10-30/null/1/0/0/null",
-          "price_source_currency": "HUF",
-          "price_source_amount": 21490.0
-        }
-      ],
-      "price_total_regular_pln": 601.11,
-      "price_total_wizz_discount_club_pln": 515.67,
-      "price_total_resident_estimated_pln": 601.11
-    },
-    {
       "id": "step4-49b1f070b2b0f6ec",
       "origin_airport": "TFS",
       "destination_airport": "KRK",
@@ -1137,6 +1090,53 @@
           "resident_fare_multiplier": 1.0,
           "price_resident_estimated_pln": 275.24,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/KRK/2026-10-30/null/1/0/0/null",
+          "price_source_currency": "HUF",
+          "price_source_amount": 22990.0
+        }
+      ],
+      "price_total_regular_pln": 619.07,
+      "price_total_wizz_discount_club_pln": 533.62,
+      "price_total_resident_estimated_pln": 619.07
+    },
+    {
+      "id": "step4-ac4a4ca717208999",
+      "origin_airport": "TFS",
+      "destination_airport": "GDN",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "BUD",
+      "layover_minutes": 965,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W62494",
+          "departure_airport": "TFS",
+          "departure_at": "2026-10-29T19:10:00+00:00",
+          "arrival_airport": "BUD",
+          "arrival_at": "2026-10-30T01:15:00+01:00",
+          "price_regular_pln": 343.83,
+          "price_wizz_discount_club_pln": 304.3,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 343.83,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-10-29/null/1/0/0/null",
+          "price_source_currency": "EUR",
+          "price_source_amount": 78.29
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61690",
+          "departure_airport": "BUD",
+          "departure_at": "2026-10-30T17:20:00+01:00",
+          "arrival_airport": "GDN",
+          "arrival_at": "2026-10-30T18:55:00+01:00",
+          "price_regular_pln": 275.24,
+          "price_wizz_discount_club_pln": 229.32,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 275.24,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/GDN/2026-10-30/null/1/0/0/null",
           "price_source_currency": "HUF",
           "price_source_amount": 22990.0
         }
@@ -1272,19 +1272,19 @@
           "departure_at": "2026-10-31T10:55:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-10-31T15:35:00+00:00",
-          "price_regular_pln": 458.41,
-          "price_wizz_discount_club_pln": 412.5,
+          "price_regular_pln": 505.1,
+          "price_wizz_discount_club_pln": 459.19,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 458.41,
+          "price_resident_estimated_pln": 505.1,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/TFS/2026-10-31/null/1/0/0/null",
           "price_source_currency": "HUF",
-          "price_source_amount": 38290.0
+          "price_source_amount": 42190.0
         }
       ],
-      "price_total_regular_pln": 917.41,
-      "price_total_wizz_discount_club_pln": 825.5,
-      "price_total_resident_estimated_pln": 917.41
+      "price_total_regular_pln": 964.1,
+      "price_total_wizz_discount_club_pln": 872.19,
+      "price_total_resident_estimated_pln": 964.1
     },
     {
       "id": "step4-9bfba11f0e09a349",
@@ -1319,19 +1319,19 @@
           "departure_at": "2026-10-31T21:30:00+01:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-10-31T23:20:00+01:00",
-          "price_regular_pln": 201.97,
-          "price_wizz_discount_club_pln": 158.06,
+          "price_regular_pln": 219.54,
+          "price_wizz_discount_club_pln": 175.62,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 201.97,
+          "price_resident_estimated_pln": 219.54,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/MXP/KRK/2026-10-31/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 45.99
+          "price_source_amount": 49.99
         }
       ],
-      "price_total_regular_pln": 447.86,
-      "price_total_wizz_discount_club_pln": 360.03,
-      "price_total_resident_estimated_pln": 447.86
+      "price_total_regular_pln": 465.43,
+      "price_total_wizz_discount_club_pln": 377.59,
+      "price_total_resident_estimated_pln": 465.43
     },
     {
       "id": "step4-df506e5ddceaeef5",
@@ -1585,14 +1585,14 @@
           "departure_at": "2026-10-30T21:40:00+01:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-10-30T22:50:00+01:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
+          "price_regular_pln": 369.0,
+          "price_wizz_discount_club_pln": 323.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
+          "price_resident_estimated_pln": 369.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/BUD/2026-10-30/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 319.0
+          "price_source_amount": 369.0
         },
         {
           "carrier": "Wizz Air",
@@ -1601,19 +1601,19 @@
           "departure_at": "2026-10-31T10:55:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-10-31T15:35:00+00:00",
-          "price_regular_pln": 458.41,
-          "price_wizz_discount_club_pln": 412.5,
+          "price_regular_pln": 505.1,
+          "price_wizz_discount_club_pln": 459.19,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 458.41,
+          "price_resident_estimated_pln": 505.1,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/TFS/2026-10-31/null/1/0/0/null",
           "price_source_currency": "HUF",
-          "price_source_amount": 38290.0
+          "price_source_amount": 42190.0
         }
       ],
-      "price_total_regular_pln": 777.41,
-      "price_total_wizz_discount_club_pln": 685.5,
-      "price_total_resident_estimated_pln": 777.41
+      "price_total_regular_pln": 874.1,
+      "price_total_wizz_discount_club_pln": 782.19,
+      "price_total_resident_estimated_pln": 874.1
     },
     {
       "id": "step4-030865303ca7e2b8",
@@ -2055,14 +2055,14 @@
           "departure_at": "2026-11-01T19:35:00+01:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-11-01T21:15:00+01:00",
-          "price_regular_pln": 299.0,
-          "price_wizz_discount_club_pln": 253.0,
+          "price_regular_pln": 319.0,
+          "price_wizz_discount_club_pln": 273.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 299.0,
+          "price_resident_estimated_pln": 319.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/GDN/BUD/2026-11-01/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 299.0
+          "price_source_amount": 319.0
         },
         {
           "carrier": "Wizz Air",
@@ -2081,9 +2081,9 @@
           "price_source_amount": 38290.0
         }
       ],
-      "price_total_regular_pln": 757.41,
-      "price_total_wizz_discount_club_pln": 665.5,
-      "price_total_resident_estimated_pln": 757.41
+      "price_total_regular_pln": 777.41,
+      "price_total_wizz_discount_club_pln": 685.5,
+      "price_total_resident_estimated_pln": 777.41
     },
     {
       "id": "step4-a265c6b42abc5add",
@@ -2713,14 +2713,14 @@
           "departure_at": "2026-11-04T18:55:00+01:00",
           "arrival_airport": "FCO",
           "arrival_at": "2026-11-04T21:30:00+01:00",
-          "price_regular_pln": 319.0,
-          "price_wizz_discount_club_pln": 273.0,
+          "price_regular_pln": 369.0,
+          "price_wizz_discount_club_pln": 323.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 319.0,
+          "price_resident_estimated_pln": 369.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/GDN/FCO/2026-11-04/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 319.0
+          "price_source_amount": 369.0
         },
         {
           "carrier": "Wizz Air",
@@ -2739,9 +2739,9 @@
           "price_source_amount": 119.99
         }
       ],
-      "price_total_regular_pln": 845.96,
-      "price_total_wizz_discount_club_pln": 756.04,
-      "price_total_resident_estimated_pln": 845.96
+      "price_total_regular_pln": 895.96,
+      "price_total_wizz_discount_club_pln": 806.04,
+      "price_total_resident_estimated_pln": 895.96
     },
     {
       "id": "step4-68cf9aec29817af9",
@@ -2917,19 +2917,19 @@
           "departure_at": "2026-11-05T18:30:00+01:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-05T21:10:00+01:00",
-          "price_regular_pln": 439.13,
-          "price_wizz_discount_club_pln": 395.21,
+          "price_regular_pln": 505.0,
+          "price_wizz_discount_club_pln": 461.08,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 439.13,
+          "price_resident_estimated_pln": 505.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FCO/WAW/2026-11-05/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 99.99
+          "price_source_amount": 114.99
         }
       ],
-      "price_total_regular_pln": 790.42,
-      "price_total_wizz_discount_club_pln": 702.59,
-      "price_total_resident_estimated_pln": 790.42
+      "price_total_regular_pln": 856.29,
+      "price_total_wizz_discount_club_pln": 768.46,
+      "price_total_resident_estimated_pln": 856.29
     },
     {
       "id": "step4-c5afa1ed883ac223",
@@ -3606,14 +3606,14 @@
           "departure_at": "2026-11-07T16:20:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-11-07T22:25:00+01:00",
-          "price_regular_pln": 570.88,
-          "price_wizz_discount_club_pln": 526.96,
+          "price_regular_pln": 636.75,
+          "price_wizz_discount_club_pln": 592.84,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 570.88,
+          "price_resident_estimated_pln": 636.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-11-07/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 129.99
+          "price_source_amount": 144.99
         },
         {
           "carrier": "Wizz Air",
@@ -3632,9 +3632,9 @@
           "price_source_amount": 10256.8
         }
       ],
-      "price_total_regular_pln": 693.67,
-      "price_total_wizz_discount_club_pln": 614.4,
-      "price_total_resident_estimated_pln": 693.67
+      "price_total_regular_pln": 759.54,
+      "price_total_wizz_discount_club_pln": 680.28,
+      "price_total_resident_estimated_pln": 759.54
     },
     {
       "id": "step4-8b579ac0d885d6ff",
@@ -3653,14 +3653,14 @@
           "departure_at": "2026-11-07T16:20:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-11-07T22:25:00+01:00",
-          "price_regular_pln": 570.88,
-          "price_wizz_discount_club_pln": 526.96,
+          "price_regular_pln": 636.75,
+          "price_wizz_discount_club_pln": 592.84,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 570.88,
+          "price_resident_estimated_pln": 636.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-11-07/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 129.99
+          "price_source_amount": 144.99
         },
         {
           "carrier": "Wizz Air",
@@ -3679,9 +3679,9 @@
           "price_source_amount": 19190.0
         }
       ],
-      "price_total_regular_pln": 800.62,
-      "price_total_wizz_discount_club_pln": 710.79,
-      "price_total_resident_estimated_pln": 800.62
+      "price_total_regular_pln": 866.49,
+      "price_total_wizz_discount_club_pln": 776.67,
+      "price_total_resident_estimated_pln": 866.49
     },
     {
       "id": "step4-2f30472c4837e034",
@@ -3700,14 +3700,14 @@
           "departure_at": "2026-11-07T16:20:00+00:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-11-07T22:25:00+01:00",
-          "price_regular_pln": 570.88,
-          "price_wizz_discount_club_pln": 526.96,
+          "price_regular_pln": 636.75,
+          "price_wizz_discount_club_pln": 592.84,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 570.88,
+          "price_resident_estimated_pln": 636.75,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-11-07/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 129.99
+          "price_source_amount": 144.99
         },
         {
           "carrier": "Wizz Air",
@@ -3726,9 +3726,9 @@
           "price_source_amount": 21490.0
         }
       ],
-      "price_total_regular_pln": 828.16,
-      "price_total_wizz_discount_club_pln": 738.33,
-      "price_total_resident_estimated_pln": 828.16
+      "price_total_regular_pln": 894.03,
+      "price_total_wizz_discount_club_pln": 804.21,
+      "price_total_resident_estimated_pln": 894.03
     },
     {
       "id": "step4-b83ae835140bc4b1",
@@ -3951,19 +3951,19 @@
           "departure_at": "2026-11-09T08:40:00+01:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-09T11:20:00+01:00",
-          "price_regular_pln": 395.21,
-          "price_wizz_discount_club_pln": 351.29,
+          "price_regular_pln": 439.13,
+          "price_wizz_discount_club_pln": 395.21,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 395.21,
+          "price_resident_estimated_pln": 439.13,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FCO/WAW/2026-11-09/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 89.99
+          "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 878.25,
-      "price_total_wizz_discount_club_pln": 790.42,
-      "price_total_resident_estimated_pln": 878.25
+      "price_total_regular_pln": 922.17,
+      "price_total_wizz_discount_club_pln": 834.34,
+      "price_total_resident_estimated_pln": 922.17
     },
     {
       "id": "step4-f7d694ff453a4cbb",
@@ -4123,14 +4123,14 @@
           "departure_at": "2026-11-08T19:35:00+01:00",
           "arrival_airport": "BUD",
           "arrival_at": "2026-11-08T21:15:00+01:00",
-          "price_regular_pln": 209.0,
-          "price_wizz_discount_club_pln": 163.0,
+          "price_regular_pln": 229.0,
+          "price_wizz_discount_club_pln": 183.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 209.0,
+          "price_resident_estimated_pln": 229.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/GDN/BUD/2026-11-08/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 209.0
+          "price_source_amount": 229.0
         },
         {
           "carrier": "Wizz Air",
@@ -4149,9 +4149,9 @@
           "price_source_amount": 49790.0
         }
       ],
-      "price_total_regular_pln": 805.09,
-      "price_total_wizz_discount_club_pln": 713.17,
-      "price_total_resident_estimated_pln": 805.09
+      "price_total_regular_pln": 825.09,
+      "price_total_wizz_discount_club_pln": 733.17,
+      "price_total_resident_estimated_pln": 825.09
     },
     {
       "id": "step4-9e2367525c51b489",
@@ -4812,53 +4812,6 @@
       "price_total_resident_estimated_pln": 878.26
     },
     {
-      "id": "step4-0e5fd7ea449b23d7",
-      "origin_airport": "TFS",
-      "destination_airport": "GDN",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "FCO",
-      "layover_minutes": 350,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W46036",
-          "departure_airport": "TFS",
-          "departure_at": "2026-11-11T10:50:00+00:00",
-          "arrival_airport": "FCO",
-          "arrival_at": "2026-11-11T16:20:00+01:00",
-          "price_regular_pln": 439.13,
-          "price_wizz_discount_club_pln": 395.21,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 439.13,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/FCO/2026-11-11/null/1/0/0/null",
-          "price_source_currency": "EUR",
-          "price_source_amount": 99.99
-        },
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61700",
-          "departure_airport": "FCO",
-          "departure_at": "2026-11-11T22:10:00+01:00",
-          "arrival_airport": "GDN",
-          "arrival_at": "2026-11-12T00:45:00+01:00",
-          "price_regular_pln": 548.92,
-          "price_wizz_discount_club_pln": 505.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 548.92,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FCO/GDN/2026-11-11/null/1/0/0/null",
-          "price_source_currency": "EUR",
-          "price_source_amount": 124.99
-        }
-      ],
-      "price_total_regular_pln": 988.05,
-      "price_total_wizz_discount_club_pln": 900.21,
-      "price_total_resident_estimated_pln": 988.05
-    },
-    {
       "id": "step4-7eb8c669e7e2ee96",
       "origin_airport": "KRK",
       "destination_airport": "TFS",
@@ -5345,14 +5298,14 @@
           "departure_at": "2026-11-12T19:00:00+01:00",
           "arrival_airport": "MXP",
           "arrival_at": "2026-11-12T20:55:00+01:00",
-          "price_regular_pln": 209.0,
-          "price_wizz_discount_club_pln": 163.0,
+          "price_regular_pln": 229.0,
+          "price_wizz_discount_club_pln": 183.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 209.0,
+          "price_resident_estimated_pln": 229.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/MXP/2026-11-12/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 209.0
+          "price_source_amount": 229.0
         },
         {
           "carrier": "Wizz Air",
@@ -5371,9 +5324,9 @@
           "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 648.13,
-      "price_total_wizz_discount_club_pln": 558.21,
-      "price_total_resident_estimated_pln": 648.13
+      "price_total_regular_pln": 668.13,
+      "price_total_wizz_discount_club_pln": 578.21,
+      "price_total_resident_estimated_pln": 668.13
     },
     {
       "id": "step4-52339580aa427f45",
@@ -6536,19 +6489,19 @@
           "departure_at": "2026-11-16T08:40:00+01:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-16T11:20:00+01:00",
-          "price_regular_pln": 592.84,
-          "price_wizz_discount_club_pln": 548.92,
+          "price_regular_pln": 658.71,
+          "price_wizz_discount_club_pln": 614.79,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 592.84,
+          "price_resident_estimated_pln": 658.71,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/FCO/WAW/2026-11-16/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 134.99
+          "price_source_amount": 149.99
         }
       ],
-      "price_total_regular_pln": 1075.88,
-      "price_total_wizz_discount_club_pln": 988.05,
-      "price_total_resident_estimated_pln": 1075.88
+      "price_total_regular_pln": 1141.75,
+      "price_total_wizz_discount_club_pln": 1053.92,
+      "price_total_resident_estimated_pln": 1141.75
     },
     {
       "id": "step4-dfc8ffe28f18567d",
@@ -7977,14 +7930,14 @@
           "departure_at": "2026-11-19T08:15:00+01:00",
           "arrival_airport": "FCO",
           "arrival_at": "2026-11-19T10:20:00+01:00",
-          "price_regular_pln": 259.0,
-          "price_wizz_discount_club_pln": 213.0,
+          "price_regular_pln": 269.0,
+          "price_wizz_discount_club_pln": 223.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 259.0,
+          "price_resident_estimated_pln": 269.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/FCO/2026-11-19/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 259.0
+          "price_source_amount": 269.0
         },
         {
           "carrier": "Wizz Air",
@@ -8003,9 +7956,9 @@
           "price_source_amount": 85.99
         }
       ],
-      "price_total_regular_pln": 636.64,
-      "price_total_wizz_discount_club_pln": 546.73,
-      "price_total_resident_estimated_pln": 636.64
+      "price_total_regular_pln": 646.64,
+      "price_total_wizz_discount_club_pln": 556.73,
+      "price_total_resident_estimated_pln": 646.64
     },
     {
       "id": "step4-73cc5d70efc0ee53",
@@ -8134,19 +8087,19 @@
           "departure_at": "2026-11-20T19:50:00+01:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-20T21:05:00+01:00",
-          "price_regular_pln": 152.71,
-          "price_wizz_discount_club_pln": 111.39,
+          "price_regular_pln": 168.88,
+          "price_wizz_discount_club_pln": 127.56,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 152.71,
+          "price_resident_estimated_pln": 168.88,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/KRK/2026-11-20/null/1/0/0/null",
           "price_source_currency": "HUF",
-          "price_source_amount": 12756.0
+          "price_source_amount": 14106.0
         }
       ],
-      "price_total_regular_pln": 723.59,
-      "price_total_wizz_discount_club_pln": 638.35,
-      "price_total_resident_estimated_pln": 723.59
+      "price_total_regular_pln": 739.76,
+      "price_total_wizz_discount_club_pln": 654.52,
+      "price_total_resident_estimated_pln": 739.76
     },
     {
       "id": "step4-732c19f58603f91f",
@@ -8228,19 +8181,19 @@
           "departure_at": "2026-11-20T17:20:00+01:00",
           "arrival_airport": "GDN",
           "arrival_at": "2026-11-20T18:55:00+01:00",
-          "price_regular_pln": 275.24,
-          "price_wizz_discount_club_pln": 229.32,
+          "price_regular_pln": 302.77,
+          "price_wizz_discount_club_pln": 256.86,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 275.24,
+          "price_resident_estimated_pln": 302.77,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/GDN/2026-11-20/null/1/0/0/null",
           "price_source_currency": "HUF",
-          "price_source_amount": 22990.0
+          "price_source_amount": 25290.0
         }
       ],
-      "price_total_regular_pln": 846.12,
-      "price_total_wizz_discount_club_pln": 756.28,
-      "price_total_resident_estimated_pln": 846.12
+      "price_total_regular_pln": 873.65,
+      "price_total_wizz_discount_club_pln": 783.82,
+      "price_total_resident_estimated_pln": 873.65
     },
     {
       "id": "step4-72bb463265564880",
@@ -9183,53 +9136,6 @@
       "price_total_resident_estimated_pln": 692.05
     },
     {
-      "id": "step4-df078d5b37f81585",
-      "origin_airport": "TFS",
-      "destination_airport": "KRK",
-      "direction": "tenerife_to_poland",
-      "connection_type": "one_stop",
-      "transfer_airport": "BUD",
-      "layover_minutes": 1285,
-      "self_transfer": true,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W62494",
-          "departure_airport": "TFS",
-          "departure_at": "2026-11-21T16:20:00+00:00",
-          "arrival_airport": "BUD",
-          "arrival_at": "2026-11-21T22:25:00+01:00",
-          "price_regular_pln": 526.96,
-          "price_wizz_discount_club_pln": 483.04,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 526.96,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-11-21/null/1/0/0/null",
-          "price_source_currency": "EUR",
-          "price_source_amount": 119.99
-        },
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W62419",
-          "departure_airport": "BUD",
-          "departure_at": "2026-11-22T19:50:00+01:00",
-          "arrival_airport": "KRK",
-          "arrival_at": "2026-11-22T21:05:00+01:00",
-          "price_regular_pln": 193.66,
-          "price_wizz_discount_club_pln": 152.34,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 193.66,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/KRK/2026-11-22/null/1/0/0/null",
-          "price_source_currency": "HUF",
-          "price_source_amount": 16176.0
-        }
-      ],
-      "price_total_regular_pln": 720.62,
-      "price_total_wizz_discount_club_pln": 635.38,
-      "price_total_resident_estimated_pln": 720.62
-    },
-    {
       "id": "step4-c94481cf2669d099",
       "origin_airport": "TFS",
       "destination_airport": "WAW",
@@ -9274,6 +9180,53 @@
       ],
       "price_total_regular_pln": 756.7,
       "price_total_wizz_discount_club_pln": 666.87,
+      "price_total_resident_estimated_pln": 756.7
+    },
+    {
+      "id": "step4-df078d5b37f81585",
+      "origin_airport": "TFS",
+      "destination_airport": "KRK",
+      "direction": "tenerife_to_poland",
+      "connection_type": "one_stop",
+      "transfer_airport": "BUD",
+      "layover_minutes": 1285,
+      "self_transfer": true,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W62494",
+          "departure_airport": "TFS",
+          "departure_at": "2026-11-21T16:20:00+00:00",
+          "arrival_airport": "BUD",
+          "arrival_at": "2026-11-21T22:25:00+01:00",
+          "price_regular_pln": 526.96,
+          "price_wizz_discount_club_pln": 483.04,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 526.96,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/BUD/2026-11-21/null/1/0/0/null",
+          "price_source_currency": "EUR",
+          "price_source_amount": 119.99
+        },
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W62419",
+          "departure_airport": "BUD",
+          "departure_at": "2026-11-22T19:50:00+01:00",
+          "arrival_airport": "KRK",
+          "arrival_at": "2026-11-22T21:05:00+01:00",
+          "price_regular_pln": 229.74,
+          "price_wizz_discount_club_pln": 169.58,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 229.74,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/BUD/KRK/2026-11-22/null/1/0/0/null",
+          "price_source_currency": "HUF",
+          "price_source_amount": 19190.0
+        }
+      ],
+      "price_total_regular_pln": 756.7,
+      "price_total_wizz_discount_club_pln": 652.62,
       "price_total_resident_estimated_pln": 756.7
     },
     {
@@ -9467,7 +9420,7 @@
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "3f11be44-c429-4c52-82e5-4ae9b41d6a61",
+    "run_id": "a6f8a0e8-f295-4f20-984e-74607fc6cb08",
     "step": "4",
     "period_from": "2026-10-23",
     "period_to": "2026-11-22",
@@ -11153,7 +11106,7 @@
           {
             "date": "2026-11-11",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -12797,7 +12750,7 @@
           {
             "date": "2026-10-25",
             "status": "checked",
-            "flights": 0,
+            "flights": 1,
             "method": "timetableV2"
           },
           {
@@ -13561,7 +13514,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -15501,7 +15454,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -16295,7 +16248,7 @@
           {
             "date": "2026-10-26",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -16307,7 +16260,7 @@
           {
             "date": "2026-10-28",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -16319,7 +16272,7 @@
           {
             "date": "2026-10-30",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -16471,7 +16424,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -16665,7 +16618,7 @@
           {
             "date": "2026-10-23",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {

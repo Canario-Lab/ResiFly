@@ -214,3 +214,24 @@ jest wyłączone w Work). Pierwszy odbiór odbył się bez commita i push.
 Następnie 2026-10-23 użytkownik osobno autoryzował publikację całego pakietu
 POZ i nowej bazy na GitHub. Dowody i wyniki:
 [`WDROZENIE_POZNANIA_POZ.md`](WDROZENIE_POZNANIA_POZ.md).
+
+## Lokalna kolekcja ośmiu endpointów 2026-10-23
+
+Po dodaniu LCJ uruchomiono nowy pełny batch
+`a6f8a0e8-f295-4f20-984e-74607fc6cb08` dla 2026-10-23–2026-11-22,
+w `tmp/lcj-expansion/batch-2026-10-23`. Własny świeży cache Ryanaira ma
+15 500 ukończonych tras/dni; jeden dzienny NBP, Google max 2. Wszystkie
+dziesięć feedów i sidecary są kompletne dla bieżącej konfiguracji ośmiu:
+32 178 pozycji pokrycia, zero braków/nadmiarów, 15 030 propozycji, w tym
+212 LCJ. Nie mieszano starych i nowych cen.
+
+Nieznana odpowiedź Google w kroku 2 zablokowała pierwsze podejście. Wznowiono
+tylko 2–5 z tym samym runem/cache, bez zmiany parsera lub traktowania błędu
+jako pustego dnia. Po 196 testach Python i 18 JS na stagingu wykonano lokalną
+promocję z backupem 20 plików. Publiczna walidacja, bajtowe porównanie ze
+stagingiem, ponowne 18 JS i HTTP nowego kodu/20 plików danych przeszły.
+Odbiór wizualny/schowka pozostaje otwarty — lokalne sterowanie przeglądarką
+wyłączone w Work. Pierwszy odbiór odbył się bez commita i push; następnie
+23.10.2026 użytkownik osobno autoryzował publikację całego pakietu LCJ i nowej
+bazy na GitHub. Nie dodano workflow Actions. Wyniki i ograniczenia źródeł
+discovery: [`WDROZENIE_LODZI_LCJ.md`](WDROZENIE_LODZI_LCJ.md).

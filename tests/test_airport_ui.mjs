@@ -95,13 +95,13 @@ function filters(direction = "poland_to_tenerife", additions = {}) {
   };
 }
 
-test("all seven endpoints remain selectable in each direction", () => {
+test("all eight endpoints remain selectable in each direction", () => {
   const api = harness();
   for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
     api.elements.direction.value = direction;
     api.updateAirportOptions();
     const select = direction === "poland_to_tenerife" ? api.elements.origin : api.elements.destination;
-    assert.deepEqual(select.children.map(option => option.value), ["all", "GDN", "KRK", "KTW", "POZ", "WAW", "WMI", "WRO"]);
+    assert.deepEqual(select.children.map(option => option.value), ["all", "GDN", "KRK", "KTW", "LCJ", "POZ", "WAW", "WMI", "WRO"]);
     assert.equal(select.children[1].textContent, "Gdańsk (GDN)");
   }
 });
@@ -194,6 +194,66 @@ test("POZ calendar, chart and share agree in both directions and all discount mo
   }
 });
 
+test("LCJ calendar, chart and share agree in both directions and all discount modes", () => {
+  const api = harness();
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    api.elements.direction.value = direction;
+    api.updateAirportOptions();
+    const select = direction === "poland_to_tenerife" ? api.elements.origin : api.elements.destination;
+    assert.equal(select.children.find(option => option.value === "LCJ")?.textContent, "Łódź (LCJ)");
+    for (const resident of [false, true]) for (const wizzClub of [false, true]) {
+      const selected = filters(direction, {
+        origin: direction === "poland_to_tenerife" ? "LCJ" : "all",
+        destination: direction === "tenerife_to_poland" ? "LCJ" : "all",
+        resident, wizzClub, maxPrice: Infinity, maxLayover: 1440,
+      });
+      const matching = api.filteredResults(selected);
+      assert.ok(matching.length > 0, direction);
+      assert.ok(matching.every(row => [row.origin_airport, row.destination_airport].includes("LCJ")));
+      const prices = api.lowestPricesByDate(matching, selected);
+      for (const [day, price] of prices) {
+        const sameDay = matching.filter(row => row.legs[0].departure_at.slice(0, 10) === day);
+        assert.equal(price.total, Math.min(...sameDay.map(row => api.selectedResultPricing(row, selected).total)));
+      }
+      const [day, price] = [...prices][0];
+      const calendar = api.createCalendarDay(api.parseDateOnly(day), selected.dateFrom, selected.dateTo, prices);
+      const chart = api.createFareChartDay(day, price, price.total);
+      calendar.listeners.click[0]();
+      chart.listeners.click[0]();
+      assert.deepEqual(Array.from(api.context.targets).slice(-2), [price.resultId, price.resultId]);
+      assert.match(chart.getAttribute("aria-label"), /zł/);
+      const row = matching.find(row => row.id === price.resultId);
+      api.context.window.location = new URL(api.shareUrlForResult(row, {resident, wizzClub}));
+      assert.equal(api.sharedResultFromUrl().id, row.id);
+      assert.equal(api.elements.direction.value, direction);
+      assert.equal(api.elements.resident.checked, resident);
+      assert.equal(api.elements.wizzClub.checked, wizzClub);
+      assert.ok(api.filteredResults().some(candidate => candidate.id === row.id));
+      for (const segment of row.legs) {
+        const url = new URL(api.bookingUrlForFilters(segment, selected));
+        assert.equal(url.protocol, "https:");
+        assert.equal(url.hostname, {Ryanair: "www.ryanair.com", Vueling: "tickets.vueling.com"}[segment.carrier]);
+        assert.ok(!["token", "session", "cookie"].some(key => url.searchParams.has(key)));
+      }
+    }
+  }
+});
+
+test("LCJ synthetic overnight marker and date reset preserve existing behaviour", () => {
+  const api = harness();
+  // Synthetic timestamps test formatting even when a collection has no overnight LCJ offer.
+  const time = api.createJourneyTime("2026-11-02T01:15:00+01:00", "2026-11-01T22:00:00+01:00");
+  assert.equal(time.children.at(-1).textContent, "+1");
+  api.initializeFilters();
+  api.elements.origin.value = "LCJ";
+  api.elements.dateFrom.value = documents[0].period_to;
+  api.elements.dateTo.value = documents[0].period_to;
+  api.clearActiveFilter("dateRange");
+  assert.equal(api.elements.origin.value, "LCJ");
+  assert.equal(api.elements.dateFrom.value, documents[0].period_from);
+  assert.equal(api.elements.dateTo.value, documents[0].period_to);
+});
+
 test("POZ overnight marker and date chip reset retain the complete window", () => {
   const api = harness();
   const overnight = results.find(row => row.destination_airport === "POZ" &&
@@ -229,9 +289,9 @@ test("GDN calendar minima agree with flight pricing in both directions and all d
   }
 });
 
-test("all eight sort orders sort whole GDN, WRO and POZ result sets", () => {
+test("all eight sort orders sort whole GDN, WRO, POZ and LCJ result sets", () => {
   const api = harness();
-  for (const endpoint of ["GDN", "WRO", "POZ"]) for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+  for (const endpoint of ["GDN", "WRO", "POZ", "LCJ"]) for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
     const selected = filters(direction, {
       origin: direction === "poland_to_tenerife" ? endpoint : "all",
       destination: direction === "tenerife_to_poland" ? endpoint : "all",
@@ -255,9 +315,9 @@ test("all eight sort orders sort whole GDN, WRO and POZ result sets", () => {
   }
 });
 
-test("GDN, WRO and POZ airport chips clear the selection back to all", () => {
+test("GDN, WRO, POZ and LCJ airport chips clear the selection back to all", () => {
   const api = harness();
-  for (const endpoint of ["GDN", "WRO", "POZ"]) {
+  for (const endpoint of ["GDN", "WRO", "POZ", "LCJ"]) {
     api.elements.origin.value = endpoint;
     api.renderActiveFilters(filters("poland_to_tenerife", {origin: endpoint}));
     for (const container of [api.elements.calendarActiveFilters, api.elements.activeFilters]) {
@@ -358,7 +418,7 @@ test("1000 PLN remains selectable when all loaded fares are lower", () => {
 test("a shared flight above 1000 PLN still opens with its explicit price settings", () => {
   const api = harness();
   api.initializeFilters();
-  for (const endpoint of ["GDN", "WRO", "POZ"]) {
+  for (const endpoint of ["GDN", "WRO", "POZ", "LCJ"]) {
     const result = results.find(result => result.origin_airport === endpoint && result.price_total_regular_pln > 1000);
     assert.ok(result);
     api.context.window.location = new URL(api.shareUrlForResult(result, { resident: false, wizzClub: false }));

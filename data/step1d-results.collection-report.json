@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "3f11be44-c429-4c52-82e5-4ae9b41d6a61",
+  "run_id": "a6f8a0e8-f295-4f20-984e-74607fc6cb08",
   "step": "1d",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
@@ -602,7 +602,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -990,7 +990,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {

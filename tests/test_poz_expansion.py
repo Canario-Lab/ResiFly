@@ -25,8 +25,8 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "BRS", "BVA", "CRL", "DUB", "EDI",
 
 
 class PozExpansionTests(unittest.TestCase):
-    def test_seventh_endpoint_and_all_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ",))
+    def test_poz_retained_in_current_endpoint_registry_and_all_scopes(self):
+        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ", "LCJ"))
         self.assertEqual(ENDPOINT_TIMEZONES["POZ"], "Europe/Warsaw")
         for path in (ROOT / "data").glob("*transfer-airports.json"):
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
@@ -50,7 +50,7 @@ class PozExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_both_carriers_both_tenerife_airports_every_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 56 * 31)
+        self.assertEqual(len(plan), 64 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("POZ", tenerife), (tenerife, "POZ")):
@@ -63,7 +63,7 @@ class PozExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 28)
+            self.assertEqual(collector.call_count, 32)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("POZ", hub, start, end), calls)
@@ -84,9 +84,9 @@ class PozExpansionTests(unittest.TestCase):
                               ("1d", "Air Europa"), ("1e", "Volotea"), ("1f", "Canaryfly")):
             module = importlib.import_module("scripts.collect_step" + step)
             low = [leg("Ryanair", code, "2026-11-01T06:00:00+01:00", "MAD", "2026-11-01T09:00:00+01:00", f"FR{n}")
-                   for n, code in enumerate(POLISH_AIRPORTS)]
+                   for n, code in enumerate(SIX + ("POZ",))]
             low += [leg("Ryanair", "MAD", "2026-11-02T16:00:00+01:00", code, "2026-11-02T19:00:00+01:00", f"FR{n}")
-                    for n, code in enumerate(POLISH_AIRPORTS)]
+                    for n, code in enumerate(SIX + ("POZ",))]
             resident = [leg(carrier, "MAD", "2026-11-01T12:00:00+01:00", "TFN", "2026-11-01T14:00:00+00:00"),
                         leg(carrier, "TFN", "2026-11-02T08:00:00+00:00", "MAD", "2026-11-02T12:00:00+01:00")]
             all_rows = module.build_connections(low, resident)
@@ -143,7 +143,7 @@ class PozExpansionTests(unittest.TestCase):
         for pair in (("LTN", "POZ"), ("POZ", "LTN"), ("NEW", "TFS"), ("TFS", "NEW")):
             self.assertIn(pair, required)
 
-    def test_six_endpoint_coverage_does_not_certify_seven(self):
+    def test_coverage_without_poz_does_not_certify_current_registry(self):
         start = date(2026, 10, 23)
         full = expected_queries("2", start, start)
         old = {q for q in full if "POZ" not in q[1:3]}
@@ -187,10 +187,10 @@ class PozExpansionTests(unittest.TestCase):
             (collect_step5, "BUD", "Wizz Air", "Ryanair", collect_step5.VARIANT_B)):
             config = copy.deepcopy(module.load_allowlist())
             rules = config["airports"] if variant is None else config["variants"][variant]["airports"]
-            next(r for r in rules if r["iata"] == hub)["polish_airports"] = list(POLISH_AIRPORTS)
+            next(r for r in rules if r["iata"] == hub)["polish_airports"] = list(SIX + ("POZ",))
             legs = [leg(a, "TFS", "2026-11-01T06:00:00+00:00", hub, "2026-11-01T10:00:00+01:00", "XX0")]
             legs += [leg(b, hub, "2026-11-01T13:00:00+01:00", code, "2026-11-01T16:00:00+01:00", f"XX{n+1}")
-                     for n, code in enumerate(POLISH_AIRPORTS)]
+                     for n, code in enumerate(SIX + ("POZ",))]
             all_rows = module.build_connections(legs, config, 4.0)
             previous_config = copy.deepcopy(config)
             previous_rules = previous_config["airports"] if variant is None else previous_config["variants"][variant]["airports"]
@@ -200,9 +200,9 @@ class PozExpansionTests(unittest.TestCase):
                 before = module.build_connections([r for r in legs if r["arrival_airport"] != "POZ"], previous_config, 4.0)
             self.assertEqual(before, [r for r in all_rows if r["destination_airport"] != "POZ"], module.__name__)
         direct = [leg("Ryanair", code, "2026-11-01T10:00:00+01:00", "TFS", "2026-11-01T15:00:00+00:00", f"FR{n}")
-                  for n, code in enumerate(POLISH_AIRPORTS)]
+                  for n, code in enumerate(SIX + ("POZ",))]
         with patch.object(collect_step2, "POLISH_AIRPORTS", SIX):
-            before = collect_step2.build_results(direct[:-1])
+            before = collect_step2.build_results([r for r in direct if r["departure_airport"] in SIX])
         self.assertEqual(before, [r for r in collect_step2.build_results(direct) if r["origin_airport"] != "POZ"])
 
     @patch("scripts.audit_airport_expansion.fill_timezones")

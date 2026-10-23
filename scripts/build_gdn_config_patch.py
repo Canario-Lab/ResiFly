@@ -26,6 +26,14 @@ from scripts.collection_coverage import atomic_json
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def refresh_endpoint_text(value):
+    """Refresh legacy endpoint lists without duplicating the latest addition."""
+    value = re.sub(r"\bWAW/WMI/(?:KTW/KRK|KRK/KTW)(?:/[A-Z]{3})*",
+                   "/".join(POLISH_AIRPORTS), value)
+    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem) polskich lotnisk[ao]?",
+                  "wszystkie polskie lotniska z rejestru endpointów", value)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", choices=POLISH_AIRPORTS, default="GDN")
@@ -61,8 +69,7 @@ def main():
         for section in (document.get("selection_method", {}), document.get("usage_policy", {})):
             for key, value in section.items():
                 if isinstance(value, str):
-                    section[key] = re.sub(r"WAW/WMI/KTW/KRK(?:/GDN)?(?:/WRO)?(?:/POZ)?", "/".join(POLISH_AIRPORTS), value)
-                    section[key] = re.sub(r"wszystkie (?:pięć|sześć|siedem) polskich lotnisk[ao]?", "wszystkie polskie lotniska z rejestru endpointów", section[key])
+                    section[key] = refresh_endpoint_text(value)
         if "selection_method" in document:
             selection = document["selection_method"]
             if "excluded_endpoints" in selection and path.name != "mixed-transfer-airports.json":
@@ -74,7 +81,14 @@ def main():
         document["sources"].append({
             "name": source_name, "verified_on": snapshot["as_of"],
             "urls": ["https://www.ryanair.com/api/views/locate/3/routes", "https://www.wizzair.com/en-gb"],
-            "finding": f"Sprawdzono {endpoint} w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów.",
+            "finding": (
+                f"Sprawdzono {endpoint} w oficjalnych siatkach Ryanaira i Wizz. "
+                f"Materiał techniczny Wizz zawiera {len(evidence['routes'])} obserwacji; "
+                f"nierozstrzygnięte trasy: {len(evidence.get('pending', []))}, "
+                f"nieaktywne w oknie: {len(evidence.get('inactive_routes', []))}. "
+                "Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. "
+                "Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+            ),
         })
         documents[path.name] = document
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "3f11be44-c429-4c52-82e5-4ae9b41d6a61",
+  "run_id": "a6f8a0e8-f295-4f20-984e-74607fc6cb08",
   "step": "5",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
@@ -2542,7 +2542,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -4288,7 +4288,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -5258,7 +5258,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -9526,7 +9526,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -10108,7 +10108,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -11078,7 +11078,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -12630,7 +12630,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -12824,7 +12824,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -12854,7 +12854,7 @@
         {
           "date": "2026-10-28",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -15358,7 +15358,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -15388,7 +15388,7 @@
         {
           "date": "2026-10-30",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -15740,7 +15740,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -16128,7 +16128,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -16624,7 +16624,7 @@
         {
           "date": "2026-11-11",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -19238,7 +19238,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "timetableV2"
         },
         {
@@ -21214,7 +21214,7 @@
         {
           "date": "2026-10-31",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -22136,7 +22136,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -23106,7 +23106,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -23300,7 +23300,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -25614,7 +25614,7 @@
         {
           "date": "2026-11-22",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         }
       ]
@@ -26210,7 +26210,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -27410,7 +27410,7 @@
         {
           "date": "2026-10-29",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -28344,7 +28344,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -28926,7 +28926,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -29896,7 +29896,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {

@@ -56,7 +56,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO i POZ. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ i LCJ. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -76,6 +76,16 @@ Lokalne wdrożenie POZ i odrębna pełna kolekcja są opisane w
 [`docs/WDROZENIE_POZNANIA_POZ.md`](docs/WDROZENIE_POZNANIA_POZ.md).
 Po pierwszym lokalnym odbiorze użytkownik osobno autoryzował 23.10.2026
 publikację całego pakietu POZ i nowej bazy na GitHub.
+
+Plan dodania Łodzi (LCJ) jako ósmego endpointu:
+[`docs/PLAN_DODANIA_LODZI_LCJ.md`](docs/PLAN_DODANIA_LODZI_LCJ.md).
+LCJ wdrożono lokalnie na osobne polecenie użytkownika. Nowa pełna kolekcja
+dziesięciu feedów zawiera 15 030 propozycji, w tym 212 LCJ. Audyt uwzględnił
+także zupełnie nowe huby; wyniki, testy i otwarty odbiór wizualny opisuje
+[`docs/WDROZENIE_LODZI_LCJ.md`](docs/WDROZENIE_LODZI_LCJ.md).
+Pierwszy odbiór odbył się bez commita i push. Następnie 23.10.2026 użytkownik
+osobno autoryzował wysłanie całego pakietu LCJ i nowej bazy na GitHub.
+Nie dodano workflow GitHub Actions.
 
 GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
