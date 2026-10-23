@@ -975,6 +975,24 @@
       "verified_on": "2026-10-23",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "FCO",
+      "destination": "RZE",
+      "flight_number": "W46067",
+      "duration_minutes": 135,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "RZE",
+      "destination": "FCO",
+      "flight_number": "W46068",
+      "duration_minutes": 140,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -1766,6 +1784,48 @@
       "departure_time": "11:40",
       "flight_number": "W95390",
       "duration_minutes": 120
+    },
+    {
+      "origin": "FCO",
+      "destination": "RZE",
+      "departure_time": "05:45",
+      "flight_number": "W46067",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "FCO",
+      "destination": "RZE",
+      "departure_time": "07:55",
+      "flight_number": "W46067",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "FCO",
+      "destination": "RZE",
+      "departure_time": "19:55",
+      "flight_number": "W46067",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "RZE",
+      "destination": "FCO",
+      "departure_time": "08:35",
+      "flight_number": "W46068",
+      "duration_minutes": 140
+    },
+    {
+      "origin": "RZE",
+      "destination": "FCO",
+      "departure_time": "10:45",
+      "flight_number": "W46068",
+      "duration_minutes": 130
+    },
+    {
+      "origin": "RZE",
+      "destination": "FCO",
+      "departure_time": "22:45",
+      "flight_number": "W46068",
+      "duration_minutes": 130
     }
   ],
   "flight_number_overrides_by_departure_weekday_and_time": [

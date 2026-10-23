@@ -17,13 +17,14 @@ Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku
 wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
 wynikowych danych.
 
-Publiczne JSON-y strony są generowane z aktualnych danych Binter, Ryanair,
-Wizz Air, Google Flights dla Iberii/Iberii Express i Vuelinga, oficjalnego
-feedu taryfowego Air Europa dla 1D, oficjalnego endpointu Volotei dla 1E,
-oficjalnego GraphQL Canaryfly dla 1F oraz kursu NBP. W krokach 1B, 1C, 1D i 1E cena
-rezydenta jest jawnym oszacowaniem 25% regularnej ceny odpowiedniego
-przewoźnika. W 1F zapisywana jest dokładna cena rezydencka zwrócona przez
-Canaryfly. Air Europa, Volotea i Canaryfly nie korzystają z Google Flights. Wyniki
+Publiczne JSON-y strony są generowane z oficjalnych danych Bintera,
+Wizz Air, Volotei i Canaryfly oraz Google Flights HTTP dla Ryanaira (FR/RK),
+Iberii/Iberii Express, Vuelinga i Air Europa. Binter i Canaryfly zwracają
+końcowe ceny regularne oraz rezydenckie. W krokach 1B–1E i uprawnionych
+hiszpańskich odcinkach Teneryfy w 3–5 cena rezydenta jest jawnym szacunkiem:
+pełne opłaty plus 25% pozostałej części taryfowej, nie 25% całej ceny.
+Kursy pochodzą z jednego dziennego zestawu NBP. Volotea i Canaryfly nie
+korzystają z Google Flights. Wyniki
 obejmują oba kierunki i nie mają limitu cenowego; maksymalną cenę wybiera
 użytkownik na stronie.
 
@@ -56,7 +57,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ i LCJ. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ i RZE. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -86,6 +87,16 @@ także zupełnie nowe huby; wyniki, testy i otwarty odbiór wizualny opisuje
 Pierwszy odbiór odbył się bez commita i push. Następnie 23.10.2026 użytkownik
 osobno autoryzował wysłanie całego pakietu LCJ i nowej bazy na GitHub.
 Nie dodano workflow GitHub Actions.
+
+Plan dodania Rzeszowa (RZE) jako dziewiątego endpointu:
+[`docs/PLAN_DODANIA_RZESZOWA_RZE.md`](docs/PLAN_DODANIA_RZESZOWA_RZE.md).
+RZE wdrożono wyłącznie lokalnie. Nowa pełna baza zawiera 15 268 propozycji,
+w tym 279 RZE, z kompletnym pokryciem dziewięciu endpointów. Zakres, dowody
+siatek, testy i otwarty odbiór wizualny/schowka opisuje
+[`docs/WDROZENIE_RZESZOWA_RZE.md`](docs/WDROZENIE_RZESZOWA_RZE.md).
+Pierwszy odbiór RZE odbył się bez commita i push. Następnie 23.10.2026
+użytkownik osobno autoryzował publikację całego pakietu RZE i nowej bazy
+na GitHub. Nie dodano workflow zbierania cen w GitHub Actions.
 
 GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
@@ -147,9 +158,9 @@ Wysp Kanaryjskich. Dla 1C nadrzędnym źródłem siatki jest oficjalna strona
 Vuelinga, a Aena służy tylko jako potwierdzenie pomocnicze.
 Warianty 1A–1F sprawdzają pełne okno dat w obu kierunkach,
 niezależnie od rozkładu drugiego przewoźnika, i dopiero potem dopasowują
-możliwe przesiadki. Wariant 1D korzysta wyłącznie z oficjalnych stron i feedu Air
-Europa; zapisane szablony rozkładu mają okres ważności i muszą zostać ponownie
-zweryfikowane po jego zakończeniu.
+możliwe przesiadki. Wariant 1D weryfikuje trasy na oficjalnych stronach Air
+Europa, lecz numery rejsów, daty, godziny i indywidualne ceny pobiera wyłącznie
+z Google Flights HTTP. Nie używa szablonów ani promocyjnego minimum dnia.
 Wariant 1E pobiera rozkład, numer lotu i cenę bezpośrednio z oficjalnego
 publicznego endpointu Volotei, osobno dla każdego dnia pełnego okna dat i w obu
 kierunkach; dopiero potem dopasowuje możliwe przesiadki.

@@ -16,13 +16,14 @@
       "GDN",
       "WRO",
       "POZ",
-      "LCJ"
+      "LCJ",
+      "RZE"
     ],
     "airline": "Wizz Air",
     "resident_discount_considered": true
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ.",
+    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -33,7 +34,8 @@
       "GDN",
       "WRO",
       "POZ",
-      "LCJ"
+      "LCJ",
+      "RZE"
     ],
     "result_count": 6,
     "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
@@ -112,7 +114,8 @@
         "WAW",
         "KTW",
         "KRK",
-        "GDN"
+        "GDN",
+        "RZE"
       ]
     },
     {
@@ -207,6 +210,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono LCJ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o RZE",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono RZE w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 16 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

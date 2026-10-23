@@ -22,8 +22,8 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "CRL", "DUB", "STN"}
 
 
 class LcjExpansionTests(unittest.TestCase):
-    def test_eighth_endpoint_and_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ",))
+    def test_lcj_retained_in_current_endpoint_registry_and_nine_scopes(self):
+        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ", "RZE"))
         self.assertEqual(ENDPOINT_TIMEZONES["LCJ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -45,7 +45,7 @@ class LcjExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_and_each_lcj_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 64 * 31)
+        self.assertEqual(len(plan), 72 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("LCJ", tenerife), (tenerife, "LCJ")):
@@ -58,7 +58,7 @@ class LcjExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 32)
+            self.assertEqual(collector.call_count, 36)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("LCJ", hub, start, end), calls)
@@ -78,9 +78,9 @@ class LcjExpansionTests(unittest.TestCase):
                               ("1d", "Air Europa"), ("1e", "Volotea"), ("1f", "Canaryfly")):
             module = importlib.import_module("scripts.collect_step" + step)
             low = [leg("Ryanair", p, "2026-11-01T06:00:00+01:00", "MAD", "2026-11-01T09:00:00+01:00", f"FR{n}")
-                   for n, p in enumerate(POLISH_AIRPORTS)]
+                   for n, p in enumerate(SEVEN + ("LCJ",))]
             low += [leg("Ryanair", "MAD", "2026-11-02T16:00:00+01:00", p, "2026-11-02T19:00:00+01:00", f"FR{n}")
-                    for n, p in enumerate(POLISH_AIRPORTS)]
+                    for n, p in enumerate(SEVEN + ("LCJ",))]
             resident = [leg(carrier, "MAD", "2026-11-01T12:00:00+01:00", "TFN", "2026-11-01T14:00:00+00:00"),
                         leg(carrier, "TFN", "2026-11-02T08:00:00+00:00", "MAD", "2026-11-02T12:00:00+01:00")]
             rows = module.build_connections(low, resident)
@@ -134,10 +134,10 @@ class LcjExpansionTests(unittest.TestCase):
             (collect_step5, "BUD", "Wizz Air", "Ryanair", collect_step5.VARIANT_B)):
             config = copy.deepcopy(module.load_allowlist())
             rules = config["airports"] if variant is None else config["variants"][variant]["airports"]
-            next(r for r in rules if r["iata"] == hub)["polish_airports"] = list(POLISH_AIRPORTS)
+            next(r for r in rules if r["iata"] == hub)["polish_airports"] = list(SEVEN + ("LCJ",))
             legs = [leg(a, "TFS", "2026-11-01T06:00:00+00:00", hub, "2026-11-01T10:00:00+01:00", "XX0")]
             legs += [leg(b, hub, "2026-11-01T13:00:00+01:00", p, "2026-11-01T16:00:00+01:00", f"XX{n+1}")
-                     for n, p in enumerate(POLISH_AIRPORTS)]
+                     for n, p in enumerate(SEVEN + ("LCJ",))]
             after = module.build_connections(legs, config, 4.0)
             previous = copy.deepcopy(config)
             old_rules = previous["airports"] if variant is None else previous["variants"][variant]["airports"]

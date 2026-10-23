@@ -235,3 +235,30 @@ wyłączone w Work. Pierwszy odbiór odbył się bez commita i push; następnie
 23.10.2026 użytkownik osobno autoryzował publikację całego pakietu LCJ i nowej
 bazy na GitHub. Nie dodano workflow Actions. Wyniki i ograniczenia źródeł
 discovery: [`WDROZENIE_LODZI_LCJ.md`](WDROZENIE_LODZI_LCJ.md).
+
+## Lokalna kolekcja dziewięciu endpointów 2026-10-23
+
+Po dodaniu RZE zebrano od nowa komplet dziesięciu feedów dla
+2026-10-23–2026-11-22, run ID `e1d13844-5567-46d6-980d-f819f4fa1752`.
+Świeży cache ma dokładnie 16 492 unikalne poprawne route/day Ryanaira,
+nie wykorzystuje starej bazy/cache LCJ. Jeden dzienny zestaw NBP,
+Google max 2, pełne niezależne kalendarze i dotychczasowe źródła cen.
+
+Wszystkie dziesięć osadzonych raportów i sidecarów jest kompletnych dla
+bieżącej konfiguracji dziewięciu: 33 976 pozycji pokrycia, zero braków
+i nadmiarów, 15 268 propozycji, w tym 279 RZE (137/142 w obu kierunkach).
+Cała kolekcja zakończyła się bez wznowienia. Wyniki zerowe nie zostały
+wyprowadzone z awarii źródła; błąd Binter `timetable_get` podczas discovery
+pozostał jawnie błędem, z osobnym przeglądem oficjalnej siatki. Bieżąca
+kolekcja cen Binter `booking_search`/`booking_getImports` była kompletna.
+
+Po 208 testach Python i 30 JS na stagingu wykonano lokalną promocję
+z backupem 20 plików. Ponowna walidacja i 30 JS na publicznej lokalnej bazie
+przeszły, bez pominiętych testów. Backup odpowiada baseline, publiczne pliki
+stagingowi, a HTTP nowemu kodowi i wszystkim 20 plikom. Odbiór wizualny
+desktop/320 px i systemowego schowka pozostaje otwarty — lokalne sterowanie
+przeglądarką jest wyłączone w Work. Pierwszy odbiór był wyłącznie lokalny,
+bez commita i push. Następnie 23.10.2026 użytkownik osobno autoryzował
+publikację całego pakietu RZE i nowej bazy na GitHub. Bez zmian Actions.
+Dowody, ograniczenia i rollback:
+[`WDROZENIE_RZESZOWA_RZE.md`](WDROZENIE_RZESZOWA_RZE.md).
