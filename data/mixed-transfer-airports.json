@@ -17,7 +17,8 @@
       "WRO",
       "POZ",
       "LCJ",
-      "RZE"
+      "RZE",
+      "BZG"
     ],
     "directions": [
       "POLAND_TO_TENERIFE",
@@ -27,8 +28,8 @@
     "resident_discount_considered": true
   },
   "selection_method": {
-    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE.",
-    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE.",
+    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG.",
+    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -39,7 +40,8 @@
       "WRO",
       "POZ",
       "LCJ",
-      "RZE"
+      "RZE",
+      "BZG"
     ],
     "variant_a_result_count": 19,
     "variant_b_result_count": 6,
@@ -569,6 +571,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono RZE w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 16 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o BZG",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono BZG w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

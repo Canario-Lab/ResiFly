@@ -430,6 +430,7 @@ const airportLabels = {
   POZ: "Poznań (POZ)",
   LCJ: "Łódź (LCJ)",
   RZE: "Rzeszów (RZE)",
+  BZG: "Bydgoszcz (BZG)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",

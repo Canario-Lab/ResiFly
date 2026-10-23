@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "e1d13844-5567-46d6-980d-f819f4fa1752",
+  "run_id": "e0322930-e323-4c8c-9f08-459723852a72",
   "step": "4",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
@@ -614,7 +614,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -2172,7 +2172,7 @@
         {
           "date": "2026-10-26",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -7404,7 +7404,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {

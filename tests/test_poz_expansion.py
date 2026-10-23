@@ -26,7 +26,7 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "BRS", "BVA", "CRL", "DUB", "EDI",
 
 class PozExpansionTests(unittest.TestCase):
     def test_poz_retained_in_current_endpoint_registry_and_all_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ", "LCJ", "RZE"))
+        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ", "LCJ", "RZE", "BZG"))
         self.assertEqual(ENDPOINT_TIMEZONES["POZ"], "Europe/Warsaw")
         for path in (ROOT / "data").glob("*transfer-airports.json"):
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
@@ -50,7 +50,7 @@ class PozExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_both_carriers_both_tenerife_airports_every_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 72 * 31)
+        self.assertEqual(len(plan), 80 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("POZ", tenerife), (tenerife, "POZ")):
@@ -63,7 +63,7 @@ class PozExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 36)
+            self.assertEqual(collector.call_count, 40)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("POZ", hub, start, end), calls)

@@ -290,7 +290,7 @@ class CoverageTests(unittest.TestCase):
     @patch("scripts.collect_step2.wizz_timetable", return_value=[])
     @patch("scripts.collect_step2.ryanair_client_version", return_value="test")
     @patch("scripts.collect_step2.collect_ryanair_google_route_days", return_value=[])
-    def test_successful_step2_certifies_all_sixty_four_route_carrier_pairs(self, google, version, wizz, nbp, print_mock):
+    def test_successful_step2_certifies_all_eighty_route_carrier_pairs(self, google, version, wizz, nbp, print_mock):
         wizz.side_effect = lambda origin, destination, start, end, price_type: ([{
             "departureDate": f"{DAY}T10:00:00", "price": {"currencyCode": "EUR", "amount": 50},
         }] if {origin, destination} == {"WAW", "TFS"} else [])
@@ -300,7 +300,7 @@ class CoverageTests(unittest.TestCase):
             with patch("scripts.collect_step2.cli", return_value=args):
                 ryanair.main()
             document = json.loads(output.read_text())
-            self.assertEqual(document["collection_coverage"]["completed_queries"], 72)
+            self.assertEqual(document["collection_coverage"]["completed_queries"], 80)
             coverage.validate_coverage(document, "2", DAY, DAY)
 
     def test_missing_request_blocks_standalone_publish_but_valid_empty_queries_pass(self):

@@ -262,3 +262,38 @@ bez commita i push. Następnie 23.10.2026 użytkownik osobno autoryzował
 publikację całego pakietu RZE i nowej bazy na GitHub. Bez zmian Actions.
 Dowody, ograniczenia i rollback:
 [`WDROZENIE_RZESZOWA_RZE.md`](WDROZENIE_RZESZOWA_RZE.md).
+
+## Lokalna kolekcja dziesięciu endpointów 2026-10-23
+
+Po dodaniu BZG zebrano nowy pełny batch dla 2026-10-23–2026-11-22:
+`e0322930-e323-4c8c-9f08-459723852a72`, staging
+`tmp/bzg-expansion/batch-2026-10-23`. Własny świeży cache Ryanaira ma
+dokładnie 17 360 unikalnych poprawnych route/day, zgodnych z pełnym planem;
+nie używano cen poprzedniego runu RZE. Jeden dzienny NBP, Google najwyżej 2.
+
+Wszystkie dziesięć feedów i sidecarów jest kompletnych dla aktualnej
+konfiguracji dziesięciu: 35 464 pozycji pokrycia, zero braków/nadmiarów,
+15 407 propozycji, w tym 187 BZG (95/92 w obu kierunkach). Pełna macierz
+bezpośrednia 2480/2480 nie daje BZG. Są dopasowania Ryanair/Ryanair przez
+BHX/BRS/DUB/STN i Ryanair/Vueling przez ALC. LTN ma pełne kalendarze,
+ale brak par w granicach 120–1440 min; nie usunięto sezonowej trasy.
+
+Nieznane odpowiedzi Google zatrzymały 1C (ALC–GDN 2026-11-15), następnie
+3 (pierwszy zgłoszony BRS–WMI 2026-11-14). Zachowano failed reports/logi
+i poprawne obserwacje. Wznowiono tylko niedokończone feedy z tym samym
+runem/cache/hashem, bez zmiany parsera i bez traktowania błędów jako pustych
+dni. Krok 5 zatrzymał HTTP 503 Wizza przy WDC WAW–RAK; ponowiono tylko 5
+z dwoma workerami. Wszystkie ponowienia ostatecznie zwróciły poprawne dane,
+bez zastąpienia WDC ceną regularną, starego feedu lub zmiany źródła ceny.
+
+Po pełnej walidacji i 34 testach JS na stagingu wykonano lokalną promocję
+całych 20 plików, z backupem zgodnym z niezależnym baseline. Publiczne
+pliki odpowiadają stagingowi; ponowna walidacja, 220 testów Python i 34 JS
+przeszły, bez pominiętych testów. HTTP podaje aktualne bajty nowego kodu
+i wszystkich 20 plików danych. Odbiór wizualny desktop/320 px i schowka
+pozostaje otwarty — sterowanie przeglądarką wyłączone w Work. Pierwszy odbiór
+odbył się bez commita i push. Następnie 23.10.2026 użytkownik osobno
+autoryzował publikację całego pakietu BZG i nowej bazy na GitHub.
+Bez zmian workflow. Audyt źródeł discovery (w tym błąd Binter timetable
+i odrębna weryfikacja oficjalnego katalogu), liczby i rollback:
+[`WDROZENIE_BYDGOSZCZY_BZG.md`](WDROZENIE_BYDGOSZCZY_BZG.md).

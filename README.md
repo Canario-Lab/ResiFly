@@ -57,7 +57,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ i RZE. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE i BZG. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -97,6 +97,16 @@ siatek, testy i otwarty odbiór wizualny/schowka opisuje
 Pierwszy odbiór RZE odbył się bez commita i push. Następnie 23.10.2026
 użytkownik osobno autoryzował publikację całego pakietu RZE i nowej bazy
 na GitHub. Nie dodano workflow zbierania cen w GitHub Actions.
+
+Plan dodania Bydgoszczy (BZG) jako dziesiątego endpointu:
+[`docs/PLAN_DODANIA_BYDGOSZCZY_BZG.md`](docs/PLAN_DODANIA_BYDGOSZCZY_BZG.md).
+BZG wdrożono lokalnie wraz z nową pełną bazą: 15 407 propozycji, w tym
+187 BZG (95 Polska → Teneryfa, 92 powrotne), kompletne pokrycie dziesięciu.
+Audyt siatek, próbek, testów, ponowień i promocji oraz otwarty odbiór
+wizualny/schowka: [`docs/WDROZENIE_BYDGOSZCZY_BZG.md`](docs/WDROZENIE_BYDGOSZCZY_BZG.md).
+Pierwszy odbiór odbył się bez commita i push. Następnie 23.10.2026 użytkownik
+osobno autoryzował publikację całego pakietu BZG i nowej bazy na GitHub.
+Nie dodano workflow zbierania cen w GitHub Actions.
 
 GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.

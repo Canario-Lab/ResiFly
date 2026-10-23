@@ -74,7 +74,7 @@ function harness({ rows = results } = {}) {
     createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters,
     bookingUrlForFilters, createPurchaseStep, airportPickers, setPolishAirports,
     polishAirportCodes, changeDirection, fareCalendarRenderKey, resultCardsRenderKey,
-    bindAirportPickerEvents, closeAirportPickers};
+    bindAirportPickerEvents, closeAirportPickers, optionLabel};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
   const api = context.api;
@@ -286,7 +286,7 @@ test("all available endpoints remain selectable in each direction", () => {
     const select = direction === "poland_to_tenerife" ? api.elements.origin : api.elements.destination;
     const available = [...new Set(results.filter(row => row.direction === direction).map(row => direction === "poland_to_tenerife" ? row.origin_airport : row.destination_airport))].sort();
     assert.deepEqual(select.children.map(option => option.value), ["all", ...available]);
-    assert.equal(select.children[1].textContent, "Gdańsk (GDN)");
+    assert.equal(select.children[1].textContent, api.optionLabel(available[0]));
   }
 });
 
@@ -304,7 +304,8 @@ function syntheticRzeRows() {
 
 test("ninth RZE checkbox, OR selection, chips, cache and direction retention", () => {
   const samples = syntheticRzeRows();
-  const api = harness({rows: [...results.filter(r => ![r.origin_airport, r.destination_airport].includes("RZE")), ...samples]});
+  // Freeze this historical nine-endpoint fixture instead of inheriting BZG.
+  const api = harness({rows: [...results.filter(r => ![r.origin_airport, r.destination_airport].some(code => ["RZE", "BZG"].includes(code))), ...samples]});
   api.initializeFilters();
   assert.deepEqual(Array.from(api.polishAirportCodes()), ["GDN", "KRK", "KTW", "LCJ", "POZ", "RZE", "WAW", "WMI", "WRO"]);
   assert.equal(api.airportPickers.origin.checkboxes.size, 9);
@@ -414,6 +415,130 @@ test("RZE overnight marker and date reset keep the multi-airport selection", () 
   assert.equal(api.elements.dateFrom.value, documents[0].period_from);
   assert.equal(api.elements.dateTo.value, documents[0].period_to);
   assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "RZE"]);
+});
+
+function syntheticBzgRows() {
+  return syntheticRzeRows().map(row => {
+    row.id = row.id.replace("rze", "bzg");
+    if (row.direction === "poland_to_tenerife") {
+      row.origin_airport = "BZG";
+      row.legs[0].departure_airport = "BZG";
+    } else {
+      row.destination_airport = "BZG";
+      row.legs.at(-1).arrival_airport = "BZG";
+    }
+    return row;
+  });
+}
+
+test("tenth BZG checkbox, OR union, cache keys and individual airport chips", () => {
+  const api = harness({rows: [...results.filter(r => ![r.origin_airport, r.destination_airport].includes("BZG")), ...syntheticBzgRows()]});
+  api.initializeFilters();
+  assert.deepEqual(Array.from(api.polishAirportCodes()), ["BZG", "GDN", "KRK", "KTW", "LCJ", "POZ", "RZE", "WAW", "WMI", "WRO"]);
+  assert.equal(api.airportPickers.origin.checkboxes.size, 10);
+  assert.equal(api.airportPickers.origin.checkboxes.get("BZG").value, "BZG");
+  const before = api.currentFilters();
+  api.setPolishAirports(["RZE", "BZG", "KRK", "BZG"]);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG", "KRK", "RZE"]);
+  assert.notEqual(api.fareCalendarRenderKey(before), api.fareCalendarRenderKey(api.currentFilters()));
+  assert.notEqual(api.resultCardsRenderKey(before), api.resultCardsRenderKey(api.currentFilters()));
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    api.elements.direction.value = direction;
+    api.changeDirection();
+    const f = {...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440};
+    assert.deepEqual(Array.from(f.polishAirports), ["BZG", "KRK", "RZE"]);
+    const union = api.filteredResults(f).map(r => r.id).sort();
+    const separate = ["BZG", "KRK", "RZE"].flatMap(code => api.filteredResults({...f, polishAirports: [code]})).map(r => r.id).sort();
+    assert.deepEqual(union, separate);
+  }
+  api.clearActiveFilter("polishAirport:BZG");
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "RZE"]);
+  api.setPolishAirports(api.polishAirportCodes());
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+});
+
+test("BZG one-way and no-offer fixtures respect the union and direction retention", () => {
+  const without = results.filter(r => ![r.origin_airport, r.destination_airport].includes("BZG"));
+  const api = harness({rows: [...without, syntheticBzgRows()[0]]});
+  api.initializeFilters();
+  api.setPolishAirports(["BZG"]);
+  api.elements.direction.value = "tenerife_to_poland";
+  api.changeDirection();
+  assert.ok(api.airportPickers.destination.checkboxes.has("BZG"));
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG"]);
+  assert.equal(api.filteredResults({...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440}).length, 0);
+  const empty = harness({rows: without});
+  empty.initializeFilters();
+  assert.equal(empty.airportPickers.origin.checkboxes.has("BZG"), false);
+});
+
+test("collected BZG prices, eight sorts, calendar/chart targets and shared links agree", t => {
+  if (!results.some(r => [r.origin_airport, r.destination_airport].includes("BZG"))) {
+    t.skip("Pre-BZG data: repeat on the complete new staging and report any verified zero explicitly");
+    return;
+  }
+  const api = harness();
+  api.initializeFilters();
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) for (const resident of [false, true]) for (const wizzClub of [false, true]) {
+    api.elements.direction.value = direction;
+    api.changeDirection();
+    api.setPolishAirports(["BZG"]);
+    const f = {...api.currentFilters(), resident, wizzClub, maxPrice: Infinity, maxLayover: 1440};
+    const rows = api.filteredResults(f);
+    assert.ok(rows.length > 0, direction);
+    assert.ok(rows.every(r => [r.origin_airport, r.destination_airport].includes("BZG")));
+    const criteria = {
+      price: r => api.selectedResultPricing(r, f).total, regular: r => r.price_total_regular_pln,
+      layover: r => r.layover_minutes ?? 0, departure: r => r.legs[0].departure_at,
+      journey: r => api.journeyDuration(r), departure_time: r => r.legs[0].departure_at.slice(11, 16),
+      arrival_time: r => r.legs.at(-1).arrival_at.slice(11, 16), direct: r => Number(r.legs.length !== 1),
+    };
+    for (const [sort, value] of Object.entries(criteria)) {
+      const sorted = api.filteredResults({...f, sort});
+      assert.equal(sorted.length, rows.length);
+      for (let n = 1; n < sorted.length; n++) assert.ok(value(sorted[n - 1]) <= value(sorted[n]), sort);
+    }
+    const minima = api.lowestPricesByDate(rows, f);
+    for (const [day, price] of minima) assert.equal(price.total, Math.min(...rows.filter(r => r.legs[0].departure_at.slice(0, 10) === day).map(r => api.selectedResultPricing(r, f).total)));
+    const [day, price] = [...minima][0];
+    api.createCalendarDay(api.parseDateOnly(day), f.dateFrom, f.dateTo, minima).dispatchEvent(new Event("click"));
+    api.createFareChartDay(day, price, price.total).dispatchEvent(new Event("click"));
+    assert.deepEqual(Array.from(api.context.targets).slice(-2), [price.resultId, price.resultId]);
+    const row = rows.find(r => r.id === price.resultId);
+    api.context.window.location = new URL(api.shareUrlForResult(row, f));
+    assert.equal(api.sharedResultFromUrl().id, row.id);
+    assert.equal(api.elements.direction.value, direction);
+    assert.equal(api.elements.resident.checked, resident);
+    assert.equal(api.elements.wizzClub.checked, wizzClub);
+    assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+    assert.ok(api.filteredResults().some(r => r.id === row.id));
+  }
+  const expensive = results.find(r => r.origin_airport === "BZG" && r.price_total_regular_pln > 1000);
+  if (expensive) {
+    api.context.window.location = new URL(api.shareUrlForResult(expensive, {resident: false, wizzClub: false}));
+    assert.equal(api.sharedResultFromUrl().id, expensive.id);
+    assert.ok(Number(api.elements.price.value) >= expensive.price_total_regular_pln);
+    assert.ok(api.filteredResults().some(r => r.id === expensive.id));
+  }
+});
+
+test("BZG overnight marker, date reset and full reset preserve existing semantics", () => {
+  const api = harness({rows: [...results, ...syntheticBzgRows()]});
+  api.initializeFilters();
+  api.setPolishAirports(["BZG", "RZE", "KRK"]);
+  const time = api.createJourneyTime("2026-11-02T00:55:00+01:00", "2026-11-01T18:00:00+00:00");
+  assert.equal(time.children[1].tagName, "sup");
+  assert.equal(time.children[1].textContent, "+1");
+  api.elements.dateFrom.value = api.elements.dateTo.value = "2026-11-01";
+  api.clearActiveFilter("dateRange");
+  assert.equal(api.elements.dateFrom.value, documents[0].period_from);
+  assert.equal(api.elements.dateTo.value, documents[0].period_to);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG", "KRK", "RZE"]);
+  api.resetFilters();
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  assert.equal(api.elements.direction.value, "poland_to_tenerife");
+  assert.equal(Number(api.elements.price.value), 1000);
+  assert.equal(Number(api.elements.layover.value), 6);
 });
 
 test("WRO is a sixth selectable endpoint with calendar and chart minima in all discount modes", () => {

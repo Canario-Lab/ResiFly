@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T20:02:40+01:00",
+  "generated_at": "2026-10-23T21:55:38+01:00",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
   "step": "1E",
@@ -153,14 +153,14 @@
           "departure_at": "2026-11-07T06:15:00+01:00",
           "arrival_airport": "BIO",
           "arrival_at": "2026-11-07T09:25:00+01:00",
-          "price_regular_pln": 459.0,
-          "price_wizz_discount_club_pln": 413.0,
+          "price_regular_pln": 529.0,
+          "price_wizz_discount_club_pln": 483.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 459.0,
+          "price_resident_estimated_pln": 529.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KRK/BIO/2026-11-07/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 459.0
+          "price_source_amount": 529.0
         },
         {
           "carrier": "Volotea",
@@ -186,8 +186,8 @@
           "resident_price_source": "estimate: 25% of regular fare excluding fixed non-discountable Spanish airport fees, plus those fees"
         }
       ],
-      "price_total_regular_pln": 820.13,
-      "price_total_resident_estimated_pln": 583.81
+      "price_total_regular_pln": 890.13,
+      "price_total_resident_estimated_pln": 653.81
     },
     {
       "id": "step1e-cce67385cbae00d7",
@@ -457,7 +457,7 @@
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "e1d13844-5567-46d6-980d-f819f4fa1752",
+    "run_id": "e0322930-e323-4c8c-9f08-459723852a72",
     "step": "1e",
     "period_from": "2026-10-23",
     "period_to": "2026-11-22",
