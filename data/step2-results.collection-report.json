@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "run_id": "efa7d3ee-f865-4353-84a7-90b73f3eb21e",
+  "run_id": "3f11be44-c429-4c52-82e5-4ae9b41d6a61",
   "step": "2",
   "period_from": "2026-10-23",
   "period_to": "2026-11-22",
   "status": "complete",
-  "expected_queries": 1488,
-  "completed_queries": 1488,
+  "expected_queries": 1736,
+  "completed_queries": 1736,
   "missing_queries": 0,
   "unexpected_queries": 0,
   "error": null,
@@ -1177,6 +1177,394 @@
     },
     {
       "carrier": "Ryanair",
+      "origin": "POZ",
+      "destination": "TFN",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        }
+      ]
+    },
+    {
+      "carrier": "Ryanair",
+      "origin": "POZ",
+      "destination": "TFS",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        }
+      ]
+    },
+    {
+      "carrier": "Ryanair",
       "origin": "TFN",
       "destination": "GDN",
       "kind": "calendar",
@@ -1567,6 +1955,200 @@
       "carrier": "Ryanair",
       "origin": "TFN",
       "destination": "KTW",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        }
+      ]
+    },
+    {
+      "carrier": "Ryanair",
+      "origin": "TFN",
+      "destination": "POZ",
       "kind": "calendar",
       "days": [
         {
@@ -2542,7 +3124,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -2731,6 +3313,200 @@
       "carrier": "Ryanair",
       "origin": "TFS",
       "destination": "KTW",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "google_flights_http"
+        }
+      ]
+    },
+    {
+      "carrier": "Ryanair",
+      "origin": "TFS",
+      "destination": "POZ",
       "kind": "calendar",
       "days": [
         {
@@ -5676,7 +6452,7 @@
         {
           "date": "2026-10-28",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "timetableV2"
         },
         {
@@ -5706,7 +6482,7 @@
         {
           "date": "2026-11-02",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "timetableV2"
         },
         {
@@ -5730,7 +6506,7 @@
         {
           "date": "2026-11-06",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -5827,6 +6603,394 @@
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
+          "method": "timetableV2"
+        }
+      ]
+    },
+    {
+      "carrier": "Wizz Air",
+      "origin": "POZ",
+      "destination": "TFN",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        }
+      ]
+    },
+    {
+      "carrier": "Wizz Air",
+      "origin": "POZ",
+      "destination": "TFS",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
           "method": "timetableV2"
         }
       ]
@@ -6223,6 +7387,200 @@
       "carrier": "Wizz Air",
       "origin": "TFN",
       "destination": "KTW",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        }
+      ]
+    },
+    {
+      "carrier": "Wizz Air",
+      "origin": "TFN",
+      "destination": "POZ",
       "kind": "calendar",
       "days": [
         {
@@ -7392,7 +8750,7 @@
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -7580,13 +8938,207 @@
     {
       "carrier": "Wizz Air",
       "origin": "TFS",
+      "destination": "POZ",
+      "kind": "calendar",
+      "days": [
+        {
+          "date": "2026-10-23",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-24",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-25",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-26",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-27",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-28",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-29",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-01",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-02",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-03",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-04",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-05",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-06",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-07",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-08",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-09",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-10",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-11",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-12",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-13",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-14",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-15",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-16",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-17",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-18",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-19",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-20",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-21",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        },
+        {
+          "date": "2026-11-22",
+          "status": "checked",
+          "flights": 0,
+          "method": "timetableV2"
+        }
+      ]
+    },
+    {
+      "carrier": "Wizz Air",
+      "origin": "TFS",
       "destination": "WAW",
       "kind": "calendar",
       "days": [
         {
           "date": "2026-10-23",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "timetableV2"
         },
         {
@@ -8386,7 +9938,7 @@
         {
           "date": "2026-10-27",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "timetableV2"
         },
         {

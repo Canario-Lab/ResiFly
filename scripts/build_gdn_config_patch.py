@@ -5,7 +5,7 @@ This one-time migration never writes source files or generated public feeds.
 
 import argparse
 from collections import defaultdict, Counter
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from dataclasses import replace
 import difflib
 import json
@@ -31,6 +31,8 @@ def main():
     parser.add_argument("--endpoint", choices=POLISH_AIRPORTS, default="GDN")
     parser.add_argument("--snapshot", type=Path, required=True)
     parser.add_argument("--schedules", type=Path, required=True)
+    parser.add_argument("--from-date", type=date.fromisoformat, required=True)
+    parser.add_argument("--days", type=int, default=30)
     parser.add_argument("--baseline-directory", type=Path, default=ROOT / "data")
     parser.add_argument("--output-directory", type=Path,
                         help="Write review copies outside data/ instead of printing a patch")
@@ -40,6 +42,9 @@ def main():
     endpoint = args.endpoint
     if evidence.get("endpoint") != endpoint or evidence.get("snapshot_date") != snapshot["as_of"]:
         raise RuntimeError("Mismatched endpoint or snapshot in schedule evidence")
+    if (evidence.get("period_from") != args.from_date.isoformat()
+            or evidence.get("period_to") != (args.from_date + timedelta(days=args.days)).isoformat()):
+        raise RuntimeError("Mismatched calendar window in schedule evidence")
     candidates = discover_candidates(snapshot)
     by_pair = defaultdict(list)
     for row in evidence["routes"]:
@@ -56,7 +61,8 @@ def main():
         for section in (document.get("selection_method", {}), document.get("usage_policy", {})):
             for key, value in section.items():
                 if isinstance(value, str):
-                    section[key] = re.sub(r"WAW/WMI/KTW/KRK(?:/GDN)?(?:/WRO)?", "/".join(POLISH_AIRPORTS), value).replace("wszystkie pięć polskich lotniska", "wszystkie sześć polskich lotnisk")
+                    section[key] = re.sub(r"WAW/WMI/KTW/KRK(?:/GDN)?(?:/WRO)?(?:/POZ)?", "/".join(POLISH_AIRPORTS), value)
+                    section[key] = re.sub(r"wszystkie (?:pięć|sześć|siedem) polskich lotnisk[ao]?", "wszystkie polskie lotniska z rejestru endpointów", section[key])
         if "selection_method" in document:
             selection = document["selection_method"]
             if "excluded_endpoints" in selection and path.name != "mixed-transfer-airports.json":
@@ -113,6 +119,9 @@ def main():
                 continue
             row = next((item for item in rows if item["iata"] == candidate.iata), None)
             if row:
+                missing_tenerife = set(candidate.tenerife_airports) - set(row["tenerife_airports"])
+                if missing_tenerife:
+                    raise RuntimeError(f"Review new Tenerife airports explicitly for {step}/{candidate.iata}: {sorted(missing_tenerife)}")
                 row["polish_airports"] = list(dict.fromkeys(row["polish_airports"] + [endpoint]))
             else:
                 rows.append(airport_record(airport_from_snapshot(snapshot, candidate.iata), isolated, step))

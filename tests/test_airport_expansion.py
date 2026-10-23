@@ -29,8 +29,8 @@ def leg(carrier, origin, departure, destination, arrival, number="W60001"):
 
 
 class AirportExpansionTests(unittest.TestCase):
-    def test_all_nine_allowlist_scopes_use_exactly_six_endpoints(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO"))
+    def test_all_nine_allowlist_scopes_use_exactly_seven_endpoints(self):
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ"))
         self.assertEqual(ENDPOINT_TIMEZONES["GDN"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -88,7 +88,7 @@ class AirportExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 22), date(2026, 11, 21)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 24)
+            self.assertEqual(collector.call_count, 28)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("GDN", hub, start, end), calls)
@@ -144,9 +144,10 @@ class AirportExpansionTests(unittest.TestCase):
             module = importlib.import_module("scripts.collect_step" + suffix)
             low = [leg("Ryanair", "MAD", "2026-11-01T15:00:00+01:00", polish, "2026-11-01T18:00:00+01:00", f"FR{index}") for index, polish in enumerate(POLISH_AIRPORTS)]
             resident = [leg(carrier, "TFN", "2026-11-01T08:00:00+00:00", "MAD", "2026-11-01T12:00:00+01:00", "XX1")]
-            with patch.object(module, "POLISH_AIRPORTS", POLISH_AIRPORTS[:-1]):
-                before = module.build_connections(low[:-1], resident)
-            after = [row for row in module.build_connections(low, resident) if row["destination_airport"] != "WRO"]
+            previous_endpoints = ("WAW", "WMI", "KTW", "KRK", "GDN")
+            with patch.object(module, "POLISH_AIRPORTS", previous_endpoints):
+                before = module.build_connections([row for row in low if row["arrival_airport"] in previous_endpoints], resident)
+            after = [row for row in module.build_connections(low, resident) if row["destination_airport"] in previous_endpoints]
             self.assertEqual(before, after, suffix)
 
     def test_gdn_endpoint_in_steps_three_four_and_both_mixed_variants(self):

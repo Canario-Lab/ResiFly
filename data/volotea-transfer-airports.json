@@ -13,7 +13,8 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "tenerife_leg_airlines": [
       "Volotea"
@@ -116,6 +117,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o POZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

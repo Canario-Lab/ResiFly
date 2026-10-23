@@ -56,19 +56,26 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN i WRO. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO i POZ. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
 osobnego audytu siatki i zapisania konkretnych par lotnisko/przewoźnik;
 nie oznacza dopisania go do wszystkich hubów. Historyczny plan Gdańska:
-`docs/PLAN_DODANIA_GDANSKA_GDN.md`. Aktualny plan dodania Wrocławia (WRO)
+`docs/PLAN_DODANIA_GDANSKA_GDN.md`. Plan dodania Wrocławia (WRO)
 jako szóstego endpointu jest zapisany w
 [`docs/PLAN_DODANIA_WROCLAWIA_WRO.md`](docs/PLAN_DODANIA_WROCLAWIA_WRO.md).
 WRO wdrożono lokalnie zgodnie z tym planem; zakres, wyniki i dowody zawiera
 [`docs/WDROZENIE_WROCLAWIA_WRO.md`](docs/WDROZENIE_WROCLAWIA_WRO.md).
 Pakiet WRO obejmuje konfigurację, kolektory, testy oraz komplet dziesięciu
 odświeżonych feedów z raportami pokrycia.
+
+Plan dodania Poznania (POZ) jako siódmego endpointu:
+[`docs/PLAN_DODANIA_POZNANIA_POZ.md`](docs/PLAN_DODANIA_POZNANIA_POZ.md).
+Lokalne wdrożenie POZ i odrębna pełna kolekcja są opisane w
+[`docs/WDROZENIE_POZNANIA_POZ.md`](docs/WDROZENIE_POZNANIA_POZ.md).
+Po pierwszym lokalnym odbiorze użytkownik osobno autoryzował 23.10.2026
+publikację całego pakietu POZ i nowej bazy na GitHub.
 
 GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.

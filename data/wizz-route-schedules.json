@@ -957,6 +957,24 @@
       "verified_on": "2026-10-23",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LTN",
+      "destination": "POZ",
+      "flight_number": "W95389",
+      "duration_minutes": 130,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "POZ",
+      "destination": "LTN",
+      "flight_number": "W95390",
+      "duration_minutes": 120,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -1727,6 +1745,27 @@
       "departure_time": "19:45",
       "flight_number": "W61801",
       "duration_minutes": 140
+    },
+    {
+      "origin": "LTN",
+      "destination": "POZ",
+      "departure_time": "07:45",
+      "flight_number": "W95389",
+      "duration_minutes": 125
+    },
+    {
+      "origin": "POZ",
+      "destination": "LTN",
+      "departure_time": "11:25",
+      "flight_number": "W95390",
+      "duration_minutes": 135
+    },
+    {
+      "origin": "POZ",
+      "destination": "LTN",
+      "departure_time": "11:40",
+      "flight_number": "W95390",
+      "duration_minutes": 120
     }
   ],
   "flight_number_overrides_by_departure_weekday_and_time": [
@@ -1737,6 +1776,16 @@
       "departure_weekday": 1,
       "flight_number": "W61869",
       "duration_minutes": 330
+    }
+  ],
+  "flight_number_overrides_by_departure_date_and_time": [
+    {
+      "origin": "LTN",
+      "destination": "POZ",
+      "departure_time": "07:45",
+      "departure_date": "2026-10-24",
+      "flight_number": "W95389",
+      "duration_minutes": 130
     }
   ]
 }

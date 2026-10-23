@@ -14,13 +14,14 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "airline": "Ryanair",
     "resident_discount_considered": false
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO.",
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO/POZ.",
     "route_filter": {
       "operator": "RYANAIR",
       "connectingAirport": null
@@ -33,7 +34,8 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "result_count": 34,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
@@ -157,7 +159,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -172,7 +175,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -185,7 +189,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -225,7 +230,8 @@
         "WMI",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -253,7 +259,8 @@
         "WMI",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -268,7 +275,8 @@
         "WMI",
         "KTW",
         "KRK",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -283,7 +291,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -297,7 +306,8 @@
         "WMI",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -359,7 +369,8 @@
         "WAW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -374,7 +385,8 @@
         "WMI",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -402,7 +414,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -471,7 +484,8 @@
         "WMI",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -510,7 +524,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -525,7 +540,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -564,7 +580,8 @@
         "KTW",
         "KRK",
         "GDN",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     },
     {
@@ -589,7 +606,8 @@
       "polish_airports": [
         "WMI",
         "KRK",
-        "WRO"
+        "WRO",
+        "POZ"
       ]
     }
   ],
@@ -635,6 +653,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o POZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

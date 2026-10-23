@@ -195,3 +195,22 @@ walidacji. Zakres, wyniki, testy i ograniczenie odbioru wizualnego opisuje
 [`WDROZENIE_WROCLAWIA_WRO.md`](WDROZENIE_WROCLAWIA_WRO.md). Pierwszy odbiór
 odbył się bez commita i push. Następnie 2026-10-23 użytkownik autoryzował
 publikację całego pakietu WRO i nowej bazy na GitHub.
+
+## Lokalna kolekcja siedmiu endpointów 2026-10-23
+
+Przy dodaniu POZ zebrano od nowa komplet dziesięciu feedów dla
+2026-10-23–2026-11-22, run ID `3f11be44-c429-4c52-82e5-4ae9b41d6a61`.
+Wspólny nowy cache Ryanaira ma 14 570 ukończonych tras/dni; nie użyto cen
+ani cache WRO. Jeden dzienny NBP, Google max 2, niezmienione źródła i reguły
+końcowych cen Binter/Canaryfly oraz szacunków pozostałych linii.
+
+Raporty wszystkich feedów i ich sidecary są kompletne, zgodne z planem
+siedmiu endpointów i jednym runem: 30 566 pozycji, zero braków/nadmiarów.
+Po 182 testach Python i 16 JS na stagingu wykonano wyłącznie lokalną
+promocję z backupem 20 plików, porównaniem bajtowym, ponowną walidacją
+publicznej bazy i testami JS. Lokalny HTTP podaje nowy kod i dane.
+Odbiór wizualny pozostaje jawnie otwarty (sterowanie lokalną przeglądarką
+jest wyłączone w Work). Pierwszy odbiór odbył się bez commita i push.
+Następnie 2026-10-23 użytkownik osobno autoryzował publikację całego pakietu
+POZ i nowej bazy na GitHub. Dowody i wyniki:
+[`WDROZENIE_POZNANIA_POZ.md`](WDROZENIE_POZNANIA_POZ.md).

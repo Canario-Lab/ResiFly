@@ -14,7 +14,8 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "directions": [
       "POLAND_TO_TENERIFE",
@@ -24,8 +25,8 @@
     "resident_discount_considered": true
   },
   "selection_method": {
-    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO.",
-    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO.",
+    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ.",
+    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO/POZ.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -33,7 +34,8 @@
       "WMI",
       "KTW",
       "KRK",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "variant_a_result_count": 19,
     "variant_b_result_count": 6,
@@ -283,7 +285,8 @@
             "KTW",
             "KRK",
             "GDN",
-            "WRO"
+            "WRO",
+            "POZ"
           ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
@@ -533,6 +536,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o POZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

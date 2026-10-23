@@ -14,13 +14,14 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "airline": "Wizz Air",
     "resident_discount_considered": true
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO.",
+    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -29,7 +30,8 @@
       "KTW",
       "KRK",
       "GDN",
-      "WRO"
+      "WRO",
+      "POZ"
     ],
     "result_count": 6,
     "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
@@ -185,6 +187,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono WRO w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o POZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono POZ w oficjalnych siatkach obu linii. Numery i czasy Wizz zweryfikowano przez Google Flights HTTP w obu kierunkach w bieżącym oknie; dla nieaktywnych tras sezonowych wykorzystano jawnie zapisane przyszłe daty dowodów, bez przenoszenia ich cen do bieżącej bazy. Zachowano trasy pozostałych endpointów."
     }
   ]
 }
