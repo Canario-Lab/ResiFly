@@ -41,10 +41,13 @@ class ElementDouble {
   addEventListener(name, callback) { (this.listeners[name] ||= []).push(callback); }
   dispatchEvent(event) { (this.listeners[event.type] || []).forEach(callback => callback(event)); }
   closest() { return this; }
+  contains(target) { return this === target || this.children.some(child => child.contains?.(target)); }
+  focus() { this.focused = true; }
 }
 
 function harness() {
   const nodes = new Map();
+  const documentListeners = {};
   const context = vm.createContext({
     console, URL, URLSearchParams, Event, Intl,
     document: {
@@ -53,6 +56,7 @@ function harness() {
         return nodes.get(selector);
       },
       createElement: tag => new ElementDouble(tag),
+      addEventListener: (name, callback) => (documentListeners[name] ||= []).push(callback),
     },
     window: {
       location: new URL("http://127.0.0.1:8000/?build=local-gdn#old"),
@@ -68,10 +72,16 @@ function harness() {
     createCalendarDay, createFareChartDay, parseDateOnly, shareUrlForResult,
     sharedResultFromUrl, configureSharedResultFilters, journeyDuration, dayOffset,
     createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters,
-    bookingUrlForFilters, createPurchaseStep};
+    bookingUrlForFilters, createPurchaseStep, airportPickers, setPolishAirports,
+    polishAirportCodes, changeDirection, fareCalendarRenderKey, resultCardsRenderKey,
+    bindAirportPickerEvents, closeAirportPickers};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
   const api = context.api;
+  for (const picker of Object.values(api.airportPickers)) {
+    picker.summary.append(picker.value);
+    picker.disclosure.append(picker.summary, picker.all, picker.options, picker.done);
+  }
   api.state.document = { period_from: documents[0].period_from, period_to: documents[0].period_to };
   api.state.results = results;
   for (const key of ["origin", "destination", "transfer", "firstCarrier", "secondCarrier"]) api.elements[key].value = "all";
@@ -81,7 +91,7 @@ function harness() {
   api.elements.resident.checked = true;
   api.elements.wizzClub.checked = false;
   api.elements.sort.value = "departure";
-  return { ...api, context };
+  return { ...api, context, documentListeners };
 }
 
 function filters(direction = "poland_to_tenerife", additions = {}) {
@@ -94,6 +104,179 @@ function filters(direction = "poland_to_tenerife", additions = {}) {
     maxLayover: 360, sort: "departure", ...additions,
   };
 }
+
+test("Polish airport multiselect is an OR filter in both directions; Tenerife remains single-select", () => {
+  const api = harness();
+  api.initializeFilters();
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    api.elements.direction.value = direction;
+    api.changeDirection();
+    api.setPolishAirports(["WRO", "KRK", "KTW"]);
+    const selected = {...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440};
+    const union = api.filteredResults(selected);
+    const separate = ["KRK", "KTW", "WRO"].flatMap(code => api.filteredResults({...selected, polishAirports: [code]}));
+    assert.deepEqual(union.map(row => row.id).sort(), separate.map(row => row.id).sort());
+    assert.equal(new Set(union.map(row => row.id)).size, union.length);
+    const polishSide = direction === "poland_to_tenerife" ? "origin" : "destination";
+    const tenerifeSide = polishSide === "origin" ? "destination" : "origin";
+    assert.equal(api.elements[polishSide].hidden, true);
+    assert.equal(api.airportPickers[polishSide].disclosure.hidden, false);
+    assert.equal(api.elements[tenerifeSide].hidden, false);
+    assert.equal(api.airportPickers[tenerifeSide].disclosure.hidden, true);
+    const tfs = api.filteredResults({...selected, [tenerifeSide]: "TFS"});
+    assert.ok(tfs.length > 0);
+    assert.deepEqual(tfs.map(row => row.id), union.filter(row => row[`${tenerifeSide}_airport`] === "TFS").map(row => row.id));
+    assert.equal(api.airportPickers[polishSide].value.textContent, "Kraków, Katowice +1");
+    assert.equal(api.elements[polishSide].classList.contains("is-filtered"), true);
+    assert.equal(api.elements[tenerifeSide].classList.contains("is-filtered"), false);
+  }
+});
+
+test("checkboxes keep focusable nodes, select several airports, and All restores the default", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.bindAirportPickerEvents();
+  const picker = api.airportPickers.origin;
+  assert.equal(picker.checkboxes.size, 8);
+  picker.disclosure.open = true;
+  const krk = picker.checkboxes.get("KRK");
+  for (const code of ["KRK", "KTW", "WRO"]) {
+    const checkbox = picker.checkboxes.get(code);
+    checkbox.checked = true;
+    checkbox.dispatchEvent(new Event("change"));
+  }
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "KTW", "WRO"]);
+  assert.equal(picker.checkboxes.get("KRK"), krk);
+  assert.equal(picker.disclosure.open, true);
+  assert.equal(picker.all.getAttribute("aria-pressed"), "false");
+  picker.checkboxes.get("KTW").checked = false;
+  picker.checkboxes.get("KTW").dispatchEvent(new Event("change"));
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "WRO"]);
+  picker.all.dispatchEvent(new Event("click"));
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  assert.equal(picker.all.getAttribute("aria-pressed"), "true");
+  assert.equal(picker.value.textContent, "Wszystkie lotniska");
+  assert.ok([...picker.checkboxes.values()].every(checkbox => !checkbox.checked));
+  assert.equal(api.elements.origin.classList.contains("is-filtered"), false);
+});
+
+test("direction changes keep the same Polish airports and close the previous popup", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.setPolishAirports(["LCJ", "POZ"]);
+  for (const direction of ["tenerife_to_poland", "poland_to_tenerife"]) {
+    Object.values(api.airportPickers).forEach(picker => { picker.disclosure.open = true; });
+    api.elements.direction.value = direction;
+    api.changeDirection();
+    assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["LCJ", "POZ"]);
+    const side = direction === "poland_to_tenerife" ? "origin" : "destination";
+    assert.equal(api.airportPickers[side].value.textContent, "Łódź, Poznań");
+    assert.ok(Object.values(api.airportPickers).every(picker => !picker.disclosure.open));
+    assert.ok(api.filteredResults().every(row => ["LCJ", "POZ"].includes(row[`${side}_airport`])));
+  }
+});
+
+test("each airport chip removes only its own airport; removing the last restores all", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.setPolishAirports(["KRK", "KTW", "WRO"]);
+  for (const code of ["KTW", "KRK", "WRO"]) {
+    api.renderActiveFilters();
+    for (const container of [api.elements.calendarActiveFilters, api.elements.activeFilters]) {
+      assert.equal(container.children.filter(chip => chip.dataset.filterKey?.startsWith("polishAirport:")).length, api.state.polishAirports.length);
+    }
+    const before = Array.from(api.state.polishAirports);
+    const chip = api.elements.calendarActiveFilters.children.find(chip => chip.dataset.filterKey === `polishAirport:${code}`);
+    chip.dispatchEvent(new Event("click"));
+    assert.deepEqual(Array.from(api.state.polishAirports), before.filter(value => value !== code));
+  }
+  assert.equal(api.airportPickers.origin.value.textContent, "Wszystkie lotniska");
+});
+
+test("calendar and chart use the union minima and same card for multiple airports in all discount modes", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.setPolishAirports(["KRK", "KTW", "WRO"]);
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    for (const resident of [false, true]) for (const wizzClub of [false, true]) {
+      const selected = {...api.currentFilters(), direction, resident, wizzClub, maxPrice: Infinity, maxLayover: 1440};
+      const matching = api.filteredResults(selected);
+      const prices = api.lowestPricesByDate(matching, selected);
+      assert.ok(prices.size > 0);
+      for (const [day, price] of prices) {
+        const sameDay = matching.filter(row => row.legs[0].departure_at.slice(0, 10) === day);
+        assert.equal(price.total, Math.min(...sameDay.map(row => api.selectedResultPricing(row, selected).total)));
+      }
+      const [day, price] = [...prices][0];
+      const calendar = api.createCalendarDay(api.parseDateOnly(day), selected.dateFrom, selected.dateTo, prices);
+      const chart = api.createFareChartDay(day, price, price.total);
+      calendar.dispatchEvent(new Event("click"));
+      chart.dispatchEvent(new Event("click"));
+      assert.deepEqual(Array.from(api.context.targets).slice(-2), [price.resultId, price.resultId]);
+    }
+  }
+});
+
+test("airport selection is normalized and invalidates both calendar and result cache keys", () => {
+  const api = harness();
+  api.initializeFilters();
+  const all = api.currentFilters();
+  api.setPolishAirports(["WRO", "KRK", "KRK", "NOPE"]);
+  const selected = api.currentFilters();
+  assert.deepEqual(Array.from(selected.polishAirports), ["KRK", "WRO"]);
+  assert.notEqual(api.fareCalendarRenderKey(all), api.fareCalendarRenderKey(selected));
+  assert.notEqual(api.resultCardsRenderKey(all), api.resultCardsRenderKey(selected));
+  api.setPolishAirports(["KRK", "WRO"]);
+  assert.equal(api.resultCardsRenderKey(api.currentFilters()), api.resultCardsRenderKey(selected));
+  api.setPolishAirports(api.polishAirportCodes());
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  assert.equal(api.resultCardsRenderKey(api.currentFilters()), api.resultCardsRenderKey(all));
+});
+
+test("date reset keeps airport choices, while full reset and shared flights clear them", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.setPolishAirports(["LCJ", "POZ"]);
+  api.elements.dateFrom.value = "2026-11-01";
+  api.clearActiveFilter("dateRange");
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["LCJ", "POZ"]);
+  assert.equal(api.elements.dateFrom.value, documents[0].period_from);
+  const row = results.find(row => row.origin_airport === "GDN");
+  api.context.window.location = new URL(api.shareUrlForResult(row, {resident: false, wizzClub: true}));
+  assert.equal(api.sharedResultFromUrl().id, row.id);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  assert.ok(api.filteredResults().some(result => result.id === row.id));
+  api.setPolishAirports(["KRK", "WRO"]);
+  api.resetFilters();
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  assert.equal(api.airportPickers.origin.value.textContent, "Wszystkie lotniska");
+  assert.equal(api.elements.direction.value, "poland_to_tenerife");
+  assert.equal(Number(api.elements.price.value), 1000);
+  assert.equal(Number(api.elements.layover.value), 6);
+});
+
+test("Done, Escape and outside clicks close the airport popup without losing selection", () => {
+  const api = harness();
+  api.initializeFilters();
+  api.bindAirportPickerEvents();
+  api.setPolishAirports(["KRK", "WRO"]);
+  const picker = api.airportPickers.origin;
+  picker.disclosure.open = true;
+  api.documentListeners.click[0]({target: picker.checkboxes.get("KRK")});
+  assert.equal(picker.disclosure.open, true);
+  picker.done.dispatchEvent(new Event("click"));
+  assert.equal(picker.disclosure.open, false);
+  assert.equal(picker.summary.focused, true);
+  picker.disclosure.open = true;
+  let prevented = false;
+  api.documentListeners.keydown[0]({key: "Escape", preventDefault() { prevented = true; }});
+  assert.equal(picker.disclosure.open, false);
+  assert.equal(prevented, true);
+  picker.disclosure.open = true;
+  api.documentListeners.click[0]({target: api.elements.price});
+  assert.equal(picker.disclosure.open, false);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "WRO"]);
+});
 
 test("all eight endpoints remain selectable in each direction", () => {
   const api = harness();

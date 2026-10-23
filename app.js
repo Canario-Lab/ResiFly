@@ -14,6 +14,7 @@ const DATA_SOURCES = [
 const state = {
   document: null,
   results: [],
+  polishAirports: [],
 };
 
 const elements = {
@@ -62,6 +63,17 @@ const elements = {
   purchaseDialogContent: document.querySelector("#purchase-dialog-content"),
   shareStatus: document.querySelector("#share-status"),
 };
+
+const airportPickers = Object.fromEntries(["origin", "destination"].map(side => [side, {
+  select: elements[side],
+  disclosure: document.querySelector(`#${side}-airports`),
+  summary: document.querySelector(`#${side}-airports-summary`),
+  value: document.querySelector(`#${side}-airports-value`),
+  options: document.querySelector(`#${side}-airports-options`),
+  all: document.querySelector(`#${side}-airports-all`),
+  done: document.querySelector(`#${side}-airports-done`),
+  checkboxes: new Map(),
+}]));
 
 const currency = new Intl.NumberFormat("pl-PL", {
   style: "currency",
@@ -473,6 +485,79 @@ function updateAirportOptions() {
   resetAirportSelect(elements.destination);
   addOptions(elements.origin, origins, optionLabel);
   addOptions(elements.destination, destinations, optionLabel);
+  updatePolishAirportPickers();
+}
+
+function polishAirportCodes() {
+  return [...new Set(state.results.map(result => result.direction === "poland_to_tenerife"
+    ? result.origin_airport : result.destination_airport))].sort();
+}
+
+function setPolishAirports(codes) {
+  const available = polishAirportCodes();
+  const selected = [...new Set(codes)].filter(code => available.includes(code)).sort();
+  // No restriction and an explicitly selected full set have the same meaning.
+  state.polishAirports = selected.length === available.length ? [] : selected;
+  const side = elements.direction.value === "poland_to_tenerife" ? "origin" : "destination";
+  elements[side].value = "all";
+  updatePolishAirportPickers();
+  updateChangedSelectStyles();
+}
+
+function updatePolishAirportPickers() {
+  const codes = polishAirportCodes();
+  const polishSide = elements.direction.value === "poland_to_tenerife" ? "origin" : "destination";
+  const names = state.polishAirports.map(airportCityLabel);
+  const label = names.length ? names.slice(0, 2).join(", ") + (names.length > 2 ? ` +${names.length - 2}` : "") : "Wszystkie lotniska";
+  for (const [side, picker] of Object.entries(airportPickers)) {
+    const active = side === polishSide;
+    picker.select.hidden = active;
+    picker.disclosure.hidden = !active;
+    if (!active) picker.disclosure.open = false;
+    picker.value.textContent = label;
+    picker.summary.title = names.join(", ") || "Wszystkie lotniska";
+    picker.summary.setAttribute("aria-label", `${side === "origin" ? "Wylot z" : "Przylot na"}: ${names.join(", ") || "Wszystkie lotniska"}. Wybierz jedno lub kilka lotnisk.`);
+    picker.all.setAttribute("aria-pressed", String(!names.length));
+    if ([...picker.checkboxes.keys()].join(",") !== codes.join(",")) {
+      picker.checkboxes.clear();
+      picker.options.replaceChildren(...codes.map(code => {
+        const row = document.createElement("label");
+        row.className = "airport-multi-option";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = code;
+        checkbox.addEventListener("change", () => {
+          const selected = new Set(state.polishAirports);
+          if (checkbox.checked) selected.add(code);
+          else selected.delete(code);
+          setPolishAirports([...selected]);
+          scheduleRenderResults();
+        });
+        const text = document.createElement("span");
+        text.textContent = optionLabel(code);
+        row.append(checkbox, text);
+        picker.checkboxes.set(code, checkbox);
+        return row;
+      }));
+    }
+    for (const [code, checkbox] of picker.checkboxes) {
+      checkbox.checked = state.polishAirports.includes(code);
+    }
+  }
+}
+
+function closeAirportPickers({ restoreFocus = false } = {}) {
+  for (const picker of Object.values(airportPickers)) {
+    if (!picker.disclosure.open) continue;
+    picker.disclosure.open = false;
+    if (restoreFocus) picker.summary.focus();
+  }
+}
+
+function changeDirection() {
+  closeAirportPickers();
+  updateAirportOptions();
+  scheduleRenderResults();
 }
 
 function lowestPricesByDate(results, filters) {
@@ -842,6 +927,7 @@ function setRangeProgress(input) {
 }
 
 function initializeFilters() {
+  state.polishAirports = [];
   elements.direction.value = DEFAULT_DIRECTION;
   elements.dateFrom.min = state.document.period_from;
   elements.dateFrom.max = state.document.period_to;
@@ -901,9 +987,10 @@ function updateChangedSelectStyles() {
     elements.secondCarrier,
     elements.transfer,
   ].forEach(select => {
+    const polishSide = elements.direction.value === "poland_to_tenerife" ? elements.origin : elements.destination;
     select.closest(".filter-field").classList.toggle(
       "is-filtered",
-      select.value !== "all" && !select.disabled
+      (select.value !== "all" || (select === polishSide && state.polishAirports.length > 0)) && !select.disabled
     );
   });
 }
@@ -931,6 +1018,7 @@ function currentFilters() {
     maxLayover: Number(elements.layover.value) * 60,
     sort: elements.sort.value,
     direction: elements.direction.value,
+    polishAirports: [...state.polishAirports],
   };
 }
 
@@ -947,6 +1035,9 @@ function filteredResults(filters = currentFilters()) {
     return (
       selectedResultPricing(result, filters).total <= filters.maxPrice &&
       result.direction === filters.direction &&
+      (!(filters.polishAirports?.length) || filters.polishAirports.includes(
+        result.direction === "poland_to_tenerife" ? result.origin_airport : result.destination_airport
+      )) &&
       departureDate >= filters.dateFrom &&
       departureDate <= filters.dateTo &&
       (filters.origin === "all" || result.origin_airport === filters.origin) &&
@@ -1315,6 +1406,12 @@ function renderActiveFilters(filters = currentFilters()) {
   if (filters.destination !== "all") {
     chips.push({ label: `Przylot: ${filters.destination}`, removable: "destination" });
   }
+  for (const code of filters.polishAirports || []) {
+    chips.push({
+      label: `${filters.direction === "poland_to_tenerife" ? "Wylot" : "Przylot"}: ${airportCityLabel(code)}`,
+      removable: `polishAirport:${code}`,
+    });
+  }
   if (filters.transfer === "direct") {
     chips.push({ label: "Bez przesiadek", removable: "transfer" });
   }
@@ -1365,6 +1462,12 @@ function renderActiveFilters(filters = currentFilters()) {
 }
 
 function clearActiveFilter(filterKey) {
+  if (filterKey.startsWith("polishAirport:")) {
+    const code = filterKey.slice("polishAirport:".length);
+    setPolishAirports(state.polishAirports.filter(selected => selected !== code));
+    scheduleRenderResults();
+    return;
+  }
   if (filterKey === "resident") {
     elements.resident.checked = false;
     elements.resident.dispatchEvent(new Event("input", { bubbles: true }));
@@ -1404,6 +1507,7 @@ function fareCalendarRenderKey(filters) {
     filters.dateTo,
     filters.origin,
     filters.destination,
+    filters.polishAirports,
     filters.transfer,
     filters.firstCarrier,
     filters.secondCarrier,
@@ -1421,6 +1525,7 @@ function resultCardsRenderKey(filters) {
     filters.dateTo,
     filters.origin,
     filters.destination,
+    filters.polishAirports,
     filters.transfer,
     filters.firstCarrier,
     filters.secondCarrier,
@@ -1869,6 +1974,8 @@ function renderResults({ preserveAnchor = true } = {}) {
 }
 
 function configureSharedResultFilters(result, params) {
+  state.polishAirports = [];
+  closeAirportPickers();
   elements.resident.checked = params.get("resident") !== "0";
   elements.wizzClub.checked = params.get("wizz") === "1";
   elements.price.value = elements.price.max;
@@ -1915,6 +2022,8 @@ function scheduleRenderResults({ preserveAnchor = true } = {}) {
 
 function resetFilters() {
   window.clearTimeout(filterRenderTimer);
+  state.polishAirports = [];
+  closeAirportPickers();
   elements.resident.checked = true;
   elements.wizzClub.checked = false;
   elements.price.value = String(DEFAULT_MAX_PRICE);
@@ -1932,7 +2041,37 @@ function resetFilters() {
   renderResults();
 }
 
+function bindAirportPickerEvents() {
+  for (const picker of Object.values(airportPickers)) {
+    picker.all.addEventListener("click", () => {
+      setPolishAirports([]);
+      scheduleRenderResults();
+    });
+    picker.done.addEventListener("click", () => closeAirportPickers({ restoreFocus: true }));
+    picker.disclosure.addEventListener("pointerdown", cancelProgressiveIdleWork);
+    picker.disclosure.addEventListener("focusin", cancelProgressiveIdleWork);
+    const resume = () => scheduleProgressiveBackground(progressiveRenderVersion, BACKGROUND_RESULT_START_DELAY_MS);
+    picker.disclosure.addEventListener("toggle", () => {
+      if (!picker.disclosure.open) resume();
+    });
+    picker.disclosure.addEventListener("focusout", event => {
+      if (!picker.disclosure.contains(event.relatedTarget)) resume();
+    });
+  }
+  document.addEventListener("click", event => {
+    for (const picker of Object.values(airportPickers)) {
+      if (picker.disclosure.open && !picker.disclosure.contains(event.target)) picker.disclosure.open = false;
+    }
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape" || !Object.values(airportPickers).some(picker => picker.disclosure.open)) return;
+    closeAirportPickers({ restoreFocus: true });
+    event.preventDefault();
+  });
+}
+
 function bindEvents() {
+  bindAirportPickerEvents();
   const filters = [
     elements.resident,
     elements.wizzClub,
@@ -1967,10 +2106,7 @@ function bindEvents() {
   elements.sort.addEventListener("input", () => {
     scheduleRenderResults({ preserveAnchor: false });
   });
-  elements.direction.addEventListener("input", () => {
-    updateAirportOptions();
-    scheduleRenderResults();
-  });
+  elements.direction.addEventListener("input", changeDirection);
   elements.calendarDirectionSwap.addEventListener("click", () => {
     elements.direction.value = elements.direction.value === "tenerife_to_poland"
       ? "poland_to_tenerife"

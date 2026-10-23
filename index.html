@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20261022-53" />
+    <link rel="stylesheet" href="styles.css?v=20261023-airports-1" />
   </head>
   <body>
     <header class="site-header">
@@ -120,19 +120,39 @@
           </div>
 
           <div class="filter-stack">
-            <label class="filter-field">
-              <span class="filter-label">Wylot z</span>
-              <select id="origin-filter">
+            <div class="filter-field">
+              <span class="filter-label" id="origin-filter-label">Wylot z</span>
+              <select id="origin-filter" aria-labelledby="origin-filter-label">
                 <option value="all">Wszystkie lotniska</option>
               </select>
-            </label>
+              <details id="origin-airports" class="airport-multi" hidden>
+                <summary id="origin-airports-summary" aria-label="Wylot z: Wszystkie lotniska">
+                  <span id="origin-airports-value">Wszystkie lotniska</span>
+                </summary>
+                <div class="airport-multi-panel" role="group" aria-label="Polskie lotniska wylotu">
+                  <button id="origin-airports-all" class="airport-multi-all" type="button" aria-pressed="true">Wszystkie lotniska</button>
+                  <div id="origin-airports-options" class="airport-multi-options"></div>
+                  <button id="origin-airports-done" class="airport-multi-done" type="button">Gotowe</button>
+                </div>
+              </details>
+            </div>
 
-            <label class="filter-field">
-              <span class="filter-label">Przylot na</span>
-              <select id="destination-filter">
+            <div class="filter-field">
+              <span class="filter-label" id="destination-filter-label">Przylot na</span>
+              <select id="destination-filter" aria-labelledby="destination-filter-label">
                 <option value="all">Wszystkie lotniska</option>
               </select>
-            </label>
+              <details id="destination-airports" class="airport-multi" hidden>
+                <summary id="destination-airports-summary" aria-label="Przylot na: Wszystkie lotniska">
+                  <span id="destination-airports-value">Wszystkie lotniska</span>
+                </summary>
+                <div class="airport-multi-panel" role="group" aria-label="Polskie lotniska przylotu">
+                  <button id="destination-airports-all" class="airport-multi-all" type="button" aria-pressed="true">Wszystkie lotniska</button>
+                  <div id="destination-airports-options" class="airport-multi-options"></div>
+                  <button id="destination-airports-done" class="airport-multi-done" type="button">Gotowe</button>
+                </div>
+              </details>
+            </div>
           </div>
 
           <div class="filter-stack">
@@ -387,6 +407,6 @@
       </div>
     </dialog>
 
-    <script src="app.js?v=20261023-lcj-1" defer></script>
+    <script src="app.js?v=20261023-airports-1" defer></script>
   </body>
 </html>
