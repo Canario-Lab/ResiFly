@@ -255,7 +255,7 @@ class PozExpansionTests(unittest.TestCase):
                     with patch("sys.argv", argv + ["--baseline-directory", str(baseline), "--output-directory", str(output)]):
                         build_configuration()
                 files = list((folder / "first").glob("*.json"))
-                self.assertEqual(len(files), 10)
+                self.assertEqual(len(files), 11)
                 for path in files:
                     self.assertEqual(json.loads(path.read_text()), json.loads((folder / "second" / path.name).read_text()))
                 candidates["step5_variant_a"] = [Candidate("LTN", ("TFN", "TFS"), ("POZ",))]

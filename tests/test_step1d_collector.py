@@ -151,9 +151,9 @@ class Step1DCollectorTests(unittest.TestCase):
                 self.parse(html)
         self.assertEqual(self.parse(google_html()), [])
 
-    @patch("scripts.collect_step1d.ThreadPoolExecutor", wraps=ThreadPoolExecutor)
+    @patch("scripts.source_recovery.ThreadPoolExecutor", wraps=ThreadPoolExecutor)
     @patch("scripts.collect_step1d.GoogleFlightsClient.availability", autospec=True)
-    def test_full_calendar_coverage_and_two_worker_cap(self, availability, pool):
+    def test_full_calendar_coverage_and_three_worker_cap(self, availability, pool):
         start, end = date(2026, 10, 22), date(2026, 11, 21)
         plan = collector.air_europa_route_days(self.allowlist, start, end)
         expected = {("Air Europa", o, d, str(day), "calendar") for o, d, day in plan}

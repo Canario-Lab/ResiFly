@@ -28,7 +28,7 @@ class SzyRdoExpansionTests(unittest.TestCase):
         for endpoint in ("SZY", "RDO"):
             self.assertEqual(ENDPOINT_TIMEZONES[endpoint], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(paths), 9)
+        self.assertEqual(len(paths), 10)
         for path in paths:
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 

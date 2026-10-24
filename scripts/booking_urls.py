@@ -280,6 +280,21 @@ def volotea_booking_url(
     )
 
 
+def easyjet_booking_url(origin: str, destination: str, departure: DateValue) -> str:
+    """Official deeplink observed in easyJet's own Low Fare Finder.
+
+    Route/date search for one adult, no return, no session and no claim of
+    flight-number preselection. The obsolete buy/flights orig/dest URL is
+    deliberately not used: the current booking app ignores those parameters.
+    """
+    query = urlencode({
+        "lang": "en", "curr": "EUR", "dep": _iata(origin), "dest": _iata(destination),
+        "dd": _departure_date(departure), "apax": 1, "cpax": 0, "ipax": 0,
+        "view": "D", "SearchFrom": "Timetable", "ep": "step1", "spnl": 1,
+    })
+    return f"https://www.easyjet.com/deeplink?{query}"
+
+
 _CANARYFLY_AIRPORT_SLUGS = {
     "ACE": "lanzarote",
     "FUE": "fuerteventura",

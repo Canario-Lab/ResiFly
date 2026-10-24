@@ -41,6 +41,7 @@ class FiveStepBatchTests(unittest.TestCase):
                     "Ryanair": "google_flights_http", "Wizz Air": "timetableV2", "Binter": "booking_search",
                     "Iberia": "google_flights_http", "Vueling": "google_flights_http",
                     "Volotea": "official_minprice", "Air Europa": "google_flights_http", "Canaryfly": "booking_calendar",
+                    "easyJet": "google_flights_http",
                 }[carrier])
             document["collection_coverage"] = tracker.verify()
             documents[step] = document
@@ -54,7 +55,7 @@ class FiveStepBatchTests(unittest.TestCase):
             directory = Path(temporary)
             self.write_batch(directory)
             report = validate_batch(directory, date(2026, 10, 22), 30)
-            self.assertEqual(len(report), 10)
+            self.assertEqual(len(report), 11)
             self.assertEqual(report["2"]["polish_airports"], {"GDN": 1})
 
     @patch("scripts.collect_five_steps.validate_feed_document")
@@ -141,6 +142,35 @@ class FiveStepBatchTests(unittest.TestCase):
                         promote_batch(directory, directory / "public-never-created")
                     self.assertFalse((directory / "public-never-created").exists())
                     self.assertFalse((directory / "previous-public-feeds").exists())
+
+    @patch("scripts.collect_five_steps.validate_feed_document")
+    def test_first_step6_migration_rolls_back_all_twenty_two_files_after_last_failure(self, validate):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            staging, public = root / "stage", root / "public"
+            staging.mkdir(); public.mkdir()
+            self.write_batch(staging)
+            original = {}
+            for step in STEPS:
+                if step == "6":
+                    continue
+                for name in (f"step{step}-results.json", f"step{step}-results.collection-report.json"):
+                    original[name] = "old-" + name
+                    (public / name).write_text(original[name])
+            replace = Path.replace
+            def fail_last(path, target):
+                if path.name == "step6-results.collection-report.json.pending":
+                    raise OSError("last file failure")
+                return replace(path, target)
+            with patch.object(Path, "replace", fail_last), self.assertRaisesRegex(OSError, "last file"):
+                promote_batch(staging, public)
+            self.assertEqual({p.name: p.read_text() for p in public.iterdir()}, original)
+            manifest = json.loads((staging / "previous-public-feeds/manifest.json").read_text())
+            self.assertEqual(len(manifest), 22)
+            self.assertFalse(manifest["step6-results.json"]["existed"])
+            self.assertFalse(manifest["step6-results.collection-report.json"]["existed"])
+            promote_batch(staging, public)
+            self.assertEqual(len(list(public.glob("*.json"))), 22)
 
     @patch("scripts.collect_five_steps.promote_batch")
     @patch("scripts.collect_five_steps.collect_sources", return_value=Path("/unused-mocked-sources"))

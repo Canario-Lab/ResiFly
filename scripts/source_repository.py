@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import threading
 from functools import wraps
+from scripts.source_recovery import PermanentSourceError, can_defer
 
 _writer = None
 _readers = {}
@@ -26,22 +27,22 @@ class Repository:
         manifest = self.folder / "manifest.json"
         if manifest.exists():
             if json.loads(manifest.read_text()) != identity:
-                raise RuntimeError("Source repository identity mismatch")
+                raise PermanentSourceError("Source repository identity mismatch")
         elif writable:
             self.folder.mkdir(parents=True, exist_ok=True)
             atomic_json(manifest, identity)
         else:
-            raise RuntimeError("Missing source repository manifest")
+            raise PermanentSourceError("Missing source repository manifest")
         for path in self.folder.glob("*.jsonl"):
             lines = path.read_text().splitlines()
             for index, line in enumerate(lines):
                 try:
                     row = json.loads(line)
                 except ValueError:
-                    raise RuntimeError(f"Corrupt source repository {path.name}:{index + 1}")
+                    raise PermanentSourceError(f"Corrupt source repository {path.name}:{index + 1}")
                 key = tuple(row["key"])
                 if key in self.rows:
-                    raise RuntimeError("Duplicate source observation")
+                    raise PermanentSourceError("Duplicate source observation")
                 self.rows[key] = row
 
     def has(self, keys):
@@ -58,13 +59,13 @@ class Repository:
             for key in day_keys(carrier, origin, destination, start, end, kind):
                 row = self.rows.get(key)
                 if row is None:
-                    raise RuntimeError("Missing current source observation: " + str(key))
+                    raise PermanentSourceError("Missing current source observation: " + str(key))
                 result.extend(deepcopy(row["rows"]))
             return result
 
     def record(self, carrier, origin, destination, start, end, rows, method, kind="calendar"):
         if not self.writable:
-            raise RuntimeError("Read-only source repository")
+            raise PermanentSourceError("Read-only source repository")
         pending = []
         for key in day_keys(carrier, origin, destination, start, end, kind):
             values = [r for r in rows if r["departure_at"][:10] == key[3]]
@@ -76,11 +77,11 @@ class Repository:
                     key = tuple(row["key"])
                     if key in self.rows:
                         if self.rows[key] != json.loads(json.dumps(row)):
-                            raise RuntimeError("Attempt to mutate a completed source observation")
+                            raise PermanentSourceError("Attempt to mutate a completed source observation")
                         continue
                     encoded = json.dumps(row, ensure_ascii=False, allow_nan=False)
                     if any('"' + k + '"' in encoded for k in ("token", "cookies", "authorization", "api_key")):
-                        raise RuntimeError("Secret field in normalized source observation")
+                        raise PermanentSourceError("Secret field in normalized source observation")
                     stream.write(encoded + "\n")
                     stream.flush()
                     self.rows[key] = json.loads(encoded)
@@ -97,13 +98,13 @@ def record_source(*args):
 
 
 def abort_on_source_failure(function):
-    """Stop queued work promptly, but do not change standalone retry behavior."""
+    """Defer request failures only inside the bounded full-batch job runner."""
     @wraps(function)
     def wrapped(*args, **kwargs):
         try:
             return function(*args, **kwargs)
-        except BaseException:
-            if _writer is not None:
+        except BaseException as error:
+            if _writer is not None and not can_defer(error):
                 from scripts.source_scheduler import stop_requests
                 stop_requests()
             raise

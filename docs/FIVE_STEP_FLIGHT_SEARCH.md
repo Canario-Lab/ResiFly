@@ -1,8 +1,14 @@
-# ResiFly — pięć kroków zbierania danych o lotach
+# ResiFly — sześć kroków zbierania danych o lotach
 
 To jest kanoniczna, trwała instrukcja cotygodniowego wyszukiwania. Nie należy
-dodawać innych rodzajów wyszukiwania ani pomijać żadnego z pięciu kroków bez
+dodawać innych rodzajów wyszukiwania ani pomijać żadnego z sześciu kroków bez
 wyraźnej decyzji użytkownika.
+
+Decyzja z 24.10.2026: użytkownik zatwierdził krok 6 easyJet + Ryanair/Wizz,
+a po nieudanym teście bezpośredniego HTTP wybrał Google Flights dla easyJet.
+Historyczna nazwa tego pliku i runnera `collect_five_steps.py` pozostaje
+kompatybilna. Bieżący zestaw `scripts.search_steps.STEPS` ma 11 feedów i
+11 raportów; dawne raporty pięciokrokowe opisują stan historyczny.
 
 ## Harmonogram
 
@@ -83,6 +89,21 @@ wyraźnej decyzji użytkownika.
 
 ## Stabilność automatycznego uruchomienia
 
+- Decyzja użytkownika z 24.10.2026: pełny batch sam odzyskuje przejściowe
+  błędy źródeł, bez pytania o kolejną zgodę. Po zwykłym budżecie krótkich prób
+  odłożyć nieudane zadanie na koniec jego kolejki i wykonać najwyżej dwie
+  dodatkowe rundy po 60 i 120 sekundach, z uwzględnieniem Retry-After. Zachować
+  ten sam run, daty, konfigurację, adaptery, NBP i poprawne obserwacje.
+  Dni Ryanaira są niezależnymi zadaniami; awaria jednego dnia nie pomija
+  pozostałych. Odzyskiwanie nie zmienia liczby kroków ani zakresu wyszukiwania.
+- Po 20 nieudanych zadaniach w danej rundzie wstrzymać niepodjęte jeszcze
+  zadania tej kolejki do następnej rundy. Nie oznaczać ich jako pustych dni.
+  Po wyczerpaniu odzyskiwania dokończyć niezależne źródła oraz późniejsze
+  rodziny Google w ustalonej kolejności, ale nie budować ani nie publikować
+  niekompletnego zestawu. Błędy integralności, bezpieczeństwa konfiguracji
+  i przerwanie przez operatora nie podlegają temu odzyskiwaniu.
+  Limity Google 3 / oficjalne źródła 2 pozostają bez zmian. Dodatkowe rundy
+  działają w pełnym runnerze; samodzielne kolektory zachowują zwykłe ponowienia.
 - Te same zabezpieczenia obowiązują lokalnie, bez GitHub Actions. Każdy
   kolektor prowadzi raport pokrycia wszystkich zapisanych tras/dni, wyliczany
   niezależnie od znalezionych lotów. Błąd pobrania nie oznacza braku lotów.
@@ -96,13 +117,13 @@ wyraźnej decyzji użytkownika.
   minimum dnia na inne rejsy i nie używać Fare Finder jako zastępstwa.
   Niekompletna odpowiedź, rejs bez ceny lub błąd dnia blokuje publikację.
   Maksymalnie trzy zapytania Google równolegle; wspólny trwały cache trasa/dzień
-  pozwala dziesięciu feedom jednego batcha użyć tego samego odczytu.
+  pozwala jedenastu feedom jednego batcha użyć tego samego odczytu.
 - Każdy nowy feed zawiera `collection_coverage`, a obok powstaje
   `step*-results.collection-report.json`. Zapis feedu jest atomowy i dozwolony
   tylko przy kompletnym raporcie. Przy błędzie dotychczasowy feed pozostaje
   nietknięty, a raport opisuje brakujące trasy/dni i przyczynę błędu.
 - Pełną bazę aktualizować przez `scripts/collect_five_steps.py`: wszystkie
-  dziesięć feedów najpierw do stagingu, walidacja raportów i wspólnego
+  jedenaście feedów najpierw do stagingu, walidacja raportów i wspólnego
   `run_id`, dopiero potem `--promote`. Nie mieszać cen ze starego uruchomienia
   z nowymi. Stare feedy bez raportów nie mogą przejść nowej walidacji — trzeba
   je zebrać ponownie. Wznowienie części kroków wymaga `--run-id` pierwotnego
@@ -136,7 +157,7 @@ wyraźnej decyzji użytkownika.
 ## Krok 1 — przewoźnik ze zniżką rezydencką + Ryanair lub Wizz Air
 
 Krok 1 ma sześć niezależnych wariantów. Wszystkie są częścią tego samego kroku, więc
-cała procedura nadal zawiera dokładnie pięć głównych kroków.
+cała procedura zawiera sześć głównych kroków, w tym osobny easyJet w kroku 6.
 
 ### Krok 1A — Binter + Ryanair lub Wizz Air
 
@@ -451,9 +472,41 @@ cała procedura nadal zawiera dokładnie pięć głównych kroków.
 - W wynikach kroku najpierw podać listę lotnisk przesiadkowych dla obu
   wariantów, a następnie wszystkie połączenia.
 
+## Krok 6 — easyJet + Ryanair lub Wizz Air
+
+- Stała lista `data/easyjet-transfer-airports.json`, kolektor
+  `scripts/collect_step6.py`, wynik `data/step6-results.json` z sidecarem.
+  Discovery odbywa się osobno przez `scripts/discover_easyjet_routes.py`,
+  na podstawie oficjalnego katalogu easyJet i pełnych siatek FR/Wizz dla
+  wszystkich portów Polski, również dla zupełnie nowych hubów.
+- Polska → FR/Wizz → hub → easyJet → TFS/TFN i osobno kierunek odwrotny.
+  easyJet zawsze obsługuje geograficzną nogę Teneryfy. Jedna przesiadka,
+  to samo IATA, 120–1440 min, brak self-routes i brak filtracji ceny.
+- Każda linia ma pełny niezależny kalendarz każdej zapisanej trasy w obu
+  kierunkach, zanim rozpocznie się dopasowanie. Nie wybierać dat jednej
+  linii z rozkładu drugiej. Poprawne zero dostępności jest legalne;
+  błędna/niepełna odpowiedź nie jest zerem i blokuje publikację.
+- Wyłącznym źródłem rejsów i indywidualnych cen easyJet jest Google Flights
+  HTTP, jeden dorosły, one-way, economy, bezpośrednio. Obsłużyć U2/EC/DS,
+  wszystkie znane bloki ofert, własną najniższą cenę każdego rejsu w PLN.
+  Nie używać minimum dnia, szablonu godzin ani alternatywnego źródła w runie.
+- easyJet jest kolejną rodziną Google po UX, we wspólnym limicie trzech,
+  z tym samym cache-only builderem i automatycznym recovery. Nie ma dodatkowych
+  trzech slotów easyJet. FR/Wizz dzielą obserwacje z wcześniejszymi krokami.
+- Zniżka rezydenta wymaga jawnego potwierdzenia dla trasy. Obecne zapisane
+  huby są poza Hiszpanią: brak zniżki, mnożnik 1.0. Nowa trasa hiszpańska
+  wymaga niezależnego przeglądu i opłat; zweryfikowany szacunek stosuje tylko
+  wspólny rejestr Aena, nigdy 25% całego rachunku.
+- Każda noga easyJet ma trwały oficjalny `/deeplink` z trasą, datą i jednym
+  dorosłym. Może wymagać potwierdzenia pasażerów. Jest to wyszukiwanie
+  trasy/dnia, nie gwarantowana preselekcja numeru lotu. Bez tokenów i sesji.
+- Nieaktywne lub niekompletne technicznie pary Wizza pozostają w jawnym
+  `pending_routes`, nie są aktywnymi trasami z wymyślonym zerem wyników.
+  Nowy feed jest wymagany; 11 feedów i 11 raportów promować jako pełny zestaw.
+
 ## Zakończenie uruchomienia
 
-Po ukończeniu pięciu kroków przygotować krótkie podsumowanie zawierające liczbę
+Po ukończeniu sześciu kroków przygotować krótkie podsumowanie zawierające liczbę
 wyników w każdym kroku.
 
 ## Osobny wykrywacz nowych tras

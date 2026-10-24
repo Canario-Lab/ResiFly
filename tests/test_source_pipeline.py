@@ -129,7 +129,7 @@ class SourceSchedulerTests(unittest.TestCase):
                     time.sleep(.025)
                     with lock: events.append((provider, family, time.monotonic(), False))
             with ThreadPoolExecutor(max_workers=12) as pool:
-                futures = [pool.submit(request, "Google", family) for family in ["Ryanair"]*6 + ["Iberia"]*3]
+                futures = [pool.submit(request, "Google", family) for family in ["Ryanair"]*6 + ["Iberia"]*3 + ["easyJet"]*3]
                 futures += [pool.submit(request, "Binter", None) for _ in range(3)]
                 for future in futures: future.result()
             active, maximum, overlap, official = {}, 0, False, 0

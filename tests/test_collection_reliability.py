@@ -28,6 +28,7 @@ class CollectionReliabilityTests(unittest.TestCase):
             "rates": [
                 {"code": "EUR", "mid": 4.3},
                 {"code": "GBP", "mid": 5.1},
+                {"code": "CHF", "mid": 4.5},
                 {"code": "HUF", "mid": 0.011},
                 {"code": "RON", "mid": 0.8},
                 {"code": "USD", "mid": 3.9},
@@ -46,12 +47,20 @@ class CollectionReliabilityTests(unittest.TestCase):
                 ) as get_json:
                     self.assertEqual(nbp_rate("EUR", requested_day).pln, 4.3)
                     self.assertEqual(nbp_rate("MAD", requested_day).pln, 0.39)
+                    self.assertEqual(nbp_rate("CHF", requested_day).pln, 4.5)
                     self.assertEqual(get_json.call_count, 2)
 
                 _nbp_rates_by_day.clear()
                 with patch("scripts.collect_step1.get_json") as get_json:
                     self.assertEqual(nbp_rate("USD", requested_day).pln, 3.9)
                     get_json.assert_not_called()
+
+    def test_old_snapshot_without_chf_is_rejected_before_a_new_basel_collection(self):
+        from scripts.collect_step1 import _decode_nbp_cache, NBP_SHARED_CURRENCIES, CurrencyRate, money_pln
+        day = date(2026, 10, 24)
+        stale = {"requested_for": str(day), "rates": {code: {"pln": 1} for code in NBP_SHARED_CURRENCIES if code != "CHF"}}
+        self.assertIsNone(_decode_nbp_cache(stale, day))
+        self.assertEqual(money_pln(23.99, "CHF", {"CHF": CurrencyRate("CHF", 4.5)}), 107.95)
 
 
 if __name__ == "__main__":

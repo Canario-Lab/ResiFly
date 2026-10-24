@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Collect all five steps (1A–1F and 2–5) into one local staging directory.
+"""Collect all six steps (1A–1F and 2–6) into one local staging directory.
+
+The legacy filename remains a backwards-compatible CLI entrypoint.
 
 No Git operations. Public feeds are untouched unless --promote is explicitly set
 and the entire batch validates. All collectors receive the same explicit date.
@@ -27,9 +29,9 @@ if __package__ in {None, ""}:
 from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS
 from scripts.collection_coverage import atomic_json, validate_coverage
 from scripts.source_pipeline import collect_sources
+from scripts.search_steps import STEPS
 
 ROOT = Path(__file__).resolve().parents[1]
-STEPS = ("1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5")
 
 
 def validate_feed_document(step, document):
@@ -182,7 +184,7 @@ def main():
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--promote", action="store_true")
     parser.add_argument("--run-id", help="Reuse the same batch ID when resuming a failed collection")
-    parser.add_argument("--refresh-steps", nargs="+", choices=STEPS, default=list(STEPS), help="Refresh selected feeds; still validate the complete ten-feed batch")
+    parser.add_argument("--refresh-steps", nargs="+", choices=STEPS, default=list(STEPS), help="Refresh selected feeds; still validate the complete eleven-feed batch")
     args = parser.parse_args()
     if args.days < 0 or args.workers < 1:
         parser.error("--days must be non-negative and --workers must be positive")

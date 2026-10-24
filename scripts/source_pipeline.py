@@ -1,7 +1,7 @@
-"""Collect unique source calendars once; build ten feeds without network later.
+"""Collect unique source calendars once; build eleven feeds without network later.
 
-There remain exactly five search steps. These are source queues, not extra
-search steps. One Google queue drains FR, IB, VY, UX in order, alongside four
+Six search steps, with variants A–F in Step 1. One Google queue drains
+FR, IB, VY, UX, easyJet in order, alongside four
 independent official-source queues. Observations belong to one immutable run.
 """
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -17,9 +17,10 @@ from scripts.collection_coverage import Coverage, atomic_json, expected_queries
 from scripts.source_repository import Repository, activate_writer
 from scripts import source_scheduler as scheduler
 from scripts.collector_settings import GOOGLE_FLIGHTS_MAX_WORKERS
+from scripts.source_recovery import deferred_collection, map_jobs, PermanentSourceError, RecoveryExhausted
+from scripts.search_steps import STEPS
 
 ROOT = Path(__file__).resolve().parents[1]
-STEPS = ("1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5")
 
 
 def configuration_hash():
@@ -73,7 +74,9 @@ def collect_sources(directory, start, end, run_id):
                 "nbp_rates": {c: r.pln for c, r in rates.items()}, "limits": scheduler.LIMITS,
                 "passengers": {"adults": 1, "children": 0, "infants": 0},
                 "wizz_price_types": ["regular", "wdc"],
-                "google_limit": GOOGLE_FLIGHTS_MAX_WORKERS}
+                "google_limit": GOOGLE_FLIGHTS_MAX_WORKERS,
+                "google_families": ["Ryanair", "Iberia", "Vueling", "Air Europa", "easyJet"],
+                "easyjet_source": "google_flights_http_individual_offers_one_adult"}
     repository = Repository(directory / "sources", identity, writable=True)
     expected = set().union(*(expected_queries(step, start, end) for step in STEPS))
     # Check all configured eligible estimate routes before the first flight request.
@@ -94,6 +97,12 @@ def collect_sources(directory, start, end, run_id):
                     for origin, destination in ((tenerife, airport["iata"]), (airport["iata"], tenerife)):
                         for day in (start, end):
                             nondiscountable_fee_eur(origin, destination, day, fees)
+    for airport in lists["6"]["airports"]:
+        if airport["resident_discount_eligible_on_easyjet_leg"]:
+            for tenerife in airport["tenerife_airports"]:
+                for origin, destination in ((tenerife, airport["iata"]), (airport["iata"], tenerife)):
+                    for day in (start, end):
+                        nondiscountable_fee_eur(origin, destination, day, fees)
     scheduler.ensure_google_owner()
     wizz_api_base()  # resolve the public version once, before concurrent work
     activate_writer(repository)
@@ -107,7 +116,8 @@ def collect_sources(directory, start, end, run_id):
         try:
             function()
         except BaseException as error:
-            scheduler.stop_requests()
+            if not isinstance(error, RecoveryExhausted):
+                scheduler.stop_requests()
             with phase_lock:
                 phases[name].update(status="failed", error=f"{type(error).__name__}: {error}"[:1000])
             raise
@@ -122,14 +132,19 @@ def collect_sources(directory, start, end, run_id):
 
     def route_queue(carrier, function, workers):
         routes = sorted({(o, d) for c, o, d, _, _ in expected if c == carrier})
+        # A failed Ryanair day must not skip later days on that same route.
+        jobs = (sorted({(o, d, date.fromisoformat(day))
+                       for c, o, d, day, _ in expected if c == carrier})
+                if carrier == "Ryanair" else routes)
         def fetch(pair):
-            origin, destination = pair
-            rows = function(origin, destination, start, end, rates)
+            origin, destination = pair[:2]
+            first, last = (pair[2], pair[2]) if len(pair) == 3 else (start, end)
+            rows = function(origin, destination, first, last, rates)
             if carrier == "Wizz Air":
                 # Shared observations must agree with any step-local metadata.
                 for step in ("1", "1b"):
                     local = binter.wizz_schedules_from_allowlist(lists[step])
-                    if pair not in local:
+                    if (origin, destination) not in local:
                         continue
                     for row in rows:
                         departure = datetime.fromisoformat(row["departure_at"])
@@ -137,17 +152,21 @@ def collect_sources(directory, start, end, run_id):
                         arrival = datetime.fromisoformat(row["arrival_at"])
                         if (number != row["flight_number"] or
                                 round((arrival - departure).total_seconds() / 60) != duration):
-                            raise RuntimeError(f"Conflicting Wizz metadata: {pair} {departure}")
+                            raise PermanentSourceError(f"Conflicting Wizz metadata: {pair} {departure}")
             return len(rows)
-        with ThreadPoolExecutor(max_workers=workers) as pool:
-            for index, count in enumerate(pool.map(fetch, routes), 1):
-                if index % 10 == 0 or index == len(routes):
-                    print(f"Source {carrier}: {index}/{len(routes)} routes", flush=True)
-                    scheduler.save_metrics("collecting")
+        for index, count in enumerate(map_jobs(carrier, fetch, jobs, workers), 1):
+            interval = 300 if carrier == "Ryanair" else 10
+            if index % interval == 0 or index == len(jobs):
+                print(f"Source {carrier}: {index}/{len(jobs)} jobs", flush=True)
+                scheduler.save_metrics("collecting")
 
     def google_queue():
-        phase("Google Ryanair", lambda: route_queue("Ryanair", lambda o, d, s, e, r:
-              low.collect_ryanair_route(o, d, s, e, r, "google"), GOOGLE_FLIGHTS_MAX_WORKERS))
+        failures = []
+        try:
+            phase("Google Ryanair", lambda: route_queue("Ryanair", lambda o, d, s, e, r:
+                  low.collect_ryanair_route(o, d, s, e, r, "google"), GOOGLE_FLIGHTS_MAX_WORKERS))
+        except RecoveryExhausted as error:
+            failures.append(error)
         for step, carrier, planner in (("1b", "Iberia", "iberia"),
                 ("1c", "Vueling", "vueling"), ("1d", "Air Europa", "air_europa")):
             module, allowlist = modules[step], lists[step]
@@ -160,7 +179,19 @@ def collect_sources(directory, start, end, run_id):
                     getattr(module, "collect_" + planner + "_legs")(
                         pending, {a["iata"]: a for a in allowlist["airports"]},
                         allowlist[planner + "_airline_codes"], GOOGLE_FLIGHTS_MAX_WORKERS, rates["EUR"].pln)
-            phase("Google " + carrier, collect)
+            try:
+                phase("Google " + carrier, collect)
+            except RecoveryExhausted as error:
+                failures.append(error)
+        from scripts.easyjet_source import collect_legs
+        candidates = modules["6"].easyjet_route_days(lists["6"], start, end)
+        try:
+            phase("Google easyJet", lambda: collect_legs(
+                remaining(repository, "easyJet", candidates), GOOGLE_FLIGHTS_MAX_WORKERS))
+        except RecoveryExhausted as error:
+            failures.append(error)
+        if failures:
+            raise RecoveryExhausted("Google families", len(failures)) from failures[0]
 
     def binter_queue():
         candidates = binter.binter_route_days(lists["1"], start, end)
@@ -180,13 +211,22 @@ def collect_sources(directory, start, end, run_id):
     try:
         jobs = [("Google", google_queue), ("Wizz Air", lambda: route_queue("Wizz Air", wizz.collect_wizz_route, 2)),
                 ("Binter", binter_queue), ("Canaryfly", canaryfly_queue), ("Volotea", volotea_queue)]
-        with ThreadPoolExecutor(max_workers=5) as pool:
-            futures = [pool.submit(phase, name, job) for name, job in jobs]
-            for future in as_completed(futures):
-                future.result()
-        report = source_report(repository, start, end, expected)
-        if report["status"] != "complete":
-            raise RuntimeError(f"Source coverage incomplete: {report['missing_queries']} missing")
+        with deferred_collection(directory / "source-recovery.json", identity):
+            failures = []
+            with ThreadPoolExecutor(max_workers=5) as pool:
+                futures = [pool.submit(phase, name, job) for name, job in jobs]
+                for future in as_completed(futures):
+                    try:
+                        future.result()
+                    except RecoveryExhausted as error:
+                        # Other providers and later Google families finish their
+                        # own independent calendars; no incomplete feed is built.
+                        failures.append(error)
+            if failures:
+                raise RecoveryExhausted("source queues", len(failures)) from failures[0]
+            report = source_report(repository, start, end, expected)
+            if report["status"] != "complete":
+                raise PermanentSourceError(f"Source coverage incomplete: {report['missing_queries']} missing")
         atomic_json(directory / "source-coverage.json", report)
         atomic_json(repository.folder / "complete.json", {"status": "complete", "identity": identity,
                                                         "digests": repository.digests()})

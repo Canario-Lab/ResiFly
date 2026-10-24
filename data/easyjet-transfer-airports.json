@@ -1,0 +1,789 @@
+{
+  "schema_version": 2,
+  "name": "easyJet + Ryanair/Wizz Air — krok 6",
+  "purpose": "easyJet only on the Tenerife leg; one same-IATA self-transfer",
+  "scope": {
+    "polish_airports": [
+      "WAW",
+      "WMI",
+      "KTW",
+      "KRK",
+      "GDN",
+      "WRO",
+      "POZ",
+      "LCJ",
+      "RZE",
+      "BZG",
+      "LUZ",
+      "SZY",
+      "RDO",
+      "SZZ",
+      "IEG"
+    ],
+    "tenerife_airports": [
+      "TFN",
+      "TFS"
+    ]
+  },
+  "usage_policy": {
+    "step": 6,
+    "flight_data_source": "google_flights_http",
+    "discovery_mode": "fixed_allowlist",
+    "do_not_rediscover_each_run": true,
+    "update_only_on_explicit_user_request": true,
+    "google_family_order": "after Air Europa, shared global limit three including retries",
+    "passengers": {
+      "adults": 1,
+      "children": 0,
+      "infants": 0
+    }
+  },
+  "easyjet_airline_codes": {
+    "accepted_marketing": [
+      "U2",
+      "EC",
+      "DS"
+    ]
+  },
+  "airports": [
+    {
+      "iata": "BFS",
+      "name_pl": "Belfast International",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "BHX",
+      "name_pl": "Birmingham",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "BZG",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "LCJ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "BRS",
+      "name_pl": "Bristol",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "BZG",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "RZE",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "BSL",
+      "name_pl": "Basel",
+      "timezone": "Europe/Paris",
+      "country_code": "ch",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "EDI",
+      "name_pl": "Edinburgh",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "RZE",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "GLA",
+      "name_pl": "Glasgow",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "LGW",
+      "name_pl": "London Gatwick",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "LPL",
+      "name_pl": "Liverpool",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "SZZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "LTN",
+      "name_pl": "London Luton",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "BZG",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "LUZ",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "RZE",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "LYS",
+      "name_pl": "Lyon\r\n",
+      "timezone": "Europe/Paris",
+      "country_code": "FR",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "MAN",
+      "name_pl": "Manchester",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KTW",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "POZ",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "RZE",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "MXP",
+      "name_pl": "Milan Malpensa",
+      "timezone": "Europe/Rome",
+      "country_code": "it",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair",
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "RZE",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WMI",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "NCE",
+      "name_pl": "Nice",
+      "timezone": "Europe/Paris",
+      "country_code": "fr",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "WAW",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Wizz Air"
+          ]
+        }
+      ]
+    },
+    {
+      "iata": "NCL",
+      "name_pl": "Newcastle",
+      "timezone": "Europe/London",
+      "country_code": "gb",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "resident_discount_eligible_on_easyjet_leg": false,
+      "easyjet_resident_fare_multiplier": 1.0,
+      "resident_pricing_method": "none",
+      "resident_eligibility_evidence": {
+        "verified_on": "2026-10-24",
+        "source": "https://www.easyjet.com/en/terms-and-conditions/large-families",
+        "reason": "International Tenerife leg; the Canary domestic subsidy does not apply"
+      },
+      "polish_routes": [
+        {
+          "polish_airport": "GDN",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Ryanair"
+          ]
+        },
+        {
+          "polish_airport": "WRO",
+          "airlines": [
+            "Ryanair"
+          ]
+        }
+      ]
+    }
+  ],
+  "verified_on": "2026-10-24",
+  "route_network_evidence": {
+    "verified_on": "2026-10-24",
+    "source": "https://www.easyjet.com/en/flights-timetables",
+    "method": "Official route catalogue read through the web tool and confirmed in the official browser destination selector; not a flight-price calendar",
+    "tenerife_destinations": {
+      "TFS": [
+        "AMS",
+        "BSL",
+        "BFS",
+        "BER",
+        "BHX",
+        "BOD",
+        "BRS",
+        "EDI",
+        "GVA",
+        "GLA",
+        "LPL",
+        "LGW",
+        "LTN",
+        "SEN",
+        "LYS",
+        "MAN",
+        "LIN",
+        "MXP",
+        "NTE",
+        "NCL",
+        "NCE",
+        "CDG"
+      ],
+      "TFN": []
+    },
+    "tenerife_status": {
+      "TFS": "Published direct destinations; availability requires independent full calendars",
+      "TFN": "No positive direct-route evidence in the current official catalogue; do not infer availability from TFS"
+    },
+    "resident_terms": "https://www.easyjet.com/en/terms-and-conditions/large-families"
+  },
+  "pending_routes": [
+    {
+      "hub": "BSL",
+      "polish_airport": "WAW",
+      "airline": "Wizz Air",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "reasons": [
+        "Missing verified Wizz numbers/block times in both directions"
+      ]
+    },
+    {
+      "hub": "NCE",
+      "polish_airport": "KRK",
+      "airline": "Wizz Air",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "reasons": [
+        "Missing verified Wizz numbers/block times in both directions"
+      ]
+    },
+    {
+      "hub": "NCE",
+      "polish_airport": "GDN",
+      "airline": "Wizz Air",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "reasons": [
+        "Missing verified Wizz numbers/block times in both directions"
+      ]
+    }
+  ],
+  "no_shared_polish_route": [
+    "AMS",
+    "BER",
+    "BOD",
+    "CDG",
+    "GVA",
+    "LIN",
+    "NTE",
+    "SEN"
+  ]
+}

@@ -47,7 +47,7 @@ MIN_LAYOVER_MINUTES = 120
 MAX_LAYOVER_MINUTES = 24 * 60
 BINTER_API = "https://services.bintercanarias.com/main/graphql"
 NBP_CACHE_DIR = ROOT / "tmp" / "nbp-rates"
-NBP_SHARED_CURRENCIES = ("EUR", "GBP", "HUF", "MAD", "RON", "USD")
+NBP_SHARED_CURRENCIES = ("EUR", "GBP", "CHF", "HUF", "MAD", "RON", "USD")
 NBP_LOOKBACK_DAYS = 7
 
 AIRPORT_TIMEZONES = dict(ENDPOINT_TIMEZONES)
@@ -901,38 +901,19 @@ def collect_binter_legs(
 ) -> list[dict[str, Any]]:
     legs: list[dict[str, Any]] = []
     ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
-    with ThreadPoolExecutor(max_workers=max(2, min(workers, 6))) as pool:
-        futures = {}
-        for origin, destination, day in ordered:
-            transfer = destination if origin in TENERIFE_AIRPORTS else origin
-            eligible = bool(
-                transfer_rules[transfer][
-                    "resident_discount_eligible_on_binter_leg"
-                ]
-            )
-            multiplier = float(
-                transfer_rules[transfer]["binter_resident_fare_multiplier"]
-            )
-            if eligible != (multiplier < 1.0):
-                raise RuntimeError(
-                    f"Inconsistent Binter discount metadata for {transfer}"
-                )
-            future = pool.submit(
-                collect_binter_trip,
-                origin,
-                destination,
-                day,
-                rates,
-                eligible,
-                multiplier,
-            )
-            futures[future] = (origin, destination, day)
-        done = 0
-        for future in as_completed(futures):
-            done += 1
-            legs.extend(future.result())
-            if done % 20 == 0 or done == len(futures):
-                print(f"Binter: {done}/{len(futures)} zapytań", flush=True)
+    from scripts.source_recovery import map_jobs, PermanentSourceError
+    def fetch(candidate):
+        origin, destination, day = candidate
+        transfer = destination if origin in TENERIFE_AIRPORTS else origin
+        eligible = bool(transfer_rules[transfer]["resident_discount_eligible_on_binter_leg"])
+        multiplier = float(transfer_rules[transfer]["binter_resident_fare_multiplier"])
+        if eligible != (multiplier < 1.0):
+            raise PermanentSourceError(f"Inconsistent Binter discount metadata for {transfer}")
+        return collect_binter_trip(origin, destination, day, rates, eligible, multiplier)
+    for done, found in enumerate(map_jobs("Binter", fetch, ordered, max(2, min(workers, 6))), 1):
+        legs.extend(found)
+        if done % 20 == 0 or done == len(ordered):
+            print(f"Binter: {done}/{len(ordered)} zapytań", flush=True)
     return legs
 
 

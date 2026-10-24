@@ -10,7 +10,6 @@ fixed Aena fees. Price filtering is left to the website.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 import hashlib
 import json
@@ -281,14 +280,14 @@ def collect_volotea_legs(
         return result
 
     legs: list[dict[str, Any]] = []
-    with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as executor:
-        for index, found in enumerate(executor.map(fetch, ordered), start=1):
-            legs.extend(found)
-            if index % 10 == 0 or index == len(ordered):
-                print(
-                    f"Volotea: {index}/{len(ordered)} oficjalnych zapytań tras/dni",
-                    flush=True,
-                )
+    from scripts.source_recovery import map_jobs
+    for index, found in enumerate(map_jobs("Volotea", fetch, ordered, min(max(workers, 1), 4)), start=1):
+        legs.extend(found)
+        if index % 10 == 0 or index == len(ordered):
+            print(
+                f"Volotea: {index}/{len(ordered)} oficjalnych zapytań tras/dni",
+                flush=True,
+            )
     unique = {
         (leg["flight_number"], leg["departure_at"], leg["arrival_at"]): leg
         for leg in legs

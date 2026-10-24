@@ -1011,6 +1011,798 @@
       "verified_on": "2026-10-23",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "BSL",
+      "destination": "KRK",
+      "flight_number": "W62030",
+      "duration_minutes": 110,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "BSL",
+            "destination": "KRK",
+            "flight_number": "W62030",
+            "duration_minutes": 110,
+            "departure_at": "2026-10-25T16:35:00+01:00",
+            "arrival_at": "2026-10-25T18:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "KRK",
+            "flight_number": "W62030",
+            "duration_minutes": 110,
+            "departure_at": "2026-10-26T16:35:00+01:00",
+            "arrival_at": "2026-10-26T18:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "KRK",
+            "flight_number": "W62030",
+            "duration_minutes": 110,
+            "departure_at": "2026-10-28T20:20:00+01:00",
+            "arrival_at": "2026-10-28T22:10:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "KRK",
+            "flight_number": "W62030",
+            "duration_minutes": 110,
+            "departure_at": "2026-10-29T16:35:00+01:00",
+            "arrival_at": "2026-10-29T18:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "KRK",
+            "flight_number": "W62030",
+            "duration_minutes": 110,
+            "departure_at": "2026-11-06T16:35:00+01:00",
+            "arrival_at": "2026-11-06T18:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "KRK",
+      "destination": "BSL",
+      "flight_number": "W62029",
+      "duration_minutes": 115,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "KRK",
+            "destination": "BSL",
+            "flight_number": "W62029",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-28T17:50:00+01:00",
+            "arrival_at": "2026-10-28T19:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "BSL",
+            "flight_number": "W62029",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-29T14:05:00+01:00",
+            "arrival_at": "2026-10-29T16:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "BSL",
+            "flight_number": "W62029",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-30T14:05:00+01:00",
+            "arrival_at": "2026-10-30T16:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "BSL",
+            "flight_number": "W62029",
+            "duration_minutes": 115,
+            "departure_at": "2026-11-01T14:05:00+01:00",
+            "arrival_at": "2026-11-01T16:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "BSL",
+            "flight_number": "W62029",
+            "duration_minutes": 115,
+            "departure_at": "2026-11-02T14:05:00+01:00",
+            "arrival_at": "2026-11-02T16:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "BSL",
+      "destination": "POZ",
+      "flight_number": "W62162",
+      "duration_minutes": 100,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "BSL",
+            "destination": "POZ",
+            "flight_number": "W62162",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-26T08:45:00+01:00",
+            "arrival_at": "2026-10-26T10:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "POZ",
+            "flight_number": "W62162",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-30T08:45:00+01:00",
+            "arrival_at": "2026-10-30T10:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "POZ",
+      "destination": "BSL",
+      "flight_number": "W62161",
+      "duration_minutes": 100,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "POZ",
+            "destination": "BSL",
+            "flight_number": "W62161",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-26T11:00:00+01:00",
+            "arrival_at": "2026-10-26T12:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "POZ",
+            "destination": "BSL",
+            "flight_number": "W62161",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-30T11:00:00+01:00",
+            "arrival_at": "2026-10-30T12:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "BSL",
+      "destination": "WMI",
+      "flight_number": "W61386",
+      "duration_minutes": 115,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "BSL",
+            "destination": "WMI",
+            "flight_number": "W61386",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-25T08:15:00+01:00",
+            "arrival_at": "2026-10-25T10:10:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "WMI",
+            "flight_number": "W61386",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-26T08:15:00+01:00",
+            "arrival_at": "2026-10-26T10:10:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "WMI",
+            "flight_number": "W61386",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-29T16:40:00+01:00",
+            "arrival_at": "2026-10-29T18:35:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "WMI",
+            "flight_number": "W61386",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-30T08:15:00+01:00",
+            "arrival_at": "2026-10-30T10:10:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "WMI",
+            "flight_number": "W61386",
+            "duration_minutes": 115,
+            "departure_at": "2026-10-31T16:40:00+01:00",
+            "arrival_at": "2026-10-31T18:35:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "WMI",
+      "destination": "BSL",
+      "flight_number": "W61385",
+      "duration_minutes": 120,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "WMI",
+            "destination": "BSL",
+            "flight_number": "W61385",
+            "duration_minutes": 120,
+            "departure_at": "2026-10-25T05:40:00+01:00",
+            "arrival_at": "2026-10-25T07:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WMI",
+            "destination": "BSL",
+            "flight_number": "W61385",
+            "duration_minutes": 120,
+            "departure_at": "2026-10-26T05:40:00+01:00",
+            "arrival_at": "2026-10-26T07:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WMI",
+            "destination": "BSL",
+            "flight_number": "W61385",
+            "duration_minutes": 120,
+            "departure_at": "2026-10-29T14:05:00+01:00",
+            "arrival_at": "2026-10-29T16:05:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WMI",
+            "destination": "BSL",
+            "flight_number": "W61385",
+            "duration_minutes": 120,
+            "departure_at": "2026-10-30T05:40:00+01:00",
+            "arrival_at": "2026-10-30T07:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WMI",
+            "destination": "BSL",
+            "flight_number": "W61385",
+            "duration_minutes": 120,
+            "departure_at": "2026-10-31T14:05:00+01:00",
+            "arrival_at": "2026-10-31T16:05:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "BSL",
+      "destination": "WRO",
+      "flight_number": "W61828",
+      "duration_minutes": 100,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "BSL",
+            "destination": "WRO",
+            "flight_number": "W61828",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-25T08:20:00+01:00",
+            "arrival_at": "2026-10-25T10:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "BSL",
+            "destination": "WRO",
+            "flight_number": "W61828",
+            "duration_minutes": 100,
+            "departure_at": "2026-10-30T08:20:00+01:00",
+            "arrival_at": "2026-10-30T10:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "WRO",
+      "destination": "BSL",
+      "flight_number": "W61827",
+      "duration_minutes": 105,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "WRO",
+            "destination": "BSL",
+            "flight_number": "W61827",
+            "duration_minutes": 105,
+            "departure_at": "2026-10-25T06:00:00+01:00",
+            "arrival_at": "2026-10-25T07:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WRO",
+            "destination": "BSL",
+            "flight_number": "W61827",
+            "duration_minutes": 105,
+            "departure_at": "2026-10-30T06:00:00+01:00",
+            "arrival_at": "2026-10-30T07:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "flight_number": "W62007",
+      "duration_minutes": 155,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62007",
+            "duration_minutes": 160,
+            "departure_at": "2026-10-27T06:00:00+01:00",
+            "arrival_at": "2026-10-27T07:40:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62007",
+            "duration_minutes": 155,
+            "departure_at": "2026-10-30T06:00:00+01:00",
+            "arrival_at": "2026-10-30T07:35:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62007",
+            "duration_minutes": 155,
+            "departure_at": "2026-11-05T06:00:00+01:00",
+            "arrival_at": "2026-11-05T07:35:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62009",
+            "duration_minutes": 160,
+            "departure_at": "2026-11-07T18:00:00+01:00",
+            "arrival_at": "2026-11-07T19:40:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62007",
+            "duration_minutes": 160,
+            "departure_at": "2026-11-08T06:00:00+01:00",
+            "arrival_at": "2026-11-08T07:40:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LGW",
+            "flight_number": "W62007",
+            "duration_minutes": 155,
+            "departure_at": "2026-11-09T06:00:00+01:00",
+            "arrival_at": "2026-11-09T07:35:00+00:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "LGW",
+      "destination": "KRK",
+      "flight_number": "W62008",
+      "duration_minutes": 145,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-26T08:25:00+00:00",
+            "arrival_at": "2026-10-26T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-27T08:25:00+00:00",
+            "arrival_at": "2026-10-27T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-28T08:25:00+00:00",
+            "arrival_at": "2026-10-28T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 150,
+            "departure_at": "2026-10-29T08:20:00+00:00",
+            "arrival_at": "2026-10-29T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-30T08:25:00+00:00",
+            "arrival_at": "2026-10-30T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-31T08:25:00+00:00",
+            "arrival_at": "2026-10-31T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62010",
+            "duration_minutes": 145,
+            "departure_at": "2026-10-31T20:25:00+00:00",
+            "arrival_at": "2026-10-31T23:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LGW",
+            "destination": "KRK",
+            "flight_number": "W62008",
+            "duration_minutes": 145,
+            "departure_at": "2026-11-01T08:25:00+00:00",
+            "arrival_at": "2026-11-01T11:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "KRK",
+      "destination": "LYS",
+      "flight_number": "W62091",
+      "duration_minutes": 135,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "KRK",
+            "destination": "LYS",
+            "flight_number": "W62091",
+            "duration_minutes": 135,
+            "departure_at": "2026-10-27T05:30:00+01:00",
+            "arrival_at": "2026-10-27T07:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LYS",
+            "flight_number": "W62091",
+            "duration_minutes": 135,
+            "departure_at": "2026-10-29T18:40:00+01:00",
+            "arrival_at": "2026-10-29T20:55:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "KRK",
+            "destination": "LYS",
+            "flight_number": "W62091",
+            "duration_minutes": 135,
+            "departure_at": "2026-10-31T05:30:00+01:00",
+            "arrival_at": "2026-10-31T07:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "LYS",
+      "destination": "KRK",
+      "flight_number": "W62092",
+      "duration_minutes": 130,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "LYS",
+            "destination": "KRK",
+            "flight_number": "W62092",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-27T08:20:00+01:00",
+            "arrival_at": "2026-10-27T10:30:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LYS",
+            "destination": "KRK",
+            "flight_number": "W62092",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-29T21:30:00+01:00",
+            "arrival_at": "2026-10-29T23:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LYS",
+            "destination": "KRK",
+            "flight_number": "W62092",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-31T08:20:00+01:00",
+            "arrival_at": "2026-10-31T10:30:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "LYS",
+      "destination": "WAW",
+      "flight_number": "W61310",
+      "duration_minutes": 140,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "LYS",
+            "destination": "WAW",
+            "flight_number": "W61310",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-25T09:05:00+01:00",
+            "arrival_at": "2026-10-25T11:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LYS",
+            "destination": "WAW",
+            "flight_number": "W61310",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-26T09:05:00+01:00",
+            "arrival_at": "2026-10-26T11:25:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LYS",
+            "destination": "WAW",
+            "flight_number": "W61310",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-28T08:55:00+01:00",
+            "arrival_at": "2026-10-28T11:15:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "LYS",
+            "destination": "WAW",
+            "flight_number": "W61310",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-30T09:20:00+01:00",
+            "arrival_at": "2026-10-30T11:40:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "WAW",
+      "destination": "LYS",
+      "flight_number": "W61309",
+      "duration_minutes": 150,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "WAW",
+            "destination": "LYS",
+            "flight_number": "W61309",
+            "duration_minutes": 150,
+            "departure_at": "2026-10-25T06:00:00+01:00",
+            "arrival_at": "2026-10-25T08:30:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WAW",
+            "destination": "LYS",
+            "flight_number": "W61309",
+            "duration_minutes": 150,
+            "departure_at": "2026-10-26T06:00:00+01:00",
+            "arrival_at": "2026-10-26T08:30:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WAW",
+            "destination": "LYS",
+            "flight_number": "W61309",
+            "duration_minutes": 150,
+            "departure_at": "2026-10-28T05:50:00+01:00",
+            "arrival_at": "2026-10-28T08:20:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WAW",
+            "destination": "LYS",
+            "flight_number": "W61309",
+            "duration_minutes": 150,
+            "departure_at": "2026-11-13T06:00:00+01:00",
+            "arrival_at": "2026-11-13T08:30:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "NCE",
+      "destination": "WAW",
+      "flight_number": "W61350",
+      "duration_minutes": 140,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "NCE",
+            "destination": "WAW",
+            "flight_number": "W61350",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-27T20:40:00+01:00",
+            "arrival_at": "2026-10-27T23:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "NCE",
+            "destination": "WAW",
+            "flight_number": "W61350",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-29T20:40:00+01:00",
+            "arrival_at": "2026-10-29T23:00:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "NCE",
+            "destination": "WAW",
+            "flight_number": "W61350",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-31T20:25:00+01:00",
+            "arrival_at": "2026-10-31T22:45:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "WAW",
+      "destination": "NCE",
+      "flight_number": "W61349",
+      "duration_minutes": 155,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "WAW",
+            "destination": "NCE",
+            "flight_number": "W61349",
+            "duration_minutes": 155,
+            "departure_at": "2026-10-27T17:30:00+01:00",
+            "arrival_at": "2026-10-27T20:05:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WAW",
+            "destination": "NCE",
+            "flight_number": "W61349",
+            "duration_minutes": 155,
+            "departure_at": "2026-10-29T17:30:00+01:00",
+            "arrival_at": "2026-10-29T20:05:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          },
+          {
+            "origin": "WAW",
+            "destination": "NCE",
+            "flight_number": "W61349",
+            "duration_minutes": 155,
+            "departure_at": "2026-10-31T17:15:00+01:00",
+            "arrival_at": "2026-10-31T19:50:00+01:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "NCE",
+      "destination": "WRO",
+      "flight_number": "W61830",
+      "duration_minutes": 125,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "NCE",
+            "destination": "WRO",
+            "flight_number": "W61830",
+            "duration_minutes": 125,
+            "departure_at": "2026-10-24T21:10:00+02:00",
+            "arrival_at": "2026-10-24T23:15:00+02:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "WRO",
+      "destination": "NCE",
+      "flight_number": "W61829",
+      "duration_minutes": 130,
+      "verification": {
+        "source": "Google Flights HTTP individual Wizz offers",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "WRO",
+            "destination": "NCE",
+            "flight_number": "W61829",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-24T18:25:00+02:00",
+            "arrival_at": "2026-10-24T20:35:00+02:00",
+            "source": "https://www.google.com/travel/flights"
+          }
+        ]
+      }
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -1886,6 +2678,27 @@
       "departure_time": "21:30",
       "flight_number": "W92065",
       "duration_minutes": 175
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "18:00",
+      "flight_number": "W62009",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "LGW",
+      "destination": "KRK",
+      "departure_time": "08:20",
+      "flight_number": "W62008",
+      "duration_minutes": 150
+    },
+    {
+      "origin": "LGW",
+      "destination": "KRK",
+      "departure_time": "20:25",
+      "flight_number": "W62010",
+      "duration_minutes": 145
     }
   ],
   "flight_number_overrides_by_departure_weekday_and_time": [
@@ -1896,6 +2709,46 @@
       "departure_weekday": 1,
       "flight_number": "W61869",
       "duration_minutes": 330
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "06:00",
+      "departure_weekday": 1,
+      "flight_number": "W62007",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "06:00",
+      "departure_weekday": 2,
+      "flight_number": "W62007",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "06:00",
+      "departure_weekday": 4,
+      "flight_number": "W62007",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "06:00",
+      "departure_weekday": 5,
+      "flight_number": "W62007",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "KRK",
+      "destination": "LGW",
+      "departure_time": "06:00",
+      "departure_weekday": 7,
+      "flight_number": "W62007",
+      "duration_minutes": 160
     }
   ],
   "flight_number_overrides_by_departure_date_and_time": [

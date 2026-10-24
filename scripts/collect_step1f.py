@@ -11,7 +11,6 @@ Price filtering is left to the website.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 import hashlib
 import json
@@ -402,16 +401,15 @@ def collect_canaryfly_available_days(
                        "booking_calendar")
         return origin, destination, days
 
-    with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as pool:
-        futures = {pool.submit(fetch, job): job for job in jobs}
-        for index, future in enumerate(as_completed(futures), start=1):
-            origin, destination, days = future.result()
-            available.update((origin, destination, day) for day in days)
-            if index % 4 == 0 or index == len(futures):
-                print(
-                    f"Canaryfly: {index}/{len(futures)} pełnych kalendarzy miesięcznych",
-                    flush=True,
-                )
+    from scripts.source_recovery import map_jobs
+    for index, result in enumerate(map_jobs("Canaryfly calendars", fetch, jobs, min(max(workers, 1), 4)), start=1):
+        origin, destination, days = result
+        available.update((origin, destination, day) for day in days)
+        if index % 4 == 0 or index == len(jobs):
+            print(
+                f"Canaryfly: {index}/{len(jobs)} pełnych kalendarzy miesięcznych",
+                flush=True,
+            )
     return available
 
 
@@ -660,15 +658,14 @@ def collect_canaryfly_legs(
         return result
 
     legs: list[dict[str, Any]] = []
-    with ThreadPoolExecutor(max_workers=min(max(workers, 1), 4)) as pool:
-        futures = {pool.submit(fetch, item): item for item in ordered}
-        for index, future in enumerate(as_completed(futures), start=1):
-            legs.extend(future.result())
-            if index % 10 == 0 or index == len(futures):
-                print(
-                    f"Canaryfly: {index}/{len(futures)} dostępnych tras/dni",
-                    flush=True,
-                )
+    from scripts.source_recovery import map_jobs
+    for index, found in enumerate(map_jobs("Canaryfly details", fetch, ordered, min(max(workers, 1), 4)), start=1):
+        legs.extend(found)
+        if index % 10 == 0 or index == len(ordered):
+            print(
+                f"Canaryfly: {index}/{len(ordered)} dostępnych tras/dni",
+                flush=True,
+            )
     unique = {
         (leg["flight_number"], leg["departure_at"], leg["arrival_at"]): leg
         for leg in legs

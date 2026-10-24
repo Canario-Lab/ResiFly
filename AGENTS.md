@@ -18,13 +18,19 @@
   ones. Do not confuse policy approval with current carrier availability:
   saved route pairs still require independent full-calendar observations.
 
-## Canonical five-step flight search
+## Canonical six-step flight search
 
 - The complete, durable procedure for recurring flight collection is stored in
   `docs/FIVE_STEP_FLIGHT_SEARCH.md`.
 - Read and follow that file before running or changing the weekly collection.
-- Keep exactly five search steps. Do not add, remove, or silently reinterpret a
-  step without an explicit user decision.
+- Explicit user decision, 2026-10-24: add Step 6, easyJet on the Tenerife leg
+  plus Ryanair/Wizz Air on the Poland leg. Keep exactly six main steps, with
+  variants 1A–1F within Step 1. The legacy documentation and runner filenames
+  remain compatible. Do not silently reinterpret the steps.
+- The user permanently allows read-only official carrier-page/browser checks
+  needed to verify routes, prices and booking links. Do not re-ask for each
+  such check. This is not permission for purchases, paid services, account
+  creation, accepting agreements or bypassing access controls.
 - For every saved route in every step, fetch the complete configured calendar
   window in both directions for each participating carrier before matching or
   comparing legs. Never derive one carrier's query dates from another
@@ -349,7 +355,41 @@
   data from `data/wizz-route-schedules.json`, without hard-coded route changes
   in the Step 5 collector.
 
+## Canonical Step 6 easyJet transfer-airport list
+
+- Use `data/easyjet-transfer-airports.json` and `scripts/collect_step6.py`.
+  easyJet always flies the Tenerife leg; Ryanair or Wizz always flies the
+  Poland leg, in both directions. One same-IATA transfer, 120–1440 minutes,
+  no self-routes, no price filtering, all canonical Polish endpoints.
+- Google Flights HTTP is the only price/schedule source for easyJet, approved
+  explicitly by the user on 2026-10-24. Keep U2/EC/DS full marketing numbers,
+  each flight's own fare, dates/times and one-adult passenger scope. No direct
+  API fallback, day-minimum expansion or template schedules.
+- Collect every day of every saved easyJet and FR/Wizz route in both directions
+  independently before matching. Missing/invalid observations block promotion.
+  Completed empty calendars are valid, not a reason to invent flights.
+- easyJet runs after Air Europa in the single Google queue, within the same
+  global cap of three HTTP attempts including retries and automatic recovery.
+  It does not receive three additional slots.
+- Resident eligibility and pricing method are explicit in the allowlist. The
+  currently reviewed international routes are ineligible, multiplier 1.0.
+  A future Spanish route needs independent eligibility and fee review; an
+  explicitly approved estimate uses the shared Aena registry, never 25% of
+  the whole fare. Missing review/fees blocks that route before publication.
+- Step 6 discovery is separate from price refreshes. Review the official
+  easyJet catalogue and full FR/Wizz graphs, including entirely new hubs.
+  `scripts/discover_easyjet_routes.py` defaults to a dry run. Apply only after
+  reviewing the report; incomplete Wizz metadata remains pending. Never
+  automatically remove seasonal routes. Do not run discovery during a normal
+  price collection.
+
 ## Flight booking links
+
+- Every easyJet leg receives a deterministic `booking_url` from
+  `scripts.booking_urls.easyjet_booking_url`. Use the official `/deeplink`
+  route/date/passenger format observed in easyJet's own calendar, one adult.
+  It may request confirmation of the passenger count. No session token,
+  return journey or claim of exact-flight preselection is permitted.
 
 - Every Wizz Air leg written to a public results JSON must contain a
   `booking_url` field.
@@ -402,8 +442,9 @@
 ## Collection completeness and publication
 
 - The full batch uses `scripts.source_pipeline`: collect unique current
-  observations first, then build all ten feeds sequentially in enforced
-  cache-only mode. Google families run in order FR/RK, IB/I2, VY, UX with
+  observations first, then build all eleven feeds sequentially in enforced
+  cache-only mode. `scripts.search_steps.STEPS` is the shared feed registry.
+  Google families run in order FR/RK, IB/I2, VY, UX, easyJet with
   at most THREE actual HTTP attempts at once, retries included. Official Wizz,
   Binter, Canaryfly and Volotea queues run independently alongside Google,
   with at most two in-flight HTTP attempts per provider. A host-wide Google
@@ -411,7 +452,9 @@
 - A source repository belongs to one run, period, configuration, adapter hash
   and NBP snapshot. Missing observations are errors, not empty availability;
   only completed certified observations may feed builders. Never reuse a
-  previous run's prices. Preserve the previous public twenty-file set on failure.
+  previous run's prices. Preserve the previous public twenty-two-file set on
+  failure. The first migration backs up the old twenty files and records the
+  previous nonexistence of the Step 6 pair.
 
 - Read `docs/COLLECTION_RELIABILITY.md` when changing source collection or
   publication. Keep route/day coverage in `scripts.collection_coverage` for
@@ -421,14 +464,28 @@
   of the complete window and retain both `FR` and Ryanair UK `RK` marketing
   codes. Never expand a daily minimum across flights or fall back to Fare
   Finder. Limit all Ryanair Google requests to three concurrent calls, reuse the
-  persistent route/day cache across the ten feeds in one batch, and fail closed
+  persistent route/day cache across the eleven feeds in one batch, and fail closed
   before publication on an unpriced flight, malformed response or failed day.
 - A public feed requires complete independently planned route/day coverage.
-  All ten feeds in a promoted batch must have matching complete sidecar
+  All eleven feeds in a promoted batch must have matching complete sidecar
   reports, current canonical coverage and the same collection run ID.
 - On failure preserve previous public feeds, write an explicit failure report
   and never mix old and new flight prices. Do not attach new completeness
   certificates to old generated feeds; recollection is required.
+- User decision, 2026-10-24: automatically recover transient source failures
+  in a full batch without asking for another approval. `scripts.source_recovery`
+  defers failed jobs until the rest of that queue finishes, then makes at most
+  two additional rounds after 60 and 120 seconds (respecting Retry-After).
+  Reuse only successful observations from this same immutable run. Ryanair
+  jobs are independent route/days so one failure cannot skip later dates.
+  Never lower validation, change sources or increase the shared Google cap of
+  three as a recovery action. At 20 failed jobs in a round, pause that queue's
+  remaining unattempted jobs rather than hammering an unavailable provider.
+  On exhausted recovery, finish independent source queues/later Google
+  families in order, report missing coverage and preserve the public feeds.
+  Integrity/configuration safety failures and operator interruption are not
+  permission to retry or publish. Standalone collectors retain their existing
+  retry/failure policy; deferred rounds are owned by the full source pipeline.
 
 ## Transfer-route detector
 
@@ -443,7 +500,7 @@
   Step 1F against Canaryfly's official route pages and GraphQL calendar. Step
   2 has no transfer allowlist: its collector always checks the complete fixed
   airport matrix.
-- The detector is separate from the five price collectors. Do not run it as
+- The detector is separate from the recurring price collectors. Do not run it as
   part of a normal price refresh unless route discovery was explicitly
   requested or separately scheduled.
 - Its default mode is a read-only dry run. Use `--apply` only after reviewing

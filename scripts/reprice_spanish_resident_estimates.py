@@ -3,7 +3,7 @@
 
 The command preserves collected flights, regular fares, booking links,
 generation timestamps and source-coverage certificates. It updates only the
-derived resident fields and totals in Steps 1B, 1C, 1D, 1E, 3, 4 and 5.
+derived resident fields and totals in Steps 1B, 1C, 1D, 1E, 3, 4, 5 and 6.
 Binter (1A) and Canaryfly (1F) are excluded because their resident fares come
 directly from the carriers.
 """
@@ -26,7 +26,7 @@ from scripts.spanish_resident_fees import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-STEPS = ("1b", "1c", "1d", "1e", "3", "4", "5")
+STEPS = ("1b", "1c", "1d", "1e", "3", "4", "5", "6")
 
 
 def _path(step: str) -> Path:

@@ -17,6 +17,7 @@ if __package__ in {None, ""}:
 from scripts.booking_urls import (
     air_europa_booking_url,
     canaryfly_booking_url,
+    easyjet_booking_url,
     iberia_booking_url,
     ryanair_booking_url,
     volotea_booking_url,
@@ -47,6 +48,8 @@ def booking_url_for_leg(leg: dict[str, Any]) -> str | None:
         return volotea_booking_url(origin, destination, departure)
     if leg.get("carrier") == "Canaryfly":
         return canaryfly_booking_url(origin, destination, departure)
+    if leg.get("carrier") == "easyJet":
+        return easyjet_booking_url(origin, destination, departure)
     return None
 
 

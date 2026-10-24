@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "3a5a1329-a7e2-4b95-a2e5-6b10546a544d",
+  "run_id": "c86f6042-3364-4a5a-b480-802960801080",
   "step": "3",
   "period_from": "2026-10-24",
   "period_to": "2026-11-23",
@@ -1378,7 +1378,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -1960,7 +1960,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -2736,7 +2736,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -10496,7 +10496,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -13812,7 +13812,7 @@
         {
           "date": "2026-10-27",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -15546,7 +15546,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -16510,7 +16510,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -17286,7 +17286,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -21554,7 +21554,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -23106,7 +23106,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -25628,7 +25628,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -26210,7 +26210,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -26792,7 +26792,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -28932,7 +28932,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 4,
+          "flights": 3,
           "method": "google_flights_http"
         },
         {
@@ -32624,7 +32624,7 @@
         {
           "date": "2026-10-26",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -32806,7 +32806,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -37268,7 +37268,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -41148,7 +41148,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -52600,7 +52600,7 @@
         {
           "date": "2026-10-25",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -52612,7 +52612,7 @@
         {
           "date": "2026-10-27",
           "status": "checked",
-          "flights": 3,
+          "flights": 2,
           "method": "google_flights_http"
         },
         {
@@ -52806,7 +52806,7 @@
         {
           "date": "2026-10-27",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -53382,7 +53382,7 @@
         {
           "date": "2026-10-26",
           "status": "checked",
-          "flights": 0,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -54340,7 +54340,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 2,
+          "flights": 1,
           "method": "google_flights_http"
         },
         {
@@ -54922,7 +54922,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -64234,7 +64234,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -69084,7 +69084,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -69278,7 +69278,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -70248,7 +70248,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {
@@ -73740,7 +73740,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 1,
+          "flights": 0,
           "method": "google_flights_http"
         },
         {

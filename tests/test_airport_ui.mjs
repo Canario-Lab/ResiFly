@@ -9,7 +9,7 @@ import vm from "node:vm";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const feedDirectory = resolve(root, process.env.RESIFLY_TEST_DATA_DIRECTORY || "data");
-const steps = ["1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5"];
+const steps = ["1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5", "6"];
 const documents = steps.map(step => JSON.parse(readFileSync(resolve(feedDirectory, `step${step}-results.json`), "utf8")));
 const results = documents.flatMap(document => document.results);
 
@@ -64,7 +64,7 @@ function harness({ rows = results } = {}) {
     },
     targets: [],
   });
-  const source = readFileSync(resolve(root, "app.js"), "utf8");
+  const source = readFileSync(resolve(root, process.env.RESIFLY_TEST_APP_PATH || "app.js"), "utf8");
   assert.match(source, /\nloadFlights\(\);\s*$/);
   vm.runInContext(source.replace(/\nloadFlights\(\);\s*$/, ""), context);
   vm.runInContext(`globalThis.api = {state, elements, updateAirportOptions, filteredResults,
@@ -73,7 +73,7 @@ function harness({ rows = results } = {}) {
     sharedResultFromUrl, configureSharedResultFilters, journeyDuration, dayOffset,
     createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters,
     bookingUrlForFilters, createPurchaseStep, airportPickers, setPolishAirports,
-    polishAirportCodes, changeDirection, fareCalendarRenderKey, resultCardsRenderKey,
+    polishAirportCodes, changeDirection, fareCalendarRenderKey, resultCardsRenderKey, DATA_SOURCES, carrierLogos,
     bindAirportPickerEvents, closeAirportPickers, optionLabel};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
@@ -1223,4 +1223,53 @@ test("Google-sourced Air Europa keeps official route/date links and resident tog
     assert.equal(link.href, url.toString());
   }
   assert.equal(new URL(api.bookingUrlForFilters({ ...leg, resident_discount_eligible: false }, filters())).searchParams.get("residentType"), null);
+});
+
+test("Step 6 is required and easyJet has working carrier filters in both directions", () => {
+  const api = harness(); api.initializeFilters();
+  const source = api.DATA_SOURCES.find(row => row.url === "data/step6-results.json");
+  assert.ok(source); assert.notEqual(source.optional, true);
+  assert.match(api.carrierLogos.easyJet, /easyjet\.svg/);
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    const selected = filters(direction, {origin:"all", destination:"all", maxPrice:Infinity, maxLayover:1440,
+      firstCarrier: direction === "tenerife_to_poland" ? "easyJet" : "all",
+      secondCarrier: direction === "poland_to_tenerife" ? "easyJet" : "all"});
+    const matches = api.filteredResults(selected);
+    assert.ok(matches.length);
+    for (const row of matches) {
+      assert.equal(row.legs[direction === "poland_to_tenerife" ? 1 : 0].carrier, "easyJet");
+      assert.ok(["Ryanair", "Wizz Air"].includes(row.legs[direction === "poland_to_tenerife" ? 0 : 1].carrier));
+    }
+    const minima = api.lowestPricesByDate(matches, selected);
+    for (const [day, price] of minima) {
+      api.createCalendarDay(api.parseDateOnly(day), selected.dateFrom, selected.dateTo, minima).listeners.click[0]();
+      api.createFareChartDay(day, price, price.total).listeners.click[0]();
+      assert.deepEqual(Array.from(api.context.targets).slice(-2), [price.resultId,price.resultId]);
+    }
+    const row = matches[0];
+    api.context.window.location = new URL(api.shareUrlForResult(row, selected));
+    assert.equal(api.sharedResultFromUrl().id, row.id);
+  }
+});
+
+test("easyJet discount toggles preserve regular fare and deterministic one-adult booking link", () => {
+  const api = harness();
+  const row = results.find(r => r.legs.some(leg => leg.carrier === "easyJet"));
+  assert.ok(row);
+  const leg = row.legs.find(leg => leg.carrier === "easyJet");
+  for (const resident of [false,true]) for (const wizzClub of [false,true]) {
+    const f = filters(row.direction, {resident,wizzClub});
+    const price = api.selectedResultPricing({...row, legs:[leg], price_total_regular_pln:leg.price_regular_pln},f);
+    assert.equal(price.total, leg.price_regular_pln);
+    const link = new URL(api.bookingUrlForFilters(leg,f));
+    assert.equal(link.hostname,"www.easyjet.com"); assert.equal(link.pathname,"/deeplink");
+    assert.equal(link.searchParams.get("dep"),leg.departure_airport);
+    assert.equal(link.searchParams.get("dest"),leg.arrival_airport);
+    assert.equal(link.searchParams.get("dd"),leg.departure_at.slice(0,10));
+    assert.equal(link.searchParams.get("apax"),"1");
+    assert.equal(link.searchParams.has("residentType"),false);
+    const purchase = api.createPurchaseStep(leg,0,f);
+    const action = purchase.children.find(child => child.className === "purchase-step-actions").children[0];
+    assert.equal(action.href,leg.booking_url); assert.equal(action.textContent,"Otwórz easyJet");
+  }
 });

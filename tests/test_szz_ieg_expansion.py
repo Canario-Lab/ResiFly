@@ -37,7 +37,7 @@ class SzzIegTests(unittest.TestCase):
         for code in ("SZZ", "IEG"):
             self.assertEqual(ENDPOINT_TIMEZONES[code], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(files), 9)
+        self.assertEqual(len(files), 10)
         for file in files:
             self.assertEqual(json.loads(file.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 

@@ -1,14 +1,16 @@
 # Bezpieczne zbieranie i publikowanie cen
 
 Zabezpieczenia działają w lokalnych kolektorach. Nie wymagają GitHub Actions
-i nie wprowadzają szóstego kroku wyszukiwania. Kanoniczne listy tras, zakres
+i nie dodają samodzielnie kroków wyszukiwania. Użytkownik 24.10.2026
+zatwierdził osobny krok 6 easyJet + FR/Wizz i Google Flights dla easyJet.
+Kanoniczne listy tras, zakres
 dat, obydwa kierunki, zniżki i filtrowanie cen na stronie pozostają bez zmian.
 
 ## Wspólne źródła i równoległość od 24.10.2026
 
 `collect_five_steps.py` zaczyna od `source_pipeline.py`: niezależny plan z
-dziesięciu feedów jest deduplikowany według przewoźnika, trasy i dnia. Google
-realizuje kolejno rodziny Ryanair (FR/RK), Iberia (IB/I2), Vueling i Air Europa,
+jedenastu feedów jest deduplikowany według przewoźnika, trasy i dnia. Google
+realizuje kolejno rodziny Ryanair (FR/RK), Iberia (IB/I2), Vueling, Air Europa i easyJet,
 globalnie do trzech prób HTTP naraz, także podczas ponowień. Nie jest to
 oficjalnie gwarantowany limit Google. Blokada procesu w `tmp/locks/` odrzuca
 drugiego właściciela Google na tej samej maszynie.
@@ -25,10 +27,10 @@ niemutowalne. Manifest kompletności zawiera sumy SHA256 plików. Przerwany lub
 zmieniony zapis nie poświadcza sukcesu. Wznowienie tego samego runu może użyć
 wyłącznie jego poprawnych obserwacji przy identycznej konfiguracji/adapterach.
 
-Dopiero po pełnym źródle dziesięć kolektorów uruchamia się kolejno z
+Dopiero po pełnym źródle jedenaście kolektorów uruchamia się kolejno z
 `RESIFLY_SOURCE_MODE=read`. Raporty pokrycia zachowują oryginalne metody
 źródeł; brak cache blokuje, nie wywołuje awaryjnej sieci. NBP jest zamrożony
-w manifeście źródeł. Wszystkie dwadzieścia plików przechodzą dotychczasową
+w manifeście źródeł. Wszystkie dwadzieścia dwa pliki przechodzą dotychczasową
 bramkę promocji lokalnej. Nie wykonuje ona operacji Git ani GitHub Actions.
 
 `performance.json`, `source-progress.json`, `source-coverage.json` i log batcha
@@ -36,6 +38,83 @@ pozwalają oddzielić faktyczne próby HTTP, retry, czasy i limity od logicznego
 route/day coverage. Poprawne `InvalidMarket` Wizza (HTTP400) pozostaje pustym
 rynkiem, nie błędem kompletności. Nie interpretować surowego licznika 4xx jako
 liczby nieudanych kalendarzy.
+
+## Migracja easyJet — 24.10.2026
+
+Zestaw sześciu głównych kroków to 11 feedów i 11 sidecarów. Nowy krok 6
+jest wymagany, nie opcjonalny. Pierwsza migracja zachowuje backup starych
+20 plików i zapisuje nieistnienie starego Step 6; późne wycofanie usuwa nowo
+utworzony Step 6 i przywraca cały poprzedni komplet. Test awarii ostatniej
+podmiany obejmuje wszystkie 22 pliki. Oryginalna nazwa runnera jest utrzymana.
+
+easyJet jest wyłącznie kolejną rodziną istniejącej kolejki Google po UX,
+bez dodatkowego limitu ani przełączenia na stronę przewoźnika. Surowe
+znormalizowane obserwacje ceny/rejsu są współdzielone i niemutowalne;
+builder dopisuje trwały link oraz pochodne ceny rezydenta. Obecne trasy są
+międzynarodowe, bez tej bonifikaty. Polski Wizz zachowuje osobno regular/WDC.
+
+Bazylea wymaga CHF. Dzienne cache NBP bez tej waluty nie jest kompletnym
+snapshotem dla nowej kolekcji. Wszystkie waluty, łącznie z CHF, są pobierane
+i zamrażane przed zapytaniami o loty. Nie dopisywać waluty do manifestu już
+rozpoczętego runu ani nie zmieniać jego hashy: poprawka wymaga nowego runu.
+Szczegóły prób, zatrzymanego pierwszego przebiegu i aktualnego odbioru:
+[`WDROZENIE_KROKU_6_EASYJET_STATUS.md`](WDROZENIE_KROKU_6_EASYJET_STATUS.md).
+
+## Automatyczne odzyskiwanie źródeł — 24.10.2026
+
+Na polecenie użytkownika odzyskiwanie przejściowych błędów pełnego batcha
+nie wymaga ponownego pytania o zgodę. Implementacja: `source_recovery.py`.
+Zwykły krótki budżet adaptera pozostaje bez zmian (Google: cztery próby).
+Nieudane zadanie jest odkładane, a pozostałe dni/trasy tej kolejki są
+sprawdzane dalej. Potem następują najwyżej dwie dodatkowe rundy po 60 i 120 s
+od ostatniej nieudanej próby. Czas kończenia zdrowych zadań wlicza się w tę
+przerwę — jeżeli już minęła, ponowienie nie dokłada zbędnego oczekiwania.
+Retry-After może wydłużyć przerwę w granicach istniejącego budżetu; większe
+żądane oczekiwanie nadal blokuje, nie jest ignorowane. Przerwa nie zajmuje
+slotu HTTP i jest przerywalna. Nie ma nieograniczonej pętli restartów.
+
+Ryanair jest planowany jako osobne zadania trasa/dzień, z tym samym plikiem
+cache runu. Wizz nadal pobiera pełne własne kalendarze regular/WDC,
+Canaryfly pełne miesiące przed szczegółami dostępnych dni. Każda kolejka
+ponawia tylko nieukończone zadania, nie cudze daty i nie poprzednie ceny.
+Po 20 nieudanych zadaniach w rundzie pozostałe niepodjęte zadania tej kolejki
+są odraczane do kolejnej rundy — zabezpieczenie na większą awarię źródła.
+Zadania aktywne mogą się zakończyć. Niepodjęte zadanie pozostaje brakiem,
+nigdy potwierdzonym zerem dostępności. Liczba aktywnych futures jest
+ograniczona do workerów, zamiast umieszczać cały plan w executorze naraz.
+
+Po wyczerpaniu rund niezależne źródła i późniejsze rodziny Google kończą
+własne kalendarze. W kolejce Google nadal kolejno FR/RK, IB/I2, VY, UX, easyJet,
+nigdy różne rodziny równocześnie, najwyżej trzy rzeczywiste próby HTTP.
+Oficjalne źródła nadal do dwóch każde. Pełne coverage jest bramką budowania
+i promocji; bez niego nie powstaje certyfikat ukończenia. Zachowujemy
+dotychczasowy publiczny komplet oraz poprawne obserwacje bieżącego runu.
+
+Błędy integralności repozytorium, lokalnego zapisu, programowania, jawne
+błędy bezpieczeństwa konfiguracji i przerwanie operatora nie są automatycznie
+odraczane. Preflight nadal musi przejść przed pobieraniem. Dodatkowe rundy
+są własnością pełnego `collect_five_steps.py`; samodzielne kolektory nadal
+mają dotychczasowy krótki budżet i kończą się błędem po jego wyczerpaniu.
+
+Raport `source-recovery.json` zawiera run/identity, rundy, statusy, liczbę
+ukończonych zadań i brakujące identyfikatory tras/dat. Nie zapisuje treści
+odpowiedzi, komunikatów wyjątków, tokenów ani danych sesji. Zmiana kodu
+odzyskiwania zmienia hash adapterów: nie wolno przepisywać certyfikatów
+starego runu, by udawały pobranie nową wersją.
+
+Wdrożenie tej zmiany nie pobiera nowych kalendarzy i nie zmienia publicznych
+cen. Testy offline obejmują chwilową niepełną odpowiedź Google (normalne
+cztery próby, później sukces bez zmiany parsera), trwałe braki, kontynuację
+niezależnych źródeł i rodzin, limit trzech/dwóch także przy recovery,
+Retry-After, przerwanie, wyłącznik większej awarii oraz blokadę certyfikacji.
+
+Odbiór tej zmiany: **273 testy Python** (w tym 14 nowych testów odzyskiwania),
+**45 testów JS**, bez pominiętych. Python i dodatkowy test wszystkich dziesięciu
+builderów wykonano z zablokowanym transportem HTTP. Buildery korzystały wyłącznie
+z jawnego, usuwanego fixture offline, bez promocji i bez przypisywania starym
+cenom świeżości. Bieżące publiczne 20 plików pozostało bez zmian i ponownie
+przeszło walidację dotychczasowego runu. Nie pobierano nowych kalendarzy ani
+nie wykonywano commita/push tej zmiany. Logi: `tmp/source-recovery-20261024/`.
 
 ## Ryanair
 
@@ -129,8 +208,9 @@ konkretnego lotu promocyjnym minimum trasy/dnia ani rozkładem z szablonu.
 Usunięto dotychczasowy klient branded feedu i aktywne szablony z allowlisty.
 
 Obowiązuje wspólny limit trzech równoległych zapytań, także gdy `--workers`
-jest większy. Błąd źródła zatrzymuje dalsze zapytania; pozostały aktywny
-wątek może dokończyć swoją próbę. Pusty, poprawnie sprawdzony dzień jest
+jest większy. W pełnym batchu chwilowe błędy przechodzą opisane wyżej
+ograniczone odzyskiwanie. Samodzielny kolektor po błędzie źródła zatrzymuje
+dalsze zapytania; aktywny wątek może dokończyć swoją próbę. Pusty, poprawnie sprawdzony dzień jest
 dozwolony. Brak ceny, pełnego numeru lub godzin zwróconego rejsu blokuje zapis.
 Raport pokrycia dopuszcza tylko metodę `google_flights_http` dla Air Europa,
 więc stary raport minimum dnia nie może poświadczyć nowego pobrania.
@@ -171,7 +251,7 @@ nigdy nie zwróci poprawnie wyglądających, lecz niepełnych danych.
   przygotowywany w pliku tymczasowym i zastępuje poprzedni po udanej
   serializacji; błąd nie obcina starego pliku.
 - Całą bazę zbierać przez `scripts/collect_five_steps.py` do stagingu.
-  Wszystkie dziesięć feedów otrzymuje to samo `RESIFLY_COLLECTION_RUN_ID`.
+  Wszystkie jedenaście feedów otrzymuje to samo `RESIFLY_COLLECTION_RUN_ID`.
   Runner przydziela im świeży plik cache Ryanaira dla konkretnego runu
   i przekazuje go jako `RESIFLY_RYANAIR_GOOGLE_CACHE`. Wznowienie zachowuje
   ten sam cache; inne daty lub konfiguracja tras dla tego samego ID są odrzucane.
@@ -179,9 +259,9 @@ nigdy nie zwróci poprawnie wyglądających, lecz niepełnych danych.
   planu tras/dni oraz wspólnego `run_id`, oprócz walidacji okna, kursów,
   odcinków i wyników. Brak raportu lub pomieszanie uruchomień blokuje zapis.
 - `promote_batch` sam ponownie waliduje zestaw przed pierwszą zmianą plików.
-  Przy obsłużonym błędzie podmiany przywraca poprzednie pliki. Promocja obejmuje dziesięć feedów i ich dziesięć sidecarów,
+  Przy obsłużonym błędzie podmiany przywraca poprzednie pliki. Promocja obejmuje jedenaście feedów i ich jedenaście sidecarów,
   z backupem poprzednich plików i informacją o wcześniej brakujących raportach.
-  Jak wcześniej, dwadzieścia podmian nie jest pojedynczą transakcją systemu plików odporną na
+  Jak wcześniej, dwadzieścia dwie podmiany nie są pojedynczą transakcją systemu plików odporną na
   nagłe zabicie procesu lub utratę zasilania.
 - Po błędzie batch zapisuje `validation-report.json` ze statusem `failed`,
   identyfikatorem i krokiem, a nie pozostawia pozornego raportu sukcesu.
@@ -206,6 +286,9 @@ Nie kopiować cen z poprzedniego uruchomienia. Dopiero po pełnym sukcesie:
 ```
 
 ## Stan wdrożenia 2026-10-22
+
+Poniższe raporty wcześniejszych wdrożeń są historyczne: ich liczby feedów
+nie opisują migracji easyJet. Aktualny zestaw wynika z `scripts.search_steps`.
 
 Obecnych publicznych JSON-ów nie zmieniono ani nie dopisano im poświadczeń.
 Starszy staging GDN nie ma nowych raportów i wymaga nowego pełnego pobrania

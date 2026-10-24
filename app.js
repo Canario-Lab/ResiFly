@@ -9,6 +9,7 @@ const DATA_SOURCES = [
   { url: "data/step3-results.json" },
   { url: "data/step4-results.json" },
   { url: "data/step5-results.json" },
+  { url: "data/step6-results.json" },
 ];
 
 const state = {
@@ -167,6 +168,7 @@ const carrierLogos = {
   "Iberia Express": "assets/logos/iberia-express.svg",
   Volotea: "assets/logos/volotea.svg?v=20261021-1",
   Canaryfly: "assets/logos/canaryfly.svg?v=20261021-1",
+  easyJet: "assets/logos/easyjet.svg?v=20261024-1",
 };
 
 const carrierPurchaseUrls = {
@@ -179,6 +181,7 @@ const carrierPurchaseUrls = {
   Canaryfly: "https://www.canaryfly.es/es/",
   "Wizz Air": "https://wizzair.com/pl-pl",
   Ryanair: "https://www.ryanair.com/pl/pl",
+  easyJet: "https://www.easyjet.com/en",
 };
 
 function finitePrice(value) {
@@ -413,6 +416,8 @@ const airportLabels = {
   BGY: "Mediolan-Bergamo (BGY)",
   BBU: "Bukareszt-Băneasa (BBU)",
   BHX: "Birmingham (BHX)",
+  BFS: "Belfast International (BFS)",
+  BSL: "Bazylea (BSL)",
   BLQ: "Bolonia (BLQ)",
   BOH: "Bournemouth (BOH)",
   BRS: "Bristol (BRS)",
@@ -426,6 +431,7 @@ const airportLabels = {
   FCO: "Rzym-Fiumicino (FCO)",
   FMM: "Memmingen (FMM)",
   GDN: "Gdańsk (GDN)",
+  GLA: "Glasgow (GLA)",
   WRO: "Wrocław (WRO)",
   POZ: "Poznań (POZ)",
   LCJ: "Łódź (LCJ)",
@@ -439,11 +445,14 @@ const airportLabels = {
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",
+  LGW: "Londyn-Gatwick (LGW)",
+  LYS: "Lyon (LYS)",
   MAN: "Manchester (MAN)",
   MRS: "Marsylia (MRS)",
   MXP: "Mediolan-Malpensa (MXP)",
   NAP: "Neapol (NAP)",
   NCL: "Newcastle (NCL)",
+  NCE: "Nicea (NCE)",
   NRN: "Weeze (NRN)",
   OPO: "Porto (OPO)",
   OTP: "Bukareszt-Otopeni (OTP)",
@@ -2178,7 +2187,7 @@ async function loadFlights() {
     elements.list.innerHTML = `
       <div class="error-state">
         <strong>Nie udało się wczytać lotów</strong>
-        <p>Sprawdź, czy pliki danych kroków 1–5 są dostępne.</p>
+        <p>Sprawdź, czy pliki danych kroków 1–6 są dostępne.</p>
       </div>
     `;
   }

@@ -24,6 +24,7 @@ METHODS = {
     "Binter": {"booking_search"}, "Iberia": {"google_flights_http"},
     "Vueling": {"google_flights_http"}, "Air Europa": {"google_flights_http"},
     "Volotea": {"official_minprice"}, "Canaryfly": {"booking_calendar", "booking_search"},
+    "easyJet": {"google_flights_http"},
 }
 
 
@@ -70,6 +71,7 @@ def expected_queries(step, start, end):
             "1d": ("Air Europa", "air_europa_route_days"),
             "1e": ("Volotea", "volotea_route_days"),
             "1f": ("Canaryfly", None),
+            "6": ("easyJet", "easyjet_route_days"),
         }[step]
         if planner:
             for origin, destination, day in getattr(module, planner)(allowlist, start, end):

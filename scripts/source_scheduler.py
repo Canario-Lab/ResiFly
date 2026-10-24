@@ -11,6 +11,7 @@ import threading
 import time
 from urllib.parse import urlparse
 from scripts.collector_settings import GOOGLE_FLIGHTS_MAX_WORKERS
+from scripts.source_recovery import PermanentSourceError
 
 ROOT = Path(__file__).resolve().parents[1]
 _lock = threading.RLock()
@@ -73,7 +74,7 @@ def retry_delay(attempt, error=None):
                 except (TypeError, ValueError):
                     seconds = 0
             if seconds > 120:
-                raise RuntimeError("Retry-After exceeds the local retry budget; collection blocked")
+                raise PermanentSourceError("Retry-After exceeds the local retry budget; collection blocked")
             delay = max(delay, seconds)
         error = error.__cause__
     return delay
@@ -107,7 +108,7 @@ def ensure_google_owner():
                 fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
             except OSError:
                 stream.close()
-                raise RuntimeError("Another Google collection owns this host; refusing concurrent runner")
+                raise PermanentSourceError("Another Google collection owns this host; refusing concurrent runner")
             _process_file = stream
 
 
@@ -115,7 +116,7 @@ def ensure_google_owner():
 def request_slot(provider, family=None):
     global _owner, _active_google
     if os.environ.get("RESIFLY_SOURCE_MODE") == "read":
-        raise RuntimeError("Network forbidden during cache-only feed building")
+        raise PermanentSourceError("Network forbidden during cache-only feed building")
     raise_if_stopped()
     if provider == "Google":
         ensure_google_owner()

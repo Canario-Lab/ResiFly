@@ -29,7 +29,7 @@ class BzgExpansionTests(unittest.TestCase):
         self.assertEqual(POLISH_AIRPORTS, NINE + ("BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["BZG"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(paths), 9)
+        self.assertEqual(len(paths), 10)
         for path in paths:
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 

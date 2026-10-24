@@ -27,7 +27,7 @@ class LuzExpansionTests(unittest.TestCase):
         self.assertEqual(POLISH_AIRPORTS, TEN + ("LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["LUZ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(paths), 9)
+        self.assertEqual(len(paths), 10)
         for path in paths:
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 

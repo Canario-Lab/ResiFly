@@ -33,7 +33,7 @@ class AirportExpansionTests(unittest.TestCase):
         self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["GDN"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(files), 9)
+        self.assertEqual(len(files), 10)
         for path in files:
             document = json.loads(path.read_text())
             self.assertEqual(document["scope"]["polish_airports"], list(POLISH_AIRPORTS), path.name)

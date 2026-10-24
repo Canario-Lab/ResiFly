@@ -11,7 +11,6 @@ No real browser, browser session or Iberia access token is required.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 import hashlib
 import json
@@ -359,14 +358,14 @@ def collect_iberia_legs(
         f"(bezpieczny limit {GOOGLE_FLIGHTS_MAX_WORKERS})",
         flush=True,
     )
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        for index, result in enumerate(executor.map(fetch, ordered), start=1):
-            legs.extend(result)
-            if index % 10 == 0 or index == len(ordered):
-                print(
-                    f"Iberia przez Google Flights: {index}/{len(ordered)} zapytań tras/dni",
-                    flush=True,
-                )
+    from scripts.source_recovery import map_jobs
+    for index, result in enumerate(map_jobs("Iberia", fetch, ordered, max_workers), start=1):
+        legs.extend(result)
+        if index % 10 == 0 or index == len(ordered):
+            print(
+                f"Iberia przez Google Flights: {index}/{len(ordered)} zapytań tras/dni",
+                flush=True,
+            )
     return legs
 
 

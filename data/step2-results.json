@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-24T12:48:34+01:00",
+  "generated_at": "2026-10-24T15:26:28+01:00",
   "period_from": "2026-10-24",
   "period_to": "2026-11-23",
   "step": 2,
@@ -134,18 +134,18 @@
           "departure_at": "2026-10-25T16:35:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-25T23:05:00+01:00",
-          "price_regular_pln": 351.29,
-          "price_wizz_discount_club_pln": 307.38,
+          "price_regular_pln": 377.64,
+          "price_wizz_discount_club_pln": 333.73,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 351.29,
+          "price_resident_estimated_pln": 377.64,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-10-25/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 85.99
         }
       ],
-      "price_total_regular_pln": 351.29,
-      "price_total_resident_estimated_pln": 351.29
+      "price_total_regular_pln": 377.64,
+      "price_total_resident_estimated_pln": 377.64
     },
     {
       "id": "step2-1d21c8edc8c202be",
@@ -326,18 +326,18 @@
           "departure_at": "2026-10-26T16:40:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-26T23:10:00+01:00",
-          "price_regular_pln": 351.29,
-          "price_wizz_discount_club_pln": 307.38,
+          "price_regular_pln": 377.64,
+          "price_wizz_discount_club_pln": 333.73,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 351.29,
+          "price_resident_estimated_pln": 377.64,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-10-26/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 79.99
+          "price_source_amount": 85.99
         }
       ],
-      "price_total_regular_pln": 351.29,
-      "price_total_resident_estimated_pln": 351.29
+      "price_total_regular_pln": 377.64,
+      "price_total_resident_estimated_pln": 377.64
     },
     {
       "id": "step2-88a661f9b59417b6",
@@ -724,6 +724,36 @@
       "price_total_resident_estimated_pln": 1270.0
     },
     {
+      "id": "step2-453195260d9af1f8",
+      "origin_airport": "WAW",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "direct",
+      "transfer_airport": null,
+      "layover_minutes": 0,
+      "self_transfer": false,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61495",
+          "departure_airport": "WAW",
+          "departure_at": "2026-10-28T10:45:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-10-28T15:45:00+00:00",
+          "price_regular_pln": 819.0,
+          "price_wizz_discount_club_pln": 773.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 819.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/TFS/2026-10-28/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 819.0
+        }
+      ],
+      "price_total_regular_pln": 819.0,
+      "price_total_resident_estimated_pln": 819.0
+    },
+    {
       "id": "step2-7d642f45910f0852",
       "origin_airport": "TFS",
       "destination_airport": "WMI",
@@ -806,18 +836,18 @@
           "departure_at": "2026-10-28T16:35:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-10-28T23:05:00+01:00",
-          "price_regular_pln": 377.64,
-          "price_wizz_discount_club_pln": 333.73,
+          "price_regular_pln": 351.29,
+          "price_wizz_discount_club_pln": 307.38,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 377.64,
+          "price_resident_estimated_pln": 351.29,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-10-28/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 85.99
+          "price_source_amount": 79.99
         }
       ],
-      "price_total_regular_pln": 377.64,
-      "price_total_resident_estimated_pln": 377.64
+      "price_total_regular_pln": 351.29,
+      "price_total_resident_estimated_pln": 351.29
     },
     {
       "id": "step2-982bc00b1566078e",
@@ -932,18 +962,18 @@
           "departure_at": "2026-10-29T10:50:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-10-29T15:50:00+00:00",
-          "price_regular_pln": 729.0,
-          "price_wizz_discount_club_pln": 683.0,
+          "price_regular_pln": 819.0,
+          "price_wizz_discount_club_pln": 773.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 729.0,
+          "price_resident_estimated_pln": 819.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/TFS/2026-10-29/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 729.0
+          "price_source_amount": 819.0
         }
       ],
-      "price_total_regular_pln": 729.0,
-      "price_total_resident_estimated_pln": 729.0
+      "price_total_regular_pln": 819.0,
+      "price_total_resident_estimated_pln": 819.0
     },
     {
       "id": "step2-7e362a2bb2ccf922",
@@ -1028,18 +1058,18 @@
           "departure_at": "2026-10-29T13:20:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-10-29T18:05:00+00:00",
-          "price_regular_pln": 819.0,
-          "price_wizz_discount_club_pln": 773.0,
+          "price_regular_pln": 659.0,
+          "price_wizz_discount_club_pln": 613.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 819.0,
+          "price_resident_estimated_pln": 659.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-10-29/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 819.0
+          "price_source_amount": 659.0
         }
       ],
-      "price_total_regular_pln": 819.0,
-      "price_total_resident_estimated_pln": 819.0
+      "price_total_regular_pln": 659.0,
+      "price_total_resident_estimated_pln": 659.0
     },
     {
       "id": "step2-f2f9b2e490f0c9c0",
@@ -1244,18 +1274,18 @@
           "departure_at": "2026-10-30T13:20:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-10-30T18:05:00+00:00",
-          "price_regular_pln": 819.0,
-          "price_wizz_discount_club_pln": 773.0,
+          "price_regular_pln": 589.0,
+          "price_wizz_discount_club_pln": 543.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 819.0,
+          "price_resident_estimated_pln": 589.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-10-30/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 819.0
+          "price_source_amount": 589.0
         }
       ],
-      "price_total_regular_pln": 819.0,
-      "price_total_resident_estimated_pln": 819.0
+      "price_total_regular_pln": 589.0,
+      "price_total_resident_estimated_pln": 589.0
     },
     {
       "id": "step2-5b811235916b9d86",
@@ -1370,18 +1400,18 @@
           "departure_at": "2026-10-30T18:50:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-10-31T01:10:00+01:00",
-          "price_regular_pln": 636.75,
-          "price_wizz_discount_club_pln": 592.84,
+          "price_regular_pln": 483.04,
+          "price_wizz_discount_club_pln": 439.13,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 636.75,
+          "price_resident_estimated_pln": 483.04,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/KTW/2026-10-30/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 144.99
+          "price_source_amount": 109.99
         }
       ],
-      "price_total_regular_pln": 636.75,
-      "price_total_resident_estimated_pln": 636.75
+      "price_total_regular_pln": 483.04,
+      "price_total_resident_estimated_pln": 483.04
     },
     {
       "id": "step2-30b0288dc59db36d",
@@ -1562,18 +1592,18 @@
           "departure_at": "2026-10-31T19:15:00+00:00",
           "arrival_airport": "GDN",
           "arrival_at": "2026-11-01T01:50:00+01:00",
-          "price_regular_pln": 439.13,
-          "price_wizz_discount_club_pln": 395.21,
+          "price_regular_pln": 395.21,
+          "price_wizz_discount_club_pln": 351.29,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 439.13,
+          "price_resident_estimated_pln": 395.21,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/GDN/2026-10-31/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 99.99
+          "price_source_amount": 89.99
         }
       ],
-      "price_total_regular_pln": 439.13,
-      "price_total_resident_estimated_pln": 439.13
+      "price_total_regular_pln": 395.21,
+      "price_total_resident_estimated_pln": 395.21
     },
     {
       "id": "step2-ceac5c17ac02f5ef",
@@ -1864,36 +1894,6 @@
       "price_total_resident_estimated_pln": 1020.0
     },
     {
-      "id": "step2-455d4e300841bcdc",
-      "origin_airport": "KTW",
-      "destination_airport": "TFS",
-      "direction": "poland_to_tenerife",
-      "connection_type": "direct",
-      "transfer_airport": null,
-      "layover_minutes": 0,
-      "self_transfer": false,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61081",
-          "departure_airport": "KTW",
-          "departure_at": "2026-11-02T13:20:00+01:00",
-          "arrival_airport": "TFS",
-          "arrival_at": "2026-11-02T18:05:00+00:00",
-          "price_regular_pln": 819.0,
-          "price_wizz_discount_club_pln": 773.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 819.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-11-02/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 819.0
-        }
-      ],
-      "price_total_regular_pln": 819.0,
-      "price_total_resident_estimated_pln": 819.0
-    },
-    {
       "id": "step2-011872b2630c50bf",
       "origin_airport": "TFS",
       "destination_airport": "WAW",
@@ -2006,18 +2006,18 @@
           "departure_at": "2026-11-02T18:50:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-03T01:10:00+01:00",
-          "price_regular_pln": 439.13,
-          "price_wizz_discount_club_pln": 395.21,
+          "price_regular_pln": 395.21,
+          "price_wizz_discount_club_pln": 351.29,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 439.13,
+          "price_resident_estimated_pln": 395.21,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/KTW/2026-11-02/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 99.99
+          "price_source_amount": 89.99
         }
       ],
-      "price_total_regular_pln": 439.13,
-      "price_total_resident_estimated_pln": 439.13
+      "price_total_regular_pln": 395.21,
+      "price_total_resident_estimated_pln": 395.21
     },
     {
       "id": "step2-1006127b7ecdc76e",
@@ -2069,21 +2069,21 @@
           "departure_at": "2026-11-03T11:45:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-03T16:50:00+00:00",
-          "price_regular_pln": 1055.0,
+          "price_regular_pln": 1033.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1055.0,
+          "price_resident_estimated_pln": 1033.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-03&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1055.0,
+          "price_source_amount": 1033.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1055.0,
-      "price_total_resident_estimated_pln": 1055.0
+      "price_total_regular_pln": 1033.0,
+      "price_total_resident_estimated_pln": 1033.0
     },
     {
       "id": "step2-a5867057bc5d8221",
@@ -2135,18 +2135,18 @@
           "departure_at": "2026-11-03T13:20:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-03T18:05:00+00:00",
-          "price_regular_pln": 589.0,
-          "price_wizz_discount_club_pln": 543.0,
+          "price_regular_pln": 549.0,
+          "price_wizz_discount_club_pln": 503.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 549.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-11-03/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0
+          "price_source_amount": 549.0
         }
       ],
-      "price_total_regular_pln": 589.0,
-      "price_total_resident_estimated_pln": 589.0
+      "price_total_regular_pln": 549.0,
+      "price_total_resident_estimated_pln": 549.0
     },
     {
       "id": "step2-969d44d8650d957e",
@@ -2338,36 +2338,6 @@
       "price_total_resident_estimated_pln": 963.0
     },
     {
-      "id": "step2-a8746793eed5d14e",
-      "origin_airport": "WAW",
-      "destination_airport": "TFS",
-      "direction": "poland_to_tenerife",
-      "connection_type": "direct",
-      "transfer_airport": null,
-      "layover_minutes": 0,
-      "self_transfer": false,
-      "legs": [
-        {
-          "carrier": "Wizz Air",
-          "flight_number": "W61495",
-          "departure_airport": "WAW",
-          "departure_at": "2026-11-04T10:45:00+01:00",
-          "arrival_airport": "TFS",
-          "arrival_at": "2026-11-04T15:45:00+00:00",
-          "price_regular_pln": 819.0,
-          "price_wizz_discount_club_pln": 773.0,
-          "resident_discount_eligible": false,
-          "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 819.0,
-          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/WAW/TFS/2026-11-04/null/1/0/0/null",
-          "price_source_currency": "PLN",
-          "price_source_amount": 819.0
-        }
-      ],
-      "price_total_regular_pln": 819.0,
-      "price_total_resident_estimated_pln": 819.0
-    },
-    {
       "id": "step2-097b9ba231175e16",
       "origin_airport": "TFS",
       "destination_airport": "WMI",
@@ -2480,18 +2450,18 @@
           "departure_at": "2026-11-04T16:35:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-04T23:05:00+01:00",
-          "price_regular_pln": 439.13,
-          "price_wizz_discount_club_pln": 395.21,
+          "price_regular_pln": 395.21,
+          "price_wizz_discount_club_pln": 351.29,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 439.13,
+          "price_resident_estimated_pln": 395.21,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-11-04/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 99.99
+          "price_source_amount": 89.99
         }
       ],
-      "price_total_regular_pln": 439.13,
-      "price_total_resident_estimated_pln": 439.13
+      "price_total_regular_pln": 395.21,
+      "price_total_resident_estimated_pln": 395.21
     },
     {
       "id": "step2-41fcd988af3c05c0",
@@ -2606,21 +2576,21 @@
           "departure_at": "2026-11-05T12:05:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-05T18:30:00+01:00",
-          "price_regular_pln": 273.0,
+          "price_regular_pln": 291.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 273.0,
+          "price_resident_estimated_pln": 291.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-05&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 273.0,
+          "price_source_amount": 291.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 273.0,
-      "price_total_resident_estimated_pln": 273.0
+      "price_total_regular_pln": 291.0,
+      "price_total_resident_estimated_pln": 291.0
     },
     {
       "id": "step2-9f063e8bfdab8357",
@@ -2672,18 +2642,18 @@
           "departure_at": "2026-11-05T12:50:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-05T17:45:00+00:00",
-          "price_regular_pln": 569.0,
-          "price_wizz_discount_club_pln": 523.0,
+          "price_regular_pln": 619.0,
+          "price_wizz_discount_club_pln": 573.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 569.0,
+          "price_resident_estimated_pln": 619.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/GDN/TFS/2026-11-05/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 569.0
+          "price_source_amount": 619.0
         }
       ],
-      "price_total_regular_pln": 569.0,
-      "price_total_resident_estimated_pln": 569.0
+      "price_total_regular_pln": 619.0,
+      "price_total_resident_estimated_pln": 619.0
     },
     {
       "id": "step2-5fd4973625448d2d",
@@ -2702,18 +2672,18 @@
           "departure_at": "2026-11-05T13:20:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-05T18:05:00+00:00",
-          "price_regular_pln": 589.0,
-          "price_wizz_discount_club_pln": 543.0,
+          "price_regular_pln": 549.0,
+          "price_wizz_discount_club_pln": 503.0,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 589.0,
+          "price_resident_estimated_pln": 549.0,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-11-05/null/1/0/0/null",
           "price_source_currency": "PLN",
-          "price_source_amount": 589.0
+          "price_source_amount": 549.0
         }
       ],
-      "price_total_regular_pln": 589.0,
-      "price_total_resident_estimated_pln": 589.0
+      "price_total_regular_pln": 549.0,
+      "price_total_resident_estimated_pln": 549.0
     },
     {
       "id": "step2-ea1b390973a64929",
@@ -2762,18 +2732,18 @@
           "departure_at": "2026-11-05T18:30:00+00:00",
           "arrival_airport": "GDN",
           "arrival_at": "2026-11-06T01:05:00+01:00",
-          "price_regular_pln": 395.21,
-          "price_wizz_discount_club_pln": 351.29,
+          "price_regular_pln": 439.13,
+          "price_wizz_discount_club_pln": 395.21,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 395.21,
+          "price_resident_estimated_pln": 439.13,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/GDN/2026-11-05/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 89.99
+          "price_source_amount": 99.99
         }
       ],
-      "price_total_regular_pln": 395.21,
-      "price_total_resident_estimated_pln": 395.21
+      "price_total_regular_pln": 439.13,
+      "price_total_resident_estimated_pln": 439.13
     },
     {
       "id": "step2-d2d81dab4f8066ed",
@@ -2792,18 +2762,18 @@
           "departure_at": "2026-11-05T18:50:00+00:00",
           "arrival_airport": "KTW",
           "arrival_at": "2026-11-06T01:10:00+01:00",
-          "price_regular_pln": 395.21,
-          "price_wizz_discount_club_pln": 351.29,
+          "price_regular_pln": 377.64,
+          "price_wizz_discount_club_pln": 333.73,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 395.21,
+          "price_resident_estimated_pln": 377.64,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/KTW/2026-11-05/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 89.99
+          "price_source_amount": 85.99
         }
       ],
-      "price_total_regular_pln": 395.21,
-      "price_total_resident_estimated_pln": 395.21
+      "price_total_regular_pln": 377.64,
+      "price_total_resident_estimated_pln": 377.64
     },
     {
       "id": "step2-e59b0af357d82763",
@@ -2872,6 +2842,36 @@
       "price_total_resident_estimated_pln": 1238.0
     },
     {
+      "id": "step2-358f1ab2fb5b836a",
+      "origin_airport": "KTW",
+      "destination_airport": "TFS",
+      "direction": "poland_to_tenerife",
+      "connection_type": "direct",
+      "transfer_airport": null,
+      "layover_minutes": 0,
+      "self_transfer": false,
+      "legs": [
+        {
+          "carrier": "Wizz Air",
+          "flight_number": "W61081",
+          "departure_airport": "KTW",
+          "departure_at": "2026-11-06T13:20:00+01:00",
+          "arrival_airport": "TFS",
+          "arrival_at": "2026-11-06T18:05:00+00:00",
+          "price_regular_pln": 819.0,
+          "price_wizz_discount_club_pln": 773.0,
+          "resident_discount_eligible": false,
+          "resident_fare_multiplier": 1.0,
+          "price_resident_estimated_pln": 819.0,
+          "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/KTW/TFS/2026-11-06/null/1/0/0/null",
+          "price_source_currency": "PLN",
+          "price_source_amount": 819.0
+        }
+      ],
+      "price_total_regular_pln": 819.0,
+      "price_total_resident_estimated_pln": 819.0
+    },
+    {
       "id": "step2-e0223c1e438004c1",
       "origin_airport": "TFS",
       "destination_airport": "WAW",
@@ -2888,18 +2888,18 @@
           "departure_at": "2026-11-06T16:35:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-06T23:05:00+01:00",
-          "price_regular_pln": 483.04,
-          "price_wizz_discount_club_pln": 439.13,
+          "price_regular_pln": 526.96,
+          "price_wizz_discount_club_pln": 483.04,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 483.04,
+          "price_resident_estimated_pln": 526.96,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-11-06/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 109.99
+          "price_source_amount": 119.99
         }
       ],
-      "price_total_regular_pln": 483.04,
-      "price_total_resident_estimated_pln": 483.04
+      "price_total_regular_pln": 526.96,
+      "price_total_resident_estimated_pln": 526.96
     },
     {
       "id": "step2-06c97df1d31fce32",
@@ -4316,18 +4316,18 @@
           "departure_at": "2026-11-12T16:40:00+00:00",
           "arrival_airport": "WAW",
           "arrival_at": "2026-11-12T23:10:00+01:00",
-          "price_regular_pln": 702.63,
-          "price_wizz_discount_club_pln": 658.71,
+          "price_regular_pln": 790.46,
+          "price_wizz_discount_club_pln": 746.55,
           "resident_discount_eligible": false,
           "resident_fare_multiplier": 1.0,
-          "price_resident_estimated_pln": 702.63,
+          "price_resident_estimated_pln": 790.46,
           "booking_url": "https://www.wizzair.com/en-gb/booking/select-flight/TFS/WAW/2026-11-12/null/1/0/0/null",
           "price_source_currency": "EUR",
-          "price_source_amount": 159.99
+          "price_source_amount": 179.99
         }
       ],
-      "price_total_regular_pln": 702.63,
-      "price_total_resident_estimated_pln": 702.63
+      "price_total_regular_pln": 790.46,
+      "price_total_resident_estimated_pln": 790.46
     },
     {
       "id": "step2-5d9052720e3bcf42",
@@ -4472,21 +4472,21 @@
           "departure_at": "2026-11-13T17:35:00+00:00",
           "arrival_airport": "KRK",
           "arrival_at": "2026-11-13T23:59:00+01:00",
-          "price_regular_pln": 1682.0,
+          "price_regular_pln": 1784.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 1682.0,
+          "price_resident_estimated_pln": 1784.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=KRK&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 1682.0,
+          "price_source_amount": 1784.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 1682.0,
-      "price_total_resident_estimated_pln": 1682.0
+      "price_total_regular_pln": 1784.0,
+      "price_total_resident_estimated_pln": 1784.0
     },
     {
       "id": "step2-43b860de8a0e8ea9",
@@ -4505,21 +4505,21 @@
           "departure_at": "2026-11-13T18:30:00+00:00",
           "arrival_airport": "WMI",
           "arrival_at": "2026-11-14T01:05:00+01:00",
-          "price_regular_pln": 912.0,
+          "price_regular_pln": 885.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 912.0,
+          "price_resident_estimated_pln": 885.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-13&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=TFS&destinationIata=WMI&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 912.0,
+          "price_source_amount": 885.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 912.0,
-      "price_total_resident_estimated_pln": 912.0
+      "price_total_regular_pln": 885.0,
+      "price_total_resident_estimated_pln": 885.0
     },
     {
       "id": "step2-f2490d28ac8d043b",
@@ -4922,21 +4922,21 @@
           "departure_at": "2026-11-16T11:55:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-16T17:00:00+00:00",
-          "price_regular_pln": 425.0,
+          "price_regular_pln": 416.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 425.0,
+          "price_resident_estimated_pln": 416.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-16&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 425.0,
+          "price_source_amount": 416.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 425.0,
-      "price_total_resident_estimated_pln": 425.0
+      "price_total_regular_pln": 416.0,
+      "price_total_resident_estimated_pln": 416.0
     },
     {
       "id": "step2-11ede7823ed478ea",
@@ -5651,21 +5651,21 @@
           "departure_at": "2026-11-19T06:50:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-19T11:55:00+00:00",
-          "price_regular_pln": 368.0,
+          "price_regular_pln": 403.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 368.0,
+          "price_resident_estimated_pln": 403.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-19&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 368.0,
+          "price_source_amount": 403.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 368.0,
-      "price_total_resident_estimated_pln": 368.0
+      "price_total_regular_pln": 403.0,
+      "price_total_resident_estimated_pln": 403.0
     },
     {
       "id": "step2-820a9028177cc091",
@@ -5993,21 +5993,21 @@
           "departure_at": "2026-11-20T12:50:00+01:00",
           "arrival_airport": "TFS",
           "arrival_at": "2026-11-20T17:55:00+00:00",
-          "price_regular_pln": 517.0,
+          "price_regular_pln": 547.0,
           "resident_discount_eligible": false,
-          "price_resident_estimated_pln": 517.0,
+          "price_resident_estimated_pln": 547.0,
           "booking_url": "https://www.ryanair.com/pl/pl/trip/flights/select?adults=1&teens=0&children=0&infants=0&dateOut=2026-11-20&dateIn=&isConnectedFlight=false&discount=0&promoCode=&isReturn=false&originIata=WMI&destinationIata=TFS&tpAdults=1&tpTeens=0&tpChildren=0&tpInfants=0",
           "booking_url_scope": "route_date_search",
           "price_source": "Google Flights",
           "price_scope": "individual_flight_offer",
           "price_source_currency": "PLN",
-          "price_source_amount": 517.0,
+          "price_source_amount": 547.0,
           "price_seller_verified": false,
           "schedule_source": "Google Flights individual flight offer"
         }
       ],
-      "price_total_regular_pln": 517.0,
-      "price_total_resident_estimated_pln": 517.0
+      "price_total_regular_pln": 547.0,
+      "price_total_resident_estimated_pln": 547.0
     },
     {
       "id": "step2-1c4141c25ba5e213",
@@ -6804,7 +6804,7 @@
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "3a5a1329-a7e2-4b95-a2e5-6b10546a544d",
+    "run_id": "c86f6042-3364-4a5a-b480-802960801080",
     "step": "2",
     "period_from": "2026-10-24",
     "period_to": "2026-11-23",
@@ -20264,7 +20264,7 @@
           {
             "date": "2026-11-02",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {
@@ -20288,7 +20288,7 @@
           {
             "date": "2026-11-06",
             "status": "checked",
-            "flights": 0,
+            "flights": 1,
             "method": "timetableV2"
           },
           {
@@ -29158,7 +29158,7 @@
           {
             "date": "2026-10-28",
             "status": "checked",
-            "flights": 0,
+            "flights": 1,
             "method": "timetableV2"
           },
           {
@@ -29200,7 +29200,7 @@
           {
             "date": "2026-11-04",
             "status": "checked",
-            "flights": 1,
+            "flights": 0,
             "method": "timetableV2"
           },
           {

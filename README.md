@@ -6,24 +6,33 @@ wyniki z plików `data/step1-results.json`, opcjonalnych wariantów
 `data/step1d-results.json`, `data/step1e-results.json` i
 `data/step1f-results.json`, `data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
-`data/step5-results.json` oraz
+`data/step5-results.json` i wymaganego `data/step6-results.json` oraz
 pozwala filtrować je po kierunku, cenie, dacie, lotnisku, miejscu przesiadki,
 przewoźniku i czasie oczekiwania.
 
 ## Zbieranie danych
 
+Od decyzji użytkownika z 24.10.2026 krok 6 łączy easyJet na nodze Teneryfy
+z Ryanair/Wizz Air na nodze Polski. easyJet korzysta wyłącznie z Google
+Flights HTTP i wspólnej puli trzech prób, po Air Europa, bez dodatkowej puli.
+Stała lista: `data/easyjet-transfer-airports.json`; osobny audyt nowych hubów:
+`scripts/discover_easyjet_routes.py`. Trzy niekompletne pary Wizza są jawnie
+pending, nie udają aktualnej dostępności. Bieżący etap migracji i odbiór:
+[`docs/WDROZENIE_KROKU_6_EASYJET_STATUS.md`](docs/WDROZENIE_KROKU_6_EASYJET_STATUS.md).
+
 Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku
 [`docs/FIVE_STEP_FLIGHT_SEARCH.md`](docs/FIVE_STEP_FLIGHT_SEARCH.md). Zawiera
-wspólne zasady, dokładnie pięć kroków wyszukiwania i wymagania dotyczące
+wspólne zasady, sześć kroków wyszukiwania i wymagania dotyczące
 wynikowych danych.
 
 Publiczne JSON-y strony są generowane z oficjalnych danych Bintera,
 Wizz Air, Volotei i Canaryfly oraz Google Flights HTTP dla Ryanaira (FR/RK),
-Iberii/Iberii Express, Vuelinga i Air Europa. Binter i Canaryfly zwracają
+Iberii/Iberii Express, Vuelinga, Air Europa i easyJet. Binter i Canaryfly zwracają
 końcowe ceny regularne oraz rezydenckie. W krokach 1B–1E i uprawnionych
 hiszpańskich odcinkach Teneryfy w 3–5 cena rezydenta jest jawnym szacunkiem:
 pełne opłaty plus 25% pozostałej części taryfowej, nie 25% całej ceny.
-Kursy pochodzą z jednego dziennego zestawu NBP. Volotea i Canaryfly nie
+Kursy (w tym CHF dla nowej Bazylei) pochodzą z jednego dziennego zestawu NBP.
+Volotea i Canaryfly nie
 korzystają z Google Flights. Wyniki
 obejmują oba kierunki i nie mają limitu cenowego; maksymalną cenę wybiera
 użytkownik na stronie.
@@ -46,13 +55,14 @@ python3 -m venv .venv
 .venv/bin/python scripts/collect_step3.py --days 30
 .venv/bin/python scripts/collect_step4.py --days 30
 .venv/bin/python scripts/collect_step5.py --days 30
+.venv/bin/python scripts/collect_step6.py --days 30
 ```
 
 Generatory same zapisują `data/step1-results.json`, `data/step1b-results.json`,
 `data/step1c-results.json`, `data/step1d-results.json`,
 `data/step1e-results.json`, `data/step1f-results.json`, `data/step2-results.json`,
 `data/step3-results.json`, `data/step4-results.json` i
-`data/step5-results.json`; plików wynikowych nie
+`data/step5-results.json`, `data/step6-results.json`; plików wynikowych nie
 należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
@@ -164,6 +174,14 @@ polskie endpointy. Zastępuje to dawny wyjątek GDN/5B/KRK,LUZ. Regułę zapisan
 w rejestrze endpointów i wspólnie stosują ją walidatory oraz detektor tras.
 Bez dodawania nowych przewoźników, drugiej przesiadki lub self-routes.
 
+Od 24.10.2026 pełny runner automatycznie odzyskuje chwilowe błędy źródeł,
+bez pytania użytkownika o zgodę. Nieudane zadania wracają po pozostałych
+odczytach swojej kolejki, najwyżej w dwóch dodatkowych rundach po 60 i 120 s.
+Poprawne obserwacje tego samego runu nie są pobierane ponownie. Google nadal
+max 3, pozostałe źródła max 2; po wyczerpaniu prób niekompletna baza nie
+zastępuje publicznej. Raport: `source-recovery.json` w stagingu. Szczegóły
+i ograniczenia: `docs/COLLECTION_RELIABILITY.md`.
+
 Cały zestaw można zebrać lokalnie do stagingu, z jednym dniem i cache NBP:
 
 ```bash
@@ -172,7 +190,7 @@ Cały zestaw można zebrać lokalnie do stagingu, z jednym dniem i cache NBP:
 ```
 
 Datę w przykładzie zastąpić dniem uruchomienia w `Atlantic/Canary`.
-Druga komenda waliduje wszystkie dziesięć feedów przed lokalną podmianą i
+Druga komenda waliduje wszystkie jedenaście feedów przed lokalną podmianą i
 zachowuje ich poprzedni komplet w stagingu. Sprawdza też wspólne okno, dzienne
 kursy, unikalność ID i poprawność odcinków. Błąd podmiany przywraca poprzedni
 komplet; nie jest to pojedyncza atomowa operacja na wszystkich plikach.
@@ -189,7 +207,7 @@ Błąd źródła przerywa aktualizację; nie ma powrotu do starego API cenowego.
 Każdy kolektor wymaga raportu `collection_coverage` dla wszystkich zapisanych
 tras/dni, także przy uruchomieniu samodzielnym. Obok feedu zapisuje
 `step*-results.collection-report.json`; błąd Bintera (również GraphQL przy
-HTTP 200) nie może udawać braku lotów. Batch dopuszcza tylko komplet dziesięciu
+HTTP 200) nie może udawać braku lotów. Batch dopuszcza tylko komplet jedenastu
 feedów z tego samego `run_id` i zgodnymi raportami. Stare feedy bez raportów
 pozostają wyświetlane, ale nie przejdą ponownej promocji bez nowego pobrania.
 Wznowienie wybranych kroków wymaga `--run-id` z raportu pierwotnego batcha.

@@ -338,14 +338,14 @@ def collect_vueling_legs(
         f"(bezpieczny limit {GOOGLE_FLIGHTS_MAX_WORKERS})",
         flush=True,
     )
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        for index, result in enumerate(executor.map(fetch, ordered), start=1):
-            legs.extend(result)
-            if index % 20 == 0 or index == len(ordered):
-                print(
-                    f"Vueling przez Google Flights: {index}/{len(ordered)} zapytań tras/dni",
-                    flush=True,
-                )
+    from scripts.source_recovery import map_jobs
+    for index, result in enumerate(map_jobs("Vueling", fetch, ordered, max_workers), start=1):
+        legs.extend(result)
+        if index % 20 == 0 or index == len(ordered):
+            print(
+                f"Vueling przez Google Flights: {index}/{len(ordered)} zapytań tras/dni",
+                flush=True,
+            )
     return legs
 
 

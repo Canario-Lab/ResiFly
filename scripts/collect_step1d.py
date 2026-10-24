@@ -12,7 +12,6 @@ independent from the price source.
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta
 import hashlib
 import json
@@ -268,18 +267,20 @@ def collect_air_europa_legs(
             return collect_air_europa_trip(local.client, origin, destination, day,
                 float(rules[transfer]["air_europa_resident_fare_multiplier"]),
                 eur_pln, accepted)
-        except Exception:
-            abort.set()
+        except Exception as error:
+            from scripts.source_recovery import can_defer
+            if not can_defer(error):
+                abort.set()
             raise
 
     max_workers = google_flights_worker_count(workers)
     print(f"Google Flights Air Europa: {max_workers} równoległe zapytania (limit {GOOGLE_FLIGHTS_MAX_WORKERS})", flush=True)
     legs: list[dict[str, Any]] = []
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        for index, result in enumerate(executor.map(fetch, ordered), start=1):
-            legs.extend(result)
-            if index % 10 == 0 or index == len(ordered):
-                print(f"Air Europa przez Google Flights: {index}/{len(ordered)} tras/dni", flush=True)
+    from scripts.source_recovery import map_jobs
+    for index, result in enumerate(map_jobs("Air Europa", fetch, ordered, max_workers), start=1):
+        legs.extend(result)
+        if index % 10 == 0 or index == len(ordered):
+            print(f"Air Europa przez Google Flights: {index}/{len(ordered)} tras/dni", flush=True)
     return sorted(legs, key=lambda leg: leg["departure_at"])
 
 

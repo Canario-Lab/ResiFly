@@ -29,7 +29,7 @@ class RzeExpansionTests(unittest.TestCase):
         self.assertEqual(POLISH_AIRPORTS, EIGHT + ("RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["RZE"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
-        self.assertEqual(len(files), 9)
+        self.assertEqual(len(files), 10)
         for path in files:
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 
