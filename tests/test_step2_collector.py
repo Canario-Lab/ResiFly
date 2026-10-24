@@ -69,8 +69,8 @@ class Step2CollectorTests(unittest.TestCase):
 
     def test_route_matrix_covers_every_airport_pair_in_both_directions(self):
         routes = set(route_matrix())
-        self.assertEqual(len(routes), 44)
-        for polish in ("WAW", "WMI", "KRK", "KTW", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ"):
+        self.assertEqual(len(routes), 52)
+        for polish in ("WAW", "WMI", "KRK", "KTW", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"):
             for tenerife in ("TFN", "TFS"):
                 self.assertIn((polish, tenerife), routes)
                 self.assertIn((tenerife, polish), routes)

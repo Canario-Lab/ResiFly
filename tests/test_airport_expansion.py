@@ -29,8 +29,8 @@ def leg(carrier, origin, departure, destination, arrival, number="W60001"):
 
 
 class AirportExpansionTests(unittest.TestCase):
-    def test_all_nine_allowlist_scopes_use_exactly_ten_endpoints(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ"))
+    def test_all_nine_allowlist_scopes_use_exactly_thirteen_endpoints(self):
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
         self.assertEqual(ENDPOINT_TIMEZONES["GDN"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -88,7 +88,7 @@ class AirportExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 22), date(2026, 11, 21)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 44)
+            self.assertEqual(collector.call_count, 52)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("GDN", hub, start, end), calls)

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "f9323dee-9fdc-4e2f-8075-a39d53838115",
+  "run_id": "d98ec327-3fa9-40bd-9a9a-6da358c35bfa",
   "step": "1f",
   "period_from": "2026-10-24",
   "period_to": "2026-11-23",
@@ -602,7 +602,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 3,
+          "flights": 1,
           "method": "booking_search"
         },
         {
@@ -1378,7 +1378,7 @@
         {
           "date": "2026-10-24",
           "status": "checked",
-          "flights": 2,
+          "flights": 0,
           "method": "booking_search"
         },
         {

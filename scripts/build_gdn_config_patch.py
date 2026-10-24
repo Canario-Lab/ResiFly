@@ -30,7 +30,7 @@ def refresh_endpoint_text(value):
     """Refresh legacy endpoint lists without duplicating the latest addition."""
     value = re.sub(r"\bWAW/WMI/(?:KTW/KRK|KRK/KTW)(?:/[A-Z]{3})*",
                    "/".join(POLISH_AIRPORTS), value)
-    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć|dziesięć|jedenaście) polskich lotnisk[ao]?",
+    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć|dziesięć|jedenaście|dwanaście|trzynaście) polskich lotnisk[ao]?",
                   "wszystkie polskie lotniska z rejestru endpointów", value)
 
 
@@ -128,7 +128,9 @@ def main():
             if endpoint not in candidate.polish_airports:
                 continue
             isolated = replace(candidate, polish_airports=(endpoint,))
-            known = schedule_keys(documents["binter-transfer-airports.json"], json.loads((ROOT / "data" / "wizz-route-schedules.json").read_text())) | verified
+            # Chained endpoint reviews must use the chosen input configuration,
+            # not an unrelated live checkout that may lack the first addition.
+            known = schedule_keys(documents["binter-transfer-airports.json"], json.loads((args.baseline_directory / "wizz-route-schedules.json").read_text())) | verified
             if missing_wizz_schedules(isolated, step, known):
                 continue
             row = next((item for item in rows if item["iata"] == candidate.iata), None)

@@ -57,7 +57,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG i LUZ. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY i RDO. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -117,6 +117,21 @@ Szczegóły i pozostały zakres odbioru wizualnego:
 [`docs/WDROZENIE_LUBLINA_LUZ.md`](docs/WDROZENIE_LUBLINA_LUZ.md).
 Po lokalnej promocji użytkownik osobno autoryzował publikację całego pakietu
 LUZ i nowej bazy na GitHub. Bez zmian workflow zbierania cen.
+
+Plan dodania Szyman (SZY) i Radomia (RDO), z jedenastu do trzynastu endpointów:
+[`docs/PLAN_DODANIA_SZYMAN_I_RADOMIA_SZY_RDO.md`](docs/PLAN_DODANIA_SZYMAN_I_RADOMIA_SZY_RDO.md).
+Obejmuje osobne audyty nowych przesiadek, nowy kandydat NRN dla SZY,
+przypadek braku połączeń RDO oraz jeden wspólny pełny batch po wdrożeniu.
+Użytkownik zatwierdził wdrożenie wyłącznie lokalne 24.10.2026; bez commita,
+push i zmian workflow Actions. Wdrożono lokalnie oba endpointy i nowy hub NRN;
+nowa pełna baza ma 15 954 propozycje, w tym 35 SZY przez STN. RDO i SZY↔NRN
+nie mają teraz dostępnych dopasowań. Aby zobaczyć SZY, zwiększ limit przesiadki
+z domyślnych 6 h do 24 h. Odbiór: 246 Python i 42 JS bez pominiętych, spójne
+20 plików, backup, HTTP oraz prawdziwa strona i kopiowanie linku sprawdzone.
+Szczegóły i ograniczenia:
+[`docs/WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md`](docs/WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md).
+Po lokalnym odbiorze użytkownik 24.10.2026 osobno autoryzował wysłanie całego
+pakietu SZY/RDO, nowego NRN i aktualnej bazy na GitHub. Bez zmian workflow Actions.
 
 GDN ma stałą zgodę na rolę przesiadki wariantu 5B dla KRK i LUZ, także
 w przyszłych kolekcjach (decyzja 23.10.2026). Rejestr zawiera

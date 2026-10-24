@@ -58,10 +58,10 @@ class WroExpansionTests(unittest.TestCase):
             self.assertIn(pair, routes)
 
     def test_wro_retained_with_timezone_and_current_full_direct_coverage(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ"))
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
         self.assertEqual(ENDPOINT_TIMEZONES["WRO"], "Europe/Warsaw")
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 88 * 31)
+        self.assertEqual(len(plan), 104 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("WRO", tenerife), (tenerife, "WRO")):

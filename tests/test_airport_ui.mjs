@@ -428,6 +428,134 @@ function syntheticLuzRows() {
   });
 }
 
+const frozenEleven = new Set(["WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ"]);
+function syntheticNewAirportRows(code) {
+  return syntheticLuzRows().map(row => {
+    row.id = row.id.replace("luz", code.toLowerCase());
+    if (row.direction === "poland_to_tenerife") row.origin_airport = row.legs[0].departure_airport = code;
+    else row.destination_airport = row.legs.at(-1).arrival_airport = code;
+    return row;
+  });
+}
+
+test("thirteen synthetic options keep SZY and RDO distinct and filter an OR union", () => {
+  const base = results.filter(r => [r.origin_airport, r.destination_airport].some(c => frozenEleven.has(c)));
+  const api = harness({rows: [...base, ...syntheticNewAirportRows("SZY"), ...syntheticNewAirportRows("RDO")]});
+  api.initializeFilters();
+  assert.deepEqual(Array.from(api.polishAirportCodes()), ["BZG", "GDN", "KRK", "KTW", "LCJ", "LUZ", "POZ", "RDO", "RZE", "SZY", "WAW", "WMI", "WRO"]);
+  assert.equal(api.airportPickers.origin.checkboxes.size, 13);
+  assert.equal(api.optionLabel("SZY"), "Szymany / Olsztyn–Mazury (SZY)");
+  assert.equal(api.optionLabel("RDO"), "Radom (RDO)");
+  assert.equal(api.optionLabel("NRN"), "Weeze (NRN)");
+  api.setPolishAirports(["SZY", "RDO", "LUZ", "SZY"]);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["LUZ", "RDO", "SZY"]);
+  const old = api.currentFilters();
+  api.setPolishAirports(["SZY", "RDO", "KRK"]);
+  assert.notEqual(api.fareCalendarRenderKey(old), api.fareCalendarRenderKey(api.currentFilters()));
+  assert.notEqual(api.resultCardsRenderKey(old), api.resultCardsRenderKey(api.currentFilters()));
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    api.elements.direction.value = direction; api.changeDirection();
+    assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "RDO", "SZY"]);
+    const f = {...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440};
+    assert.deepEqual(api.filteredResults(f).map(r => r.id).sort(), ["KRK", "RDO", "SZY"].flatMap(c => api.filteredResults({...f,polishAirports:[c]})).map(r => r.id).sort());
+  }
+  api.clearActiveFilter("polishAirport:RDO");
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "SZY"]);
+  api.clearActiveFilter("dateRange");
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "SZY"]);
+  api.resetFilters();
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+});
+
+test("new endpoints with zero or one-way results never fabricate a checkbox or reverse flight", () => {
+  const base = results.filter(r => [r.origin_airport,r.destination_airport].some(c => frozenEleven.has(c)));
+  for (const code of ["SZY", "RDO"]) {
+    const empty = harness({rows: base}); empty.initializeFilters();
+    assert.ok(!empty.polishAirportCodes().includes(code));
+    assert.ok(!empty.airportPickers.origin.checkboxes.has(code));
+    for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+      const sample = syntheticNewAirportRows(code).find(r => r.direction === direction);
+      const api = harness({rows:[...base,sample]}); api.initializeFilters();
+      api.setPolishAirports([code]);
+      api.elements.direction.value = direction === "poland_to_tenerife" ? "tenerife_to_poland" : "poland_to_tenerife";
+      api.changeDirection();
+      assert.ok(api.polishAirportCodes().includes(code));
+      assert.deepEqual(Array.from(api.currentFilters().polishAirports), [code]);
+      assert.equal(api.filteredResults({...api.currentFilters(),maxPrice:Infinity,maxLayover:1440}).length,0);
+    }
+  }
+});
+
+test("SZY and RDO calendar/chart, all discounts and sorts, share and overnight remain consistent", () => {
+  const base = results.filter(r => [r.origin_airport,r.destination_airport].some(c => frozenEleven.has(c)));
+  const api = harness({rows:[...base,...syntheticNewAirportRows("SZY"),...syntheticNewAirportRows("RDO")]});
+  api.initializeFilters();
+  for (const code of ["SZY", "RDO"]) for (const direction of ["poland_to_tenerife", "tenerife_to_poland"])
+    for (const resident of [false,true]) for (const wizzClub of [false,true]) {
+      api.elements.direction.value = direction; api.changeDirection(); api.setPolishAirports([code]);
+      const f = {...api.currentFilters(),resident,wizzClub,maxPrice:Infinity,maxLayover:1440};
+      const matches = api.filteredResults(f); assert.ok(matches.length);
+      const minima = api.lowestPricesByDate(matches,f);
+      for (const [day,price] of minima) {
+        assert.equal(price.total,Math.min(...matches.filter(r => r.legs[0].departure_at.slice(0,10)===day).map(r => api.selectedResultPricing(r,f).total)));
+        api.createCalendarDay(api.parseDateOnly(day),f.dateFrom,f.dateTo,minima).listeners.click[0]();
+        const bar = api.createFareChartDay(day,price,price.total); bar.listeners.click[0]();
+        assert.match(bar.getAttribute("aria-label"),/zł/);
+        assert.deepEqual(Array.from(api.context.targets).slice(-2),[price.resultId,price.resultId]);
+      }
+      for (const sort of ["price","regular","layover","departure","journey","departure_time","arrival_time","direct"])
+        assert.deepEqual(api.filteredResults({...f,sort}).map(r => r.id).sort(),matches.map(r => r.id).sort());
+      const row = matches[0]; api.context.window.location=new URL(api.shareUrlForResult(row,f));
+      assert.equal(api.sharedResultFromUrl().id,row.id);
+      assert.equal(api.elements.resident.checked,resident); assert.equal(api.elements.wizzClub.checked,wizzClub);
+      assert.deepEqual(Array.from(api.currentFilters().polishAirports),[]);
+      assert.ok(api.filteredResults().some(r => r.id===row.id));
+    }
+  for (const code of ["SZY","RDO"]) {
+    const expensive=syntheticNewAirportRows(code)[0]; expensive.id += "-expensive";
+    expensive.price_total_regular_pln=2100; expensive.legs[0].price_regular_pln+=2100;
+    api.state.results.push(expensive);
+    api.context.window.location=new URL(api.shareUrlForResult(expensive,{resident:false,wizzClub:false}));
+    assert.equal(api.sharedResultFromUrl().id,expensive.id); assert.ok(Number(api.elements.price.value)>=2100);
+  }
+  assert.equal(api.createJourneyTime("2026-11-02T00:55:00+01:00","2026-11-01T18:00:00+00:00").children.at(-1).textContent,"+1");
+});
+
+test("complete thirteen-endpoint batch checks real SZY/RDO availability without requiring invented offers", t => {
+  const direct=documents[6].collection_coverage;
+  if (direct?.status!=="complete" || !["SZY","RDO"].every(c => direct.routes.some(r => [r.origin,r.destination].includes(c))))
+    return t.skip("Thirteen-endpoint collection absent: rerun on complete staging before promotion");
+  assert.equal(direct.expected_queries,104*31);
+  assert.equal(direct.completed_queries,direct.expected_queries);
+  const api=harness(); api.initializeFilters();
+  for (const code of ["SZY","RDO"]) {
+    const all=results.filter(r => [r.origin_airport,r.destination_airport].includes(code));
+    assert.equal(api.polishAirportCodes().includes(code),all.length>0);
+    if (!all.length) continue; // Complete checked source coverage proves the empty case.
+    for (const direction of ["poland_to_tenerife","tenerife_to_poland"]) for (const resident of [false,true]) for (const wizzClub of [false,true]) {
+      api.elements.direction.value=direction; api.changeDirection(); api.setPolishAirports([code]);
+      const f={...api.currentFilters(),resident,wizzClub,maxPrice:Infinity,maxLayover:1440};
+      const matches=api.filteredResults(f);
+      assert.deepEqual(matches.map(r => r.id).sort(),all.filter(r => r.direction===direction).map(r => r.id).sort());
+      const criteria={price:r=>api.selectedResultPricing(r,f).total,regular:r=>r.price_total_regular_pln,layover:r=>r.layover_minutes??0,
+        departure:r=>r.legs[0].departure_at,journey:r=>api.journeyDuration(r),departure_time:r=>r.legs[0].departure_at.slice(11,16),arrival_time:r=>r.legs.at(-1).arrival_at.slice(11,16),direct:r=>Number(r.legs.length!==1)};
+      for (const [sort,key] of Object.entries(criteria)) {
+        const sorted=api.filteredResults({...f,sort});
+        for(let i=1;i<sorted.length;i++) assert.ok(key(sorted[i-1])<=key(sorted[i]),sort);
+      }
+      for (const [day,price] of api.lowestPricesByDate(matches,f)) {
+        api.createFareChartDay(day,price,price.total).listeners.click[0]();
+        assert.equal(api.context.targets.at(-1),price.resultId);
+      }
+      if(matches.length) {
+        const row=matches[0]; api.context.window.location=new URL(api.shareUrlForResult(row,f));
+        assert.equal(api.sharedResultFromUrl().id,row.id);
+        assert.equal(api.elements.resident.checked,resident); assert.equal(api.elements.wizzClub.checked,wizzClub);
+      }
+    }
+  }
+});
+
 test("eleventh LUZ checkbox, OR union, direction, chips, caches and resets", () => {
   const ten = new Set(["WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG"]);
   const rows = [...results.filter(r => [r.origin_airport, r.destination_airport].some(c => ten.has(c))), ...syntheticLuzRows()];

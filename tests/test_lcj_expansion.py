@@ -23,7 +23,7 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "CRL", "DUB", "STN"}
 
 class LcjExpansionTests(unittest.TestCase):
     def test_lcj_retained_in_current_endpoint_registry_and_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ", "RZE", "BZG", "LUZ"))
+        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
         self.assertEqual(ENDPOINT_TIMEZONES["LCJ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -45,7 +45,7 @@ class LcjExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_and_each_lcj_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 88 * 31)
+        self.assertEqual(len(plan), 104 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("LCJ", tenerife), (tenerife, "LCJ")):
@@ -58,7 +58,7 @@ class LcjExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 44)
+            self.assertEqual(collector.call_count, 52)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("LCJ", hub, start, end), calls)

@@ -4,7 +4,7 @@
 
 - Read Polish endpoints and their time zones from `data/search-airports.json`
   through `scripts.search_airports`. The approved endpoints are WAW, WMI,
-  KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG and LUZ. Collectors and route discovery must share this registry.
+  KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY and RDO. Collectors and route discovery must share this registry.
 - GDN is permanently approved as a Step 5 variant B transfer for KRK and LUZ.
   This approval persists for future collections, not just the LUZ migration. The precise
   exception is stored in the endpoint registry; do not enable self-routes or
@@ -255,7 +255,7 @@
 ## Step 2 direct-flight collection
 
 - Generate Step 2 with `scripts/collect_step2.py`.
-- Check the complete matrix between WAW, WMI, KRK, KTW, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ and TFN, TFS in both
+- Check the complete matrix between WAW, WMI, KRK, KTW, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY, RDO and TFN, TFS in both
   directions for Wizz Air and Ryanair.
 - Fetch the complete configured date window for every route/carrier pair before
   producing results; do not prefilter dates with another source.

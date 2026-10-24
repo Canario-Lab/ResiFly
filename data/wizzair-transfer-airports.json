@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Wizz Air dla kroku 4",
-  "verified_on": "2026-10-23",
+  "verified_on": "2026-10-24",
   "purpose": "Stała lista lotnisk, przez które wolno budować połączenia Wizz Air + Wizz Air między Teneryfą a Polską w kroku 4.",
   "scope": {
     "tenerife_airports": [
@@ -19,13 +19,15 @@
       "LCJ",
       "RZE",
       "BZG",
-      "LUZ"
+      "LUZ",
+      "SZY",
+      "RDO"
     ],
     "airline": "Wizz Air",
     "resident_discount_considered": true
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG/LUZ.",
+    "description": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG/LUZ/SZY/RDO.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -39,7 +41,9 @@
       "LCJ",
       "RZE",
       "BZG",
-      "LUZ"
+      "LUZ",
+      "SZY",
+      "RDO"
     ],
     "result_count": 6,
     "note": "Trasa TFN-SCQ została ogłoszona z rozpoczęciem 1 lutego 2027 roku, a WMI-SCQ z rozpoczęciem 1 grudnia 2026 roku. Lotnisko pozostaje na stałej liście, ale nie będzie dostępne w każdym 30-dniowym oknie. Pozostałe możliwości prowadzą przez TFS. GDN nie znajduje się na liście, ponieważ nie ma dalszego bezpośredniego odcinka Wizz Air do WAW, WMI, KTW ani KRK."
@@ -241,6 +245,24 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono LUZ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 38 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o SZY",
+      "verified_on": "2026-10-24",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono SZY w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o RDO",
+      "verified_on": "2026-10-24",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono RDO w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

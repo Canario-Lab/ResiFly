@@ -24,7 +24,7 @@ START, END = date(2026, 10, 24), date(2026, 11, 23)
 
 class LuzExpansionTests(unittest.TestCase):
     def test_eleventh_endpoint_and_exact_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, TEN + ("LUZ",))
+        self.assertEqual(POLISH_AIRPORTS, TEN + ("LUZ", "SZY", "RDO"))
         self.assertEqual(ENDPOINT_TIMEZONES["LUZ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -60,8 +60,8 @@ class LuzExpansionTests(unittest.TestCase):
         self.assertFalse(any(r.iata == "GDN" for r in rows["step3"] + rows["step4"] + rows["step5_variant_a"]))
 
     def test_complete_direct_and_saved_leg_calendars(self):
-        self.assertEqual(len(list(collect_step2.route_matrix())), 44)
-        self.assertEqual(len(expected_queries("2", START, END)), 88 * 31)
+        self.assertEqual(len(list(collect_step2.route_matrix())), 52)
+        self.assertEqual(len(expected_queries("2", START, END)), 104 * 31)
         requirements = [("2", c, t) for c in ("Ryanair", "Wizz Air") for t in ("TFN", "TFS")]
         requirements += [("3", "Ryanair", h) for h in ("BGY", "DUB", "LTN")]
         requirements += [("5", "Wizz Air", "LTN"), ("5", "Ryanair", "GDN")]
@@ -81,7 +81,7 @@ class LuzExpansionTests(unittest.TestCase):
     def test_actual_executor_full_matrix_despite_empty_other_carrier(self, wizz, ryanair):
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 44)
+            self.assertEqual(collector.call_count, 52)
             for hub in ("MAD", "PMI"):
                 self.assertIn((hub, "LUZ", START, END), {c.args[:4] for c in collector.call_args_list})
                 self.assertIn(("LUZ", hub, START, END), {c.args[:4] for c in collector.call_args_list})

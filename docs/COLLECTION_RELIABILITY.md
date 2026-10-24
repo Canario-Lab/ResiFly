@@ -321,3 +321,37 @@ jedenasty checkbox i 4 domyślne oferty LUZ; pełny odbiór desktop/320 px
 i schowka pozostaje otwarty. Po lokalnej promocji użytkownik osobno autoryzował
 publikację całego pakietu na GitHub. Bez zmian workflow Actions.
 Szczegóły: [`WDROZENIE_LUBLINA_LUZ.md`](WDROZENIE_LUBLINA_LUZ.md).
+
+## Lokalna kolekcja trzynastu endpointów 2026-10-24
+
+Po wspólnym dodaniu SZY i RDO oraz nowego huba NRN zebrano od nowa wszystkie
+dziesięć feedów dla 2026-10-24–2026-11-23. Run
+`d98ec327-3fa9-40bd-9a9a-6da358c35bfa`, staging
+`tmp/szy-rdo-expansion/batch-2026-10-24`. Kompletne niezależne pokrycie
+bieżącej konfiguracji trzynastu: **39 308 pozycji**, zero braków/nadmiarów,
+zgodne osadzone raporty i sidecary. Świeży cache ma dokładnie planowane
+**19 282 unikalne poprawne route/day** Ryanaira, wyłącznie Google Flights HTTP.
+Jeden dzienny zestaw NBP (EUR/PLN 4.3917), Google max 2, bez wznowienia,
+starych cen, zmiany parsera lub źródeł. Kolekcja cen Bintera była kompletna;
+błąd E01000 jego discovery pozostał błędem z odrębną oceną topologii.
+
+Nowa baza: **15 954 propozycje**, w tym 35 SZY przez STN (9 z Polski,
+26 do Polski). RDO ma zero kwalifikujących się wyników. Każdy z czterech
+kierunków nowej relacji NRN został sprawdzony przez 31 dat: SZY↔NRN zero,
+NRN↔TFS po 22 rejsy. Hub pozostaje w konfiguracji na przyszłe kolekcje;
+nie wymyślano brakujących lotów. SZY ma przesiadki dłuższe niż domyślne
+6 h; przy 1000 zł i 24 h jest 8 propozycji z Polski i 18 do Polski.
+
+Po walidacji i testach (246 Python, 42 JS, bez skipów) podmieniono lokalnie
+całe 20 plików. Backup zgodny z niezależnym baseline, publiczne=staging,
+ponowny odbiór batcha i 42 JS na publicznej lokalnej bazie poprawne.
+HTTP podaje aktualne bajty index/app i wszystkich 20 plików danych.
+Przeglądarka potwierdziła rzeczywiste wyniki, OR portów, oba kierunki,
+kalendarz/słupek→ta sama karta, +1, osobne daty booking links oraz faktyczne
+kopiowanie, wklejenie i otwarcie linku. Układ sprawdzono przy 1280 px oraz
+wąskim panelu około 319 px; wymuszenie dokładnie 320 px w IAB nie zadziałało.
+Bez zmian globalnego CSS. Pierwszy odbiór **bez commita/push**. Następnie
+24.10.2026 użytkownik osobno autoryzował wysłanie całego pakietu SZY/RDO,
+NRN i nowej bazy na GitHub. Bez zmian Actions.
+Szczegóły, dowody i rollback:
+[`WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md`](WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md).

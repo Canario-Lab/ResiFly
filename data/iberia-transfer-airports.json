@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "name": "Lotniska przesiadkowe Iberia dla kroku 1B",
-  "verified_on": "2026-10-23",
+  "verified_on": "2026-10-24",
   "purpose": "Stała lista hiszpańskich lotnisk objętych zniżką rezydencką, przez które wolno budować połączenia Iberia/Iberia Express + Ryanair/Wizz Air w kroku 1B.",
   "scope": {
     "tenerife_airports": [
@@ -19,7 +19,9 @@
       "LCJ",
       "RZE",
       "BZG",
-      "LUZ"
+      "LUZ",
+      "SZY",
+      "RDO"
     ],
     "tenerife_leg_airlines": [
       "Iberia",
@@ -218,6 +220,24 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono LUZ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 38 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o SZY",
+      "verified_on": "2026-10-24",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono SZY w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o RDO",
+      "verified_on": "2026-10-24",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono RDO w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ],
   "flight_number_overrides_by_departure_time": [
