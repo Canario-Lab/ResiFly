@@ -13,6 +13,18 @@ const steps = ["1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5", "6"];
 const documents = steps.map(step => JSON.parse(readFileSync(resolve(feedDirectory, `step${step}-results.json`), "utf8")));
 const results = documents.flatMap(document => document.results);
 
+test("partial update label distinguishes inherited full-base dates from rebuilt feeds", () => {
+  const api = harness();
+  const full = { generated_at: "2026-10-24T10:00:00+00:00" };
+  assert.match(api.collectionUpdateLabel([full]), /^Aktualizacja /);
+  assert.doesNotMatch(api.collectionUpdateLabel([full]), /częściowa/);
+  const partial = { generated_at: "2026-10-25T12:00:00+00:00", data_lineage: {
+    mode: "incremental", updated_at: "2026-10-25T11:00:00+00:00",
+    last_full_collection_at: full.generated_at,
+  }};
+  assert.match(api.collectionUpdateLabel([partial]), /Aktualizacja częściowa 25.*pełna baza 24/);
+});
+
 class ElementDouble {
   constructor(tag = "div") {
     this.tagName = tag;
@@ -74,7 +86,7 @@ function harness({ rows = results } = {}) {
     createJourneyTime, updateRangeLabels, resetFilters, initializeFilters, currentFilters,
     bookingUrlForFilters, createPurchaseStep, airportPickers, setPolishAirports,
     polishAirportCodes, changeDirection, fareCalendarRenderKey, resultCardsRenderKey, DATA_SOURCES, carrierLogos,
-    bindAirportPickerEvents, closeAirportPickers, optionLabel};
+    bindAirportPickerEvents, closeAirportPickers, optionLabel, collectionUpdateLabel};
     scrollToResult = id => targets.push(id);
     renderResults = () => {};`, context);
   const api = context.api;

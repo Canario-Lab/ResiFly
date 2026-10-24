@@ -185,6 +185,11 @@ def publish_document(document, output):
     if _active is None:
         raise RuntimeError("No collection coverage session; refusing to publish")
     report = _active.verify()
+    from scripts.source_repository import reader
+    repository = reader()
+    if repository is not None and repository.identity.get("collection_mode") == "incremental":
+        from scripts.incremental_update import enrich_publication
+        enrich_publication(document, report, repository)
     document["collection_coverage"] = report
     atomic_json(Path(output).with_suffix(".collection-report.json"), report)
     atomic_json(output, document)

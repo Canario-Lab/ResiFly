@@ -12,12 +12,19 @@ przewoźniku i czasie oczekiwania.
 
 ## Zbieranie danych
 
+Ręczna aktualizacja tylko wskazanych tras jest dostępna przez
+`scripts/incremental_update.py` (domyślnie podgląd bez HTTP). Zachowuje jawny
+wiek i pochodzenie reszty cen, przebudowuje zależne wyniki bez pobierania
+całości i odróżnia aktualizację częściową od pełnej na stronie.
+Instrukcja i ograniczenia: [PARTIAL_FLIGHT_UPDATES.md](docs/PARTIAL_FLIGHT_UPDATES.md).
+
 Od decyzji użytkownika z 24.10.2026 krok 6 łączy easyJet na nodze Teneryfy
 z Ryanair/Wizz Air na nodze Polski. easyJet korzysta wyłącznie z Google
 Flights HTTP i wspólnej puli trzech prób, po Air Europa, bez dodatkowej puli.
 Stała lista: `data/easyjet-transfer-airports.json`; osobny audyt nowych hubów:
-`scripts/discover_easyjet_routes.py`. Trzy niekompletne pary Wizza są jawnie
-pending, nie udają aktualnej dostępności. Bieżący etap migracji i odbiór:
+`scripts/discover_easyjet_routes.py`. Po częściowym uzupełnieniu KRK↔NCE
+dwie niekompletne pary Wizza (BSL↔WAW, NCE↔GDN) pozostają jawnie pending,
+bez udawania aktualnej dostępności. Bieżący etap migracji i odbiór:
 [`docs/WDROZENIE_KROKU_6_EASYJET_STATUS.md`](docs/WDROZENIE_KROKU_6_EASYJET_STATUS.md).
 
 Kanoniczna instrukcja cotygodniowego wyszukiwania jest zapisana w pliku

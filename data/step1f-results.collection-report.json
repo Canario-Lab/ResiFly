@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "c86f6042-3364-4a5a-b480-802960801080",
+  "run_id": "8d963abb-a306-4a75-a4cd-8d89cb06db51",
   "step": "1f",
   "period_from": "2026-10-24",
   "period_to": "2026-11-23",
@@ -21,187 +21,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -215,187 +246,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -409,187 +471,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -603,187 +696,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -797,187 +921,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -991,187 +1146,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -1185,187 +1371,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "booking_calendar"
+          "method": "booking_calendar",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -1379,187 +1596,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 3,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 4,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 2,
-          "method": "booking_search"
+          "method": "booking_search",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -1573,187 +1821,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -1767,187 +2046,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -1961,187 +2271,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -2155,187 +2496,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 1,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "google_flights_http"
+          "method": "google_flights_http",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -2349,187 +2721,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -2543,187 +2946,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -2737,187 +3171,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -2931,187 +3396,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -3125,187 +3621,218 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     },
@@ -3319,189 +3846,250 @@
           "date": "2026-10-24",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-25",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-26",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-27",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-28",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-29",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-30",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-10-31",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-01",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-02",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-03",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-04",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-05",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-06",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-07",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-08",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-09",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-10",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-11",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-12",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-13",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-14",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-15",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-16",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-17",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-18",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-19",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-20",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-21",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-22",
           "status": "checked",
           "flights": 0,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         },
         {
           "date": "2026-11-23",
           "status": "checked",
           "flights": 1,
-          "method": "timetableV2"
+          "method": "timetableV2",
+          "observation_run_id": "c86f6042-3364-4a5a-b480-802960801080"
         }
       ]
     }
-  ]
+  ],
+  "data_lineage": {
+    "mode": "incremental",
+    "revision_id": "8d963abb-a306-4a75-a4cd-8d89cb06db51",
+    "parent_revision_id": "c86f6042-3364-4a5a-b480-802960801080",
+    "rate_snapshot_run_id": "c86f6042-3364-4a5a-b480-802960801080",
+    "last_full_collection_at": "2026-10-24T15:26:47+01:00",
+    "updated_at": "2026-10-24T15:27:40.655766+00:00",
+    "source_runs": {
+      "c86f6042-3364-4a5a-b480-802960801080": {
+        "collected_from": "2026-10-24T13:43:56.145213+00:00",
+        "collected_to": "2026-10-24T15:26:47+01:00"
+      },
+      "8d963abb-a306-4a75-a4cd-8d89cb06db51": {
+        "collected_from": "2026-10-24T15:27:39.376438+00:00",
+        "collected_to": "2026-10-24T15:27:40.655766+00:00"
+      }
+    },
+    "refreshed_routes": [
+      [
+        "Wizz Air",
+        "KRK",
+        "NCE"
+      ],
+      [
+        "Wizz Air",
+        "NCE",
+        "KRK"
+      ]
+    ]
+  }
 }

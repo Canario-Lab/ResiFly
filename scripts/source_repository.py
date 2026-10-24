@@ -132,6 +132,9 @@ def reader():
         repository = Repository(folder, identity)
         if certificate.get("digests") != repository.digests():
             raise RuntimeError("Source repository observations changed after certification")
+        if identity.get("collection_mode") == "incremental":
+            from scripts.incremental_update import load_provenance
+            load_provenance(repository)
         _readers[folder] = repository
     return _readers[folder]
 

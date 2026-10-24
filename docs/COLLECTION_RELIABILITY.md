@@ -6,6 +6,11 @@ zatwierdził osobny krok 6 easyJet + FR/Wizz i Google Flights dla easyJet.
 Kanoniczne listy tras, zakres
 dat, obydwa kierunki, zniżki i filtrowanie cen na stronie pozostają bez zmian.
 
+Osobna decyzja użytkownika z 24.10.2026 dopuszcza kontrolowaną aktualizację
+częściową: [`PARTIAL_FLIGHT_UPDATES.md`](PARTIAL_FLIGHT_UPDATES.md).
+To jawny wyjątek od zakazu mieszania runów, nie oznaczenie starych cen jako
+nowych. Zwykła cotygodniowa pełna kolekcja nie zmienia zachowania.
+
 ## Wspólne źródła i równoległość od 24.10.2026
 
 `collect_five_steps.py` zaczyna od `source_pipeline.py`: niezależny plan z

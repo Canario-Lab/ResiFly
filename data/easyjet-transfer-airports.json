@@ -652,6 +652,12 @@
       },
       "polish_routes": [
         {
+          "polish_airport": "KRK",
+          "airlines": [
+            "Wizz Air"
+          ]
+        },
+        {
           "polish_airport": "WAW",
           "airlines": [
             "Wizz Air"
@@ -745,17 +751,6 @@
     {
       "hub": "BSL",
       "polish_airport": "WAW",
-      "airline": "Wizz Air",
-      "tenerife_airports": [
-        "TFS"
-      ],
-      "reasons": [
-        "Missing verified Wizz numbers/block times in both directions"
-      ]
-    },
-    {
-      "hub": "NCE",
-      "polish_airport": "KRK",
       "airline": "Wizz Air",
       "tenerife_airports": [
         "TFS"

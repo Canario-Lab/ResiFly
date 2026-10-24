@@ -1,5 +1,17 @@
 # Krok 6 easyJet — realizacja lokalna, 24.10.2026
 
+## Aktualizacja po pierwszym pełnym odbiorze
+
+Pełny odbiór opisany niżej dotyczy pierwotnego runu `c86f6042`.
+Następnie KRK↔NCE zweryfikowano w oficjalnym rozkładzie Kraków Airport
+i uzupełniono częściowo z Wizza: 19 rejsów oraz 4 nowe propozycje
+TFS→NCE→KRK. Krok 6 ma obecnie 2188 propozycji, całość 18 201.
+Pozostałe loty i ceny zachowano wraz z pochodzeniem; nie pobierano ich od nowa.
+Pending pozostają tylko BSL↔WAW i NCE↔GDN. Szczegóły aktualizacji i dowody:
+[`PARTIAL_FLIGHT_UPDATES.md`](PARTIAL_FLIGHT_UPDATES.md).
+
+## Historia pierwszego odbioru lokalnego
+
 Status: **wdrożone i zweryfikowane lokalnie; bez commita i wysyłania na GitHub**.
 Użytkownik polecił realizację planu `PLAN_WDROZENIA_KROKU_6_EASYJET.md`.
 Nie oznacza to wdrożenia na publicznej stronie produkcyjnej.

@@ -78,6 +78,8 @@ def collect_sources(directory, start, end, run_id):
                 "google_families": ["Ryanair", "Iberia", "Vueling", "Air Europa", "easyJet"],
                 "easyjet_source": "google_flights_http_individual_offers_one_adult"}
     repository = Repository(directory / "sources", identity, writable=True)
+    from scripts.incremental_update import archive_configuration
+    archive_configuration(directory)
     expected = set().union(*(expected_queries(step, start, end) for step in STEPS))
     # Check all configured eligible estimate routes before the first flight request.
     fees = load_fee_registry()

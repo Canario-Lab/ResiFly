@@ -1803,6 +1803,84 @@
           }
         ]
       }
+    },
+    {
+      "origin": "KRK",
+      "destination": "NCE",
+      "flight_number": "W62071",
+      "duration_minutes": 140,
+      "verification": {
+        "source": "Official Krakow Airport scheduled flights supplied by the airline",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "KRK",
+            "destination": "NCE",
+            "flight_number": "W62071",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-24T18:25:00+02:00",
+            "arrival_at": "2026-10-24T20:45:00+02:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/odloty?c=nicea"
+          },
+          {
+            "origin": "KRK",
+            "destination": "NCE",
+            "flight_number": "W62071",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-25T18:40:00+01:00",
+            "arrival_at": "2026-10-25T21:00:00+01:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/odloty?c=nicea"
+          },
+          {
+            "origin": "KRK",
+            "destination": "NCE",
+            "flight_number": "W62071",
+            "duration_minutes": 140,
+            "departure_at": "2026-10-28T05:30:00+01:00",
+            "arrival_at": "2026-10-28T07:50:00+01:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/odloty?c=nicea"
+          }
+        ]
+      }
+    },
+    {
+      "origin": "NCE",
+      "destination": "KRK",
+      "flight_number": "W62072",
+      "duration_minutes": 130,
+      "verification": {
+        "source": "Official Krakow Airport scheduled flights supplied by the airline",
+        "verified_on": "2026-10-24",
+        "observations": [
+          {
+            "origin": "NCE",
+            "destination": "KRK",
+            "flight_number": "W62072",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-24T21:20:00+02:00",
+            "arrival_at": "2026-10-24T23:30:00+02:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/przyloty?c=nicea"
+          },
+          {
+            "origin": "NCE",
+            "destination": "KRK",
+            "flight_number": "W62072",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-25T21:35:00+01:00",
+            "arrival_at": "2026-10-25T23:45:00+01:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/przyloty?c=nicea"
+          },
+          {
+            "origin": "NCE",
+            "destination": "KRK",
+            "flight_number": "W62072",
+            "duration_minutes": 130,
+            "departure_at": "2026-10-28T08:25:00+01:00",
+            "arrival_at": "2026-10-28T10:35:00+01:00",
+            "source": "https://krakowairport.pl/pl/pasazer/loty/polaczenia/rozklad-rejsow-regularnych/przyloty?c=nicea"
+          }
+        ]
+      }
     }
   ],
   "flight_number_overrides_by_departure_time": [

@@ -2148,6 +2148,17 @@ function bindEvents() {
   });
 }
 
+function collectionUpdateLabel(documents) {
+  const partial = documents.map(document => document.data_lineage)
+    .filter(lineage => lineage?.mode === "incremental")
+    .sort((a, b) => b.updated_at.localeCompare(a.updated_at))[0];
+  if (partial) {
+    return `Aktualizacja częściowa ${shortDate.format(new Date(partial.updated_at))} · pełna baza ${shortDate.format(new Date(partial.last_full_collection_at))}`;
+  }
+  const generated = new Date(documents.map(document => document.generated_at).sort().at(-1));
+  return `Aktualizacja ${shortDate.format(generated)}`;
+}
+
 async function loadFlights() {
   try {
     const responses = await Promise.all(DATA_SOURCES.map(async source => ({
@@ -2165,8 +2176,7 @@ async function loadFlights() {
     };
     state.results = documents.flatMap(document => document.results || []);
 
-    const generated = new Date(state.document.generated_at);
-    elements.updatedAt.textContent = `Aktualizacja ${shortDate.format(generated)}`;
+    elements.updatedAt.textContent = collectionUpdateLabel(documents);
     initializeFilters();
     bindEvents();
     const sharedResult = sharedResultFromUrl();

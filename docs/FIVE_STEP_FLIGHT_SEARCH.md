@@ -16,6 +16,11 @@ kompatybilna. Bieżący zestaw `scripts.search_steps.STEPS` ma 11 feedów i
 - Każde uruchomienie zaczyna się od zera i pobiera aktualne rozkłady oraz ceny.
 - Nie wolno używać cen z poprzedniego uruchomienia.
 
+Osobny wyjątek zatwierdzony 24.10.2026: ręczna aktualizacja częściowa tras
+przez `scripts/incremental_update.py`, z jawnym pochodzeniem i wiekiem reszty
+cen. Nie jest pełnym pobraniem ani siódmym krokiem. Zwykły cotygodniowy batch
+nadal startuje od zera. Instrukcja: `docs/PARTIAL_FLIGHT_UPDATES.md`.
+
 ## Wspólne zasady dla wszystkich kroków
 
 - Okno wyszukiwania: od dnia uruchomienia do 30 dni naprzód.

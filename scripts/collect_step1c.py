@@ -15,6 +15,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import time as time_module
@@ -151,6 +152,8 @@ def collect_low_cost_legs(
                 last_error = None
                 break
             except RuntimeError as error:
+                if os.environ.get("RESIFLY_SOURCE_MODE") == "read":
+                    raise  # A missing certified cache row cannot recover through HTTP.
                 last_error = error
                 if attempt < 2:
                     time_module.sleep(10 * (attempt + 1))
@@ -159,7 +162,8 @@ def collect_low_cost_legs(
                 f"Wizz Air nie zwrócił trasy {origin}-{destination}; "
                 "wynik 1C nie zostanie nadpisany"
             ) from last_error
-        time_module.sleep(0.4)
+        if os.environ.get("RESIFLY_SOURCE_MODE") != "read":
+            time_module.sleep(0.4)
 
     ryanair_routes = [route for route in routes if route[0] == "Ryanair"]
     with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:

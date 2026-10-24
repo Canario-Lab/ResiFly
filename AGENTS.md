@@ -441,6 +441,28 @@
 
 ## Collection completeness and publication
 
+- User decision, 2026-10-24: manual partial updates are an explicit exception
+  to the no-cross-run-price rule, never a fresh full collection. Use
+  `scripts/incremental_update.py`; default is plan-only. `--collect` downloads
+  only named carrier/routes, both directions, every day of the unchanged
+  parent window. Then rebuild all eleven consumers offline; `--promote` is
+  explicit local publication. Weekly full runs still start from zero.
+- Require a complete certified parent, matching feeds/coverage and proven
+  configuration. Never mutate/re-certify the parent. Keep its NBP snapshot,
+  observation run IDs/time ranges and last-full-collection date. Inherited
+  observations older than 24 hours fail closed. New revision/certificate and
+  a hashed provenance ledger are mandatory; public coverage days and legs
+  identify their original runs and all 22 files share `data_lineage`.
+- Existing approved routes of all supported providers may refresh. New route
+  activation is restricted to reviewed Step 6 pairs at existing hubs, plus
+  verified Wizz metadata for selected directions. Unrelated config/fee/source
+  changes or missing unselected calendars block before HTTP. No automatic
+  discovery or guessed schedules. Preserve provider limits and recovery.
+- Partial publication uses the normal whole-set rollback, a single-publisher
+  lock and a compare-and-swap public baseline check. The website must clearly
+  distinguish partial-update time from the last full database. Details:
+  `docs/PARTIAL_FLIGHT_UPDATES.md`.
+
 - The full batch uses `scripts.source_pipeline`: collect unique current
   observations first, then build all eleven feeds sequentially in enforced
   cache-only mode. `scripts.search_steps.STEPS` is the shared feed registry.

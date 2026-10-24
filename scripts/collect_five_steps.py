@@ -8,6 +8,7 @@ and the entire batch validates. All collectors receive the same explicit date.
 """
 
 import argparse
+from contextlib import contextmanager
 from collections import Counter
 import hashlib
 from datetime import date, datetime, timedelta
@@ -48,6 +49,8 @@ def validate_batch(directory, start, days, expected_run_id=None):
     exchange_rates = {}
     expected_end = date.fromordinal(start.toordinal() + days).isoformat()
     run_id = expected_run_id
+    batch_lineage = None
+    provenance_repository = None
     for step in STEPS:
         document = json.loads((directory / f"step{step}-results.json").read_text(encoding="utf-8"))
         expected_step = int(step) if step.isdigit() else step.upper()
@@ -58,6 +61,14 @@ def validate_batch(directory, start, days, expected_run_id=None):
         generated = datetime.fromisoformat(document["generated_at"])
         if generated.tzinfo is None or generated.astimezone(ZoneInfo("Atlantic/Canary")).date() != datetime.now(ZoneInfo("Atlantic/Canary")).date():
             raise RuntimeError(f"Old collection file in step {step}")
+        from scripts.incremental_update import validate_publication, certified_repository
+        if document.get("data_lineage") and provenance_repository is None and (directory / "sources").exists():
+            provenance_repository = certified_repository(directory / "sources")
+        validate_publication(document, provenance_repository)
+        if step == STEPS[0]:
+            batch_lineage = document.get("data_lineage")
+        elif document.get("data_lineage") != batch_lineage:
+            raise RuntimeError("Mixed full/partial revisions or incremental lineage")
         if document.get("price_filtering", {}).get("applied_during_collection") is not False:
             raise RuntimeError(f"Price filtering must remain on the website: step {step}")
         for currency, rate in document.get("exchange_rates", {}).items():
@@ -125,9 +136,53 @@ def validate_batch(directory, start, days, expected_run_id=None):
     return summary
 
 
-def promote_batch(directory, public_directory=ROOT / "data"):
+@contextmanager
+def publication_lock():
+    import fcntl
+    folder = ROOT / "tmp/locks"
+    folder.mkdir(parents=True, exist_ok=True)
+    with (folder / "public-feed-publication.lock").open("a+") as stream:
+        try:
+            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            raise RuntimeError("Another feed publication is in progress")
+        yield
+
+
+def promote_batch(directory, public_directory=ROOT / "data", expected_public_hashes=None):
+    """One publisher; a partial update must still be based on current public bytes."""
+    directory, public_directory = Path(directory), Path(public_directory)
+    first = json.loads((directory / f"step{STEPS[0]}-results.json").read_text())
+    if first.get("data_lineage"):
+        from scripts.incremental_update import certified_repository, load_provenance
+        repo = certified_repository(directory / "sources")
+        from scripts.source_pipeline import configuration_hash, adapter_hash
+        if (repo.identity["configuration_hash"] != configuration_hash() or
+                repo.identity["adapter_hash"] != adapter_hash()):
+            raise RuntimeError("Partial source configuration/adapters changed before promotion")
+        lineage = load_provenance(repo)["lineage"]
+        if first["data_lineage"] != lineage:
+            raise RuntimeError("Staged feeds do not match their incremental source certificate")
+        saved = json.loads((directory / "public-baseline.json").read_text())
+        if expected_public_hashes is not None and expected_public_hashes != saved:
+            raise RuntimeError("Conflicting expected public baseline")
+        expected_public_hashes = saved
+    with publication_lock():
+        if expected_public_hashes is not None:
+            expected_names = {f"step{s}-{suffix}" for s in STEPS
+                for suffix in ("results.json", "results.collection-report.json")}
+            if set(expected_public_hashes) != expected_names:
+                raise RuntimeError("Incomplete expected public baseline")
+            for filename, expected in expected_public_hashes.items():
+                path = public_directory / filename
+                if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                    raise RuntimeError("Public base changed during partial update; refusing stale promotion")
+        _promote_batch(directory, public_directory)
+
+
+def _promote_batch(directory, public_directory):
     """Replace a validated batch, preserving the old set and rolling back errors."""
-    first = json.loads((directory / "step1-results.json").read_text(encoding="utf-8"))
+    first = json.loads((directory / f"step{STEPS[0]}-results.json").read_text(encoding="utf-8"))
     start, end = date.fromisoformat(first["period_from"]), date.fromisoformat(first["period_to"])
     validate_batch(directory, start, (end - start).days)
     backup = directory / "previous-public-feeds"
