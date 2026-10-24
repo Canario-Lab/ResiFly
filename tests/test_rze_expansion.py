@@ -26,7 +26,7 @@ START, END = date(2026, 10, 23), date(2026, 11, 22)
 
 class RzeExpansionTests(unittest.TestCase):
     def test_rze_retained_in_current_registry_and_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, EIGHT + ("RZE", "BZG"))
+        self.assertEqual(POLISH_AIRPORTS, EIGHT + ("RZE", "BZG", "LUZ"))
         self.assertEqual(ENDPOINT_TIMEZONES["RZE"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -49,7 +49,7 @@ class RzeExpansionTests(unittest.TestCase):
 
     def test_full_direct_and_saved_transfer_plans(self):
         direct = expected_queries("2", START, END)
-        self.assertEqual(len(direct), 80 * 31)
+        self.assertEqual(len(direct), 88 * 31)
         expected = [("2", c, t) for c in ("Ryanair", "Wizz Air") for t in ("TFN", "TFS")]
         expected += [("1c", "Ryanair", "ALC")]
         expected += [("3", "Ryanair", h) for h in HUBS]
@@ -65,7 +65,7 @@ class RzeExpansionTests(unittest.TestCase):
     def test_actual_full_low_cost_executor_even_with_empty_other_carrier(self, wizz, ryanair):
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 40)
+            self.assertEqual(collector.call_count, 44)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("RZE", hub, START, END), calls)
@@ -191,7 +191,7 @@ class RzeExpansionTests(unittest.TestCase):
             self.assertEqual(tracker.report()["missing_queries"], len(missing))
             with self.assertRaisesRegex(RuntimeError, "Incomplete source coverage"):
                 tracker.verify()
-        old = Coverage("2", START, START, {key for key in plan if not {"RZE", "BZG"}.intersection(key[1:3])}, "old-eight")
+        old = Coverage("2", START, START, {key for key in plan if set(key[1:3]).intersection(EIGHT)}, "old-eight")
         for c, o, d, day, kind in old.expected:
             old.record(c, o, d, START, START, [], "google_flights_http" if c == "Ryanair" else "timetableV2")
         with self.assertRaisesRegex(RuntimeError, "Incomplete source coverage"):

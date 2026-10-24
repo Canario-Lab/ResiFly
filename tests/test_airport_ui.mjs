@@ -304,8 +304,9 @@ function syntheticRzeRows() {
 
 test("ninth RZE checkbox, OR selection, chips, cache and direction retention", () => {
   const samples = syntheticRzeRows();
-  // Freeze this historical nine-endpoint fixture instead of inheriting BZG.
-  const api = harness({rows: [...results.filter(r => ![r.origin_airport, r.destination_airport].some(code => ["RZE", "BZG"].includes(code))), ...samples]});
+  // Freeze historical eight, then add the ninth endpoint explicitly.
+  const eight = new Set(["WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ"]);
+  const api = harness({rows: [...results.filter(r => [r.origin_airport, r.destination_airport].some(code => eight.has(code))), ...samples]});
   api.initializeFilters();
   assert.deepEqual(Array.from(api.polishAirportCodes()), ["GDN", "KRK", "KTW", "LCJ", "POZ", "RZE", "WAW", "WMI", "WRO"]);
   assert.equal(api.airportPickers.origin.checkboxes.size, 9);
@@ -417,6 +418,142 @@ test("RZE overnight marker and date reset keep the multi-airport selection", () 
   assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["KRK", "RZE"]);
 });
 
+function syntheticLuzRows() {
+  return syntheticRzeRows().map(row => {
+    row.id = row.id.replace("rze", "luz");
+    if (row.direction === "poland_to_tenerife") {
+      row.origin_airport = row.legs[0].departure_airport = "LUZ";
+    } else row.destination_airport = row.legs.at(-1).arrival_airport = "LUZ";
+    return row;
+  });
+}
+
+test("eleventh LUZ checkbox, OR union, direction, chips, caches and resets", () => {
+  const ten = new Set(["WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG"]);
+  const rows = [...results.filter(r => [r.origin_airport, r.destination_airport].some(c => ten.has(c))), ...syntheticLuzRows()];
+  const api = harness({rows});
+  api.initializeFilters();
+  assert.deepEqual(Array.from(api.polishAirportCodes()), ["BZG", "GDN", "KRK", "KTW", "LCJ", "LUZ", "POZ", "RZE", "WAW", "WMI", "WRO"]);
+  assert.equal(api.airportPickers.origin.checkboxes.size, 11);
+  assert.equal(api.airportPickers.origin.checkboxes.get("LUZ").value, "LUZ");
+  assert.equal(api.optionLabel("LUZ"), "Lublin (LUZ)");
+  const before = api.currentFilters();
+  api.setPolishAirports(["LUZ", "BZG", "KRK", "LUZ"]);
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG", "KRK", "LUZ"]);
+  assert.notEqual(api.fareCalendarRenderKey(before), api.fareCalendarRenderKey(api.currentFilters()));
+  assert.notEqual(api.resultCardsRenderKey(before), api.resultCardsRenderKey(api.currentFilters()));
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) {
+    api.elements.direction.value = direction;
+    api.changeDirection();
+    const f = {...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440};
+    const union = api.filteredResults(f);
+    assert.deepEqual(union.map(r => r.id).sort(), ["LUZ", "BZG", "KRK"].flatMap(c => api.filteredResults({...f, polishAirports: [c]})).map(r => r.id).sort());
+    assert.ok(union.some(r => r.id === `synthetic-luz-${direction}`));
+  }
+  api.renderActiveFilters(api.currentFilters());
+  const chip = api.elements.activeFilters.children.find(c => c.dataset.filterKey === "polishAirport:LUZ");
+  assert.ok(chip);
+  chip.listeners.click[0]();
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG", "KRK"]);
+  api.setPolishAirports(["LUZ", "BZG", "KRK"]);
+  api.clearActiveFilter("dateRange");
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["BZG", "KRK", "LUZ"]);
+  api.setPolishAirports(api.polishAirportCodes());
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), []);
+  api.resetFilters();
+  assert.equal(api.elements.direction.value, "poland_to_tenerife");
+  assert.equal(Number(api.elements.price.value), 1000);
+  assert.equal(Number(api.elements.layover.value), 6);
+});
+
+test("LUZ zero and one-way availability never invent a result or checkbox", () => {
+  const base = results.filter(r => ![r.origin_airport, r.destination_airport].includes("LUZ"));
+  const empty = harness({rows: base});
+  empty.initializeFilters();
+  assert.ok(!empty.polishAirportCodes().includes("LUZ"));
+  assert.ok(!empty.airportPickers.origin.checkboxes.has("LUZ"));
+  const api = harness({rows: [...base, syntheticLuzRows()[0]]});
+  api.initializeFilters(); api.setPolishAirports(["LUZ"]);
+  api.elements.direction.value = "tenerife_to_poland"; api.changeDirection();
+  assert.ok(api.airportPickers.destination.checkboxes.has("LUZ"));
+  assert.deepEqual(Array.from(api.currentFilters().polishAirports), ["LUZ"]);
+  assert.equal(api.filteredResults({...api.currentFilters(), maxPrice: Infinity, maxLayover: 1440}).length, 0);
+});
+
+test("LUZ calendar/chart same card, all discounts, eight sorts, share and overnight", () => {
+  const rows = [...results.filter(r => ![r.origin_airport, r.destination_airport].includes("LUZ")), ...syntheticLuzRows()];
+  const api = harness({rows}); api.initializeFilters();
+  for (const direction of ["poland_to_tenerife", "tenerife_to_poland"]) for (const resident of [false,true]) for (const wizzClub of [false,true]) {
+    api.elements.direction.value = direction; api.changeDirection(); api.setPolishAirports(["LUZ"]);
+    const f = {...api.currentFilters(), resident, wizzClub, maxPrice: Infinity, maxLayover: 1440};
+    const matches = api.filteredResults(f); assert.ok(matches.length);
+    const minima = api.lowestPricesByDate(matches, f);
+    for (const [day, price] of minima) {
+      assert.equal(price.total, Math.min(...matches.filter(r => r.legs[0].departure_at.slice(0,10) === day).map(r => api.selectedResultPricing(r,f).total)));
+      api.createCalendarDay(api.parseDateOnly(day), f.dateFrom, f.dateTo, minima).listeners.click[0]();
+      const bar = api.createFareChartDay(day,price,price.total); bar.listeners.click[0]();
+      assert.match(bar.getAttribute("aria-label"), /zł/);
+      assert.deepEqual(Array.from(api.context.targets).slice(-2), [price.resultId,price.resultId]);
+    }
+    for (const sort of ["price","regular","layover","departure","journey","departure_time","arrival_time","direct"]) {
+      assert.deepEqual(api.filteredResults({...f,sort}).map(r => r.id).sort(), matches.map(r => r.id).sort());
+    }
+    const row = matches[0];
+    api.context.window.location = new URL(api.shareUrlForResult(row,f));
+    assert.equal(api.sharedResultFromUrl().id,row.id);
+    assert.equal(api.elements.resident.checked,resident);
+    assert.equal(api.elements.wizzClub.checked,wizzClub);
+    assert.deepEqual(Array.from(api.currentFilters().polishAirports),[]);
+    assert.ok(api.filteredResults().some(r => r.id === row.id));
+  }
+  const expensive = syntheticLuzRows()[0]; expensive.id="synthetic-luz-expensive";
+  expensive.price_total_regular_pln = 2100;
+  expensive.legs[0].price_regular_pln += 2100;
+  api.state.results.push(expensive);
+  api.context.window.location = new URL(api.shareUrlForResult(expensive,{resident:false,wizzClub:false}));
+  assert.equal(api.sharedResultFromUrl().id,expensive.id);
+  assert.ok(Number(api.elements.price.value) >= 2100);
+  const clock = api.createJourneyTime("2026-11-02T00:55:00+01:00","2026-11-01T18:00:00+00:00");
+  assert.equal(clock.children.at(-1).textContent,"+1");
+});
+
+test("real LUZ offers both directions are checked after the eleven-endpoint collection", t => {
+  const eleven = documents.every(d => d.collection_coverage?.status === "complete" &&
+    d.collection_coverage?.routes?.some?.(r => r.origin === "LUZ" || r.destination === "LUZ")) || results.some(r => [r.origin_airport,r.destination_airport].includes("LUZ"));
+  if (!eleven) return t.skip("LUZ collection not yet present: rerun on new staging before promotion");
+  const api = harness(); api.initializeFilters();
+  for (const direction of ["poland_to_tenerife","tenerife_to_poland"]) {
+    const matches = results.filter(r => r.direction === direction && [r.origin_airport,r.destination_airport].includes("LUZ"));
+    assert.ok(matches.length, direction);
+    api.elements.direction.value = direction; api.changeDirection(); api.setPolishAirports(["LUZ"]);
+    for (const resident of [false,true]) for (const wizzClub of [false,true]) {
+      // Sharing intentionally clears airport restrictions. Each scenario
+      // starts with a fresh explicit LUZ selection instead of inheriting All.
+      api.setPolishAirports(["LUZ"]);
+      const f = {...api.currentFilters(),resident,wizzClub,maxPrice:Infinity,maxLayover:1440};
+      assert.deepEqual(api.filteredResults(f).map(r => r.id).sort(),matches.map(r => r.id).sort());
+      const minima=api.lowestPricesByDate(matches,f);
+      for (const [day,price] of minima) {
+        assert.equal(price.total,Math.min(...matches.filter(r => r.legs[0].departure_at.slice(0,10)===day).map(r => api.selectedResultPricing(r,f).total)));
+        api.createCalendarDay(api.parseDateOnly(day),f.dateFrom,f.dateTo,minima).listeners.click[0]();
+        api.createFareChartDay(day,price,price.total).listeners.click[0]();
+        assert.deepEqual(Array.from(api.context.targets).slice(-2),[price.resultId,price.resultId]);
+      }
+      const criteria={price:r=>api.selectedResultPricing(r,f).total, regular:r=>r.price_total_regular_pln,
+        layover:r=>r.layover_minutes??0, departure:r=>r.legs[0].departure_at, journey:r=>api.journeyDuration(r),
+        departure_time:r=>r.legs[0].departure_at.slice(11,16), arrival_time:r=>r.legs.at(-1).arrival_at.slice(11,16),direct:r=>Number(r.legs.length!==1)};
+      for (const [sort,key] of Object.entries(criteria)) {
+        const sorted=api.filteredResults({...f,sort});
+        for(let i=1;i<sorted.length;i++) assert.ok(key(sorted[i-1])<=key(sorted[i]),sort);
+      }
+      const row=matches[0]; api.context.window.location=new URL(api.shareUrlForResult(row,f));
+      assert.equal(api.sharedResultFromUrl().id,row.id);
+      assert.equal(api.elements.resident.checked,resident); assert.equal(api.elements.wizzClub.checked,wizzClub);
+      assert.ok(api.filteredResults().some(r=>r.id===row.id));
+    }
+  }
+});
+
 function syntheticBzgRows() {
   return syntheticRzeRows().map(row => {
     row.id = row.id.replace("rze", "bzg");
@@ -432,7 +569,8 @@ function syntheticBzgRows() {
 }
 
 test("tenth BZG checkbox, OR union, cache keys and individual airport chips", () => {
-  const api = harness({rows: [...results.filter(r => ![r.origin_airport, r.destination_airport].includes("BZG")), ...syntheticBzgRows()]});
+  const nine = new Set(["WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE"]);
+  const api = harness({rows: [...results.filter(r => [r.origin_airport, r.destination_airport].some(code => nine.has(code))), ...syntheticBzgRows()]});
   api.initializeFilters();
   assert.deepEqual(Array.from(api.polishAirportCodes()), ["BZG", "GDN", "KRK", "KTW", "LCJ", "POZ", "RZE", "WAW", "WMI", "WRO"]);
   assert.equal(api.airportPickers.origin.checkboxes.size, 10);

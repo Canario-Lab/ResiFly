@@ -18,7 +18,8 @@
       "POZ",
       "LCJ",
       "RZE",
-      "BZG"
+      "BZG",
+      "LUZ"
     ],
     "directions": [
       "POLAND_TO_TENERIFE",
@@ -28,8 +29,8 @@
     "resident_discount_considered": true
   },
   "selection_method": {
-    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG.",
-    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG.",
+    "variant_a": "Przecięcie bezpośrednich tras Ryanair z TFN/TFS z bezpośrednimi trasami Wizz Air z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG/LUZ.",
+    "variant_b": "Przecięcie bezpośrednich tras Wizz Air z TFN/TFS z bezpośrednimi trasami Ryanair z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG/LUZ.",
     "excluded_endpoints": [
       "TFN",
       "TFS",
@@ -41,13 +42,14 @@
       "POZ",
       "LCJ",
       "RZE",
-      "BZG"
+      "BZG",
+      "LUZ"
     ],
     "variant_a_result_count": 19,
     "variant_b_result_count": 6,
     "unique_transfer_airport_count": 22,
     "note": "W chwili weryfikacji żaden wariant mieszany nie dawał kompletnego połączenia przez TFN. Wszystkie zapisane kombinacje prowadzą przez TFS. WMI-SCQ rozpoczyna się 1 grudnia 2026 roku, więc wariant przez SCQ nie będzie dostępny we wcześniejszych 30-dniowych oknach.",
-    "endpoint_transfer_exception": "GDN zachowuje istniejącą przesiadkę tylko w wariancie B do KRK; nowe endpointy GDN korzystają z pozostałych zatwierdzonych hubów."
+    "endpoint_transfer_exception": "GDN jest stale zatwierdzoną przesiadką wariantu B dla KRK i LUZ, zgodnie z rejestrem endpointów i decyzją użytkownika z 23.10.2026. Nie rozszerza to innych miast ani wariantów."
   },
   "airport_timezones": {
     "AGA": "Africa/Casablanca",
@@ -293,7 +295,8 @@
             "KRK",
             "GDN",
             "WRO",
-            "POZ"
+            "POZ",
+            "LUZ"
           ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
@@ -465,7 +468,8 @@
             "TFS"
           ],
           "polish_airports": [
-            "KRK"
+            "KRK",
+            "LUZ"
           ],
           "resident_discount_eligible_on_tenerife_leg": false,
           "tenerife_leg_fare_multiplier": 1.0
@@ -580,6 +584,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono BZG w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o LUZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono LUZ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 38 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }

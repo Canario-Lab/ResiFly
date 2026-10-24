@@ -57,7 +57,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE i BZG. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG i LUZ. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -108,7 +108,18 @@ Pierwszy odbiór odbył się bez commita i push. Następnie 23.10.2026 użytkown
 osobno autoryzował publikację całego pakietu BZG i nowej bazy na GitHub.
 Nie dodano workflow zbierania cen w GitHub Actions.
 
-GDN zachowuje istniejącą rolę przesiadki wariantu 5B do KRK. Rejestr zawiera
+Plan dodania Lublina (LUZ) jako jedenastego endpointu:
+[`docs/PLAN_DODANIA_LUBLINA_LUZ.md`](docs/PLAN_DODANIA_LUBLINA_LUZ.md).
+LUZ wdrożono lokalnie 24.10.2026 wraz z kompletną nową bazą: 16 017 propozycji,
+w tym 47 LUZ (23 Polska → Teneryfa, 24 powrotne), kompletne pokrycie jedenastu
+endpointów. Testy: 234 Python i 38 JS bez pominiętych; backup i HTTP sprawdzone.
+Szczegóły i pozostały zakres odbioru wizualnego:
+[`docs/WDROZENIE_LUBLINA_LUZ.md`](docs/WDROZENIE_LUBLINA_LUZ.md).
+Po lokalnej promocji użytkownik osobno autoryzował publikację całego pakietu
+LUZ i nowej bazy na GitHub. Bez zmian workflow zbierania cen.
+
+GDN ma stałą zgodę na rolę przesiadki wariantu 5B dla KRK i LUZ, także
+w przyszłych kolekcjach (decyzja 23.10.2026). Rejestr zawiera
 precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
 
 Cały zestaw można zebrać lokalnie do stagingu, z jednym dniem i cache NBP:

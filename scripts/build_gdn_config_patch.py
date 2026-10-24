@@ -30,7 +30,7 @@ def refresh_endpoint_text(value):
     """Refresh legacy endpoint lists without duplicating the latest addition."""
     value = re.sub(r"\bWAW/WMI/(?:KTW/KRK|KRK/KTW)(?:/[A-Z]{3})*",
                    "/".join(POLISH_AIRPORTS), value)
-    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć) polskich lotnisk[ao]?",
+    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć|dziesięć|jedenaście) polskich lotnisk[ao]?",
                   "wszystkie polskie lotniska z rejestru endpointów", value)
 
 

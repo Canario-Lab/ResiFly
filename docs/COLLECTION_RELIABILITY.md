@@ -297,3 +297,27 @@ autoryzował publikację całego pakietu BZG i nowej bazy na GitHub.
 Bez zmian workflow. Audyt źródeł discovery (w tym błąd Binter timetable
 i odrębna weryfikacja oficjalnego katalogu), liczby i rollback:
 [`WDROZENIE_BYDGOSZCZY_BZG.md`](WDROZENIE_BYDGOSZCZY_BZG.md).
+
+## Lokalna kolekcja jedenastu endpointów 2026-10-24
+
+Po dodaniu LUZ wykonano pełny nowy batch dla 2026-10-24–2026-11-23,
+run `f9323dee-9fdc-4e2f-8075-a39d53838115`, staging
+`tmp/luz-expansion/batch-2026-10-24`. Wszystkie dziesięć feedów i sidecarów
+ma kompletne pokrycie bieżącej konfiguracji jedenastu: 36 890 pozycji,
+zero braków/nadmiarów. Świeży cache Ryanaira zawiera dokładnie planowane
+18 104 unikalne route/day. Jeden dzienny zestaw NBP, Google max 2;
+całość zakończyła się bez wznowienia ani zmiany parserów.
+
+16 017 propozycji, w tym 47 LUZ (23/24 w obu kierunkach). GDN ma trwałą,
+precyzyjną zgodę 5B/KRK,LUZ; pełne kalendarze LUZ↔GDN nie zwróciły jednak
+aktualnych lotów Ryanaira, więc nie wymyślano połączeń. Błąd Binter timetable
+podczas discovery zachowano jako błąd i rozstrzygnięto trasę osobnym
+oficjalnym katalogiem; kolekcja cen Bintera była kompletna.
+
+Po walidacji, 234 testach Python i 38 JS bez skipów promowano lokalnie cały
+zestaw 20 plików z backupem. Ponowna walidacja i porównania bajtowe przeszły;
+HTTP podaje nowy kod i wszystkie 20 plików. Przeglądarka potwierdziła daty,
+jedenasty checkbox i 4 domyślne oferty LUZ; pełny odbiór desktop/320 px
+i schowka pozostaje otwarty. Po lokalnej promocji użytkownik osobno autoryzował
+publikację całego pakietu na GitHub. Bez zmian workflow Actions.
+Szczegóły: [`WDROZENIE_LUBLINA_LUZ.md`](WDROZENIE_LUBLINA_LUZ.md).

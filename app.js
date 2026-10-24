@@ -431,6 +431,7 @@ const airportLabels = {
   LCJ: "Łódź (LCJ)",
   RZE: "Rzeszów (RZE)",
   BZG: "Bydgoszcz (BZG)",
+  LUZ: "Lublin (LUZ)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",

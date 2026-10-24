@@ -993,6 +993,24 @@
       "verified_on": "2026-10-23",
       "schedule_source": "Google Flights HTTP",
       "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LTN",
+      "destination": "LUZ",
+      "flight_number": "W92066",
+      "duration_minutes": 160,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
+    },
+    {
+      "origin": "LUZ",
+      "destination": "LTN",
+      "flight_number": "W92065",
+      "duration_minutes": 165,
+      "verified_on": "2026-10-23",
+      "schedule_source": "Google Flights HTTP",
+      "source_url": "https://www.google.com/travel/flights"
     }
   ],
   "flight_number_overrides_by_departure_time": [
@@ -1826,6 +1844,48 @@
       "departure_time": "22:45",
       "flight_number": "W46068",
       "duration_minutes": 130
+    },
+    {
+      "origin": "LTN",
+      "destination": "LUZ",
+      "departure_time": "05:50",
+      "flight_number": "W92066",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "LTN",
+      "destination": "LUZ",
+      "departure_time": "05:55",
+      "flight_number": "W92066",
+      "duration_minutes": 160
+    },
+    {
+      "origin": "LTN",
+      "destination": "LUZ",
+      "departure_time": "17:20",
+      "flight_number": "W92066",
+      "duration_minutes": 155
+    },
+    {
+      "origin": "LUZ",
+      "destination": "LTN",
+      "departure_time": "10:00",
+      "flight_number": "W92065",
+      "duration_minutes": 175
+    },
+    {
+      "origin": "LUZ",
+      "destination": "LTN",
+      "departure_time": "10:10",
+      "flight_number": "W92065",
+      "duration_minutes": 165
+    },
+    {
+      "origin": "LUZ",
+      "destination": "LTN",
+      "departure_time": "21:30",
+      "flight_number": "W92065",
+      "duration_minutes": 175
     }
   ],
   "flight_number_overrides_by_departure_weekday_and_time": [

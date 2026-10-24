@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T21:55:38+01:00",
-  "period_from": "2026-10-23",
-  "period_to": "2026-11-22",
+  "generated_at": "2026-10-24T00:45:20+01:00",
+  "period_from": "2026-10-24",
+  "period_to": "2026-11-23",
   "step": "1E",
   "directions": [
     "tenerife_to_poland",
@@ -19,7 +19,7 @@
     "EUR_PLN": {
       "rate": 4.3917,
       "source": "NBP tabela A",
-      "effective_for": "2026-10-23"
+      "effective_for": "2026-10-24"
     }
   },
   "sources": {
@@ -457,10 +457,10 @@
   ],
   "collection_coverage": {
     "schema_version": 1,
-    "run_id": "e0322930-e323-4c8c-9f08-459723852a72",
+    "run_id": "f9323dee-9fdc-4e2f-8075-a39d53838115",
     "step": "1e",
-    "period_from": "2026-10-23",
-    "period_to": "2026-11-22",
+    "period_from": "2026-10-24",
+    "period_to": "2026-11-23",
     "status": "complete",
     "expected_queries": 248,
     "completed_queries": 248,
@@ -475,12 +475,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "official_minprice"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -658,6 +652,12 @@
             "date": "2026-11-22",
             "status": "checked",
             "flights": 1,
+            "method": "official_minprice"
+          },
+          {
+            "date": "2026-11-23",
+            "status": "checked",
+            "flights": 0,
             "method": "official_minprice"
           }
         ]
@@ -669,12 +669,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "official_minprice"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -852,6 +846,12 @@
             "date": "2026-11-22",
             "status": "checked",
             "flights": 1,
+            "method": "official_minprice"
+          },
+          {
+            "date": "2026-11-23",
+            "status": "checked",
+            "flights": 0,
             "method": "official_minprice"
           }
         ]
@@ -863,12 +863,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 1,
@@ -1044,6 +1038,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"
@@ -1057,12 +1057,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -1238,6 +1232,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"
@@ -1251,12 +1251,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -1432,6 +1426,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"
@@ -1445,12 +1445,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 1,
@@ -1626,6 +1620,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"
@@ -1639,12 +1639,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -1820,6 +1814,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"
@@ -1833,12 +1833,6 @@
         "kind": "calendar",
         "days": [
           {
-            "date": "2026-10-23",
-            "status": "checked",
-            "flights": 0,
-            "method": "timetableV2"
-          },
-          {
             "date": "2026-10-24",
             "status": "checked",
             "flights": 0,
@@ -2014,6 +2008,12 @@
           },
           {
             "date": "2026-11-22",
+            "status": "checked",
+            "flights": 0,
+            "method": "timetableV2"
+          },
+          {
+            "date": "2026-11-23",
             "status": "checked",
             "flights": 0,
             "method": "timetableV2"

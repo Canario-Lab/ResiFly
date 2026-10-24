@@ -26,7 +26,7 @@ START, END = date(2026, 10, 23), date(2026, 11, 22)
 
 class BzgExpansionTests(unittest.TestCase):
     def test_tenth_endpoint_and_nine_exact_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, NINE + ("BZG",))
+        self.assertEqual(POLISH_AIRPORTS, NINE + ("BZG", "LUZ"))
         self.assertEqual(ENDPOINT_TIMEZONES["BZG"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -45,8 +45,8 @@ class BzgExpansionTests(unittest.TestCase):
             self.assertEqual(actual, {"ALC"} if name == "vueling" else set(), name)
 
     def test_complete_saved_bzg_calendars_and_direct_matrix(self):
-        self.assertEqual(len(list(collect_step2.route_matrix())), 40)
-        self.assertEqual(len(expected_queries("2", START, END)), 80 * 31)
+        self.assertEqual(len(list(collect_step2.route_matrix())), 44)
+        self.assertEqual(len(expected_queries("2", START, END)), 88 * 31)
         expected = [("2", c, t) for c in ("Ryanair", "Wizz Air") for t in ("TFN", "TFS")]
         expected += [("1c", "Ryanair", "ALC")] + [("3", "Ryanair", h) for h in HUBS]
         expected += [("1", c, h) for c in ("Ryanair", "Wizz Air") for h in ("FUE", "LPA", "MAD", "PMI", "SVQ", "VLC")]
@@ -62,7 +62,7 @@ class BzgExpansionTests(unittest.TestCase):
     def test_actual_executor_queries_bzg_both_carriers_even_if_other_is_empty(self, wizz, ryanair):
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 40)
+            self.assertEqual(collector.call_count, 44)
             calls = {call.args[:4] for call in collector.call_args_list}
             for h in ("MAD", "PMI"):
                 self.assertIn(("BZG", h, START, END), calls)
@@ -179,7 +179,7 @@ class BzgExpansionTests(unittest.TestCase):
                 tracker.record(c, o, d, START, START, [], "google_flights_http" if c == "Ryanair" else "timetableV2")
             self.assertEqual(tracker.report()["missing_queries"], len(missing))
             with self.assertRaisesRegex(RuntimeError, "Incomplete source coverage"): tracker.verify()
-        old = Coverage("2", START, START, {key for key in plan if "BZG" not in key[1:3]}, "old-nine")
+        old = Coverage("2", START, START, {key for key in plan if set(key[1:3]).intersection(NINE)}, "old-nine")
         for c, o, d, day, kind in old.expected:
             old.record(c, o, d, START, START, [], "google_flights_http" if c == "Ryanair" else "timetableV2")
         with self.assertRaisesRegex(RuntimeError, "Incomplete source coverage"):

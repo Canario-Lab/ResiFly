@@ -17,7 +17,8 @@
       "POZ",
       "LCJ",
       "RZE",
-      "BZG"
+      "BZG",
+      "LUZ"
     ],
     "tenerife_leg_airlines": [
       "Vueling"
@@ -453,6 +454,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono BZG w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "Weryfikacja rozszerzenia o LUZ",
+      "verified_on": "2026-10-23",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Sprawdzono LUZ w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 38 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
     }
   ]
 }
