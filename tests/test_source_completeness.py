@@ -300,7 +300,7 @@ class CoverageTests(unittest.TestCase):
             with patch("scripts.collect_step2.cli", return_value=args):
                 ryanair.main()
             document = json.loads(output.read_text())
-            self.assertEqual(document["collection_coverage"]["completed_queries"], 104)
+            self.assertEqual(document["collection_coverage"]["completed_queries"], 120)
             coverage.validate_coverage(document, "2", DAY, DAY)
 
     def test_missing_request_blocks_standalone_publish_but_valid_empty_queries_pass(self):

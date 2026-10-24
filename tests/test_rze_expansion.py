@@ -26,7 +26,7 @@ START, END = date(2026, 10, 23), date(2026, 11, 22)
 
 class RzeExpansionTests(unittest.TestCase):
     def test_rze_retained_in_current_registry_and_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, EIGHT + ("RZE", "BZG", "LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, EIGHT + ("RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["RZE"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -49,7 +49,7 @@ class RzeExpansionTests(unittest.TestCase):
 
     def test_full_direct_and_saved_transfer_plans(self):
         direct = expected_queries("2", START, END)
-        self.assertEqual(len(direct), 104 * 31)
+        self.assertEqual(len(direct), 120 * 31)
         expected = [("2", c, t) for c in ("Ryanair", "Wizz Air") for t in ("TFN", "TFS")]
         expected += [("1c", "Ryanair", "ALC")]
         expected += [("3", "Ryanair", h) for h in HUBS]
@@ -65,7 +65,7 @@ class RzeExpansionTests(unittest.TestCase):
     def test_actual_full_low_cost_executor_even_with_empty_other_carrier(self, wizz, ryanair):
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("RZE", hub, START, END), calls)
@@ -135,7 +135,10 @@ class RzeExpansionTests(unittest.TestCase):
     def test_no_extra_polish_transfer_roles_and_dst_boundaries(self):
         validate_polish_transfer("KRK", "GDN", "step5_variant_b")
         for p, h in (("RZE", "GDN"), ("RZE", "RZE"), ("KRK", "RZE"), ("RZE", "LCJ")):
-            with self.assertRaises(RuntimeError):
+            if p == h:
+                with self.assertRaises(RuntimeError):
+                    validate_polish_transfer(p, h, "step5_variant_b")
+            else:
                 validate_polish_transfer(p, h, "step5_variant_b")
         arrival = datetime.fromisoformat("2026-10-25T00:30:00+01:00")
         for wait, count in ((119, 0), (120, 1), (1440, 1), (1441, 0)):

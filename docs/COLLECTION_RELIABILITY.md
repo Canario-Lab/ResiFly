@@ -4,6 +4,39 @@ Zabezpieczenia działają w lokalnych kolektorach. Nie wymagają GitHub Actions
 i nie wprowadzają szóstego kroku wyszukiwania. Kanoniczne listy tras, zakres
 dat, obydwa kierunki, zniżki i filtrowanie cen na stronie pozostają bez zmian.
 
+## Wspólne źródła i równoległość od 24.10.2026
+
+`collect_five_steps.py` zaczyna od `source_pipeline.py`: niezależny plan z
+dziesięciu feedów jest deduplikowany według przewoźnika, trasy i dnia. Google
+realizuje kolejno rodziny Ryanair (FR/RK), Iberia (IB/I2), Vueling i Air Europa,
+globalnie do trzech prób HTTP naraz, także podczas ponowień. Nie jest to
+oficjalnie gwarantowany limit Google. Blokada procesu w `tmp/locks/` odrzuca
+drugiego właściciela Google na tej samej maszynie.
+
+Jednocześnie osobne kolejki Wizz Air, Binter, Canaryfly i Volotea wykonują do
+dwóch prób HTTP na źródło. Wizz zapisuje razem regular/WDC po ich poprawnym
+pobraniu, Binter/Canaryfly końcowe kwoty imports bez tokenów, Canaryfly osobno
+pełny kalendarz oraz szczegóły dostępnych dni. Brak aktywnego lotu nie usuwa
+obowiązku odczytu zaplanowanego kalendarza.
+
+Repozytorium JSONL w stagingu identyfikuje run, daty, konfigurację i wersję
+adapterów, NBP oraz limit. Zapisy są serializowane; kompletne obserwacje są
+niemutowalne. Manifest kompletności zawiera sumy SHA256 plików. Przerwany lub
+zmieniony zapis nie poświadcza sukcesu. Wznowienie tego samego runu może użyć
+wyłącznie jego poprawnych obserwacji przy identycznej konfiguracji/adapterach.
+
+Dopiero po pełnym źródle dziesięć kolektorów uruchamia się kolejno z
+`RESIFLY_SOURCE_MODE=read`. Raporty pokrycia zachowują oryginalne metody
+źródeł; brak cache blokuje, nie wywołuje awaryjnej sieci. NBP jest zamrożony
+w manifeście źródeł. Wszystkie dwadzieścia plików przechodzą dotychczasową
+bramkę promocji lokalnej. Nie wykonuje ona operacji Git ani GitHub Actions.
+
+`performance.json`, `source-progress.json`, `source-coverage.json` i log batcha
+pozwalają oddzielić faktyczne próby HTTP, retry, czasy i limity od logicznego
+route/day coverage. Poprawne `InvalidMarket` Wizza (HTTP400) pozostaje pustym
+rynkiem, nie błędem kompletności. Nie interpretować surowego licznika 4xx jako
+liczby nieudanych kalendarzy.
+
 ## Ryanair
 
 Wspólna funkcja w `scripts/collect_step2.py` jest używana przez kroki 1A–1F,
@@ -13,7 +46,7 @@ trasa jest pytana osobno o każdy dzień pełnego okna, niezależnie od rozkład
 drugiej linii. Parser zachowuje wszystkie bezpośrednie oferty z kodami `FR`
 oraz Ryanair UK `RK`, także kilka godzin tego samego dnia.
 
-Wszystkie zapytania Ryanaira są ograniczone do dwóch równoległych wywołań.
+Wszystkie zapytania Ryanaira są ograniczone do trzech równoległych wywołań.
 Znormalizowane poprawne odpowiedzi trasa/dzień trafiają do trwałego cache i są
 ponownie używane przez dziesięć kolektorów tego samego batcha. Brak ceny
 konkretnego rejsu, nieznana struktura albo wyczerpanie ponowień blokuje
@@ -95,7 +128,7 @@ zachowuje jego własną najniższą zwróconą taryfę. Nie wolno zastępować c
 konkretnego lotu promocyjnym minimum trasy/dnia ani rozkładem z szablonu.
 Usunięto dotychczasowy klient branded feedu i aktywne szablony z allowlisty.
 
-Obowiązuje wspólny limit dwóch równoległych zapytań, także gdy `--workers`
+Obowiązuje wspólny limit trzech równoległych zapytań, także gdy `--workers`
 jest większy. Błąd źródła zatrzymuje dalsze zapytania; pozostały aktywny
 wątek może dokończyć swoją próbę. Pusty, poprawnie sprawdzony dzień jest
 dozwolony. Brak ceny, pełnego numeru lub godzin zwróconego rejsu blokuje zapis.
@@ -355,3 +388,37 @@ Bez zmian globalnego CSS. Pierwszy odbiór **bez commita/push**. Następnie
 NRN i nowej bazy na GitHub. Bez zmian Actions.
 Szczegóły, dowody i rollback:
 [`WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md`](WDROZENIE_SZYMAN_I_RADOMIA_SZY_RDO.md).
+
+## Lokalny odbiór SZZ/IEG i źródeł równoległych — 24.10.2026
+
+Pełny batch 15 endpointów dla 2026-10-24–2026-11-23 ma run
+`3a5a1329-a7e2-4b95-a2e5-6b10546a544d`, jeden NBP EUR/PLN 4.3917,
+33 852 certyfikowane obserwacje źródłowe i 41 974 obserwacje coverage feedów.
+Zbudowano 16 087 propozycji, w tym 145 SZZ; IEG ma poprawnie sprawdzone zero.
+
+Pierwsze podejście zatrzymało się bez promocji na niekompletnej odpowiedzi
+Google POZ→BRS 17.11.2026 (cztery próby HTTP200). Po wyraźnej zgodzie
+użytkownika wznowiono **ten sam run i cache**, bez zmiany parsera, konfiguracji,
+adapterów i limitu 3. Zapisane poprawne kalendarze nie były pobierane ponownie.
+Problemowy dzień zwrócił później znaną poprawną strukturę z zerem ofert FR/RK,
+a wszystkie zaplanowane źródła zostały uzupełnione. Nie nadano certyfikatu
+starym publicznym cenom i nie uznano błędu za brak dostępności.
+
+Telemetria potwierdza limit Google 3 (rodziny kolejno FR/RK, IB/I2, VY, UX),
+bezpośrednie źródła do 2 i ich rzeczywistą pracę równolegle z Google.
+Aktywny czas obu podejść źródeł: 2389,56 s, w tym wznowienie 1044,66 s;
+bez przerwy na decyzję, budowania i testów. Nie ma porównawczego pomiaru
+Google=2, więc nie wyliczamy procentowego przyspieszenia.
+
+Po kompletnym źródle wszystkie dziesięć builderów pracowało kolejno wyłącznie
+z cache. Odbiór: 259 testów Python oraz 45 testów JS na stagingu i po lokalnej
+promocji, bez pominiętych. Dodatkowo osobny fixture offline sprawdził wszystkie
+dziesięć builderów przy całkowicie zablokowanym transporcie HTTP; nie posłużył
+za aktualne dane. Nowe 20 plików odpowiada stagingowi bajtowo, backup starego
+kompletu odpowiada niezależnemu baseline, a 23 lokalne zasoby HTTP zwracają
+te same bajty. Pierwszy odbiór był bez commita/push ani zmian Actions; następnie
+24.10.2026 użytkownik osobno autoryzował wysłanie całego pakietu na GitHub.
+Odbiór wizualny
+desktop/320 px i realnego schowka pozostaje otwarty: sterowanie przeglądarką
+jest wyłączone w Work. Szczegóły i ścieżki dowodów:
+[`WDROZENIE_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md`](WDROZENIE_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md).

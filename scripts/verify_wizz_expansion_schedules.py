@@ -110,7 +110,7 @@ def main():
     verified_pairs = {(row["origin"], row["destination"]) for row in result["routes"]}
     if args.inactive_probe_date:
         completed -= {tuple(pair) for pair in result["inactive_routes"]} - verified_pairs
-    client = GoogleFlightsClient()
+    client = GoogleFlightsClient(family="Wizz technical", attempts=4)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     for origin, destination in routes:
         if (origin, destination) in completed:

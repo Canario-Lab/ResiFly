@@ -143,8 +143,9 @@ class FiveStepBatchTests(unittest.TestCase):
                     self.assertFalse((directory / "previous-public-feeds").exists())
 
     @patch("scripts.collect_five_steps.promote_batch")
+    @patch("scripts.collect_five_steps.collect_sources", return_value=Path("/unused-mocked-sources"))
     @patch("scripts.collect_five_steps.subprocess.run", side_effect=subprocess.CalledProcessError(1, "collector"))
-    def test_failed_batch_replaces_old_success_report_but_never_promotes(self, run, promote):
+    def test_failed_batch_replaces_old_success_report_but_never_promotes(self, run, sources, promote):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
             (directory / "validation-report.json").write_text('{"status":"complete"}')

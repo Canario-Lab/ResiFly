@@ -163,7 +163,7 @@ class Step1DCollectorTests(unittest.TestCase):
             rows = collector.collect_air_europa_legs(plan, self.allowlist, 99, 4.0)
         self.assertEqual(len(rows), 124)
         self.assertEqual(availability.call_count, 124)
-        self.assertEqual(pool.call_args.kwargs["max_workers"], 2)
+        self.assertEqual(pool.call_args.kwargs["max_workers"], 3)
         self.assertEqual(tracker.verify()["completed_queries"], 124)
 
     def test_old_day_minimum_coverage_is_no_longer_valid(self):
@@ -231,7 +231,7 @@ class Step1DCollectorTests(unittest.TestCase):
             self.assertGreater(report["missing_queries"], 0)
             # At most two route/day workers run concurrently. Each worker may
             # retry the same transient Google/parser failure up to four times.
-            self.assertLessEqual(availability.call_count, 8)
+        self.assertLessEqual(availability.call_count, 12)
 
     def test_builds_both_directions_without_price_limit(self):
         out = collector.build_connections([

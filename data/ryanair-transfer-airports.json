@@ -21,35 +21,24 @@
       "BZG",
       "LUZ",
       "SZY",
-      "RDO"
+      "RDO",
+      "SZZ",
+      "IEG"
     ],
     "airline": "Ryanair",
     "resident_discount_considered": false
   },
   "selection_method": {
-    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z WAW/WMI/KTW/KRK/GDN/WRO/POZ/LCJ/RZE/BZG/LUZ/SZY/RDO.",
+    "description": "Przecięcie bezpośrednich tras Ryanaira z TFN/TFS z bezpośrednimi trasami Ryanaira z polskich lotnisk w data/search-airports.json; krajowe przesiadki dozwolone, bez self-routes.",
     "route_filter": {
       "operator": "RYANAIR",
       "connectingAirport": null
     },
     "excluded_endpoints": [
       "TFN",
-      "TFS",
-      "WAW",
-      "WMI",
-      "KTW",
-      "KRK",
-      "GDN",
-      "WRO",
-      "POZ",
-      "LCJ",
-      "RZE",
-      "BZG",
-      "LUZ",
-      "SZY",
-      "RDO"
+      "TFS"
     ],
-    "result_count": 35,
+    "result_count": 36,
     "note": "W chwili weryfikacji Ryanair nie miał aktywnych tras z TFN; wszystkie znalezione możliwości prowadzą przez TFS."
   },
   "airport_timezones": {
@@ -87,7 +76,8 @@
     "TSF": "Europe/Rome",
     "VIE": "Europe/Vienna",
     "VLC": "Europe/Madrid",
-    "NRN": "Europe/Berlin"
+    "NRN": "Europe/Berlin",
+    "KRK": "Europe/Warsaw"
   },
   "resident_discount_on_tenerife_leg": {
     "rule": "Zniżka rezydencka dotyczy bezpośredniego odcinka między Wyspami Kanaryjskimi a resztą terytorium Hiszpanii. Nie dotyczy odcinków międzynarodowych.",
@@ -116,6 +106,7 @@
       "EMA",
       "FCO",
       "FMM",
+      "KRK",
       "LBA",
       "LPL",
       "LTN",
@@ -135,7 +126,7 @@
       "VIE"
     ],
     "eligible_count": 3,
-    "ineligible_count": 32,
+    "ineligible_count": 33,
     "calculation": "Dla AGP, SVQ i VLC odejmij kierunkową opłatę z data/spanish-resident-fees.json, pomnóż przez 0.25 wyłącznie pozostałą część taryfową odcinka TFS/TFN i dodaj opłatę z powrotem. Dla każdego pozostałego lotniska użyj pełnej ceny, czyli mnożnika 1.0. Odcinek między Polską a lotniskiem przesiadkowym zawsze licz w pełnej cenie."
   },
   "usage_policy": {
@@ -318,7 +309,8 @@
         "LCJ",
         "RZE",
         "BZG",
-        "LUZ"
+        "LUZ",
+        "SZZ"
       ]
     },
     {
@@ -413,7 +405,8 @@
         "KRK",
         "GDN",
         "WRO",
-        "POZ"
+        "POZ",
+        "SZZ"
       ]
     },
     {
@@ -577,7 +570,8 @@
         "LCJ",
         "RZE",
         "BZG",
-        "SZY"
+        "SZY",
+        "SZZ"
       ]
     },
     {
@@ -655,6 +649,20 @@
       ],
       "polish_airports": [
         "SZY"
+      ],
+      "resident_discount_eligible_on_tenerife_leg": false,
+      "tenerife_leg_fare_multiplier": 1.0
+    },
+    {
+      "iata": "KRK",
+      "name_pl": "Krakow",
+      "country_pl": "Polska",
+      "tenerife_airports": [
+        "TFS"
+      ],
+      "polish_airports": [
+        "GDN",
+        "SZZ"
       ],
       "resident_discount_eligible_on_tenerife_leg": false,
       "tenerife_leg_fare_multiplier": 1.0
@@ -765,6 +773,15 @@
         "https://www.wizzair.com/en-gb"
       ],
       "finding": "Sprawdzono RDO w oficjalnych siatkach Ryanaira i Wizz. Materiał techniczny Wizz zawiera 0 obserwacji; nierozstrzygnięte trasy: 0, nieaktywne w oknie: 4. Dowody mają własne daty; brak obserwacji nie poświadcza rozkładu. Nie przeniesiono cen z audytu technicznego. Zachowano trasy pozostałych endpointów."
+    },
+    {
+      "name": "SZZ/IEG and all domestic transfer review",
+      "verified_on": "2026-10-24",
+      "urls": [
+        "https://www.ryanair.com/api/views/locate/3/routes",
+        "https://www.wizzair.com/en-gb"
+      ],
+      "finding": "Full official FR/Wizz graphs reviewed for SZZ/IEG and every Polish domestic hub. Resident steps have no new eligible Spanish low-cost neighbours. Domestic transfers approved permanently; self-routes forbidden. Calendar availability is collected separately."
     }
   ]
 }

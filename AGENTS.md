@@ -4,11 +4,19 @@
 
 - Read Polish endpoints and their time zones from `data/search-airports.json`
   through `scripts.search_airports`. The approved endpoints are WAW, WMI,
-  KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY and RDO. Collectors and route discovery must share this registry.
-- GDN is permanently approved as a Step 5 variant B transfer for KRK and LUZ.
-  This approval persists for future collections, not just the LUZ migration. The precise
-  exception is stored in the endpoint registry; do not enable self-routes or
-  silently expand other endpoint-as-transfer roles.
+  KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY, RDO, SZZ and IEG. Collectors and route discovery must share this registry.
+- Permanent user decision, 2026-10-24: ALL Polish domestic transfer airports
+  are approved, including current and future Polish endpoints. Do not ask for
+  another airport-specific permission (e.g. SZZ via KRK). This supersedes the
+  former GDN-only Step 5B/KRK,LUZ permission policy. Existing carrier rules,
+  one-transfer limit, full-calendar collection, verified schedules, same IATA,
+  connection-time bounds, and the ban on self-routes still apply. This does not
+  add LOT, Norwegian, charters or an extra transfer.
+- The runtime registry uses `domestic_transfers_allowed=true`; discovery and
+  validators share this general policy, not individual airport exceptions.
+  Review eligible domestic combinations for ALL endpoints, not only the new
+  ones. Do not confuse policy approval with current carrier availability:
+  saved route pairs still require independent full-calendar observations.
 
 ## Canonical five-step flight search
 
@@ -122,7 +130,7 @@
   Check all recognized offer groups and keep each flight's own lowest fare.
   Never expand a daily minimum across flights, use timetable templates, or
   fall back to the official promotional/branded route-day fare feed.
-- Limit Google Flights to at most TWO concurrent requests using the shared
+- Limit Google Flights to at most THREE concurrent requests using the shared
   `scripts.collector_settings` cap, including retries. Calculate the resident
   estimate by subtracting the direction-specific fixed non-discountable fees
   saved in `data/spanish-resident-fees.json`, applying the saved `0.25`
@@ -255,7 +263,7 @@
 ## Step 2 direct-flight collection
 
 - Generate Step 2 with `scripts/collect_step2.py`.
-- Check the complete matrix between WAW, WMI, KRK, KTW, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY, RDO and TFN, TFS in both
+- Check the complete matrix between WAW, WMI, KRK, KTW, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY, RDO, SZZ, IEG and TFN, TFS in both
   directions for Wizz Air and Ryanair.
 - Fetch the complete configured date window for every route/carrier pair before
   producing results; do not prefilter dates with another source.
@@ -393,6 +401,18 @@
 
 ## Collection completeness and publication
 
+- The full batch uses `scripts.source_pipeline`: collect unique current
+  observations first, then build all ten feeds sequentially in enforced
+  cache-only mode. Google families run in order FR/RK, IB/I2, VY, UX with
+  at most THREE actual HTTP attempts at once, retries included. Official Wizz,
+  Binter, Canaryfly and Volotea queues run independently alongside Google,
+  with at most two in-flight HTTP attempts per provider. A host-wide Google
+  process lock rejects an overlapping standalone collector or another batch.
+- A source repository belongs to one run, period, configuration, adapter hash
+  and NBP snapshot. Missing observations are errors, not empty availability;
+  only completed certified observations may feed builders. Never reuse a
+  previous run's prices. Preserve the previous public twenty-file set on failure.
+
 - Read `docs/COLLECTION_RELIABILITY.md` when changing source collection or
   publication. Keep route/day coverage in `scripts.collection_coverage` for
   standalone collectors as well as the full staged batch.
@@ -400,7 +420,7 @@
   dates, times and individual PLN fares. Query every saved route on every day
   of the complete window and retain both `FR` and Ryanair UK `RK` marketing
   codes. Never expand a daily minimum across flights or fall back to Fare
-  Finder. Limit all Ryanair Google requests to two concurrent calls, reuse the
+  Finder. Limit all Ryanair Google requests to three concurrent calls, reuse the
   persistent route/day cache across the ten feeds in one batch, and fail closed
   before publication on an unpriced flight, malformed response or failed day.
 - A public feed requires complete independently planned route/day coverage.

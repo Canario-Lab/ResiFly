@@ -85,15 +85,18 @@ def cli() -> argparse.Namespace:
 class GoogleFlightsClient:
     """HTTP-only Google Flights client used for regular airline fares."""
 
-    def __init__(self) -> None:
+    def __init__(self, family="Iberia", attempts=1) -> None:
+        self.family, self.attempts = family, attempts
         self.session = requests.Session(impersonate="chrome")
 
     def _request(self, params: dict[str, str]) -> str:
         last_error: Exception | None = None
-        for attempt in range(4):
+        for attempt in range(self.attempts):
             try:
-                response = self.session.get(
+                from scripts.source_scheduler import http_request
+                response = http_request(self.session.get,
                     GOOGLE_FLIGHTS_URL,
+                    family=self.family,
                     params=params,
                     cookies=GOOGLE_CONSENT_COOKIES,
                     headers={"Accept-Language": "pl-PL,pl;q=0.9,en;q=0.8"},
@@ -104,9 +107,12 @@ class GoogleFlightsClient:
                     raise RuntimeError("Google zwrócił ekran zgody zamiast wyników")
                 return response.text
             except Exception as error:
+                from scripts.source_scheduler import raise_if_stopped
+                raise_if_stopped()
                 last_error = error
-                if attempt + 1 < 4:
-                    time_module.sleep(1.5 * (attempt + 1))
+                if attempt + 1 < self.attempts:
+                    from scripts.source_scheduler import retry_delay
+                    time_module.sleep(retry_delay(attempt, error))
         raise RuntimeError(
             "Google Flights nie zwrócił wyników dla zapytania przewoźnika. "
             "Poprzedni plik wynikowy nie został nadpisany."
@@ -291,7 +297,8 @@ def collect_iberia_trip(
         except (RuntimeError, json.JSONDecodeError, ValueError) as error:
             last_error = error
             if attempt + 1 < 4:
-                time_module.sleep(1.5 * (attempt + 1))
+                from scripts.source_scheduler import retry_delay
+                time_module.sleep(retry_delay(attempt, error))
     raise RuntimeError(
         f"Google Flights Iberia failed for {origin}-{destination} on {departure_date}; "
         "publication blocked"

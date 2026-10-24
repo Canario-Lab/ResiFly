@@ -26,7 +26,7 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "BRS", "BVA", "CRL", "DUB", "EDI",
 
 class PozExpansionTests(unittest.TestCase):
     def test_poz_retained_in_current_endpoint_registry_and_all_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, SIX + ("POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["POZ"], "Europe/Warsaw")
         for path in (ROOT / "data").glob("*transfer-airports.json"):
             self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
@@ -50,7 +50,7 @@ class PozExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_both_carriers_both_tenerife_airports_every_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 104 * 31)
+        self.assertEqual(len(plan), 120 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("POZ", tenerife), (tenerife, "POZ")):
@@ -63,7 +63,7 @@ class PozExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("POZ", hub, start, end), calls)
@@ -117,7 +117,10 @@ class PozExpansionTests(unittest.TestCase):
     def test_no_endpoint_as_transfer_expansion(self):
         validate_polish_transfer("KRK", "GDN", "step5_variant_b")
         for endpoint, transfer in (("POZ", "GDN"), ("POZ", "WRO"), ("POZ", "POZ"), ("KRK", "POZ")):
-            with self.assertRaises(RuntimeError):
+            if endpoint == transfer:
+                with self.assertRaises(RuntimeError):
+                    validate_polish_transfer(endpoint, transfer, "step5_variant_b")
+            else:
                 validate_polish_transfer(endpoint, transfer, "step5_variant_b")
 
     def test_poz_ltn_summer_winter_and_date_override(self):
@@ -134,7 +137,7 @@ class PozExpansionTests(unittest.TestCase):
                                "wizzair": [["GDN", "TFS"]], "binter": []}, "airports": {}}
         candidates = discover_candidates(snapshot)
         self.assertEqual({r.iata for r in candidates["step3"] if "POZ" in r.polish_airports}, {"NEW", "AGP"})
-        self.assertFalse(any("POZ" in r.polish_airports and r.iata == "GDN" for r in candidates["step5_variant_b"]))
+        self.assertTrue(any("POZ" in r.polish_airports and r.iata == "GDN" for r in candidates["step5_variant_b"]))
 
     def test_schedule_audit_poz_both_needed_legs(self):
         snapshot = {"routes": {"ryanair": [["POZ", "NEW"], ["LTN", "TFS"]],

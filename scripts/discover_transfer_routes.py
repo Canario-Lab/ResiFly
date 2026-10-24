@@ -32,7 +32,7 @@ from typing import Any, Iterable, Mapping, Optional
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS, ENDPOINT_TRANSFER_EXCEPTIONS
+from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS, ENDPOINT_TRANSFER_EXCEPTIONS, DOMESTIC_TRANSFERS_ALLOWED
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -182,6 +182,8 @@ def candidate_intersection(
 ) -> list[Candidate]:
     """Return transfer airports joining a Tenerife graph to a Poland graph."""
     exceptions = {code: allowed for (key, code), allowed in ENDPOINT_TRANSFER_EXCEPTIONS.items() if key == step}
+    if DOMESTIC_TRANSFERS_ALLOWED:
+        exceptions.update({code: set(POLISH_AIRPORTS) - {code} for code in POLISH_AIRPORTS})
     excluded = ENDPOINTS - set(exceptions)
     tenerife_by_transfer: dict[str, set[str]] = {}
     for tenerife in TENERIFE_AIRPORTS:

@@ -20,7 +20,7 @@ from scripts.discover_transfer_routes import (
     airport_from_snapshot, airport_record, discover_candidates,
     missing_wizz_schedules, schedule_keys, refresh_discount_lists,
 )
-from scripts.search_airports import POLISH_AIRPORTS
+from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS, DOMESTIC_TRANSFERS_ALLOWED
 from scripts.collection_coverage import atomic_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +30,7 @@ def refresh_endpoint_text(value):
     """Refresh legacy endpoint lists without duplicating the latest addition."""
     value = re.sub(r"\bWAW/WMI/(?:KTW/KRK|KRK/KTW)(?:/[A-Z]{3})*",
                    "/".join(POLISH_AIRPORTS), value)
-    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć|dziesięć|jedenaście|dwanaście|trzynaście) polskich lotnisk[ao]?",
+    return re.sub(r"wszystkie (?:pięć|sześć|siedem|osiem|dziewięć|dziesięć|jedenaście|dwanaście|trzynaście|czternaście|piętnaście) polskich lotnisk[ao]?",
                   "wszystkie polskie lotniska z rejestru endpointów", value)
 
 
@@ -76,6 +76,8 @@ def main():
                 selection["excluded_endpoints"] = list(dict.fromkeys(selection["excluded_endpoints"] + [endpoint]))
             if path.name == "mixed-transfer-airports.json":
                 selection["excluded_endpoints"] = list(dict.fromkeys(selection["excluded_endpoints"] + [endpoint]))
+            if DOMESTIC_TRANSFERS_ALLOWED and "excluded_endpoints" in selection:
+                selection["excluded_endpoints"] = list(TENERIFE_AIRPORTS)
         source_name = "Weryfikacja rozszerzenia o " + endpoint
         document["sources"] = [source for source in document.get("sources", []) if source.get("name") != source_name]
         document["sources"].append({

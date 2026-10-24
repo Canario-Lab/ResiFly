@@ -30,7 +30,7 @@ def leg(carrier, origin, departure, destination, arrival, number="W60001"):
 
 class AirportExpansionTests(unittest.TestCase):
     def test_all_nine_allowlist_scopes_use_exactly_thirteen_endpoints(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["GDN"], "Europe/Warsaw")
         files = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(files), 9)
@@ -88,7 +88,7 @@ class AirportExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 22), date(2026, 11, 21)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("GDN", hub, start, end), calls)
@@ -241,7 +241,7 @@ class AirportExpansionTests(unittest.TestCase):
         found = discover_candidates(snapshot)
         self.assertIn("GDN", next(row for row in found["step3"] if row.iata == "AGP").polish_airports)
         gdn = next(row for row in found["step5_variant_b"] if row.iata == "GDN")
-        self.assertEqual(gdn.polish_airports, ("KRK",))
+        self.assertEqual(set(gdn.polish_airports), {"KRK", "KTW"})
         self.assertFalse(any(row.iata == "GDN" for row in found["step3"]))
         self.assertIn("GDN", next(row for row in found["step4"] if row.iata == "BUD").polish_airports)
 
@@ -269,12 +269,11 @@ class AirportExpansionTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "Invalid Poland/transfer"):
             collect_step5.validate_document({"results": rows}, allowlist)
 
-    def test_gdn_transfer_exception_cannot_spread_to_other_polish_airports(self):
+    def test_domestic_gdn_transfer_permission_can_include_other_polish_airports(self):
         allowlist = copy.deepcopy(collect_step5.load_allowlist())
         rule = next(row for row in allowlist["variants"][collect_step5.VARIANT_B]["airports"] if row["iata"] == "GDN")
         rule["polish_airports"].append("KTW")
-        with self.assertRaisesRegex(RuntimeError, "Unapproved endpoint-as-transfer"):
-            collect_step5.route_matrix(allowlist)
+        self.assertIn(("KTW", "GDN"), collect_step5.route_matrix(allowlist)["Ryanair"])
 
     def test_stable_booking_links_accept_gdn_both_ways(self):
         for origin, destination in (("GDN", "TFS"), ("TFS", "GDN")):

@@ -8,6 +8,7 @@ from typing import Optional
 from urllib.parse import urljoin
 
 from curl_cffi import requests
+from scripts.source_scheduler import http_request
 
 
 WIZZ_HOMEPAGE_URL = "https://www.wizzair.com/en-gb"
@@ -36,7 +37,7 @@ def wizz_api_base() -> str:
             return _cached_api_base
 
         session = requests.Session(impersonate="chrome")
-        response = session.get(WIZZ_HOMEPAGE_URL, timeout=45)
+        response = http_request(session.get, WIZZ_HOMEPAGE_URL, timeout=45)
         response.raise_for_status()
         resolved = extract_wizz_api_base(response.text)
 
@@ -44,7 +45,7 @@ def wizz_api_base() -> str:
             for script_path in _SCRIPT_PATTERN.findall(response.text):
                 if "/dist/" not in script_path:
                     continue
-                script = session.get(urljoin(WIZZ_HOMEPAGE_URL, script_path), timeout=45)
+                script = http_request(session.get, urljoin(WIZZ_HOMEPAGE_URL, script_path), timeout=45)
                 if script.status_code >= 400:
                     continue
                 resolved = extract_wizz_api_base(script.text)

@@ -281,17 +281,27 @@ def collect_vueling_legs(
     workers: int,
     eur_pln: float,
 ) -> list[dict[str, Any]]:
+    from scripts.source_repository import cached_days
+    cached = cached_days("Vueling", route_days, "google_flights_http")
+    if cached is not None:
+        return cached
     if not route_days:
         return []
     accepted_marketing = set(airline_codes["accepted_marketing"])
     ordered = sorted(route_days, key=lambda item: (item[2], item[0], item[1]))
 
+    from scripts.source_repository import abort_on_source_failure
+    @abort_on_source_failure
     def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
         origin, destination, day = candidate
+        from scripts.source_repository import cached_route
+        cached = cached_route("Vueling", origin, destination, day, day)
+        if cached is not None:
+            return cached
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         rule = transfer_rules[transfer]
         multiplier = float(rule["vueling_resident_fare_multiplier"])
-        client = GoogleFlightsClient()
+        client = GoogleFlightsClient(family="Vueling")
         last_error: Exception | None = None
         result = None
         for attempt in range(4):
@@ -310,7 +320,8 @@ def collect_vueling_legs(
             except (RuntimeError, json.JSONDecodeError, ValueError) as error:
                 last_error = error
                 if attempt + 1 < 4:
-                    time_module.sleep(1.5 * (attempt + 1))
+                    from scripts.source_scheduler import retry_delay
+                    time_module.sleep(retry_delay(attempt, error))
         if last_error is not None or result is None:
             raise RuntimeError(
                 f"Google Flights Vueling failed for {origin}-{destination} on {day}; "

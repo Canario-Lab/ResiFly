@@ -57,7 +57,7 @@ należy poprawiać ręcznie.
 
 ## Dodawanie nowych lotnisk przesiadkowych
 
-Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY i RDO. Ich wspólny rejestr
+Polskie lotniska końcowe to WAW, WMI, KTW, KRK, GDN, WRO, POZ, LCJ, RZE, BZG, LUZ, SZY, RDO, SZZ i IEG. Ich wspólny rejestr
 `data/search-airports.json` jest odczytywany przez `scripts.search_airports`
 zarówno w kolektorach, jak i detektorze. Zakres `scope.polish_airports`
 każdej allowlisty musi odpowiadać temu rejestrowi. Dodanie endpointu wymaga
@@ -133,9 +133,36 @@ Szczegóły i ograniczenia:
 Po lokalnym odbiorze użytkownik 24.10.2026 osobno autoryzował wysłanie całego
 pakietu SZY/RDO, nowego NRN i aktualnej bazy na GitHub. Bez zmian workflow Actions.
 
-GDN ma stałą zgodę na rolę przesiadki wariantu 5B dla KRK i LUZ, także
-w przyszłych kolekcjach (decyzja 23.10.2026). Rejestr zawiera
-precyzyjny wyjątek, który nie dopuszcza odcinków GDN–GDN.
+Plan Szczecina–Goleniowa (SZZ) i Zielonej Góry–Babimostu (IEG), z trzynastu
+do piętnastu endpointów, wraz z przyspieszeniem kolekcji:
+[`docs/PLAN_DODANIA_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md`](docs/PLAN_DODANIA_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md).
+Docelowo jedna rodzina przewoźnika naraz w Google Flights, globalnie maksymalnie
+3 żądania, równolegle bezpośrednie serwisy Wizz/Binter/Canaryfly/Volotea.
+Ocena czasu i błędów na jednej właściwej pełnej kolekcji, bez osobnego testu 2 vs 3.
+Wdrożenie lokalne: rejestr i macierze obejmują 15 endpointów. Runner pobiera
+deduplikowane źródła równolegle, a po ich kompletnym zebraniu uruchamia kolejno
+dziesięć builderów w trybie cache-only. Świeży audyt z 24.10.2026 wskazuje dla
+SZZ DUB/KRK/LPL/STN; IEG może pozostać
+bez ofert. Publiczna baza jest podmieniana dopiero po pełnym odbiorze batcha.
+
+**Bieżący odbiór lokalny: nowa baza podmieniona.** Po przejściowym błędzie
+Google dla POZ→BRS wznowiono ten sam run, bez ponownego pobierania poprawnych
+obserwacji, zmiany parsera lub limitu 3. Komplet 33 852 obserwacji źródeł dał
+16 087 propozycji dla 24.10–23.11.2026, w tym 145 SZZ (71 do Teneryfy,
+74 do Polski). IEG sprawdzono, ale nie ma aktualnych ofert obsługiwanych linii.
+Dziesięć feedów i dziesięć raportów jednego runu są lokalnie opublikowane,
+poprzedni komplet zachowano w backupie. Testy: 259 Python i 45 JS; odbiór
+wizualny pozostaje otwarty, bo sterowanie przeglądarką jest wyłączone w Work.
+Pierwszy odbiór był wyłącznie lokalny. Następnie 24.10.2026 użytkownik osobno
+autoryzował wysłanie całego pakietu SZZ/IEG, mechanizmu źródeł i nowej bazy na
+GitHub, bez zmian workflow Actions. Szczegóły:
+[`docs/WDROZENIE_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md`](docs/WDROZENIE_SZCZECINA_I_ZIELONEJ_GORY_SZZ_IEG.md).
+
+Od decyzji użytkownika z 24.10.2026 **wszystkie krajowe przesiadki są stale
+dozwolone bez kolejnych pytań o zgodę**, również przez obecne i przyszłe
+polskie endpointy. Zastępuje to dawny wyjątek GDN/5B/KRK,LUZ. Regułę zapisano
+w rejestrze endpointów i wspólnie stosują ją walidatory oraz detektor tras.
+Bez dodawania nowych przewoźników, drugiej przesiadki lub self-routes.
 
 Cały zestaw można zebrać lokalnie do stagingu, z jednym dniem i cache NBP:
 

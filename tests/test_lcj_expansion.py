@@ -23,7 +23,7 @@ RYANAIR_HUBS = {"AGP", "BGY", "BHX", "CRL", "DUB", "STN"}
 
 class LcjExpansionTests(unittest.TestCase):
     def test_lcj_retained_in_current_endpoint_registry_and_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, SEVEN + ("LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["LCJ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -45,7 +45,7 @@ class LcjExpansionTests(unittest.TestCase):
 
     def test_full_direct_matrix_and_each_lcj_day(self):
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 104 * 31)
+        self.assertEqual(len(plan), 120 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("LCJ", tenerife), (tenerife, "LCJ")):
@@ -58,7 +58,7 @@ class LcjExpansionTests(unittest.TestCase):
         start, end = date(2026, 10, 23), date(2026, 11, 22)
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], start, end, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             calls = {call.args[:4] for call in collector.call_args_list}
             for hub in ("MAD", "PMI"):
                 self.assertIn(("LCJ", hub, start, end), calls)
@@ -111,7 +111,10 @@ class LcjExpansionTests(unittest.TestCase):
     def test_no_new_polish_transfer_roles(self):
         validate_polish_transfer("KRK", "GDN", "step5_variant_b")
         for p, hub in (("LCJ", "GDN"), ("LCJ", "POZ"), ("LCJ", "WRO"), ("LCJ", "LCJ"), ("KRK", "LCJ")):
-            with self.assertRaises(RuntimeError):
+            if p == hub:
+                with self.assertRaises(RuntimeError):
+                    validate_polish_transfer(p, hub, "step5_variant_b")
+            else:
                 validate_polish_transfer(p, hub, "step5_variant_b")
 
     def test_lcj_transfer_boundaries_across_midnight_and_dst(self):

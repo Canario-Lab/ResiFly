@@ -16,10 +16,10 @@ class CollectionReliabilityTests(unittest.TestCase):
         _nbp_rates_by_day.clear()
 
     def test_google_flights_workers_are_capped_for_shared_runners(self):
-        self.assertEqual(GOOGLE_FLIGHTS_MAX_WORKERS, 2)
+        self.assertEqual(GOOGLE_FLIGHTS_MAX_WORKERS, 3)
         self.assertEqual(google_flights_worker_count(1), 1)
-        self.assertEqual(google_flights_worker_count(4), 2)
-        self.assertEqual(google_flights_worker_count(20), 2)
+        self.assertEqual(google_flights_worker_count(4), 3)
+        self.assertEqual(google_flights_worker_count(20), 3)
 
     def test_nbp_snapshot_is_fetched_once_and_reused_from_daily_cache(self):
         requested_day = date(2026, 10, 22)

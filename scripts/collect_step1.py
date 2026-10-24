@@ -193,8 +193,8 @@ def get_json(
     last_error: Exception | None = None
     for attempt in range(attempts):
         try:
-            response = requests.request(
-                method,
+            from scripts.source_scheduler import http_request
+            response = http_request(lambda address, **kw: requests.request(method, address, **kw),
                 url,
                 headers=headers,
                 json=payload,
@@ -207,9 +207,12 @@ def get_json(
             response.raise_for_status()
             return response.json()
         except Exception as error:  # network errors need a bounded retry
+            from scripts.source_scheduler import raise_if_stopped
+            raise_if_stopped()
             last_error = error
             if attempt + 1 < attempts:
-                time_module.sleep(1.5 * (attempt + 1))
+                from scripts.source_scheduler import retry_delay
+                time_module.sleep(retry_delay(attempt, error))
     raise RuntimeError(f"Request failed after {attempts} attempts: {url}") from last_error
 
 
@@ -319,11 +322,19 @@ def _write_nbp_cache(day: date, payload: dict[str, Any]) -> None:
 def nbp_rates(day: date) -> dict[str, CurrencyRate]:
     """Return one shared, complete NBP snapshot for a collection date."""
     key = day.isoformat()
+    if os.environ.get("RESIFLY_SOURCE_MODE") == "read":
+        from scripts.source_repository import reader
+        snapshot = reader().identity
+        if snapshot["period_from"] != key:
+            raise RuntimeError("Wrong collection date for the frozen NBP snapshot")
+        return {code: CurrencyRate(code, float(value)) for code, value in snapshot["nbp_rates"].items()}
     cached = _nbp_rates_by_day.get(key)
     if cached is not None:
         return dict(cached)
     cached = _read_nbp_cache(day)
     if cached is None:
+        if os.environ.get("RESIFLY_SOURCE_MODE") == "read":
+            raise RuntimeError("Missing NBP snapshot during cache-only feed building")
         cached, payload = _fetch_nbp_rates(day)
         _write_nbp_cache(day, payload)
     _nbp_rates_by_day[key] = cached

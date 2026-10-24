@@ -24,7 +24,7 @@ class WroExpansionTests(unittest.TestCase):
         actual = {variant: {r["iata"] for r in data["airports"] if "WRO" in r["polish_airports"]}
                   for variant, data in config["variants"].items()}
         self.assertEqual(actual[collect_step5.VARIANT_A], {"AGP", "BUD", "EIN", "LTN"})
-        self.assertEqual(actual[collect_step5.VARIANT_B], set())
+        self.assertEqual(actual[collect_step5.VARIANT_B], {"GDN"})
         self.assertEqual({r["iata"] for r in collect_step4.load_allowlist()["airports"]
                           if "WRO" in r["polish_airports"]}, {"BUD"})
 
@@ -58,10 +58,10 @@ class WroExpansionTests(unittest.TestCase):
             self.assertIn(pair, routes)
 
     def test_wro_retained_with_timezone_and_current_full_direct_coverage(self):
-        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, ("WAW", "WMI", "KTW", "KRK", "GDN", "WRO", "POZ", "LCJ", "RZE", "BZG", "LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["WRO"], "Europe/Warsaw")
         plan = expected_queries("2", date(2026, 10, 23), date(2026, 11, 22))
-        self.assertEqual(len(plan), 104 * 31)
+        self.assertEqual(len(plan), 120 * 31)
         for carrier in ("Ryanair", "Wizz Air"):
             for tenerife in ("TFN", "TFS"):
                 for origin, destination in (("WRO", tenerife), (tenerife, "WRO")):
@@ -103,7 +103,10 @@ class WroExpansionTests(unittest.TestCase):
     def test_gdn_exception_does_not_extend_to_wro_and_no_wro_self_route(self):
         validate_polish_transfer("KRK", "GDN", "step5_variant_b")
         for endpoint, transfer in (("WRO", "GDN"), ("WRO", "WRO"), ("KRK", "WRO")):
-            with self.assertRaises(RuntimeError):
+            if endpoint == transfer:
+                with self.assertRaises(RuntimeError):
+                    validate_polish_transfer(endpoint, transfer, "step5_variant_b")
+            else:
                 validate_polish_transfer(endpoint, transfer, "step5_variant_b")
 
     def test_wro_booking_links_accept_both_directions(self):
@@ -148,7 +151,8 @@ class WroBatchTests(unittest.TestCase):
             self.assertEqual((staging / "previous-public-feeds/step1-results.collection-report.json").read_text(), "old-report")
 
     @patch("scripts.collect_five_steps.subprocess.run", side_effect=RuntimeError("probe stop"))
-    def test_new_runs_isolate_cache_and_resume_keeps_same_identity(self, run):
+    @patch("scripts.collect_five_steps.collect_sources", return_value=Path("/mocked-sources"))
+    def test_new_runs_isolate_cache_and_resume_keeps_same_identity(self, sources, run):
         with tempfile.TemporaryDirectory() as temp:
             def launch(run_id):
                 with patch("sys.argv", ["collect_five_steps", "--from-date", "2026-10-23", "--stage-directory", temp, "--run-id", run_id]):

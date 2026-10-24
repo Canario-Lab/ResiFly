@@ -91,7 +91,8 @@ def wizz_timetable(
     max_attempts = 6
     for attempt in range(max_attempts):
         try:
-            response = requests.post(
+            from scripts.source_scheduler import http_request
+            response = http_request(requests.post,
                 f"{wizz_api_base()}/search/timetableV2",
                 headers={"content-type": "application/json"},
                 json=payload,
@@ -113,13 +114,16 @@ def wizz_timetable(
                 and float(item.get("price", {}).get("amount") or 0) > 0
             ]
         except Exception as error:
+            from scripts.source_scheduler import raise_if_stopped
+            raise_if_stopped()
             last_error = error
             if attempt + 1 < max_attempts:
                 # The public timetable endpoint intermittently returns 503
                 # during a complete multi-route scan. Longer exponential
                 # backoff prevents a transient throttle from discarding the
                 # otherwise complete calendar.
-                time_module.sleep(min(3 * (2 ** attempt), 30))
+                from scripts.source_scheduler import retry_delay
+                time_module.sleep(max(min(3 * (2 ** attempt), 30), retry_delay(attempt, error)))
     raise RuntimeError(f"Wizz Air request failed for {origin}-{destination}") from last_error
 
 

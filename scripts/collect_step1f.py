@@ -363,6 +363,14 @@ def collect_canaryfly_available_days(
     workers: int,
     client: CanaryflyClient | None = None,
 ) -> set[tuple[str, str, date]]:
+    from scripts.source_repository import reader, cached_route
+    if reader() is not None:
+        available = set()
+        for origin, destination in canaryfly_routes(allowlist):
+            rows = cached_route("Canaryfly", origin, destination, start, end)
+            record_checked("Canaryfly", origin, destination, start, end, rows, "booking_calendar")
+            available.update((origin, destination, date.fromisoformat(row["departure_at"][:10])) for row in rows)
+        return available
     config = allowlist["fare_feed"]
     fare_client = client or CanaryflyClient(
         config["endpoint"],
@@ -376,8 +384,14 @@ def collect_canaryfly_available_days(
     ]
     available: set[tuple[str, str, date]] = set()
 
+    from scripts.source_repository import abort_on_source_failure
+    @abort_on_source_failure
     def fetch(job: tuple[str, str, date]) -> tuple[str, str, set[date]]:
         origin, destination, anchor = job
+        month_end = (anchor.replace(day=28) + timedelta(days=4)).replace(day=1) - timedelta(days=1)
+        cached = cached_route("Canaryfly", origin, destination, max(start, anchor), min(end, month_end))
+        if cached is not None:
+            return origin, destination, {date.fromisoformat(row["departure_at"][:10]) for row in cached}
         payload = fare_client.calendar(origin, destination, anchor)
         days = available_days_from_calendar(
             payload, origin, destination, start, end
@@ -607,6 +621,10 @@ def collect_canaryfly_legs(
     workers: int,
     client: CanaryflyClient | None = None,
 ) -> list[dict[str, Any]]:
+    from scripts.source_repository import cached_days
+    cached = cached_days("Canaryfly", candidates, "booking_search", "details")
+    if cached is not None:
+        return cached
     if not candidates:
         return []
     config = allowlist["fare_feed"]
@@ -618,8 +636,14 @@ def collect_canaryfly_legs(
     )
     ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
 
+    from scripts.source_repository import abort_on_source_failure
+    @abort_on_source_failure
     def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
         origin, destination, day = candidate
+        from scripts.source_repository import cached_route
+        cached = cached_route("Canaryfly", origin, destination, day, day, "details")
+        if cached is not None:
+            return cached
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         multiplier = float(rules[transfer]["canaryfly_resident_fare_multiplier"])
         result = parse_canaryfly_search(

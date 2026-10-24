@@ -26,6 +26,7 @@ if __package__ in {None, ""}:
 
 from scripts.search_airports import POLISH_AIRPORTS, TENERIFE_AIRPORTS
 from scripts.collection_coverage import atomic_json, validate_coverage
+from scripts.source_pipeline import collect_sources
 
 ROOT = Path(__file__).resolve().parents[1]
 STEPS = ("1", "1b", "1c", "1d", "1e", "1f", "2", "3", "4", "5")
@@ -216,6 +217,21 @@ def main():
             atomic_json(directory / "validation-report.json", report)
             environment = dict(os.environ, RESIFLY_COLLECTION_RUN_ID=run_id,
                                RESIFLY_RYANAIR_GOOGLE_CACHE=str(cache))
+            previous_environment = {key: os.environ.get(key) for key in (
+                "RESIFLY_COLLECTION_RUN_ID", "RESIFLY_RYANAIR_GOOGLE_CACHE")}
+            try:
+                os.environ.update({key: environment[key] for key in previous_environment})
+                print("Collecting shared sources: Google 3; independent official sources in parallel", flush=True)
+                source_directory = collect_sources(directory, args.from_date,
+                    args.from_date + timedelta(days=args.days), run_id)
+            finally:
+                for key, previous in previous_environment.items():
+                    if previous is None:
+                        os.environ.pop(key, None)
+                    else:
+                        os.environ[key] = previous
+            environment.update(RESIFLY_SOURCE_MODE="read",
+                               RESIFLY_SOURCE_REPOSITORY=str(source_directory))
             for step in STEPS:
                 if step not in args.refresh_steps:
                     continue

@@ -24,13 +24,13 @@ START, END = date(2026, 10, 24), date(2026, 11, 23)
 
 class SzyRdoExpansionTests(unittest.TestCase):
     def test_thirteen_registry_and_nine_exact_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, TARGET)
+        self.assertEqual(POLISH_AIRPORTS, TARGET + ("SZZ", "IEG"))
         for endpoint in ("SZY", "RDO"):
             self.assertEqual(ENDPOINT_TIMEZONES[endpoint], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
         for path in paths:
-            self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(TARGET))
+            self.assertEqual(json.loads(path.read_text())["scope"]["polish_airports"], list(POLISH_AIRPORTS))
 
     def test_reviewed_permissions_new_nrn_not_all_existing_endpoints(self):
         config = collect_step3.load_allowlist()
@@ -53,10 +53,10 @@ class SzyRdoExpansionTests(unittest.TestCase):
                                  for r in a.get("polish_routes", []) + a.get("eligibility_evidence", [])))
 
     def test_complete_plans_and_actual_executor_even_with_empty_other_carrier(self):
-        self.assertEqual(len(list(collect_step2.route_matrix())), 52)
-        self.assertEqual(len(expected_queries("2", START, END)), 3224)
-        self.assertEqual(len(expected_queries("1", START, END)), 10416)
-        self.assertEqual(len(expected_queries("1b", START, END)), 1736)
+        self.assertEqual(len(list(collect_step2.route_matrix())), 60)
+        self.assertEqual(len(expected_queries("2", START, END)), 3720)
+        self.assertEqual(len(expected_queries("1", START, END)), 11904)
+        self.assertEqual(len(expected_queries("1b", START, END)), 1984)
         for endpoint in ("SZY", "RDO"):
             for step, hubs in (("2", ("TFN", "TFS")), ("1", ("FUE", "LPA", "MAD", "PMI", "SVQ", "VLC")), ("1b", ("MAD",))):
                 plan = expected_queries(step, START, END)
@@ -69,7 +69,7 @@ class SzyRdoExpansionTests(unittest.TestCase):
              patch.object(collect_step1, "collect_wizz_route", return_value=[]) as wz:
             collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (fr, wz):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             actual = {c.args[:4] for c in collector.call_args_list}
             for endpoint in ("SZY", "RDO"):
                 for hub in ("MAD", "PMI"):
@@ -153,7 +153,10 @@ class SzyRdoExpansionTests(unittest.TestCase):
         for endpoint in ("SZY", "RDO"):
             for step in ("step3", "step4", "step5_variant_a", "step5_variant_b"):
                 for hub in ("GDN", "KRK", endpoint):
-                    with self.assertRaises(RuntimeError): validate_polish_transfer(endpoint, hub, step)
+                    if endpoint == hub:
+                        with self.assertRaises(RuntimeError): validate_polish_transfer(endpoint, hub, step)
+                    else:
+                        validate_polish_transfer(endpoint, hub, step)
         for old in ("KRK", "LUZ"): validate_polish_transfer(old, "GDN", "step5_variant_b")
         snapshot = {"as_of": str(START), "routes": {"ryanair": [["RDO", "NEW"]], "wizzair": [["NEW", "TFS"]], "binter": []},
                     "airports": {"NEW": {"name": "Synthetic", "country_code": "GB", "timezone": "Europe/London"}}}

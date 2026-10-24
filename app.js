@@ -434,6 +434,8 @@ const airportLabels = {
   LUZ: "Lublin (LUZ)",
   SZY: "Szymany / Olsztyn–Mazury (SZY)",
   RDO: "Radom (RDO)",
+  SZZ: "Szczecin–Goleniów (SZZ)",
+  IEG: "Zielona Góra–Babimost (IEG)",
   LBA: "Leeds-Bradford (LBA)",
   LPL: "Liverpool (LPL)",
   LTN: "Londyn-Luton (LTN)",

@@ -236,7 +236,8 @@ def collect_air_europa_trip(
         except (RuntimeError, json.JSONDecodeError, ValueError) as error:
             last_error = error
             if attempt + 1 < 4:
-                time_module.sleep(1.5 * (attempt + 1))
+                from scripts.source_scheduler import retry_delay
+                time_module.sleep(retry_delay(attempt, error))
     raise RuntimeError(
         f"Google Flights Air Europa failed for {origin}-{destination} on {departure_date}; "
         "publication blocked"
@@ -263,7 +264,7 @@ def collect_air_europa_legs(
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         try:
             if not hasattr(local, "client"):
-                local.client = GoogleFlightsClient()
+                local.client = GoogleFlightsClient(family="Air Europa")
             return collect_air_europa_trip(local.client, origin, destination, day,
                 float(rules[transfer]["air_europa_resident_fare_multiplier"]),
                 eur_pln, accepted)

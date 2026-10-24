@@ -24,7 +24,7 @@ START, END = date(2026, 10, 24), date(2026, 11, 23)
 
 class LuzExpansionTests(unittest.TestCase):
     def test_eleventh_endpoint_and_exact_nine_scopes(self):
-        self.assertEqual(POLISH_AIRPORTS, TEN + ("LUZ", "SZY", "RDO"))
+        self.assertEqual(POLISH_AIRPORTS, TEN + ("LUZ", "SZY", "RDO", "SZZ", "IEG"))
         self.assertEqual(ENDPOINT_TIMEZONES["LUZ"], "Europe/Warsaw")
         paths = list((ROOT / "data").glob("*transfer-airports.json"))
         self.assertEqual(len(paths), 9)
@@ -42,26 +42,24 @@ class LuzExpansionTests(unittest.TestCase):
             self.assertFalse(any(p.get("polish_airport") == "LUZ" for r in config["airports"]
                                  for p in r.get("polish_routes", []) + r.get("eligibility_evidence", [])), name)
 
-    def test_permanent_gdn_only_for_krk_luz_and_only_variant_b(self):
-        self.assertEqual(ENDPOINT_TRANSFER_EXCEPTIONS, {("step5_variant_b", "GDN"): frozenset({"KRK", "LUZ"})})
-        for polish in ("KRK", "LUZ"):
+    def test_permanent_domestic_policy_replaces_narrow_gdn_exception(self):
+        self.assertEqual(ENDPOINT_TRANSFER_EXCEPTIONS, {})
+        for polish in set(POLISH_AIRPORTS) - {"GDN"}:
             validate_polish_transfer(polish, "GDN", "step5_variant_b")
-        for polish in set(POLISH_AIRPORTS) - {"KRK", "LUZ"}:
-            with self.assertRaises(RuntimeError): validate_polish_transfer(polish, "GDN", "step5_variant_b")
         for step in ("step1", "step3", "step4", "step5_variant_a"):
-            with self.assertRaises(RuntimeError): validate_polish_transfer("LUZ", "GDN", step)
-        for polish, hub in (("LUZ", "LUZ"), ("GDN", "GDN"), ("KRK", "LUZ")):
+            validate_polish_transfer("LUZ", "GDN", step)
+        for polish, hub in (("LUZ", "LUZ"), ("GDN", "GDN")):
             with self.assertRaises(RuntimeError): validate_polish_transfer(polish, hub, "step5_variant_b")
         snapshot = {"routes": {"ryanair": [["LUZ", "GDN"], ["KRK", "GDN"], ["WRO", "GDN"]],
                                "wizzair": [["GDN", "TFS"]], "binter": []}, "airports": {}}
         rows = discover_candidates(snapshot)
         gdn = next(r for r in rows["step5_variant_b"] if r.iata == "GDN")
-        self.assertEqual(set(gdn.polish_airports), {"KRK", "LUZ"})
+        self.assertEqual(set(gdn.polish_airports), {"KRK", "LUZ", "WRO"})
         self.assertFalse(any(r.iata == "GDN" for r in rows["step3"] + rows["step4"] + rows["step5_variant_a"]))
 
     def test_complete_direct_and_saved_leg_calendars(self):
-        self.assertEqual(len(list(collect_step2.route_matrix())), 52)
-        self.assertEqual(len(expected_queries("2", START, END)), 104 * 31)
+        self.assertEqual(len(list(collect_step2.route_matrix())), 60)
+        self.assertEqual(len(expected_queries("2", START, END)), 120 * 31)
         requirements = [("2", c, t) for c in ("Ryanair", "Wizz Air") for t in ("TFN", "TFS")]
         requirements += [("3", "Ryanair", h) for h in ("BGY", "DUB", "LTN")]
         requirements += [("5", "Wizz Air", "LTN"), ("5", "Ryanair", "GDN")]
@@ -81,7 +79,7 @@ class LuzExpansionTests(unittest.TestCase):
     def test_actual_executor_full_matrix_despite_empty_other_carrier(self, wizz, ryanair):
         collect_step1.collect_low_cost_legs(["MAD", "PMI"], START, END, {}, 2, {})
         for collector in (wizz, ryanair):
-            self.assertEqual(collector.call_count, 52)
+            self.assertEqual(collector.call_count, 60)
             for hub in ("MAD", "PMI"):
                 self.assertIn((hub, "LUZ", START, END), {c.args[:4] for c in collector.call_args_list})
                 self.assertIn(("LUZ", hub, START, END), {c.args[:4] for c in collector.call_args_list})

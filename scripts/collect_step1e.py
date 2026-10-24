@@ -149,7 +149,8 @@ class VoloteaFareClient:
                 "userType": "standard",
             }]
         }
-        response = requests.get(
+        from scripts.source_scheduler import http_request
+        response = http_request(requests.get,
             self.endpoint,
             params={"data": json.dumps(request_data, separators=(",", ":"))},
             headers={
@@ -251,6 +252,10 @@ def collect_volotea_legs(
     workers: int,
     client: VoloteaFareClient | None = None,
 ) -> list[dict[str, Any]]:
+    from scripts.source_repository import cached_days
+    cached = cached_days("Volotea", candidates, "official_minprice")
+    if cached is not None:
+        return cached
     if not candidates:
         return []
     config = allowlist["fare_feed"]
@@ -258,8 +263,14 @@ def collect_volotea_legs(
     fare_client = client or VoloteaFareClient(config["endpoint"])
     ordered = sorted(candidates, key=lambda item: (item[2], item[0], item[1]))
 
+    from scripts.source_repository import abort_on_source_failure
+    @abort_on_source_failure
     def fetch(candidate: tuple[str, str, date]) -> list[dict[str, Any]]:
         origin, destination, day = candidate
+        from scripts.source_repository import cached_route
+        cached = cached_route("Volotea", origin, destination, day, day)
+        if cached is not None:
+            return cached
         transfer = destination if origin in TENERIFE_AIRPORTS else origin
         multiplier = float(rules[transfer]["volotea_resident_fare_multiplier"])
         payload = fare_client.search(origin, destination, day)

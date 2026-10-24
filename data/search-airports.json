@@ -13,13 +13,14 @@
     { "iata": "BZG", "name_pl": "Bydgoszcz", "timezone": "Europe/Warsaw" },
     { "iata": "LUZ", "name_pl": "Lublin", "timezone": "Europe/Warsaw" },
     { "iata": "SZY", "name_pl": "Szymany / Olsztyn–Mazury", "timezone": "Europe/Warsaw" },
-    { "iata": "RDO", "name_pl": "Radom", "timezone": "Europe/Warsaw" }
+    { "iata": "RDO", "name_pl": "Radom", "timezone": "Europe/Warsaw" },
+    { "iata": "SZZ", "name_pl": "Szczecin–Goleniów", "timezone": "Europe/Warsaw" },
+    { "iata": "IEG", "name_pl": "Zielona Góra–Babimost", "timezone": "Europe/Warsaw" }
   ],
   "tenerife_airports": [
     { "iata": "TFN", "name_pl": "Teneryfa Północ", "timezone": "Atlantic/Canary" },
     { "iata": "TFS", "name_pl": "Teneryfa Południe", "timezone": "Atlantic/Canary" }
   ],
-  "endpoint_transfer_exceptions": [
-    { "step": "step5_variant_b", "iata": "GDN", "polish_airports": ["KRK", "LUZ"] }
-  ]
+  "domestic_transfers_allowed": true,
+  "endpoint_transfer_exceptions": []
 }

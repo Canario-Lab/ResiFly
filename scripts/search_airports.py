@@ -19,6 +19,7 @@ for _row in _rows:
 POLISH_AIRPORTS = tuple(row["iata"] for row in SEARCH_AIRPORTS["polish_airports"])
 TENERIFE_AIRPORTS = tuple(row["iata"] for row in SEARCH_AIRPORTS["tenerife_airports"])
 ENDPOINT_TIMEZONES = {row["iata"]: row["timezone"] for row in _rows}
+DOMESTIC_TRANSFERS_ALLOWED = SEARCH_AIRPORTS.get("domestic_transfers_allowed") is True
 ENDPOINT_TRANSFER_EXCEPTIONS = {
     (row["step"], row["iata"]): frozenset(row["polish_airports"])
     for row in SEARCH_AIRPORTS.get("endpoint_transfer_exceptions", [])
@@ -28,5 +29,5 @@ ENDPOINT_TRANSFER_EXCEPTIONS = {
 def validate_polish_transfer(polish, transfer, step=""):
     if polish not in POLISH_AIRPORTS or transfer == polish or transfer in TENERIFE_AIRPORTS:
         raise RuntimeError(f"Invalid Poland/transfer pair: {polish}-{transfer}")
-    if transfer in POLISH_AIRPORTS and polish not in ENDPOINT_TRANSFER_EXCEPTIONS.get((step, transfer), frozenset()):
+    if transfer in POLISH_AIRPORTS and not DOMESTIC_TRANSFERS_ALLOWED and polish not in ENDPOINT_TRANSFER_EXCEPTIONS.get((step, transfer), frozenset()):
         raise RuntimeError(f"Unapproved endpoint-as-transfer role: {step}/{transfer}/{polish}")

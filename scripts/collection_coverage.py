@@ -136,6 +136,8 @@ class Coverage:
 
 
 def record_checked(carrier, origin, destination, start, end, rows, method, kind="calendar"):
+    from scripts.source_repository import record_source
+    record_source(carrier, origin, destination, start, end, rows, method, kind)
     if _active is not None:
         _active.record(carrier, origin, destination, start, end, rows, method, kind)
 
@@ -144,12 +146,17 @@ def calendar_collector(carrier, method):
     def decorate(function):
         signature = inspect.signature(function)
 
+        from scripts.source_repository import abort_on_source_failure
+        @abort_on_source_failure
         @wraps(function)
         def wrapped(*args, **kwargs):
             bound = signature.bind(*args, **kwargs).arguments
-            result = function(*args, **kwargs)
             start = bound.get("start", bound.get("departure_date"))
             end = bound.get("end", start)
+            from scripts.source_repository import cached_route
+            result = cached_route(carrier, bound["origin"], bound["destination"], start, end)
+            if result is None:
+                result = function(*args, **kwargs)
             record_checked(carrier, bound["origin"], bound["destination"], start, end, result, method)
             return result
         return wrapped

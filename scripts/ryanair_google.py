@@ -238,7 +238,7 @@ def collect_route_days(origin: str, destination: str, start: date, end: date) ->
         for attempt in range(4):
             try:
                 if not hasattr(_thread_local, "client"):
-                    _thread_local.client = GoogleFlightsClient()
+                    _thread_local.client = GoogleFlightsClient(family="Ryanair")
                 with _request_slots:
                     html = _thread_local.client.availability(origin, destination, day)
                 if "PLN" not in html and "zł" not in html:
@@ -249,7 +249,8 @@ def collect_route_days(origin: str, destination: str, start: date, end: date) ->
             except (RuntimeError, json.JSONDecodeError, ValueError) as error:
                 last_error = error
                 if attempt + 1 < 4:
-                    time.sleep(1.5 * (attempt + 1))
+                    from scripts.source_scheduler import retry_delay
+                    time.sleep(retry_delay(attempt, error))
         if last_error is not None or flights is None:
             raise RuntimeError(
                 f"Ryanair Google Flights failed for {origin}-{destination} on {day}; "
